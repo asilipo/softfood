@@ -35,6 +35,8 @@ public class Ristorante implements Serializable{
 	@Column(name = "provincia", nullable = true)
 	private String provincia;
 	
+	public Ristorante () {}
+	
 	public String getRagioneSociale() {
 		return ragioneSociale;
 	}

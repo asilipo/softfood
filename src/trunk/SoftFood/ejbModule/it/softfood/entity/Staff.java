@@ -35,6 +35,8 @@ public class Staff implements Serializable {
 	@OneToOne(fetch = FetchType.LAZY)
 	private Ristorante ristorante;
 
+	public Staff() {}
+	
 	public Long getId() {
 		return id;
 	}
