@@ -23,6 +23,8 @@ import org.hibernate.annotations.LazyCollectionOption;
 @Table(name = "fornitore")
 public class Fornitore implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@Column(name = "ragione_sociale")
 	private String ragioneSociale;
@@ -44,5 +46,77 @@ public class Fornitore implements Serializable {
     @LazyCollection(value = LazyCollectionOption.FALSE)
     @JoinColumn(name = "ragione_sociale", nullable = false)
 	private Ristorante ristorante;
+	
+	public String getRagioneSociale() {
+		return ragioneSociale;
+	}
+	
+	public void setRagioneSociale(String ragioneSociale) {
+		this.ragioneSociale = ragioneSociale;
+	}
+	
+	public String getPartitaIva() {
+		return partitaIva;
+	}
+	
+	public void setPartitaIva(String partitaIva) {
+		this.partitaIva = partitaIva;
+	}
+	
+	public String getDescrizione() {
+		return descrizione;
+	}
+	
+	public void setDescrizione(String descrizione) {
+		this.descrizione = descrizione;
+	}
+	
+	public String getVia() {
+		return via;
+	}
+	
+	public void setVia(String via) {
+		this.via = via;
+	}
+	
+	public String getCivico() {
+		return civico;
+	}
+	
+	public void setCivico(String civico) {
+		this.civico = civico;
+	}
+	
+	public String getCap() {
+		return cap;
+	}
+	
+	public void setCap(String cap) {
+		this.cap = cap;
+	}
+	
+	public String getCitta() {
+		return citta;
+	}
+	
+	public void setCitta(String citta) {
+		this.citta = citta;
+	}
+	
+	public String getProvincia() {
+		return provincia;
+	}
+	
+	public void setProvincia(String provincia) {
+		this.provincia = provincia;
+	}
+	
+	public Ristorante getRistorante() {
+		return ristorante;
+	}
+	
+	public void setRistorante(Ristorante ristorante) {
+		this.ristorante = ristorante;
+	}
 	
 }
