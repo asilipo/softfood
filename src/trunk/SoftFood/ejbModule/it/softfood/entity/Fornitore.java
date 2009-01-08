@@ -44,7 +44,7 @@ public class Fornitore implements Serializable {
 	private String provincia;
 	@ManyToOne()
     @LazyCollection(value = LazyCollectionOption.FALSE)
-    @JoinColumn(name = "ragione_sociale", nullable = false)
+    @JoinColumn(name = "ristorante", nullable = false)
 	private Ristorante ristorante;
 	
 	public String getRagioneSociale() {
