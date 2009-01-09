@@ -1,5 +1,7 @@
 package it.softfood.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -17,37 +19,37 @@ import org.hibernate.annotations.LazyCollectionOption;
  */
 
 @Entity
-@Table(name = "ingrediente_pietanza")
-public class IngredientePietanza {
+@Table(name = "magazzino_ingrediente")
+public class MagazzinoIngrediente implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@Id()
+	@Id
     @OneToOne()
     @LazyCollection(value = LazyCollectionOption.FALSE)
-    @JoinColumn(name = "pietanza")
-    private Pietanza pietanza;
-	@Id()
+    @JoinColumn(name = "magazzino")
+    private Magazzino magazzino;
+	@Id
     @OneToOne()
     @LazyCollection(value = LazyCollectionOption.FALSE)
     @JoinColumn(name = "ingrediente")
-    private Ingrediente ingrediente;
+    private IngredienteLungaConservazione ingrediente;
 	@Column(name = "quantita", nullable = false)
 	private Integer quantita;
 	
-	public Pietanza getPietanza() {
-		return pietanza;
+	public Magazzino getMagazzino() {
+		return magazzino;
 	}
 	
-	public void setPietanza(Pietanza pietanza) {
-		this.pietanza = pietanza;
+	public void setMagazzino(Magazzino magazzino) {
+		this.magazzino = magazzino;
 	}
 	
-	public Ingrediente getIngrediente() {
+	public IngredienteLungaConservazione getIngredienteLungaConservazione() {
 		return ingrediente;
 	}
 	
-	public void setIngrediente(Ingrediente ingrediente) {
+	public void setIngredienteLungaConservazione(IngredienteLungaConservazione ingrediente) {
 		this.ingrediente = ingrediente;
 	}
 	
@@ -60,8 +62,9 @@ public class IngredientePietanza {
 	}
 
 	@Override
-	public boolean equals(Object obj) {
-		return super.equals(obj);
-	}
+	public boolean equals(Object arg0) {
+		return super.equals(arg0);
+	}	
 	
 }
+

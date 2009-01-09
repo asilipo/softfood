@@ -2,6 +2,7 @@ package it.softfood.entity;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.DiscriminatorValue;
@@ -28,11 +29,15 @@ import javax.persistence.Table;
 @DiscriminatorValue(value = "Articolo")
 public class Articolo implements Serializable {
 	
-private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenza_articolo")
 	private Long id;
+	@Column(name = "nome", nullable = false)
+	private String nome;
+	@Column(name = "descrizione", nullable = true)
+	private String descrizione;
 
 	public Long getId() {
 		return id;
@@ -41,7 +46,23 @@ private static final long serialVersionUID = 1L;
 	public void setId(Long id) {
 		this.id = id;
 	}
-
+	
+	public String getNome() {
+		return nome;
+	}
+	
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+	
+	public String getDescrizione() {
+		return descrizione;
+	}
+	
+	public void setDescrizione(String descrizione) {
+		this.descrizione = descrizione;
+	}
+	
 	@Override
 	public boolean equals(Object obj) {
 		return super.equals(obj);
