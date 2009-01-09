@@ -4,10 +4,14 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
@@ -19,17 +23,19 @@ import org.hibernate.annotations.LazyCollectionOption;
  */
 
 @Entity
-@Table(name = "listino")
+@Table(name = "listino", uniqueConstraints = @UniqueConstraint(columnNames = {"articolo", "ristorante"}))
+@SequenceGenerator(name = "sequenza_listino", sequenceName = "seq_id_listino")
 public class Listino implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenza_listino")
+	private Long id;
 	@OneToOne()
 	@LazyCollection(value = LazyCollectionOption.FALSE)
     @JoinColumn(name = "articolo", nullable = false)
 	private Articolo articolo;
-	@Id
 	@OneToOne()
 	@LazyCollection(value = LazyCollectionOption.FALSE)
     @JoinColumn(name = "ristorante", nullable = false)
@@ -37,6 +43,14 @@ public class Listino implements Serializable {
 	@Column(name = "prezzo", nullable = false)
 	private Double prezzo;
 	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	public Articolo getArticolo() {
 		return articolo;
 	}
