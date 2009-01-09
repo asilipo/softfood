@@ -2,13 +2,12 @@ package it.softfood.entity;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -22,36 +21,26 @@ import org.hibernate.annotations.LazyCollectionOption;
  */
 
 @Entity
-@Table(name = "tavolo")
-@SequenceGenerator(name = "sequenza_tavolo", sequenceName = "seq_id_tavolo")
-public class Tavolo implements Serializable {
-
+@Table(name = "menu")
+@SequenceGenerator(name = "sequenza_menu", sequenceName = "seq_id_menu")
+public class Menu implements Serializable {
+	
 	private static final long serialVersionUID = 1L;
 	
-	@Id()
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenza_tavolo")
-	private Long id;
-	@Column(name = "numero_posti", nullable = false)
-	private Integer numeroPosti;
-	@ManyToOne()
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenza_menu")
+	private String id;
+	@OneToOne()
     @LazyCollection(value = LazyCollectionOption.FALSE)
     @JoinColumn(name = "ristorante", nullable = false)
-    private Ristorante ristorante;
+	private Ristorante ristorante;
 	
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
 	
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
-	}
-	
-	public Integer getNumeroPosti() {
-		return numeroPosti;
-	}
-	
-	public void setNumeroPosti(Integer numeroPosti) {
-		this.numeroPosti = numeroPosti;
 	}
 	
 	public Ristorante getRistorante() {
@@ -61,6 +50,10 @@ public class Tavolo implements Serializable {
 	public void setRistorante(Ristorante ristorante) {
 		this.ristorante = ristorante;
 	}
-	
-	
+
+	@Override
+	public boolean equals(Object obj) {
+		return super.equals(obj);
+	}
+
 }
