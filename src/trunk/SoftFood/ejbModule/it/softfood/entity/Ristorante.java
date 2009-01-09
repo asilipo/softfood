@@ -32,7 +32,7 @@ public class Ristorante implements Serializable{
 	private String partitaIva;
 	@OneToOne(cascade = CascadeType.ALL)
     @LazyCollection(value=LazyCollectionOption.FALSE)
-    @JoinColumn(name = "id_indirizzo", nullable = false)
+    @JoinColumn(name = "indirizzo", nullable = false)
 	private Indirizzo indirizzo;
 	
 	public Ristorante () {}

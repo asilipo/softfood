@@ -1,5 +1,7 @@
 package it.softfood.entity;
 
+import it.softfood.enumeration.TipoStaff;
+
 import java.io.Serializable;
 
 import javax.persistence.Column;
@@ -29,7 +31,7 @@ public class Staff implements Serializable {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenza_staff")
 	private Long id;
 	@Column(name = "tipo_staff", nullable = false)
-	private String tipo;
+	private TipoStaff tipoStaff;
 	@Column(name = "descrizione" , nullable = true)
 	private String descrizione;
 	@OneToOne(fetch = FetchType.LAZY)
@@ -45,12 +47,12 @@ public class Staff implements Serializable {
 		this.id = id;
 	}
 	
-	public String getTipo() {
-		return tipo;
+	public TipoStaff getTipo() {
+		return tipoStaff;
 	}
 	
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
+	public void setTipo(TipoStaff tipoStaff) {
+		this.tipoStaff = tipoStaff;
 	}
 	
 	public String getDescrizione() {

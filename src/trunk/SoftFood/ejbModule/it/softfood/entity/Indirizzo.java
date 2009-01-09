@@ -24,7 +24,7 @@ public class Indirizzo implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id()
-	@Column(name = "id_indirizzo")
+	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenza_indirizzo")
 	private Long id;
 	@Column(name = "via", nullable = true)

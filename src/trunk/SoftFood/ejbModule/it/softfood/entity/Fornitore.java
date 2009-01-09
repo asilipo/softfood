@@ -34,8 +34,8 @@ public class Fornitore implements Serializable {
 	@Column(name = "descrizione", nullable = true)
 	private String descrizione;
 	@OneToOne(cascade = CascadeType.ALL)
-    @LazyCollection(value=LazyCollectionOption.FALSE)
-    @JoinColumn(name = "id_indirizzo", nullable = false)
+    @LazyCollection(value = LazyCollectionOption.FALSE)
+    @JoinColumn(name = "indirizzo", nullable = false)
 	private Indirizzo indirizzo;
 	@ManyToOne()
     @LazyCollection(value = LazyCollectionOption.FALSE)
