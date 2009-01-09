@@ -5,7 +5,6 @@ import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -34,7 +33,9 @@ public class Fornitore implements Serializable {
 	private String partitaIva;
 	@Column(name = "descrizione", nullable = true)
 	private String descrizione;
-	@OneToOne(mappedBy = "indirizzo", cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.ALL)
+    @LazyCollection(value=LazyCollectionOption.FALSE)
+    @JoinColumn(name = "id_indirizzo", nullable = false)
 	private Indirizzo indirizzo;
 	@ManyToOne()
     @LazyCollection(value = LazyCollectionOption.FALSE)

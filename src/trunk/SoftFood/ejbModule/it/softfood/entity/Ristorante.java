@@ -6,8 +6,12 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 /**
  * @author Maria Rosaria Paone
@@ -26,7 +30,9 @@ public class Ristorante implements Serializable{
 	private String ragioneSociale;
 	@Column(name = "partita_iva", nullable = false, unique = true)
 	private String partitaIva;
-	@OneToOne(mappedBy = "indirizzo", cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.ALL)
+    @LazyCollection(value=LazyCollectionOption.FALSE)
+    @JoinColumn(name = "id_indirizzo", nullable = false)
 	private Indirizzo indirizzo;
 	
 	public Ristorante () {}

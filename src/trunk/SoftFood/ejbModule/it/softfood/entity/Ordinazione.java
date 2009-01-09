@@ -1,5 +1,7 @@
 package it.softfood.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,7 +18,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "indirizzo")
 @SequenceGenerator(name = "sequenza_ordinazione", sequenceName = "seq_id_ordinazione")
-public class Ordinazione {
+public class Ordinazione implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
