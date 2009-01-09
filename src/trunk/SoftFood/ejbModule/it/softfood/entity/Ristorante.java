@@ -2,9 +2,11 @@ package it.softfood.entity;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -24,16 +26,8 @@ public class Ristorante implements Serializable{
 	private String ragioneSociale;
 	@Column(name = "partita_iva", nullable = false, unique = true)
 	private String partitaIva;
-	@Column(name = "via", nullable = true)
-	private String via;
-	@Column(name = "civico", nullable = true)
-	private String civico;
-	@Column(name = "cap", nullable = true)
-	private String cap;
-	@Column(name = "citta", nullable = true)
-	private String citta;
-	@Column(name = "provincia", nullable = true)
-	private String provincia;
+	@OneToOne(mappedBy = "indirizzo", cascade = CascadeType.ALL)
+	private Indirizzo indirizzo;
 	
 	public Ristorante () {}
 	
@@ -52,45 +46,13 @@ public class Ristorante implements Serializable{
 	public void setPartitaIva(String partitaIva) {
 		this.partitaIva = partitaIva;
 	}
-	
-	public String getVia() {
-		return via;
+
+	public Indirizzo getIndirizzo() {
+		return indirizzo;
 	}
-	
-	public void setVia(String via) {
-		this.via = via;
-	}
-	
-	public String getCivico() {
-		return civico;
-	}
-	
-	public void setCivico(String civico) {
-		this.civico = civico;
-	}
-	
-	public String getCap() {
-		return cap;
-	}
-	
-	public void setCap(String cap) {
-		this.cap = cap;
-	}
-	
-	public String getCitta() {
-		return citta;
-	}
-	
-	public void setCitta(String citta) {
-		this.citta = citta;
-	}
-	
-	public String getProvincia() {
-		return provincia;
-	}
-	
-	public void setProvincia(String provincia) {
-		this.provincia = provincia;
+
+	public void setIndirizzo(Indirizzo indirizzo) {
+		this.indirizzo = indirizzo;
 	}
 
 	@Override

@@ -2,12 +2,14 @@ package it.softfood.entity;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.LazyCollection;
@@ -32,16 +34,8 @@ public class Fornitore implements Serializable {
 	private String partitaIva;
 	@Column(name = "descrizione", nullable = true)
 	private String descrizione;
-	@Column(name = "via", nullable = true)
-	private String via;
-	@Column(name = "civico", nullable = true)
-	private String civico;
-	@Column(name = "cap", nullable = true)
-	private String cap;
-	@Column(name = "citta", nullable = true)
-	private String citta;
-	@Column(name = "provincia", nullable = true)
-	private String provincia;
+	@OneToOne(mappedBy = "indirizzo", cascade = CascadeType.ALL)
+	private Indirizzo indirizzo;
 	@ManyToOne()
     @LazyCollection(value = LazyCollectionOption.FALSE)
     @JoinColumn(name = "ristorante", nullable = false)
@@ -71,52 +65,26 @@ public class Fornitore implements Serializable {
 		this.descrizione = descrizione;
 	}
 	
-	public String getVia() {
-		return via;
-	}
-	
-	public void setVia(String via) {
-		this.via = via;
-	}
-	
-	public String getCivico() {
-		return civico;
-	}
-	
-	public void setCivico(String civico) {
-		this.civico = civico;
-	}
-	
-	public String getCap() {
-		return cap;
-	}
-	
-	public void setCap(String cap) {
-		this.cap = cap;
-	}
-	
-	public String getCitta() {
-		return citta;
-	}
-	
-	public void setCitta(String citta) {
-		this.citta = citta;
-	}
-	
-	public String getProvincia() {
-		return provincia;
-	}
-	
-	public void setProvincia(String provincia) {
-		this.provincia = provincia;
-	}
-	
 	public Ristorante getRistorante() {
 		return ristorante;
 	}
 	
 	public void setRistorante(Ristorante ristorante) {
 		this.ristorante = ristorante;
+	}
+
+	public Indirizzo getIndirizzo() {
+		return indirizzo;
+	}
+
+	public void setIndirizzo(Indirizzo indirizzo) {
+		this.indirizzo = indirizzo;
+	}
+
+	@Override
+	public boolean equals(Object arg0) {
+		// TODO Auto-generated method stub
+		return super.equals(arg0);
 	}
 	
 }
