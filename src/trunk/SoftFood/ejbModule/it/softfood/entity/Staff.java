@@ -10,6 +10,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -23,6 +25,9 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "staff")
 @SequenceGenerator(name = "sequenza_staff", sequenceName = "seq_id_staff")
+@NamedQueries({
+    @NamedQuery(name = "Staff.selezionaStaffPerTipo", query = "SELECT s FROM Staff s WHERE s.tipoStaff = :tipo_staff")
+})
 public class Staff implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -30,7 +35,7 @@ public class Staff implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenza_staff")
 	private Long id;
-	@Column(name = "tipo_staff", nullable = false)
+	@Column(name = "tipo_staff", nullable = false, unique = true)
 	private TipoStaff tipoStaff;
 	@Column(name = "descrizione" , nullable = true)
 	private String descrizione;
