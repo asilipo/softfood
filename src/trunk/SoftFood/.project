@@ -3,7 +3,7 @@
 	<name>SoftFood</name>
 	<comment></comment>
 	<projects>
-		<project>SoftFoodClient</project>
+		<project>SoftFoodClientPDA</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
