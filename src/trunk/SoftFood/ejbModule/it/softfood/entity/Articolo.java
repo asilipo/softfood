@@ -36,7 +36,7 @@ public class Articolo implements Serializable {
 	private String nome;
 	@Column(name = "descrizione", nullable = true)
 	private String descrizione; 
-
+	
 	public Long getId() {
 		return id;
 	}
