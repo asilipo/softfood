@@ -7,6 +7,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -21,6 +23,9 @@ import org.hibernate.annotations.LazyCollectionOption;
 
 @Entity
 @Table(name = "ristorante")
+@NamedQueries({
+    @NamedQuery(name = "Ristorante.selezionaRistorantePerPartitaIva", query = "SELECT r FROM Ristorante r WHERE r.partitaIva = :partita_iva")
+})
 public class Ristorante implements Serializable{
 
 	private static final long serialVersionUID = 1L;
