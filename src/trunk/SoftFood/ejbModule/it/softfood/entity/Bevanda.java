@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 /**
  * @author Maria Rosaria Paone
@@ -13,6 +15,9 @@ import javax.persistence.Entity;
 
 @Entity
 @DiscriminatorValue(value = "Bevanda")
+@NamedQueries({
+    @NamedQuery(name = "Bevanda.selezionaBevandePerNome", query = "SELECT a FROM Articolo a WHERE a.tipo_articolo = Bevanda AND a.nome = :nome")
+ })
 public class Bevanda extends Articolo implements Serializable {
 
 	private static final long serialVersionUID = 1L;
