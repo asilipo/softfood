@@ -5,7 +5,6 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -26,7 +25,6 @@ import javax.persistence.Table;
 @SequenceGenerator(name = "sequenza_articolo", sequenceName = "seq_id_articolo")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "tipo_articolo", discriminatorType = DiscriminatorType.STRING)
-@DiscriminatorValue(value = "Articolo")
 public class Articolo implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -37,7 +35,7 @@ public class Articolo implements Serializable {
 	@Column(name = "nome", nullable = false)
 	private String nome;
 	@Column(name = "descrizione", nullable = true)
-	private String descrizione;
+	private String descrizione; 
 
 	public Long getId() {
 		return id;
@@ -62,7 +60,7 @@ public class Articolo implements Serializable {
 	public void setDescrizione(String descrizione) {
 		this.descrizione = descrizione;
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		return super.equals(obj);

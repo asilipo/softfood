@@ -2,12 +2,18 @@ package it.softfood.entity;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 /**
  * @author Maria Rosaria Paone
@@ -25,6 +31,10 @@ public class Magazzino implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenza_magazzino")
 	private Long id;
+	@OneToOne(cascade = CascadeType.ALL)
+    @LazyCollection(value = LazyCollectionOption.FALSE)
+    @JoinColumn(name = "indirizzo", nullable = true)
+	private Indirizzo indirizzo;
 
 	public Long getId() {
 		return id;
@@ -32,6 +42,14 @@ public class Magazzino implements Serializable {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public Indirizzo getIndirizzo() {
+		return indirizzo;
+	}
+
+	public void setIndirizzo(Indirizzo indirizzo) {
+		this.indirizzo = indirizzo;
 	}
 
 	@Override

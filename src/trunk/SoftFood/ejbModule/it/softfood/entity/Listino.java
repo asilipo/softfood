@@ -1,6 +1,7 @@
 package it.softfood.entity;
 
 import java.io.Serializable;
+import java.util.Collection;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,10 +9,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
@@ -23,7 +24,7 @@ import org.hibernate.annotations.LazyCollectionOption;
  */
 
 @Entity
-@Table(name = "listino", uniqueConstraints = @UniqueConstraint(columnNames = {"articolo", "ristorante"}))
+@Table(name = "listino")
 @SequenceGenerator(name = "sequenza_listino", sequenceName = "seq_id_listino")
 public class Listino implements Serializable {
 
@@ -32,16 +33,18 @@ public class Listino implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenza_listino")
 	private Long id;
-	@OneToOne()
-	@LazyCollection(value = LazyCollectionOption.FALSE)
-    @JoinColumn(name = "articolo", nullable = false)
-	private Articolo articolo;
-	@OneToOne()
-	@LazyCollection(value = LazyCollectionOption.FALSE)
-    @JoinColumn(name = "ristorante", nullable = false)
-	private Menu ristorante;
+	@Column(name = "descrizione", nullable = true)
+	private String descrizione;
 	@Column(name = "prezzo", nullable = false)
 	private Double prezzo;
+	@OneToMany()
+    @LazyCollection(value = LazyCollectionOption.FALSE)
+    @JoinColumn(name = "listino", nullable = true)
+    private Collection<Articolo> articoli;
+	@OneToOne
+    @LazyCollection(value = LazyCollectionOption.FALSE)
+    @JoinColumn(name = "menu", nullable = false)
+	private Menu menu;
 	
 	public Long getId() {
 		return id;
@@ -50,22 +53,6 @@ public class Listino implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
-
-	public Articolo getArticolo() {
-		return articolo;
-	}
-	
-	public void setArticolo(Articolo articolo) {
-		this.articolo = articolo;
-	}
-	
-	public Menu getRistorante() {
-		return ristorante;
-	}
-	
-	public void setRistorante(Menu ristorante) {
-		this.ristorante = ristorante;
-	}
 	
 	public Double getPrezzo() {
 		return prezzo;
@@ -73,6 +60,30 @@ public class Listino implements Serializable {
 	
 	public void setPrezzo(Double prezzo) {
 		this.prezzo = prezzo;
+	}
+
+	public String getDescrizione() {
+		return descrizione;
+	}
+
+	public void setDescrizione(String descrizione) {
+		this.descrizione = descrizione;
+	}
+
+	public Collection<Articolo> getArticoli() {
+		return articoli;
+	}
+
+	public void setArticoli(Collection<Articolo> articoli) {
+		this.articoli = articoli;
+	}
+
+	public Menu getMenu() {
+		return menu;
+	}
+
+	public void setMenu(Menu menu) {
+		this.menu = menu;
 	}
 
 	@Override
