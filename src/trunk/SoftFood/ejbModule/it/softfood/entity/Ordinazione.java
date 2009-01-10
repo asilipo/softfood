@@ -22,7 +22,7 @@ import org.hibernate.annotations.LazyCollectionOption;
  */
 
 @Entity
-@Table(name = "indirizzo")
+@Table(name = "ordinazione")
 @SequenceGenerator(name = "sequenza_ordinazione", sequenceName = "seq_id_ordinazione")
 public class Ordinazione implements Serializable {
 

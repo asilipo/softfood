@@ -2,6 +2,7 @@ package it.softfood.entity;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -30,6 +31,8 @@ public class Menu implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenza_menu")
 	private String id;
+	@Column(name = "descrizione", nullable = true)
+	private String descrizione;
 	@OneToOne()
     @LazyCollection(value = LazyCollectionOption.FALSE)
     @JoinColumn(name = "ristorante", nullable = false)
@@ -43,6 +46,14 @@ public class Menu implements Serializable {
 		this.id = id;
 	}
 	
+	public String getDescrizione() {
+		return descrizione;
+	}
+
+	public void setDescrizione(String descrizione) {
+		this.descrizione = descrizione;
+	}
+
 	public Ristorante getRistorante() {
 		return ristorante;
 	}

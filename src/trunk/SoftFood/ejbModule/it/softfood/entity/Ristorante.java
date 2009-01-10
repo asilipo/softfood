@@ -31,7 +31,7 @@ public class Ristorante implements Serializable{
 	@Column(name = "partita_iva", nullable = false, unique = true)
 	private String partitaIva;
 	@OneToOne(cascade = CascadeType.ALL)
-    @LazyCollection(value=LazyCollectionOption.FALSE)
+    @LazyCollection(value = LazyCollectionOption.FALSE)
     @JoinColumn(name = "indirizzo", nullable = false)
 	private Indirizzo indirizzo;
 	
