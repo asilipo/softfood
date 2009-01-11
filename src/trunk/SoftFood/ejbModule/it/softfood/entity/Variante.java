@@ -11,6 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -27,6 +29,10 @@ import org.hibernate.annotations.LazyCollectionOption;
 @Entity
 @Table(name = "variante")
 @SequenceGenerator(name = "sequenza_variante", sequenceName = "seq_id_variante")
+@NamedQueries({
+	@NamedQuery(name = "Variante.selezionaVariantiPerIngrediente", query = "SELECT v FROM Variante v WHERE v.ingrediente = :ingrediente"),
+	@NamedQuery(name = "Variante.selezionaVariantiPerLineaOrdinazione", query = "SELECT v FROM Variante v WHERE v.lineaOrdinazione = :linea_ordinazione")
+})
 public class Variante implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
