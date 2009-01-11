@@ -2,8 +2,6 @@ package it.softfood.session.ristorante;
 
 import it.softfood.entity.Ristorante;
 
-import java.util.List;
-
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -34,12 +32,12 @@ public class RistoranteSessionBean implements RistoranteSessionBeanRemote, Risto
         return em.find(Ristorante.class, ragioneSociale);
 	}
 	
-	public List<Ristorante> selezionaRistorantePerPartitaIva(String partitaIva) {
+	public Ristorante selezionaRistorantePerPartitaIva(String partitaIva) {
         if (partitaIva == null) 
             return null;
        
-       return em.createNamedQuery("Ristorante.selezionaRistorantePerPartitaIva")
-        	.setParameter("partita_iva", partitaIva).getResultList();
+       return (Ristorante) em.createNamedQuery("Ristorante.selezionaRistorantePerPartitaIva")
+        	.setParameter("partita_iva", partitaIva).getSingleResult();
 	}
 	
     public boolean rimuoviRistorante(String partitaIva) {

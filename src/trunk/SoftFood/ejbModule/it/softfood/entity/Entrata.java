@@ -8,6 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -24,6 +26,9 @@ import org.hibernate.annotations.LazyCollectionOption;
 @Entity
 @Table(name = "entrata")
 @SequenceGenerator(name = "sequenza_entrata", sequenceName = "seq_id_entrata")
+@NamedQueries({
+    @NamedQuery(name = "Entrata.selezionaEntrataPerOrdinazione", query = "SELECT e FROM Entrata e WHERE ordinazione = :ordinazione")
+})
 public class Entrata implements Serializable {
 
 	private static final long serialVersionUID = 1L;

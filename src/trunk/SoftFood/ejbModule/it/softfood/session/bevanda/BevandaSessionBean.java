@@ -2,8 +2,6 @@ package it.softfood.session.bevanda;
 
 import it.softfood.entity.Bevanda;
 
-import java.util.List;
-
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -32,14 +30,6 @@ public class BevandaSessionBean implements BevandaSessionBeanRemote, BevandaSess
             return null;
         
         return em.find(Bevanda.class, id);
-	}
-	
-	public List<Bevanda> selezionaBevandePerNome(String nome) {
-        if (nome == null) 
-            return null;
-       
-       return em.createNamedQuery("Bevanda.selezionaBevandePerNome")
-        	.setParameter("nome", nome).getResultList();
 	}
 
     public boolean rimuoviBevanda(Long id) {

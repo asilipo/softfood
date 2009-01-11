@@ -52,4 +52,5 @@ public class StaffSessionBean implements StaffSessionBeanRemote, StaffSessionBea
         
         return false;
     }
+    
 }

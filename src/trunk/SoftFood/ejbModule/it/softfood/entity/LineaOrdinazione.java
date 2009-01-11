@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -25,6 +27,9 @@ import org.hibernate.annotations.LazyCollectionOption;
 @Entity
 @Table(name = "linea_ordinazione")
 @SequenceGenerator(name = "sequenza_linea_ordinazione", sequenceName = "seq_id_linea_ordinazione")
+@NamedQueries({
+	@NamedQuery(name = "LineaOrdinazione.selezionaLineeOrdinazionePerOrdinazione", query = "SELECT l FROM LineaOrdinazione l WHERE ordinazione = :ordinazione")
+})
 public class LineaOrdinazione implements Serializable {
 
 	private static final long serialVersionUID = 1L;
