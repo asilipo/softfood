@@ -1,6 +1,7 @@
 package it.softfood.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -35,8 +36,10 @@ public class Ordinazione implements Serializable {
 	private Double totale;
 	@Column(name = "sconto", nullable = true)
 	private Double sconto;
-	@Column(name = "completo", nullable = false)
-	private Boolean completo;
+	@Column(name = "terminato", nullable = false)
+	private Boolean terminato;
+	@Column(name = "data", nullable = false)
+	private Date data;
 	@ManyToOne()
     @LazyCollection(value = LazyCollectionOption.FALSE)
     @JoinColumn(name = "tavolo", nullable = false)
@@ -66,12 +69,20 @@ public class Ordinazione implements Serializable {
 		this.sconto = sconto;
 	}
 
-	public Boolean getCompleto() {
-		return completo;
+	public Date getData() {
+		return data;
 	}
 
-	public void setCompleto(Boolean completo) {
-		this.completo = completo;
+	public void setData(Date data) {
+		this.data = data;
+	}
+
+	public Boolean getTerminato() {
+		return terminato;
+	}
+
+	public void setTerminato(Boolean terminato) {
+		this.terminato = terminato;
 	}
 
 	public Tavolo getTavolo() {

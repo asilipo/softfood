@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -24,6 +26,10 @@ import org.hibernate.annotations.LazyCollectionOption;
 @Entity
 @Table(name = "tavolo")
 @SequenceGenerator(name = "sequenza_tavolo", sequenceName = "seq_id_tavolo")
+@NamedQueries({
+		@NamedQuery(name = "Tavolo.selezionaTavoliPerNumeroPosti", query = "SELECT t FROM Tavolo t WHERE t.numeroPosti = :numero_posti"),
+		@NamedQuery(name = "Tavolo.selezionaTavoliLiberi", query = "SELECT t FROM Tavolo t WHERE t.occupato = false")
+})
 public class Tavolo implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -33,6 +39,8 @@ public class Tavolo implements Serializable {
 	private Long id;
 	@Column(name = "numero_posti", nullable = false)
 	private Integer numeroPosti;
+	@Column(name = "occupato", nullable = false)
+	private Boolean occupato;
 	@ManyToOne()
     @LazyCollection(value = LazyCollectionOption.FALSE)
     @JoinColumn(name = "ristorante", nullable = false)
@@ -54,6 +62,14 @@ public class Tavolo implements Serializable {
 		this.numeroPosti = numeroPosti;
 	}
 	
+	public Boolean getOccupato() {
+		return occupato;
+	}
+
+	public void setOccupato(Boolean occupato) {
+		this.occupato = occupato;
+	}
+
 	public Ristorante getRistorante() {
 		return ristorante;
 	}
@@ -61,6 +77,10 @@ public class Tavolo implements Serializable {
 	public void setRistorante(Ristorante ristorante) {
 		this.ristorante = ristorante;
 	}
-	
+
+	@Override
+	public boolean equals(Object obj) {
+		return super.equals(obj);
+	}
 	
 }

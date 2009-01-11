@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -24,6 +26,9 @@ import org.hibernate.annotations.LazyCollectionOption;
 @Entity
 @Table(name = "registro")
 @SequenceGenerator(name = "sequenza_registro", sequenceName = "seq_id_registro")
+@NamedQueries({
+	@NamedQuery(name = "Registro.selezionaRegistroPerAnnoRiferimento", query = "SELECT r FROM Registro r WHERE r.annoRiferimento = :anno_riferimento")
+})
 public class Registro implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -33,7 +38,7 @@ public class Registro implements Serializable {
 	private Long id;
 	@Column(name = "descrizione", nullable = true)
 	private String descrizione;
-	@Column(name = "anno_riferimento", nullable = false)
+	@Column(name = "anno_riferimento", nullable = false, unique = true)
 	private Integer annoRiferimento;
 	@ManyToOne()
     @LazyCollection(value = LazyCollectionOption.FALSE)
