@@ -11,10 +11,4 @@ import javax.ejb.Remote;
 @Remote
 public interface ArticoloSessionBeanRemote {
 
-	it.softfood.entity.Articolo inserisciArticolo(it.softfood.entity.Articolo articolo);
-	
-	it.softfood.entity.Articolo selezionaArticoloPerId(Long id);
-	
-	boolean rimuoviBevanda(Long id);
-	
 }
