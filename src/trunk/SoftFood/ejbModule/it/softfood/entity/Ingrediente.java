@@ -13,6 +13,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -28,6 +30,9 @@ import javax.persistence.Table;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "tipo_ingrediente", discriminatorType = DiscriminatorType.STRING)
 @DiscriminatorValue(value = "Ingrediente")
+@NamedQueries({
+	@NamedQuery(name = "Ingrediente.selezionaIngredientiPerNome", query = "SELECT i FROM Ingrediente i WHERE nome = :nome")
+})
 public class Ingrediente implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -35,6 +40,8 @@ public class Ingrediente implements Serializable {
 	@Id()
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenza_ingrediente")
 	private Long id;
+	@Column(name = "nome", nullable = false)
+	private String nome;
 	@Column(name = "descrizione", nullable = false)
 	private String descrizione;
 	@Column(name = "scadenza", nullable = true)
@@ -48,6 +55,14 @@ public class Ingrediente implements Serializable {
 		this.id = id;
 	}
 	
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
 	public String getDescrizione() {
 		return descrizione;
 	}

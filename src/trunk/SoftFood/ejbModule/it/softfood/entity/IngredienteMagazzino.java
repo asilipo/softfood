@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -26,6 +28,10 @@ import org.hibernate.annotations.LazyCollectionOption;
 @Entity
 @Table(name = "ingrediente_magazzino")
 @SequenceGenerator(name = "sequenza_ingrediente_magazzino", sequenceName = "seq_id_ingrediente_magazzino")
+@NamedQueries({
+	@NamedQuery(name = "IngredienteMagazzino.selezionaIngredientiLungaConservazione", query = "SELECT i FROM IngredienteMagazzino i"),
+	@NamedQuery(name = "IngredienteMagazzino.selezionaIngredientiLungaConservazionePerQuantita", query = "SELECT i FROM IngredienteMagazzino i WHERE quantita >= :quantita")
+})
 public class IngredienteMagazzino implements Serializable {
 
 	private static final long serialVersionUID = 1L;

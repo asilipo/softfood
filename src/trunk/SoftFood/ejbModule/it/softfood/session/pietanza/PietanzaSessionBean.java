@@ -2,8 +2,6 @@ package it.softfood.session.pietanza;
 
 import it.softfood.entity.Pietanza;
 
-import java.util.List;
-
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -32,14 +30,6 @@ public class PietanzaSessionBean implements PietanzaSessionBeanRemote, PietanzaS
             return null;
         
         return em.find(Pietanza.class, id);
-	}
-	
-	public List<Pietanza> selezionaPietanzePerNome(String nome) {
-        if (nome == null) 
-            return null;
-       
-       return em.createNamedQuery("Pietanza.selezionaPietanzePerNome")
-        	.setParameter("nome", nome).getResultList();
 	}
 
     public boolean rimuoviPietanza(Long id) {
