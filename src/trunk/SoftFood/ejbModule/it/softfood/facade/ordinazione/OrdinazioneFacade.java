@@ -1,4 +1,4 @@
-package it.softfood.facade;
+package it.softfood.facade.ordinazione;
 
 import it.softfood.entity.LineaOrdinazione;
 import it.softfood.entity.Ordinazione;
