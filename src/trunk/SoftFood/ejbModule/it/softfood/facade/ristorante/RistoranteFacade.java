@@ -1,4 +1,4 @@
-package it.softfood.facade;
+package it.softfood.facade.ristorante;
 
 import javax.ejb.Stateless;
 
