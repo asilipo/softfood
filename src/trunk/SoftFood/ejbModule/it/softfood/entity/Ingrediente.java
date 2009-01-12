@@ -42,9 +42,9 @@ public class Ingrediente implements Serializable {
 	private Long id;
 	@Column(name = "nome", nullable = false)
 	private String nome;
-	@Column(name = "descrizione", nullable = false)
+	@Column(name = "descrizione", nullable = true)
 	private String descrizione;
-	@Column(name = "scadenza", nullable = true)
+	@Column(name = "scadenza", nullable = false)
 	private Date scadenza;
 	
 	public Long getId() {
