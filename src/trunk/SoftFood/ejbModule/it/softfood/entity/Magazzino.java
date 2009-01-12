@@ -3,6 +3,7 @@ package it.softfood.entity;
 import java.io.Serializable;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -31,6 +32,8 @@ public class Magazzino implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenza_magazzino")
 	private Long id;
+	@Column(name = "descrizione", nullable = true)
+	private String descrizione;
 	@OneToOne(cascade = CascadeType.ALL)
     @LazyCollection(value = LazyCollectionOption.FALSE)
     @JoinColumn(name = "indirizzo", nullable = true)
@@ -42,6 +45,14 @@ public class Magazzino implements Serializable {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public String getDescrizione() {
+		return descrizione;
+	}
+
+	public void setDescrizione(String descrizione) {
+		this.descrizione = descrizione;
 	}
 
 	public Indirizzo getIndirizzo() {
