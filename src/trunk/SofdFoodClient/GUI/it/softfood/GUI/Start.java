@@ -23,11 +23,10 @@ import java.awt.FlowLayout;
 import javax.swing.JButton;
 import java.awt.GridLayout;
 
-public class Start {
+public class Start { 
 
 	private JFrame jFrame = null;
 	private JPanel jContentPane = null;
-	private JPanel tavoli = null;
 	private JButton Inserisci = null;
 	private JButton Gestisci = null;
 	private boolean vuoti=true;
@@ -68,19 +67,6 @@ public class Start {
 		return jContentPane;
 	}
 	
-	private JPanel getTavoli() {
-		if (tavoli == null) {
-			GridLayout gridLayout1 = new GridLayout();
-			gridLayout1.setRows(1);
-			gridLayout1.setColumns(1);
-			tavoli = new JPanel();
-			tavoli.setLayout(gridLayout1);
-			tavoli.setVisible(false);
-			
-		}
-		return tavoli;
-	}
-
 	/**
 	 * This method initializes Inserisci	
 	 * 	
