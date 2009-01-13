@@ -84,6 +84,10 @@ public class Start {
 			Inserisci.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					jContentPane.setVisible(false); // TODO Auto-generated Event stub actionPerformed()
+					vuoti=true;
+					Search_tavoli tav=new Search_tavoli(vuoti);
+					jFrame.setContentPane(tav);
+					
 				}
 			});
 		}
@@ -106,8 +110,11 @@ public class Start {
 			Gestisci.setMnemonic(KeyEvent.VK_M);
 			Gestisci.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					jContentPane.setVisible(false); // TODO Auto-generated Event stub actionPerformed()
+					//jContentPane.setVisible(false); // TODO Auto-generated Event stub actionPerformed()
 					vuoti=false;
+					Search_tavoli tav=new Search_tavoli(vuoti);
+					jFrame.setContentPane(tav);
+					
 				}
 			});
 		}
