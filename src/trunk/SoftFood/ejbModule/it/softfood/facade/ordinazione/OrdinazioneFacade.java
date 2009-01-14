@@ -69,7 +69,7 @@ public class OrdinazioneFacade implements OrdinazioneFacadeRemote, OrdinazioneFa
 		return false;
 	}
 	
-	public LineaOrdinazione aggiungiLineaOrdinazione(LineaOrdinazione lineaOrdinazione) {
+	public LineaOrdinazione inserisciLineaOrdinazione(LineaOrdinazione lineaOrdinazione) {
 		if (lineaOrdinazione != null) {
 			lineaOrdinazione.setOrdinazione(em.merge(lineaOrdinazione.getOrdinazione()));
 			
