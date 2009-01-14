@@ -19,6 +19,6 @@ public interface RistoranteSessionBeanRemote {
 	
 	it.softfood.entity.Ristorante selezionaRistorantePerPartitaIva(String partitaIva);
 	
-	boolean rimuoviRistorante(String partitaIva);
+	boolean rimuoviRistorante(String ragioneSociale);
 	
 }
