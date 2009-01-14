@@ -19,37 +19,57 @@ public class RistoranteSessionBean implements RistoranteSessionBeanRemote, Risto
     private EntityManager em;
     
 	public Ristorante inserisciRistorante(Ristorante ristorante) {
-		if (ristorante != null) 
-			em.persist(ristorante);
-		
-		return ristorante;
+		try {
+			if (ristorante != null) 
+				em.persist(ristorante);
+			
+			return ristorante;
+		} catch (Exception e) {
+			System.err.println("RistoranteSessionBean#inserisciRistorante");
+			return null;
+		}
 	}
 	
 	public Ristorante selezionaRistorantePerRagioneSociale(String ragioneSociale) {
-        if (ragioneSociale == null) 
-            return null;
-        
-        return em.find(Ristorante.class, ragioneSociale);
+        try {
+			if (ragioneSociale == null) 
+	            return null;
+	        
+	        return em.find(Ristorante.class, ragioneSociale);
+		} catch (Exception e) {
+			System.err.println("RistoranteSessionBean#selezionaRistorantePerRagioneSociale");
+			return null;
+		}
 	}
 	
 	public Ristorante selezionaRistorantePerPartitaIva(String partitaIva) {
-        if (partitaIva == null) 
-            return null;
-       
-       return (Ristorante) em.createNamedQuery("Ristorante.selezionaRistorantePerPartitaIva")
-        	.setParameter("partita_iva", partitaIva).getSingleResult();
+        try {
+			if (partitaIva == null) 
+	            return null;
+	       
+			return (Ristorante) em.createNamedQuery("Ristorante.selezionaRistorantePerPartitaIva")
+	        	.setParameter("partita_iva", partitaIva).getSingleResult();
+        } catch (Exception e) {
+			System.err.println("RistoranteSessionBean#selezionaRistorantePerPartitaIva");
+			return null;
+		}
 	}
 	
-    public boolean rimuoviRistorante(String partitaIva) {
-        if (partitaIva != null) {
-        	Ristorante ristorante = em.find(Ristorante.class, partitaIva);
-            if (ristorante != null) {
-                em.remove(ristorante);
-                return true;
-            }
-        }
-        
-        return false;
+    public boolean rimuoviRistorante(String ragioneSociale) {
+        try {
+	    	if (ragioneSociale != null) {
+	        	Ristorante ristorante = em.find(Ristorante.class, ragioneSociale);
+	            if (ristorante != null) {
+	                em.remove(ristorante);
+	                return true;
+	            }
+	        }
+	        
+	        return false;
+        } catch (Exception e) {
+			System.err.println("RistoranteSessionBean#rimuoviRistorante");
+			return false;
+		}
     }
     
 }
