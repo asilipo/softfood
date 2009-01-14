@@ -21,49 +21,81 @@ public class TavoloSessionBean implements TavoloSessionBeanRemote, TavoloSession
 	private EntityManager em;
 	
 	public Tavolo inserisciTavolo(Tavolo tavolo) {
-		if (tavolo != null)
-			em.persist(tavolo);
-		
-		return tavolo;
+		try {
+			if (tavolo != null)
+				em.persist(tavolo);
+			
+			return tavolo;
+		} catch (Exception e) {
+			System.err.println("TavoloSessionBean#inserisciTavolo");
+			return null;
+		}
 	}
 	
 	public Tavolo selezionaTavoloPerId(Long id) {
-		if (id != null) 
+		try {
+			if (id != null) 
+				return null;
+	        
+	        return em.find(Tavolo.class, id);
+		} catch (Exception e) {
+			System.err.println("TavoloSessionBean#selezionaTavoloPerId");
 			return null;
-        
-        return em.find(Tavolo.class, id);
+		}
 	}
 	
 	@SuppressWarnings("unchecked")
 	public List<Tavolo> selezionaTavoliPerNumeroPosti(Integer numeroPosti) {
-        if (numeroPosti == null) 
-            return null;
-       
-       return em.createNamedQuery("Tavolo.selezionaTavoliPerNumeroPosti")
-        	.setParameter("numero_posti", numeroPosti).getResultList();
+		try {
+	        if (numeroPosti == null) 
+	            return null;
+	       
+	        return em.createNamedQuery("Tavolo.selezionaTavoliPerNumeroPosti")
+	        	.setParameter("numero_posti", numeroPosti).getResultList();
+		} catch (Exception e) {
+			System.err.println("TavoloSessionBean#selezionaTavoliPerNumeroPosti");
+			return null;
+		}
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<Tavolo> selezionaTavoliLiberi() {     
-       return em.createNamedQuery("Tavolo.selezionaTavoliLiberi")
-        	.getResultList();
+	public List<Tavolo> selezionaTavoliLiberi() {    
+		try {
+	       return em.createNamedQuery("Tavolo.selezionaTavoliLiberi")
+	        	.getResultList();
+		} catch (Exception e) {
+			System.err.println("TavoloSessionBean#selezionaTavoliLiberi");
+			return null;
+		}
 	}
 	
-	public void modificaStatoTavolo(Tavolo tavolo, Boolean occupato) {
-		tavolo.setOccupato(occupato);
-		tavolo = em.merge(tavolo);
+	public boolean modificaStatoTavolo(Tavolo tavolo, Boolean occupato) {
+		try {
+			tavolo.setOccupato(occupato);
+			tavolo = em.merge(tavolo);
+			
+			return true;
+		} catch (Exception e) {
+			System.err.println("TavoloSessionBean#modificaStatoTavolo");
+			return false;
+		}
     }
 	
     public boolean rimuoviTavolo(Long id) {
-        if (id != null) {
-        	Tavolo tavolo = em.find(Tavolo.class, id);
-            if (tavolo != null) {
-                em.remove(tavolo);
-                return true;
-            }
-        }
-        
-        return false;
+    	try {
+	        if (id != null) {
+	        	Tavolo tavolo = em.find(Tavolo.class, id);
+	            if (tavolo != null) {
+	                em.remove(tavolo);
+	                return true;
+	            }
+	        }
+	        
+	        return false;
+		} catch (Exception e) {
+			System.err.println("TavoloSessionBean#rimuoviTavolo");
+			return false;
+		}
     }
     
 }

@@ -19,7 +19,7 @@ public interface TavoloSessionBeanRemote {
 	
 	java.util.List<it.softfood.entity.Tavolo> selezionaTavoliLiberi();
 	
-	void modificaStatoTavolo(it.softfood.entity.Tavolo tavolo, Boolean occupato);
+	boolean modificaStatoTavolo(it.softfood.entity.Tavolo tavolo, Boolean occupato);
 	
 	boolean rimuoviTavolo(Long id); 
 	
