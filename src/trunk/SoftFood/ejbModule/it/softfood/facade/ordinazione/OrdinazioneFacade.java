@@ -1,7 +1,11 @@
 package it.softfood.facade.ordinazione;
 
+import java.util.Date;
+import java.util.List;
+
 import it.softfood.entity.LineaOrdinazione;
 import it.softfood.entity.Ordinazione;
+import it.softfood.entity.Tavolo;
 import it.softfood.session.lineaordinazione.LineaOrdinazioneSessionBeanLocal;
 import it.softfood.session.ordinazione.OrdinazioneSessionBeanLocal;
 
@@ -26,21 +30,58 @@ public class OrdinazioneFacade implements OrdinazioneFacadeRemote, OrdinazioneFa
 	@EJB(beanName = "LineaOrdinazioneSessionBean", mappedName = "it.sofdfood.session.ordinazione.LineaOrdinazioneSessionBean")
 	private LineaOrdinazioneSessionBeanLocal lineaOrdinazioneSessionBean;
 	
-	public boolean inserisciOrdinazione(Ordinazione ordinazione) {
+	public Ordinazione inserisciOrdinazione(Ordinazione ordinazione) {
 		if (ordinazione != null)
-			if (ordinazioneSessionBean.inserisciOrdinazione(ordinazione) != null) 
-				return true;
+			return ordinazioneSessionBean.inserisciOrdinazione(ordinazione);
+		
+		return null;
+	}
+	
+	public Ordinazione selezionaOrdinazione(Long id) {
+		if (id != null) 
+			return ordinazioneSessionBean.selezionaOrdinazionePerId(id);
+		
+		return null;
+	}
+	
+	public List<Ordinazione> selezionaOrdinazioni() {
+		return ordinazioneSessionBean.selezionaOrdinazioni();
+	}
+	
+	public List<Ordinazione> selezionaOrdinazioniPerData(Date data) {
+		if (data != null) 
+			return ordinazioneSessionBean.selezionaOrdinazioniPerData(data);
+		
+		return null;
+	}
+	
+	public List<Ordinazione> selezionaOrdinazioniGiornalierePerTavolo(Tavolo tavolo, Boolean terminato) {
+		if (tavolo != null && terminato != null) 
+			return ordinazioneSessionBean.selezionaOrdinazioniGionalierePerTavolo(tavolo, terminato);
+		
+		return null;
+	}
+	
+	public boolean rimuoviOrdinazione(Long id) {
+		if (id != null)
+			return ordinazioneSessionBean.rimuoviOrdinazione(id);
 		
 		return false;
 	}
 	
-	public boolean aggiungiLineaOrdinazione(LineaOrdinazione lineaOrdinazione) {
+	public LineaOrdinazione aggiungiLineaOrdinazione(LineaOrdinazione lineaOrdinazione) {
 		if (lineaOrdinazione != null) {
-			if (lineaOrdinazioneSessionBean.inserisciLineaOrdinazione(lineaOrdinazione) != null) 
-				return true;
+			lineaOrdinazione.setOrdinazione(em.merge(lineaOrdinazione.getOrdinazione()));
+			
+			return lineaOrdinazioneSessionBean.inserisciLineaOrdinazione(lineaOrdinazione);
 		}
+		
+		return null;
+	}
 	
-		return false;
+	public LineaOrdinazione modificaLineaOrdinazione(
+			LineaOrdinazione nuovaLineaOrdinazione, LineaOrdinazione vecchiaLineaOrdinazione) {
+		return null;
 	}
 	
 }
