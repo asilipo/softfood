@@ -20,7 +20,9 @@ public interface TavoloFacadeLocal {
 	it.softfood.entity.Tavolo selezionaTavolo(Long id);
 	
 	java.util.List<it.softfood.entity.Tavolo> selezionaTavoliLiberi();
-	
+
+    java.util.List<it.softfood.entity.Tavolo> selezionaTavoliOccupati();
+    
 	boolean rimuoviTavolo(Long id);
 	
 }
