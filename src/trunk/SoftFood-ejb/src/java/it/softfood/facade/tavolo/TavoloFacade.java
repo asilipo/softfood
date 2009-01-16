@@ -51,6 +51,10 @@ public class TavoloFacade implements TavoloFacadeRemote, TavoloFacadeLocal {
 	public List<Tavolo> selezionaTavoliLiberi() {
 		return tavoloSessionBean.selezionaTavoliLiberi();
 	}
+
+    public List<Tavolo> selezionaTavoliOccupati() {
+		return tavoloSessionBean.selezionaTavoliOccupati();
+	}
 	
 	public boolean rimuoviTavolo(Long id) {
 		if (id != null)
