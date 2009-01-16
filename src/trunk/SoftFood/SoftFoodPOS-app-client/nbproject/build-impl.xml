@@ -390,11 +390,13 @@ exists or setup the property manually. For example like this:
     <target depends="compile" name="library-inclusion-in-archive">
         <mkdir dir="${build.classes.dir}/META-INF/lib"/>
         <copyfiles files="${reference.SoftFood-ejb.dist}" todir="${build.classes.dir}/META-INF/lib"/>
+        <copyfiles files="${libs.swing-app-framework.classpath}" todir="${build.classes.dir}/META-INF/lib"/>
     </target>
     <target depends="compile" if="dist.ear.dir" name="library-inclusion-in-manifest">
         <copyfiles files="${reference.SoftFood-ejb.dist}" manifestproperty="manifest.reference.SoftFood-ejb.dist" todir="${dist.ear.dir}"/>
+        <copyfiles files="${libs.swing-app-framework.classpath}" manifestproperty="manifest.libs.swing-app-framework.classpath" todir="${dist.ear.dir}"/>
         <manifest file="${build.ear.classes.dir}/META-INF/MANIFEST.MF" mode="update">
-            <attribute name="Class-Path" value="${manifest.reference.SoftFood-ejb.dist} "/>
+            <attribute name="Class-Path" value="${manifest.reference.SoftFood-ejb.dist} ${manifest.libs.swing-app-framework.classpath} "/>
         </manifest>
     </target>
     <target name="-copy-meta-inf">
