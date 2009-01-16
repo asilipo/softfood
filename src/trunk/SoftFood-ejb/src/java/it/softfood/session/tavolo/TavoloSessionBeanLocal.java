@@ -18,6 +18,8 @@ public interface TavoloSessionBeanLocal {
 	java.util.List<it.softfood.entity.Tavolo> selezionaTavoliPerNumeroPosti(Integer numeroPosti);
 	
 	java.util.List<it.softfood.entity.Tavolo> selezionaTavoliLiberi();
+
+    java.util.List<it.softfood.entity.Tavolo> selezionaTavoliOccupati();
 	
 	boolean modificaStatoTavolo(it.softfood.entity.Tavolo tavolo, Boolean occupato);
 	
