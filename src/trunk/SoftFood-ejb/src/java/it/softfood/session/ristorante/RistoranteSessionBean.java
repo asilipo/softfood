@@ -20,9 +20,7 @@ public class RistoranteSessionBean implements RistoranteSessionBeanRemote, Risto
     
 	public Ristorante inserisciRistorante(Ristorante ristorante) {
 		try {
-			if (ristorante != null) 
-				em.persist(ristorante);
-			
+            em.persist(ristorante);
 			return ristorante;
 		} catch (Exception e) {
 			System.err.println("RistoranteSessionBean#inserisciRistorante");
@@ -31,10 +29,7 @@ public class RistoranteSessionBean implements RistoranteSessionBeanRemote, Risto
 	}
 	
 	public Ristorante selezionaRistorantePerRagioneSociale(String ragioneSociale) {
-        try {
-			if (ragioneSociale == null) 
-	            return null;
-	        
+        try {        
 	        return em.find(Ristorante.class, ragioneSociale);
 		} catch (Exception e) {
 			System.err.println("RistoranteSessionBean#selezionaRistorantePerRagioneSociale");
@@ -44,9 +39,6 @@ public class RistoranteSessionBean implements RistoranteSessionBeanRemote, Risto
 	
 	public Ristorante selezionaRistorantePerPartitaIva(String partitaIva) {
         try {
-			if (partitaIva == null) 
-	            return null;
-	       
 			return (Ristorante) em.createNamedQuery("Ristorante.selezionaRistorantePerPartitaIva")
 	        	.setParameter("partita_iva", partitaIva).getSingleResult();
         } catch (Exception e) {
@@ -57,15 +49,13 @@ public class RistoranteSessionBean implements RistoranteSessionBeanRemote, Risto
 	
     public boolean rimuoviRistorante(String ragioneSociale) {
         try {
-	    	if (ragioneSociale != null) {
-	        	Ristorante ristorante = em.find(Ristorante.class, ragioneSociale);
-	            if (ristorante != null) {
-	                em.remove(ristorante);
-	                return true;
-	            }
-	        }
-	        
-	        return false;
+            Ristorante ristorante = em.find(Ristorante.class, ragioneSociale);
+            if (ristorante != null) {
+                em.remove(ristorante);
+                return true;
+            }
+
+            return false;
         } catch (Exception e) {
 			System.err.println("RistoranteSessionBean#rimuoviRistorante");
 			return false;

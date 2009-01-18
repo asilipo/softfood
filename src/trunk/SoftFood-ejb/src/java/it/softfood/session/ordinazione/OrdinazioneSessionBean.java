@@ -24,9 +24,7 @@ public class OrdinazioneSessionBean implements OrdinazioneSessionBeanRemote, Ord
     
 	public Ordinazione inserisciOrdinazione(Ordinazione ordinazione) {
 		try {
-			if (ordinazione != null) 
-				em.persist(ordinazione);
-			
+            em.persist(ordinazione);
 			return ordinazione;
 		} catch (Exception e) {
 			System.err.println("OrdinazioneSessionBean#inserisciOrdinazione");
@@ -35,10 +33,7 @@ public class OrdinazioneSessionBean implements OrdinazioneSessionBeanRemote, Ord
 	}
 	
 	public Ordinazione selezionaOrdinazionePerId(Long id) {
-		try {
-	        if (id == null) 
-	            return null;
-	        
+		try {        
 	        return em.find(Ordinazione.class, id);
 		} catch (Exception e) {
 			System.err.println("OrdinazioneSessionBean#selezionaOrdinazionePerId");
@@ -60,9 +55,6 @@ public class OrdinazioneSessionBean implements OrdinazioneSessionBeanRemote, Ord
 	@SuppressWarnings("unchecked")
 	public List<Ordinazione> selezionaOrdinazioniPerData(Date data) {
 		try {
-	        if (data == null) 
-	            return null;
-	       
         	return em.createNamedQuery("Ordinazione.selezionaOrdinazioniPerData")
 	        	.setParameter("data", data).getResultList();
 		} catch (Exception e) {
@@ -74,9 +66,6 @@ public class OrdinazioneSessionBean implements OrdinazioneSessionBeanRemote, Ord
 	@SuppressWarnings("unchecked")
 	public List<Ordinazione> selezionaOrdinazioniGionalierePerTavolo(Tavolo tavolo, Boolean terminato) {
         try {
-			if (tavolo == null || terminato == null) 
-	            return null;
-	       
 	        return em.createNamedQuery("Ordinazione.selezionaOrdinazioniGionalierePerTavolo")
 	        	.setParameter("tavolo", tavolo).setParameter("terminato", terminato).getResultList();
 		} catch (Exception e) {
@@ -87,14 +76,12 @@ public class OrdinazioneSessionBean implements OrdinazioneSessionBeanRemote, Ord
 	
     public boolean rimuoviOrdinazione(Long id) {
     	try {
-	        if (id != null) {
-	        	Ordinazione ordinazione = em.find(Ordinazione.class, id);
-	            if (ordinazione != null) {
-	                em.remove(ordinazione);
-	                return true;
-	            }
-	        }
-	        
+            Ordinazione ordinazione = em.find(Ordinazione.class, id);
+            if (ordinazione != null) {
+                em.remove(ordinazione);
+                return true;
+            }
+
 	        return false;
 		} catch (Exception e) {
 			System.err.println("OrdinazioneSessionBean#rimuoviOrdinazione");

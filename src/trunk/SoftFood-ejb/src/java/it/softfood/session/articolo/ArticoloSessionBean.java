@@ -19,29 +19,37 @@ public class ArticoloSessionBean implements ArticoloSessionBeanRemote, ArticoloS
     private EntityManager em;
     
 	public Articolo inserisciArticolo(Articolo articolo) {
-		if (articolo != null) 
-			em.persist(articolo);
-		
-		return articolo;
+		try {
+			em.persist(articolo);		
+            return articolo;
+        } catch (Exception e) {
+            System.err.println("ArticoloSessionBean#inserisciArticolo");
+            return null;
+        }
 	}
 	
 	public Articolo selezionaArticoloPerId(Long id) {
-        if (id == null) 
+        try {
+            return em.find(Articolo.class, id);
+        } catch (Exception e) {
+            System.err.println("ArticoloSessionBean#selezionaArticoloPerId");
             return null;
-        
-        return em.find(Articolo.class, id);
+        }
 	}
 
     public boolean rimuoviBevanda(Long id) {
-        if (id != null) {
+        try {
         	Articolo articolo = em.find(Articolo.class, id);
             if (articolo != null) {
                 em.remove(articolo);
                 return true;
             }
+
+            return false;
+        } catch (Exception e) {
+            System.err.println("ArticoloSessionBean#rimuoviBevanda");
+            return false;
         }
-        
-        return false;
     }
 
 }

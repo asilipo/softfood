@@ -22,9 +22,7 @@ public class TavoloSessionBean implements TavoloSessionBeanRemote, TavoloSession
 	
 	public Tavolo inserisciTavolo(Tavolo tavolo) {
 		try {
-			if (tavolo != null)
-				em.persist(tavolo);
-			
+            em.persist(tavolo);
 			return tavolo;
 		} catch (Exception e) {
 			System.err.println("TavoloSessionBean#inserisciTavolo");
@@ -33,10 +31,7 @@ public class TavoloSessionBean implements TavoloSessionBeanRemote, TavoloSession
 	}
 	
 	public Tavolo selezionaTavoloPerId(Long id) {
-		try {
-			if (id != null) 
-				return null;
-	        
+		try {        
 	        return em.find(Tavolo.class, id);
 		} catch (Exception e) {
 			System.err.println("TavoloSessionBean#selezionaTavoloPerId");
@@ -94,13 +89,11 @@ public class TavoloSessionBean implements TavoloSessionBeanRemote, TavoloSession
 	
     public boolean rimuoviTavolo(Long id) {
     	try {
-	        if (id != null) {
-	        	Tavolo tavolo = em.find(Tavolo.class, id);
-	            if (tavolo != null) {
-	                em.remove(tavolo);
-	                return true;
-	            }
-	        }
+            Tavolo tavolo = em.find(Tavolo.class, id);
+            if (tavolo != null) {
+                em.remove(tavolo);
+                return true;
+            }
 	        
 	        return false;
 		} catch (Exception e) {

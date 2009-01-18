@@ -21,44 +21,62 @@ public class IngredienteMagazzinoSessionBean implements IngredienteMagazzinoSess
     private EntityManager em;
     
 	public IngredienteMagazzino inserisciIngredienteMagazzino(IngredienteMagazzino ingredienteMagazzino) {
-		if (ingredienteMagazzino != null) 
+		try {
 			em.persist(ingredienteMagazzino);
-		
-		return ingredienteMagazzino;
+            return ingredienteMagazzino;
+        } catch (Exception e) {
+            System.err.println("IngredienteMagazzinoSessionBean#inserisciIngredienteMagazzino");
+            return null;
+        }
 	}
 	
 	public IngredienteMagazzino selezionaIngredienteMagazzinoPerId(Long id) {
-        if (id == null) 
+        try {
+            return em.find(IngredienteMagazzino.class, id);
+        } catch (Exception e) {
+            System.err.println("IngredienteMagazzinoSessionBean#selezionaIngredienteMagazzinoPerId");
             return null;
-        
-        return em.find(IngredienteMagazzino.class, id);
+        }
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<IngredienteMagazzino> selezionaIngredientiLungaConservazione() {       
-       return em.createNamedQuery("IngredienteMagazzino.selezionaIngredientiLungaConservazione")
-        	.getResultList();
+	public List<IngredienteMagazzino> selezionaIngredientiLungaConservazione() {
+        try {
+            return em.createNamedQuery("IngredienteMagazzino.selezionaIngredientiLungaConservazione")
+                .getResultList();
+        } catch (Exception e) {
+            System.err.println("IngredienteMagazzinoSessionBean#selezionaIngredientiLungaConservazione");
+            return null;
+        }
 	}
 	
 	@SuppressWarnings("unchecked")
 	public List<IngredienteMagazzino> selezionaIngredientiLungaConservazionePerQuantita(Integer quantita) {
-        if (quantita == null || quantita < 0) 
-            quantita = 0;
-       
-       return em.createNamedQuery("IngredienteMagazzino.selezionaIngredientiLungaConservazionePerQuantita")
-        	.setParameter("quantita", quantita).getResultList();
+        try {
+            if (quantita == null || quantita < 0)
+                quantita = 0;
+
+            return em.createNamedQuery("IngredienteMagazzino.selezionaIngredientiLungaConservazionePerQuantita")
+                .setParameter("quantita", quantita).getResultList();
+        } catch (Exception e) {
+            System.err.println("IngredienteMagazzinoSessionBean#selezionaIngredientiLungaConservazionePerQuantita");
+            return null;
+        }
 	}
 	
     public boolean rimuoviIngredienteMagazzino(Long id) {
-        if (id != null) {
-        	IngredienteMagazzino ingredienteMagazzino = em.find(IngredienteMagazzino.class, id);
+        try {
+            IngredienteMagazzino ingredienteMagazzino = em.find(IngredienteMagazzino.class, id);
             if (ingredienteMagazzino != null) {
                 em.remove(ingredienteMagazzino);
                 return true;
             }
+
+            return false;
+        } catch (Exception e) {
+            System.err.println("IngredienteMagazzinoSessionBean#rimuoviIngredienteMagazzino");
+            return false;
         }
-        
-        return false;
     }
 
 }

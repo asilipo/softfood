@@ -19,29 +19,37 @@ public class IngredientePietanzaSessionBean implements IngredientePietanzaSessio
     private EntityManager em;
     
 	public IngredientePietanza inserisciIngredientePietanza(IngredientePietanza ingredientePietanza) {
-		if (ingredientePietanza != null) 
+		try {
 			em.persist(ingredientePietanza);
-		
-		return ingredientePietanza;
+            return ingredientePietanza;
+        } catch (Exception e) {
+            System.err.println("IngredientePietanzaSessionBean#inserisciIngredientePietanza");
+            return null;
+        }
 	}
 	
 	public IngredientePietanza selezionaIngredientePietanzaPerId(Long id) {
-        if (id == null) 
+        try {
+            return em.find(IngredientePietanza.class, id);
+        } catch (Exception e) {
+            System.err.println("IngredientePietanzaSessionBean#selezionaIngredientePietanzaPerId");
             return null;
-        
-        return em.find(IngredientePietanza.class, id);
+        }
 	}
 	
     public boolean rimuoviIngredientePietanza(Long id) {
-        if (id != null) {
+        try {
         	IngredientePietanza ingredientePietanza = em.find(IngredientePietanza.class, id);
             if (ingredientePietanza != null) {
                 em.remove(ingredientePietanza);
                 return true;
             }
+
+            return false;
+        } catch (Exception e) {
+            System.err.println("IngredientePietanzaSessionBean#rimuoviIngredientePietanza");
+            return false;
         }
-        
-        return false;
     }
     
 }

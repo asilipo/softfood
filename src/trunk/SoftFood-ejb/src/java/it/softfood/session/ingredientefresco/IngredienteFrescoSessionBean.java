@@ -21,35 +21,48 @@ public class IngredienteFrescoSessionBean implements IngredienteFrescoSessionBea
     private EntityManager em;
     
 	public IngredienteFresco inserisciIngredienteFresco(IngredienteFresco ingredienteFresco) {
-		if (ingredienteFresco != null) 
+		try {
 			em.persist(ingredienteFresco);
-		
-		return ingredienteFresco;
+            return ingredienteFresco;
+        } catch (Exception e) {
+            System.err.println("IngredienteFrescoSessionBean#inserisciIngredienteFresco");
+            return null;
+        }
 	}
 	
 	public IngredienteFresco selezionaIngredienteFrescoPerId(Long id) {
-        if (id == null) 
+        try {
+            return em.find(IngredienteFresco.class, id);
+        } catch (Exception e) {
+            System.err.println("IngredienteFrescoSessionBean#selezionaIngredienteFrescoPerId");
             return null;
-        
-        return em.find(IngredienteFresco.class, id);
+        }
 	}
 	
 	@SuppressWarnings("unchecked")
 	public List<IngredienteFresco> selezionaIngredientiFreschi() {
-       return em.createNamedQuery("IngredienteFresco.selezionaIngredientiFreschi")
-        	.getResultList();
+        try {
+            return em.createNamedQuery("IngredienteFresco.selezionaIngredientiFreschi")
+                .getResultList();
+        } catch (Exception e) {
+            System.err.println("IngredienteFrescoSessionBean#selezionaIngredientiFreschi");
+            return null;
+        }
 	}
 	
     public boolean rimuoviIngredienteFresco(Long id) {
-        if (id != null) {
+        try {
         	IngredienteFresco ingredienteFresco = em.find(IngredienteFresco.class, id);
             if (ingredienteFresco != null) {
                 em.remove(ingredienteFresco);
                 return true;
             }
+
+            return false;
+        } catch (Exception e) {
+            System.err.println("IngredienteFrescoSessionBean#rimuoviIngredienteFresco");
+            return false;
         }
-        
-        return false;
     }
     
 }

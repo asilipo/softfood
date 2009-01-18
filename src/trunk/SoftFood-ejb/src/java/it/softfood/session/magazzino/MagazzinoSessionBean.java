@@ -19,29 +19,37 @@ public class MagazzinoSessionBean implements MagazzinoSessionBeanRemote, Magazzi
     private EntityManager em;
     
 	public Magazzino inserisciMagazzino(Magazzino magazzino) {
-		if (magazzino != null) 
+		try {
 			em.persist(magazzino);
-		
-		return magazzino;
+            return magazzino;
+        } catch (Exception e) {
+            System.err.println("MagazzinoSessionBean#inserisciMagazzino");
+            return null;
+        }
 	}
 	
 	public Magazzino selezionaMagazzinoPerId(Long id) {
-        if (id == null) 
+        try {
+            return em.find(Magazzino.class, id);
+        } catch (Exception e) {
+            System.err.println("MagazzinoSessionBean#selezionaMagazzinoPerId");
             return null;
-        
-        return em.find(Magazzino.class, id);
+        }
 	}
 	
     public boolean rimuoviMagazzino(Long id) {
-        if (id != null) {
+        try {
         	Magazzino magazzino = em.find(Magazzino.class, id);
             if (magazzino != null) {
                 em.remove(magazzino);
                 return true;
             }
+
+            return false;
+        } catch (Exception e) {
+            System.err.println("MagazzinoSessionBean#rimuoviMagazzino");
+            return false;
         }
-        
-        return false;
     }
 
 }

@@ -34,6 +34,8 @@ public class RistoranteFacade implements RistoranteFacadeRemote, RistoranteFacad
 			Ristorante ristorante = em.merge(vecchioRistorante);
 			ristorante.setIndirizzo(nuovoRistorante.getIndirizzo());
 			ristorante.setPartitaIva(nuovoRistorante.getPartitaIva());
+
+            return ristorante;
 		}
 		
 		return null;

@@ -19,29 +19,37 @@ public class BevandaSessionBean implements BevandaSessionBeanRemote, BevandaSess
     private EntityManager em;
     
 	public Bevanda inserisciBevanda(Bevanda bevanda) {
-		if (bevanda != null) 
+		try {
 			em.persist(bevanda);
-		
-		return bevanda;
+            return bevanda;
+        } catch (Exception e ) {
+            System.err.println("BevandaSessionBean#inserisciBevanda");
+            return null;
+        }
 	}
 	
 	public Bevanda selezionaBevandaPerId(Long id) {
-        if (id == null) 
+        try {
+            return em.find(Bevanda.class, id);
+        } catch (Exception e ) {
+            System.err.println("BevandaSessionBean#selezionaBevandaPerId");
             return null;
-        
-        return em.find(Bevanda.class, id);
+        }
 	}
 
     public boolean rimuoviBevanda(Long id) {
-        if (id != null) {
+        try {
             Bevanda bevanda = em.find(Bevanda.class, id);
             if (bevanda != null) {
                 em.remove(bevanda);
                 return true;
             }
+
+            return false;
+        } catch (Exception e ) {
+            System.err.println("BevandaSessionBean#rimuoviBevanda");
+            return false;
         }
-        
-        return false;
     }
     
 }

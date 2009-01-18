@@ -19,29 +19,37 @@ public class IndirizzoSessionBean implements IndirizzoSessionBeanRemote, Indiriz
     private EntityManager em;
     
 	public Indirizzo inserisciIndirizzo(Indirizzo indirizzo) {
-		if (indirizzo != null) 
+		try {
 			em.persist(indirizzo);
-		
-		return indirizzo;
+            return indirizzo;
+        } catch (Exception e) {
+            System.err.println("IndirizzoSessionBean#inserisciIndirizzo");
+            return null;
+        }
 	}
 	
 	public Indirizzo selezionaIndirizzoPerId(Long id) {
-        if (id == null) 
+        try {
+            return em.find(Indirizzo.class, id);
+        } catch (Exception e) {
+            System.err.println("IndirizzoSessionBean#selezionaIndirizzoPerId");
             return null;
-        
-        return em.find(Indirizzo.class, id);
+        }
 	}
 	
     public boolean rimuoviIndirizzo(Long id) {
-        if (id != null) {
+        try {
         	Indirizzo indirizzo = em.find(Indirizzo.class, id);
             if (indirizzo != null) {
                 em.remove(indirizzo);
                 return true;
             }
+
+            return false;
+        } catch (Exception e) {
+            System.err.println("IndirizzoSessionBean#rimuoviIndirizzo");
+            return false;
         }
-        
-        return false;
     }
 
 }
