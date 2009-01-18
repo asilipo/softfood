@@ -20,37 +20,47 @@ public class EntrataSessionBean implements EntrataSessionBeanRemote, EntrataSess
     private EntityManager em;
     
 	public Entrata inserisciEntrata(Entrata entrata) {
-		if (entrata != null) 
+		try {
 			em.persist(entrata);
-		
-		return entrata;
+            return entrata;
+        } catch (Exception e) {
+            System.err.println("EntrataSessionBean#inserisciEntrata");
+            return null;
+        }
 	}
 	
 	public Entrata selezionaEntrataPerId(Long id) {
-        if (id == null) 
+        try {
+            return em.find(Entrata.class, id);
+        } catch (Exception e) {
+            System.err.println("EntrataSessionBean#selezionaEntrataPerId");
             return null;
-        
-        return em.find(Entrata.class, id);
+        }
 	}
 
 	public Ordinazione selezionaBevandeMagazzinoEntrataPerOrdinazione(Ordinazione ordinazione) {
-		if (ordinazione != null)
-			return null;
-			
-       return (Ordinazione) em.createNamedQuery("Entrata.selezionaEntrataPerOrdinazione")
-        	.getSingleResult();
+		try {
+            return (Ordinazione) em.createNamedQuery("Entrata.selezionaEntrataPerOrdinazione")
+                .getSingleResult();
+        } catch (Exception e) {
+            System.err.println("EntrataSessionBean#selezionaBevandeMagazzinoEntrataPerOrdinazione");
+            return null;
+        }
 	}
 	
     public boolean rimuoviEntrata(Long id) {
-        if (id != null) {
+        try {
         	Entrata entrata = em.find(Entrata.class, id);
             if (entrata != null) {
                 em.remove(entrata);
                 return true;
             }
+
+            return false;
+        } catch (Exception e) {
+            System.err.println("EntrataSessionBean#rimuoviEntrata");
+            return false;
         }
-        
-        return false;
     }
     
 }

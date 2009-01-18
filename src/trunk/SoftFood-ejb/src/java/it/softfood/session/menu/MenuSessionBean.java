@@ -19,29 +19,37 @@ public class MenuSessionBean implements MenuSessionBeanRemote, MenuSessionBeanLo
     private EntityManager em;
     
 	public Menu inserisciMenu(Menu menu) {
-		if (menu != null) 
+		try {
 			em.persist(menu);
-		
-		return menu;
+            return menu;
+        } catch (Exception e) {
+            System.err.println("MenuSessionBean#inserisciMenu");
+            return null;
+        }
 	}
 	
 	public Menu selezionaMenuPerId(Long id) {
-        if (id == null) 
+        try {
+            return em.find(Menu.class, id);
+        } catch (Exception e) {
+            System.err.println("MenuSessionBean#selezionaMenuPerId");
             return null;
-        
-        return em.find(Menu.class, id);
+        }
 	}
 	
     public boolean rimuoviMenu(Long id) {
-        if (id != null) {
+        try {
         	Menu menu = em.find(Menu.class, id);
             if (menu != null) {
                 em.remove(menu);
                 return true;
             }
+
+            return false;
+        } catch (Exception e) {
+            System.err.println("MenuSessionBean#rimuoviMenu");
+            return false;
         }
-        
-        return false;
     }
 
 }

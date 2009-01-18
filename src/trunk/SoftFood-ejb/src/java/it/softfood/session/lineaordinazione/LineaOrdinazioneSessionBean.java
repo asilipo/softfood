@@ -22,38 +22,46 @@ public class LineaOrdinazioneSessionBean implements LineaOrdinazioneSessionBeanR
     private EntityManager em;
     
 	public LineaOrdinazione inserisciLineaOrdinazione(LineaOrdinazione lineaOrdinazione) {
-		if (lineaOrdinazione != null) 
-			em.persist(lineaOrdinazione);
-		
-		return lineaOrdinazione;
+        try {
+            em.persist(lineaOrdinazione);
+            return lineaOrdinazione;
+        } catch (Exception e) {
+            System.err.println("LineaOrdinazioneSessionBean#inserisciLineaOrdinazione");
+            return null;
+        }
 	}
 	
 	public LineaOrdinazione selezionaLineaOrdinazionePerId(Long id) {
-        if (id == null) 
+        try {
+            return em.find(LineaOrdinazione.class, id);
+        } catch (Exception e) {
+            System.err.println("LineaOrdinazioneSessionBean#selezionaLineaOrdinazionePerId");
             return null;
-        
-        return em.find(LineaOrdinazione.class, id);
+        }
 	}
 	
 	@SuppressWarnings("unchecked")
 	public List<LineaOrdinazione> selezionaLineeOrdinazionePerOrdinazione(Ordinazione ordinazione) {
-        if (ordinazione == null) 
+        try {
+           return em.createNamedQuery("LineaOrdinazione.selezionaLineeOrdinazionePerOrdinazione")
+                .setParameter("ordinazione", ordinazione).getResultList();
+        } catch (Exception e) {
+            System.err.println("LineaOrdinazioneSessionBean#selezionaLineeOrdinazionePerOrdinazione");
             return null;
-       
-       return em.createNamedQuery("LineaOrdinazione.selezionaLineeOrdinazionePerOrdinazione")
-        	.setParameter("ordinazione", ordinazione).getResultList();
+        }
 	}
 	
     public boolean rimuoviLineaOrdinazione(Long id) {
-        if (id != null) {
+        try {
         	LineaOrdinazione lineaOrdinazione = em.find(LineaOrdinazione.class, id);
-            if (lineaOrdinazione != null) {
+            if (lineaOrdinazione != null)
                 em.remove(lineaOrdinazione);
-                return true;
-            }
+                
+            return true;
+        } catch (Exception e) {
+            System.err.println("LineaOrdinazioneSessionBean#rimuoviLineaOrdinazione");
+            return false;
         }
-        
-        return false;
     }
     
 }

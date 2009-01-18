@@ -22,35 +22,48 @@ public class IngredienteLungaConservazioneSessionBean implements IngredienteLung
     
 	public IngredienteLungaConservazione inserisciIngredienteLungaConservazione(
 			IngredienteLungaConservazione ingredienteLungaConservazione) {
-		if (ingredienteLungaConservazione != null) 
+		try {
 			em.persist(ingredienteLungaConservazione);
-		
-		return ingredienteLungaConservazione;
+            return ingredienteLungaConservazione;
+        } catch (Exception e) {
+            System.err.println("IngredienteLungaConservazioneSessionBean#inserisciIngredienteLungaConservazione");
+            return null;
+        }
 	}
 	
 	public IngredienteLungaConservazione selezionaIngredienteLungaConservazionePerId(Long id) {
-        if (id == null) 
+        try {
+            return em.find(IngredienteLungaConservazione.class, id);
+        } catch (Exception e) {
+            System.err.println("IngredienteLungaConservazioneSessionBean#selezionaIngredienteLungaConservazionePerId");
             return null;
-        
-        return em.find(IngredienteLungaConservazione.class, id);
+        }
 	}
 	
 	@SuppressWarnings("unchecked")
 	public List<IngredienteLungaConservazione> selezionaIngredientiLungaConservazione() {
-       return em.createNamedQuery("IngredienteLungaConservazione.selezionaIngredientiLungaConservazione")
-        	.getResultList();
+        try {
+            return em.createNamedQuery("IngredienteLungaConservazione.selezionaIngredientiLungaConservazione")
+                .getResultList();
+        } catch (Exception e) {
+            System.err.println("IngredienteLungaConservazioneSessionBean#selezionaIngredientiLungaConservazione");
+            return null;
+        }
 	}
 	
     public boolean rimuoviIngredienteLungaConservazione(Long id) {
-        if (id != null) {
+        try {
         	IngredienteLungaConservazione ingredienteLungaConservazione = em.find(IngredienteLungaConservazione.class, id);
             if (ingredienteLungaConservazione != null) {
                 em.remove(ingredienteLungaConservazione);
                 return true;
             }
+
+            return false;
+        } catch (Exception e) {
+            System.err.println("IngredienteLungaConservazioneSessionBean#rimuoviIngredienteLungaConservazione");
+            return false;
         }
-        
-        return false;
     }
     
 }

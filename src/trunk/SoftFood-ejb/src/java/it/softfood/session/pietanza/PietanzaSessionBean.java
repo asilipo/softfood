@@ -19,29 +19,37 @@ public class PietanzaSessionBean implements PietanzaSessionBeanRemote, PietanzaS
     private EntityManager em;
     
 	public Pietanza inserisciPietanza(Pietanza pietanza) {
-		if (pietanza != null) 
+		try {
 			em.persist(pietanza);
-		
-		return pietanza;
+            return pietanza;
+        } catch (Exception e) {
+            System.err.println("PietanzaSessionBean#inserisciPietanza");
+            return null;
+        }
 	}
 	
 	public Pietanza selezionaPietanzaPerId(Long id) {
-        if (id == null) 
+        try {
+            return em.find(Pietanza.class, id);
+        } catch (Exception e) {
+            System.err.println("PietanzaSessionBean#selezionaPietanzaPerId");
             return null;
-        
-        return em.find(Pietanza.class, id);
+        }
 	}
 
     public boolean rimuoviPietanza(Long id) {
-        if (id != null) {
+        try {
         	Pietanza pietanza = em.find(Pietanza.class, id);
             if (pietanza != null) {
                 em.remove(pietanza);
                 return true;
             }
-        }
-        
-        return false;
+
+            return false;
+         } catch (Exception e) {
+            System.err.println("PietanzaSessionBean#rimuoviPietanza");
+            return false;
+         }
     }
     
 }

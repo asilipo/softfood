@@ -22,34 +22,48 @@ public class ListinoSessionBean implements ListinoSessionBeanRemote, ListinoSess
     private EntityManager em;
     
 	public Listino inserisciListino(Listino listino) {
-		if (listino != null) 
+		try {
 			em.persist(listino);
-		
-		return listino;
+            return listino;
+        } catch (Exception e) {
+            System.err.println("ListinoSessionBean#inserisciListino");
+            return null;
+        }
 	}
 	
 	public Listino selezionaListinoPerId(Long id) {
-        if (id == null) 
+        try {
+            return em.find(Listino.class, id);
+        } catch (Exception e) {
+            System.err.println("ListinoSessionBean#selezionaListinoPerId");
             return null;
-        
-        return em.find(Listino.class, id);
+        }
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<Articolo> selezionaArticoli() {       
-       return em.createNamedQuery("Listino.selezionaArticoli")
-        	.getResultList();
+	public List<Articolo> selezionaArticoli() {
+        try {
+            return em.createNamedQuery("Listino.selezionaArticoli")
+                .getResultList();
+        } catch (Exception e) {
+            System.err.println("ListinoSessionBean#selezionaArticoli");
+            return null;
+        }
 	}
 	
     public boolean rimuoviListino(Long id) {
-        if (id != null) {
+        try {
         	Listino listino = em.find(Listino.class, id);
             if (listino != null) {
                 em.remove(listino);
                 return true;
             }
+
+            return false;
+        } catch (Exception e) {
+            System.err.println("ListinoSessionBean#rimuoviListino");
+            return false;
         }
-        
-        return false;
     }
+
 }

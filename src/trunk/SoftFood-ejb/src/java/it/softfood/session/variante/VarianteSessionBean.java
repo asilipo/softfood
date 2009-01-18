@@ -23,47 +23,59 @@ public class VarianteSessionBean implements VarianteSessionBeanRemote, VarianteS
 	private EntityManager em;
 	
 	public Variante inserisciVariante(Variante variante) {
-		if (variante != null)
-			em.persist(variante);
-		
-		return variante;
+        try {
+            em.persist(variante);
+            return variante;
+         } catch (Exception e) {
+            System.err.println("VarianteSessionBean#inserisciVariante");
+            return null;
+         }
 	}
 	
 	public Variante selezionaVariantePerId(Long id) {
-		if (id != null) 
-			return null;
-        
-        return em.find(Variante.class, id);
+        try {
+            return em.find(Variante.class, id);
+         } catch (Exception e) {
+            System.err.println("VarianteSessionBean#selezionaVariantePerId");
+            return null;
+         }
 	}
 	
 	@SuppressWarnings("unchecked")
 	public List<Variante> selezionaVariantiPerIngrediente(Ingrediente ingrediente) {
-        if (ingrediente == null) 
+        try {
+            return em.createNamedQuery("Variante.selezionaVariantiPerIngrediente")
+                .setParameter("ingrediente", ingrediente).getResultList();
+         } catch (Exception e) {
+            System.err.println("VarianteSessionBean#selezionaVariantiPerIngrediente");
             return null;
-       
-       return em.createNamedQuery("Variante.selezionaVariantiPerIngrediente")
-        	.setParameter("ingrediente", ingrediente).getResultList();
+         }
 	}
 	
 	@SuppressWarnings("unchecked")
 	public List<Variante> selezionaVariantiPerLineaOrdinazione(LineaOrdinazione lineaOrdinazione) {
-        if (lineaOrdinazione == null) 
+        try {
+            return em.createNamedQuery("Variante.selezionaVariantiPerIngrediente")
+                .setParameter("linea_ordinazione", lineaOrdinazione).getResultList();
+         } catch (Exception e) {
+            System.err.println("VarianteSessionBean#selezionaVariantiPerLineaOrdinazione");
             return null;
-       
-       return em.createNamedQuery("Variante.selezionaVariantiPerIngrediente")
-        	.setParameter("linea_ordinazione", lineaOrdinazione).getResultList();
+         }
 	}
 	
     public boolean rimuoviVariante(Long id) {
-        if (id != null) {
+        try {
         	Variante variante = em.find(Variante.class, id);
             if (variante != null) {
                 em.remove(variante);
                 return true;
             }
+
+            return false;
+        } catch (Exception e) {
+            System.err.println("VarianteSessionBean#rimuoviVariante");
+            return false;
         }
-        
-        return false;
     }
     
 }

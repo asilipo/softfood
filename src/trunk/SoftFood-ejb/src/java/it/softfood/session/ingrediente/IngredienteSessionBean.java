@@ -21,38 +21,48 @@ public class IngredienteSessionBean implements IngredienteSessionBeanRemote, Ing
     private EntityManager em;
     
 	public Ingrediente inserisciIngrediente(Ingrediente ingrediente) {
-		if (ingrediente != null) 
+		try {
 			em.persist(ingrediente);
-		
-		return ingrediente;
+            return ingrediente;
+        } catch (Exception e) {
+            System.err.println("IngredienteSessionBean#inserisciIngrediente");
+            return null;
+        }
 	}
 	
 	public Ingrediente selezionaIngredientePerId(Long id) {
-        if (id == null) 
+        try {
+            return em.find(Ingrediente.class, id);
+        } catch (Exception e) {
+            System.err.println("IngredienteSessionBean#selezionaIngredientePerId");
             return null;
-        
-        return em.find(Ingrediente.class, id);
+        }
 	}
 	
 	@SuppressWarnings("unchecked")
 	public List<Ingrediente> selezionaIngredientePerNome(String nome) {
-        if (nome == null) 
+        try {
+            return em.createNamedQuery("Ingrediente.selezionaIngredientiPerNome")
+                .setParameter("nome", nome).getResultList();
+        } catch (Exception e) {
+            System.err.println("IngredienteSessionBean#selezionaIngredientePerNome");
             return null;
-       
-       return em.createNamedQuery("Ingrediente.selezionaIngredientiPerNome")
-        	.setParameter("nome", nome).getResultList();
+        }
 	}
 	
     public boolean rimuoviIngrediente(Long id) {
-        if (id != null) {
+        try {
         	Ingrediente ingrediente = em.find(Ingrediente.class, id);
             if (ingrediente != null) {
                 em.remove(ingrediente);
                 return true;
             }
+
+            return false;
+        } catch (Exception e) {
+            System.err.println("IngredienteSessionBean#rimuoviIngrediente");
+            return false;
         }
-        
-        return false;
     }
 
 }

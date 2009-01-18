@@ -20,37 +20,47 @@ public class StaffSessionBean implements StaffSessionBeanRemote, StaffSessionBea
     private EntityManager em;
     
 	public Staff inserisciStaff(Staff staff) {
-		if (staff != null) 
+        try {
 			em.persist(staff);
-		
-		return staff;
+            return staff;
+        } catch (Exception e) {
+            System.err.println("StaffSessionBean#inserisciStaff");
+            return null;
+        }
 	}
 	
 	public Staff selezionaStaffPerId(Long id) {
-        if (id == null) 
+        try {
+            return em.find(Staff.class, id);
+        } catch (Exception e) {
+            System.err.println("StaffSessionBean#selezionaStaffPerId");
             return null;
-        
-        return em.find(Staff.class, id);
+        }
 	}
 	
 	public Staff selezionaStaffPerTipo(TipoStaff tipoStaff) {
-        if (tipoStaff == null) 
+        try {
+            return (Staff) em.createNamedQuery("Staff.selezionaStaffPerTipo")
+                .setParameter("tipo_staff", tipoStaff).getSingleResult();
+        } catch (Exception e) {
+            System.err.println("StaffSessionBean#selezionaStaffPerTipo");
             return null;
-       
-       return (Staff) em.createNamedQuery("Staff.selezionaStaffPerTipo")
-        	.setParameter("tipo_staff", tipoStaff).getSingleResult();
+        }
 	}
 	
     public boolean rimuoviStaff(Long id) {
-        if (id != null) {
+        try {
         	Staff staff = em.find(Staff.class, id);
             if (staff != null) {
                 em.remove(staff);
                 return true;
             }
+
+            return false;
+        } catch (Exception e) {
+            System.err.println("StaffSessionBean#rimuoviStaff");
+            return false;
         }
-        
-        return false;
     }
     
 }

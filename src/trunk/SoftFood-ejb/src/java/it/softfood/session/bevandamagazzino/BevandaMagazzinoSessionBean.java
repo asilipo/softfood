@@ -21,44 +21,62 @@ public class BevandaMagazzinoSessionBean implements BevandaMagazzinoSessionBeanR
     private EntityManager em;
     
 	public BevandaMagazzino inserisciBevandaMagazzino(BevandaMagazzino bevandaMagazzino) {
-		if (bevandaMagazzino != null) 
+		try {
 			em.persist(bevandaMagazzino);
-		
-		return bevandaMagazzino;
+            return bevandaMagazzino;
+        } catch (Exception e) {
+            System.err.println("BevandaMagazzino#inserisciBevandaMagazzino");
+            return null;
+        }
 	}
 	
 	public BevandaMagazzino selezionaBevandaMagazzinoPerId(Long id) {
-        if (id == null) 
+        try {
+            return em.find(BevandaMagazzino.class, id);
+        } catch (Exception e) {
+            System.err.println("BevandaMagazzino#selezionaBevandaMagazzinoPerId");
             return null;
-        
-        return em.find(BevandaMagazzino.class, id);
+        }
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<BevandaMagazzino> selezionaBevandeMagazzino() {       
-       return em.createNamedQuery("BevandaMagazzino.selezionaBevandeMagazzino")
-        	.getResultList();
+	public List<BevandaMagazzino> selezionaBevandeMagazzino() {
+        try {
+            return em.createNamedQuery("BevandaMagazzino.selezionaBevandeMagazzino")
+                .getResultList();
+        } catch (Exception e) {
+            System.err.println("BevandaMagazzino#selezionaBevandeMagazzino");
+            return null;
+        }
 	}
 	
 	@SuppressWarnings("unchecked")
 	public List<BevandaMagazzino> selezionaBevandeMagazzinoPerQuantita(Integer quantita) {
-        if (quantita == null || quantita < 0) 
-            quantita = 0;
-       
-       return em.createNamedQuery("BevandaMagazzino.selezionaBevandeMagazzinoPerQuantita")
-        	.setParameter("quantita", quantita).getResultList();
+        try {
+            if (quantita == null || quantita < 0)
+                quantita = 0;
+
+            return em.createNamedQuery("BevandaMagazzino.selezionaBevandeMagazzinoPerQuantita")
+                .setParameter("quantita", quantita).getResultList();
+        } catch (Exception e) {
+            System.err.println("BevandaMagazzino#selezionaBevandeMagazzinoPerQuantita");
+            return null;
+        }
 	}
 	
     public boolean rimuoviBevandaMagazzino(Long id) {
-        if (id != null) {
+        try {
         	BevandaMagazzino bevandaMagazzino = em.find(BevandaMagazzino.class, id);
             if (bevandaMagazzino != null) {
                 em.remove(bevandaMagazzino);
                 return true;
             }
+
+            return false;
+        } catch (Exception e) {
+            System.err.println("BevandaMagazzino#rimuoviBevandaMagazzino");
+            return false;
         }
-        
-        return false;
     }
 
 }
