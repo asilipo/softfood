@@ -17,6 +17,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
 
 /**
  * @author Maria Rosaria Paone
@@ -40,11 +41,12 @@ public class Ingrediente implements Serializable {
 	@Id()
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenza_ingrediente")
 	private Long id;
-	@Column(name = "nome", nullable = false)
+	@Column(name = "nome", nullable = false, unique = true)
 	private String nome;
 	@Column(name = "descrizione", nullable = true)
 	private String descrizione;
 	@Column(name = "scadenza", nullable = false)
+    @Temporal(javax.persistence.TemporalType.DATE)
 	private Date scadenza;
 	
 	public Long getId() {

@@ -40,8 +40,8 @@ public class Tavolo implements Serializable {
 	private Long id;
 	@Column(name = "numero_posti", nullable = false)
 	private Integer numeroPosti;
-    @Column(name = "descrizione", nullable = false)
-	private String descrizione;
+    @Column(name = "riferimento", nullable = false, unique = true)
+	private String riferimento;
 	@Column(name = "occupato", nullable = false)
 	private Boolean occupato;
 	@ManyToOne()
@@ -57,12 +57,12 @@ public class Tavolo implements Serializable {
 		this.id = id;
 	}
 
-    public String getDescrizione() {
-        return descrizione;
+    public String getRiferimento() {
+        return riferimento;
     }
 
-    public void setDescrizione(String descrizione) {
-        this.descrizione = descrizione;
+    public void setRiferimento(String riferimento) {
+        this.riferimento = riferimento;
     }
 	
 	public Integer getNumeroPosti() {
