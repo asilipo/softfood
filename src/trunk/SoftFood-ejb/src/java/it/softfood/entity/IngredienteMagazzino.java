@@ -48,7 +48,7 @@ public class IngredienteMagazzino implements Serializable {
 	private Magazzino magazzino;
 	@OneToOne()
     @LazyCollection(value = LazyCollectionOption.FALSE)
-    @JoinColumn(name = "magazzino", nullable = false)
+    @JoinColumn(name = "ingrediente", nullable = false)
     private IngredienteLungaConservazione ingredienteLungaConservazione;
 	
 	public Long getId() {
