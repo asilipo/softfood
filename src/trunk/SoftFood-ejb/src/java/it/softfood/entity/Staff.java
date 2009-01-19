@@ -10,11 +10,14 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 /**
  * @author Maria Rosaria Paone
@@ -39,7 +42,9 @@ public class Staff implements Serializable {
 	private TipoStaff tipoStaff;
 	@Column(name = "descrizione" , nullable = true)
 	private String descrizione;
-	@OneToOne(fetch = FetchType.LAZY)
+    @OneToOne()
+    @LazyCollection(value = LazyCollectionOption.FALSE)
+    @JoinColumn(name = "ristorante", nullable = false)
 	private Ristorante ristorante;
 
 	public Staff() {}

@@ -40,6 +40,8 @@ public class Tavolo implements Serializable {
 	private Long id;
 	@Column(name = "numero_posti", nullable = false)
 	private Integer numeroPosti;
+    @Column(name = "descrizione", nullable = false)
+	private String descrizione;
 	@Column(name = "occupato", nullable = false)
 	private Boolean occupato;
 	@ManyToOne()
@@ -54,6 +56,14 @@ public class Tavolo implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
+
+    public String getDescrizione() {
+        return descrizione;
+    }
+
+    public void setDescrizione(String descrizione) {
+        this.descrizione = descrizione;
+    }
 	
 	public Integer getNumeroPosti() {
 		return numeroPosti;
