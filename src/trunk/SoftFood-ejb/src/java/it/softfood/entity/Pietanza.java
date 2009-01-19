@@ -25,7 +25,7 @@ public class Pietanza extends Articolo implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-    @Column(name = "tipo_pietanza", nullable = false)
+    @Column(name = "tipo_pietanza", nullable = true)
 	private TipoPietanza tipo;
 
     public TipoPietanza getTipo() {

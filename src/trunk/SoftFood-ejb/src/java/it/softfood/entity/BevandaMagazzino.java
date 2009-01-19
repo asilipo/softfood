@@ -13,6 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -45,10 +46,10 @@ public class BevandaMagazzino implements Serializable {
     @LazyCollection(value = LazyCollectionOption.FALSE)
     @JoinColumn(name = "magazzino", nullable = false)
 	private Magazzino magazzino;
-	@OneToMany()
+	@OneToOne()
     @LazyCollection(value = LazyCollectionOption.FALSE)
-    @JoinColumn(name = "magazzino", nullable = false)
-    private Collection<Bevanda> bevande;
+    @JoinColumn(name = "bevanda", nullable = true)
+    private Bevanda bevanda;
 	
 	public Long getId() {
 		return id;
@@ -58,12 +59,12 @@ public class BevandaMagazzino implements Serializable {
 		this.id = id;
 	}
 
-	public Collection<Bevanda> getBevande() {
-		return bevande;
+	public Bevanda getBevanda() {
+		return bevanda;
 	}
 
-	public void setBevande(Collection<Bevanda> bevande) {
-		this.bevande = bevande;
+	public void setBevande(Bevanda bevanda) {
+		this.bevanda = bevanda;
 	}
 
 	public Magazzino getMagazzino() {
