@@ -28,8 +28,8 @@ import org.hibernate.annotations.LazyCollectionOption;
 @SequenceGenerator(name = "sequenza_tavolo", sequenceName = "seq_id_tavolo")
 @NamedQueries({
 		@NamedQuery(name = "Tavolo.selezionaTavoliPerNumeroPosti", query = "SELECT t FROM Tavolo t WHERE t.numeroPosti = :numero_posti"),
-		@NamedQuery(name = "Tavolo.selezionaTavoliLiberi", query = "SELECT t FROM Tavolo t WHERE t.occupato = false"),
-        @NamedQuery(name = "Tavolo.selezionaTavoliOccupati", query = "SELECT t FROM Tavolo t WHERE t.occupato = true")
+		@NamedQuery(name = "Tavolo.selezionaTavoliLiberi", query = "SELECT t FROM Tavolo t WHERE t.occupato = false ORDER BY riferimento"),
+        @NamedQuery(name = "Tavolo.selezionaTavoliOccupati", query = "SELECT t FROM Tavolo t WHERE t.occupato = true ORDER BY riferimento")
 })
 public class Tavolo implements Serializable {
 
