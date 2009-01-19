@@ -1,15 +1,19 @@
 package it.softfood.facade.ordinazione;
 
+import it.softfood.entity.Articolo;
 import it.softfood.entity.Ingrediente;
 import it.softfood.entity.LineaOrdinazione;
 import it.softfood.entity.Ordinazione;
+import it.softfood.entity.Pietanza;
 import it.softfood.entity.Tavolo;
 import it.softfood.entity.Variante;
+import it.softfood.enumeration.TipoPietanza;
 import it.softfood.session.lineaordinazione.LineaOrdinazioneSessionBeanRemote;
 import it.softfood.session.ordinazione.OrdinazioneSessionBeanRemote;
 
 import it.softfood.session.variante.VarianteSessionBeanRemote;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -125,6 +129,23 @@ public class OrdinazioneFacade implements OrdinazioneFacadeRemote, OrdinazioneFa
 			return lineaOrdinazioneSessionBean.selezionaLineeOrdinazionePerOrdinazione(ordinazione);
 
         return null;
+    }
+
+    public List<LineaOrdinazione> selezionaLineeOrdinazionePerOrdinazione(Ordinazione ordinazione,
+            TipoPietanza tipoPietanza) {
+        LinkedList<LineaOrdinazione> lineeOrdinazione = new LinkedList<LineaOrdinazione>();
+        if (ordinazione != null) 
+			 lineeOrdinazione = (LinkedList<LineaOrdinazione>) lineaOrdinazioneSessionBean.selezionaLineeOrdinazionePerOrdinazione(ordinazione);
+        
+        LinkedList<LineaOrdinazione> lineeOrdinazionePietanza = new LinkedList<LineaOrdinazione> ();
+        for (LineaOrdinazione lineaOrdinazione : lineeOrdinazione) {
+            Pietanza pietanza = (Pietanza) lineaOrdinazione.getArticolo();
+            if (pietanza instanceof Pietanza)
+                if (pietanza.getTipo().equals(tipoPietanza))
+                    lineeOrdinazionePietanza.add(lineaOrdinazione);
+        }
+
+        return lineeOrdinazionePietanza;
     }
 
     public boolean rimuoviLineaOrdinazione(Long id) {

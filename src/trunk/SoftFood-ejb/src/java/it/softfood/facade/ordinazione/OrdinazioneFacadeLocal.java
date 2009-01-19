@@ -34,6 +34,8 @@ public interface OrdinazioneFacadeLocal {
 
     java.util.List<it.softfood.entity.LineaOrdinazione> selezionaLineeOrdinazionePerOrdinazione(it.softfood.entity.Ordinazione ordinazione);
 
+    java.util.List<it.softfood.entity.LineaOrdinazione> selezionaLineeOrdinazionePerOrdinazione(it.softfood.entity.Ordinazione ordinazione, it.softfood.enumeration.TipoPietanza tipoPietanza);
+
     boolean rimuoviLineaOrdinazione(java.lang.Long id);
 
     it.softfood.entity.Variante inserisciVariante(it.softfood.entity.Variante variante);
