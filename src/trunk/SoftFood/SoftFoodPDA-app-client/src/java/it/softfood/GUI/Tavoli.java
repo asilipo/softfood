@@ -11,6 +11,11 @@
 
 package it.softfood.GUI;
 
+import it.softfood.entity.Tavolo;
+import it.softfood.facade.tavolo.TavoloFacadeRemote;
+import java.util.ArrayList;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import org.jdesktop.application.FrameView;
 /**
  *
@@ -18,14 +23,35 @@ import org.jdesktop.application.FrameView;
  */
 public class Tavoli extends javax.swing.JPanel {
 
+    private TavoloFacadeRemote tavoloFacade;
+    private ArrayList<Tavolo> tavoli;
+    private String[] listaTavoli;
+    private void initFacade(){
+        try{
+            InitialContext initial=new InitialContext();
+            tavoloFacade = (TavoloFacadeRemote) initial.lookup("it.softfood.facade.tavolo.TavoloFacade");
+        }catch(NamingException e){
+            
+        }
+    }
     /** Creates new form Tavoli */
     public Tavoli(FrameView frame, boolean vuoti) {
         initComponents();
+        initFacade();
         this.frame=frame;
-        if(vuoti)
+        if(vuoti){
             SelezionaTavoli.setText(SelezionaTavoli.getText()+" un tavolo vuoto:");
-        else
+            tavoli=(ArrayList<Tavolo>) tavoloFacade.selezionaTavoliLiberi();
+        }else{
             SelezionaTavoli.setText(SelezionaTavoli.getText()+" un tavolo:");
+            tavoli= (ArrayList<Tavolo>) tavoloFacade.selezionaTavoliOccupati();
+        }
+        int i=0;
+        for(Tavolo tavolo:tavoli){
+            listaTavoli[i]=tavolo.getRiferimento();
+        }
+        Tavoli.setListData(listaTavoli);
+        
     }
 
     /** This method is called from within the constructor to
@@ -59,11 +85,6 @@ public class Tavoli extends javax.swing.JPanel {
 
         jScrollPane1.setName("jScrollPane1"); // NOI18N
 
-        Tavoli.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Tavolo 1", "Tavolo 2", "Tavolo 3", "Tavolo 4", "Tavolo 5", "Tavolo 6", "Tavolo 7", "Tavolo 8", "Tavolo 9", "Tavolo 10", "Tavolo 11" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
         Tavoli.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         Tavoli.setName("ListaTavoli"); // NOI18N
         Tavoli.setVisibleRowCount(10);
