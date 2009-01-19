@@ -16,10 +16,12 @@ public interface IngredienteMagazzinoSessionBeanRemote {
 	
 	it.softfood.entity.IngredienteMagazzino selezionaIngredienteMagazzinoPerId(Long id);
 
-	java.util.List<it.softfood.entity.IngredienteMagazzino> selezionaIngredientiLungaConservazione();
-	
+    @java.lang.SuppressWarnings(value = {"unchecked"})
 	java.util.List<it.softfood.entity.IngredienteMagazzino> selezionaIngredientiLungaConservazionePerQuantita(Integer quantita);
-	
+
+    @java.lang.SuppressWarnings(value = {"unchecked"})
+    java.util.List<it.softfood.entity.IngredienteMagazzino> selezionaIngredientiMagazzino();
+
 	boolean rimuoviIngredienteMagazzino(Long id);
 	
 }

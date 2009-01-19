@@ -2,6 +2,7 @@ package it.softfood.session.bevanda;
 
 import it.softfood.entity.Bevanda;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -34,6 +35,17 @@ public class BevandaSessionBean implements BevandaSessionBeanRemote, BevandaSess
         } catch (Exception e ) {
             System.err.println("BevandaSessionBean#selezionaBevandaPerId");
             return null;
+        }
+	}
+
+    @SuppressWarnings("unchecked")
+    public List<Bevanda> selezionaBevande() {
+		try {
+	        return em.createNamedQuery("Bevanda.selezionaBevande")
+	        	.getResultList();
+		} catch (Exception e) {
+			System.err.println("BevandaSessionBean#selezionaBevande");
+			return null;
         }
 	}
 

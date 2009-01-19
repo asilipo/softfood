@@ -13,6 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -29,7 +30,7 @@ import org.hibernate.annotations.LazyCollectionOption;
 @Table(name = "ingrediente_magazzino")
 @SequenceGenerator(name = "sequenza_ingrediente_magazzino", sequenceName = "seq_id_ingrediente_magazzino")
 @NamedQueries({
-	@NamedQuery(name = "IngredienteMagazzino.selezionaIngredientiLungaConservazione", query = "SELECT i FROM IngredienteMagazzino i"),
+	@NamedQuery(name = "IngredienteMagazzino.selezionaIngredientiMagazzino", query = "SELECT i FROM IngredienteMagazzino i"),
 	@NamedQuery(name = "IngredienteMagazzino.selezionaIngredientiLungaConservazionePerQuantita", query = "SELECT i FROM IngredienteMagazzino i WHERE quantita >= :quantita")
 })
 public class IngredienteMagazzino implements Serializable {
@@ -45,10 +46,10 @@ public class IngredienteMagazzino implements Serializable {
     @LazyCollection(value = LazyCollectionOption.FALSE)
     @JoinColumn(name = "magazzino", nullable = false)
 	private Magazzino magazzino;
-	@OneToMany()
+	@OneToOne()
     @LazyCollection(value = LazyCollectionOption.FALSE)
     @JoinColumn(name = "magazzino", nullable = false)
-    private Collection<IngredienteLungaConservazione> ingredienti;
+    private IngredienteLungaConservazione ingredienteLungaConservazione;
 	
 	public Long getId() {
 		return id;
@@ -58,12 +59,12 @@ public class IngredienteMagazzino implements Serializable {
 		this.id = id;
 	}
 
-	public Collection<IngredienteLungaConservazione> getIngredienti() {
-		return ingredienti;
+	public IngredienteLungaConservazione getIngredienteLungaConservazione() {
+		return ingredienteLungaConservazione;
 	}
 
-	public void setIngredienti(Collection<IngredienteLungaConservazione> ingredienti) {
-		this.ingredienti = ingredienti;
+	public void setIngredienteLungaConservazione(IngredienteLungaConservazione ingredienteLungaConservazione) {
+		this.ingredienteLungaConservazione = ingredienteLungaConservazione;
 	}
 
 	public Magazzino getMagazzino() {

@@ -3,6 +3,8 @@ package it.softfood.entity;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 /**
@@ -13,6 +15,9 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "ingrediente_pietanza")
+@NamedQueries({
+    @NamedQuery(name = "IngredientePietanza.selezionaIngredientiPietanze", query = "SELECT i FROM IngredientePietanza i")
+})
 public class IngredientePietanza {
 
 	private static final long serialVersionUID = 1L;
