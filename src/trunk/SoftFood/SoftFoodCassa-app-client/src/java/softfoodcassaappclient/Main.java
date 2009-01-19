@@ -1,11 +1,8 @@
 package softfoodcassaappclient;
 
-import it.softfood.facade.ristorante.RistoranteFacade;
 import it.softfood.facade.ristorante.RistoranteFacadeRemote;
-import it.softfood.session.ristorante.RistoranteSessionBeanRemote;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.ejb.EJB;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
