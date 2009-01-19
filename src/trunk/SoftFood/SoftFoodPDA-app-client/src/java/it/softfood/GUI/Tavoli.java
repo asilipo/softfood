@@ -26,12 +26,13 @@ public class Tavoli extends javax.swing.JPanel {
     private TavoloFacadeRemote tavoloFacade;
     private ArrayList<Tavolo> tavoli;
     private String[] listaTavoli;
+
     private void initFacade(){
         try{
             InitialContext initial=new InitialContext();
             tavoloFacade = (TavoloFacadeRemote) initial.lookup("it.softfood.facade.tavolo.TavoloFacade");
         }catch(NamingException e){
-            
+            System.err.println("Errore binding TavoloFacade");
         }
     }
     /** Creates new form Tavoli */
@@ -42,6 +43,7 @@ public class Tavoli extends javax.swing.JPanel {
         if(vuoti){
             SelezionaTavoli.setText(SelezionaTavoli.getText()+" un tavolo vuoto:");
             tavoli=(ArrayList<Tavolo>) tavoloFacade.selezionaTavoliLiberi();
+            System.out.println("dim: " +tavoli.size());
         }else{
             SelezionaTavoli.setText(SelezionaTavoli.getText()+" un tavolo:");
             tavoli= (ArrayList<Tavolo>) tavoloFacade.selezionaTavoliOccupati();
