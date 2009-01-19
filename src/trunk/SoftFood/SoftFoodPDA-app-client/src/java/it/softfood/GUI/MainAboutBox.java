@@ -2,6 +2,12 @@
  * MainAboutBox.java
  */
 
+/**
+ * @author Maria Rosaria Paone
+ * @author Marco Grasso
+ * @author Francesco Pacilio
+ */
+
 package it.softfood.GUI;
 
 import org.jdesktop.application.Action;

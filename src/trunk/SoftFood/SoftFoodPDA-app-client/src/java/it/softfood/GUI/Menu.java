@@ -14,15 +14,17 @@ package it.softfood.GUI;
 import org.jdesktop.application.FrameView;
 
 /**
- *
- * @author mary
+ * @author Maria Rosaria Paone
+ * @author Marco Grasso
+ * @author Francesco Pacilio
  */
 public class Menu extends javax.swing.JPanel {
 
     /** Creates new form Menu */
-    public Menu(FrameView frame) {
+    public Menu(FrameView frame,String tavolo) {
         initComponents();
         this.frame = frame;
+        this.tavolo=tavolo;
     }
 
     /** This method is called from within the constructor to
@@ -57,6 +59,11 @@ public class Menu extends javax.swing.JPanel {
         Antipasti.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         Antipasti.setName("Antipasti"); // NOI18N
         Antipasti.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        Antipasti.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AntipastiActionPerformed(evt);
+            }
+        });
         add(Antipasti);
 
         Primi.setIcon(resourceMap.getIcon("Primi.icon")); // NOI18N
@@ -141,6 +148,13 @@ public class Menu extends javax.swing.JPanel {
         frame.setComponent(tavoli);
     }//GEN-LAST:event_AnnullaActionPerformed
 
+private void AntipastiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AntipastiActionPerformed
+// TODO add your handling code here:
+    this.setVisible(false);
+    Antipasto antipasto=new Antipasto(frame,tavolo);
+    frame.setComponent(antipasto);
+}//GEN-LAST:event_AntipastiActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Annulla;
@@ -155,4 +169,5 @@ public class Menu extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
     private FrameView frame;
+    private String tavolo;
 }
