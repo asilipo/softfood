@@ -1,8 +1,10 @@
 package softfoodcassaappclient;
 
+import it.softfood.entity.Ristorante;
 import it.softfood.facade.ristorante.RistoranteFacadeRemote;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.ejb.EJB;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
@@ -13,13 +15,13 @@ import javax.naming.NamingException;
  */
 
 public class Main {
-
+  
     public static void main(String[] args) {
         try {
             InitialContext initialContext = new InitialContext();
             RistoranteFacadeRemote remote = (RistoranteFacadeRemote) initialContext.lookup("it.softfood.facade.ristorante.RistoranteFacade");
 
-            System.out.println(remote.selezionaRistorantePerPartitaIva("0").getRagioneSociale());
+            System.out.println(remote.selezionaRistorantePerPartitaIva("12032874912").getRagioneSociale());
         } catch (NamingException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
