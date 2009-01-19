@@ -49,8 +49,10 @@ public class Tavoli extends javax.swing.JPanel {
             tavoli= (ArrayList<Tavolo>) tavoloFacade.selezionaTavoliOccupati();
         }
         int i=0;
+        listaTavoli = new String[tavoli.size()];
         for(Tavolo tavolo:tavoli){
             listaTavoli[i]=tavolo.getRiferimento();
+            i++;
         }
         Tavoli.setListData(listaTavoli);
         
