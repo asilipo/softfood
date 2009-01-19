@@ -91,7 +91,7 @@
         <Property name="verticalGap" type="int" value="5"/>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JLabel" name="jLabel1">
+        <Component class="javax.swing.JLabel" name="ordini">
           <Properties>
             <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="text" type="java.lang.String" resourceKey="label_ordini.text"/>
@@ -162,18 +162,12 @@
             <Property name="text" type="java.lang.String" resourceKey="OK.text"/>
             <Property name="name" type="java.lang.String" value="OK" noResource="true"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="OKActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="Annulla">
           <Properties>
             <Property name="text" type="java.lang.String" resourceKey="Annulla.text"/>
             <Property name="name" type="java.lang.String" value="Annulla" noResource="true"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AnnullaActionPerformed"/>
-          </Events>
         </Component>
       </SubComponents>
     </Container>

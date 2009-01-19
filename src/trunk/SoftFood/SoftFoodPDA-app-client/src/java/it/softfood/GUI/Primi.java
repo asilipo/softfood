@@ -6,12 +6,7 @@
 
 package it.softfood.GUI;
 
-
-import it.softfood.entity.Pietanza;
-import it.softfood.enumeration.TipoPietanza;
-import it.softfood.facade.articolomenu.ArticoloMenuFacadeRemote;
 import it.softfood.facade.ordinazione.OrdinazioneFacadeRemote;
-import java.util.ArrayList;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import org.jdesktop.application.FrameView;
@@ -21,33 +16,25 @@ import org.jdesktop.application.FrameView;
  * @author Marco Grasso
  * @author Francesco Pacilio
  */
-public class Antipasto extends javax.swing.JPanel {
+public class Primi extends javax.swing.JPanel {
 
     private OrdinazioneFacadeRemote ordinazioneFacade;
-    private ArticoloMenuFacadeRemote articolo;
     
     private void initFacade(){
         try{
             InitialContext initial=new InitialContext();
             ordinazioneFacade = (OrdinazioneFacadeRemote) initial.lookup("it.softfood.facade.ordinazione.OrdinazioneFacade");
-            articolo = (ArticoloMenuFacadeRemote) initial.lookup("it.softfood.facade.articolomenu.ArticoloMenuFacade");
         }catch(NamingException e){
             System.err.println("Errore binding TavoloFacade");
         }
     }
     /** Creates new form Antipasto */
-    public Antipasto(FrameView frame, String tavolo) {
+    public Primi(FrameView frame, String tavolo) {
         initComponents();
         initFacade();
         this.frame=frame;
         this.tavolo=tavolo;
-        ArrayList<it.softfood.entity.Pietanza> antipasti = (ArrayList<it.softfood.entity.Pietanza>) articolo.selezionaPietanzePerTipo(TipoPietanza.ANTIPASTI);
-        int i=0;
-        int j=0;
-        for(it.softfood.entity.Pietanza pietanza:antipasti){
-            tabella_antipasti.setValueAt(pietanza.getNome(), i, j);
-            i++;
-        }
+        
     }
 
     /** This method is called from within the constructor to
@@ -63,7 +50,7 @@ public class Antipasto extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tabella_antipasti = new javax.swing.JTable();
         pannello_ordini = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        ordini = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tabella_ordini = new javax.swing.JTable();
         bottoni = new javax.swing.JPanel();
@@ -111,13 +98,13 @@ public class Antipasto extends javax.swing.JPanel {
         pannello_ordini.setName("pannello_ordini"); // NOI18N
         pannello_ordini.setLayout(new java.awt.BorderLayout(5, 5));
 
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(it.softfood.GUI.Main.class).getContext().getResourceMap(Antipasto.class);
-        jLabel1.setText(resourceMap.getString("label_ordini.text")); // NOI18N
-        jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jLabel1.setName("label_ordini"); // NOI18N
-        jLabel1.setPreferredSize(new java.awt.Dimension(225, 13));
-        pannello_ordini.add(jLabel1, java.awt.BorderLayout.PAGE_START);
+        ordini.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(it.softfood.GUI.Main.class).getContext().getResourceMap(Primi.class);
+        ordini.setText(resourceMap.getString("label_ordini.text")); // NOI18N
+        ordini.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        ordini.setName("label_ordini"); // NOI18N
+        ordini.setPreferredSize(new java.awt.Dimension(225, 13));
+        pannello_ordini.add(ordini, java.awt.BorderLayout.PAGE_START);
 
         jScrollPane2.setName("jScrollPane2"); // NOI18N
         jScrollPane2.setPreferredSize(new java.awt.Dimension(100, 200));
@@ -153,47 +140,23 @@ public class Antipasto extends javax.swing.JPanel {
 
         OK.setText(resourceMap.getString("OK.text")); // NOI18N
         OK.setName("OK"); // NOI18N
-        OK.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                OKActionPerformed(evt);
-            }
-        });
         bottoni.add(OK);
 
         Annulla.setText(resourceMap.getString("Annulla.text")); // NOI18N
         Annulla.setName("Annulla"); // NOI18N
-        Annulla.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AnnullaActionPerformed(evt);
-            }
-        });
         bottoni.add(Annulla);
 
         add(bottoni, java.awt.BorderLayout.SOUTH);
     }// </editor-fold>//GEN-END:initComponents
-
-private void OKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OKActionPerformed
-// TODO add your handling code here:
-    this.setVisible(false);
-    Menu menu=new Menu(frame,tavolo);
-    frame.setComponent(menu);
-}//GEN-LAST:event_OKActionPerformed
-
-private void AnnullaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AnnullaActionPerformed
-// TODO add your handling code here:
-    this.setVisible(false);
-    Menu menu=new Menu(frame,tavolo);
-    frame.setComponent(menu);
-}//GEN-LAST:event_AnnullaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Annulla;
     private javax.swing.JButton OK;
     private javax.swing.JPanel bottoni;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel ordini;
     private javax.swing.JPanel pannello_antipasti;
     private javax.swing.JPanel pannello_ordini;
     private javax.swing.JTable tabella_antipasti;

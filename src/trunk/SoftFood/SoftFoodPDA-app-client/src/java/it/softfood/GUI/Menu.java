@@ -71,6 +71,11 @@ public class Menu extends javax.swing.JPanel {
         Primi.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         Primi.setName("Primi"); // NOI18N
         Primi.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        Primi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PrimiActionPerformed(evt);
+            }
+        });
         add(Primi);
 
         Secondi.setIcon(resourceMap.getIcon("Secondi.icon")); // NOI18N
@@ -154,6 +159,13 @@ private void AntipastiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     Antipasto antipasto=new Antipasto(frame,tavolo);
     frame.setComponent(antipasto);
 }//GEN-LAST:event_AntipastiActionPerformed
+
+private void PrimiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PrimiActionPerformed
+// TODO add your handling code here:
+    this.setVisible(false);
+    Primi primi=new Primi(frame,tavolo);
+    frame.setComponent(primi);
+}//GEN-LAST:event_PrimiActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

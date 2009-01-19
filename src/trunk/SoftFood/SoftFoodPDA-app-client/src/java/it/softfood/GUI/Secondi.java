@@ -6,12 +6,7 @@
 
 package it.softfood.GUI;
 
-
-import it.softfood.entity.Pietanza;
-import it.softfood.enumeration.TipoPietanza;
-import it.softfood.facade.articolomenu.ArticoloMenuFacadeRemote;
 import it.softfood.facade.ordinazione.OrdinazioneFacadeRemote;
-import java.util.ArrayList;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import org.jdesktop.application.FrameView;
@@ -21,33 +16,25 @@ import org.jdesktop.application.FrameView;
  * @author Marco Grasso
  * @author Francesco Pacilio
  */
-public class Antipasto extends javax.swing.JPanel {
+public class Secondi extends javax.swing.JPanel {
 
     private OrdinazioneFacadeRemote ordinazioneFacade;
-    private ArticoloMenuFacadeRemote articolo;
     
     private void initFacade(){
         try{
             InitialContext initial=new InitialContext();
             ordinazioneFacade = (OrdinazioneFacadeRemote) initial.lookup("it.softfood.facade.ordinazione.OrdinazioneFacade");
-            articolo = (ArticoloMenuFacadeRemote) initial.lookup("it.softfood.facade.articolomenu.ArticoloMenuFacade");
         }catch(NamingException e){
             System.err.println("Errore binding TavoloFacade");
         }
     }
     /** Creates new form Antipasto */
-    public Antipasto(FrameView frame, String tavolo) {
+    public Secondi(FrameView frame, String tavolo) {
         initComponents();
         initFacade();
         this.frame=frame;
         this.tavolo=tavolo;
-        ArrayList<it.softfood.entity.Pietanza> antipasti = (ArrayList<it.softfood.entity.Pietanza>) articolo.selezionaPietanzePerTipo(TipoPietanza.ANTIPASTI);
-        int i=0;
-        int j=0;
-        for(it.softfood.entity.Pietanza pietanza:antipasti){
-            tabella_antipasti.setValueAt(pietanza.getNome(), i, j);
-            i++;
-        }
+        
     }
 
     /** This method is called from within the constructor to
@@ -112,7 +99,7 @@ public class Antipasto extends javax.swing.JPanel {
         pannello_ordini.setLayout(new java.awt.BorderLayout(5, 5));
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(it.softfood.GUI.Main.class).getContext().getResourceMap(Antipasto.class);
+        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(it.softfood.GUI.Main.class).getContext().getResourceMap(Secondi.class);
         jLabel1.setText(resourceMap.getString("label_ordini.text")); // NOI18N
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jLabel1.setName("label_ordini"); // NOI18N
