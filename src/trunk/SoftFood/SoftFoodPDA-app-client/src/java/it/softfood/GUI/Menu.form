@@ -53,6 +53,9 @@
         <Property name="name" type="java.lang.String" value="Primi" noResource="true"/>
         <Property name="verticalTextPosition" type="int" value="3"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="PrimiActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="Secondi">
       <Properties>
