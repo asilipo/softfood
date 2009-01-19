@@ -18,8 +18,9 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import org.jdesktop.application.FrameView;
 /**
- *
- * @author mary
+ * @author Maria Rosaria Paone
+ * @author Marco Grasso
+ * @author Francesco Pacilio
  */
 public class Tavoli extends javax.swing.JPanel {
 
@@ -43,7 +44,7 @@ public class Tavoli extends javax.swing.JPanel {
         if(vuoti){
             SelezionaTavoli.setText(SelezionaTavoli.getText()+" un tavolo vuoto:");
             tavoli=(ArrayList<Tavolo>) tavoloFacade.selezionaTavoliLiberi();
-            System.out.println("dim: " +tavoli.size());
+            
         }else{
             SelezionaTavoli.setText(SelezionaTavoli.getText()+" un tavolo:");
             tavoli= (ArrayList<Tavolo>) tavoloFacade.selezionaTavoliOccupati();
@@ -133,8 +134,9 @@ public class Tavoli extends javax.swing.JPanel {
 
     private void OkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OkActionPerformed
         // TODO add your handling code here:
+        String tavoloSelezionato=(String)Tavoli.getSelectedValue();
         this.setVisible(false);
-        Menu menu=new Menu(frame);
+        Menu menu=new Menu(frame,tavoloSelezionato);
         frame.setComponent(menu);
     }//GEN-LAST:event_OkActionPerformed
 

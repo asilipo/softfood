@@ -14,8 +14,9 @@ package it.softfood.GUI;
 import org.jdesktop.application.FrameView;
 
 /**
- *
- * @author mary
+ * @author Maria Rosaria Paone
+ * @author Marco Grasso
+ * @author Francesco Pacilio
  */
 public class Pietanza extends javax.swing.JPanel {
 
@@ -123,7 +124,7 @@ public class Pietanza extends javax.swing.JPanel {
     private void CancellaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancellaActionPerformed
         // TODO add your handling code here:
              this.setVisible(false);
-         Menu menu = new Menu(frame);
+         Menu menu = new Menu(frame,null);
          frame.setComponent(menu);
     }//GEN-LAST:event_CancellaActionPerformed
 

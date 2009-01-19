@@ -14,8 +14,9 @@ package it.softfood.GUI;
 import org.jdesktop.application.FrameView;
 
 /**
- *
- * @author mary
+ * @author Maria Rosaria Paone
+ * @author Marco Grasso
+ * @author Francesco Pacilio
  */
 public class Ordine extends javax.swing.JPanel {
 
