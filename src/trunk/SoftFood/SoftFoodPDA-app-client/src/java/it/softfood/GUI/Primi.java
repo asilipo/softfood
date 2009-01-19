@@ -77,7 +77,7 @@ public class Primi extends javax.swing.JPanel {
                 {null, null}
             },
             new String [] {
-                "Pietanza", "Quantitˆ"
+                "Pietanza", "Quantita'"
             }
         ) {
             Class[] types = new Class [] {
@@ -90,6 +90,9 @@ public class Primi extends javax.swing.JPanel {
         });
         tabella_antipasti.setName("tabella_antipasti"); // NOI18N
         jScrollPane1.setViewportView(tabella_antipasti);
+        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(it.softfood.GUI.Main.class).getContext().getResourceMap(Primi.class);
+        tabella_antipasti.getColumnModel().getColumn(0).setHeaderValue(resourceMap.getString("tabella_antipasti.columnModel.title0")); // NOI18N
+        tabella_antipasti.getColumnModel().getColumn(1).setHeaderValue(resourceMap.getString("tabella_antipasti.columnModel.title1")); // NOI18N
 
         pannello_antipasti.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
@@ -99,7 +102,6 @@ public class Primi extends javax.swing.JPanel {
         pannello_ordini.setLayout(new java.awt.BorderLayout(5, 5));
 
         ordini.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(it.softfood.GUI.Main.class).getContext().getResourceMap(Primi.class);
         ordini.setText(resourceMap.getString("label_ordini.text")); // NOI18N
         ordini.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         ordini.setName("label_ordini"); // NOI18N
@@ -117,7 +119,7 @@ public class Primi extends javax.swing.JPanel {
                 {null, null}
             },
             new String [] {
-                "Pietanza", "Quantitˆ"
+                "Pietanza", "Quantita'"
             }
         ) {
             Class[] types = new Class [] {
@@ -130,6 +132,8 @@ public class Primi extends javax.swing.JPanel {
         });
         tabella_ordini.setName("tabella_ordini"); // NOI18N
         jScrollPane2.setViewportView(tabella_ordini);
+        tabella_ordini.getColumnModel().getColumn(0).setHeaderValue(resourceMap.getString("tabella_ordini.columnModel.title0")); // NOI18N
+        tabella_ordini.getColumnModel().getColumn(1).setHeaderValue(resourceMap.getString("tabella_ordini.columnModel.title1")); // NOI18N
 
         pannello_ordini.add(jScrollPane2, java.awt.BorderLayout.SOUTH);
 
