@@ -23,8 +23,12 @@ public interface ArticoloMenuFacadeLocal {
 
     java.util.List<it.softfood.entity.Pietanza> selezionaPietanzeDisponibili();
 
+    java.util.List<it.softfood.entity.Pietanza> selezionaPietanzeDisponibiliPerTipo(it.softfood.enumeration.TipoPietanza tipoPietanza);
+
     java.util.HashMap<it.softfood.entity.Pietanza, java.lang.Integer> selezionaDisponibilitaPietanze();
 
-    boolean rimuoviArticoloMenu(Long id);
+    java.util.HashMap<it.softfood.entity.Pietanza, java.lang.Integer> selezionaDisponibilitaPietanzePerTipo(it.softfood.enumeration.TipoPietanza tipoPietanza);
 
+    boolean rimuoviArticoloMenu(Long id);
+    
 }

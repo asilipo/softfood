@@ -25,6 +25,10 @@ public interface ArticoloMenuFacadeRemote {
 
     java.util.HashMap<it.softfood.entity.Pietanza, java.lang.Integer> selezionaDisponibilitaPietanze();
 
+    java.util.List<it.softfood.entity.Pietanza> selezionaPietanzeDisponibiliPerTipo(it.softfood.enumeration.TipoPietanza tipoPietanza);
+
+    java.util.HashMap<it.softfood.entity.Pietanza, java.lang.Integer> selezionaDisponibilitaPietanzePerTipo(it.softfood.enumeration.TipoPietanza tipoPietanza);
+
     boolean rimuoviArticoloMenu(Long id);
     
 }
