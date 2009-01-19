@@ -28,6 +28,14 @@ public class Pietanza extends Articolo implements Serializable {
     @Column(name = "tipo_pietanza", nullable = false)
 	private TipoPietanza tipo;
 
+    public TipoPietanza getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(TipoPietanza tipo) {
+        this.tipo = tipo;
+    }
+
 	@Override
 	public boolean equals(Object obj) {
 		return super.equals(obj);
