@@ -2,6 +2,8 @@ package it.softfood.session.pietanza;
 
 import it.softfood.entity.Pietanza;
 
+import it.softfood.enumeration.TipoPietanza;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -34,6 +36,28 @@ public class PietanzaSessionBean implements PietanzaSessionBeanRemote, PietanzaS
         } catch (Exception e) {
             System.err.println("PietanzaSessionBean#selezionaPietanzaPerId");
             return null;
+        }
+	}
+
+    @SuppressWarnings("unchecked")
+    public List<Pietanza> selezionaPietanzePerTipo(TipoPietanza tipoPietanza) {
+		try {
+	        return em.createNamedQuery("Pietanza.selezionaPietanzePerTipo")
+	        	.setParameter("tipo", tipoPietanza).getResultList();
+		} catch (Exception e) {
+			System.err.println("PietanzaSessionBean#selezionaPietanzePerTipo");
+			return null;
+        }
+	}
+
+    @SuppressWarnings("unchecked")
+    public List<Pietanza> selezionaPietanze() {
+		try {
+	        return em.createNamedQuery("Pietanza.selezionaPietanze")
+	        	.getResultList();
+		} catch (Exception e) {
+			System.err.println("PietanzaSessionBean#selezionaPietanze");
+			return null;
         }
 	}
 

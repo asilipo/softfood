@@ -15,7 +15,8 @@ public interface IngredienteLungaConservazioneSessionBeanRemote {
 			it.softfood.entity.IngredienteLungaConservazione ingredienteLungaConservazione);
 	
 	it.softfood.entity.IngredienteLungaConservazione selezionaIngredienteLungaConservazionePerId(Long id);
-	
+
+    @java.lang.SuppressWarnings(value = {"unchecked"})
 	java.util.List<it.softfood.entity.IngredienteLungaConservazione> selezionaIngredientiLungaConservazione();
 
 	boolean rimuoviIngredienteLungaConservazione(Long id);

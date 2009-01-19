@@ -13,7 +13,7 @@ public interface OrdinazioneFacadeLocal {
 
 	it.softfood.entity.Ordinazione inserisciOrdinazione(it.softfood.entity.Ordinazione ordinazione);
 	
-	it.softfood.entity.Ordinazione selezionaOrdinazione(Long id);
+	it.softfood.entity.Ordinazione selezionaOrdinazionePerId(Long id);
 
     it.softfood.entity.Ordinazione modificaOrdinazione(it.softfood.entity.Ordinazione nuovaOrdinazione, it.softfood.entity.Ordinazione vecchiaOrdinazione);
 	

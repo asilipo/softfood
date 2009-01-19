@@ -16,5 +16,11 @@ public interface PietanzaSessionBeanLocal {
 	it.softfood.entity.Pietanza selezionaPietanzaPerId(Long id);
 	
 	boolean rimuoviPietanza(Long id);
+
+    @java.lang.SuppressWarnings(value = {"unchecked"})
+    java.util.List<it.softfood.entity.Pietanza> selezionaPietanzePerTipo(it.softfood.enumeration.TipoPietanza tipoPietanza);
+
+    @java.lang.SuppressWarnings(value = {"unchecked"})
+    java.util.List<it.softfood.entity.Pietanza> selezionaPietanze();
 	
 }

@@ -2,6 +2,7 @@ package it.softfood.session.ingredientepietanza;
 
 import it.softfood.entity.IngredientePietanza;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -33,6 +34,16 @@ public class IngredientePietanzaSessionBean implements IngredientePietanzaSessio
             return em.find(IngredientePietanza.class, id);
         } catch (Exception e) {
             System.err.println("IngredientePietanzaSessionBean#selezionaIngredientePietanzaPerId");
+            return null;
+        }
+	}
+
+    public List<IngredientePietanza> selezionaIngredientiPietanze() {
+        try {
+            return em.createNamedQuery("IngredientePietanza.selezionaIngredientiPietanze")
+	        	.getResultList();
+        } catch (Exception e) {
+            System.err.println("IngredientePietanzaSessionBean#selezionaIngredientiPietanza");
             return null;
         }
 	}

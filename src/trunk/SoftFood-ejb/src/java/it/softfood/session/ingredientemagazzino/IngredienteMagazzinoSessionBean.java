@@ -40,9 +40,9 @@ public class IngredienteMagazzinoSessionBean implements IngredienteMagazzinoSess
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<IngredienteMagazzino> selezionaIngredientiLungaConservazione() {
+	public List<IngredienteMagazzino> selezionaIngredientiMagazzino() {
         try {
-            return em.createNamedQuery("IngredienteMagazzino.selezionaIngredientiLungaConservazione")
+            return em.createNamedQuery("IngredienteMagazzino.selezionaIngredientiMagazzino")
                 .getResultList();
         } catch (Exception e) {
             System.err.println("IngredienteMagazzinoSessionBean#selezionaIngredientiLungaConservazione");

@@ -57,7 +57,7 @@ public class OrdinazioneFacade implements OrdinazioneFacadeRemote, OrdinazioneFa
 		return null;
 	}
 	
-	public Ordinazione selezionaOrdinazione(Long id) {
+	public Ordinazione selezionaOrdinazionePerId(Long id) {
 		if (id != null) 
 			return ordinazioneSessionBean.selezionaOrdinazionePerId(id);
 		

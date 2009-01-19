@@ -14,7 +14,8 @@ public interface IngredienteSessionBeanRemote {
 	it.softfood.entity.Ingrediente inserisciIngrediente(it.softfood.entity.Ingrediente ingrediente);
 	
 	it.softfood.entity.Ingrediente selezionaIngredientePerId(Long id);
-	
+
+    @java.lang.SuppressWarnings(value = {"unchecked"})
 	java.util.List<it.softfood.entity.Ingrediente> selezionaIngredientePerNome(String nome);
 	
 	boolean rimuoviIngrediente(Long id);

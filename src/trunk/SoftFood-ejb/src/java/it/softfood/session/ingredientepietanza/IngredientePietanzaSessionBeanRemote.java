@@ -16,6 +16,8 @@ public interface IngredientePietanzaSessionBeanRemote {
 	
 	it.softfood.entity.IngredientePietanza selezionaIngredientePietanzaPerId(Long id);
 
+    java.util.List<it.softfood.entity.IngredientePietanza> selezionaIngredientiPietanze();
+
 	boolean rimuoviIngredientePietanza(Long id);
 	
 }

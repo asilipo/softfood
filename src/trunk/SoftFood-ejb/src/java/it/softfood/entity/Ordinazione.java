@@ -15,6 +15,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import javax.persistence.Temporal;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -46,6 +47,7 @@ public class Ordinazione implements Serializable {
 	@Column(name = "terminato", nullable = false)
 	private Boolean terminato;
 	@Column(name = "data", nullable = false)
+    @Temporal(javax.persistence.TemporalType.DATE)
 	private Date data;
 	@ManyToOne()
     @LazyCollection(value = LazyCollectionOption.FALSE)
