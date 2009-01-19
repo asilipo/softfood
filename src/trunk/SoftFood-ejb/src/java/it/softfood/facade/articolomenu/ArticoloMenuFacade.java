@@ -125,7 +125,7 @@ public class ArticoloMenuFacade implements ArticoloMenuFacadeRemote, ArticoloMen
 
                 for (IngredienteMagazzino ingredienteMagazzino : ingredientiMagazzino)
                     if (ingredienteMagazzino.getIngredienteLungaConservazione().equals(ingrediente) && ingredienteMagazzino.getQuantita() >=
-                            ingredientePietanza.getQuantita() && ingrediente.getScadenza().after(data))
+                            (ingredientePietanza.getQuantita() + (ingredientePietanza.getQuantita() * disponibilita)) && ingrediente.getScadenza().after(data))
                             disponibilita++;
             }
         }
