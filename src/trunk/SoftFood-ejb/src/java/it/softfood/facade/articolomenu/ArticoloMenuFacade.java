@@ -82,12 +82,29 @@ public class ArticoloMenuFacade implements ArticoloMenuFacadeRemote, ArticoloMen
     }
 
     public List<Pietanza> selezionaPietanzeDisponibiliPerTipo(TipoPietanza tipoPietanza) {
+        LinkedList<Pietanza> pietanze = (LinkedList<Pietanza>) pietanzaSessionBean.selezionaPietanzePerTipo(tipoPietanza);
+        LinkedList<Pietanza> pietanzeDisponibili = null;
 
-        return null;
+        for (Pietanza pietanza : pietanze) {
+            if (this.verificaIngredientiPietanza(pietanza) > 0)
+                pietanzeDisponibili.add(pietanza);
+        }
+
+        return pietanzeDisponibili;
     }
 
     public HashMap<Pietanza, Integer> selezionaDisponibilitaPietanze() {
         LinkedList<Pietanza> pietanze = (LinkedList<Pietanza>) pietanzaSessionBean.selezionaPietanze();
+        HashMap<Pietanza, Integer> pietanzeDisponibili = null;
+
+        for (Pietanza pietanza : pietanze)
+            pietanzeDisponibili.put(pietanza, this.verificaIngredientiPietanza(pietanza));
+
+        return pietanzeDisponibili;
+    }
+
+    public HashMap<Pietanza, Integer> selezionaDisponibilitaPietanzePerTipo(TipoPietanza tipoPietanza) {
+        LinkedList<Pietanza> pietanze = (LinkedList<Pietanza>) pietanzaSessionBean.selezionaPietanzePerTipo(tipoPietanza);
         HashMap<Pietanza, Integer> pietanzeDisponibili = null;
 
         for (Pietanza pietanza : pietanze)

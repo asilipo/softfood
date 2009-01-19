@@ -45,6 +45,8 @@ public class Ingrediente implements Serializable {
 	private String nome;
 	@Column(name = "descrizione", nullable = true)
 	private String descrizione;
+    @Column(name = "unita_misura", nullable = true)
+	private String unitaMisura;
 	@Column(name = "scadenza", nullable = false)
     @Temporal(javax.persistence.TemporalType.DATE)
 	private Date scadenza;
@@ -56,6 +58,14 @@ public class Ingrediente implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
+
+    public String getUnitaMisura() {
+        return unitaMisura;
+    }
+
+    public void setUnitaMisura(String unitaMisura) {
+        this.unitaMisura = unitaMisura;
+    }
 	
 	public String getNome() {
 		return nome;
