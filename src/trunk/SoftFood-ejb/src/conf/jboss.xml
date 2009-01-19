@@ -97,6 +97,10 @@
             <ejb-name>TavoloFacade</ejb-name>
             <jndi-name>it.softfood.facade.tavolo.TavoloFacade</jndi-name>
         </session>
+        <session>
+            <ejb-name>ArticoloMenuFacade</ejb-name>
+            <jndi-name>it.softfood.facade.articolomenu.ArticoloMenuFacade</jndi-name>
+        </session>
     </enterprise-beans>
     <resource-managers>
         <resource-manager>
