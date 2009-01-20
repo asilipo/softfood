@@ -3,6 +3,7 @@ package it.softfood.session.lineaordinazione;
 import it.softfood.entity.LineaOrdinazione;
 import it.softfood.entity.Ordinazione;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -43,7 +44,7 @@ public class LineaOrdinazioneSessionBean implements LineaOrdinazioneSessionBeanR
 	@SuppressWarnings("unchecked")
 	public List<LineaOrdinazione> selezionaLineeOrdinazionePerOrdinazione(Ordinazione ordinazione) {
         try {
-           return em.createNamedQuery("LineaOrdinazione.selezionaLineeOrdinazionePerOrdinazione")
+           return (LinkedList<LineaOrdinazione>) em.createNamedQuery("LineaOrdinazione.selezionaLineeOrdinazionePerOrdinazione")
                 .setParameter("ordinazione", ordinazione).getResultList();
         } catch (Exception e) {
             System.err.println("LineaOrdinazioneSessionBean#selezionaLineeOrdinazionePerOrdinazione");
