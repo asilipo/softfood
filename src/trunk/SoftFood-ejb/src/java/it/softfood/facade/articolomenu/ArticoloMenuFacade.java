@@ -138,7 +138,7 @@ public class ArticoloMenuFacade implements ArticoloMenuFacadeRemote, ArticoloMen
     }
 
     public List<Bevanda> selezionaBevandeDisponibili() {
-        return null;
+        return (ArrayList<Bevanda>) bevandaSessionBean.selezionaBevande();
     }
     
     public boolean rimuoviArticoloMenu(Long id) {
