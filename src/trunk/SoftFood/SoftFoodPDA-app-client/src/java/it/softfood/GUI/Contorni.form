@@ -28,6 +28,12 @@
   <SubComponents>
     <Container class="javax.swing.JPanel" name="pannello_contorno">
       <Properties>
+        <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[100, 200]"/>
+        </Property>
+        <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[100, 200]"/>
+        </Property>
         <Property name="name" type="java.lang.String" value="pannello_contorno" noResource="true"/>
         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[100, 200]"/>

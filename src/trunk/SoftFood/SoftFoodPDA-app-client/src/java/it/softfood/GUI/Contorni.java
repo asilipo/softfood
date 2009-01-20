@@ -120,6 +120,8 @@ public class Contorni extends javax.swing.JPanel {
         setName("Form"); // NOI18N
         setLayout(new java.awt.BorderLayout(5, 0));
 
+        pannello_contorno.setMaximumSize(new java.awt.Dimension(100, 200));
+        pannello_contorno.setMinimumSize(new java.awt.Dimension(100, 200));
         pannello_contorno.setName("pannello_contorno"); // NOI18N
         pannello_contorno.setPreferredSize(new java.awt.Dimension(100, 200));
         pannello_contorno.setLayout(new java.awt.BorderLayout(5, 0));

@@ -120,6 +120,8 @@ public class Dolci extends javax.swing.JPanel {
         setName("Form"); // NOI18N
         setLayout(new java.awt.BorderLayout(5, 0));
 
+        pannello_dolci.setMaximumSize(new java.awt.Dimension(100, 200));
+        pannello_dolci.setMinimumSize(new java.awt.Dimension(100, 200));
         pannello_dolci.setName("pannello_dolci"); // NOI18N
         pannello_dolci.setPreferredSize(new java.awt.Dimension(100, 200));
         pannello_dolci.setLayout(new java.awt.BorderLayout(5, 0));
@@ -208,6 +210,7 @@ public class Dolci extends javax.swing.JPanel {
         pannello_ordini.setLayout(new java.awt.BorderLayout(5, 5));
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText(resourceMap.getString("label_ordini.text")); // NOI18N
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jLabel1.setName("label_ordini"); // NOI18N
         jLabel1.setPreferredSize(new java.awt.Dimension(225, 13));

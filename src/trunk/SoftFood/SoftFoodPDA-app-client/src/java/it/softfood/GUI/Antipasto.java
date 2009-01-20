@@ -50,7 +50,7 @@ public class Antipasto extends javax.swing.JPanel {
         ArrayList<it.softfood.entity.Pietanza> antipasti = (ArrayList<it.softfood.entity.Pietanza>) articolo.selezionaPietanzeDisponibiliPerTipo(TipoPietanza.ANTIPASTI);
         int i=0;
         int j=0;
-
+        tabella_antipasti.setModel(new javax.swing.table.DefaultTableModel(new String[]{"ID","Pietanza","Quantita'"},antipasti.size()));
         
         JComboBox combo= new JComboBox();
         combo.addItem(1);
@@ -120,6 +120,8 @@ public class Antipasto extends javax.swing.JPanel {
         setName("Form"); // NOI18N
         setLayout(new java.awt.BorderLayout(5, 0));
 
+        pannello_antipasti.setMaximumSize(new java.awt.Dimension(100, 200));
+        pannello_antipasti.setMinimumSize(new java.awt.Dimension(100, 200));
         pannello_antipasti.setName("pannello_antipasti"); // NOI18N
         pannello_antipasti.setPreferredSize(new java.awt.Dimension(100, 200));
         pannello_antipasti.setLayout(new java.awt.BorderLayout(5, 0));
@@ -129,26 +131,7 @@ public class Antipasto extends javax.swing.JPanel {
 
         tabella_antipasti.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
                 "ID", "Pietanza", "Quantita'"

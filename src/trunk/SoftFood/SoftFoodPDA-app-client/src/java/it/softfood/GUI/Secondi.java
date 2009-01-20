@@ -120,9 +120,11 @@ public class Secondi extends javax.swing.JPanel {
         setName("Form"); // NOI18N
         setLayout(new java.awt.BorderLayout(5, 0));
 
+        pannello_secondi.setMaximumSize(new java.awt.Dimension(100, 200));
+        pannello_secondi.setMinimumSize(new java.awt.Dimension(100, 200));
         pannello_secondi.setName("pannello_secondi"); // NOI18N
         pannello_secondi.setPreferredSize(new java.awt.Dimension(100, 200));
-        pannello_secondi.setLayout(new java.awt.BorderLayout(5, 0));
+        pannello_secondi.setLayout(new java.awt.BorderLayout(5, 5));
 
         jScrollPane1.setName("jScrollPane1"); // NOI18N
         jScrollPane1.setPreferredSize(new java.awt.Dimension(100, 200));
@@ -182,7 +184,7 @@ public class Secondi extends javax.swing.JPanel {
         pannello_secondi.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
         jPanel1.setName("jPanel1"); // NOI18N
-        jPanel1.setLayout(new java.awt.GridLayout(1, 0));
+        jPanel1.setLayout(new java.awt.GridLayout(1, 0, 0, 5));
 
         add.setText(resourceMap.getString("add.text")); // NOI18N
         add.setName("add"); // NOI18N

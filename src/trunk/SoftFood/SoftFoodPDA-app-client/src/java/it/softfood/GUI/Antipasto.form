@@ -28,6 +28,12 @@
   <SubComponents>
     <Container class="javax.swing.JPanel" name="pannello_antipasti">
       <Properties>
+        <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[100, 200]"/>
+        </Property>
+        <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[100, 200]"/>
+        </Property>
         <Property name="name" type="java.lang.String" value="pannello_antipasti" noResource="true"/>
         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[100, 200]"/>
@@ -64,7 +70,7 @@
             <Component class="javax.swing.JTable" name="tabella_antipasti">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="3" rowCount="20">
+                  <Table columnCount="3" rowCount="0">
                     <Column editable="false" title="ID" type="java.lang.Object"/>
                     <Column editable="false" title="Pietanza" type="java.lang.String"/>
                     <Column editable="true" title="Quantita&apos;" type="java.lang.Object"/>

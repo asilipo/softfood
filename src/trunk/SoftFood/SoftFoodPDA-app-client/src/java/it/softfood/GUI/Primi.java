@@ -59,21 +59,21 @@ public class Primi extends javax.swing.JPanel {
         combo.addItem(4);
         combo.addItem(5);
         
-        TableColumn sportColumn = tabella_antipasti.getColumnModel().getColumn(2);
+        TableColumn sportColumn = tabella_primi.getColumnModel().getColumn(2);
         sportColumn.setCellEditor(new DefaultCellEditor(combo));
         
         id_antipasto=new XTableColumnModel();
         
-        tabella_antipasti.setColumnModel(id_antipasto);
-        tabella_antipasti.createDefaultColumnsFromModel();
+        tabella_primi.setColumnModel(id_antipasto);
+        tabella_primi.createDefaultColumnsFromModel();
         
         id=id_antipasto.getColumnByModelIndex(0);
         
         for(it.softfood.entity.Pietanza pietanza:antipasti){
             //antipasto_model.insertRow(tabella_antipasti.getRowCount(), new Object[]{/*pietanza.getId(),pietanza.getNome()*/"PROVA","UNO"});
-            tabella_antipasti.setValueAt(pietanza.getId(), i, j);
+            tabella_primi.setValueAt(pietanza.getId(), i, j);
             j++;
-            tabella_antipasti.setValueAt(pietanza.getNome(), i, j);
+            tabella_primi.setValueAt(pietanza.getNome(), i, j);
             j=0;
             i++;
         }
@@ -101,9 +101,9 @@ public class Primi extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        pannello_antipasti = new javax.swing.JPanel();
+        pannello_primi = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tabella_antipasti = new javax.swing.JTable();
+        tabella_primi = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         add = new javax.swing.JButton();
         visuallizza = new javax.swing.JButton();
@@ -120,14 +120,16 @@ public class Primi extends javax.swing.JPanel {
         setName("Form"); // NOI18N
         setLayout(new java.awt.BorderLayout(5, 0));
 
-        pannello_antipasti.setName("pannello_antipasti"); // NOI18N
-        pannello_antipasti.setPreferredSize(new java.awt.Dimension(100, 200));
-        pannello_antipasti.setLayout(new java.awt.BorderLayout(5, 0));
+        pannello_primi.setMaximumSize(new java.awt.Dimension(100, 200));
+        pannello_primi.setMinimumSize(new java.awt.Dimension(100, 200));
+        pannello_primi.setName("pannello_primi"); // NOI18N
+        pannello_primi.setPreferredSize(new java.awt.Dimension(100, 200));
+        pannello_primi.setLayout(new java.awt.BorderLayout(5, 0));
 
         jScrollPane1.setName("jScrollPane1"); // NOI18N
         jScrollPane1.setPreferredSize(new java.awt.Dimension(100, 200));
 
-        tabella_antipasti.setModel(new javax.swing.table.DefaultTableModel(
+        tabella_primi.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -169,17 +171,17 @@ public class Primi extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        tabella_antipasti.setName("tabella_antipasti"); // NOI18N
-        jScrollPane1.setViewportView(tabella_antipasti);
+        tabella_primi.setName("tabella_primi"); // NOI18N
+        jScrollPane1.setViewportView(tabella_primi);
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(it.softfood.GUI.Main.class).getContext().getResourceMap(Primi.class);
-        tabella_antipasti.getColumnModel().getColumn(0).setResizable(false);
-        tabella_antipasti.getColumnModel().getColumn(0).setPreferredWidth(0);
-        tabella_antipasti.getColumnModel().getColumn(1).setResizable(false);
-        tabella_antipasti.getColumnModel().getColumn(1).setHeaderValue(resourceMap.getString("tabella_antipasti.columnModel.title0")); // NOI18N
-        tabella_antipasti.getColumnModel().getColumn(2).setResizable(false);
-        tabella_antipasti.getColumnModel().getColumn(2).setHeaderValue(resourceMap.getString("tabella_antipasti.columnModel.title1")); // NOI18N
+        tabella_primi.getColumnModel().getColumn(0).setResizable(false);
+        tabella_primi.getColumnModel().getColumn(0).setPreferredWidth(0);
+        tabella_primi.getColumnModel().getColumn(1).setResizable(false);
+        tabella_primi.getColumnModel().getColumn(1).setHeaderValue(resourceMap.getString("tabella_antipasti.columnModel.title0")); // NOI18N
+        tabella_primi.getColumnModel().getColumn(2).setResizable(false);
+        tabella_primi.getColumnModel().getColumn(2).setHeaderValue(resourceMap.getString("tabella_antipasti.columnModel.title1")); // NOI18N
 
-        pannello_antipasti.add(jScrollPane1, java.awt.BorderLayout.CENTER);
+        pannello_primi.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
         jPanel1.setName("jPanel1"); // NOI18N
         jPanel1.setLayout(new java.awt.GridLayout(1, 0));
@@ -202,9 +204,9 @@ public class Primi extends javax.swing.JPanel {
         });
         jPanel1.add(visuallizza);
 
-        pannello_antipasti.add(jPanel1, java.awt.BorderLayout.SOUTH);
+        pannello_primi.add(jPanel1, java.awt.BorderLayout.SOUTH);
 
-        add(pannello_antipasti, java.awt.BorderLayout.NORTH);
+        add(pannello_primi, java.awt.BorderLayout.NORTH);
 
         pannello_ordini.setName("pannello_ordini"); // NOI18N
         pannello_ordini.setLayout(new java.awt.BorderLayout(5, 5));
@@ -299,18 +301,18 @@ private void AnnullaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
 
 private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActionPerformed
 // TODO add your handling code here:
-    int row=tabella_antipasti.getSelectedRow();
+    int row=tabella_primi.getSelectedRow();
     id_antipasto.setColumnVisible(id, true);
-    long id_long=((Long)tabella_antipasti.getValueAt(row, 0)).longValue();
+    long id_long=((Long)tabella_primi.getValueAt(row, 0)).longValue();
     System.out.println(id_long);
     id_antipasto.setColumnVisible(id, false);
 }//GEN-LAST:event_addActionPerformed
 
 private void visuallizzaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_visuallizzaActionPerformed
 // TODO add your handling code here:
-    int row=tabella_antipasti.getSelectedRow();
+    int row=tabella_primi.getSelectedRow();
     id_antipasto.setColumnVisible(id, true);
-    long id_long=((Long)tabella_antipasti.getValueAt(row, 0)).longValue();
+    long id_long=((Long)tabella_primi.getValueAt(row, 0)).longValue();
     System.out.println("ID pietanza "+id_long);
     id_antipasto.setColumnVisible(id, false);
    this.setVisible(false);
@@ -328,10 +330,10 @@ private void visuallizzaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JPanel pannello_antipasti;
     private javax.swing.JPanel pannello_ordini;
-    private javax.swing.JTable tabella_antipasti;
+    private javax.swing.JPanel pannello_primi;
     private javax.swing.JTable tabella_ordini;
+    private javax.swing.JTable tabella_primi;
     private javax.swing.JButton visuallizza;
     // End of variables declaration//GEN-END:variables
 
