@@ -71,7 +71,7 @@ public class ArticoloMenuFacade implements ArticoloMenuFacadeRemote, ArticoloMen
 
     public List<Pietanza> selezionaPietanzeDisponibili() {
         ArrayList<Pietanza> pietanze = (ArrayList<Pietanza>) pietanzaSessionBean.selezionaPietanze();
-        ArrayList<Pietanza> pietanzeDisponibili = null;
+        ArrayList<Pietanza> pietanzeDisponibili = new ArrayList<Pietanza>();
 
         for (Pietanza pietanza : pietanze) {
             if (this.verificaIngredientiPietanza(pietanza) > 0)
@@ -83,20 +83,20 @@ public class ArticoloMenuFacade implements ArticoloMenuFacadeRemote, ArticoloMen
 
     public List<Pietanza> selezionaPietanzeDisponibiliPerTipo(TipoPietanza tipoPietanza) {
         ArrayList<Pietanza> pietanze = (ArrayList<Pietanza>) pietanzaSessionBean.selezionaPietanzePerTipo(tipoPietanza);
-        ArrayList<Pietanza> pietanzeDisponibili = null;
+        ArrayList<Pietanza> pietanzeDisponibili = new ArrayList<Pietanza>();
 
         if (pietanze != null)
             for (Pietanza pietanza : pietanze) {
                 if (this.verificaIngredientiPietanza(pietanza) > 0)
                     pietanzeDisponibili.add(pietanza);
             }
-            
+        System.out.println("Dimensioneeeeeeeeeeeeeeeeeeeeee: " + pietanzeDisponibili.size());
         return pietanzeDisponibili;
     }
 
     public HashMap<Pietanza, Integer> selezionaDisponibilitaPietanze() {
         ArrayList<Pietanza> pietanze = (ArrayList<Pietanza>) pietanzaSessionBean.selezionaPietanze();
-        HashMap<Pietanza, Integer> pietanzeDisponibili = null;
+        HashMap<Pietanza, Integer> pietanzeDisponibili = new HashMap<Pietanza, Integer>();
 
         for (Pietanza pietanza : pietanze)
             pietanzeDisponibili.put(pietanza, this.verificaIngredientiPietanza(pietanza));
@@ -106,7 +106,7 @@ public class ArticoloMenuFacade implements ArticoloMenuFacadeRemote, ArticoloMen
 
     public HashMap<Pietanza, Integer> selezionaDisponibilitaPietanzePerTipo(TipoPietanza tipoPietanza) {
         ArrayList<Pietanza> pietanze = (ArrayList<Pietanza>) pietanzaSessionBean.selezionaPietanzePerTipo(tipoPietanza);
-        HashMap<Pietanza, Integer> pietanzeDisponibili = null;
+        HashMap<Pietanza, Integer> pietanzeDisponibili = new HashMap<Pietanza, Integer>();
 
         for (Pietanza pietanza : pietanze)
             pietanzeDisponibili.put(pietanza, this.verificaIngredientiPietanza(pietanza));
