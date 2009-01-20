@@ -17,6 +17,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JComboBox;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 import org.jdesktop.application.FrameView;
@@ -46,9 +47,10 @@ public class Antipasto extends javax.swing.JPanel {
         initFacade();
         this.frame=frame;
         this.tavolo=tavolo;
-        LinkedList<it.softfood.entity.Pietanza> antipasti = (LinkedList<it.softfood.entity.Pietanza>) articolo.selezionaPietanzeDisponibiliPerTipo(TipoPietanza.ANTIPASTI);
+        ArrayList<it.softfood.entity.Pietanza> antipasti = (ArrayList<it.softfood.entity.Pietanza>) articolo.selezionaPietanzeDisponibiliPerTipo(TipoPietanza.ANTIPASTI);
         int i=0;
         int j=0;
+
         
         JComboBox combo= new JComboBox();
         combo.addItem(1);
@@ -57,16 +59,18 @@ public class Antipasto extends javax.swing.JPanel {
         combo.addItem(4);
         combo.addItem(5);
         
-        XTableColumnModel id_antipasto=new XTableColumnModel();
+        TableColumn sportColumn = tabella_antipasti.getColumnModel().getColumn(2);
+        sportColumn.setCellEditor(new DefaultCellEditor(combo));
+        
+        id_antipasto=new XTableColumnModel();
         
         tabella_antipasti.setColumnModel(id_antipasto);
         tabella_antipasti.createDefaultColumnsFromModel();
         
-        TableColumn id=id_antipasto.getColumnByModelIndex(0);
-        
-        id_antipasto.setColumnVisible(id, false);
+        id=id_antipasto.getColumnByModelIndex(0);
         
         for(it.softfood.entity.Pietanza pietanza:antipasti){
+            //antipasto_model.insertRow(tabella_antipasti.getRowCount(), new Object[]{/*pietanza.getId(),pietanza.getNome()*/"PROVA","UNO"});
             tabella_antipasti.setValueAt(pietanza.getId(), i, j);
             j++;
             tabella_antipasti.setValueAt(pietanza.getNome(), i, j);
@@ -74,12 +78,14 @@ public class Antipasto extends javax.swing.JPanel {
             i++;
         }
         
-        XTableColumnModel linea_ordine=new XTableColumnModel();
+        id_antipasto.setColumnVisible(id, false);
+             
+        linea_ordine=new XTableColumnModel();
         
         tabella_ordini.setColumnModel(linea_ordine);
         tabella_ordini.createDefaultColumnsFromModel();
         
-        TableColumn id_ordini=linea_ordine.getColumnByModelIndex(0);
+        id_ordini=linea_ordine.getColumnByModelIndex(0);
         
         linea_ordine.setColumnVisible(id_ordini, false);
         
@@ -98,6 +104,7 @@ public class Antipasto extends javax.swing.JPanel {
         pannello_antipasti = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabella_antipasti = new javax.swing.JTable();
+        add = new javax.swing.JButton();
         pannello_ordini = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -120,7 +127,26 @@ public class Antipasto extends javax.swing.JPanel {
 
         tabella_antipasti.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
                 "ID", "Pietanza", "Quantita'"
@@ -154,6 +180,15 @@ public class Antipasto extends javax.swing.JPanel {
 
         pannello_antipasti.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
+        add.setText(resourceMap.getString("add.text")); // NOI18N
+        add.setName("add"); // NOI18N
+        add.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addActionPerformed(evt);
+            }
+        });
+        pannello_antipasti.add(add, java.awt.BorderLayout.PAGE_END);
+
         add(pannello_antipasti, java.awt.BorderLayout.NORTH);
 
         pannello_ordini.setName("pannello_ordini"); // NOI18N
@@ -171,20 +206,20 @@ public class Antipasto extends javax.swing.JPanel {
 
         tabella_ordini.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Pietanza", "Quantita'", "Elimina"
+                "ID", "Pietanza", "Quantita'", "Elimina"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.Object.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, true, true
+                false, false, true, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -198,11 +233,13 @@ public class Antipasto extends javax.swing.JPanel {
         tabella_ordini.setName("tabella_ordini"); // NOI18N
         jScrollPane2.setViewportView(tabella_ordini);
         tabella_ordini.getColumnModel().getColumn(0).setResizable(false);
-        tabella_ordini.getColumnModel().getColumn(0).setHeaderValue(resourceMap.getString("tabella_ordini.columnModel.title0")); // NOI18N
+        tabella_ordini.getColumnModel().getColumn(0).setHeaderValue(resourceMap.getString("tabella_ordini.columnModel.title3")); // NOI18N
         tabella_ordini.getColumnModel().getColumn(1).setResizable(false);
-        tabella_ordini.getColumnModel().getColumn(1).setHeaderValue(resourceMap.getString("tabella_ordini.columnModel.title1")); // NOI18N
+        tabella_ordini.getColumnModel().getColumn(1).setHeaderValue(resourceMap.getString("tabella_ordini.columnModel.title0")); // NOI18N
         tabella_ordini.getColumnModel().getColumn(2).setResizable(false);
-        tabella_ordini.getColumnModel().getColumn(2).setHeaderValue(resourceMap.getString("tabella_ordini.columnModel.title2")); // NOI18N
+        tabella_ordini.getColumnModel().getColumn(2).setHeaderValue(resourceMap.getString("tabella_ordini.columnModel.title1")); // NOI18N
+        tabella_ordini.getColumnModel().getColumn(3).setResizable(false);
+        tabella_ordini.getColumnModel().getColumn(3).setHeaderValue(resourceMap.getString("tabella_ordini.columnModel.title2")); // NOI18N
 
         pannello_ordini.add(jScrollPane2, java.awt.BorderLayout.SOUTH);
 
@@ -246,10 +283,20 @@ private void AnnullaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
     frame.setComponent(menu);
 }//GEN-LAST:event_AnnullaActionPerformed
 
+private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActionPerformed
+// TODO add your handling code here:
+    int row=tabella_antipasti.getSelectedRow();
+    id_antipasto.setColumnVisible(id, true);
+    long id_long=((Long)tabella_antipasti.getValueAt(row, 0)).longValue();
+    System.out.println(id_long);
+    id_antipasto.setColumnVisible(id, false);
+}//GEN-LAST:event_addActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Annulla;
     private javax.swing.JButton OK;
+    private javax.swing.JButton add;
     private javax.swing.JPanel bottoni;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
@@ -262,4 +309,8 @@ private void AnnullaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
 
     private FrameView frame;
     private String tavolo;
+    private XTableColumnModel id_antipasto;
+    private XTableColumnModel linea_ordine;
+    private TableColumn id_ordini;
+    private TableColumn id;
 }
