@@ -47,7 +47,7 @@ public class Bibite extends javax.swing.JPanel {
         initFacade();
         this.frame=frame;
         this.tavolo=tavolo;
-        ArrayList<it.softfood.entity.Pietanza> bibite = (ArrayList<it.softfood.entity.Pietanza>) articolo.selezionaPietanzeDisponibiliPerTipo(TipoPietanza.ANTIPASTI);
+        ArrayList<it.softfood.entity.Bevanda> bibite = (ArrayList<it.softfood.entity.Bevanda>) articolo.selezionaBevandeDisponibili();
         int i=0;
         int j=0;
 
@@ -59,9 +59,6 @@ public class Bibite extends javax.swing.JPanel {
         combo.addItem(4);
         combo.addItem(5);
         
-        TableColumn sportColumn = tabella_bibite.getColumnModel().getColumn(2);
-        sportColumn.setCellEditor(new DefaultCellEditor(combo));
-        
         id_antipasto=new XTableColumnModel();
         
         tabella_bibite.setColumnModel(id_antipasto);
@@ -69,7 +66,7 @@ public class Bibite extends javax.swing.JPanel {
         
         id=id_antipasto.getColumnByModelIndex(0);
         
-        for(it.softfood.entity.Pietanza pietanza:bibite){
+        for(it.softfood.entity.Bevanda pietanza:bibite){
             //antipasto_model.insertRow(tabella_antipasti.getRowCount(), new Object[]{/*pietanza.getId(),pietanza.getNome()*/"PROVA","UNO"});
             tabella_bibite.setValueAt(pietanza.getId(), i, j);
             j++;
@@ -89,6 +86,10 @@ public class Bibite extends javax.swing.JPanel {
         
         linea_ordine.setColumnVisible(id_ordini, false);
         
+             TableColumn sportColumn = tabella_bibite.getColumnModel().getColumn(1);
+        sportColumn.setCellEditor(new DefaultCellEditor(combo));
+
+        tabella_bibite.setRowHeight(tabella_bibite.getRowHeight() * 15 / 10);
         
     }
 

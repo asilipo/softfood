@@ -58,9 +58,6 @@ public class Dolci extends javax.swing.JPanel {
         combo.addItem(4);
         combo.addItem(5);
         
-        TableColumn sportColumn = tabella_dolci.getColumnModel().getColumn(2);
-        sportColumn.setCellEditor(new DefaultCellEditor(combo));
-        
         id_antipasto=new XTableColumnModel();
         
         tabella_dolci.setColumnModel(id_antipasto);
@@ -88,6 +85,10 @@ public class Dolci extends javax.swing.JPanel {
         
         linea_ordine.setColumnVisible(id_ordini, false);
         
+             TableColumn sportColumn = tabella_dolci.getColumnModel().getColumn(1);
+        sportColumn.setCellEditor(new DefaultCellEditor(combo));
+
+        tabella_dolci.setRowHeight(tabella_dolci.getRowHeight() * 15 / 10);
         
     }
 

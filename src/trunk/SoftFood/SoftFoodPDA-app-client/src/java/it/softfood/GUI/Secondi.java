@@ -58,8 +58,6 @@ public class Secondi extends javax.swing.JPanel {
         combo.addItem(4);
         combo.addItem(5);
         
-        TableColumn sportColumn = tabella_secondi.getColumnModel().getColumn(2);
-        sportColumn.setCellEditor(new DefaultCellEditor(combo));
         
         id_antipasto=new XTableColumnModel();
         
@@ -88,6 +86,10 @@ public class Secondi extends javax.swing.JPanel {
         
         linea_ordine.setColumnVisible(id_ordini, false);
         
+     TableColumn sportColumn = tabella_secondi.getColumnModel().getColumn(1);
+        sportColumn.setCellEditor(new DefaultCellEditor(combo));
+
+        tabella_secondi.setRowHeight(tabella_secondi.getRowHeight() * 15 / 10);        
         
     }
 
