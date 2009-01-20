@@ -32,7 +32,7 @@ public class Antipasto extends javax.swing.JPanel {
         }
     }
 
-    public Antipasto(FrameView frame, String tavolo) {
+    public Antipasto(FrameView frame, Long tavolo) {
         initComponents();
         initFacade();
         this.frame=frame;
@@ -309,7 +309,7 @@ private void visuallizzaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     // End of variables declaration//GEN-END:variables
 
     private FrameView frame;
-    private String tavolo;
+    private Long tavolo;
     private XTableColumnModel id_antipasto;
     private XTableColumnModel linea_ordine;
     private TableColumn id_ordini;

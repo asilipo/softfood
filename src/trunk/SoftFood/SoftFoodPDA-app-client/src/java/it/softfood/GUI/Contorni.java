@@ -33,7 +33,7 @@ public class Contorni extends javax.swing.JPanel {
     }
     
     /** Creates new form Antipasto */
-    public Contorni(FrameView frame, String tavolo) {
+    public Contorni(FrameView frame, Long tavolo) {
         initComponents();
         initFacade();
         this.frame=frame;
@@ -303,7 +303,7 @@ private void visuallizzaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     // End of variables declaration//GEN-END:variables
 
     private FrameView frame;
-    private String tavolo;
+    private Long tavolo;
     private XTableColumnModel id_antipasto;
     private XTableColumnModel linea_ordine;
     private TableColumn id_ordini;
