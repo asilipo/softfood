@@ -3,7 +3,6 @@ package it.softfood.facade.articolomenu;
 import it.softfood.entity.Articolo;
 import it.softfood.entity.Bevanda;
 import it.softfood.entity.Ingrediente;
-import it.softfood.entity.IngredienteLungaConservazione;
 import it.softfood.entity.IngredienteMagazzino;
 import it.softfood.entity.IngredientePietanza;
 import it.softfood.entity.Pietanza;
