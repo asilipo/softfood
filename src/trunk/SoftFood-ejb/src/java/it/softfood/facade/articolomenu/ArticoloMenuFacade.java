@@ -152,7 +152,7 @@ public class ArticoloMenuFacade implements ArticoloMenuFacadeRemote, ArticoloMen
         if (id != null) {
             ArrayList<Ingrediente> ingredienti = new ArrayList<Ingrediente>();
             ArrayList<IngredientePietanza> ingredientiPietanze = (ArrayList<IngredientePietanza>) ingredientePietanzaSessionBeanRemote.selezionaIngredientiPietanze();
-            System.out.println("ingredientiPietanze" + ingredientiPietanze.size());
+            
             if (ingredientiPietanze != null)
                 for (IngredientePietanza ingredientePietanza : ingredientiPietanze)
                     if (ingredientePietanza.getIngredientePietanzaPK().getPietanza().getId().equals(id))
