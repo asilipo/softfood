@@ -1,12 +1,16 @@
 package it.softfood.facade.ordinazione;
 
 import it.softfood.entity.Ingrediente;
+import it.softfood.entity.IngredienteMagazzino;
+import it.softfood.entity.IngredientePietanza;
 import it.softfood.entity.LineaOrdinazione;
 import it.softfood.entity.Ordinazione;
 import it.softfood.entity.Pietanza;
 import it.softfood.entity.Tavolo;
 import it.softfood.entity.Variante;
 import it.softfood.enumeration.TipoPietanza;
+import it.softfood.session.ingredientemagazzino.IngredienteMagazzinoSessionBeanRemote;
+import it.softfood.session.ingredientepietanza.IngredientePietanzaSessionBeanRemote;
 import it.softfood.session.lineaordinazione.LineaOrdinazioneSessionBeanRemote;
 import it.softfood.session.ordinazione.OrdinazioneSessionBeanRemote;
 
@@ -37,13 +41,40 @@ public class OrdinazioneFacade implements OrdinazioneFacadeRemote, OrdinazioneFa
 	private LineaOrdinazioneSessionBeanRemote lineaOrdinazioneSessionBean;
     @EJB(beanName = "VarianteSessionBean")
 	private VarianteSessionBeanRemote varianteSessionBean;
+    @EJB(beanName = "IngredientePietanzaSessionBean")
+	private IngredientePietanzaSessionBeanRemote ingredientePietanzaSessionBeanRemote;
+    @EJB(beanName = "IngredienteMagazzinoSessionBean")
+	private IngredienteMagazzinoSessionBeanRemote ingredienteMagazzinoSessionBeanRemote;
 	
 	public Ordinazione inserisciOrdinazione(Ordinazione ordinazione) {
-		if (ordinazione != null)
+		if (ordinazione != null) {
+
 			return ordinazioneSessionBean.inserisciOrdinazione(ordinazione);
-		
+        }
+
 		return null;
 	}
+
+    private Integer verificaIngredientiPietanza(Pietanza pietanza) {
+        ArrayList<IngredientePietanza> ingredientiPietanze = (ArrayList<IngredientePietanza>) ingredientePietanzaSessionBeanRemote.selezionaIngredientiPietanze();
+        ArrayList<IngredienteMagazzino> ingredientiMagazzino = (ArrayList<IngredienteMagazzino>) ingredienteMagazzinoSessionBeanRemote.selezionaIngredientiMagazzino();
+        Date data = new Date(System.currentTimeMillis());
+
+        int disponibilita = 0;
+        for (IngredientePietanza ingredientePietanza : ingredientiPietanze) {
+
+            if (ingredientePietanza.getIngredientePietanzaPK().getPietanza().getId().equals(pietanza.getId())) {
+                Ingrediente ingrediente = ingredientePietanza.getIngredientePietanzaPK().getIngrediente();
+                System.out.println("Pietanza " + pietanza.getNome() + " ingrediente " + ingrediente.getNome());
+                for (IngredienteMagazzino ingredienteMagazzino : ingredientiMagazzino)
+                    if (ingredienteMagazzino.getIngredienteLungaConservazione().getId().equals(ingrediente.getId()) && ingredienteMagazzino.getQuantita() >=
+                            (ingredientePietanza.getQuantita() + (ingredientePietanza.getQuantita() * disponibilita)) && ingrediente.getScadenza().after(data))
+                            disponibilita++;
+            }
+        }
+
+        return disponibilita;
+    }
 
     public Ordinazione modificaOrdinazione(Ordinazione nuovaOrdinazione, Ordinazione vecchiaOrdinazione) {
 		if (nuovaOrdinazione != null && vecchiaOrdinazione != null) {
