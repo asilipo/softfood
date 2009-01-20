@@ -9,7 +9,6 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
 
 /**
@@ -76,11 +75,11 @@ public class TavoloFacade implements TavoloFacadeRemote, TavoloFacadeLocal {
 	}
     
     public Long occupaTavoli(List<String> riferimenti) {
-        EntityTransaction tx = em.getTransaction();
+//        EntityTransaction tx = em.getTransaction();
         try {
             if (riferimenti != null) {
                 if (riferimenti.size() == 1) {
-                    tx.begin();
+//                    tx.begin();
 
                     String riferimento = riferimenti.get(0);
                     if (riferimento != null) {
@@ -88,7 +87,7 @@ public class TavoloFacade implements TavoloFacadeRemote, TavoloFacadeLocal {
                         tavolo = em.merge(tavolo);
                         if (!tavolo.getOccupato()) {
                             tavolo.setOccupato(true);
-                            tx.commit();
+//                            tx.commit();
                             return tavolo.getId();
                         } else {
                             return null;
@@ -97,7 +96,7 @@ public class TavoloFacade implements TavoloFacadeRemote, TavoloFacadeLocal {
                         return null;
                     }
                 } else if (riferimenti.size() > 1) {
-                    tx.begin();
+//                    tx.begin();
                     String riferimentoTavoli = "";
                     Integer numeroPosti = 0;
                     for (String riferimento : riferimenti) {
@@ -106,7 +105,10 @@ public class TavoloFacade implements TavoloFacadeRemote, TavoloFacadeLocal {
                             tavolo = em.merge(tavolo);
                             if (!tavolo.getOccupato()) {
                                 tavolo.setAttivo(false);
-                                riferimentoTavoli = riferimentoTavoli + tavolo.getRiferimento();
+                                if (!riferimento.equals(""))
+                                    riferimentoTavoli = riferimentoTavoli + tavolo.getRiferimento();
+                                else
+                                    riferimentoTavoli = riferimentoTavoli + " + " + tavolo.getRiferimento();
                                 numeroPosti = numeroPosti + tavolo.getNumeroPosti();
                             }
                             else
@@ -123,13 +125,13 @@ public class TavoloFacade implements TavoloFacadeRemote, TavoloFacadeLocal {
                     nuovoTavolo.setRiferimento(riferimentoTavoli);
                     nuovoTavolo.setRistorante(ristoranteSessionBeanRemote.selezionaRistorantePerRagioneSociale("La taverna"));
 
-                    tx.commit();
+//                    tx.commit();
 
                     return (tavoloSessionBean.inserisciTavolo(nuovoTavolo)).getId();
                 }
             }
         } catch (RuntimeException e) {
-            tx.rollback();
+//            tx.rollback();
         }
 
         return null;
