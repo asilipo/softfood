@@ -313,7 +313,7 @@ private void visuallizzaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     int row=tabella_antipasti.getSelectedRow();
     id_antipasto.setColumnVisible(id, true);
     long id_long=((Long)tabella_antipasti.getValueAt(row, 0)).longValue();
-    System.out.println(id_long);
+    System.out.println("ID pietanza "+id_long);
     id_antipasto.setColumnVisible(id, false);
    this.setVisible(false);
    it.softfood.GUI.Pietanza pietanza = new it.softfood.GUI.Pietanza(frame,tavolo,id_long);
