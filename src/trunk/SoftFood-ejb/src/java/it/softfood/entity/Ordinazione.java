@@ -46,6 +46,8 @@ public class Ordinazione implements Serializable {
 	private Double sconto;
 	@Column(name = "terminato", nullable = false)
 	private Boolean terminato;
+    @Column(name = "coperti", nullable = false)
+	private Integer coperti;
 	@Column(name = "data", nullable = false)
     @Temporal(javax.persistence.TemporalType.DATE)
 	private Date data;
@@ -61,6 +63,14 @@ public class Ordinazione implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
+
+    public Integer getCoperti() {
+        return coperti;
+    }
+
+    public void setCoperti(Integer coperti) {
+        this.coperti = coperti;
+    }
 	
 	public Double getTotale() {
 		return totale;
