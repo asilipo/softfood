@@ -102,6 +102,7 @@ public class Primi extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         pannello_primi = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabella_primi = new javax.swing.JTable();
@@ -327,6 +328,7 @@ private void visuallizzaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     private javax.swing.JButton OK;
     private javax.swing.JButton add;
     private javax.swing.JPanel bottoni;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
