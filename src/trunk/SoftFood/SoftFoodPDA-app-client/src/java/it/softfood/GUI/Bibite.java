@@ -48,9 +48,6 @@ public class Bibite extends javax.swing.JPanel {
         this.frame=frame;
         this.tavolo=tavolo;
         ArrayList<it.softfood.entity.Bevanda> bibite = (ArrayList<it.softfood.entity.Bevanda>) articolo.selezionaBevandeDisponibili();
-        int i=0;
-        int j=0;
-
         
         JComboBox combo= new JComboBox();
         combo.addItem(1);
@@ -58,7 +55,9 @@ public class Bibite extends javax.swing.JPanel {
         combo.addItem(3);
         combo.addItem(4);
         combo.addItem(5);
-        
+
+        tabella_bibite.setModel(new javax.swing.table.DefaultTableModel(new String[]{"ID", "Bevanda", "Quantita'"}, bibite.size()));
+
         id_antipasto=new XTableColumnModel();
         
         tabella_bibite.setColumnModel(id_antipasto);
@@ -66,13 +65,12 @@ public class Bibite extends javax.swing.JPanel {
         
         id=id_antipasto.getColumnByModelIndex(0);
         
+        int i=0;
+        int j=0;
         for(it.softfood.entity.Bevanda pietanza:bibite){
-            //antipasto_model.insertRow(tabella_antipasti.getRowCount(), new Object[]{/*pietanza.getId(),pietanza.getNome()*/"PROVA","UNO"});
-            tabella_bibite.setValueAt(pietanza.getId(), i, j);
-            j++;
-            tabella_bibite.setValueAt(pietanza.getNome(), i, j);
+            tabella_bibite.setValueAt(pietanza.getId(), i, j++);
+            tabella_bibite.setValueAt(pietanza.getNome(), i++, j);
             j=0;
-            i++;
         }
         
         id_antipasto.setColumnVisible(id, false);
@@ -132,29 +130,10 @@ public class Bibite extends javax.swing.JPanel {
 
         tabella_bibite.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
-                "ID", "Pietanza", "Quantita'"
+                "ID", "Bevanda", "Quantita'"
             }
         ) {
             Class[] types = new Class [] {
