@@ -59,7 +59,7 @@ public class Antipasto extends javax.swing.JPanel {
         combo.addItem(4);
         combo.addItem(5);
         
-        TableColumn sportColumn = tabella_antipasti.getColumnModel().getColumn(2);
+        TableColumn sportColumn = tabella_antipasti.getColumnModel().getColumn(1);
         sportColumn.setCellEditor(new DefaultCellEditor(combo));
         
         id_antipasto=new XTableColumnModel();
