@@ -1,6 +1,5 @@
 package it.softfood.facade.ordinazione;
 
-import it.softfood.entity.Articolo;
 import it.softfood.entity.Ingrediente;
 import it.softfood.entity.LineaOrdinazione;
 import it.softfood.entity.Ordinazione;
@@ -13,7 +12,7 @@ import it.softfood.session.ordinazione.OrdinazioneSessionBeanRemote;
 
 import it.softfood.session.variante.VarianteSessionBeanRemote;
 import java.util.Date;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -133,11 +132,11 @@ public class OrdinazioneFacade implements OrdinazioneFacadeRemote, OrdinazioneFa
 
     public List<LineaOrdinazione> selezionaLineeOrdinazionePerOrdinazione(Ordinazione ordinazione,
             TipoPietanza tipoPietanza) {
-        LinkedList<LineaOrdinazione> lineeOrdinazione = new LinkedList<LineaOrdinazione>();
+        ArrayList<LineaOrdinazione> lineeOrdinazione = new ArrayList<LineaOrdinazione>();
         if (ordinazione != null) 
-			 lineeOrdinazione = (LinkedList<LineaOrdinazione>) lineaOrdinazioneSessionBean.selezionaLineeOrdinazionePerOrdinazione(ordinazione);
+			 lineeOrdinazione = (ArrayList<LineaOrdinazione>) lineaOrdinazioneSessionBean.selezionaLineeOrdinazionePerOrdinazione(ordinazione);
         
-        LinkedList<LineaOrdinazione> lineeOrdinazionePietanza = new LinkedList<LineaOrdinazione> ();
+        ArrayList<LineaOrdinazione> lineeOrdinazionePietanza = new ArrayList<LineaOrdinazione> ();
         for (LineaOrdinazione lineaOrdinazione : lineeOrdinazione) {
             Pietanza pietanza = (Pietanza) lineaOrdinazione.getArticolo();
             if (pietanza instanceof Pietanza)
