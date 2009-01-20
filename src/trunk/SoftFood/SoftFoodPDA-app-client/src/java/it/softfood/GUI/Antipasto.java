@@ -12,8 +12,13 @@ import it.softfood.enumeration.TipoPietanza;
 import it.softfood.facade.articolomenu.ArticoloMenuFacadeRemote;
 import it.softfood.facade.ordinazione.OrdinazioneFacadeRemote;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
+import javax.swing.DefaultCellEditor;
+import javax.swing.JComboBox;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
 import org.jdesktop.application.FrameView;
 
 /**
@@ -41,13 +46,44 @@ public class Antipasto extends javax.swing.JPanel {
         initFacade();
         this.frame=frame;
         this.tavolo=tavolo;
-        ArrayList<it.softfood.entity.Pietanza> antipasti = (ArrayList<it.softfood.entity.Pietanza>) articolo.selezionaPietanzePerTipo(TipoPietanza.ANTIPASTI);
+        LinkedList<it.softfood.entity.Pietanza> antipasti = (LinkedList<it.softfood.entity.Pietanza>) articolo.selezionaPietanzeDisponibiliPerTipo(TipoPietanza.ANTIPASTI);
         int i=0;
         int j=0;
+        
+        JComboBox combo= new JComboBox();
+        combo.addItem(1);
+        combo.addItem(2);
+        combo.addItem(3);
+        combo.addItem(4);
+        combo.addItem(5);
+        
+        XTableColumnModel id_antipasto=new XTableColumnModel();
+        
+        tabella_antipasti.setColumnModel(id_antipasto);
+        tabella_antipasti.createDefaultColumnsFromModel();
+        
+        TableColumn id=id_antipasto.getColumnByModelIndex(0);
+        
+        id_antipasto.setColumnVisible(id, false);
+        
         for(it.softfood.entity.Pietanza pietanza:antipasti){
+            tabella_antipasti.setValueAt(pietanza.getId(), i, j);
+            j++;
             tabella_antipasti.setValueAt(pietanza.getNome(), i, j);
+            j=0;
             i++;
         }
+        
+        XTableColumnModel linea_ordine=new XTableColumnModel();
+        
+        tabella_ordini.setColumnModel(linea_ordine);
+        tabella_ordini.createDefaultColumnsFromModel();
+        
+        TableColumn id_ordini=linea_ordine.getColumnByModelIndex(0);
+        
+        linea_ordine.setColumnVisible(id_ordini, false);
+        
+        
     }
 
     /** This method is called from within the constructor to
@@ -84,28 +120,37 @@ public class Antipasto extends javax.swing.JPanel {
 
         tabella_antipasti.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+
             },
             new String [] {
-                "Pietanza", "Quantita'"
+                "ID", "Pietanza", "Quantita'"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Integer.class
+                java.lang.Object.class, java.lang.String.class, java.lang.Object.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, true
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
         });
         tabella_antipasti.setName("tabella_antipasti"); // NOI18N
         jScrollPane1.setViewportView(tabella_antipasti);
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(it.softfood.GUI.Main.class).getContext().getResourceMap(Antipasto.class);
-        tabella_antipasti.getColumnModel().getColumn(0).setHeaderValue(resourceMap.getString("tabella_antipasti.columnModel.title0")); // NOI18N
-        tabella_antipasti.getColumnModel().getColumn(1).setHeaderValue(resourceMap.getString("tabella_antipasti.columnModel.title1")); // NOI18N
+        tabella_antipasti.getColumnModel().getColumn(0).setResizable(false);
+        tabella_antipasti.getColumnModel().getColumn(0).setPreferredWidth(0);
+        tabella_antipasti.getColumnModel().getColumn(0).setHeaderValue(resourceMap.getString("tabella_antipasti.columnModel.title2")); // NOI18N
+        tabella_antipasti.getColumnModel().getColumn(1).setResizable(false);
+        tabella_antipasti.getColumnModel().getColumn(1).setHeaderValue(resourceMap.getString("tabella_antipasti.columnModel.title0")); // NOI18N
+        tabella_antipasti.getColumnModel().getColumn(2).setResizable(false);
+        tabella_antipasti.getColumnModel().getColumn(2).setHeaderValue(resourceMap.getString("tabella_antipasti.columnModel.title1")); // NOI18N
 
         pannello_antipasti.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
@@ -126,27 +171,38 @@ public class Antipasto extends javax.swing.JPanel {
 
         tabella_ordini.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Pietanza", "Quantita'"
+                "Pietanza", "Quantita'", "Elimina"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Integer.class
+                java.lang.String.class, java.lang.Object.class, java.lang.Object.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, true, true
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
         });
         tabella_ordini.setName("tabella_ordini"); // NOI18N
         jScrollPane2.setViewportView(tabella_ordini);
+        tabella_ordini.getColumnModel().getColumn(0).setResizable(false);
         tabella_ordini.getColumnModel().getColumn(0).setHeaderValue(resourceMap.getString("tabella_ordini.columnModel.title0")); // NOI18N
+        tabella_ordini.getColumnModel().getColumn(1).setResizable(false);
         tabella_ordini.getColumnModel().getColumn(1).setHeaderValue(resourceMap.getString("tabella_ordini.columnModel.title1")); // NOI18N
+        tabella_ordini.getColumnModel().getColumn(2).setResizable(false);
+        tabella_ordini.getColumnModel().getColumn(2).setHeaderValue(resourceMap.getString("tabella_ordini.columnModel.title2")); // NOI18N
 
         pannello_ordini.add(jScrollPane2, java.awt.BorderLayout.SOUTH);
 

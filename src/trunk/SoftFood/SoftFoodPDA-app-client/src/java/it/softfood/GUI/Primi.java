@@ -81,17 +81,26 @@ public class Primi extends javax.swing.JPanel {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Integer.class
+                java.lang.String.class, java.lang.Object.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, true
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
         });
         tabella_antipasti.setName("tabella_antipasti"); // NOI18N
         jScrollPane1.setViewportView(tabella_antipasti);
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(it.softfood.GUI.Main.class).getContext().getResourceMap(Primi.class);
+        tabella_antipasti.getColumnModel().getColumn(0).setResizable(false);
         tabella_antipasti.getColumnModel().getColumn(0).setHeaderValue(resourceMap.getString("tabella_antipasti.columnModel.title0")); // NOI18N
+        tabella_antipasti.getColumnModel().getColumn(1).setResizable(false);
         tabella_antipasti.getColumnModel().getColumn(1).setHeaderValue(resourceMap.getString("tabella_antipasti.columnModel.title1")); // NOI18N
 
         pannello_antipasti.add(jScrollPane1, java.awt.BorderLayout.CENTER);
@@ -113,27 +122,39 @@ public class Primi extends javax.swing.JPanel {
 
         tabella_ordini.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Pietanza", "Quantita'"
+                "Pietanza", "Quantita'", "Elimina"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Integer.class
+                java.lang.String.class, java.lang.Object.class, java.lang.Object.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, true
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
         });
         tabella_ordini.setName("tabella_ordini"); // NOI18N
+        tabella_ordini.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(tabella_ordini);
+        tabella_ordini.getColumnModel().getColumn(0).setResizable(false);
         tabella_ordini.getColumnModel().getColumn(0).setHeaderValue(resourceMap.getString("tabella_ordini.columnModel.title0")); // NOI18N
+        tabella_ordini.getColumnModel().getColumn(1).setResizable(false);
         tabella_ordini.getColumnModel().getColumn(1).setHeaderValue(resourceMap.getString("tabella_ordini.columnModel.title1")); // NOI18N
+        tabella_ordini.getColumnModel().getColumn(2).setResizable(false);
+        tabella_ordini.getColumnModel().getColumn(2).setHeaderValue(resourceMap.getString("tabella_ordini.columnModel.title2")); // NOI18N
 
         pannello_ordini.add(jScrollPane2, java.awt.BorderLayout.SOUTH);
 
