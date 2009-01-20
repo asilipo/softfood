@@ -26,7 +26,7 @@ public class Pietanza extends javax.swing.JPanel {
         }
     }
 
-    public Pietanza(FrameView frame,String tavolo,Long id) {
+    public Pietanza(FrameView frame,Long tavolo,Long id) {
         this.tavolo = tavolo;
         initComponents();
         initFacade();
@@ -157,6 +157,6 @@ public class Pietanza extends javax.swing.JPanel {
     private javax.swing.JButton ok;
     // End of variables declaration//GEN-END:variables
     private FrameView frame;
-    private String tavolo;
+    private Long tavolo;
     private Long id;
 }

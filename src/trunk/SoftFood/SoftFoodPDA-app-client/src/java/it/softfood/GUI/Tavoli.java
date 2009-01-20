@@ -14,8 +14,10 @@ package it.softfood.GUI;
 import it.softfood.entity.Tavolo;
 import it.softfood.facade.tavolo.TavoloFacadeRemote;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
+import javax.swing.DefaultListModel;
 import org.jdesktop.application.FrameView;
 /**
  * @author Maria Rosaria Paone
@@ -53,9 +55,17 @@ public class Tavoli extends javax.swing.JPanel {
         listaTavoli = new String[tavoli.size()];
         for(Tavolo tavolo:tavoli){
             listaTavoli[i]=tavolo.getRiferimento();
+            jComboBox1.addItem(tavolo.getRiferimento());
             i++;
         }
-        Tavoli.setListData(listaTavoli);
+        
+        model=new DefaultListModel();
+        
+        jList1.setModel(model);
+        
+        
+        
+        
         
     }
 
@@ -69,8 +79,16 @@ public class Tavoli extends javax.swing.JPanel {
     private void initComponents() {
 
         SelezionaTavoli = new javax.swing.JLabel();
+        pannello_tavolo = new javax.swing.JPanel();
+        jComboBox1 = new javax.swing.JComboBox();
+        add = new javax.swing.JButton();
+        pannello_aggiunta = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        Tavoli = new javax.swing.JList();
+        jList1 = new javax.swing.JList();
+        pannello_posti = new javax.swing.JPanel();
+        jComboBox2 = new javax.swing.JComboBox();
+        jLabel1 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         Ok = new javax.swing.JButton();
         Annulla = new javax.swing.JButton();
@@ -79,28 +97,65 @@ public class Tavoli extends javax.swing.JPanel {
         setMinimumSize(new java.awt.Dimension(225, 450));
         setName("Form"); // NOI18N
         setPreferredSize(new java.awt.Dimension(225, 450));
-        setLayout(new java.awt.BorderLayout(5, 5));
+        setLayout(new java.awt.GridLayout(6, 1, 5, 5));
 
         SelezionaTavoli.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(it.softfood.GUI.Main.class).getContext().getResourceMap(Tavoli.class);
         SelezionaTavoli.setText(resourceMap.getString("SelezionaTavoli.text")); // NOI18N
         SelezionaTavoli.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         SelezionaTavoli.setName("SelezionaTavoli"); // NOI18N
-        add(SelezionaTavoli, java.awt.BorderLayout.PAGE_START);
+        add(SelezionaTavoli);
+
+        pannello_tavolo.setName("pannello_tavolo"); // NOI18N
+        pannello_tavolo.setLayout(new java.awt.BorderLayout());
+
+        jComboBox1.setName("jComboBox1"); // NOI18N
+        pannello_tavolo.add(jComboBox1, java.awt.BorderLayout.CENTER);
+
+        add.setText(resourceMap.getString("add.text")); // NOI18N
+        add.setMaximumSize(new java.awt.Dimension(75, 10));
+        add.setMinimumSize(new java.awt.Dimension(75, 10));
+        add.setName("add"); // NOI18N
+        add.setPreferredSize(new java.awt.Dimension(75, 10));
+        add.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addActionPerformed(evt);
+            }
+        });
+        pannello_tavolo.add(add, java.awt.BorderLayout.EAST);
+
+        add(pannello_tavolo);
+
+        pannello_aggiunta.setName("pannello_aggiunta"); // NOI18N
+        pannello_aggiunta.setLayout(new java.awt.GridLayout(1, 1));
 
         jScrollPane1.setName("jScrollPane1"); // NOI18N
 
-        Tavoli.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        Tavoli.setName("ListaTavoli"); // NOI18N
-        Tavoli.setVisibleRowCount(10);
-        Tavoli.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                TavoliMouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(Tavoli);
+        jList1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jList1.setName("jList1"); // NOI18N
+        jScrollPane1.setViewportView(jList1);
 
-        add(jScrollPane1, java.awt.BorderLayout.CENTER);
+        pannello_aggiunta.add(jScrollPane1);
+
+        add(pannello_aggiunta);
+
+        pannello_posti.setName("pannello_posti"); // NOI18N
+        pannello_posti.setLayout(new java.awt.BorderLayout());
+
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15" }));
+        jComboBox2.setName("jComboBox2"); // NOI18N
+        pannello_posti.add(jComboBox2, java.awt.BorderLayout.CENTER);
+
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText(resourceMap.getString("jLabel1.text")); // NOI18N
+        jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jLabel1.setName("jLabel1"); // NOI18N
+        pannello_posti.add(jLabel1, java.awt.BorderLayout.NORTH);
+
+        add(pannello_posti);
+
+        jPanel2.setName("jPanel2"); // NOI18N
+        add(jPanel2);
 
         jPanel1.setName("jPanel1"); // NOI18N
         jPanel1.setLayout(new java.awt.GridLayout(1, 2, 5, 5));
@@ -124,17 +179,18 @@ public class Tavoli extends javax.swing.JPanel {
         });
         jPanel1.add(Annulla);
 
-        add(jPanel1, java.awt.BorderLayout.PAGE_END);
+        add(jPanel1);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void TavoliMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TavoliMouseClicked
-        // TODO add your handling code here:
-        Ok.setEnabled(true);
-    }//GEN-LAST:event_TavoliMouseClicked
 
     private void OkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OkActionPerformed
         // TODO add your handling code here:
-        String tavoloSelezionato=(String)Tavoli.getSelectedValue();
+        Enumeration enumeration=model.elements();
+        ArrayList<String> tav=new ArrayList<String>();
+        for(;enumeration.hasMoreElements();)
+            tav.add((String) enumeration.nextElement());
+        
+        Long tavoloSelezionato=null;
+        
         this.setVisible(false);
         Menu menu=new Menu(frame,tavoloSelezionato);
         frame.setComponent(menu);
@@ -147,14 +203,30 @@ public class Tavoli extends javax.swing.JPanel {
         frame.setComponent(ordine);
     }//GEN-LAST:event_AnnullaActionPerformed
 
+private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActionPerformed
+// TODO add your handling code here:
+    Ok.setEnabled(true);
+    model.addElement((String)jComboBox1.getSelectedItem());
+    jComboBox1.setSelectedIndex(0);
+}//GEN-LAST:event_addActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Annulla;
     private javax.swing.JButton Ok;
     private javax.swing.JLabel SelezionaTavoli;
-    private javax.swing.JList Tavoli;
+    private javax.swing.JButton add;
+    private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JComboBox jComboBox2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JList jList1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JPanel pannello_aggiunta;
+    private javax.swing.JPanel pannello_posti;
+    private javax.swing.JPanel pannello_tavolo;
     // End of variables declaration//GEN-END:variables
     private FrameView frame;
+    private DefaultListModel model;
 }

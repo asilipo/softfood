@@ -21,7 +21,7 @@ import org.jdesktop.application.FrameView;
 public class Menu extends javax.swing.JPanel {
 
     /** Creates new form Menu */
-    public Menu(FrameView frame,String tavolo) {
+    public Menu(FrameView frame,Long tavolo) {
         initComponents();
         this.frame = frame;
         this.tavolo = tavolo;
@@ -229,5 +229,5 @@ private void BibiteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
     private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
     private FrameView frame;
-    private String tavolo;
+    private Long tavolo;
 }
