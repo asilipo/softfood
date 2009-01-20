@@ -60,7 +60,7 @@ public class Antipasto extends javax.swing.JPanel {
         for(it.softfood.entity.Pietanza pietanza:antipasti){
             tabella_antipasti.setValueAt(pietanza.getId(), i, j++);
             tabella_antipasti.setValueAt(pietanza.getNome(), i++, j);
-            i++;
+            j = 0;;
         }
         
         id_antipasto.setColumnVisible(id, false);
