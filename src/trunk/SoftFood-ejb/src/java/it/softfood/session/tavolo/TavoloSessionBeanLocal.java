@@ -30,5 +30,7 @@ public interface TavoloSessionBeanLocal {
 
     @java.lang.SuppressWarnings(value = {"unchecked"})
     java.util.List<it.softfood.entity.Tavolo> selezionaTavoliNonAttivi();
+
+    it.softfood.entity.Tavolo selezionaTavoloPerRiferimento(java.lang.String riferimento);
 	
 }
