@@ -1,25 +1,15 @@
-/*
- * Antipasto.java
- *
- * Created on 19 gennaio 2009, 16.59
- */
-
 package it.softfood.GUI;
 
 
-import it.softfood.entity.Pietanza;
 import it.softfood.enumeration.TipoPietanza;
 import it.softfood.facade.articolomenu.ArticoloMenuFacadeRemote;
 import it.softfood.facade.ordinazione.OrdinazioneFacadeRemote;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JComboBox;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
-import javax.swing.table.TableColumnModel;
 import org.jdesktop.application.FrameView;
 
 /**

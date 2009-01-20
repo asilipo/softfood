@@ -39,7 +39,7 @@ public class Contorni extends javax.swing.JPanel {
         this.frame=frame;
         this.tavolo=tavolo;
         ArrayList<it.softfood.entity.Pietanza> contorni = (ArrayList<it.softfood.entity.Pietanza>) articolo.selezionaPietanzeDisponibiliPerTipo(TipoPietanza.CONTORNO);
-        System.out.println("dim" + contorni.size());
+        
         tabella_contorno.setModel(new javax.swing.table.DefaultTableModel(new String[]{"ID", "Contorno", "Quantita'"}, contorni.size()));
 
         JComboBox combo= new JComboBox();
@@ -49,7 +49,7 @@ public class Contorni extends javax.swing.JPanel {
         combo.addItem(4);
         combo.addItem(5);
         
-        id_antipasto=new XTableColumnModel();
+        id_antipasto = new XTableColumnModel();
         
         tabella_contorno.setColumnModel(id_antipasto);
         tabella_contorno.createDefaultColumnsFromModel();
