@@ -50,7 +50,9 @@ public class Antipasto extends javax.swing.JPanel {
         ArrayList<it.softfood.entity.Pietanza> antipasti = (ArrayList<it.softfood.entity.Pietanza>) articolo.selezionaPietanzeDisponibiliPerTipo(TipoPietanza.ANTIPASTI);
         int i=0;
         int j=0;
-        tabella_antipasti.setModel(new javax.swing.table.DefaultTableModel(new String[]{"ID","Pietanza","Quantita'"},antipasti.size()));
+
+        tabella_antipasti.setModel(new javax.swing.table.DefaultTableModel(new String[]{"ID", "Antipasto", "Quantita'"}, antipasti.size()));
+
         JComboBox combo= new JComboBox();
         combo.addItem(1);
         combo.addItem(2);
@@ -133,11 +135,11 @@ public class Antipasto extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Id", "Pietanza", "Quantità"
+                "ID", "Antipasto", "Quantità"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Long.class, java.lang.String.class, java.lang.Integer.class
+                java.lang.Object.class, java.lang.String.class, java.lang.Integer.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, true
