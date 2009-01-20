@@ -32,5 +32,7 @@ public interface ArticoloMenuFacadeLocal {
     boolean rimuoviArticoloMenu(Long id);
 
     java.util.List<it.softfood.entity.Ingrediente> selezionaIngredientiPietanza(java.lang.Long id);
+
+    java.util.List<it.softfood.entity.Bevanda> selezionaBevandeDisponibili();
     
 }
