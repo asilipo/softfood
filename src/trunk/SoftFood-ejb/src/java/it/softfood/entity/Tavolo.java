@@ -30,6 +30,7 @@ import org.hibernate.annotations.LazyCollectionOption;
 		@NamedQuery(name = "Tavolo.selezionaTavoliPerNumeroPosti", query = "SELECT t FROM Tavolo t WHERE t.numeroPosti = :numero_posti ORDER BY riferimento"),
 		@NamedQuery(name = "Tavolo.selezionaTavoliLiberi", query = "SELECT t FROM Tavolo t WHERE t.occupato = false AND t.attivo = true ORDER BY riferimento"),
         @NamedQuery(name = "Tavolo.selezionaTavoliOccupati", query = "SELECT t FROM Tavolo t WHERE t.occupato = true AND t.attivo = true ORDER BY riferimento"),
+        @NamedQuery(name = "Tavolo.selezionaTavoloPerRiferimento", query = "SELECT t FROM Tavolo t WHERE t.riferimento = :riferimento"),
         @NamedQuery(name = "Tavolo.selezionaTavoliNonAttivi", query = "SELECT t FROM Tavolo t WHERE t.attivo = false ORDER BY riferimento")
 })
 public class Tavolo implements Serializable {

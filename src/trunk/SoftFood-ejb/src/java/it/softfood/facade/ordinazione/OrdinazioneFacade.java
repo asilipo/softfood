@@ -14,6 +14,7 @@ import it.softfood.session.ingredientepietanza.IngredientePietanzaSessionBeanRem
 import it.softfood.session.lineaordinazione.LineaOrdinazioneSessionBeanRemote;
 import it.softfood.session.ordinazione.OrdinazioneSessionBeanRemote;
 
+import it.softfood.session.tavolo.TavoloSessionBeanRemote;
 import it.softfood.session.variante.VarianteSessionBeanRemote;
 import java.util.Date;
 import java.util.ArrayList;
@@ -45,7 +46,9 @@ public class OrdinazioneFacade implements OrdinazioneFacadeRemote, OrdinazioneFa
 	private IngredientePietanzaSessionBeanRemote ingredientePietanzaSessionBeanRemote;
     @EJB(beanName = "IngredienteMagazzinoSessionBean")
 	private IngredienteMagazzinoSessionBeanRemote ingredienteMagazzinoSessionBeanRemote;
-	
+    @EJB(beanName = "TavoloSessionBean")
+	private TavoloSessionBeanRemote tavoloSessionBeanRemote;
+
 	public Ordinazione inserisciOrdinazione(Ordinazione ordinazione) {
 		if (ordinazione != null) {
 

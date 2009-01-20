@@ -26,5 +26,7 @@ public interface TavoloFacadeLocal {
 	boolean rimuoviTavolo(Long id);
 
     java.util.List<it.softfood.entity.Tavolo> selezionaTavoliNonAttivi();
+
+    java.lang.Long occupaTavoli(java.util.List<java.lang.String> riferimenti);
 	
 }

@@ -39,6 +39,16 @@ public class TavoloSessionBean implements TavoloSessionBeanRemote, TavoloSession
 			return null;
 		}
 	}
+
+    public Tavolo selezionaTavoloPerRiferimento(String riferimento) {
+		try {
+	        return (Tavolo) em.createNamedQuery("Tavolo.selezionaTavoloPerRiferimento")
+	        	.setParameter("riferimento", riferimento).getSingleResult();
+		} catch (Exception e) {
+			System.err.println("TavoloSessionBean#selezionaTavoloPerRiferimento");
+			return null;
+		}
+	}
 	
 	@SuppressWarnings("unchecked")
 	public List<Tavolo> selezionaTavoliPerNumeroPosti(Integer numeroPosti) {
