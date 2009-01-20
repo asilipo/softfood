@@ -32,6 +32,7 @@ public class Primi extends javax.swing.JPanel {
     private OrdinazioneFacadeRemote ordinazioneFacade;
     private ArticoloMenuFacadeRemote articolo;
     
+    
     private void initFacade(){
         try{
             InitialContext initial=new InitialContext();
