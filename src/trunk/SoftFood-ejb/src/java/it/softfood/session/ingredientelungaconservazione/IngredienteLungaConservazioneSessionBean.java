@@ -2,6 +2,7 @@ package it.softfood.session.ingredientelungaconservazione;
 
 import it.softfood.entity.IngredienteLungaConservazione;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -43,7 +44,7 @@ public class IngredienteLungaConservazioneSessionBean implements IngredienteLung
 	@SuppressWarnings("unchecked")
 	public List<IngredienteLungaConservazione> selezionaIngredientiLungaConservazione() {
         try {
-            return em.createNamedQuery("IngredienteLungaConservazione.selezionaIngredientiLungaConservazione")
+            return (ArrayList<IngredienteLungaConservazione>) em.createNamedQuery("IngredienteLungaConservazione.selezionaIngredientiLungaConservazione")
                 .getResultList();
         } catch (Exception e) {
             System.err.println("IngredienteLungaConservazioneSessionBean#selezionaIngredientiLungaConservazione");

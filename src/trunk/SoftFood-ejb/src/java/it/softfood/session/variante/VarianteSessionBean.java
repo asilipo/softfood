@@ -4,6 +4,7 @@ import it.softfood.entity.Ingrediente;
 import it.softfood.entity.LineaOrdinazione;
 import it.softfood.entity.Variante;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -44,7 +45,7 @@ public class VarianteSessionBean implements VarianteSessionBeanRemote, VarianteS
 	@SuppressWarnings("unchecked")
 	public List<Variante> selezionaVariantiPerIngrediente(Ingrediente ingrediente) {
         try {
-            return em.createNamedQuery("Variante.selezionaVariantiPerIngrediente")
+            return (ArrayList<Variante>) em.createNamedQuery("Variante.selezionaVariantiPerIngrediente")
                 .setParameter("ingrediente", ingrediente).getResultList();
          } catch (Exception e) {
             System.err.println("VarianteSessionBean#selezionaVariantiPerIngrediente");
@@ -55,7 +56,7 @@ public class VarianteSessionBean implements VarianteSessionBeanRemote, VarianteS
 	@SuppressWarnings("unchecked")
 	public List<Variante> selezionaVariantiPerLineaOrdinazione(LineaOrdinazione lineaOrdinazione) {
         try {
-            return em.createNamedQuery("Variante.selezionaVariantiPerIngrediente")
+            return (ArrayList<Variante>) em.createNamedQuery("Variante.selezionaVariantiPerIngrediente")
                 .setParameter("linea_ordinazione", lineaOrdinazione).getResultList();
          } catch (Exception e) {
             System.err.println("VarianteSessionBean#selezionaVariantiPerLineaOrdinazione");

@@ -2,6 +2,7 @@ package it.softfood.session.ingrediente;
 
 import it.softfood.entity.Ingrediente;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -42,7 +43,7 @@ public class IngredienteSessionBean implements IngredienteSessionBeanRemote, Ing
 	@SuppressWarnings("unchecked")
 	public List<Ingrediente> selezionaIngredientePerNome(String nome) {
         try {
-            return em.createNamedQuery("Ingrediente.selezionaIngredientiPerNome")
+            return (ArrayList<Ingrediente>) em.createNamedQuery("Ingrediente.selezionaIngredientiPerNome")
                 .setParameter("nome", nome).getResultList();
         } catch (Exception e) {
             System.err.println("IngredienteSessionBean#selezionaIngredientePerNome");

@@ -46,7 +46,6 @@ public class PietanzaSessionBean implements PietanzaSessionBeanRemote, PietanzaS
 	        return (ArrayList<Pietanza>) em.createNamedQuery("Pietanza.selezionaPietanzePerTipo")
 	        	.setParameter("tipo", tipoPietanza).getResultList();
 		} catch (Exception e) {
-            e.printStackTrace();
 			System.err.println("PietanzaSessionBean#selezionaPietanzePerTipo");
 			return null;
         }

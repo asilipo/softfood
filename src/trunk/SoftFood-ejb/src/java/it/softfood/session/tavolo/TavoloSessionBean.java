@@ -2,6 +2,7 @@ package it.softfood.session.tavolo;
 
 import it.softfood.entity.Tavolo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -41,11 +42,8 @@ public class TavoloSessionBean implements TavoloSessionBeanRemote, TavoloSession
 	
 	@SuppressWarnings("unchecked")
 	public List<Tavolo> selezionaTavoliPerNumeroPosti(Integer numeroPosti) {
-		try {
-	        if (numeroPosti == null) 
-	            return null;
-	       
-	        return em.createNamedQuery("Tavolo.selezionaTavoliPerNumeroPosti")
+		try {	       
+	        return (ArrayList<Tavolo>) em.createNamedQuery("Tavolo.selezionaTavoliPerNumeroPosti")
 	        	.setParameter("numero_posti", numeroPosti).getResultList();
 		} catch (Exception e) {
 			System.err.println("TavoloSessionBean#selezionaTavoliPerNumeroPosti");
@@ -56,7 +54,7 @@ public class TavoloSessionBean implements TavoloSessionBeanRemote, TavoloSession
 	@SuppressWarnings("unchecked")
 	public List<Tavolo> selezionaTavoliLiberi() {    
 		try {
-	       return em.createNamedQuery("Tavolo.selezionaTavoliLiberi")
+	       return (ArrayList<Tavolo>) em.createNamedQuery("Tavolo.selezionaTavoliLiberi")
 	        	.getResultList();
 		} catch (Exception e) {
 			System.err.println("TavoloSessionBean#selezionaTavoliLiberi");
@@ -67,7 +65,7 @@ public class TavoloSessionBean implements TavoloSessionBeanRemote, TavoloSession
     @SuppressWarnings("unchecked")
 	public List<Tavolo> selezionaTavoliOccupati() {
 		try {
-	       return em.createNamedQuery("Tavolo.selezionaTavoliOccupati")
+	       return (ArrayList<Tavolo>) em.createNamedQuery("Tavolo.selezionaTavoliOccupati")
 	        	.getResultList();
 		} catch (Exception e) {
 			System.err.println("TavoloSessionBean#selezionaTavoliOccupati");

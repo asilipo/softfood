@@ -2,6 +2,7 @@ package it.softfood.session.ingredientemagazzino;
 
 import it.softfood.entity.IngredienteMagazzino;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -42,7 +43,7 @@ public class IngredienteMagazzinoSessionBean implements IngredienteMagazzinoSess
 	@SuppressWarnings("unchecked")
 	public List<IngredienteMagazzino> selezionaIngredientiMagazzino() {
         try {
-            return em.createNamedQuery("IngredienteMagazzino.selezionaIngredientiMagazzino")
+            return (ArrayList<IngredienteMagazzino>) em.createNamedQuery("IngredienteMagazzino.selezionaIngredientiMagazzino")
                 .getResultList();
         } catch (Exception e) {
             System.err.println("IngredienteMagazzinoSessionBean#selezionaIngredientiLungaConservazione");
@@ -56,7 +57,7 @@ public class IngredienteMagazzinoSessionBean implements IngredienteMagazzinoSess
             if (quantita == null || quantita < 0)
                 quantita = 0;
 
-            return em.createNamedQuery("IngredienteMagazzino.selezionaIngredientiLungaConservazionePerQuantita")
+            return (ArrayList<IngredienteMagazzino>) em.createNamedQuery("IngredienteMagazzino.selezionaIngredientiLungaConservazionePerQuantita")
                 .setParameter("quantita", quantita).getResultList();
         } catch (Exception e) {
             System.err.println("IngredienteMagazzinoSessionBean#selezionaIngredientiLungaConservazionePerQuantita");

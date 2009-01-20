@@ -2,6 +2,7 @@ package it.softfood.session.ingredientepietanza;
 
 import it.softfood.entity.IngredientePietanza;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -40,7 +41,7 @@ public class IngredientePietanzaSessionBean implements IngredientePietanzaSessio
 
     public List<IngredientePietanza> selezionaIngredientiPietanze() {
         try {
-            return em.createNamedQuery("IngredientePietanza.selezionaIngredientiPietanze")
+            return (ArrayList<IngredientePietanza>) em.createNamedQuery("IngredientePietanza.selezionaIngredientiPietanze")
 	        	.getResultList();
         } catch (Exception e) {
             System.err.println("IngredientePietanzaSessionBean#selezionaIngredientiPietanza");

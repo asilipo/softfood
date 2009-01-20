@@ -3,6 +3,7 @@ package it.softfood.session.ordinazione;
 import it.softfood.entity.Ordinazione;
 import it.softfood.entity.Tavolo;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -44,7 +45,7 @@ public class OrdinazioneSessionBean implements OrdinazioneSessionBeanRemote, Ord
 	@SuppressWarnings("unchecked")
 	public List<Ordinazione> selezionaOrdinazioni() {    
 		try {
-	       return em.createNamedQuery("Ordinazione.selezionaOrdinazioni")
+	       return (ArrayList<Ordinazione>) em.createNamedQuery("Ordinazione.selezionaOrdinazioni")
 	        	.getResultList();
 		} catch (Exception e) {
 			System.err.println("OrdinazioneSessionBean#selezionaOrdinazioni");
@@ -55,7 +56,7 @@ public class OrdinazioneSessionBean implements OrdinazioneSessionBeanRemote, Ord
 	@SuppressWarnings("unchecked")
 	public List<Ordinazione> selezionaOrdinazioniPerData(Date data) {
 		try {
-        	return em.createNamedQuery("Ordinazione.selezionaOrdinazioniPerData")
+        	return (ArrayList<Ordinazione>) em.createNamedQuery("Ordinazione.selezionaOrdinazioniPerData")
 	        	.setParameter("data", data).getResultList();
 		} catch (Exception e) {
 			System.err.println("OrdinazioneSessionBean#selezionaOrdinazioniPerData");
@@ -66,7 +67,7 @@ public class OrdinazioneSessionBean implements OrdinazioneSessionBeanRemote, Ord
 	@SuppressWarnings("unchecked")
 	public List<Ordinazione> selezionaOrdinazioniGionalierePerTavolo(Tavolo tavolo, Boolean terminato) {
         try {
-	        return em.createNamedQuery("Ordinazione.selezionaOrdinazioniGionalierePerTavolo")
+	        return (ArrayList<Ordinazione>) em.createNamedQuery("Ordinazione.selezionaOrdinazioniGionalierePerTavolo")
 	        	.setParameter("tavolo", tavolo).setParameter("terminato", terminato).getResultList();
 		} catch (Exception e) {
 			System.err.println("OrdinazioneSessionBean#selezionaOrdinazioniGionalierePerTavolo");
