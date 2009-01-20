@@ -11,6 +11,11 @@
 
 package it.softfood.GUI;
 
+import it.softfood.entity.Ingrediente;
+import it.softfood.facade.articolomenu.ArticoloMenuFacadeRemote;
+import java.util.ArrayList;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import org.jdesktop.application.FrameView;
 
 /**
@@ -20,10 +25,27 @@ import org.jdesktop.application.FrameView;
  */
 public class Pietanza extends javax.swing.JPanel {
 
+    private ArticoloMenuFacadeRemote articolo;
+    
+    private void initFacade(){
+        try{
+            InitialContext initial=new InitialContext();
+            articolo = (ArticoloMenuFacadeRemote) initial.lookup("it.softfood.facade.articolomenu.ArticoloMenuFacade");
+        }catch(NamingException e){
+            System.err.println("Errore binding TavoloFacade");
+        }
+    }
     /** Creates new form Pietanza */
-    public Pietanza(FrameView frame) {
+    public Pietanza(FrameView frame,String tavolo,Long id) {
+        this.tavolo = tavolo;
+        initComponents();
         initComponents();
         this.frame = frame;
+        this.id=id;
+        
+        ArrayList<Ingrediente> ingredienti = (ArrayList<Ingrediente>) articolo.selezionaIngredientiPietanza(id);
+        
+        listaIngredienti.setListData(ingredienti.toArray());
     }
 
     /** This method is called from within the constructor to
@@ -109,8 +131,8 @@ public class Pietanza extends javax.swing.JPanel {
     private void okActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-       // Pietanze pietanze = new Pietanze(frame);
-       // frame.setComponent(pietanze);
+       Antipasto pietanze = new Antipasto(frame,tavolo);
+        frame.setComponent(pietanze);
     }//GEN-LAST:event_okActionPerformed
 
     private void AnnullaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AnnullaActionPerformed
@@ -140,4 +162,6 @@ public class Pietanza extends javax.swing.JPanel {
     private javax.swing.JButton ok;
     // End of variables declaration//GEN-END:variables
     private FrameView frame;
+    private String tavolo;
+    private Long id;
 }

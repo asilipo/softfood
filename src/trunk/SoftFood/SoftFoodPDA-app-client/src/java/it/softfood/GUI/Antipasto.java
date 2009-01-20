@@ -104,7 +104,9 @@ public class Antipasto extends javax.swing.JPanel {
         pannello_antipasti = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabella_antipasti = new javax.swing.JTable();
+        jPanel1 = new javax.swing.JPanel();
         add = new javax.swing.JButton();
+        visuallizza = new javax.swing.JButton();
         pannello_ordini = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -180,6 +182,9 @@ public class Antipasto extends javax.swing.JPanel {
 
         pannello_antipasti.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
+        jPanel1.setName("jPanel1"); // NOI18N
+        jPanel1.setLayout(new java.awt.GridLayout());
+
         add.setText(resourceMap.getString("add.text")); // NOI18N
         add.setName("add"); // NOI18N
         add.addActionListener(new java.awt.event.ActionListener() {
@@ -187,7 +192,18 @@ public class Antipasto extends javax.swing.JPanel {
                 addActionPerformed(evt);
             }
         });
-        pannello_antipasti.add(add, java.awt.BorderLayout.PAGE_END);
+        jPanel1.add(add);
+
+        visuallizza.setText(resourceMap.getString("visuallizza.text")); // NOI18N
+        visuallizza.setName("visuallizza"); // NOI18N
+        visuallizza.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                visuallizzaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(visuallizza);
+
+        pannello_antipasti.add(jPanel1, java.awt.BorderLayout.SOUTH);
 
         add(pannello_antipasti, java.awt.BorderLayout.NORTH);
 
@@ -292,6 +308,18 @@ private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:eve
     id_antipasto.setColumnVisible(id, false);
 }//GEN-LAST:event_addActionPerformed
 
+private void visuallizzaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_visuallizzaActionPerformed
+// TODO add your handling code here:
+    int row=tabella_antipasti.getSelectedRow();
+    id_antipasto.setColumnVisible(id, true);
+    long id_long=((Long)tabella_antipasti.getValueAt(row, 0)).longValue();
+    System.out.println(id_long);
+    id_antipasto.setColumnVisible(id, false);
+   this.setVisible(false);
+   it.softfood.GUI.Pietanza pietanza = new it.softfood.GUI.Pietanza(frame,tavolo,id_long);
+   frame.setComponent(pietanza);  
+}//GEN-LAST:event_visuallizzaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Annulla;
@@ -299,12 +327,14 @@ private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:eve
     private javax.swing.JButton add;
     private javax.swing.JPanel bottoni;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPanel pannello_antipasti;
     private javax.swing.JPanel pannello_ordini;
     private javax.swing.JTable tabella_antipasti;
     private javax.swing.JTable tabella_ordini;
+    private javax.swing.JButton visuallizza;
     // End of variables declaration//GEN-END:variables
 
     private FrameView frame;
