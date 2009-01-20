@@ -72,7 +72,18 @@ public class TavoloSessionBean implements TavoloSessionBeanRemote, TavoloSession
 			return null;
 		}
 	}
-	
+
+    @SuppressWarnings("unchecked")
+	public List<Tavolo> selezionaTavoliNonAttivi() {
+		try {
+	        return (ArrayList<Tavolo>) em.createNamedQuery("Tavolo.selezionaTavoliAttivi")
+	        	.getResultList();
+		} catch (Exception e) {
+			System.err.println("TavoloSessionBean#selezionaTavoliNonAttivi");
+			return null;
+		}
+	}
+
 	public boolean modificaStatoTavolo(Tavolo tavolo, Boolean occupato) {
 		try {
 			tavolo.setOccupato(occupato);

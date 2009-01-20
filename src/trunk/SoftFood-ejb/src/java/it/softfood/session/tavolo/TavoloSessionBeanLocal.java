@@ -26,6 +26,9 @@ public interface TavoloSessionBeanLocal {
 	
 	boolean modificaStatoTavolo(it.softfood.entity.Tavolo tavolo, Boolean occupato);
 	
-	boolean rimuoviTavolo(Long id); 
+	boolean rimuoviTavolo(Long id);
+
+    @java.lang.SuppressWarnings(value = {"unchecked"})
+    java.util.List<it.softfood.entity.Tavolo> selezionaTavoliNonAttivi();
 	
 }

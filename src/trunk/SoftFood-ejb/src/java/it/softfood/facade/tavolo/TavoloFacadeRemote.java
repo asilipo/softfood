@@ -25,4 +25,6 @@ public interface TavoloFacadeRemote {
 	
 	boolean rimuoviTavolo(Long id);
 
+    java.util.List<it.softfood.entity.Tavolo> selezionaTavoliNonAttivi();
+    
 }
