@@ -184,7 +184,7 @@ public class Primi extends javax.swing.JPanel {
         pannello_primi.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
         jPanel1.setName("jPanel1"); // NOI18N
-        jPanel1.setLayout(new java.awt.GridLayout(1, 0, 0, 5));
+        jPanel1.setLayout(new java.awt.GridLayout(1, 2, 0, 5));
 
         add.setText(resourceMap.getString("add.text")); // NOI18N
         add.setName("add"); // NOI18N
