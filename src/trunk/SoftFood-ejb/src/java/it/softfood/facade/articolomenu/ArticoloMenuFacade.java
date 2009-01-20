@@ -145,4 +145,19 @@ public class ArticoloMenuFacade implements ArticoloMenuFacadeRemote, ArticoloMen
 		return false;
     }
 
+    public List<Ingrediente> selezionaIngredientiPietanza(Long id) {
+        if (id != null) {
+            ArrayList<Ingrediente> ingredienti = new ArrayList<Ingrediente>();
+            ArrayList<IngredientePietanza> ingredientiPietanze = (ArrayList<IngredientePietanza>) ingredientePietanzaSessionBeanRemote.selezionaIngredientiPietanze();
+            if (ingredientiPietanze != null)
+                for (IngredientePietanza ingredientePietanza : ingredientiPietanze)
+                    if (ingredientePietanza.getIngredientePietanzaPK().getPietanza().getId().equals(id))
+                        ingredienti.add(ingredientePietanza.getIngredientePietanzaPK().getIngrediente());
+                     
+            return ingredienti;
+        }
+        
+        return null;
+    }
+    
 }
