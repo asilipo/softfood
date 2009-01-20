@@ -105,7 +105,7 @@ public class TavoloFacade implements TavoloFacadeRemote, TavoloFacadeLocal {
                             tavolo = em.merge(tavolo);
                             if (!tavolo.getOccupato()) {
                                 tavolo.setAttivo(false);
-                                if (riferimento == null)
+                                if (riferimentoTavoli == null)
                                     riferimentoTavoli = tavolo.getRiferimento();
                                 else
                                     riferimentoTavoli = riferimentoTavoli + " + " + tavolo.getRiferimento();
