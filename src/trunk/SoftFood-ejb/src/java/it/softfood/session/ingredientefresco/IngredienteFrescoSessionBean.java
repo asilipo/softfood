@@ -2,6 +2,7 @@ package it.softfood.session.ingredientefresco;
 
 import it.softfood.entity.IngredienteFresco;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -42,7 +43,7 @@ public class IngredienteFrescoSessionBean implements IngredienteFrescoSessionBea
 	@SuppressWarnings("unchecked")
 	public List<IngredienteFresco> selezionaIngredientiFreschi() {
         try {
-            return em.createNamedQuery("IngredienteFresco.selezionaIngredientiFreschi")
+            return (ArrayList<IngredienteFresco>) em.createNamedQuery("IngredienteFresco.selezionaIngredientiFreschi")
                 .getResultList();
         } catch (Exception e) {
             System.err.println("IngredienteFrescoSessionBean#selezionaIngredientiFreschi");

@@ -3,6 +3,7 @@ package it.softfood.session.listino;
 import it.softfood.entity.Articolo;
 import it.softfood.entity.Listino;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -43,7 +44,7 @@ public class ListinoSessionBean implements ListinoSessionBeanRemote, ListinoSess
 	@SuppressWarnings("unchecked")
 	public List<Articolo> selezionaArticoli() {
         try {
-            return em.createNamedQuery("Listino.selezionaArticoli")
+            return (ArrayList<Articolo>) em.createNamedQuery("Listino.selezionaArticoli")
                 .getResultList();
         } catch (Exception e) {
             System.err.println("ListinoSessionBean#selezionaArticoli");

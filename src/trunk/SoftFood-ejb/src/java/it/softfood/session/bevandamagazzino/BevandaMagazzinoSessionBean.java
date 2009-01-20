@@ -2,6 +2,7 @@ package it.softfood.session.bevandamagazzino;
 
 import it.softfood.entity.BevandaMagazzino;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -42,7 +43,7 @@ public class BevandaMagazzinoSessionBean implements BevandaMagazzinoSessionBeanR
 	@SuppressWarnings("unchecked")
 	public List<BevandaMagazzino> selezionaBevandeMagazzino() {
         try {
-            return em.createNamedQuery("BevandaMagazzino.selezionaBevandeMagazzino")
+            return (ArrayList<BevandaMagazzino>) em.createNamedQuery("BevandaMagazzino.selezionaBevandeMagazzino")
                 .getResultList();
         } catch (Exception e) {
             System.err.println("BevandaMagazzino#selezionaBevandeMagazzino");
@@ -56,7 +57,7 @@ public class BevandaMagazzinoSessionBean implements BevandaMagazzinoSessionBeanR
             if (quantita == null || quantita < 0)
                 quantita = 0;
 
-            return em.createNamedQuery("BevandaMagazzino.selezionaBevandeMagazzinoPerQuantita")
+            return (ArrayList<BevandaMagazzino>) em.createNamedQuery("BevandaMagazzino.selezionaBevandeMagazzinoPerQuantita")
                 .setParameter("quantita", quantita).getResultList();
         } catch (Exception e) {
             System.err.println("BevandaMagazzino#selezionaBevandeMagazzinoPerQuantita");
