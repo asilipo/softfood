@@ -58,9 +58,6 @@ public class Contorni extends javax.swing.JPanel {
         combo.addItem(4);
         combo.addItem(5);
         
-        TableColumn sportColumn = tabella_contorno.getColumnModel().getColumn(2);
-        sportColumn.setCellEditor(new DefaultCellEditor(combo));
-        
         id_antipasto=new XTableColumnModel();
         
         tabella_contorno.setColumnModel(id_antipasto);
@@ -88,6 +85,10 @@ public class Contorni extends javax.swing.JPanel {
         
         linea_ordine.setColumnVisible(id_ordini, false);
         
+             TableColumn sportColumn = tabella_contorno.getColumnModel().getColumn(1);
+        sportColumn.setCellEditor(new DefaultCellEditor(combo));
+
+        tabella_contorno.setRowHeight(tabella_contorno.getRowHeight() * 15 / 10);
         
     }
 
