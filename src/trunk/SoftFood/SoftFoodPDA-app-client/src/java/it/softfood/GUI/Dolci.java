@@ -6,7 +6,6 @@
 
 package it.softfood.GUI;
 
-
 import it.softfood.entity.Pietanza;
 import it.softfood.enumeration.TipoPietanza;
 import it.softfood.facade.articolomenu.ArticoloMenuFacadeRemote;
