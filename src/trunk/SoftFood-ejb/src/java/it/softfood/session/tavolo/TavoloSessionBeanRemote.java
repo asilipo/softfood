@@ -23,7 +23,10 @@ public interface TavoloSessionBeanRemote {
 
     @java.lang.SuppressWarnings(value = {"unchecked"})
     java.util.List<it.softfood.entity.Tavolo> selezionaTavoliOccupati();
-	
+
+    @java.lang.SuppressWarnings(value = {"unchecked"})
+    java.util.List<it.softfood.entity.Tavolo> selezionaTavoliNonAttivi();
+
 	boolean modificaStatoTavolo(it.softfood.entity.Tavolo tavolo, Boolean occupato);
 	
 	boolean rimuoviTavolo(Long id); 

@@ -27,9 +27,10 @@ import org.hibernate.annotations.LazyCollectionOption;
 @Table(name = "tavolo")
 @SequenceGenerator(name = "sequenza_tavolo", sequenceName = "seq_id_tavolo")
 @NamedQueries({
-		@NamedQuery(name = "Tavolo.selezionaTavoliPerNumeroPosti", query = "SELECT t FROM Tavolo t WHERE t.numeroPosti = :numero_posti"),
-		@NamedQuery(name = "Tavolo.selezionaTavoliLiberi", query = "SELECT t FROM Tavolo t WHERE t.occupato = false ORDER BY riferimento"),
-        @NamedQuery(name = "Tavolo.selezionaTavoliOccupati", query = "SELECT t FROM Tavolo t WHERE t.occupato = true ORDER BY riferimento")
+		@NamedQuery(name = "Tavolo.selezionaTavoliPerNumeroPosti", query = "SELECT t FROM Tavolo t WHERE t.numeroPosti = :numero_posti ORDER BY riferimento"),
+		@NamedQuery(name = "Tavolo.selezionaTavoliLiberi", query = "SELECT t FROM Tavolo t WHERE t.occupato = false AND t.attivo = true ORDER BY riferimento"),
+        @NamedQuery(name = "Tavolo.selezionaTavoliOccupati", query = "SELECT t FROM Tavolo t WHERE t.occupato = true AND t.attivo = true ORDER BY riferimento"),
+        @NamedQuery(name = "Tavolo.selezionaTavoliNonAttivi", query = "SELECT t FROM Tavolo t WHERE t.attivo = false ORDER BY riferimento")
 })
 public class Tavolo implements Serializable {
 
@@ -44,6 +45,8 @@ public class Tavolo implements Serializable {
 	private String riferimento;
 	@Column(name = "occupato", nullable = false)
 	private Boolean occupato;
+    @Column(name = "attivo", nullable = false)
+	private Boolean attivo;
 	@ManyToOne()
     @LazyCollection(value = LazyCollectionOption.FALSE)
     @JoinColumn(name = "ristorante", nullable = false)
@@ -57,6 +60,14 @@ public class Tavolo implements Serializable {
 		this.id = id;
 	}
 
+    public Boolean getAttivo() {
+        return attivo;
+    }
+
+    public void setAttivo(Boolean attivo) {
+        this.attivo = attivo;
+    }
+    
     public String getRiferimento() {
         return riferimento;
     }
