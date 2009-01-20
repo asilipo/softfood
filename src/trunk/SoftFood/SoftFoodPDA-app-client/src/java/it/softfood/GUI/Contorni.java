@@ -77,7 +77,7 @@ public class Contorni extends javax.swing.JPanel {
         
         linea_ordine.setColumnVisible(id_ordini, false);
         
-             TableColumn sportColumn = tabella_contorno.getColumnModel().getColumn(1);
+        TableColumn sportColumn = tabella_contorno.getColumnModel().getColumn(1);
         sportColumn.setCellEditor(new DefaultCellEditor(combo));
 
         tabella_contorno.setRowHeight(tabella_contorno.getRowHeight() * 15 / 10);
