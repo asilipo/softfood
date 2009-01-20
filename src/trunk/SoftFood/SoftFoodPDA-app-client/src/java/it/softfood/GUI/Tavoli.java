@@ -189,8 +189,8 @@ public class Tavoli extends javax.swing.JPanel {
         for(;enumeration.hasMoreElements();)
             tav.add((String) enumeration.nextElement());
         
-        Long tavoloSelezionato=null;
-        
+        Long tavoloSelezionato=tavoloFacade.occupaTavoli(tav);
+        System.out.println("TAVOLO ID "+tavoloSelezionato);
         this.setVisible(false);
         Menu menu=new Menu(frame,tavoloSelezionato);
         frame.setComponent(menu);
