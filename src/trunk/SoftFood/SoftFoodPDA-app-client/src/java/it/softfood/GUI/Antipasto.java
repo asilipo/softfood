@@ -58,11 +58,8 @@ public class Antipasto extends javax.swing.JPanel {
         id=id_antipasto.getColumnByModelIndex(0);
         
         for(it.softfood.entity.Pietanza pietanza:antipasti){
-            //antipasto_model.insertRow(tabella_antipasti.getRowCount(), new Object[]{/*pietanza.getId(),pietanza.getNome()*/"PROVA","UNO"});
-            tabella_antipasti.setValueAt(pietanza.getId(), i, j);
-            j++;
-            tabella_antipasti.setValueAt(pietanza.getNome(), i, j);
-            j=0;
+            tabella_antipasti.setValueAt(pietanza.getId(), i, j++);
+            tabella_antipasti.setValueAt(pietanza.getNome(), i++, j);
             i++;
         }
         
