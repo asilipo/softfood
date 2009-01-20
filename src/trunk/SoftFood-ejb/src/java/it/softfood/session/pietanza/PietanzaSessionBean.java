@@ -3,7 +3,7 @@ package it.softfood.session.pietanza;
 import it.softfood.entity.Pietanza;
 
 import it.softfood.enumeration.TipoPietanza;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -43,9 +43,10 @@ public class PietanzaSessionBean implements PietanzaSessionBeanRemote, PietanzaS
     @SuppressWarnings("unchecked")
     public List<Pietanza> selezionaPietanzePerTipo(TipoPietanza tipoPietanza) {
 		try {
-	        return (LinkedList<Pietanza>) em.createNamedQuery("Pietanza.selezionaPietanzePerTipo")
+	        return (ArrayList<Pietanza>) em.createNamedQuery("Pietanza.selezionaPietanzePerTipo")
 	        	.setParameter("tipo", tipoPietanza).getResultList();
 		} catch (Exception e) {
+            e.printStackTrace();
 			System.err.println("PietanzaSessionBean#selezionaPietanzePerTipo");
 			return null;
         }
@@ -54,7 +55,7 @@ public class PietanzaSessionBean implements PietanzaSessionBeanRemote, PietanzaS
     @SuppressWarnings("unchecked")
     public List<Pietanza> selezionaPietanze() {
 		try {
-	        return (LinkedList<Pietanza>) em.createNamedQuery("Pietanza.selezionaPietanze")
+	        return (ArrayList<Pietanza>) em.createNamedQuery("Pietanza.selezionaPietanze")
 	        	.getResultList();
 		} catch (Exception e) {
 			System.err.println("PietanzaSessionBean#selezionaPietanze");

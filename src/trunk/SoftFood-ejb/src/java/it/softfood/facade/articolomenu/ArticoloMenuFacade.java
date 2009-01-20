@@ -12,6 +12,7 @@ import it.softfood.session.bevanda.BevandaSessionBeanRemote;
 import it.softfood.session.ingredientemagazzino.IngredienteMagazzinoSessionBeanRemote;
 import it.softfood.session.ingredientepietanza.IngredientePietanzaSessionBeanRemote;
 import it.softfood.session.pietanza.PietanzaSessionBeanRemote;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -69,8 +70,8 @@ public class ArticoloMenuFacade implements ArticoloMenuFacadeRemote, ArticoloMen
     }
 
     public List<Pietanza> selezionaPietanzeDisponibili() {
-        LinkedList<Pietanza> pietanze = (LinkedList<Pietanza>) pietanzaSessionBean.selezionaPietanze();
-        LinkedList<Pietanza> pietanzeDisponibili = null;
+        ArrayList<Pietanza> pietanze = (ArrayList<Pietanza>) pietanzaSessionBean.selezionaPietanze();
+        ArrayList<Pietanza> pietanzeDisponibili = null;
 
         for (Pietanza pietanza : pietanze) {
             if (this.verificaIngredientiPietanza(pietanza) > 0)
@@ -81,19 +82,20 @@ public class ArticoloMenuFacade implements ArticoloMenuFacadeRemote, ArticoloMen
     }
 
     public List<Pietanza> selezionaPietanzeDisponibiliPerTipo(TipoPietanza tipoPietanza) {
-        LinkedList<Pietanza> pietanze = (LinkedList<Pietanza>) pietanzaSessionBean.selezionaPietanzePerTipo(tipoPietanza);
-        LinkedList<Pietanza> pietanzeDisponibili = null;
+        ArrayList<Pietanza> pietanze = (ArrayList<Pietanza>) pietanzaSessionBean.selezionaPietanzePerTipo(tipoPietanza);
+        ArrayList<Pietanza> pietanzeDisponibili = null;
 
-        for (Pietanza pietanza : pietanze) {
-            if (this.verificaIngredientiPietanza(pietanza) > 0)
-                pietanzeDisponibili.add(pietanza);
-        }
-
+        if (pietanze != null)
+            for (Pietanza pietanza : pietanze) {
+                if (this.verificaIngredientiPietanza(pietanza) > 0)
+                    pietanzeDisponibili.add(pietanza);
+            }
+            
         return pietanzeDisponibili;
     }
 
     public HashMap<Pietanza, Integer> selezionaDisponibilitaPietanze() {
-        LinkedList<Pietanza> pietanze = (LinkedList<Pietanza>) pietanzaSessionBean.selezionaPietanze();
+        ArrayList<Pietanza> pietanze = (ArrayList<Pietanza>) pietanzaSessionBean.selezionaPietanze();
         HashMap<Pietanza, Integer> pietanzeDisponibili = null;
 
         for (Pietanza pietanza : pietanze)
@@ -103,7 +105,7 @@ public class ArticoloMenuFacade implements ArticoloMenuFacadeRemote, ArticoloMen
     }
 
     public HashMap<Pietanza, Integer> selezionaDisponibilitaPietanzePerTipo(TipoPietanza tipoPietanza) {
-        LinkedList<Pietanza> pietanze = (LinkedList<Pietanza>) pietanzaSessionBean.selezionaPietanzePerTipo(tipoPietanza);
+        ArrayList<Pietanza> pietanze = (ArrayList<Pietanza>) pietanzaSessionBean.selezionaPietanzePerTipo(tipoPietanza);
         HashMap<Pietanza, Integer> pietanzeDisponibili = null;
 
         for (Pietanza pietanza : pietanze)
@@ -113,8 +115,8 @@ public class ArticoloMenuFacade implements ArticoloMenuFacadeRemote, ArticoloMen
     }
 
     private Integer verificaIngredientiPietanza(Pietanza pietanza) {
-        LinkedList<IngredientePietanza> ingredientiPietanze = (LinkedList<IngredientePietanza>) ingredientePietanzaSessionBeanRemote.selezionaIngredientiPietanze();
-        LinkedList<IngredienteMagazzino> ingredientiMagazzino = (LinkedList<IngredienteMagazzino>) ingredienteMagazzinoSessionBeanRemote.selezionaIngredientiMagazzino();
+        ArrayList<IngredientePietanza> ingredientiPietanze = (ArrayList<IngredientePietanza>) ingredientePietanzaSessionBeanRemote.selezionaIngredientiPietanze();
+        ArrayList<IngredienteMagazzino> ingredientiMagazzino = (ArrayList<IngredienteMagazzino>) ingredienteMagazzinoSessionBeanRemote.selezionaIngredientiMagazzino();
         Date data = new Date(System.currentTimeMillis());
 
         int disponibilita = 0;
