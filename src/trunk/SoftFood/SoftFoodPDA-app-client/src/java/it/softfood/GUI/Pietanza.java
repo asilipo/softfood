@@ -39,13 +39,17 @@ public class Pietanza extends javax.swing.JPanel {
     public Pietanza(FrameView frame,String tavolo,Long id) {
         this.tavolo = tavolo;
         initComponents();
-        initComponents();
+        initFacade();
         this.frame = frame;
         this.id=id;
         
         ArrayList<Ingrediente> ingredienti = (ArrayList<Ingrediente>) articolo.selezionaIngredientiPietanza(id);
-        
-        listaIngredienti.setListData(ingredienti.toArray());
+        String ingr[]=new String[ingredienti.size()];
+        int i=0;
+        for(Ingrediente ingrediente:ingredienti)
+            ingr[i++] = ingrediente.getNome();
+
+        listaIngredienti.setListData(ingr);
     }
 
     /** This method is called from within the constructor to
