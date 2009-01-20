@@ -51,16 +51,12 @@ public class Antipasto extends javax.swing.JPanel {
         int i=0;
         int j=0;
         tabella_antipasti.setModel(new javax.swing.table.DefaultTableModel(new String[]{"ID","Pietanza","Quantita'"},antipasti.size()));
-        
         JComboBox combo= new JComboBox();
         combo.addItem(1);
         combo.addItem(2);
         combo.addItem(3);
         combo.addItem(4);
         combo.addItem(5);
-        
-        TableColumn sportColumn = tabella_antipasti.getColumnModel().getColumn(1);
-        sportColumn.setCellEditor(new DefaultCellEditor(combo));
         
         id_antipasto=new XTableColumnModel();
         
@@ -88,8 +84,11 @@ public class Antipasto extends javax.swing.JPanel {
         id_ordini=linea_ordine.getColumnByModelIndex(0);
         
         linea_ordine.setColumnVisible(id_ordini, false);
-        
-        
+
+        TableColumn sportColumn = tabella_antipasti.getColumnModel().getColumn(1);
+        sportColumn.setCellEditor(new DefaultCellEditor(combo));
+
+        tabella_antipasti.setRowHeight(tabella_antipasti.getRowHeight() * 15 / 10);
     }
 
     /** This method is called from within the constructor to
@@ -134,11 +133,11 @@ public class Antipasto extends javax.swing.JPanel {
 
             },
             new String [] {
-                "ID", "Pietanza", "Quantita'"
+                "Id", "Pietanza", "Quantità"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.String.class, java.lang.Object.class
+                java.lang.Long.class, java.lang.String.class, java.lang.Integer.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, true
@@ -166,7 +165,7 @@ public class Antipasto extends javax.swing.JPanel {
         pannello_antipasti.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
         jPanel1.setName("jPanel1"); // NOI18N
-        jPanel1.setLayout(new java.awt.GridLayout());
+        jPanel1.setLayout(new java.awt.GridLayout(1, 0));
 
         add.setText(resourceMap.getString("add.text")); // NOI18N
         add.setName("add"); // NOI18N
