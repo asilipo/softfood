@@ -120,6 +120,8 @@ public class Bibite extends javax.swing.JPanel {
         setName("Form"); // NOI18N
         setLayout(new java.awt.BorderLayout(5, 0));
 
+        pannello_bibite.setMaximumSize(new java.awt.Dimension(100, 200));
+        pannello_bibite.setMinimumSize(new java.awt.Dimension(100, 200));
         pannello_bibite.setName("pannello_bibite"); // NOI18N
         pannello_bibite.setPreferredSize(new java.awt.Dimension(100, 200));
         pannello_bibite.setLayout(new java.awt.BorderLayout(5, 0));
@@ -208,6 +210,7 @@ public class Bibite extends javax.swing.JPanel {
         pannello_ordini.setLayout(new java.awt.BorderLayout(5, 5));
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText(resourceMap.getString("label_ordini.text")); // NOI18N
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jLabel1.setName("label_ordini"); // NOI18N
         jLabel1.setPreferredSize(new java.awt.Dimension(225, 13));
