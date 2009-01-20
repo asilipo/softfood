@@ -42,7 +42,6 @@ public class Primi extends javax.swing.JPanel {
             System.err.println("Errore binding TavoloFacade");
         }
     }
-    
     /** Creates new form Antipasto */
     public Primi(FrameView frame, String tavolo) {
         initComponents();
