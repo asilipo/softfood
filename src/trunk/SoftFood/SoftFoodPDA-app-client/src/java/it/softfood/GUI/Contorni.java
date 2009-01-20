@@ -56,14 +56,12 @@ public class Contorni extends javax.swing.JPanel {
         
         id=id_antipasto.getColumnByModelIndex(0);
 
-        int i=0;
-        int j=0;
+        int i = 0;
+        int j = 0;
         for(it.softfood.entity.Pietanza pietanza : contorni){
-            tabella_contorno.setValueAt(pietanza.getId(), i, j);
-            j++;
-            tabella_contorno.setValueAt(pietanza.getNome(), i, j);
+            tabella_contorno.setValueAt(pietanza.getId(), i, j++);
+            tabella_contorno.setValueAt(pietanza.getNome(), i++, j);
             j=0;
-            i++;
         }
         
         id_antipasto.setColumnVisible(id, false);
