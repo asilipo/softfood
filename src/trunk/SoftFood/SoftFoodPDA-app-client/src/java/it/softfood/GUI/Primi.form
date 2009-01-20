@@ -64,13 +64,19 @@
             <Component class="javax.swing.JTable" name="tabella_antipasti">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="2" rowCount="4">
+                  <Table columnCount="3" rowCount="20">
+                    <Column editable="false" title="ID" type="java.lang.Object"/>
                     <Column editable="false" title="Pietanza" type="java.lang.String"/>
                     <Column editable="true" title="Quantita&apos;" type="java.lang.Object"/>
                   </Table>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                   <TableColumnModel selectionModel="0">
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="0" resizable="false">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
                     <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
                       <Title resourceKey="tabella_antipasti.columnModel.title0"/>
                       <Editor/>
@@ -91,6 +97,41 @@
             </Component>
           </SubComponents>
         </Container>
+        <Container class="javax.swing.JPanel" name="jPanel1">
+          <Properties>
+            <Property name="name" type="java.lang.String" value="jPanel1" noResource="true"/>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+              <BorderConstraints direction="South"/>
+            </Constraint>
+          </Constraints>
+
+          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
+            <Property name="columns" type="int" value="0"/>
+            <Property name="rows" type="int" value="1"/>
+          </Layout>
+          <SubComponents>
+            <Component class="javax.swing.JButton" name="add">
+              <Properties>
+                <Property name="text" type="java.lang.String" resourceKey="add.text"/>
+                <Property name="name" type="java.lang.String" value="add" noResource="true"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="visuallizza">
+              <Properties>
+                <Property name="text" type="java.lang.String" resourceKey="visuallizza.text"/>
+                <Property name="name" type="java.lang.String" value="visuallizza" noResource="true"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="visuallizzaActionPerformed"/>
+              </Events>
+            </Component>
+          </SubComponents>
+        </Container>
       </SubComponents>
     </Container>
     <Container class="javax.swing.JPanel" name="pannello_ordini">
@@ -108,7 +149,7 @@
         <Property name="verticalGap" type="int" value="5"/>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JLabel" name="ordini">
+        <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
             <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="text" type="java.lang.String" resourceKey="label_ordini.text"/>
@@ -145,14 +186,20 @@
             <Component class="javax.swing.JTable" name="tabella_ordini">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="3" rowCount="4">
+                  <Table columnCount="4" rowCount="4">
+                    <Column editable="false" title="ID" type="java.lang.Object"/>
                     <Column editable="false" title="Pietanza" type="java.lang.String"/>
-                    <Column editable="false" title="Quantita&apos;" type="java.lang.Object"/>
+                    <Column editable="true" title="Quantita&apos;" type="java.lang.Object"/>
                     <Column editable="true" title="Elimina" type="java.lang.Object"/>
                   </Table>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                   <TableColumnModel selectionModel="0">
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
                     <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
                       <Title resourceKey="tabella_ordini.columnModel.title0"/>
                       <Editor/>
@@ -172,7 +219,7 @@
                 </Property>
                 <Property name="name" type="java.lang.String" value="tabella_ordini" noResource="true"/>
                 <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
-                  <TableHeader reorderingAllowed="false" resizingAllowed="true"/>
+                  <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                 </Property>
               </Properties>
             </Component>
@@ -202,12 +249,18 @@
             <Property name="text" type="java.lang.String" resourceKey="OK.text"/>
             <Property name="name" type="java.lang.String" value="OK" noResource="true"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="OKActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="Annulla">
           <Properties>
             <Property name="text" type="java.lang.String" resourceKey="Annulla.text"/>
             <Property name="name" type="java.lang.String" value="Annulla" noResource="true"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AnnullaActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
