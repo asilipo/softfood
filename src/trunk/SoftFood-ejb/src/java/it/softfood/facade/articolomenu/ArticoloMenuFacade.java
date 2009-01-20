@@ -123,7 +123,6 @@ public class ArticoloMenuFacade implements ArticoloMenuFacadeRemote, ArticoloMen
             
             if (ingredientePietanza.getIngredientePietanzaPK().getPietanza().getId().equals(pietanza.getId())) {
                 Ingrediente ingrediente = ingredientePietanza.getIngredientePietanzaPK().getIngrediente();
-                System.out.println("Pietanza " + pietanza.getNome() + " ingrediente " + ingrediente.getNome());
                 for (IngredienteMagazzino ingredienteMagazzino : ingredientiMagazzino)
                     if (ingredienteMagazzino.getIngredienteLungaConservazione().getId().equals(ingrediente.getId()) && ingredienteMagazzino.getQuantita() >=
                             (ingredientePietanza.getQuantita() + (ingredientePietanza.getQuantita() * disponibilita)) && ingrediente.getScadenza().after(data))
@@ -149,6 +148,7 @@ public class ArticoloMenuFacade implements ArticoloMenuFacadeRemote, ArticoloMen
         if (id != null) {
             ArrayList<Ingrediente> ingredienti = new ArrayList<Ingrediente>();
             ArrayList<IngredientePietanza> ingredientiPietanze = (ArrayList<IngredientePietanza>) ingredientePietanzaSessionBeanRemote.selezionaIngredientiPietanze();
+            System.out.println("ingredientiPietanze" + ingredientiPietanze.size());
             if (ingredientiPietanze != null)
                 for (IngredientePietanza ingredientePietanza : ingredientiPietanze)
                     if (ingredientePietanza.getIngredientePietanzaPK().getPietanza().getId().equals(id))
