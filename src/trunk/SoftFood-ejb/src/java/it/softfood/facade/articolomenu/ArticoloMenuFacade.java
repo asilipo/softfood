@@ -15,7 +15,6 @@ import it.softfood.session.pietanza.PietanzaSessionBeanRemote;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -90,7 +89,7 @@ public class ArticoloMenuFacade implements ArticoloMenuFacadeRemote, ArticoloMen
                 if (this.verificaIngredientiPietanza(pietanza) > 0)
                     pietanzeDisponibili.add(pietanza);
             }
-        System.out.println("Dimensioneeeeeeeeeeeeeeeeeeeeee: " + pietanzeDisponibili.size());
+
         return pietanzeDisponibili;
     }
 
@@ -121,11 +120,12 @@ public class ArticoloMenuFacade implements ArticoloMenuFacadeRemote, ArticoloMen
 
         int disponibilita = 0;
         for (IngredientePietanza ingredientePietanza : ingredientiPietanze) {
-            if (ingredientePietanza.getIngredientePietanzaPK().getPietanza().equals(pietanza)) {
+            
+            if (ingredientePietanza.getIngredientePietanzaPK().getPietanza().getId().equals(pietanza.getId())) {
                 Ingrediente ingrediente = ingredientePietanza.getIngredientePietanzaPK().getIngrediente();
-
+                System.out.println("Pietanza " + pietanza.getNome() + " ingrediente " + ingrediente.getNome());
                 for (IngredienteMagazzino ingredienteMagazzino : ingredientiMagazzino)
-                    if (ingredienteMagazzino.getIngredienteLungaConservazione().equals(ingrediente) && ingredienteMagazzino.getQuantita() >=
+                    if (ingredienteMagazzino.getIngredienteLungaConservazione().getId().equals(ingrediente.getId()) && ingredienteMagazzino.getQuantita() >=
                             (ingredientePietanza.getQuantita() + (ingredientePietanza.getQuantita() * disponibilita)) && ingrediente.getScadenza().after(data))
                             disponibilita++;
             }
