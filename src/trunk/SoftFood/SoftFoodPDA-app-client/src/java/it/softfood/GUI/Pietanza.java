@@ -1,14 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
- * Pietanza.java
- *
- * Created on 14-gen-2009, 15.57.47
- */
-
 package it.softfood.GUI;
 
 import it.softfood.entity.Ingrediente;
@@ -23,6 +12,7 @@ import org.jdesktop.application.FrameView;
  * @author Marco Grasso
  * @author Francesco Pacilio
  */
+
 public class Pietanza extends javax.swing.JPanel {
 
     private ArticoloMenuFacadeRemote articolo;
@@ -32,10 +22,10 @@ public class Pietanza extends javax.swing.JPanel {
             InitialContext initial=new InitialContext();
             articolo = (ArticoloMenuFacadeRemote) initial.lookup("it.softfood.facade.articolomenu.ArticoloMenuFacade");
         }catch(NamingException e){
-            System.err.println("Errore binding TavoloFacade");
+            System.err.println("Errore binding: ArticoloMenuFacade");
         }
     }
-    /** Creates new form Pietanza */
+
     public Pietanza(FrameView frame,String tavolo,Long id) {
         this.tavolo = tavolo;
         initComponents();
@@ -44,6 +34,7 @@ public class Pietanza extends javax.swing.JPanel {
         this.id=id;
         
         ArrayList<Ingrediente> ingredienti = (ArrayList<Ingrediente>) articolo.selezionaIngredientiPietanza(id);
+
         String ingr[]=new String[ingredienti.size()];
         int i=0;
         for(Ingrediente ingrediente:ingredienti)
