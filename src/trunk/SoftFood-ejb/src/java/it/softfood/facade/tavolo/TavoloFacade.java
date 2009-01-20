@@ -97,7 +97,7 @@ public class TavoloFacade implements TavoloFacadeRemote, TavoloFacadeLocal {
                     }
                 } else if (riferimenti.size() > 1) {
 //                    tx.begin();
-                    String riferimentoTavoli = "";
+                    String riferimentoTavoli = null;
                     Integer numeroPosti = 0;
                     for (String riferimento : riferimenti) {
                         if (riferimento != null) {
@@ -105,8 +105,8 @@ public class TavoloFacade implements TavoloFacadeRemote, TavoloFacadeLocal {
                             tavolo = em.merge(tavolo);
                             if (!tavolo.getOccupato()) {
                                 tavolo.setAttivo(false);
-                                if (riferimento.equals(""))
-                                    riferimentoTavoli = riferimentoTavoli + tavolo.getRiferimento();
+                                if (riferimento == null)
+                                    riferimentoTavoli = tavolo.getRiferimento();
                                 else
                                     riferimentoTavoli = riferimentoTavoli + " + " + tavolo.getRiferimento();
                                 numeroPosti = numeroPosti + tavolo.getNumeroPosti();
