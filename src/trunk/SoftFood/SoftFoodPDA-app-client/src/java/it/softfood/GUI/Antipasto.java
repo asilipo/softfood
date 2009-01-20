@@ -28,10 +28,10 @@ public class Antipasto extends javax.swing.JPanel {
             ordinazioneFacade = (OrdinazioneFacadeRemote) initial.lookup("it.softfood.facade.ordinazione.OrdinazioneFacade");
             articolo = (ArticoloMenuFacadeRemote) initial.lookup("it.softfood.facade.articolomenu.ArticoloMenuFacade");
         }catch(NamingException e){
-            System.err.println("Errore binding TavoloFacade");
+            System.err.println("Errore binding: OrdinazioneFacade e ArticoloMenuFacade");
         }
     }
-    /** Creates new form Antipasto */
+
     public Antipasto(FrameView frame, String tavolo) {
         initComponents();
         initFacade();
