@@ -27,7 +27,7 @@ import org.jdesktop.application.FrameView;
  * @author Marco Grasso
  * @author Francesco Pacilio
  */
-public class Secondi extends javax.swing.JPanel {
+public class Bibite extends javax.swing.JPanel {
 
     private OrdinazioneFacadeRemote ordinazioneFacade;
     private ArticoloMenuFacadeRemote articolo;
@@ -42,12 +42,12 @@ public class Secondi extends javax.swing.JPanel {
         }
     }
     /** Creates new form Antipasto */
-    public Secondi(FrameView frame, String tavolo) {
+    public Bibite(FrameView frame, String tavolo) {
         initComponents();
         initFacade();
         this.frame=frame;
         this.tavolo=tavolo;
-        ArrayList<it.softfood.entity.Pietanza> secondi = (ArrayList<it.softfood.entity.Pietanza>) articolo.selezionaPietanzeDisponibiliPerTipo(TipoPietanza.SECONDO_PIATTO);
+        ArrayList<it.softfood.entity.Pietanza> bibite = (ArrayList<it.softfood.entity.Pietanza>) articolo.selezionaPietanzeDisponibiliPerTipo(TipoPietanza.ANTIPASTI);
         int i=0;
         int j=0;
 
@@ -59,21 +59,21 @@ public class Secondi extends javax.swing.JPanel {
         combo.addItem(4);
         combo.addItem(5);
         
-        TableColumn sportColumn = tabella_secondi.getColumnModel().getColumn(2);
+        TableColumn sportColumn = tabella_bibite.getColumnModel().getColumn(2);
         sportColumn.setCellEditor(new DefaultCellEditor(combo));
         
         id_antipasto=new XTableColumnModel();
         
-        tabella_secondi.setColumnModel(id_antipasto);
-        tabella_secondi.createDefaultColumnsFromModel();
+        tabella_bibite.setColumnModel(id_antipasto);
+        tabella_bibite.createDefaultColumnsFromModel();
         
         id=id_antipasto.getColumnByModelIndex(0);
         
-        for(it.softfood.entity.Pietanza pietanza:secondi){
+        for(it.softfood.entity.Pietanza pietanza:bibite){
             //antipasto_model.insertRow(tabella_antipasti.getRowCount(), new Object[]{/*pietanza.getId(),pietanza.getNome()*/"PROVA","UNO"});
-            tabella_secondi.setValueAt(pietanza.getId(), i, j);
+            tabella_bibite.setValueAt(pietanza.getId(), i, j);
             j++;
-            tabella_secondi.setValueAt(pietanza.getNome(), i, j);
+            tabella_bibite.setValueAt(pietanza.getNome(), i, j);
             j=0;
             i++;
         }
@@ -101,9 +101,9 @@ public class Secondi extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        pannello_secondi = new javax.swing.JPanel();
+        pannello_bibite = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tabella_secondi = new javax.swing.JTable();
+        tabella_bibite = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         add = new javax.swing.JButton();
         visuallizza = new javax.swing.JButton();
@@ -120,14 +120,14 @@ public class Secondi extends javax.swing.JPanel {
         setName("Form"); // NOI18N
         setLayout(new java.awt.BorderLayout(5, 0));
 
-        pannello_secondi.setName("pannello_secondi"); // NOI18N
-        pannello_secondi.setPreferredSize(new java.awt.Dimension(100, 200));
-        pannello_secondi.setLayout(new java.awt.BorderLayout(5, 0));
+        pannello_bibite.setName("pannello_bibite"); // NOI18N
+        pannello_bibite.setPreferredSize(new java.awt.Dimension(100, 200));
+        pannello_bibite.setLayout(new java.awt.BorderLayout(5, 0));
 
         jScrollPane1.setName("jScrollPane1"); // NOI18N
         jScrollPane1.setPreferredSize(new java.awt.Dimension(100, 200));
 
-        tabella_secondi.setModel(new javax.swing.table.DefaultTableModel(
+        tabella_bibite.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -169,21 +169,19 @@ public class Secondi extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        tabella_secondi.setName("tabella_secondi"); // NOI18N
-        jScrollPane1.setViewportView(tabella_secondi);
-        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(it.softfood.GUI.Main.class).getContext().getResourceMap(Secondi.class);
-        tabella_secondi.getColumnModel().getColumn(0).setResizable(false);
-        tabella_secondi.getColumnModel().getColumn(0).setPreferredWidth(0);
-        tabella_secondi.getColumnModel().getColumn(1).setResizable(false);
-        tabella_secondi.getColumnModel().getColumn(1).setHeaderValue(resourceMap.getString("tabella_antipasti.columnModel.title0")); // NOI18N
-        tabella_secondi.getColumnModel().getColumn(2).setResizable(false);
-        tabella_secondi.getColumnModel().getColumn(2).setHeaderValue(resourceMap.getString("tabella_antipasti.columnModel.title1")); // NOI18N
+        tabella_bibite.setName("tabella_bibite"); // NOI18N
+        jScrollPane1.setViewportView(tabella_bibite);
+        tabella_bibite.getColumnModel().getColumn(0).setResizable(false);
+        tabella_bibite.getColumnModel().getColumn(0).setPreferredWidth(0);
+        tabella_bibite.getColumnModel().getColumn(1).setResizable(false);
+        tabella_bibite.getColumnModel().getColumn(2).setResizable(false);
 
-        pannello_secondi.add(jScrollPane1, java.awt.BorderLayout.CENTER);
+        pannello_bibite.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
         jPanel1.setName("jPanel1"); // NOI18N
         jPanel1.setLayout(new java.awt.GridLayout(1, 0));
 
+        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(it.softfood.GUI.Main.class).getContext().getResourceMap(Bibite.class);
         add.setText(resourceMap.getString("add.text")); // NOI18N
         add.setName("add"); // NOI18N
         add.addActionListener(new java.awt.event.ActionListener() {
@@ -202,15 +200,14 @@ public class Secondi extends javax.swing.JPanel {
         });
         jPanel1.add(visuallizza);
 
-        pannello_secondi.add(jPanel1, java.awt.BorderLayout.SOUTH);
+        pannello_bibite.add(jPanel1, java.awt.BorderLayout.SOUTH);
 
-        add(pannello_secondi, java.awt.BorderLayout.NORTH);
+        add(pannello_bibite, java.awt.BorderLayout.NORTH);
 
         pannello_ordini.setName("pannello_ordini"); // NOI18N
         pannello_ordini.setLayout(new java.awt.BorderLayout(5, 5));
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText(resourceMap.getString("label_ordini.text")); // NOI18N
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jLabel1.setName("label_ordini"); // NOI18N
         jLabel1.setPreferredSize(new java.awt.Dimension(225, 13));
@@ -249,9 +246,7 @@ public class Secondi extends javax.swing.JPanel {
         jScrollPane2.setViewportView(tabella_ordini);
         tabella_ordini.getColumnModel().getColumn(0).setResizable(false);
         tabella_ordini.getColumnModel().getColumn(1).setResizable(false);
-        tabella_ordini.getColumnModel().getColumn(1).setHeaderValue(resourceMap.getString("tabella_ordini.columnModel.title0")); // NOI18N
         tabella_ordini.getColumnModel().getColumn(2).setResizable(false);
-        tabella_ordini.getColumnModel().getColumn(2).setHeaderValue(resourceMap.getString("tabella_ordini.columnModel.title1")); // NOI18N
         tabella_ordini.getColumnModel().getColumn(3).setResizable(false);
 
         pannello_ordini.add(jScrollPane2, java.awt.BorderLayout.SOUTH);
@@ -298,18 +293,18 @@ private void AnnullaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
 
 private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActionPerformed
 // TODO add your handling code here:
-    int row=tabella_secondi.getSelectedRow();
+    int row=tabella_bibite.getSelectedRow();
     id_antipasto.setColumnVisible(id, true);
-    long id_long=((Long)tabella_secondi.getValueAt(row, 0)).longValue();
+    long id_long=((Long)tabella_bibite.getValueAt(row, 0)).longValue();
     System.out.println(id_long);
     id_antipasto.setColumnVisible(id, false);
 }//GEN-LAST:event_addActionPerformed
 
 private void visuallizzaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_visuallizzaActionPerformed
 // TODO add your handling code here:
-    int row=tabella_secondi.getSelectedRow();
+    int row=tabella_bibite.getSelectedRow();
     id_antipasto.setColumnVisible(id, true);
-    long id_long=((Long)tabella_secondi.getValueAt(row, 0)).longValue();
+    long id_long=((Long)tabella_bibite.getValueAt(row, 0)).longValue();
     System.out.println("ID pietanza "+id_long);
     id_antipasto.setColumnVisible(id, false);
    this.setVisible(false);
@@ -327,10 +322,10 @@ private void visuallizzaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JPanel pannello_bibite;
     private javax.swing.JPanel pannello_ordini;
-    private javax.swing.JPanel pannello_secondi;
+    private javax.swing.JTable tabella_bibite;
     private javax.swing.JTable tabella_ordini;
-    private javax.swing.JTable tabella_secondi;
     private javax.swing.JButton visuallizza;
     // End of variables declaration//GEN-END:variables
 

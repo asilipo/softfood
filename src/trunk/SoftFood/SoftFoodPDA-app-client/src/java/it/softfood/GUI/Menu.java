@@ -24,7 +24,7 @@ public class Menu extends javax.swing.JPanel {
     public Menu(FrameView frame,String tavolo) {
         initComponents();
         this.frame = frame;
-        this.tavolo=tavolo;
+        this.tavolo = tavolo;
     }
 
     /** This method is called from within the constructor to
@@ -83,6 +83,11 @@ public class Menu extends javax.swing.JPanel {
         Secondi.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         Secondi.setName("Secondi"); // NOI18N
         Secondi.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        Secondi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SecondiActionPerformed(evt);
+            }
+        });
         add(Secondi);
 
         Contorni.setIcon(resourceMap.getIcon("Contorni.icon")); // NOI18N
@@ -90,6 +95,11 @@ public class Menu extends javax.swing.JPanel {
         Contorni.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         Contorni.setName("Contorni"); // NOI18N
         Contorni.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        Contorni.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ContorniActionPerformed(evt);
+            }
+        });
         add(Contorni);
 
         Dolci.setIcon(resourceMap.getIcon("Dolci.icon")); // NOI18N
@@ -97,6 +107,11 @@ public class Menu extends javax.swing.JPanel {
         Dolci.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         Dolci.setName("Dolci"); // NOI18N
         Dolci.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        Dolci.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DolciActionPerformed(evt);
+            }
+        });
         add(Dolci);
 
         Bibite.setIcon(resourceMap.getIcon("Bibite.icon")); // NOI18N
@@ -104,6 +119,11 @@ public class Menu extends javax.swing.JPanel {
         Bibite.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         Bibite.setName("Bibite"); // NOI18N
         Bibite.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        Bibite.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BibiteActionPerformed(evt);
+            }
+        });
         add(Bibite);
 
         jPanel1.setName("jPanel1"); // NOI18N
@@ -156,16 +176,44 @@ public class Menu extends javax.swing.JPanel {
 private void AntipastiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AntipastiActionPerformed
 // TODO add your handling code here:
     this.setVisible(false);
-    Antipasto antipasto=new Antipasto(frame,tavolo);
+    Antipasto antipasto = new Antipasto(frame,tavolo);
     frame.setComponent(antipasto);
 }//GEN-LAST:event_AntipastiActionPerformed
 
 private void PrimiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PrimiActionPerformed
 // TODO add your handling code here:
     this.setVisible(false);
-    Primi primi=new Primi(frame,tavolo);
+    Primi primi = new Primi(frame,tavolo);
     frame.setComponent(primi);
 }//GEN-LAST:event_PrimiActionPerformed
+
+private void SecondiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SecondiActionPerformed
+// TODO add your handling code here:
+     this.setVisible(false);
+    Secondi secondi = new Secondi(frame,tavolo);
+    frame.setComponent(secondi);
+}//GEN-LAST:event_SecondiActionPerformed
+
+private void ContorniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ContorniActionPerformed
+// TODO add your handling code here:
+     this.setVisible(false);
+    Contorni contorni = new Contorni(frame,tavolo);
+    frame.setComponent(contorni);
+}//GEN-LAST:event_ContorniActionPerformed
+
+private void DolciActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DolciActionPerformed
+// TODO add your handling code here:
+    this.setVisible(false);
+    Dolci dolci = new Dolci(frame,tavolo);
+    frame.setComponent(dolci);
+}//GEN-LAST:event_DolciActionPerformed
+
+private void BibiteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BibiteActionPerformed
+// TODO add your handling code here:
+    this.setVisible(false);
+    Bibite bibite = new Bibite(frame,tavolo);
+    frame.setComponent(bibite);
+}//GEN-LAST:event_BibiteActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
