@@ -64,7 +64,7 @@
             <Component class="javax.swing.JTable" name="tabella_antipasti">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="3" rowCount="0">
+                  <Table columnCount="3" rowCount="20">
                     <Column editable="false" title="ID" type="java.lang.Object"/>
                     <Column editable="false" title="Pietanza" type="java.lang.String"/>
                     <Column editable="true" title="Quantita&apos;" type="java.lang.Object"/>
@@ -97,6 +97,20 @@
             </Component>
           </SubComponents>
         </Container>
+        <Component class="javax.swing.JButton" name="add">
+          <Properties>
+            <Property name="text" type="java.lang.String" resourceKey="add.text"/>
+            <Property name="name" type="java.lang.String" value="add" noResource="true"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addActionPerformed"/>
+          </Events>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+              <BorderConstraints direction="Last"/>
+            </Constraint>
+          </Constraints>
+        </Component>
       </SubComponents>
     </Container>
     <Container class="javax.swing.JPanel" name="pannello_ordini">
@@ -151,7 +165,8 @@
             <Component class="javax.swing.JTable" name="tabella_ordini">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="3" rowCount="4">
+                  <Table columnCount="4" rowCount="4">
+                    <Column editable="false" title="ID" type="java.lang.Object"/>
                     <Column editable="false" title="Pietanza" type="java.lang.String"/>
                     <Column editable="true" title="Quantita&apos;" type="java.lang.Object"/>
                     <Column editable="true" title="Elimina" type="java.lang.Object"/>
@@ -159,6 +174,11 @@
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                   <TableColumnModel selectionModel="0">
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
+                      <Title resourceKey="tabella_ordini.columnModel.title3"/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
                     <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
                       <Title resourceKey="tabella_ordini.columnModel.title0"/>
                       <Editor/>
