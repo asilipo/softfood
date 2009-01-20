@@ -1,24 +1,14 @@
-/*
- * Antipasto.java
- *
- * Created on 19 gennaio 2009, 16.59
- */
-
 package it.softfood.GUI;
 
-import it.softfood.entity.Pietanza;
 import it.softfood.enumeration.TipoPietanza;
 import it.softfood.facade.articolomenu.ArticoloMenuFacadeRemote;
 import it.softfood.facade.ordinazione.OrdinazioneFacadeRemote;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JComboBox;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
-import javax.swing.table.TableColumnModel;
 import org.jdesktop.application.FrameView;
 
 /**
@@ -26,6 +16,7 @@ import org.jdesktop.application.FrameView;
  * @author Marco Grasso
  * @author Francesco Pacilio
  */
+
 public class Contorni extends javax.swing.JPanel {
 
     private OrdinazioneFacadeRemote ordinazioneFacade;
@@ -37,9 +28,10 @@ public class Contorni extends javax.swing.JPanel {
             ordinazioneFacade = (OrdinazioneFacadeRemote) initial.lookup("it.softfood.facade.ordinazione.OrdinazioneFacade");
             articolo = (ArticoloMenuFacadeRemote) initial.lookup("it.softfood.facade.articolomenu.ArticoloMenuFacade");
         }catch(NamingException e){
-            System.err.println("Errore binding TavoloFacade");
+            System.err.println("Errore binding: OrdinazioneFacade - ArticoloMenuFacade");
         }
     }
+    
     /** Creates new form Antipasto */
     public Contorni(FrameView frame, String tavolo) {
         initComponents();
@@ -50,7 +42,8 @@ public class Contorni extends javax.swing.JPanel {
         int i=0;
         int j=0;
 
-        
+        tabella_contorno.setModel(new javax.swing.table.DefaultTableModel(new String[]{"ID", "Contorno", "Quantita'"}, contorni.size()));
+
         JComboBox combo= new JComboBox();
         combo.addItem(1);
         combo.addItem(2);
@@ -65,8 +58,7 @@ public class Contorni extends javax.swing.JPanel {
         
         id=id_antipasto.getColumnByModelIndex(0);
         
-        for(it.softfood.entity.Pietanza pietanza:contorni){
-            //antipasto_model.insertRow(tabella_antipasti.getRowCount(), new Object[]{/*pietanza.getId(),pietanza.getNome()*/"PROVA","UNO"});
+        for(it.softfood.entity.Pietanza pietanza : contorni){
             tabella_contorno.setValueAt(pietanza.getId(), i, j);
             j++;
             tabella_contorno.setValueAt(pietanza.getNome(), i, j);
@@ -131,29 +123,10 @@ public class Contorni extends javax.swing.JPanel {
 
         tabella_contorno.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
-                "ID", "Pietanza", "Quantita'"
+                "ID", "Contorno", "Quantita'"
             }
         ) {
             Class[] types = new Class [] {
