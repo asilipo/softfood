@@ -76,7 +76,8 @@ public class Primi extends javax.swing.JPanel {
         id_ordini=linea_ordine.getColumnByModelIndex(0);
         
         linea_ordine.setColumnVisible(id_ordini, false);
-            TableColumn sportColumn = tabella_primi.getColumnModel().getColumn(1);
+        
+        TableColumn sportColumn = tabella_primi.getColumnModel().getColumn(1);
         sportColumn.setCellEditor(new DefaultCellEditor(combo));
 
         tabella_primi.setRowHeight(tabella_primi.getRowHeight() * 15 / 10); 
