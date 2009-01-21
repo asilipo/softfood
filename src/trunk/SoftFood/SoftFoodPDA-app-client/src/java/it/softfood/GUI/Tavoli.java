@@ -37,8 +37,8 @@ public class Tavoli extends javax.swing.JPanel {
         initComponents();
         initFacade();
         this.frame = frame;
-        this.vuoti=vuoti;
-        
+        this.vuoti = vuoti;
+
         if (vuoti) {
             SelezionaTavoli.setText(SelezionaTavoli.getText() + " un tavolo vuoto:");
             tavoli = (ArrayList<Tavolo>) tavoloFacade.selezionaTavoliLiberi();
@@ -197,22 +197,39 @@ public class Tavoli extends javax.swing.JPanel {
         for (; enumeration.hasMoreElements();) {
             tav.add((String) enumeration.nextElement());
         }
-        Long tavoloSelezionato = tavoloFacade.occupaTavoli(tav);
-        System.out.println("TAVOLO ID " + tavoloSelezionato);
 
-        Ordinazione ordine = new Ordinazione();
-        ordine.setTavolo(tavoloFacade.selezionaTavolo(tavoloSelezionato));
-        ordine.setCoperti(Integer.parseInt((String) jComboBox2.getSelectedItem()));
-        ordine.setTerminato(false);
-        try {
-            ordine = ordinazioneFacade.inserisciOrdinazione(ordine);
-        } catch (NullPointerException e) {
-            this.setVisible(false);
-            Tavoli pannello_tavoli = new Tavoli(frame,vuoti);
-            frame.setComponent(pannello_tavoli);
+        Ordinazione ordine = null;
+        
+        System.out.println("MARY "+vuoti);
+        
+        if (vuoti) { 
+            
+            //Inserimento
+            
+            Long tavoloSelezionato = tavoloFacade.occupaTavoli(tav);
+            System.out.println("TAVOLO ID " + tavoloSelezionato);
+
+            ordine = new Ordinazione();
+            ordine.setTavolo(tavoloFacade.selezionaTavolo(tavoloSelezionato));
+            ordine.setCoperti(Integer.parseInt((String) jComboBox2.getSelectedItem()));
+            ordine.setTerminato(false);
+
+            try {
+                ordine = ordinazioneFacade.inserisciOrdinazione(ordine);
+            } catch (NullPointerException e) {
+                this.setVisible(false);
+                Tavoli pannello_tavoli = new Tavoli(frame, vuoti);
+                frame.setComponent(pannello_tavoli);
+            }
+            
+            
+            
+        }else{
+            //Gestione
+            //ordine = ordinazioneFacade.selezionaOrdinazioniGiornalierePerTavolo(/*RECUPERARE TAVOLO*/, false);
+        
         }
-
-
+        
         this.setVisible(false);
         Menu menu = new Menu(frame, ordine.getId());
         frame.setComponent(menu);
@@ -230,8 +247,10 @@ private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:eve
 // TODO add your handling code here:
     Ok.setEnabled(true);
     model.addElement((String) jComboBox1.getSelectedItem());
+    jComboBox1.removeItemAt(jComboBox1.getSelectedIndex());
     jComboBox1.setSelectedIndex(0);
 }//GEN-LAST:event_addActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Annulla;
     private javax.swing.JButton Ok;
