@@ -279,9 +279,9 @@ private void AnnullaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
 
 private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActionPerformed
 // TODO add your handling code here:
-    int row=tabella_antipasti.getSelectedRow();
+    int row = tabella_antipasti.getSelectedRow();
     id_antipasto.setColumnVisible(id, true);
-    long id_long=((Long)tabella_antipasti.getValueAt(row, 0)).longValue();
+    long id_long = ((Long)tabella_antipasti.getValueAt(row, 0)).longValue();
     System.out.println(id_long);
     id_antipasto.setColumnVisible(id, false);
 }//GEN-LAST:event_addActionPerformed
@@ -294,7 +294,7 @@ private void visuallizzaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     System.out.println("ID pietanza "+id_long);
     id_antipasto.setColumnVisible(id, false);
    this.setVisible(false);
-   it.softfood.GUI.Pietanza pietanza = new it.softfood.GUI.Pietanza(frame,tavolo,id_long,"antipasto");
+   it.softfood.GUI.Pietanza pietanza = new it.softfood.GUI.Pietanza(frame,tavolo,id_long,"antipasti");
    frame.setComponent(pietanza);  
 }//GEN-LAST:event_visuallizzaActionPerformed
 

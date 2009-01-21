@@ -146,6 +146,11 @@ public class Primi extends javax.swing.JPanel {
             }
         });
         tabella_primi.setName("tabella_primi"); // NOI18N
+        tabella_primi.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabella_primiMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tabella_primi);
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(it.softfood.GUI.Main.class).getContext().getResourceMap(Primi.class);
         tabella_primi.getColumnModel().getColumn(0).setResizable(false);
@@ -161,6 +166,7 @@ public class Primi extends javax.swing.JPanel {
         jPanel1.setLayout(new java.awt.GridLayout(1, 2, 0, 5));
 
         add.setText(resourceMap.getString("add.text")); // NOI18N
+        add.setEnabled(false);
         add.setName("add"); // NOI18N
         add.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -170,6 +176,7 @@ public class Primi extends javax.swing.JPanel {
         jPanel1.add(add);
 
         visuallizza.setText(resourceMap.getString("visuallizza.text")); // NOI18N
+        visuallizza.setEnabled(false);
         visuallizza.setName("visuallizza"); // NOI18N
         visuallizza.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -293,6 +300,12 @@ private void visuallizzaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
    it.softfood.GUI.Pietanza pietanza = new it.softfood.GUI.Pietanza(frame,tavolo,id_long,"primi");
    frame.setComponent(pietanza);  
 }//GEN-LAST:event_visuallizzaActionPerformed
+
+private void tabella_primiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabella_primiMouseClicked
+// TODO add your handling code here:
+    add.setEnabled(true);
+    visuallizza.setEnabled(true);
+}//GEN-LAST:event_tabella_primiMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
