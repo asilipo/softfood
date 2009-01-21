@@ -44,6 +44,7 @@ public class Bibite extends javax.swing.JPanel {
     /** Creates new form Antipasto */
     public Bibite(FrameView frame, Long tavolo) {
         initComponents();
+       
         initFacade();
         this.frame=frame;
         this.tavolo=tavolo;
@@ -86,6 +87,7 @@ public class Bibite extends javax.swing.JPanel {
       
 
         tabella_bibite.setRowHeight(tabella_bibite.getRowHeight() * 15 / 10);
+       
         
     }
 
@@ -149,6 +151,7 @@ public class Bibite extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        tabella_bibite.setFocusable(false);
         tabella_bibite.setName("tabella_bibite"); // NOI18N
         tabella_bibite.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
