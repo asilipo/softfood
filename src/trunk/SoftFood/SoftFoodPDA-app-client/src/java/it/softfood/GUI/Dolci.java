@@ -282,7 +282,7 @@ private void visuallizzaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     System.out.println("ID pietanza "+id_long);
     id_antipasto.setColumnVisible(id, false);
    this.setVisible(false);
-   it.softfood.GUI.Pietanza pietanza = new it.softfood.GUI.Pietanza(frame,tavolo,id_long);
+   it.softfood.GUI.Pietanza pietanza = new it.softfood.GUI.Pietanza(frame,tavolo,id_long,"dolci");
    frame.setComponent(pietanza);  
 }//GEN-LAST:event_visuallizzaActionPerformed
 

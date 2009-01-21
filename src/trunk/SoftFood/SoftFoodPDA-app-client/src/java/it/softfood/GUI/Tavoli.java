@@ -161,7 +161,7 @@ public class Tavoli extends javax.swing.JPanel {
         jPanel1.setLayout(new java.awt.GridLayout(1, 2, 5, 5));
 
         Ok.setText(resourceMap.getString("Ok.text")); // NOI18N
-        Ok.setEnabled(false);
+        Ok.setContentAreaFilled(false);
         Ok.setName("Ok"); // NOI18N
         Ok.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
