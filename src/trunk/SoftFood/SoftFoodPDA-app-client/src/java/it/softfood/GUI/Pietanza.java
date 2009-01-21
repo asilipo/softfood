@@ -124,31 +124,13 @@ public class Pietanza extends javax.swing.JPanel {
     private void okActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-        if(tipo.equalsIgnoreCase("antipasti")){
-            antipasto = new Antipasto(frame, tavolo);
-            frame.setComponent(antipasto);
-        }
-        else if(tipo.equalsIgnoreCase("primi")){
-            primi = new Primi(frame, tavolo);
-            frame.setComponent(primi);
-        }
-        else if(tipo.equalsIgnoreCase("secondi")){
-            secondi = new Secondi(frame, tavolo);
-            frame.setComponent(secondi);
-        }
-        else if(tipo.equalsIgnoreCase("contorni")){
-            contorni = new Contorni(frame, tavolo);
-            frame.setComponent(contorni);
-        }
-        else if(tipo.equalsIgnoreCase("dolci")){
-            dolci = new Dolci(frame, tavolo);
-            frame.setComponent(dolci);
-        }
-        else if(tipo.equalsIgnoreCase("bibite")){
-            bibite = new Bibite(frame, tavolo);
-            frame.setComponent(bibite);
-        }else
-            System.out.println("ERRORE NEL TIPO DELLA PIETANZA");
+        if(tipo.equalsIgnoreCase("bibite")){
+              Bibite pannello=new Bibite(frame, tavolo);
+              frame.setComponent(pannello);
+          }else{
+              Pannello_ordinazioni pannello = new Pannello_ordinazioni(frame, tavolo, tipo);
+              frame.setComponent(pannello);
+          }
         
         
     }//GEN-LAST:event_okActionPerformed
@@ -156,32 +138,13 @@ public class Pietanza extends javax.swing.JPanel {
     private void AnnullaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AnnullaActionPerformed
         // TODO add your handling code here:
           this.setVisible(false);
-         this.setVisible(false);
-        if(tipo.equalsIgnoreCase("antipasti")){
-            antipasto = new Antipasto(frame, tavolo);
-            frame.setComponent(antipasto);
-        }
-        else if(tipo.equalsIgnoreCase("primi")){
-            primi = new Primi(frame, tavolo);
-            frame.setComponent(primi);
-        }
-        else if(tipo.equalsIgnoreCase("secondi")){
-            secondi = new Secondi(frame, tavolo);
-            frame.setComponent(secondi);
-        }
-        else if(tipo.equalsIgnoreCase("contorni")){
-            contorni = new Contorni(frame, tavolo);
-            frame.setComponent(contorni);
-        }
-        else if(tipo.equalsIgnoreCase("dolci")){
-            dolci = new Dolci(frame, tavolo);
-            frame.setComponent(dolci);
-        }
-        else if(tipo.equalsIgnoreCase("bibite")){
-            bibite = new Bibite(frame, tavolo);
-            frame.setComponent(bibite);
-        }else
-            System.out.println("ERRORE NEL TIPO DELLA PIETANZA");
+          if(tipo.equalsIgnoreCase("bibite")){
+              Bibite pannello=new Bibite(frame, tavolo);
+              frame.setComponent(pannello);
+          }else{
+              Pannello_ordinazioni pannello = new Pannello_ordinazioni(frame, tavolo, tipo);
+              frame.setComponent(pannello);
+          }
       
     }//GEN-LAST:event_AnnullaActionPerformed
 
@@ -205,10 +168,4 @@ public class Pietanza extends javax.swing.JPanel {
     private Long tavolo;
     private Long id;
     private String tipo;
-    Antipasto antipasto = null;
-    Bibite bibite = null;
-    Contorni contorni = null;
-    Dolci dolci = null;
-    Primi primi = null;
-    Secondi secondi = null;
 }
