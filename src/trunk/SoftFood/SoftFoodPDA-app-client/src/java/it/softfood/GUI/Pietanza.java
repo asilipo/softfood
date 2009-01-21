@@ -112,11 +112,6 @@ public class Pietanza extends javax.swing.JPanel {
 
         jScrollPane1.setName("jScrollPane1"); // NOI18N
 
-        listaIngredienti.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
         listaIngredienti.setName("listaIngredienti"); // NOI18N
         jScrollPane1.setViewportView(listaIngredienti);
 
@@ -133,8 +128,8 @@ public class Pietanza extends javax.swing.JPanel {
     private void AnnullaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AnnullaActionPerformed
         // TODO add your handling code here:
           this.setVisible(false);
-       // Pietanze pietanze = new Pietanze(frame);
-       // frame.setComponent(pietanze);
+       Antipasto pietanze = new Antipasto(frame,tavolo);
+        frame.setComponent(pietanze);
       
     }//GEN-LAST:event_AnnullaActionPerformed
 

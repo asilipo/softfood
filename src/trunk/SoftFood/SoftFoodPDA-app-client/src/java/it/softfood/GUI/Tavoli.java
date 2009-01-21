@@ -194,6 +194,7 @@ public class Tavoli extends javax.swing.JPanel {
         this.setVisible(false);
         Menu menu=new Menu(frame,tavoloSelezionato);
         frame.setComponent(menu);
+        
     }//GEN-LAST:event_OkActionPerformed
 
     private void AnnullaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AnnullaActionPerformed
