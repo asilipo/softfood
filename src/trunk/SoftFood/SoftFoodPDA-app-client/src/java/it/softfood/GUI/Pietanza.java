@@ -158,10 +158,10 @@ public class Pietanza extends javax.swing.JPanel {
                 return types [columnIndex];
             }
         });
-        jTable1.setMaximumSize(new java.awt.Dimension(30, 30));
-        jTable1.setMinimumSize(new java.awt.Dimension(30, 30));
+        jTable1.setMaximumSize(new java.awt.Dimension(225, 60));
+        jTable1.setMinimumSize(new java.awt.Dimension(226, 60));
         jTable1.setName("jTable1"); // NOI18N
-        jTable1.setPreferredSize(new java.awt.Dimension(30, 30));
+        jTable1.setPreferredSize(new java.awt.Dimension(226, 60));
         jScrollPane2.setViewportView(jTable1);
         jTable1.getColumnModel().getColumn(0).setResizable(false);
         jTable1.getColumnModel().getColumn(0).setHeaderValue(resourceMap.getString("jTable1.columnModel.title0")); // NOI18N
