@@ -87,6 +87,7 @@ public class Bibite extends javax.swing.JPanel {
       
 
         tabella_bibite.setRowHeight(tabella_bibite.getRowHeight() * 15 / 10);
+        
        
         
     }
