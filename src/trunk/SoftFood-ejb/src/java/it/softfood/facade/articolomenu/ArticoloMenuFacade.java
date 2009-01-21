@@ -2,6 +2,7 @@ package it.softfood.facade.articolomenu;
 
 import it.softfood.entity.Articolo;
 import it.softfood.entity.Bevanda;
+import it.softfood.entity.BevandaMagazzino;
 import it.softfood.entity.Ingrediente;
 import it.softfood.entity.IngredienteMagazzino;
 import it.softfood.entity.IngredientePietanza;
@@ -9,6 +10,7 @@ import it.softfood.entity.Pietanza;
 import it.softfood.enumeration.TipoPietanza;
 import it.softfood.session.articolo.ArticoloSessionBeanRemote;
 import it.softfood.session.bevanda.BevandaSessionBeanRemote;
+import it.softfood.session.bevandamagazzino.BevandaMagazzinoSessionBeanRemote;
 import it.softfood.session.ingredientemagazzino.IngredienteMagazzinoSessionBeanRemote;
 import it.softfood.session.ingredientepietanza.IngredientePietanzaSessionBeanRemote;
 import it.softfood.session.pietanza.PietanzaSessionBeanRemote;
@@ -42,6 +44,8 @@ public class ArticoloMenuFacade implements ArticoloMenuFacadeRemote, ArticoloMen
 	private IngredientePietanzaSessionBeanRemote ingredientePietanzaSessionBeanRemote;
     @EJB(beanName = "IngredienteMagazzinoSessionBean")
 	private IngredienteMagazzinoSessionBeanRemote ingredienteMagazzinoSessionBeanRemote;
+    @EJB(beanName = "BevandaMagazzinoSessionBean")
+	private BevandaMagazzinoSessionBeanRemote bevandaMagazzinoSessionBeanRemote;
     
     public Articolo inserisciArticoloMenu(Articolo articolo) {
         if (articolo != null)
@@ -110,6 +114,21 @@ public class ArticoloMenuFacade implements ArticoloMenuFacadeRemote, ArticoloMen
         }
 
         return null;
+    }
+
+    public Integer selezionaDisponibilitaBevanda(Long id) {
+        if (id != null) {
+            Bevanda bevanda = bevandaSessionBean.selezionaBevandaPerId(id);
+            ArrayList<BevandaMagazzino> bevandeMagazzino = (ArrayList<BevandaMagazzino>) bevandaMagazzinoSessionBeanRemote.selezionaBevandeMagazzino();
+
+            for (BevandaMagazzino bevandaMagazzino : bevandeMagazzino)
+                if (bevandaMagazzino.getBevanda().getId().equals(id))
+                    return bevandaMagazzino.getQuantita();
+
+            return 0;
+        }
+
+        return 0;
     }
 
     public HashMap<Pietanza, Integer> selezionaDisponibilitaPietanzePerTipo(TipoPietanza tipoPietanza) {
