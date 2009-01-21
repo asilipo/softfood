@@ -124,7 +124,7 @@ public class Pietanza extends javax.swing.JPanel {
     private void okActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-        if(tipo.equalsIgnoreCase("antipasto")){
+        if(tipo.equalsIgnoreCase("antipasti")){
             antipasto = new Antipasto(frame, tavolo);
             frame.setComponent(antipasto);
         }

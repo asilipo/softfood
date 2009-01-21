@@ -143,6 +143,11 @@ public class Contorni extends javax.swing.JPanel {
             }
         });
         tabella_contorno.setName("tabella_contorno"); // NOI18N
+        tabella_contorno.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabella_contornoMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tabella_contorno);
         tabella_contorno.getColumnModel().getColumn(0).setResizable(false);
         tabella_contorno.getColumnModel().getColumn(0).setPreferredWidth(0);
@@ -156,6 +161,7 @@ public class Contorni extends javax.swing.JPanel {
 
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(it.softfood.GUI.Main.class).getContext().getResourceMap(Contorni.class);
         add.setText(resourceMap.getString("add.text")); // NOI18N
+        add.setEnabled(false);
         add.setName("add"); // NOI18N
         add.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -165,6 +171,7 @@ public class Contorni extends javax.swing.JPanel {
         jPanel1.add(add);
 
         visuallizza.setText(resourceMap.getString("visuallizza.text")); // NOI18N
+        visuallizza.setEnabled(false);
         visuallizza.setName("visuallizza"); // NOI18N
         visuallizza.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -284,6 +291,12 @@ private void visuallizzaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
    it.softfood.GUI.Pietanza pietanza = new it.softfood.GUI.Pietanza(frame,tavolo,id_long,"contorni");
    frame.setComponent(pietanza);  
 }//GEN-LAST:event_visuallizzaActionPerformed
+
+private void tabella_contornoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabella_contornoMouseClicked
+// TODO add your handling code here:
+    add.setEnabled(true);
+    visuallizza.setEnabled(true);
+}//GEN-LAST:event_tabella_contornoMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
