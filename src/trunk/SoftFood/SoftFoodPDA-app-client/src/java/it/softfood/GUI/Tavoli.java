@@ -1,6 +1,8 @@
 package it.softfood.GUI;
 
+import it.softfood.entity.Ordinazione;
 import it.softfood.entity.Tavolo;
+import it.softfood.facade.ordinazione.OrdinazioneFacadeRemote;
 import it.softfood.facade.tavolo.TavoloFacadeRemote;
 import java.util.ArrayList;
 import java.util.Enumeration;
@@ -18,6 +20,7 @@ import org.jdesktop.application.FrameView;
 public class Tavoli extends javax.swing.JPanel {
 
     private TavoloFacadeRemote tavoloFacade;
+    private OrdinazioneFacadeRemote ordinazioneFacade;
     private ArrayList<Tavolo> tavoli;
     private String[] listaTavoli;
 
@@ -25,6 +28,7 @@ public class Tavoli extends javax.swing.JPanel {
         try{
             InitialContext initial=new InitialContext();
             tavoloFacade = (TavoloFacadeRemote) initial.lookup("it.softfood.facade.tavolo.TavoloFacade");
+            ordinazioneFacade = (OrdinazioneFacadeRemote) initial.lookup("it.softfood.facade.tavolo.OrdinazioneFacade");
         }catch(NamingException e){
             System.err.println("Errore binding TavoloFacade");
         }
@@ -194,8 +198,16 @@ public class Tavoli extends javax.swing.JPanel {
         
         Long tavoloSelezionato=tavoloFacade.occupaTavoli(tav);
         System.out.println("TAVOLO ID "+tavoloSelezionato);
+        
+        Ordinazione ordine=new Ordinazione();
+        ordine.setTavolo(tavoloFacade.selezionaTavolo(tavoloSelezionato));
+        ordine.setCoperti((Integer) jComboBox2.getSelectedItem());
+        ordine.setTerminato(false);
+        
+        ordine=ordinazioneFacade.inserisciOrdinazione(ordine);
+        
         this.setVisible(false);
-        Menu menu=new Menu(frame,tavoloSelezionato);
+        Menu menu=new Menu(frame,ordine.getId());
         frame.setComponent(menu);
         
     }//GEN-LAST:event_OkActionPerformed
