@@ -112,7 +112,9 @@ public class Tavoli extends javax.swing.JPanel {
         jComboBox1.setName("jComboBox1"); // NOI18N
         pannello_tavolo.add(jComboBox1, java.awt.BorderLayout.CENTER);
 
+        add.setFont(resourceMap.getFont("add.font")); // NOI18N
         add.setText(resourceMap.getString("add.text")); // NOI18N
+        add.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         add.setMaximumSize(new java.awt.Dimension(75, 10));
         add.setMinimumSize(new java.awt.Dimension(75, 10));
         add.setName("add"); // NOI18N
