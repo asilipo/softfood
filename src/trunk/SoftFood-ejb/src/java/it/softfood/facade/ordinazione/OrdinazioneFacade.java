@@ -20,7 +20,10 @@ import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
 
+import java.util.StringTokenizer;
+import javax.annotation.Resource;
 import javax.ejb.EJB;
+import javax.ejb.EJBContext;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -34,6 +37,8 @@ import javax.persistence.PersistenceContext;
 @Stateless
 public class OrdinazioneFacade implements OrdinazioneFacadeRemote, OrdinazioneFacadeLocal {
 
+    @Resource
+    private EJBContext ejbContext;
 	@PersistenceContext
     private EntityManager em;
 	@EJB(beanName = "OrdinazioneSessionBean")
@@ -52,14 +57,37 @@ public class OrdinazioneFacade implements OrdinazioneFacadeRemote, OrdinazioneFa
 	public Ordinazione inserisciOrdinazione(Ordinazione ordinazione) {
 		if (ordinazione != null) {
             Tavolo tavolo = tavoloSessionBeanRemote.selezionaTavoloPerId(ordinazione.getTavolo().getId());
-            if (tavolo == null || tavolo.getNumeroPosti() <= ordinazione.getCoperti()) 
-                return null;
+            if (tavolo == null || tavolo.getNumeroPosti() <= ordinazione.getCoperti()) {
+                try {
+                    if (tavolo.getRiferimento().contains("+")) {
+                        String riferimento = tavolo.getRiferimento();
+                        StringTokenizer st = new StringTokenizer(riferimento, "+");
+                        while(st.hasMoreTokens()) {
+                            String temp = st.nextToken();
+                            Tavolo tavoloDaAttivare = tavoloSessionBeanRemote.selezionaTavoloPerRiferimento(temp);
+                            tavoloDaAttivare = em.merge(tavoloDaAttivare);
+                            tavoloDaAttivare.setAttivo(true);
+                        }
+                        tavoloSessionBeanRemote.rimuoviTavolo(tavolo.getId());
+                    } else {
+                        tavoloSessionBeanRemote.modificaStatoTavolo(tavolo, false);
+                    }
+                } catch (Exception e) {
+                    ejbContext.setRollbackOnly();
+                }
 
-            ordinazione.setData(new Date(System.currentTimeMillis()));
-            ordinazione.setSconto(0d);
-            ordinazione.setTotale(0d);
-            ordinazione.setTerminato(false);
-			return ordinazioneSessionBean.inserisciOrdinazione(ordinazione);
+                return null;
+            }
+
+            try {
+                ordinazione.setData(new Date(System.currentTimeMillis()));
+                ordinazione.setSconto(0d);
+                ordinazione.setTotale(0d);
+                ordinazione.setTerminato(false);
+                return ordinazioneSessionBean.inserisciOrdinazione(ordinazione);
+            } catch (Exception e) {
+                ejbContext.setRollbackOnly();
+            }
         }
 
 		return null;

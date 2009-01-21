@@ -111,7 +111,7 @@ public class TavoloFacade implements TavoloFacadeRemote, TavoloFacadeLocal {
                                 if (riferimentoTavoli == null)
                                     riferimentoTavoli = tavolo.getRiferimento();
                                 else
-                                    riferimentoTavoli = riferimentoTavoli + " + " + tavolo.getRiferimento();
+                                    riferimentoTavoli = riferimentoTavoli + "+" + tavolo.getRiferimento();
                                 numeroPosti = numeroPosti + tavolo.getNumeroPosti();
                             }
                             else {
