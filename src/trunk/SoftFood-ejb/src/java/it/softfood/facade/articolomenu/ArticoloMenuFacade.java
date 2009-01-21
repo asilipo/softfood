@@ -103,6 +103,15 @@ public class ArticoloMenuFacade implements ArticoloMenuFacadeRemote, ArticoloMen
         return pietanzeDisponibili;
     }
 
+    public Integer selezionaDisponibilitaPietanza(Long id) {
+        if (id != null) {
+            Pietanza pietanza = pietanzaSessionBean.selezionaPietanzaPerId(id);
+            return this.verificaIngredientiPietanza(pietanza);
+        }
+
+        return null;
+    }
+
     public HashMap<Pietanza, Integer> selezionaDisponibilitaPietanzePerTipo(TipoPietanza tipoPietanza) {
         ArrayList<Pietanza> pietanze = (ArrayList<Pietanza>) pietanzaSessionBean.selezionaPietanzePerTipo(tipoPietanza);
         HashMap<Pietanza, Integer> pietanzeDisponibili = new HashMap<Pietanza, Integer>();
