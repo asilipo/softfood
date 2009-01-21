@@ -117,15 +117,14 @@ public class ArticoloMenuFacade implements ArticoloMenuFacadeRemote, ArticoloMen
     }
 
     public Integer selezionaDisponibilitaBevanda(Long id) {
+        System.out.println("id"+ id);
         if (id != null) {
             Bevanda bevanda = bevandaSessionBean.selezionaBevandaPerId(id);
             ArrayList<BevandaMagazzino> bevandeMagazzino = (ArrayList<BevandaMagazzino>) bevandaMagazzinoSessionBeanRemote.selezionaBevandeMagazzino();
 
             for (BevandaMagazzino bevandaMagazzino : bevandeMagazzino)
                 if (bevandaMagazzino.getBevanda().getId().equals(id))
-                    return bevandaMagazzino.getQuantita();
-
-            return 0;
+                    return (bevandaMagazzino.getQuantita())/(bevanda.getCapacita()).intValue();
         }
 
         return 0;
