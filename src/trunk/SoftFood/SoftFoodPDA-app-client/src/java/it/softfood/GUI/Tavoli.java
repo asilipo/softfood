@@ -139,7 +139,7 @@ public class Tavoli extends javax.swing.JPanel {
         pannello_posti.setName("pannello_posti"); // NOI18N
         pannello_posti.setLayout(new java.awt.BorderLayout());
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4" }));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15" }));
         jComboBox2.setName("jComboBox2"); // NOI18N
         pannello_posti.add(jComboBox2, java.awt.BorderLayout.CENTER);
 
