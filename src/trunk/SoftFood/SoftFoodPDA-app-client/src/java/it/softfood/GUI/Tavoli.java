@@ -28,9 +28,9 @@ public class Tavoli extends javax.swing.JPanel {
         try{
             InitialContext initial=new InitialContext();
             tavoloFacade = (TavoloFacadeRemote) initial.lookup("it.softfood.facade.tavolo.TavoloFacade");
-            ordinazioneFacade = (OrdinazioneFacadeRemote) initial.lookup("it.softfood.facade.tavolo.OrdinazioneFacade");
+            ordinazioneFacade = (OrdinazioneFacadeRemote) initial.lookup("it.softfood.facade.ordinazione.OrdinazioneFacade");
         }catch(NamingException e){
-            System.err.println("Errore binding TavoloFacade");
+            System.err.println("Errore binding: TavoloFacade e OrdinazioneFacade");
         }
     }
 
@@ -201,7 +201,7 @@ public class Tavoli extends javax.swing.JPanel {
         
         Ordinazione ordine=new Ordinazione();
         ordine.setTavolo(tavoloFacade.selezionaTavolo(tavoloSelezionato));
-        ordine.setCoperti((Integer) jComboBox2.getSelectedItem());
+        ordine.setCoperti(Integer.parseInt((String)jComboBox2.getSelectedItem()));
         ordine.setTerminato(false);
         
         ordine=ordinazioneFacade.inserisciOrdinazione(ordine);
