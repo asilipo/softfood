@@ -1,14 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
- * Tavoli.java
- *
- * Created on 14-gen-2009, 11.16.59
- */
-
 package it.softfood.GUI;
 
 import it.softfood.entity.Tavolo;
@@ -19,11 +8,13 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.swing.DefaultListModel;
 import org.jdesktop.application.FrameView;
+
 /**
  * @author Maria Rosaria Paone
  * @author Marco Grasso
  * @author Francesco Pacilio
  */
+
 public class Tavoli extends javax.swing.JPanel {
 
     private TavoloFacadeRemote tavoloFacade;
@@ -38,7 +29,7 @@ public class Tavoli extends javax.swing.JPanel {
             System.err.println("Errore binding TavoloFacade");
         }
     }
-    /** Creates new form Tavoli */
+
     public Tavoli(FrameView frame, boolean vuoti) {
         initComponents();
         initFacade();
@@ -51,34 +42,26 @@ public class Tavoli extends javax.swing.JPanel {
             SelezionaTavoli.setText(SelezionaTavoli.getText()+" un tavolo:");
             tavoli= (ArrayList<Tavolo>) tavoloFacade.selezionaTavoliOccupati();
         }
-        int i=0;
-        
+
+        int i=0;        
         int size=tavoli.size();
         model=new DefaultListModel();
        
-        if(size==0){
+        if(size == 0) {
            add.setEnabled(false);
            jComboBox1.setEnabled(false);
            jComboBox2.setEnabled(false);
            model.addElement("Tavoli momentaneamente \n tutti occupati... ");
-       }
+        }
         
         listaTavoli = new String[size];
-        for(Tavolo tavolo:tavoli){
+        for(Tavolo tavolo:tavoli) {
             listaTavoli[i]=tavolo.getRiferimento();
             jComboBox1.addItem(tavolo.getRiferimento());
             i++;
         }
-        
-        
-        
+              
         jList1.setModel(model);
-        
-      
-        
-        
-        
-        
     }
 
     /** This method is called from within the constructor to
@@ -156,7 +139,7 @@ public class Tavoli extends javax.swing.JPanel {
         pannello_posti.setName("pannello_posti"); // NOI18N
         pannello_posti.setLayout(new java.awt.BorderLayout());
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15" }));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4" }));
         jComboBox2.setName("jComboBox2"); // NOI18N
         pannello_posti.add(jComboBox2, java.awt.BorderLayout.CENTER);
 
