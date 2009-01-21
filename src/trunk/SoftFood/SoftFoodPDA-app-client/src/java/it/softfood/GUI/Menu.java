@@ -1,14 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
- * Menu.java
- *
- * Created on 14-gen-2009, 12.07.01
- */
-
 package it.softfood.GUI;
 
 import org.jdesktop.application.FrameView;
@@ -18,9 +7,9 @@ import org.jdesktop.application.FrameView;
  * @author Marco Grasso
  * @author Francesco Pacilio
  */
+
 public class Menu extends javax.swing.JPanel {
 
-    /** Creates new form Menu */
     public Menu(FrameView frame,Long tavolo) {
         initComponents();
         this.frame = frame;
