@@ -137,6 +137,8 @@ public class Pietanza extends javax.swing.JPanel {
                 {null, null},
                 {null, null},
                 {null, null},
+                {null, null},
+                {null, null},
                 {null, null}
             },
             new String [] {
@@ -236,6 +238,8 @@ private void cancellaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         
         TableColumn sport = jTable1.getColumnModel().getColumn(0);
         sport.setCellEditor(new DefaultCellEditor(piu));
+       
+        
 }//GEN-LAST:event_cancellaActionPerformed
 
 private void OKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OKActionPerformed
