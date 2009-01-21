@@ -55,7 +55,6 @@ public class Pietanza extends javax.swing.JPanel {
         sport.setCellEditor(new DefaultCellEditor(piu));
 
         int disp;
-    System.out.println("tipo"+ tipo);
         if (tipo.equalsIgnoreCase("bibite")) 
             disp = articolo.selezionaDisponibilitaBevanda(id);
         else 
