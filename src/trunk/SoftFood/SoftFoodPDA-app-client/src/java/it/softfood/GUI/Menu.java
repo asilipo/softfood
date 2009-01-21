@@ -130,10 +130,7 @@ public class Menu extends javax.swing.JPanel {
         jPanel1.setLayout(new java.awt.BorderLayout());
 
         Ok.setText(resourceMap.getString("Ok.text")); // NOI18N
-        Ok.setMaximumSize(new java.awt.Dimension(59, 29));
-        Ok.setMinimumSize(new java.awt.Dimension(59, 29));
         Ok.setName("Ok"); // NOI18N
-        Ok.setPreferredSize(new java.awt.Dimension(59, 29));
         Ok.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 OkActionPerformed(evt);
@@ -147,7 +144,10 @@ public class Menu extends javax.swing.JPanel {
         jPanel2.setLayout(new java.awt.BorderLayout());
 
         Annulla.setText(resourceMap.getString("Annulla.text")); // NOI18N
+        Annulla.setMaximumSize(new java.awt.Dimension(75, 29));
+        Annulla.setMinimumSize(new java.awt.Dimension(75, 29));
         Annulla.setName("Annulla"); // NOI18N
+        Annulla.setPreferredSize(new java.awt.Dimension(75, 29));
         Annulla.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AnnullaActionPerformed(evt);
