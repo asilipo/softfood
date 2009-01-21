@@ -101,6 +101,9 @@
                   <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tabella_bibiteMouseClicked"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -122,6 +125,7 @@
             <Component class="javax.swing.JButton" name="add">
               <Properties>
                 <Property name="text" type="java.lang.String" resourceKey="add.text"/>
+                <Property name="enabled" type="boolean" value="false"/>
                 <Property name="name" type="java.lang.String" value="add" noResource="true"/>
               </Properties>
               <Events>
@@ -131,6 +135,7 @@
             <Component class="javax.swing.JButton" name="visuallizza">
               <Properties>
                 <Property name="text" type="java.lang.String" resourceKey="visuallizza.text"/>
+                <Property name="enabled" type="boolean" value="false"/>
                 <Property name="name" type="java.lang.String" value="visuallizza" noResource="true"/>
               </Properties>
               <Events>

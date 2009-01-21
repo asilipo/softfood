@@ -152,6 +152,11 @@ public class Bibite extends javax.swing.JPanel {
             }
         });
         tabella_bibite.setName("tabella_bibite"); // NOI18N
+        tabella_bibite.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabella_bibiteMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tabella_bibite);
         tabella_bibite.getColumnModel().getColumn(0).setResizable(false);
         tabella_bibite.getColumnModel().getColumn(0).setPreferredWidth(0);
@@ -165,6 +170,7 @@ public class Bibite extends javax.swing.JPanel {
 
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(it.softfood.GUI.Main.class).getContext().getResourceMap(Bibite.class);
         add.setText(resourceMap.getString("add.text")); // NOI18N
+        add.setEnabled(false);
         add.setName("add"); // NOI18N
         add.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -174,6 +180,7 @@ public class Bibite extends javax.swing.JPanel {
         jPanel1.add(add);
 
         visuallizza.setText(resourceMap.getString("visuallizza.text")); // NOI18N
+        visuallizza.setEnabled(false);
         visuallizza.setName("visuallizza"); // NOI18N
         visuallizza.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -291,9 +298,15 @@ private void visuallizzaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     System.out.println("ID pietanza "+id_long);
     id_antipasto.setColumnVisible(id, false);
    this.setVisible(false);
-   it.softfood.GUI.Pietanza pietanza = new it.softfood.GUI.Pietanza(frame,tavolo,id_long);
+   it.softfood.GUI.Pietanza pietanza = new it.softfood.GUI.Pietanza(frame,tavolo,id_long,"bibite");
    frame.setComponent(pietanza);  
 }//GEN-LAST:event_visuallizzaActionPerformed
+
+private void tabella_bibiteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabella_bibiteMouseClicked
+// TODO add your handling code here:
+    add.setEnabled(true);
+    visuallizza.setEnabled(true);
+}//GEN-LAST:event_tabella_bibiteMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
