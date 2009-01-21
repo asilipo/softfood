@@ -46,6 +46,7 @@ public class Tavoli extends javax.swing.JPanel {
         } else {
             SelezionaTavoli.setText(SelezionaTavoli.getText() + " un tavolo:");
             tavoli = (ArrayList<Tavolo>) tavoloFacade.selezionaTavoliOccupati();
+            jComboBox2.setEnabled(false);
         }
 
         int i = 0;
@@ -226,8 +227,9 @@ public class Tavoli extends javax.swing.JPanel {
             
         }else{
             //Gestione
-            //ordine = ordinazioneFacade.selezionaOrdinazioniGiornalierePerTavolo(/*RECUPERARE TAVOLO*/, false);
-        
+            ordine = ordinazioneFacade.selezionaOrdinazioneGiornalieraPerTavolo(tav.get(0),new Boolean("false"));
+            
+            System.out.println(ordine.getId());
         }
         
         this.setVisible(false);
