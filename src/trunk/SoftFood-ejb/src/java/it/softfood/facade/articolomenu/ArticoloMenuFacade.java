@@ -155,6 +155,7 @@ public class ArticoloMenuFacade implements ArticoloMenuFacadeRemote, ArticoloMen
 
         int contatore = 0;
         int disponibilita = 0;
+        int disponibilitaMinima = 1000;
         int numeroIngredienti = 0;
         for (IngredientePietanza ingredientePietanza : ingredientiPietanze) {
             if (ingredientePietanza.getIngredientePietanzaPK().getPietanza().getId().equals(pietanza.getId())) {
@@ -164,10 +165,18 @@ public class ArticoloMenuFacade implements ArticoloMenuFacadeRemote, ArticoloMen
                 for (IngredienteMagazzino ingredienteMagazzino : ingredientiMagazzino) {
                     if (ingredienteMagazzino.getIngredienteLungaConservazione().getId().equals(ingrediente.getId())) {
                         contatore++;
-                        if (ingredienteMagazzino.getQuantita() >= (ingredientePietanza.getQuantita() + (ingredientePietanza.getQuantita() * disponibilita))
+                        if (ingredienteMagazzino.getQuantita() >= ingredientePietanza.getQuantita()
                                 && ingrediente.getScadenza().after(data)) {
-                            disponibilita++;
+                            try {
+                                disponibilita = ingredienteMagazzino.getQuantita() / ingredientePietanza.getQuantita();
+                            } catch (NumberFormatException nfe) {
+                                disponibilita = 0;
+                            }
                         }
+
+                        if (disponibilita < disponibilitaMinima)
+                            disponibilitaMinima = disponibilita;
+                        disponibilita = 0;
                     }
                 }
             }
@@ -175,8 +184,8 @@ public class ArticoloMenuFacade implements ArticoloMenuFacadeRemote, ArticoloMen
 
         System.out.println("numero ingre " + numeroIngredienti);
         System.out.println("contatore " + contatore);
-        if (contatore == numeroIngredienti)
-            return disponibilita;
+        if (contatore == numeroIngredienti && contatore > 0)
+            return disponibilitaMinima;
 
         return 0;
     }
