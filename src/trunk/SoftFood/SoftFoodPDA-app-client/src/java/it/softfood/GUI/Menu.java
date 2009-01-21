@@ -176,35 +176,35 @@ public class Menu extends javax.swing.JPanel {
 private void AntipastiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AntipastiActionPerformed
 // TODO add your handling code here:
     this.setVisible(false);
-    Antipasto antipasto = new Antipasto(frame,tavolo);
+    Pannello_ordinazioni antipasto = new Pannello_ordinazioni(frame,tavolo,"antipasti");
     frame.setComponent(antipasto);
 }//GEN-LAST:event_AntipastiActionPerformed
 
 private void PrimiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PrimiActionPerformed
 // TODO add your handling code here:
     this.setVisible(false);
-    Primi primi = new Primi(frame,tavolo);
+    Pannello_ordinazioni primi = new Pannello_ordinazioni(frame,tavolo,"primi");
     frame.setComponent(primi);
 }//GEN-LAST:event_PrimiActionPerformed
 
 private void SecondiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SecondiActionPerformed
 // TODO add your handling code here:
      this.setVisible(false);
-    Secondi secondi = new Secondi(frame,tavolo);
+    Pannello_ordinazioni secondi = new Pannello_ordinazioni(frame,tavolo,"secondi");
     frame.setComponent(secondi);
 }//GEN-LAST:event_SecondiActionPerformed
 
 private void ContorniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ContorniActionPerformed
 // TODO add your handling code here:
      this.setVisible(false);
-    Contorni contorni = new Contorni(frame,tavolo);
+    Pannello_ordinazioni contorni = new Pannello_ordinazioni(frame,tavolo,"contorni");
     frame.setComponent(contorni);
 }//GEN-LAST:event_ContorniActionPerformed
 
 private void DolciActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DolciActionPerformed
 // TODO add your handling code here:
     this.setVisible(false);
-    Dolci dolci = new Dolci(frame,tavolo);
+    Pannello_ordinazioni dolci = new Pannello_ordinazioni(frame,tavolo,"dolci");
     frame.setComponent(dolci);
 }//GEN-LAST:event_DolciActionPerformed
 
