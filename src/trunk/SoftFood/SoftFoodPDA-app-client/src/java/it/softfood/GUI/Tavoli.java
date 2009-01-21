@@ -16,7 +16,6 @@ import org.jdesktop.application.FrameView;
  * @author Marco Grasso
  * @author Francesco Pacilio
  */
-
 public class Tavoli extends javax.swing.JPanel {
 
     private TavoloFacadeRemote tavoloFacade;
@@ -24,12 +23,12 @@ public class Tavoli extends javax.swing.JPanel {
     private ArrayList<Tavolo> tavoli;
     private String[] listaTavoli;
 
-    private void initFacade(){
-        try{
-            InitialContext initial=new InitialContext();
+    private void initFacade() {
+        try {
+            InitialContext initial = new InitialContext();
             tavoloFacade = (TavoloFacadeRemote) initial.lookup("it.softfood.facade.tavolo.TavoloFacade");
             ordinazioneFacade = (OrdinazioneFacadeRemote) initial.lookup("it.softfood.facade.ordinazione.OrdinazioneFacade");
-        }catch(NamingException e){
+        } catch (NamingException e) {
             System.err.println("Errore binding: TavoloFacade e OrdinazioneFacade");
         }
     }
@@ -37,34 +36,36 @@ public class Tavoli extends javax.swing.JPanel {
     public Tavoli(FrameView frame, boolean vuoti) {
         initComponents();
         initFacade();
-        this.frame=frame;
-        if(vuoti){
-            SelezionaTavoli.setText(SelezionaTavoli.getText()+" un tavolo vuoto:");
-            tavoli=(ArrayList<Tavolo>) tavoloFacade.selezionaTavoliLiberi();
-            
-        }else{
-            SelezionaTavoli.setText(SelezionaTavoli.getText()+" un tavolo:");
-            tavoli= (ArrayList<Tavolo>) tavoloFacade.selezionaTavoliOccupati();
+        this.frame = frame;
+        this.vuoti=vuoti;
+        
+        if (vuoti) {
+            SelezionaTavoli.setText(SelezionaTavoli.getText() + " un tavolo vuoto:");
+            tavoli = (ArrayList<Tavolo>) tavoloFacade.selezionaTavoliLiberi();
+
+        } else {
+            SelezionaTavoli.setText(SelezionaTavoli.getText() + " un tavolo:");
+            tavoli = (ArrayList<Tavolo>) tavoloFacade.selezionaTavoliOccupati();
         }
 
-        int i=0;        
-        int size=tavoli.size();
-        model=new DefaultListModel();
-       
-        if(size == 0) {
-           add.setEnabled(false);
-           jComboBox1.setEnabled(false);
-           jComboBox2.setEnabled(false);
-           model.addElement("Tavoli momentaneamente \n tutti occupati... ");
+        int i = 0;
+        int size = tavoli.size();
+        model = new DefaultListModel();
+
+        if (size == 0) {
+            add.setEnabled(false);
+            jComboBox1.setEnabled(false);
+            jComboBox2.setEnabled(false);
+            model.addElement("Tavoli momentaneamente \n tutti occupati... ");
         }
-        
+
         listaTavoli = new String[size];
-        for(Tavolo tavolo:tavoli) {
-            listaTavoli[i]=tavolo.getRiferimento();
+        for (Tavolo tavolo : tavoli) {
+            listaTavoli[i] = tavolo.getRiferimento();
             jComboBox1.addItem(tavolo.getRiferimento());
             i++;
         }
-              
+
         jList1.setModel(model);
     }
 
@@ -191,42 +192,46 @@ public class Tavoli extends javax.swing.JPanel {
 
     private void OkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OkActionPerformed
         // TODO add your handling code here:
-        Enumeration enumeration=model.elements();
-        ArrayList<String> tav=new ArrayList<String>();
-        for(;enumeration.hasMoreElements();)
+        Enumeration enumeration = model.elements();
+        ArrayList<String> tav = new ArrayList<String>();
+        for (; enumeration.hasMoreElements();) {
             tav.add((String) enumeration.nextElement());
-        
-        Long tavoloSelezionato=tavoloFacade.occupaTavoli(tav);
-        System.out.println("TAVOLO ID "+tavoloSelezionato);
-        
-        Ordinazione ordine=new Ordinazione();
+        }
+        Long tavoloSelezionato = tavoloFacade.occupaTavoli(tav);
+        System.out.println("TAVOLO ID " + tavoloSelezionato);
+
+        Ordinazione ordine = new Ordinazione();
         ordine.setTavolo(tavoloFacade.selezionaTavolo(tavoloSelezionato));
-        ordine.setCoperti(Integer.parseInt((String)jComboBox2.getSelectedItem()));
+        ordine.setCoperti(Integer.parseInt((String) jComboBox2.getSelectedItem()));
         ordine.setTerminato(false);
-        
-        ordine=ordinazioneFacade.inserisciOrdinazione(ordine);
-        
+        try {
+            ordine = ordinazioneFacade.inserisciOrdinazione(ordine);
+        } catch (NullPointerException e) {
+            this.setVisible(false);
+            Tavoli pannello_tavoli = new Tavoli(frame,vuoti);
+            frame.setComponent(pannello_tavoli);
+        }
+
+
         this.setVisible(false);
-        Menu menu=new Menu(frame,ordine.getId());
+        Menu menu = new Menu(frame, ordine.getId());
         frame.setComponent(menu);
-        
+
     }//GEN-LAST:event_OkActionPerformed
 
     private void AnnullaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AnnullaActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-        Ordine ordine=new Ordine(frame);
+        Ordine ordine = new Ordine(frame);
         frame.setComponent(ordine);
     }//GEN-LAST:event_AnnullaActionPerformed
 
 private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActionPerformed
 // TODO add your handling code here:
     Ok.setEnabled(true);
-    model.addElement((String)jComboBox1.getSelectedItem());
+    model.addElement((String) jComboBox1.getSelectedItem());
     jComboBox1.setSelectedIndex(0);
 }//GEN-LAST:event_addActionPerformed
-
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Annulla;
     private javax.swing.JButton Ok;
@@ -245,4 +250,5 @@ private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:eve
     // End of variables declaration//GEN-END:variables
     private FrameView frame;
     private DefaultListModel model;
+    private boolean vuoti;
 }
