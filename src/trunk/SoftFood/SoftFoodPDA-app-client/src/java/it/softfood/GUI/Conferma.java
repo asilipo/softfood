@@ -11,6 +11,11 @@
 
 package it.softfood.GUI;
 
+import it.softfood.entity.LineaOrdinazione;
+import it.softfood.facade.ordinazione.OrdinazioneFacadeRemote;
+import java.util.ArrayList;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import org.jdesktop.application.FrameView;
 
 /**
@@ -20,10 +25,36 @@ import org.jdesktop.application.FrameView;
  */
 public class Conferma extends javax.swing.JPanel {
 
+    
+    
+    private OrdinazioneFacadeRemote ordinazioneFacade;
+
+    private void initFacade(){
+        try{
+            InitialContext initial=new InitialContext();
+            ordinazioneFacade = (OrdinazioneFacadeRemote) initial.lookup("it.softfood.facade.ordinazione.OrdinazioneFacade");
+        }catch(NamingException e){
+            System.err.println("Errore binding: TavoloFacade e OrdinazioneFacade");
+        }
+    }
+    
+    
     /** Creates new form Conferma */
-    public Conferma(FrameView frame) {
+    public Conferma(FrameView frame,Long tavolo) {
         initComponents();
+        initFacade();
         this.frame = frame;
+        this.tavolo=tavolo;
+        
+        ArrayList<LineaOrdinazione> ordini=(ArrayList<LineaOrdinazione>) ordinazioneFacade.selezionaLineeOrdinazionePerOrdinazione(ordinazioneFacade.selezionaOrdinazionePerId(tavolo));
+        
+        String data[]=new String[ordini.size()];
+        int i=0;
+        
+        for(LineaOrdinazione linea:ordini)
+            data[i++] = linea.getArticolo()+" - "+linea.getQuantita();
+        
+        menu.setListData(data);
     }
 
     /** This method is called from within the constructor to
@@ -50,11 +81,6 @@ public class Conferma extends javax.swing.JPanel {
 
         jScrollPane1.setName("jScrollPane1"); // NOI18N
 
-        menu.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
         menu.setName("menu"); // NOI18N
         jScrollPane1.setViewportView(menu);
 
@@ -127,4 +153,5 @@ public class Conferma extends javax.swing.JPanel {
     private javax.swing.JList menu;
     // End of variables declaration//GEN-END:variables
     private FrameView frame;
+    private Long tavolo;
 }
