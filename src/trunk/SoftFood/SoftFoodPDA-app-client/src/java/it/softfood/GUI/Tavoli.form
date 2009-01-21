@@ -63,7 +63,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="add">
           <Properties>
+            <Property name="font" type="java.awt.Font" resourceKey="add.font"/>
             <Property name="text" type="java.lang.String" resourceKey="add.text"/>
+            <Property name="horizontalTextPosition" type="int" value="0"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[75, 10]"/>
             </Property>
