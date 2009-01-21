@@ -34,5 +34,7 @@ public interface ArticoloMenuFacadeLocal {
     java.util.List<it.softfood.entity.Ingrediente> selezionaIngredientiPietanza(java.lang.Long id);
 
     java.util.List<it.softfood.entity.Bevanda> selezionaBevandeDisponibili();
+
+    java.lang.Integer selezionaDisponibilitaPietanza(java.lang.Long id);
     
 }
