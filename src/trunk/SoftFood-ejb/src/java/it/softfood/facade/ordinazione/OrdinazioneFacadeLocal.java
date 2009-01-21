@@ -50,4 +50,8 @@ public interface OrdinazioneFacadeLocal {
 
     boolean rimuoviVariante(java.lang.Long id);
 
+    it.softfood.entity.Ordinazione selezionaOrdinazioneGiornalieraPerTavolo(it.softfood.entity.Tavolo tavolo, java.lang.Boolean terminato);
+
+    it.softfood.entity.Ordinazione selezionaOrdinazioneGiornalieraPerTavolo(java.lang.String riferimentoTavolo, java.lang.Boolean terminato);
+
 }
