@@ -182,8 +182,6 @@ public class ArticoloMenuFacade implements ArticoloMenuFacadeRemote, ArticoloMen
             }
         }
 
-        System.out.println("numero ingre " + numeroIngredienti);
-        System.out.println("contatore " + contatore);
         if (contatore == numeroIngredienti && contatore > 0)
             return disponibilitaMinima;
 
