@@ -15,51 +15,57 @@ import org.jdesktop.application.FrameView;
  * @author Marco Grasso
  * @author Francesco Pacilio
  */
-
 public class Pietanza extends javax.swing.JPanel {
 
     private ArticoloMenuFacadeRemote articolo;
-    
-    private void initFacade(){
-        try{
-            InitialContext initial=new InitialContext();
+
+    private void initFacade() {
+        try {
+            InitialContext initial = new InitialContext();
             articolo = (ArticoloMenuFacadeRemote) initial.lookup("it.softfood.facade.articolomenu.ArticoloMenuFacade");
-        }catch(NamingException e){
+        } catch (NamingException e) {
             System.err.println("Errore binding: ArticoloMenuFacade");
         }
     }
 
-    public Pietanza(FrameView frame,Long tavolo,Long id,String tipo) {
+    public Pietanza(FrameView frame, Long tavolo, Long id, String tipo) {
         this.tavolo = tavolo;
         this.tipo = tipo;
-        
+
         initComponents();
         initFacade();
-        
+
         this.frame = frame;
-        this.id=id;
-        
+        this.id = id;
+
         ArrayList<Ingrediente> ingredienti = (ArrayList<Ingrediente>) articolo.selezionaIngredientiPietanza(id);
 
-        String ingr[]=new String[ingredienti.size()];
-        int i=0;
-        for(Ingrediente ingrediente:ingredienti)
+        String ingr[] = new String[ingredienti.size()];
+        int i = 0;
+        for (Ingrediente ingrediente : ingredienti) {
             ingr[i++] = ingrediente.getNome();
-
+        }
         listaIngredienti.setListData(ingr);
-        
-        piu=new JComboBox();
+
+        piu = new JComboBox();
         piu.addItem("+");
         piu.addItem("-");
-        
+
         TableColumn sport = jTable1.getColumnModel().getColumn(0);
         sport.setCellEditor(new DefaultCellEditor(piu));
-        int disp=((Integer)articolo.selezionaDisponibilitaPietanza(id)).intValue();
-        
-        disponibilita.setText(disponibilita.getText()+disp);
-        
-        for(int idisp=1;idisp<=disp;idisp++)
+
+        int disp;
+
+        if (tipo.equalsIgnoreCase("bibite")) {
+            disp = ((Integer) articolo.selezionaDisponibilitaBevanda(id)).intValue();
+        } else {
+            disp = ((Integer) articolo.selezionaDisponibilitaPietanza(id)).intValue();
+        }
+        disponibilita.setText(disponibilita.getText() + disp);
+
+        for (int idisp = 1; idisp <= disp; idisp++) {
             jComboBox1.addItem(idisp);
+        }
     }
 
     /** This method is called from within the constructor to
@@ -216,7 +222,7 @@ public class Pietanza extends javax.swing.JPanel {
 private void cancellaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancellaActionPerformed
 // TODO add your handling code here:
     jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+            new Object[][]{
                 {null, null},
                 {null, null},
                 {null, null},
@@ -224,39 +230,48 @@ private void cancellaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                 {null, null},
                 {null, null}
             },
-            new String [] {
+            new String[]{
                 " ", "Variante"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.String.class
-            };
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        
-        TableColumn sport = jTable1.getColumnModel().getColumn(0);
-        sport.setCellEditor(new DefaultCellEditor(piu));
-       
-        
+            }) {
+
+        Class[] types = new Class[]{
+            java.lang.Object.class, java.lang.String.class
+        };
+
+        public Class getColumnClass(int columnIndex) {
+            return types[columnIndex];
+        }
+    });
+
+    TableColumn sport = jTable1.getColumnModel().getColumn(0);
+    sport.setCellEditor(new DefaultCellEditor(piu));
+
+
 }//GEN-LAST:event_cancellaActionPerformed
 
 private void OKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OKActionPerformed
 // TODO add your handling code here:
     this.setVisible(false);
-    Pannello_ordinazioni pannello=new Pannello_ordinazioni(frame, tavolo, tipo);
-    frame.setComponent(pannello);
+    if (tipo.equalsIgnoreCase("bibite")) {
+        Bibite pannello = new Bibite(frame, tavolo);
+        frame.setComponent(pannello);
+    } else {
+        Pannello_ordinazioni pannello = new Pannello_ordinazioni(frame, tavolo, tipo);
+        frame.setComponent(pannello);
+    }
 }//GEN-LAST:event_OKActionPerformed
 
 private void annullaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_annullaActionPerformed
 // TODO add your handling code here:
     this.setVisible(false);
-    Pannello_ordinazioni pannello=new Pannello_ordinazioni(frame, tavolo, tipo);
-    frame.setComponent(pannello);
+    if (tipo.equalsIgnoreCase("bibite")) {
+        Bibite pannello = new Bibite(frame, tavolo);
+        frame.setComponent(pannello);
+    } else {
+        Pannello_ordinazioni pannello = new Pannello_ordinazioni(frame, tavolo, tipo);
+        frame.setComponent(pannello);
+    }
 }//GEN-LAST:event_annullaActionPerformed
-
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton OK;
     private javax.swing.JButton annulla;
