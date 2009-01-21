@@ -126,11 +126,15 @@ public class Menu extends javax.swing.JPanel {
         });
         add(Bibite);
 
+        jPanel1.setMaximumSize(new java.awt.Dimension(100, 29));
         jPanel1.setName("jPanel1"); // NOI18N
         jPanel1.setLayout(new java.awt.BorderLayout());
 
         Ok.setText(resourceMap.getString("Ok.text")); // NOI18N
+        Ok.setMaximumSize(new java.awt.Dimension(100, 29));
+        Ok.setMinimumSize(new java.awt.Dimension(100, 29));
         Ok.setName("Ok"); // NOI18N
+        Ok.setPreferredSize(new java.awt.Dimension(100, 50));
         Ok.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 OkActionPerformed(evt);
@@ -140,14 +144,17 @@ public class Menu extends javax.swing.JPanel {
 
         add(jPanel1);
 
+        jPanel2.setMaximumSize(new java.awt.Dimension(100, 29));
+        jPanel2.setMinimumSize(new java.awt.Dimension(100, 29));
         jPanel2.setName("jPanel2"); // NOI18N
+        jPanel2.setPreferredSize(new java.awt.Dimension(100, 29));
         jPanel2.setLayout(new java.awt.BorderLayout());
 
         Annulla.setText(resourceMap.getString("Annulla.text")); // NOI18N
-        Annulla.setMaximumSize(new java.awt.Dimension(75, 29));
-        Annulla.setMinimumSize(new java.awt.Dimension(75, 29));
+        Annulla.setMaximumSize(new java.awt.Dimension(100, 29));
+        Annulla.setMinimumSize(new java.awt.Dimension(100, 29));
         Annulla.setName("Annulla"); // NOI18N
-        Annulla.setPreferredSize(new java.awt.Dimension(75, 29));
+        Annulla.setPreferredSize(new java.awt.Dimension(100, 50));
         Annulla.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AnnullaActionPerformed(evt);

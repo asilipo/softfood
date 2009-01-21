@@ -162,6 +162,7 @@ public class Pannello_ordinazioni extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        tabella_pietanza.setFocusable(false);
         tabella_pietanza.setName("tabella_pietanza"); // NOI18N
         tabella_pietanza.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
