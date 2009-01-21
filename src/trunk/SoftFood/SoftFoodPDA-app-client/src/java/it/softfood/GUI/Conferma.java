@@ -123,6 +123,7 @@ public class Conferma extends javax.swing.JPanel {
     private void CancellaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancellaActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
+        ordinazioneFacade.rimuoviOrdinazione(tavolo);
         Ordine ordine = new Ordine(frame);
         frame.setComponent(ordine);
         
