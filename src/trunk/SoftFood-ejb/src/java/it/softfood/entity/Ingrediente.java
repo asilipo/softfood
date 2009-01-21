@@ -41,7 +41,7 @@ public class Ingrediente implements Serializable {
 	@Id()
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenza_ingrediente")
 	private Long id;
-	@Column(name = "nome", nullable = false, unique = true)
+	@Column(name = "nome", nullable = false)
 	private String nome;
 	@Column(name = "descrizione", nullable = true)
 	private String descrizione;
