@@ -5,6 +5,9 @@ import it.softfood.facade.articolomenu.ArticoloMenuFacadeRemote;
 import java.util.ArrayList;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
+import javax.swing.DefaultCellEditor;
+import javax.swing.JComboBox;
+import javax.swing.table.TableColumn;
 import org.jdesktop.application.FrameView;
 
 /**
@@ -44,6 +47,19 @@ public class Pietanza extends javax.swing.JPanel {
             ingr[i++] = ingrediente.getNome();
 
         listaIngredienti.setListData(ingr);
+        
+        piu=new JComboBox();
+        piu.addItem("+");
+        piu.addItem("-");
+        
+        TableColumn sport = jTable1.getColumnModel().getColumn(0);
+        sport.setCellEditor(new DefaultCellEditor(piu));
+        int disp=((Integer)articolo.selezionaDisponibilitaPietanza(id)).intValue();
+        
+        disponibilita.setText(disponibilita.getText()+disp);
+        
+        for(int idisp=1;idisp<=disp;idisp++)
+            jComboBox1.addItem(idisp);
     }
 
     /** This method is called from within the constructor to
@@ -55,14 +71,22 @@ public class Pietanza extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        ok = new javax.swing.JButton();
-        Annulla = new javax.swing.JButton();
-        Cancella = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        Variante = new javax.swing.JEditorPane();
+        ingredienti = new javax.swing.JPanel();
+        disponibilita = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         listaIngredienti = new javax.swing.JList();
+        quantita = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        combo = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox();
+        cancella = new javax.swing.JButton();
+        pannello_bottoni = new javax.swing.JPanel();
+        OK = new javax.swing.JButton();
+        annulla = new javax.swing.JButton();
 
         setMaximumSize(new java.awt.Dimension(225, 450));
         setMinimumSize(new java.awt.Dimension(225, 450));
@@ -70,102 +94,186 @@ public class Pietanza extends javax.swing.JPanel {
         setPreferredSize(new java.awt.Dimension(225, 450));
         setLayout(new java.awt.BorderLayout(5, 5));
 
-        jPanel1.setName("jPanel1"); // NOI18N
-        jPanel1.setLayout(new java.awt.GridLayout(1, 3));
+        ingredienti.setName("ingredienti"); // NOI18N
+        ingredienti.setLayout(new java.awt.BorderLayout(0, 2));
 
+        disponibilita.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(it.softfood.GUI.Main.class).getContext().getResourceMap(Pietanza.class);
-        ok.setText(resourceMap.getString("ok.text")); // NOI18N
-        ok.setName("ok"); // NOI18N
-        ok.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                okActionPerformed(evt);
-            }
-        });
-        jPanel1.add(ok);
+        disponibilita.setText(resourceMap.getString("disponibilita.text")); // NOI18N
+        disponibilita.setName("disponibilita"); // NOI18N
+        ingredienti.add(disponibilita, java.awt.BorderLayout.SOUTH);
 
-        Annulla.setText(resourceMap.getString("Annulla.text")); // NOI18N
-        Annulla.setName("Annulla"); // NOI18N
-        Annulla.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AnnullaActionPerformed(evt);
-            }
-        });
-        jPanel1.add(Annulla);
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText(resourceMap.getString("jLabel1.text")); // NOI18N
+        jLabel1.setName("jLabel1"); // NOI18N
+        ingredienti.add(jLabel1, java.awt.BorderLayout.NORTH);
 
-        Cancella.setText(resourceMap.getString("Cancella.text")); // NOI18N
-        Cancella.setName("Cancella"); // NOI18N
-        Cancella.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CancellaActionPerformed(evt);
-            }
-        });
-        jPanel1.add(Cancella);
-
-        add(jPanel1, java.awt.BorderLayout.PAGE_END);
-
-        jScrollPane2.setName("jScrollPane2"); // NOI18N
-
-        Variante.setText(resourceMap.getString("Variante.text")); // NOI18N
-        Variante.setMaximumSize(new java.awt.Dimension(0, 0));
-        Variante.setMinimumSize(new java.awt.Dimension(0, 0));
-        Variante.setName("Variante"); // NOI18N
-        jScrollPane2.setViewportView(Variante);
-
-        add(jScrollPane2, java.awt.BorderLayout.CENTER);
-
-        jScrollPane1.setName("jScrollPane1"); // NOI18N
+        jScrollPane1.setName("ingredienti"); // NOI18N
 
         listaIngredienti.setName("listaIngredienti"); // NOI18N
         jScrollPane1.setViewportView(listaIngredienti);
 
-        add(jScrollPane1, java.awt.BorderLayout.PAGE_START);
+        ingredienti.add(jScrollPane1, java.awt.BorderLayout.CENTER);
+
+        add(ingredienti, java.awt.BorderLayout.NORTH);
+
+        quantita.setName("quantita"); // NOI18N
+        quantita.setLayout(new java.awt.BorderLayout(0, 2));
+
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText(resourceMap.getString("jLabel3.text")); // NOI18N
+        jLabel3.setName("jLabel3"); // NOI18N
+        quantita.add(jLabel3, java.awt.BorderLayout.CENTER);
+
+        jScrollPane2.setMaximumSize(new java.awt.Dimension(225, 60));
+        jScrollPane2.setMinimumSize(new java.awt.Dimension(225, 60));
+        jScrollPane2.setName("jScrollPane2"); // NOI18N
+        jScrollPane2.setPreferredSize(new java.awt.Dimension(225, 60));
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                " ", "Variante"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jTable1.setMaximumSize(new java.awt.Dimension(30, 30));
+        jTable1.setMinimumSize(new java.awt.Dimension(30, 30));
+        jTable1.setName("jTable1"); // NOI18N
+        jTable1.setPreferredSize(new java.awt.Dimension(30, 30));
+        jScrollPane2.setViewportView(jTable1);
+        jTable1.getColumnModel().getColumn(0).setResizable(false);
+        jTable1.getColumnModel().getColumn(0).setHeaderValue(resourceMap.getString("jTable1.columnModel.title0")); // NOI18N
+        jTable1.getColumnModel().getColumn(1).setResizable(false);
+        jTable1.getColumnModel().getColumn(1).setHeaderValue(resourceMap.getString("jTable1.columnModel.title1")); // NOI18N
+
+        quantita.add(jScrollPane2, java.awt.BorderLayout.CENTER);
+
+        combo.setName("combo"); // NOI18N
+        combo.setPreferredSize(new java.awt.Dimension(20, 20));
+        combo.setLayout(new java.awt.BorderLayout());
+
+        jLabel2.setText(resourceMap.getString("jLabel2.text")); // NOI18N
+        jLabel2.setName("jLabel2"); // NOI18N
+        combo.add(jLabel2, java.awt.BorderLayout.WEST);
+
+        jComboBox1.setName("jComboBox1"); // NOI18N
+        combo.add(jComboBox1, java.awt.BorderLayout.CENTER);
+
+        quantita.add(combo, java.awt.BorderLayout.NORTH);
+
+        cancella.setText(resourceMap.getString("cancella.text")); // NOI18N
+        cancella.setName("cancella"); // NOI18N
+        cancella.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancellaActionPerformed(evt);
+            }
+        });
+        quantita.add(cancella, java.awt.BorderLayout.SOUTH);
+
+        add(quantita, java.awt.BorderLayout.CENTER);
+
+        pannello_bottoni.setName("pannello_bottoni"); // NOI18N
+        pannello_bottoni.setLayout(new java.awt.GridLayout(1, 2));
+
+        OK.setText(resourceMap.getString("OK.text")); // NOI18N
+        OK.setName("OK"); // NOI18N
+        OK.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                OKActionPerformed(evt);
+            }
+        });
+        pannello_bottoni.add(OK);
+
+        annulla.setText(resourceMap.getString("annulla.text")); // NOI18N
+        annulla.setName("annulla"); // NOI18N
+        annulla.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                annullaActionPerformed(evt);
+            }
+        });
+        pannello_bottoni.add(annulla);
+
+        add(pannello_bottoni, java.awt.BorderLayout.SOUTH);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void okActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okActionPerformed
-        // TODO add your handling code here:
-        this.setVisible(false);
-        if(tipo.equalsIgnoreCase("bibite")){
-              Bibite pannello=new Bibite(frame, tavolo);
-              frame.setComponent(pannello);
-          }else{
-              Pannello_ordinazioni pannello = new Pannello_ordinazioni(frame, tavolo, tipo);
-              frame.setComponent(pannello);
-          }
+private void cancellaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancellaActionPerformed
+// TODO add your handling code here:
+    jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                " ", "Variante"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.String.class
+            };
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
         
-        
-    }//GEN-LAST:event_okActionPerformed
+        TableColumn sport = jTable1.getColumnModel().getColumn(0);
+        sport.setCellEditor(new DefaultCellEditor(piu));
+}//GEN-LAST:event_cancellaActionPerformed
 
-    private void AnnullaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AnnullaActionPerformed
-        // TODO add your handling code here:
-          this.setVisible(false);
-          if(tipo.equalsIgnoreCase("bibite")){
-              Bibite pannello=new Bibite(frame, tavolo);
-              frame.setComponent(pannello);
-          }else{
-              Pannello_ordinazioni pannello = new Pannello_ordinazioni(frame, tavolo, tipo);
-              frame.setComponent(pannello);
-          }
-      
-    }//GEN-LAST:event_AnnullaActionPerformed
+private void OKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OKActionPerformed
+// TODO add your handling code here:
+    this.setVisible(false);
+    Pannello_ordinazioni pannello=new Pannello_ordinazioni(frame, tavolo, tipo);
+    frame.setComponent(pannello);
+}//GEN-LAST:event_OKActionPerformed
 
-    private void CancellaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancellaActionPerformed
-        // TODO add your handling code here:
-            Variante.setText("");
-    }//GEN-LAST:event_CancellaActionPerformed
+private void annullaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_annullaActionPerformed
+// TODO add your handling code here:
+    this.setVisible(false);
+    Pannello_ordinazioni pannello=new Pannello_ordinazioni(frame, tavolo, tipo);
+    frame.setComponent(pannello);
+}//GEN-LAST:event_annullaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Annulla;
-    private javax.swing.JButton Cancella;
-    private javax.swing.JEditorPane Variante;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton OK;
+    private javax.swing.JButton annulla;
+    private javax.swing.JButton cancella;
+    private javax.swing.JPanel combo;
+    private javax.swing.JLabel disponibilita;
+    private javax.swing.JPanel ingredienti;
+    private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable1;
     private javax.swing.JList listaIngredienti;
-    private javax.swing.JButton ok;
+    private javax.swing.JPanel pannello_bottoni;
+    private javax.swing.JPanel quantita;
     // End of variables declaration//GEN-END:variables
     private FrameView frame;
     private Long tavolo;
     private Long id;
     private String tipo;
+    private JComboBox piu;
 }

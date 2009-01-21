@@ -56,7 +56,7 @@ public class Bibite extends javax.swing.JPanel {
         combo.addItem(4);
         combo.addItem(5);
 
-        tabella_bibite.setModel(new javax.swing.table.DefaultTableModel(new String[]{"ID", "Bevanda", "Quantita'"}, bibite.size()));
+        tabella_bibite.setModel(new javax.swing.table.DefaultTableModel(new String[]{"ID", "Bevanda"}, bibite.size()));
 
         id_antipasto=new XTableColumnModel();
         
@@ -104,8 +104,8 @@ public class Bibite extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tabella_bibite = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
-        add = new javax.swing.JButton();
         visuallizza = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
         pannello_ordini = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -133,14 +133,14 @@ public class Bibite extends javax.swing.JPanel {
 
             },
             new String [] {
-                "ID", "Bevanda", "Quantita'"
+                "ID", "Bevanda"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.String.class, java.lang.Object.class
+                java.lang.Object.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, true
+                false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -158,26 +158,17 @@ public class Bibite extends javax.swing.JPanel {
             }
         });
         jScrollPane1.setViewportView(tabella_bibite);
+        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(it.softfood.GUI.Main.class).getContext().getResourceMap(Bibite.class);
         tabella_bibite.getColumnModel().getColumn(0).setResizable(false);
         tabella_bibite.getColumnModel().getColumn(0).setPreferredWidth(0);
+        tabella_bibite.getColumnModel().getColumn(0).setHeaderValue(resourceMap.getString("tabella_bibite.columnModel.title0")); // NOI18N
         tabella_bibite.getColumnModel().getColumn(1).setResizable(false);
-        tabella_bibite.getColumnModel().getColumn(2).setResizable(false);
+        tabella_bibite.getColumnModel().getColumn(1).setHeaderValue(resourceMap.getString("tabella_bibite.columnModel.title1")); // NOI18N
 
         pannello_bibite.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
         jPanel1.setName("jPanel1"); // NOI18N
         jPanel1.setLayout(new java.awt.GridLayout(1, 0));
-
-        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(it.softfood.GUI.Main.class).getContext().getResourceMap(Bibite.class);
-        add.setText(resourceMap.getString("add.text")); // NOI18N
-        add.setEnabled(false);
-        add.setName("add"); // NOI18N
-        add.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addActionPerformed(evt);
-            }
-        });
-        jPanel1.add(add);
 
         visuallizza.setText(resourceMap.getString("visuallizza.text")); // NOI18N
         visuallizza.setEnabled(false);
@@ -190,6 +181,11 @@ public class Bibite extends javax.swing.JPanel {
         jPanel1.add(visuallizza);
 
         pannello_bibite.add(jPanel1, java.awt.BorderLayout.SOUTH);
+
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText(resourceMap.getString("jLabel2.text")); // NOI18N
+        jLabel2.setName("jLabel2"); // NOI18N
+        pannello_bibite.add(jLabel2, java.awt.BorderLayout.PAGE_START);
 
         add(pannello_bibite, java.awt.BorderLayout.NORTH);
 
@@ -281,15 +277,6 @@ private void AnnullaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
     frame.setComponent(menu);
 }//GEN-LAST:event_AnnullaActionPerformed
 
-private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActionPerformed
-// TODO add your handling code here:
-    int row=tabella_bibite.getSelectedRow();
-    id_antipasto.setColumnVisible(id, true);
-    long id_long=((Long)tabella_bibite.getValueAt(row, 0)).longValue();
-    System.out.println(id_long);
-    id_antipasto.setColumnVisible(id, false);
-}//GEN-LAST:event_addActionPerformed
-
 private void visuallizzaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_visuallizzaActionPerformed
 // TODO add your handling code here:
     int row=tabella_bibite.getSelectedRow();
@@ -304,7 +291,6 @@ private void visuallizzaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
 
 private void tabella_bibiteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabella_bibiteMouseClicked
 // TODO add your handling code here:
-    add.setEnabled(true);
     visuallizza.setEnabled(true);
 }//GEN-LAST:event_tabella_bibiteMouseClicked
 
@@ -312,9 +298,9 @@ private void tabella_bibiteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FI
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Annulla;
     private javax.swing.JButton OK;
-    private javax.swing.JButton add;
     private javax.swing.JPanel bottoni;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
