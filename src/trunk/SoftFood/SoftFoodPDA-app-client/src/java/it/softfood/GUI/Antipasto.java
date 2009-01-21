@@ -122,7 +122,7 @@ public class Antipasto extends javax.swing.JPanel {
 
             },
             new String [] {
-                "ID", "Antipasto", "Quantit√†"
+                "ID", "Antipasto", "Quantità"
             }
         ) {
             Class[] types = new Class [] {
@@ -141,6 +141,11 @@ public class Antipasto extends javax.swing.JPanel {
             }
         });
         tabella_antipasti.setName("tabella_antipasti"); // NOI18N
+        tabella_antipasti.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabella_antipastiMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tabella_antipasti);
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(it.softfood.GUI.Main.class).getContext().getResourceMap(Antipasto.class);
         tabella_antipasti.getColumnModel().getColumn(0).setResizable(false);
@@ -157,6 +162,7 @@ public class Antipasto extends javax.swing.JPanel {
         jPanel1.setLayout(new java.awt.GridLayout(1, 0));
 
         add.setText(resourceMap.getString("add.text")); // NOI18N
+        add.setEnabled(false);
         add.setName("add"); // NOI18N
         add.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -166,6 +172,7 @@ public class Antipasto extends javax.swing.JPanel {
         jPanel1.add(add);
 
         visuallizza.setText(resourceMap.getString("visuallizza.text")); // NOI18N
+        visuallizza.setEnabled(false);
         visuallizza.setName("visuallizza"); // NOI18N
         visuallizza.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -290,6 +297,12 @@ private void visuallizzaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
    it.softfood.GUI.Pietanza pietanza = new it.softfood.GUI.Pietanza(frame,tavolo,id_long,"antipasto");
    frame.setComponent(pietanza);  
 }//GEN-LAST:event_visuallizzaActionPerformed
+
+private void tabella_antipastiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabella_antipastiMouseClicked
+// TODO add your handling code here:
+    add.setEnabled(true);
+    visuallizza.setEnabled(true);
+}//GEN-LAST:event_tabella_antipastiMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
