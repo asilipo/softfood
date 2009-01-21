@@ -157,7 +157,7 @@ public class Menu extends javax.swing.JPanel {
     private void OkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OkActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-        Conferma conferma = new Conferma(frame);
+        Conferma conferma = new Conferma(frame,tavolo);
         frame.setComponent(conferma);
 
     }//GEN-LAST:event_OkActionPerformed
