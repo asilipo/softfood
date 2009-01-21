@@ -57,7 +57,8 @@ public class OrdinazioneFacade implements OrdinazioneFacadeRemote, OrdinazioneFa
 	public Ordinazione inserisciOrdinazione(Ordinazione ordinazione) {
 		if (ordinazione != null) {
             Tavolo tavolo = tavoloSessionBeanRemote.selezionaTavoloPerId(ordinazione.getTavolo().getId());
-            if (tavolo == null || tavolo.getNumeroPosti() <= ordinazione.getCoperti()) {
+
+            if (tavolo == null || tavolo.getNumeroPosti() < ordinazione.getCoperti()) {
                 try {
                     if (tavolo.getRiferimento().contains("+")) {
                         String riferimento = tavolo.getRiferimento();
@@ -151,6 +152,20 @@ public class OrdinazioneFacade implements OrdinazioneFacadeRemote, OrdinazioneFa
 		if (tavolo != null && terminato != null) 
 			return ordinazioneSessionBean.selezionaOrdinazioniGionalierePerTavolo(tavolo, terminato);
 		
+		return null;
+	}
+
+    public Ordinazione selezionaOrdinazioneGiornalieraPerTavolo(Tavolo tavolo, Boolean terminato) {
+		if (tavolo != null && terminato != null)
+			return ((ArrayList<Ordinazione>)ordinazioneSessionBean.selezionaOrdinazioniGionalierePerTavolo(tavolo, terminato)).get(0);
+
+		return null;
+	}
+
+    public Ordinazione selezionaOrdinazioneGiornalieraPerTavolo(String riferimentoTavolo, Boolean terminato) {
+		if (riferimentoTavolo != null && terminato != null)
+			return ((ArrayList<Ordinazione>)ordinazioneSessionBean.selezionaOrdinazioniGionalierePerTavolo(tavoloSessionBeanRemote.selezionaTavoloPerRiferimento(riferimentoTavolo), terminato)).get(0);
+
 		return null;
 	}
 	
