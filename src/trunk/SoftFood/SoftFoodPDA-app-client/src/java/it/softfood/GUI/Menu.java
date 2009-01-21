@@ -25,16 +25,20 @@ public class Menu extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jToggleButton1 = new javax.swing.JToggleButton();
         Antipasti = new javax.swing.JButton();
         Primi = new javax.swing.JButton();
         Secondi = new javax.swing.JButton();
         Contorni = new javax.swing.JButton();
         Dolci = new javax.swing.JButton();
         Bibite = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         Ok = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
-        Annulla = new javax.swing.JButton();
+
+        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(it.softfood.GUI.Main.class).getContext().getResourceMap(Menu.class);
+        jToggleButton1.setText(resourceMap.getString("jToggleButton1.text")); // NOI18N
+        jToggleButton1.setName("jToggleButton1"); // NOI18N
 
         setMaximumSize(new java.awt.Dimension(225, 450));
         setMinimumSize(new java.awt.Dimension(225, 450));
@@ -42,7 +46,6 @@ public class Menu extends javax.swing.JPanel {
         setPreferredSize(new java.awt.Dimension(225, 450));
         setLayout(new java.awt.GridLayout(4, 2, 5, 5));
 
-        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(it.softfood.GUI.Main.class).getContext().getResourceMap(Menu.class);
         Antipasti.setIcon(resourceMap.getIcon("Antipasti.icon")); // NOI18N
         Antipasti.setText(resourceMap.getString("Antipasti.text")); // NOI18N
         Antipasti.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -115,6 +118,9 @@ public class Menu extends javax.swing.JPanel {
         });
         add(Bibite);
 
+        jPanel2.setName("jPanel2"); // NOI18N
+        add(jPanel2);
+
         jPanel1.setMaximumSize(new java.awt.Dimension(100, 29));
         jPanel1.setName("jPanel1"); // NOI18N
         jPanel1.setLayout(new java.awt.BorderLayout());
@@ -132,26 +138,6 @@ public class Menu extends javax.swing.JPanel {
         jPanel1.add(Ok, java.awt.BorderLayout.PAGE_END);
 
         add(jPanel1);
-
-        jPanel2.setMaximumSize(new java.awt.Dimension(100, 29));
-        jPanel2.setMinimumSize(new java.awt.Dimension(100, 29));
-        jPanel2.setName("jPanel2"); // NOI18N
-        jPanel2.setPreferredSize(new java.awt.Dimension(100, 29));
-        jPanel2.setLayout(new java.awt.BorderLayout());
-
-        Annulla.setText(resourceMap.getString("Annulla.text")); // NOI18N
-        Annulla.setMaximumSize(new java.awt.Dimension(100, 29));
-        Annulla.setMinimumSize(new java.awt.Dimension(100, 29));
-        Annulla.setName("Annulla"); // NOI18N
-        Annulla.setPreferredSize(new java.awt.Dimension(100, 50));
-        Annulla.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AnnullaActionPerformed(evt);
-            }
-        });
-        jPanel2.add(Annulla, java.awt.BorderLayout.PAGE_END);
-
-        add(jPanel2);
     }// </editor-fold>//GEN-END:initComponents
 
     private void OkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OkActionPerformed
@@ -161,13 +147,6 @@ public class Menu extends javax.swing.JPanel {
         frame.setComponent(conferma);
 
     }//GEN-LAST:event_OkActionPerformed
-
-    private void AnnullaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AnnullaActionPerformed
-        // TODO add your handling code here:
-        this.setVisible(false);
-        Tavoli tavoli = new Tavoli(frame,true);
-        frame.setComponent(tavoli);
-    }//GEN-LAST:event_AnnullaActionPerformed
 
 private void AntipastiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AntipastiActionPerformed
 // TODO add your handling code here:
@@ -213,7 +192,6 @@ private void BibiteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Annulla;
     private javax.swing.JButton Antipasti;
     private javax.swing.JButton Bibite;
     private javax.swing.JButton Contorni;
@@ -223,6 +201,7 @@ private void BibiteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
     private javax.swing.JButton Secondi;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JToggleButton jToggleButton1;
     // End of variables declaration//GEN-END:variables
     private FrameView frame;
     private Long tavolo;
