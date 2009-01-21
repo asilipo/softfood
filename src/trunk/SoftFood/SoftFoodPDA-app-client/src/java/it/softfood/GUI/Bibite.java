@@ -83,9 +83,7 @@ public class Bibite extends javax.swing.JPanel {
         id_ordini=linea_ordine.getColumnByModelIndex(0);
         
         linea_ordine.setColumnVisible(id_ordini, false);
-        
-             TableColumn sportColumn = tabella_bibite.getColumnModel().getColumn(1);
-        sportColumn.setCellEditor(new DefaultCellEditor(combo));
+      
 
         tabella_bibite.setRowHeight(tabella_bibite.getRowHeight() * 15 / 10);
         
