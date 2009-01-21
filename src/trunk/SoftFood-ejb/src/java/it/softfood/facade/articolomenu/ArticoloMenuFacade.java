@@ -28,43 +28,45 @@ import javax.persistence.PersistenceContext;
  * @author Marco Grasso
  * @author Francesco Pacilio
  */
-
 @Stateless
 public class ArticoloMenuFacade implements ArticoloMenuFacadeRemote, ArticoloMenuFacadeLocal {
-    
+
     @PersistenceContext
     private EntityManager em;
-	@EJB(beanName = "ArticoloSessionBean")
-	private ArticoloSessionBeanRemote articoloSessionBean;
+    @EJB(beanName = "ArticoloSessionBean")
+    private ArticoloSessionBeanRemote articoloSessionBean;
     @EJB(beanName = "PietanzaSessionBean")
-	private PietanzaSessionBeanRemote pietanzaSessionBean;
+    private PietanzaSessionBeanRemote pietanzaSessionBean;
     @EJB(beanName = "BevandaSessionBean")
-	private BevandaSessionBeanRemote bevandaSessionBean;
+    private BevandaSessionBeanRemote bevandaSessionBean;
     @EJB(beanName = "IngredientePietanzaSessionBean")
-	private IngredientePietanzaSessionBeanRemote ingredientePietanzaSessionBeanRemote;
+    private IngredientePietanzaSessionBeanRemote ingredientePietanzaSessionBeanRemote;
     @EJB(beanName = "IngredienteMagazzinoSessionBean")
-	private IngredienteMagazzinoSessionBeanRemote ingredienteMagazzinoSessionBeanRemote;
+    private IngredienteMagazzinoSessionBeanRemote ingredienteMagazzinoSessionBeanRemote;
     @EJB(beanName = "BevandaMagazzinoSessionBean")
-	private BevandaMagazzinoSessionBeanRemote bevandaMagazzinoSessionBeanRemote;
-    
+    private BevandaMagazzinoSessionBeanRemote bevandaMagazzinoSessionBeanRemote;
+
     public Articolo inserisciArticoloMenu(Articolo articolo) {
-        if (articolo != null)
+        if (articolo != null) {
             return articoloSessionBean.inserisciArticolo(articolo);
+        }
 
         return null;
     }
 
     public Articolo selezionaArticoloMenuPerId(Long id) {
-        if (id != null)
-			return articoloSessionBean.selezionaArticoloPerId(id);
+        if (id != null) {
+            return articoloSessionBean.selezionaArticoloPerId(id);
+        }
 
-		return null;
+        return null;
     }
 
     public List<Pietanza> selezionaPietanzePerTipo(TipoPietanza tipoPietanza) {
-        if (tipoPietanza != null)
+        if (tipoPietanza != null) {
             return pietanzaSessionBean.selezionaPietanzePerTipo(tipoPietanza);
-        
+        }
+
         return null;
     }
 
@@ -77,10 +79,11 @@ public class ArticoloMenuFacade implements ArticoloMenuFacadeRemote, ArticoloMen
         ArrayList<Pietanza> pietanzeDisponibili = new ArrayList<Pietanza>();
 
         for (Pietanza pietanza : pietanze) {
-            if (this.verificaIngredientiPietanza(pietanza) > 0)
+            if (this.verificaIngredientiPietanza(pietanza) > 0) {
                 pietanzeDisponibili.add(pietanza);
+            }
         }
-        
+
         return pietanzeDisponibili;
     }
 
@@ -88,11 +91,13 @@ public class ArticoloMenuFacade implements ArticoloMenuFacadeRemote, ArticoloMen
         ArrayList<Pietanza> pietanze = (ArrayList<Pietanza>) pietanzaSessionBean.selezionaPietanzePerTipo(tipoPietanza);
         ArrayList<Pietanza> pietanzeDisponibili = new ArrayList<Pietanza>();
 
-        if (pietanze != null)
+        if (pietanze != null) {
             for (Pietanza pietanza : pietanze) {
-                if (this.verificaIngredientiPietanza(pietanza) > 0)
+                if (this.verificaIngredientiPietanza(pietanza) > 0) {
                     pietanzeDisponibili.add(pietanza);
+                }
             }
+        }
 
         return pietanzeDisponibili;
     }
@@ -101,8 +106,9 @@ public class ArticoloMenuFacade implements ArticoloMenuFacadeRemote, ArticoloMen
         ArrayList<Pietanza> pietanze = (ArrayList<Pietanza>) pietanzaSessionBean.selezionaPietanze();
         HashMap<Pietanza, Integer> pietanzeDisponibili = new HashMap<Pietanza, Integer>();
 
-        for (Pietanza pietanza : pietanze)
+        for (Pietanza pietanza : pietanze) {
             pietanzeDisponibili.put(pietanza, this.verificaIngredientiPietanza(pietanza));
+        }
 
         return pietanzeDisponibili;
     }
@@ -117,14 +123,15 @@ public class ArticoloMenuFacade implements ArticoloMenuFacadeRemote, ArticoloMen
     }
 
     public Integer selezionaDisponibilitaBevanda(Long id) {
-        System.out.println("id"+ id);
         if (id != null) {
             Bevanda bevanda = bevandaSessionBean.selezionaBevandaPerId(id);
             ArrayList<BevandaMagazzino> bevandeMagazzino = (ArrayList<BevandaMagazzino>) bevandaMagazzinoSessionBeanRemote.selezionaBevandeMagazzino();
 
-            for (BevandaMagazzino bevandaMagazzino : bevandeMagazzino)
-                if (bevandaMagazzino.getBevanda().getId().equals(id))
-                    return (bevandaMagazzino.getQuantita())/(bevanda.getCapacita()).intValue();
+            for (BevandaMagazzino bevandaMagazzino : bevandeMagazzino) {
+                if (bevandaMagazzino.getBevanda().getId().equals(id)) {
+                    return (bevandaMagazzino.getQuantita()) / (bevanda.getCapacita()).intValue();
+                }
+            }
         }
 
         return 0;
@@ -134,8 +141,9 @@ public class ArticoloMenuFacade implements ArticoloMenuFacadeRemote, ArticoloMen
         ArrayList<Pietanza> pietanze = (ArrayList<Pietanza>) pietanzaSessionBean.selezionaPietanzePerTipo(tipoPietanza);
         HashMap<Pietanza, Integer> pietanzeDisponibili = new HashMap<Pietanza, Integer>();
 
-        for (Pietanza pietanza : pietanze)
+        for (Pietanza pietanza : pietanze) {
             pietanzeDisponibili.put(pietanza, this.verificaIngredientiPietanza(pietanza));
+        }
 
         return pietanzeDisponibili;
     }
@@ -145,19 +153,32 @@ public class ArticoloMenuFacade implements ArticoloMenuFacadeRemote, ArticoloMen
         ArrayList<IngredienteMagazzino> ingredientiMagazzino = (ArrayList<IngredienteMagazzino>) ingredienteMagazzinoSessionBeanRemote.selezionaIngredientiMagazzino();
         Date data = new Date(System.currentTimeMillis());
 
+        int contatore = 0;
         int disponibilita = 0;
+        int numeroIngredienti = 0;
         for (IngredientePietanza ingredientePietanza : ingredientiPietanze) {
-            
             if (ingredientePietanza.getIngredientePietanzaPK().getPietanza().getId().equals(pietanza.getId())) {
+                numeroIngredienti++;
                 Ingrediente ingrediente = ingredientePietanza.getIngredientePietanzaPK().getIngrediente();
-                for (IngredienteMagazzino ingredienteMagazzino : ingredientiMagazzino)
-                    if (ingredienteMagazzino.getIngredienteLungaConservazione().getId().equals(ingrediente.getId()) && ingredienteMagazzino.getQuantita() >=
-                            (ingredientePietanza.getQuantita() + (ingredientePietanza.getQuantita() * disponibilita)) && ingrediente.getScadenza().after(data))
+                
+                for (IngredienteMagazzino ingredienteMagazzino : ingredientiMagazzino) {
+                    if (ingredienteMagazzino.getIngredienteLungaConservazione().getId().equals(ingrediente.getId())) {
+                        contatore++;
+                        if (ingredienteMagazzino.getQuantita() >= (ingredientePietanza.getQuantita() + (ingredientePietanza.getQuantita() * disponibilita))
+                                && ingrediente.getScadenza().after(data)) {
                             disponibilita++;
+                        }
+                    }
+                }
             }
         }
 
-        return disponibilita;
+        System.out.println("numero ingre " + numeroIngredienti);
+        System.out.println("contatore " + contatore);
+        if (contatore == numeroIngredienti)
+            return disponibilita;
+
+        return 0;
     }
 
     public List<Bevanda> selezionaBevande() {
@@ -167,28 +188,31 @@ public class ArticoloMenuFacade implements ArticoloMenuFacadeRemote, ArticoloMen
     public List<Bevanda> selezionaBevandeDisponibili() {
         return (ArrayList<Bevanda>) bevandaSessionBean.selezionaBevande();
     }
-    
+
     public boolean rimuoviArticoloMenu(Long id) {
-        if (id != null)
-			return articoloSessionBean.rimuoviBevanda(id);
-        
-		return false;
+        if (id != null) {
+            return articoloSessionBean.rimuoviBevanda(id);
+        }
+
+        return false;
     }
 
     public List<Ingrediente> selezionaIngredientiPietanza(Long id) {
         if (id != null) {
             ArrayList<Ingrediente> ingredienti = new ArrayList<Ingrediente>();
             ArrayList<IngredientePietanza> ingredientiPietanze = (ArrayList<IngredientePietanza>) ingredientePietanzaSessionBeanRemote.selezionaIngredientiPietanze();
-            
-            if (ingredientiPietanze != null)
-                for (IngredientePietanza ingredientePietanza : ingredientiPietanze)
-                    if (ingredientePietanza.getIngredientePietanzaPK().getPietanza().getId().equals(id))
+
+            if (ingredientiPietanze != null) {
+                for (IngredientePietanza ingredientePietanza : ingredientiPietanze) {
+                    if (ingredientePietanza.getIngredientePietanzaPK().getPietanza().getId().equals(id)) {
                         ingredienti.add(ingredientePietanza.getIngredientePietanzaPK().getIngrediente());
-                     
+                    }
+                }
+            }
+
             return ingredienti;
         }
-        
+
         return null;
     }
-    
 }
