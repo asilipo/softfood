@@ -51,7 +51,14 @@ public class OrdinazioneFacade implements OrdinazioneFacadeRemote, OrdinazioneFa
 
 	public Ordinazione inserisciOrdinazione(Ordinazione ordinazione) {
 		if (ordinazione != null) {
+            Tavolo tavolo = tavoloSessionBeanRemote.selezionaTavoloPerId(ordinazione.getTavolo().getId());
+            if (tavolo == null || tavolo.getNumeroPosti() <= ordinazione.getCoperti()) 
+                return null;
 
+            ordinazione.setData(new Date(System.currentTimeMillis()));
+            ordinazione.setSconto(0d);
+            ordinazione.setTotale(0d);
+            ordinazione.setTerminato(false);
 			return ordinazioneSessionBean.inserisciOrdinazione(ordinazione);
         }
 
