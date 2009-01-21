@@ -52,17 +52,29 @@ public class Tavoli extends javax.swing.JPanel {
             tavoli= (ArrayList<Tavolo>) tavoloFacade.selezionaTavoliOccupati();
         }
         int i=0;
-        listaTavoli = new String[tavoli.size()];
+        
+        int size=tavoli.size();
+        model=new DefaultListModel();
+       
+        if(size==0){
+           add.setEnabled(false);
+           jComboBox1.setEnabled(false);
+           jComboBox2.setEnabled(false);
+           model.addElement("Tavoli momentaneamente \n tutti occupati... ");
+       }
+        
+        listaTavoli = new String[size];
         for(Tavolo tavolo:tavoli){
             listaTavoli[i]=tavolo.getRiferimento();
             jComboBox1.addItem(tavolo.getRiferimento());
             i++;
         }
         
-        model=new DefaultListModel();
+        
         
         jList1.setModel(model);
         
+      
         
         
         
@@ -179,7 +191,7 @@ public class Tavoli extends javax.swing.JPanel {
         Annulla.setMaximumSize(new java.awt.Dimension(100, 29));
         Annulla.setMinimumSize(new java.awt.Dimension(100, 29));
         Annulla.setName("Annulla"); // NOI18N
-        Annulla.setPreferredSize(new java.awt.Dimension(100, 29));
+        Annulla.setPreferredSize(new java.awt.Dimension(100, 50));
         Annulla.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AnnullaActionPerformed(evt);

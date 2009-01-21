@@ -93,9 +93,11 @@ public class Pannello_ordinazioni extends javax.swing.JPanel {
         
         id_ordini=linea_ordine.getColumnByModelIndex(0);
         
+        
         linea_ordine.setColumnVisible(id_ordini, false);
 
         tabella_pietanza.setRowHeight(tabella_pietanza.getRowHeight() * 15 / 10);
+        
     }
 
     /** This method is called from within the constructor to
@@ -162,8 +164,10 @@ public class Pannello_ordinazioni extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        tabella_pietanza.setColumnSelectionAllowed(true);
         tabella_pietanza.setFocusable(false);
         tabella_pietanza.setName("tabella_pietanza"); // NOI18N
+        tabella_pietanza.getTableHeader().setReorderingAllowed(false);
         tabella_pietanza.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tabella_pietanzaMouseClicked(evt);
@@ -171,6 +175,7 @@ public class Pannello_ordinazioni extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tabella_pietanza);
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(it.softfood.GUI.Main.class).getContext().getResourceMap(Pannello_ordinazioni.class);
+        tabella_pietanza.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tabella_pietanza.getColumnModel().getColumn(0).setResizable(false);
         tabella_pietanza.getColumnModel().getColumn(0).setPreferredWidth(0);
         tabella_pietanza.getColumnModel().getColumn(0).setHeaderValue(resourceMap.getString("tabella_pietanza.columnModel.title0")); // NOI18N
