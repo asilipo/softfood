@@ -55,12 +55,12 @@ public class Pietanza extends javax.swing.JPanel {
         sport.setCellEditor(new DefaultCellEditor(piu));
 
         int disp;
+    System.out.println("tipo"+ tipo);
+        if (tipo.equalsIgnoreCase("bibite")) 
+            disp = articolo.selezionaDisponibilitaBevanda(id);
+        else 
+            disp = (Integer) articolo.selezionaDisponibilitaPietanza(id);
 
-        if (tipo.equalsIgnoreCase("bibite")) {
-            disp = ((Integer) articolo.selezionaDisponibilitaBevanda(id)).intValue();
-        } else {
-            disp = ((Integer) articolo.selezionaDisponibilitaPietanza(id)).intValue();
-        }
         disponibilita.setText(disponibilita.getText() + disp);
 
         for (int idisp = 1; idisp <= disp; idisp++) {
