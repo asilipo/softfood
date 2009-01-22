@@ -1,7 +1,9 @@
 package it.softfood.GUI;
 
 import it.softfood.entity.Ingrediente;
+import it.softfood.entity.LineaOrdinazione;
 import it.softfood.facade.articolomenu.ArticoloMenuFacadeRemote;
+import it.softfood.facade.ordinazione.OrdinazioneFacadeRemote;
 import java.util.ArrayList;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -18,11 +20,13 @@ import org.jdesktop.application.FrameView;
 public class Pietanza extends javax.swing.JPanel {
 
     private ArticoloMenuFacadeRemote articolo;
+    private OrdinazioneFacadeRemote ordinazioneFacade;
 
     private void initFacade() {
         try {
             InitialContext initial = new InitialContext();
             articolo = (ArticoloMenuFacadeRemote) initial.lookup("it.softfood.facade.articolomenu.ArticoloMenuFacade");
+            ordinazioneFacade = (OrdinazioneFacadeRemote) initial.lookup("it.softfood.facade.ordinazione.OrdinazioneFacade");
         } catch (NamingException e) {
             System.err.println("Errore binding: ArticoloMenuFacade");
         }
@@ -251,6 +255,14 @@ private void cancellaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 private void OKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OKActionPerformed
 // TODO add your handling code here:
     this.setVisible(false);
+    
+    LineaOrdinazione linea=new LineaOrdinazione();
+    linea.setOrdinazione(ordinazioneFacade.selezionaOrdinazionePerId(tavolo));
+    linea.setArticolo(articolo.selezionaArticoloMenuPerId(id));
+    linea.setQuantita((Integer) jComboBox1.getSelectedItem());
+    
+    ordinazioneFacade.inserisciLineaOrdinazione(linea); 
+    
     if (tipo.equalsIgnoreCase("bibite")) {
         Bibite pannello = new Bibite(frame, tavolo);
         frame.setComponent(pannello);
