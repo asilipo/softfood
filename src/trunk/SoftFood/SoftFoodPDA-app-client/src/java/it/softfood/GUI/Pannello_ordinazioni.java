@@ -107,6 +107,8 @@ public class Pannello_ordinazioni extends javax.swing.JPanel {
 
         i = 0;
         j = 0;
+        
+        tabella_ordini.setModel(new javax.swing.table.DefaultTableModel(new String[]{"ID", "Pietanza","Quantita'"}, linee.size()));
 
         linea_ordine.setColumnVisible(id_ordini, true);
         
