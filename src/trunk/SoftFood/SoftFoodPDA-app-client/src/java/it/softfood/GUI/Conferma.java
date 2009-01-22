@@ -139,8 +139,8 @@ public class Conferma extends javax.swing.JPanel {
 
     private void AnnullaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AnnullaActionPerformed
         // TODO add your handling code here:
-          this.setVisible(false);
-        Menu menu = new Menu(frame,null);
+        this.setVisible(false);
+        Menu menu = new Menu(frame,tavolo);
         frame.setComponent(menu);
     }//GEN-LAST:event_AnnullaActionPerformed
 
