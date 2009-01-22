@@ -179,7 +179,7 @@ public class OrdinazioneFacade implements OrdinazioneFacadeRemote, OrdinazioneFa
 	public LineaOrdinazione inserisciLineaOrdinazione(LineaOrdinazione lineaOrdinazione) {
 		if (lineaOrdinazione != null) {
 			lineaOrdinazione.setOrdinazione(em.merge(lineaOrdinazione.getOrdinazione()));
-			
+			em.flush();
 			return lineaOrdinazioneSessionBean.inserisciLineaOrdinazione(lineaOrdinazione);
 		}
 		
