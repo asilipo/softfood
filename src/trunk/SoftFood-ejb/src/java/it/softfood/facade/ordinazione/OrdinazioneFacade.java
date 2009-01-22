@@ -215,7 +215,7 @@ public class OrdinazioneFacade implements OrdinazioneFacadeRemote, OrdinazioneFa
                             if (bevandaMagazzino.getBevanda().getId().equals(articolo.getId())) {
                                 bevandaMagazzino = em.merge(bevandaMagazzino);
                                 int quantita = bevandaMagazzino.getQuantita();
-                                bevandaMagazzino.setQuantita(quantita - lineaOrdinazione.getQuantita());
+                                bevandaMagazzino.setQuantita(quantita - (lineaOrdinazione.getQuantita() * ((Bevanda) articolo).getCapacita().intValue()));
                                 em.flush();
                             }
                         }
