@@ -52,7 +52,7 @@ public class Conferma extends javax.swing.JPanel {
         int i=0;
         
         for(LineaOrdinazione linea:ordini)
-            data[i++] = linea.getArticolo()+" - "+linea.getQuantita();
+            data[i++] = linea.getArticolo().getNome()+" - "+linea.getQuantita();
         
         menu.setListData(data);
     }
