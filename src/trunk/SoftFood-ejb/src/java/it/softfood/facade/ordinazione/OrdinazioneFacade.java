@@ -209,11 +209,19 @@ public class OrdinazioneFacade implements OrdinazioneFacadeRemote, OrdinazioneFa
                         ejbContext.setRollbackOnly();
                     }
                 } else {
-                    BevandaMagazzino bevandaMagazzino = bevandaMagazzinoSessionBeanRemote.selezionaBevandaMagazzinoPerId(articolo.getId());
-                    bevandaMagazzino = em.merge(bevandaMagazzino);
-                    int quantita = bevandaMagazzino.getQuantita();
-                    bevandaMagazzino.setQuantita(quantita - lineaOrdinazione.getQuantita());
-                    em.flush();
+                    ArrayList<BevandaMagazzino> bevandeMagazzino = (ArrayList<BevandaMagazzino>) bevandaMagazzinoSessionBeanRemote.selezionaBevandeMagazzino();
+                    if (bevandeMagazzino != null) {
+                        for (BevandaMagazzino bevandaMagazzino : bevandeMagazzino) {
+                            if (bevandaMagazzino.getBevanda().getId().equals(articolo.getId())) {
+                                bevandaMagazzino = em.merge(bevandaMagazzino);
+                                int quantita = bevandaMagazzino.getQuantita();
+                                bevandaMagazzino.setQuantita(quantita - lineaOrdinazione.getQuantita());
+                                em.flush();
+                            }
+                        }
+                    } else {
+                        ejbContext.setRollbackOnly();
+                    }
                 }
             } catch (Exception e) {
                 ejbContext.setRollbackOnly();
