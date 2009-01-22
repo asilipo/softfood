@@ -16,6 +16,7 @@ import org.jdesktop.application.FrameView;
  * @author Marco Grasso
  * @author Francesco Pacilio
  */
+
 public class Bibite extends javax.swing.JPanel {
 
     private OrdinazioneFacadeRemote ordinazioneFacade;
@@ -27,16 +28,17 @@ public class Bibite extends javax.swing.JPanel {
             ordinazioneFacade = (OrdinazioneFacadeRemote) initial.lookup("it.softfood.facade.ordinazione.OrdinazioneFacade");
             articolo = (ArticoloMenuFacadeRemote) initial.lookup("it.softfood.facade.articolomenu.ArticoloMenuFacade");
         } catch (NamingException e) {
-            System.err.println("Errore binding TavoloFacade");
+            System.err.println("Errore binding: OrdinazioneFacade - ArticoloMenuFacade");
         }
     }
 
     public Bibite(FrameView frame, Long tavolo) {
-        initComponents();
-
-        initFacade();
         this.frame = frame;
         this.tavolo = tavolo;
+
+        initComponents();
+        initFacade();
+
         ArrayList<it.softfood.entity.Bevanda> bibite = (ArrayList<it.softfood.entity.Bevanda>) articolo.selezionaBevandeDisponibili();
 
         JComboBox combo = new JComboBox();
@@ -74,23 +76,19 @@ public class Bibite extends javax.swing.JPanel {
 
         ArrayList<LineaOrdinazione> linee = (ArrayList<LineaOrdinazione>) ordinazioneFacade.selezionaLineeOrdinazionePerOrdinazione(ordine, null);
 
-        i = 0;
-        j = 0;
-        
         tabella_ordini.setModel(new javax.swing.table.DefaultTableModel(new Object [3][linee.size()],new String[]{"ID", "Pietanza","Quantita'"}){
              public boolean isCellEditable(int row, int column) {
                 return false;
             }
         });
 
+        i = 0;
+        j = 0;
         for (LineaOrdinazione linea : linee) {
-            tabella_ordini.setValueAt(linea.getId(), i, j);
-            j++;
-            tabella_ordini.setValueAt(linea.getArticolo().getNome(), i, j);
-            j++;
-            tabella_ordini.setValueAt(linea.getQuantita(), i, j);
+            tabella_ordini.setValueAt(linea.getId(), i, j++);
+            tabella_ordini.setValueAt(linea.getArticolo().getNome(), i, j++);
+            tabella_ordini.setValueAt(linea.getQuantita(), i++, j);
             j = 0;
-            i++;
         }
         
         linea_ordine = new XTableColumnModel();
@@ -100,9 +98,7 @@ public class Bibite extends javax.swing.JPanel {
 
         id_ordini = linea_ordine.getColumnByModelIndex(0);
 
-
         linea_ordine.setColumnVisible(id_ordini, false);
-
     }
 
     /** This method is called from within the constructor to
@@ -297,25 +293,21 @@ public class Bibite extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
 private void OKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OKActionPerformed
-// TODO add your handling code here:
     this.setVisible(false);
     Menu menu = new Menu(frame, tavolo);
     frame.setComponent(menu);
 }//GEN-LAST:event_OKActionPerformed
 
 private void AnnullaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AnnullaActionPerformed
-// TODO add your handling code here:
     this.setVisible(false);
     Menu menu = new Menu(frame, tavolo);
     frame.setComponent(menu);
 }//GEN-LAST:event_AnnullaActionPerformed
 
 private void visuallizzaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_visuallizzaActionPerformed
-// TODO add your handling code here:
     int row = tabella_bibite.getSelectedRow();
     id_antipasto.setColumnVisible(id, true);
     long id_long = ((Long) tabella_bibite.getValueAt(row, 0)).longValue();
-    System.out.println("ID pietanza " + id_long);
     id_antipasto.setColumnVisible(id, false);
     this.setVisible(false);
     it.softfood.GUI.Pietanza pietanza = new it.softfood.GUI.Pietanza(frame, tavolo, id_long, "bibite");
@@ -323,18 +315,13 @@ private void visuallizzaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
 }//GEN-LAST:event_visuallizzaActionPerformed
 
 private void tabella_bibiteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabella_bibiteMouseClicked
-// TODO add your handling code here:
     visuallizza.setEnabled(true);
 }//GEN-LAST:event_tabella_bibiteMouseClicked
 
 private void cancellaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancellaActionPerformed
-// TODO add your handling code here:
-    
     linea_ordine.setColumnVisible(id_ordini, true);
     Long id=(Long) tabella_ordini.getValueAt(tabella_ordini.getSelectedRow(),0);
-    System.out.println("IDD: "+id);
     ordinazioneFacade.rimuoviLineaOrdinazione(id);
-    //tabella_ordini.removeRowSelectionInterval(tabella_ordini.getSelectedRow(), tabella_ordini.getSelectedRow());
     linea_ordine.setColumnVisible(id_ordini, false);
     this.setVisible(false);
     Bibite pannello=new Bibite(frame, tavolo);
@@ -342,8 +329,6 @@ private void cancellaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 }//GEN-LAST:event_cancellaActionPerformed
 
 private void tabella_ordiniMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabella_ordiniMouseClicked
-// TODO add your handling code here:
-    
     cancella.setEnabled(true);
 }//GEN-LAST:event_tabella_ordiniMouseClicked
 
@@ -369,4 +354,5 @@ private void tabella_ordiniMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FI
     private XTableColumnModel linea_ordine;
     private TableColumn id_ordini;
     private TableColumn id;
+    
 }
