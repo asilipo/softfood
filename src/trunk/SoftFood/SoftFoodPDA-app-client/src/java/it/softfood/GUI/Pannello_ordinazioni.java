@@ -1,6 +1,7 @@
 package it.softfood.GUI;
 
-
+import it.softfood.entity.LineaOrdinazione;
+import it.softfood.entity.Ordinazione;
 import it.softfood.enumeration.TipoPietanza;
 import it.softfood.facade.articolomenu.ArticoloMenuFacadeRemote;
 import it.softfood.facade.ordinazione.OrdinazioneFacadeRemote;
@@ -21,83 +22,105 @@ public class Pannello_ordinazioni extends javax.swing.JPanel {
 
     private OrdinazioneFacadeRemote ordinazioneFacade;
     private ArticoloMenuFacadeRemote articolo;
-    
-    private void initFacade(){
-        try{
-            InitialContext initial=new InitialContext();
+
+    private void initFacade() {
+        try {
+            InitialContext initial = new InitialContext();
             ordinazioneFacade = (OrdinazioneFacadeRemote) initial.lookup("it.softfood.facade.ordinazione.OrdinazioneFacade");
             articolo = (ArticoloMenuFacadeRemote) initial.lookup("it.softfood.facade.articolomenu.ArticoloMenuFacade");
-        }catch(NamingException e){
+        } catch (NamingException e) {
             System.err.println("Errore binding: OrdinazioneFacade e ArticoloMenuFacade");
         }
     }
 
-    public Pannello_ordinazioni(FrameView frame, Long tavolo,String tipo) {
+    public Pannello_ordinazioni(FrameView frame, Long tavolo, String tipo) {
         initComponents();
         initFacade();
-        this.frame=frame;
-        this.tavolo=tavolo;
-        this.tipo=tipo;
-        
+        this.frame = frame;
+        this.tavolo = tavolo;
+        this.tipo = tipo;
+
         TipoPietanza tipo_pietanza;
-        
-        
-        if(tipo.equalsIgnoreCase("antipasti")){
-            jLabel2.setText(jLabel2.getText()+" antipasto:");
-            tipo_pietanza=TipoPietanza.ANTIPASTI;
-        }else if(tipo.equalsIgnoreCase("primi")){
-            jLabel2.setText(jLabel2.getText()+" primo:");
-            tipo_pietanza=TipoPietanza.PRIMO_PIATTO;
-        }else if(tipo.equalsIgnoreCase("secondi")){
-            jLabel2.setText(jLabel2.getText()+" secondo:");
-            tipo_pietanza=TipoPietanza.SECONDO_PIATTO;
-        }else if(tipo.equalsIgnoreCase("contorni")){
-            jLabel2.setText(jLabel2.getText()+" contorno:");
-            tipo_pietanza=TipoPietanza.CONTORNO;
-        }else{
-            jLabel2.setText(jLabel2.getText()+" dolce:");
-            tipo_pietanza=TipoPietanza.DOLCE;
+
+
+        if (tipo.equalsIgnoreCase("antipasti")) {
+            jLabel2.setText(jLabel2.getText() + " antipasto:");
+            tipo_pietanza = TipoPietanza.ANTIPASTI;
+        } else if (tipo.equalsIgnoreCase("primi")) {
+            jLabel2.setText(jLabel2.getText() + " primo:");
+            tipo_pietanza = TipoPietanza.PRIMO_PIATTO;
+        } else if (tipo.equalsIgnoreCase("secondi")) {
+            jLabel2.setText(jLabel2.getText() + " secondo:");
+            tipo_pietanza = TipoPietanza.SECONDO_PIATTO;
+        } else if (tipo.equalsIgnoreCase("contorni")) {
+            jLabel2.setText(jLabel2.getText() + " contorno:");
+            tipo_pietanza = TipoPietanza.CONTORNO;
+        } else {
+            jLabel2.setText(jLabel2.getText() + " dolce:");
+            tipo_pietanza = TipoPietanza.DOLCE;
         }
-        
-       
-            ArrayList<it.softfood.entity.Pietanza> pietanze = (ArrayList<it.softfood.entity.Pietanza>) articolo.selezionaPietanzeDisponibiliPerTipo(tipo_pietanza);
-        
-        
-        int i=0;
-        int j=0;
-        
-        
+
+
+        ArrayList<it.softfood.entity.Pietanza> pietanze = (ArrayList<it.softfood.entity.Pietanza>) articolo.selezionaPietanzeDisponibiliPerTipo(tipo_pietanza);
+
+
+        int i = 0;
+        int j = 0;
+
+
         tabella_pietanza.setModel(new javax.swing.table.DefaultTableModel(new String[]{"ID", "Pietanza"}, pietanze.size()));
 
-        
-        
-        id_antipasto=new XTableColumnModel();
-        
+
+
+        id_antipasto = new XTableColumnModel();
+
         tabella_pietanza.setColumnModel(id_antipasto);
         tabella_pietanza.createDefaultColumnsFromModel();
-        
-        id=id_antipasto.getColumnByModelIndex(0);
-        
-        for(it.softfood.entity.Pietanza pietanza:pietanze){
+
+        id = id_antipasto.getColumnByModelIndex(0);
+
+        for (it.softfood.entity.Pietanza pietanza : pietanze) {
             tabella_pietanza.setValueAt(pietanza.getId(), i, j++);
             tabella_pietanza.setValueAt(pietanza.getNome(), i++, j);
-            j = 0;;
+            j = 0;
+            ;
         }
-        
+
         id_antipasto.setColumnVisible(id, false);
-             
-        linea_ordine=new XTableColumnModel();
-        
+
+        linea_ordine = new XTableColumnModel();
+
         tabella_ordini.setColumnModel(linea_ordine);
         tabella_ordini.createDefaultColumnsFromModel();
-        
-        id_ordini=linea_ordine.getColumnByModelIndex(0);
-        
-        
+
+        id_ordini = linea_ordine.getColumnByModelIndex(0);
+
+
         linea_ordine.setColumnVisible(id_ordini, false);
 
         tabella_pietanza.setRowHeight(tabella_pietanza.getRowHeight() * 15 / 10);
+
+
+        Ordinazione ordine = ordinazioneFacade.selezionaOrdinazionePerId(tavolo);
+
+        ArrayList<LineaOrdinazione> linee = (ArrayList<LineaOrdinazione>) ordinazioneFacade.selezionaLineeOrdinazionePerOrdinazione(ordine, tipo_pietanza);
+
+        i = 0;
+        j = 0;
+
+        linea_ordine.setColumnVisible(id_ordini, true);
         
+        for (LineaOrdinazione linea : linee) {
+            tabella_ordini.setValueAt(linea.getId(), i, j);
+            j++;
+            tabella_ordini.setValueAt(linea.getArticolo().getNome(), i, j);
+            j++;
+            tabella_ordini.setValueAt(linea.getQuantita(), i, j);
+            j = 0;
+            i++;
+        }
+        
+        linea_ordine.setColumnVisible(id_ordini, false);
     }
 
     /** This method is called from within the constructor to
@@ -246,6 +269,11 @@ public class Pannello_ordinazioni extends javax.swing.JPanel {
             }
         });
         tabella_ordini.setName("tabella_ordini"); // NOI18N
+        tabella_ordini.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabella_ordiniMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tabella_ordini);
         tabella_ordini.getColumnModel().getColumn(0).setResizable(false);
         tabella_ordini.getColumnModel().getColumn(1).setResizable(false);
@@ -283,27 +311,27 @@ public class Pannello_ordinazioni extends javax.swing.JPanel {
 private void OKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OKActionPerformed
 // TODO add your handling code here:
     this.setVisible(false);
-    Menu menu=new Menu(frame,tavolo);
+    Menu menu = new Menu(frame, tavolo);
     frame.setComponent(menu);
 }//GEN-LAST:event_OKActionPerformed
 
 private void AnnullaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AnnullaActionPerformed
 // TODO add your handling code here:
     this.setVisible(false);
-    Menu menu=new Menu(frame,tavolo);
+    Menu menu = new Menu(frame, tavolo);
     frame.setComponent(menu);
 }//GEN-LAST:event_AnnullaActionPerformed
 
 private void visuallizzaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_visuallizzaActionPerformed
 // TODO add your handling code here:
-    int row=tabella_pietanza.getSelectedRow();
+    int row = tabella_pietanza.getSelectedRow();
     id_antipasto.setColumnVisible(id, true);
-    long id_long=((Long)tabella_pietanza.getValueAt(row, 0)).longValue();
-    System.out.println("ID pietanza "+id_long);
+    long id_long = ((Long) tabella_pietanza.getValueAt(row, 0)).longValue();
+    System.out.println("ID pietanza " + id_long);
     id_antipasto.setColumnVisible(id, false);
-   this.setVisible(false);
-   it.softfood.GUI.Pietanza pietanza = new it.softfood.GUI.Pietanza(frame,tavolo,id_long,tipo);
-   frame.setComponent(pietanza);  
+    this.setVisible(false);
+    it.softfood.GUI.Pietanza pietanza = new it.softfood.GUI.Pietanza(frame, tavolo, id_long, tipo);
+    frame.setComponent(pietanza);
 }//GEN-LAST:event_visuallizzaActionPerformed
 
 private void tabella_pietanzaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabella_pietanzaMouseClicked
@@ -311,6 +339,18 @@ private void tabella_pietanzaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-
     visuallizza.setEnabled(true);
 }//GEN-LAST:event_tabella_pietanzaMouseClicked
 
+private void tabella_ordiniMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabella_ordiniMouseClicked
+// TODO add your handling code here:
+    /*linea_ordine.setColumnVisible(id_ordini, true);
+    Long id=(Long) tabella_ordini.getValueAt(tabella_ordini.getSelectedRow(),0);
+    System.out.println("IDD: "+id);
+    ordinazioneFacade.rimuoviLineaOrdinazione(id);
+    linea_ordine.setColumnVisible(id_ordini, false);
+    this.setVisible(false);
+    Pannello_ordinazioni pannello=new Pannello_ordinazioni(frame, tavolo, tipo);
+    frame.setComponent(pannello);*/
+    
+}//GEN-LAST:event_tabella_ordiniMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Annulla;
@@ -328,7 +368,6 @@ private void tabella_pietanzaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-
     private javax.swing.JTable tabella_pietanza;
     private javax.swing.JButton visuallizza;
     // End of variables declaration//GEN-END:variables
-
     private FrameView frame;
     private Long tavolo;
     private XTableColumnModel id_antipasto;

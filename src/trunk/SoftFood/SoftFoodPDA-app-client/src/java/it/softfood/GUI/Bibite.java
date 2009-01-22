@@ -3,10 +3,10 @@
  *
  * Created on 19 gennaio 2009, 16.59
  */
-
 package it.softfood.GUI;
 
-
+import it.softfood.entity.LineaOrdinazione;
+import it.softfood.entity.Ordinazione;
 import it.softfood.facade.articolomenu.ArticoloMenuFacadeRemote;
 import it.softfood.facade.ordinazione.OrdinazioneFacadeRemote;
 import java.util.ArrayList;
@@ -21,31 +21,30 @@ import org.jdesktop.application.FrameView;
  * @author Marco Grasso
  * @author Francesco Pacilio
  */
-
 public class Bibite extends javax.swing.JPanel {
 
     private OrdinazioneFacadeRemote ordinazioneFacade;
     private ArticoloMenuFacadeRemote articolo;
-    
-    private void initFacade(){
-        try{
-            InitialContext initial=new InitialContext();
+
+    private void initFacade() {
+        try {
+            InitialContext initial = new InitialContext();
             ordinazioneFacade = (OrdinazioneFacadeRemote) initial.lookup("it.softfood.facade.ordinazione.OrdinazioneFacade");
             articolo = (ArticoloMenuFacadeRemote) initial.lookup("it.softfood.facade.articolomenu.ArticoloMenuFacade");
-        }catch(NamingException e){
+        } catch (NamingException e) {
             System.err.println("Errore binding TavoloFacade");
         }
     }
-    
+
     public Bibite(FrameView frame, Long tavolo) {
         initComponents();
-       
+
         initFacade();
-        this.frame=frame;
-        this.tavolo=tavolo;
+        this.frame = frame;
+        this.tavolo = tavolo;
         ArrayList<it.softfood.entity.Bevanda> bibite = (ArrayList<it.softfood.entity.Bevanda>) articolo.selezionaBevandeDisponibili();
-        
-        JComboBox combo= new JComboBox();
+
+        JComboBox combo = new JComboBox();
         combo.addItem(1);
         combo.addItem(2);
         combo.addItem(3);
@@ -58,36 +57,49 @@ public class Bibite extends javax.swing.JPanel {
             }
         });
 
-        id_antipasto=new XTableColumnModel();
+        id_antipasto = new XTableColumnModel();
         tabella_bibite.setColumnModel(id_antipasto);
         tabella_bibite.createDefaultColumnsFromModel();
-   
-        id=id_antipasto.getColumnByModelIndex(0);
-        
-        int i=0;
-        int j=0;
-        for(it.softfood.entity.Bevanda pietanza:bibite){
+
+        id = id_antipasto.getColumnByModelIndex(0);
+
+        int i = 0;
+        int j = 0;
+        for (it.softfood.entity.Bevanda pietanza : bibite) {
             tabella_bibite.setValueAt(pietanza.getId(), i, j++);
             tabella_bibite.setValueAt(pietanza.getNome(), i++, j);
-            j=0;
+            j = 0;
         }
-        
+
         id_antipasto.setColumnVisible(id, false);
-             
-        linea_ordine=new XTableColumnModel();
-        
+
+        linea_ordine = new XTableColumnModel();
+
         tabella_ordini.setColumnModel(linea_ordine);
         tabella_ordini.createDefaultColumnsFromModel();
-        
-        id_ordini=linea_ordine.getColumnByModelIndex(0);
-        
+
+        id_ordini = linea_ordine.getColumnByModelIndex(0);
+
         linea_ordine.setColumnVisible(id_ordini, false);
-      
+
 
         tabella_bibite.setRowHeight(tabella_bibite.getRowHeight() * 15 / 10);
-        
-       
-        
+
+        Ordinazione ordine = ordinazioneFacade.selezionaOrdinazionePerId(tavolo);
+
+        ArrayList<LineaOrdinazione> linee = (ArrayList<LineaOrdinazione>) ordinazioneFacade.selezionaLineeOrdinazionePerOrdinazione(ordine, null);
+
+        i = 0;
+        j = 0;
+
+        for (LineaOrdinazione linea : linee) {
+            tabella_ordini.setValueAt(linea.getArticolo().getNome(), i, j);
+            j++;
+            tabella_ordini.setValueAt(linea.getQuantita(), i, j);
+            j = 0;
+            i++;
+        }
+
     }
 
     /** This method is called from within the constructor to
@@ -266,35 +278,33 @@ public class Bibite extends javax.swing.JPanel {
 private void OKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OKActionPerformed
 // TODO add your handling code here:
     this.setVisible(false);
-    Menu menu=new Menu(frame,tavolo);
+    Menu menu = new Menu(frame, tavolo);
     frame.setComponent(menu);
 }//GEN-LAST:event_OKActionPerformed
 
 private void AnnullaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AnnullaActionPerformed
 // TODO add your handling code here:
     this.setVisible(false);
-    Menu menu=new Menu(frame,tavolo);
+    Menu menu = new Menu(frame, tavolo);
     frame.setComponent(menu);
 }//GEN-LAST:event_AnnullaActionPerformed
 
 private void visuallizzaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_visuallizzaActionPerformed
 // TODO add your handling code here:
-    int row=tabella_bibite.getSelectedRow();
+    int row = tabella_bibite.getSelectedRow();
     id_antipasto.setColumnVisible(id, true);
-    long id_long=((Long)tabella_bibite.getValueAt(row, 0)).longValue();
-    System.out.println("ID pietanza "+id_long);
+    long id_long = ((Long) tabella_bibite.getValueAt(row, 0)).longValue();
+    System.out.println("ID pietanza " + id_long);
     id_antipasto.setColumnVisible(id, false);
-   this.setVisible(false);
-   it.softfood.GUI.Pietanza pietanza = new it.softfood.GUI.Pietanza(frame,tavolo,id_long,"bibite");
-   frame.setComponent(pietanza);  
+    this.setVisible(false);
+    it.softfood.GUI.Pietanza pietanza = new it.softfood.GUI.Pietanza(frame, tavolo, id_long, "bibite");
+    frame.setComponent(pietanza);
 }//GEN-LAST:event_visuallizzaActionPerformed
 
 private void tabella_bibiteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabella_bibiteMouseClicked
 // TODO add your handling code here:
     visuallizza.setEnabled(true);
 }//GEN-LAST:event_tabella_bibiteMouseClicked
-
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Annulla;
     private javax.swing.JButton OK;
@@ -310,7 +320,6 @@ private void tabella_bibiteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FI
     private javax.swing.JTable tabella_ordini;
     private javax.swing.JButton visuallizza;
     // End of variables declaration//GEN-END:variables
-
     private FrameView frame;
     private Long tavolo;
     private XTableColumnModel id_antipasto;
