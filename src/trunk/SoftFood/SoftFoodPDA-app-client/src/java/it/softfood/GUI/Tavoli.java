@@ -57,7 +57,7 @@ public class Tavoli extends javax.swing.JPanel {
             add.setEnabled(false);
             jComboBox1.setEnabled(false);
             jComboBox2.setEnabled(false);
-            model.addElement("Tavoli momentaneamente \n tutti occupati... ");
+            model.addElement("Nessun tavolo disponibile per l'operazione! ");
         }
 
         listaTavoli = new String[size];
