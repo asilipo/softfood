@@ -178,6 +178,7 @@ public class OrdinazioneFacade implements OrdinazioneFacadeRemote, OrdinazioneFa
 	
 	public boolean rimuoviOrdinazione(Long id) {
 		if (id != null) {
+            Boolean statoEliminazione = false;
             Ordinazione ordinazione = ordinazioneSessionBean.selezionaOrdinazionePerId(id);
             ArrayList<LineaOrdinazione> lineeOrdinazione = (ArrayList<LineaOrdinazione>) lineaOrdinazioneSessionBean.selezionaLineeOrdinazionePerOrdinazione(ordinazione);
 
@@ -198,13 +199,14 @@ public class OrdinazioneFacade implements OrdinazioneFacadeRemote, OrdinazioneFa
                             tavoloDaAttivare.setAttivo(true);
                             em.flush();
                         }
-                        
+                        statoEliminazione = ordinazioneSessionBean.rimuoviOrdinazione(id);
                         tavoloSessionBeanRemote.rimuoviTavolo(tavolo.getId());
                     } else {
                         tavoloSessionBeanRemote.modificaStatoTavolo(tavolo, false);
+                        statoEliminazione = ordinazioneSessionBean.rimuoviOrdinazione(id);
                     }
 
-                    return ordinazioneSessionBean.rimuoviOrdinazione(id);
+                    return statoEliminazione;
                 } catch (Exception e) {
                     ejbContext.setRollbackOnly();
                 }
