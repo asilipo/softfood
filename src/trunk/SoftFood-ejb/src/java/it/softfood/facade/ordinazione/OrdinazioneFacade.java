@@ -1,5 +1,8 @@
 package it.softfood.facade.ordinazione;
 
+import it.softfood.entity.Articolo;
+import it.softfood.entity.Bevanda;
+import it.softfood.entity.BevandaMagazzino;
 import it.softfood.entity.Ingrediente;
 import it.softfood.entity.IngredienteMagazzino;
 import it.softfood.entity.IngredientePietanza;
@@ -9,6 +12,7 @@ import it.softfood.entity.Pietanza;
 import it.softfood.entity.Tavolo;
 import it.softfood.entity.Variante;
 import it.softfood.enumeration.TipoPietanza;
+import it.softfood.session.bevandamagazzino.BevandaMagazzinoSessionBeanRemote;
 import it.softfood.session.ingredientemagazzino.IngredienteMagazzinoSessionBeanRemote;
 import it.softfood.session.ingredientepietanza.IngredientePietanzaSessionBeanRemote;
 import it.softfood.session.lineaordinazione.LineaOrdinazioneSessionBeanRemote;
@@ -51,6 +55,8 @@ public class OrdinazioneFacade implements OrdinazioneFacadeRemote, OrdinazioneFa
 	private IngredientePietanzaSessionBeanRemote ingredientePietanzaSessionBeanRemote;
     @EJB(beanName = "IngredienteMagazzinoSessionBean")
 	private IngredienteMagazzinoSessionBeanRemote ingredienteMagazzinoSessionBeanRemote;
+    @EJB(beanName = "BevandaMagazzinoSessionBean")
+	private BevandaMagazzinoSessionBeanRemote bevandaMagazzinoSessionBeanRemote;
     @EJB(beanName = "TavoloSessionBean")
 	private TavoloSessionBeanRemote tavoloSessionBeanRemote;
 
@@ -178,9 +184,40 @@ public class OrdinazioneFacade implements OrdinazioneFacadeRemote, OrdinazioneFa
 	
 	public LineaOrdinazione inserisciLineaOrdinazione(LineaOrdinazione lineaOrdinazione) {
 		if (lineaOrdinazione != null) {
-			lineaOrdinazione.setOrdinazione(em.merge(lineaOrdinazione.getOrdinazione()));
-			em.flush();
-			return lineaOrdinazioneSessionBean.inserisciLineaOrdinazione(lineaOrdinazione);
+            try {
+                lineaOrdinazione.setOrdinazione(em.merge(lineaOrdinazione.getOrdinazione()));
+                em.flush();
+                lineaOrdinazione = lineaOrdinazioneSessionBean.inserisciLineaOrdinazione(lineaOrdinazione);
+                Articolo articolo = lineaOrdinazione.getArticolo();
+                if (articolo instanceof Pietanza) {
+                    ArrayList<IngredientePietanza> ingredientiPietanze = (ArrayList<IngredientePietanza>) ingredientePietanzaSessionBeanRemote.selezionaIngredientiPietanze();
+                    ArrayList<IngredienteMagazzino> ingredientiMagazzino = (ArrayList<IngredienteMagazzino>) ingredienteMagazzinoSessionBeanRemote.selezionaIngredientiMagazzino();
+                    if (ingredientiPietanze != null && ingredientiMagazzino != null) {
+                        for (IngredientePietanza ingredientePietanza : ingredientiPietanze) {
+                            if (ingredientePietanza.getIngredientePietanzaPK().getPietanza().getId().equals(articolo.getId())) {
+                                for (IngredienteMagazzino ingredienteMagazzino : ingredientiMagazzino) {
+                                    if (ingredienteMagazzino.getIngredienteLungaConservazione().getId().
+                                            equals(ingredientePietanza.getIngredientePietanzaPK().getIngrediente().getId())) {
+                                        ingredienteMagazzino = em.merge(ingredienteMagazzino);
+                                        int quantita = ingredienteMagazzino.getQuantita();
+                                        ingredienteMagazzino.setQuantita(quantita - (lineaOrdinazione.getQuantita() * ingredientePietanza.getQuantita()));
+                                    }
+                                }
+                            }
+                        }
+                    } else {
+                        ejbContext.setRollbackOnly();
+                    }
+                } else {
+                    BevandaMagazzino bevandaMagazzino = bevandaMagazzinoSessionBeanRemote.selezionaBevandaMagazzinoPerId(articolo.getId());
+                    bevandaMagazzino = em.merge(bevandaMagazzino);
+                    int quantita = bevandaMagazzino.getQuantita();
+                    bevandaMagazzino.setQuantita(quantita - lineaOrdinazione.getQuantita());
+                    em.flush();
+                }
+            } catch (Exception e) {
+                ejbContext.setRollbackOnly();
+            }
 		}
 		
 		return null;
@@ -220,15 +257,23 @@ public class OrdinazioneFacade implements OrdinazioneFacadeRemote, OrdinazioneFa
         if (ordinazione != null) 
 			 lineeOrdinazione = (ArrayList<LineaOrdinazione>) lineaOrdinazioneSessionBean.selezionaLineeOrdinazionePerOrdinazione(ordinazione);
         
-        ArrayList<LineaOrdinazione> lineeOrdinazionePietanza = new ArrayList<LineaOrdinazione> ();
-        for (LineaOrdinazione lineaOrdinazione : lineeOrdinazione) {
-            Pietanza pietanza = (Pietanza) lineaOrdinazione.getArticolo();
-            if (pietanza instanceof Pietanza)
-                if (pietanza.getTipo().equals(tipoPietanza))
-                    lineeOrdinazionePietanza.add(lineaOrdinazione);
+        ArrayList<LineaOrdinazione> lineeOrdinazioneArticoli = new ArrayList<LineaOrdinazione> ();
+        if (tipoPietanza == null) {
+            for (LineaOrdinazione lineaOrdinazione : lineeOrdinazione) {
+                Bevanda bevanda = (Bevanda) lineaOrdinazione.getArticolo();
+                if (bevanda instanceof Bevanda)
+                    lineeOrdinazioneArticoli.add(lineaOrdinazione);
+            }
+        } else {
+            for (LineaOrdinazione lineaOrdinazione : lineeOrdinazione) {
+                Pietanza pietanza = (Pietanza) lineaOrdinazione.getArticolo();
+                if (pietanza instanceof Pietanza)
+                    if (pietanza.getTipo().equals(tipoPietanza))
+                        lineeOrdinazioneArticoli.add(lineaOrdinazione);
+            }
         }
 
-        return lineeOrdinazionePietanza;
+        return lineeOrdinazioneArticoli;
     }
 
     public boolean rimuoviLineaOrdinazione(Long id) {
