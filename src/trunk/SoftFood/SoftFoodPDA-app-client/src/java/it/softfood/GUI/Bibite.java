@@ -7,19 +7,13 @@
 package it.softfood.GUI;
 
 
-import it.softfood.entity.Pietanza;
-import it.softfood.enumeration.TipoPietanza;
 import it.softfood.facade.articolomenu.ArticoloMenuFacadeRemote;
 import it.softfood.facade.ordinazione.OrdinazioneFacadeRemote;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
-import javax.swing.DefaultCellEditor;
 import javax.swing.JComboBox;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
-import javax.swing.table.TableColumnModel;
 import org.jdesktop.application.FrameView;
 
 /**
@@ -27,6 +21,7 @@ import org.jdesktop.application.FrameView;
  * @author Marco Grasso
  * @author Francesco Pacilio
  */
+
 public class Bibite extends javax.swing.JPanel {
 
     private OrdinazioneFacadeRemote ordinazioneFacade;
@@ -41,7 +36,7 @@ public class Bibite extends javax.swing.JPanel {
             System.err.println("Errore binding TavoloFacade");
         }
     }
-    /** Creates new form Antipasto */
+    
     public Bibite(FrameView frame, Long tavolo) {
         initComponents();
        
@@ -60,10 +55,9 @@ public class Bibite extends javax.swing.JPanel {
         tabella_bibite.setModel(new javax.swing.table.DefaultTableModel(new String[]{"ID", "Bevanda"}, bibite.size()));
 
         id_antipasto=new XTableColumnModel();
-        
         tabella_bibite.setColumnModel(id_antipasto);
         tabella_bibite.createDefaultColumnsFromModel();
-        
+   
         id=id_antipasto.getColumnByModelIndex(0);
         
         int i=0;
