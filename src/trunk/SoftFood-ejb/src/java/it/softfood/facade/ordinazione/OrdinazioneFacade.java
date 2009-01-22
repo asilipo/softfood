@@ -74,6 +74,7 @@ public class OrdinazioneFacade implements OrdinazioneFacadeRemote, OrdinazioneFa
                             Tavolo tavoloDaAttivare = tavoloSessionBeanRemote.selezionaTavoloPerRiferimento(temp);
                             tavoloDaAttivare = em.merge(tavoloDaAttivare);
                             tavoloDaAttivare.setAttivo(true);
+                            em.flush();
                         }
                         tavoloSessionBeanRemote.rimuoviTavolo(tavolo.getId());
                     } else {
@@ -176,9 +177,40 @@ public class OrdinazioneFacade implements OrdinazioneFacadeRemote, OrdinazioneFa
 	}
 	
 	public boolean rimuoviOrdinazione(Long id) {
-		if (id != null)
-			return ordinazioneSessionBean.rimuoviOrdinazione(id);
-		
+		if (id != null) {
+            Ordinazione ordinazione = ordinazioneSessionBean.selezionaOrdinazionePerId(id);
+            ArrayList<LineaOrdinazione> lineeOrdinazione = (ArrayList<LineaOrdinazione>) lineaOrdinazioneSessionBean.selezionaLineeOrdinazionePerOrdinazione(ordinazione);
+
+            if (lineeOrdinazione != null) {
+                try {
+                    for (LineaOrdinazione lineaOrdinazione : lineeOrdinazione)
+                        lineaOrdinazioneSessionBean.rimuoviLineaOrdinazione(lineaOrdinazione.getId());
+
+                    Tavolo tavolo = tavoloSessionBeanRemote.selezionaTavoloPerId(ordinazione.getTavolo().getId());
+                    
+                    if (tavolo.getRiferimento().contains("+")) {
+                        String riferimento = tavolo.getRiferimento();
+                        StringTokenizer st = new StringTokenizer(riferimento, "+");
+                        while(st.hasMoreTokens()) {
+                            String temp = st.nextToken();
+                            Tavolo tavoloDaAttivare = tavoloSessionBeanRemote.selezionaTavoloPerRiferimento(temp);
+                            tavoloDaAttivare = em.merge(tavoloDaAttivare);
+                            tavoloDaAttivare.setAttivo(true);
+                            em.flush();
+                        }
+                        
+                        tavoloSessionBeanRemote.rimuoviTavolo(tavolo.getId());
+                    } else {
+                        tavoloSessionBeanRemote.modificaStatoTavolo(tavolo, false);
+                    }
+
+                    return ordinazioneSessionBean.rimuoviOrdinazione(id);
+                } catch (Exception e) {
+                    ejbContext.setRollbackOnly();
+                }
+            }
+        }
+
 		return false;
 	}
 	
