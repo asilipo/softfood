@@ -289,6 +289,7 @@ public class Pannello_ordinazioni extends javax.swing.JPanel {
         pannello_ordini.add(jScrollPane2, java.awt.BorderLayout.CENTER);
 
         cancella.setText(resourceMap.getString("cancella.text")); // NOI18N
+        cancella.setEnabled(false);
         cancella.setName("cancella"); // NOI18N
         cancella.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -356,14 +357,7 @@ private void tabella_pietanzaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-
 
 private void tabella_ordiniMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabella_ordiniMouseClicked
 // TODO add your handling code here:
-    /*linea_ordine.setColumnVisible(id_ordini, true);
-    Long id=(Long) tabella_ordini.getValueAt(tabella_ordini.getSelectedRow(),0);
-    System.out.println("IDD: "+id);
-    ordinazioneFacade.rimuoviLineaOrdinazione(id);
-    linea_ordine.setColumnVisible(id_ordini, false);
-    this.setVisible(false);
-    Pannello_ordinazioni pannello=new Pannello_ordinazioni(frame, tavolo, tipo);
-    frame.setComponent(pannello);*/
+    cancella.setEnabled(true);
     
 }//GEN-LAST:event_tabella_ordiniMouseClicked
 

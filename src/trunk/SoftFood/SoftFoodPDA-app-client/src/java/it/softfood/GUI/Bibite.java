@@ -246,6 +246,11 @@ public class Bibite extends javax.swing.JPanel {
             }
         });
         tabella_ordini.setName("tabella_ordini"); // NOI18N
+        tabella_ordini.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabella_ordiniMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tabella_ordini);
         tabella_ordini.getColumnModel().getColumn(0).setResizable(false);
         tabella_ordini.getColumnModel().getColumn(0).setHeaderValue(resourceMap.getString("tabella_ordini.columnModel.title0")); // NOI18N
@@ -257,6 +262,7 @@ public class Bibite extends javax.swing.JPanel {
         pannello_ordini.add(jScrollPane2, java.awt.BorderLayout.CENTER);
 
         cancella.setText(resourceMap.getString("cancella.text")); // NOI18N
+        cancella.setEnabled(false);
         cancella.setName("cancella"); // NOI18N
         cancella.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -335,6 +341,12 @@ private void cancellaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     Bibite pannello=new Bibite(frame, tavolo);
     frame.setComponent(pannello);
 }//GEN-LAST:event_cancellaActionPerformed
+
+private void tabella_ordiniMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabella_ordiniMouseClicked
+// TODO add your handling code here:
+    
+    cancella.setEnabled(true);
+}//GEN-LAST:event_tabella_ordiniMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Annulla;
