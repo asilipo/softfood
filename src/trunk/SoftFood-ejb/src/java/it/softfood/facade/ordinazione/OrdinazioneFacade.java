@@ -266,19 +266,15 @@ public class OrdinazioneFacade implements OrdinazioneFacadeRemote, OrdinazioneFa
 			 lineeOrdinazione = (ArrayList<LineaOrdinazione>) lineaOrdinazioneSessionBean.selezionaLineeOrdinazionePerOrdinazione(ordinazione);
         
         ArrayList<LineaOrdinazione> lineeOrdinazioneArticoli = new ArrayList<LineaOrdinazione> ();
-        if (tipoPietanza == null) {
-            for (LineaOrdinazione lineaOrdinazione : lineeOrdinazione) {
-                Bevanda bevanda = (Bevanda) lineaOrdinazione.getArticolo();
-                if (bevanda instanceof Bevanda)
+        
+        for (LineaOrdinazione lineaOrdinazione : lineeOrdinazione) {
+            Articolo articolo = lineaOrdinazione.getArticolo();
+            if (articolo instanceof Bevanda) 
+                lineeOrdinazioneArticoli.add(lineaOrdinazione);
+            else 
+                if (((Pietanza)articolo).getTipo().equals(tipoPietanza))
                     lineeOrdinazioneArticoli.add(lineaOrdinazione);
-            }
-        } else {
-            for (LineaOrdinazione lineaOrdinazione : lineeOrdinazione) {
-                Pietanza pietanza = (Pietanza) lineaOrdinazione.getArticolo();
-                if (pietanza instanceof Pietanza)
-                    if (pietanza.getTipo().equals(tipoPietanza))
-                        lineeOrdinazioneArticoli.add(lineaOrdinazione);
-            }
+            
         }
 
         return lineeOrdinazioneArticoli;
