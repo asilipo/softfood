@@ -1,6 +1,7 @@
-/*
- * Main.java
- */
+package it.softfood.GUI;
+
+import org.jdesktop.application.Application;
+import org.jdesktop.application.SingleFrameApplication;
 
 /**
  * @author Maria Rosaria Paone
@@ -8,14 +9,6 @@
  * @author Francesco Pacilio
  */
 
-package it.softfood.GUI;
-
-import org.jdesktop.application.Application;
-import org.jdesktop.application.SingleFrameApplication;
-
-/**
- * The main class of the application.
- */
 public class Main extends SingleFrameApplication {
 
     /**
@@ -47,4 +40,5 @@ public class Main extends SingleFrameApplication {
     public static void main(String[] args) {
         launch(Main.class, args);
     }
+    
 }

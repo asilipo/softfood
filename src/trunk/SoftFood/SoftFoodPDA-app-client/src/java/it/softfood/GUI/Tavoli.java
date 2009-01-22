@@ -201,8 +201,6 @@ public class Tavoli extends javax.swing.JPanel {
 
         Ordinazione ordine = null;
         
-        System.out.println("MARY "+vuoti);
-        
         if (vuoti) { 
             
             //Inserimento
