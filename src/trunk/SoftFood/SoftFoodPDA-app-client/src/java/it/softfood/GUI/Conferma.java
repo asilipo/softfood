@@ -109,7 +109,7 @@ public class Conferma extends javax.swing.JPanel {
 
     private void CancellaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancellaActionPerformed
         this.setVisible(false);
-        ordinazioneFacade.rimuoviOrdinazione(tavolo);
+        ordinazioneFacade.rimuoviOrdinazione(tavolo, true);
         Ordine ordine = new Ordine(frame);
         frame.setComponent(ordine);
         
