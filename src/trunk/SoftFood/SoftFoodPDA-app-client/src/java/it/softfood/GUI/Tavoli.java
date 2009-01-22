@@ -250,7 +250,8 @@ private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:eve
     Ok.setEnabled(true);
     model.addElement((String) jComboBox1.getSelectedItem());
     jComboBox1.removeItemAt(jComboBox1.getSelectedIndex());
-    jComboBox1.setSelectedIndex(0);
+    
+    //jComboBox1.setSelectedIndex(0);
 }//GEN-LAST:event_addActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
