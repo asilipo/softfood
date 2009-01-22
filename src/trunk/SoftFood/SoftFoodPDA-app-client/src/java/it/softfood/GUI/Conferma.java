@@ -1,14 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
- * Conferma.java
- *
- * Created on 14-gen-2009, 16.19.13
- */
-
 package it.softfood.GUI;
 
 import it.softfood.entity.LineaOrdinazione;
@@ -23,10 +12,9 @@ import org.jdesktop.application.FrameView;
  * @author Marco Grasso
  * @author Francesco Pacilio
  */
+
 public class Conferma extends javax.swing.JPanel {
 
-    
-    
     private OrdinazioneFacadeRemote ordinazioneFacade;
 
     private void initFacade(){
@@ -34,23 +22,22 @@ public class Conferma extends javax.swing.JPanel {
             InitialContext initial=new InitialContext();
             ordinazioneFacade = (OrdinazioneFacadeRemote) initial.lookup("it.softfood.facade.ordinazione.OrdinazioneFacade");
         }catch(NamingException e){
-            System.err.println("Errore binding: TavoloFacade e OrdinazioneFacade");
+            System.err.println("Errore binding: OrdinazioneFacade");
         }
     }
     
-    
-    /** Creates new form Conferma */
     public Conferma(FrameView frame,Long tavolo) {
+        this.frame = frame;
+        this.tavolo = tavolo;
+
         initComponents();
         initFacade();
-        this.frame = frame;
-        this.tavolo=tavolo;
         
         ArrayList<LineaOrdinazione> ordini=(ArrayList<LineaOrdinazione>) ordinazioneFacade.selezionaLineeOrdinazionePerOrdinazione(ordinazioneFacade.selezionaOrdinazionePerId(tavolo));
         
         String data[]=new String[ordini.size()];
-        int i=0;
         
+        int i=0;
         for(LineaOrdinazione linea:ordini)
             data[i++] = linea.getArticolo().getNome()+" - "+linea.getQuantita();
         
@@ -121,7 +108,6 @@ public class Conferma extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void CancellaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancellaActionPerformed
-        // TODO add your handling code here:
         this.setVisible(false);
         ordinazioneFacade.rimuoviOrdinazione(tavolo);
         Ordine ordine = new Ordine(frame);
@@ -131,14 +117,12 @@ public class Conferma extends javax.swing.JPanel {
     }//GEN-LAST:event_CancellaActionPerformed
 
     private void OKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OKActionPerformed
-        // TODO add your handling code here:
         this.setVisible(false);
         Ordine ordine = new Ordine(frame);
         frame.setComponent(ordine);
     }//GEN-LAST:event_OKActionPerformed
 
     private void AnnullaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AnnullaActionPerformed
-        // TODO add your handling code here:
         this.setVisible(false);
         Menu menu = new Menu(frame,tavolo);
         frame.setComponent(menu);
@@ -155,4 +139,5 @@ public class Conferma extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
     private FrameView frame;
     private Long tavolo;
+    
 }

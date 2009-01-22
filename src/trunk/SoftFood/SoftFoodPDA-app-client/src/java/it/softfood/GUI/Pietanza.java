@@ -17,6 +17,7 @@ import org.jdesktop.application.FrameView;
  * @author Marco Grasso
  * @author Francesco Pacilio
  */
+
 public class Pietanza extends javax.swing.JPanel {
 
     private ArticoloMenuFacadeRemote articolo;
@@ -28,7 +29,7 @@ public class Pietanza extends javax.swing.JPanel {
             articolo = (ArticoloMenuFacadeRemote) initial.lookup("it.softfood.facade.articolomenu.ArticoloMenuFacade");
             ordinazioneFacade = (OrdinazioneFacadeRemote) initial.lookup("it.softfood.facade.ordinazione.OrdinazioneFacade");
         } catch (NamingException e) {
-            System.err.println("Errore binding: ArticoloMenuFacade");
+            System.err.println("Errore binding: ArticoloMenuFacade - OrdinazioneFacade");
         }
     }
 
@@ -223,7 +224,6 @@ public class Pietanza extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
 private void cancellaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancellaActionPerformed
-// TODO add your handling code here:
     jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object[][]{
                 {null, null},
@@ -253,7 +253,6 @@ private void cancellaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 }//GEN-LAST:event_cancellaActionPerformed
 
 private void OKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OKActionPerformed
-// TODO add your handling code here:
     this.setVisible(false);
     
     LineaOrdinazione linea=new LineaOrdinazione();
@@ -273,7 +272,6 @@ private void OKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:even
 }//GEN-LAST:event_OKActionPerformed
 
 private void annullaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_annullaActionPerformed
-// TODO add your handling code here:
     this.setVisible(false);
     if (tipo.equalsIgnoreCase("bibite")) {
         Bibite pannello = new Bibite(frame, tavolo);
@@ -306,4 +304,5 @@ private void annullaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
     private Long id;
     private String tipo;
     private JComboBox piu;
+    
 }

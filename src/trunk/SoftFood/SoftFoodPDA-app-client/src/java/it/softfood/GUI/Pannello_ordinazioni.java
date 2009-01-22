@@ -8,8 +8,6 @@ import it.softfood.facade.ordinazione.OrdinazioneFacadeRemote;
 import java.util.ArrayList;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
-import javax.swing.DefaultCellEditor;
-import javax.swing.JComboBox;
 import javax.swing.table.TableColumn;
 import org.jdesktop.application.FrameView;
 
@@ -18,6 +16,7 @@ import org.jdesktop.application.FrameView;
  * @author Marco Grasso
  * @author Francesco Pacilio
  */
+
 public class Pannello_ordinazioni extends javax.swing.JPanel {
 
     private OrdinazioneFacadeRemote ordinazioneFacade;
@@ -34,15 +33,14 @@ public class Pannello_ordinazioni extends javax.swing.JPanel {
     }
 
     public Pannello_ordinazioni(FrameView frame, Long tavolo, String tipo) {
-        initComponents();
-        initFacade();
         this.frame = frame;
         this.tavolo = tavolo;
         this.tipo = tipo;
 
+        initComponents();
+        initFacade();
+
         TipoPietanza tipo_pietanza;
-
-
         if (tipo.equalsIgnoreCase("antipasti")) {
             jLabel2.setText(jLabel2.getText() + " antipasto:");
             tipo_pietanza = TipoPietanza.ANTIPASTI;
@@ -60,17 +58,15 @@ public class Pannello_ordinazioni extends javax.swing.JPanel {
             tipo_pietanza = TipoPietanza.DOLCE;
         }
 
-
         ArrayList<it.softfood.entity.Pietanza> pietanze = (ArrayList<it.softfood.entity.Pietanza>) articolo.selezionaPietanzeDisponibiliPerTipo(tipo_pietanza);
-
 
         int i = 0;
         int j = 0;
-
-
-        tabella_pietanza.setModel(new javax.swing.table.DefaultTableModel(new String[]{"ID", "Pietanza"}, pietanze.size()));
-
-
+        tabella_pietanza.setModel(new javax.swing.table.DefaultTableModel(new String[]{"ID", "Pietanza"}, pietanze.size()){
+             public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        });
 
         id_antipasto = new XTableColumnModel();
 
@@ -83,27 +79,24 @@ public class Pannello_ordinazioni extends javax.swing.JPanel {
             tabella_pietanza.setValueAt(pietanza.getId(), i, j++);
             tabella_pietanza.setValueAt(pietanza.getNome(), i++, j);
             j = 0;
-            ;
         }
 
         id_antipasto.setColumnVisible(id, false);
 
-        
-
         tabella_pietanza.setRowHeight(tabella_pietanza.getRowHeight() * 15 / 10);
-
 
         Ordinazione ordine = ordinazioneFacade.selezionaOrdinazionePerId(tavolo);
 
         ArrayList<LineaOrdinazione> linee = (ArrayList<LineaOrdinazione>) ordinazioneFacade.selezionaLineeOrdinazionePerOrdinazione(ordine, tipo_pietanza);
 
+        tabella_ordini.setModel(new javax.swing.table.DefaultTableModel(new Object [3][linee.size()],new String[]{"ID", "Pietanza","Quantita'"}){
+             public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        });
+
         i = 0;
         j = 0;
-    
-        tabella_ordini.setModel(new javax.swing.table.DefaultTableModel(new Object [3][linee.size()],new String[]{"ID", "Pietanza","Quantita'"}));
-
-        
-        
         for (LineaOrdinazione linea : linee) {
             tabella_ordini.setValueAt(linea.getId(), i, j);
             j++;
@@ -114,7 +107,6 @@ public class Pannello_ordinazioni extends javax.swing.JPanel {
             i++;
         }
       
-        
         linea_ordine = new XTableColumnModel();
 
         tabella_ordini.setColumnModel(linea_ordine);
@@ -325,21 +317,18 @@ public class Pannello_ordinazioni extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
 private void OKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OKActionPerformed
-// TODO add your handling code here:
     this.setVisible(false);
     Menu menu = new Menu(frame, tavolo);
     frame.setComponent(menu);
 }//GEN-LAST:event_OKActionPerformed
 
 private void AnnullaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AnnullaActionPerformed
-// TODO add your handling code here:
     this.setVisible(false);
     Menu menu = new Menu(frame, tavolo);
     frame.setComponent(menu);
 }//GEN-LAST:event_AnnullaActionPerformed
 
 private void visuallizzaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_visuallizzaActionPerformed
-// TODO add your handling code here:
     int row = tabella_pietanza.getSelectedRow();
     id_antipasto.setColumnVisible(id, true);
     long id_long = ((Long) tabella_pietanza.getValueAt(row, 0)).longValue();
@@ -351,23 +340,18 @@ private void visuallizzaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
 }//GEN-LAST:event_visuallizzaActionPerformed
 
 private void tabella_pietanzaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabella_pietanzaMouseClicked
-// TODO add your handling code here:
     visuallizza.setEnabled(true);
 }//GEN-LAST:event_tabella_pietanzaMouseClicked
 
 private void tabella_ordiniMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabella_ordiniMouseClicked
-// TODO add your handling code here:
     cancella.setEnabled(true);
     
 }//GEN-LAST:event_tabella_ordiniMouseClicked
 
 private void cancellaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancellaActionPerformed
-// TODO add your handling code here:
     linea_ordine.setColumnVisible(id_ordini, true);
-    Long id=(Long) tabella_ordini.getValueAt(tabella_ordini.getSelectedRow(),0);
-    System.out.println("IDD: "+id);
+    Long id = (Long) tabella_ordini.getValueAt(tabella_ordini.getSelectedRow(),0);
     ordinazioneFacade.rimuoviLineaOrdinazione(id);
-    //tabella_ordini.removeRowSelectionInterval(tabella_ordini.getSelectedRow(), tabella_ordini.getSelectedRow());
     linea_ordine.setColumnVisible(id_ordini, false);
     this.setVisible(false);
     Pannello_ordinazioni pannello=new Pannello_ordinazioni(frame, tavolo, tipo);
