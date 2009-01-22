@@ -370,6 +370,7 @@ private void cancellaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     Long id=(Long) tabella_ordini.getValueAt(tabella_ordini.getSelectedRow(),0);
     System.out.println("IDD: "+id);
     ordinazioneFacade.rimuoviLineaOrdinazione(id);
+    //tabella_ordini.removeRowSelectionInterval(tabella_ordini.getSelectedRow(), tabella_ordini.getSelectedRow());
     linea_ordine.setColumnVisible(id_ordini, false);
     this.setVisible(false);
     Pannello_ordinazioni pannello=new Pannello_ordinazioni(frame, tavolo, tipo);
