@@ -143,6 +143,7 @@ public class Pannello_ordinazioni extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tabella_ordini = new javax.swing.JTable();
+        cancella = new javax.swing.JButton();
         bottoni = new javax.swing.JPanel();
         OK = new javax.swing.JButton();
         Annulla = new javax.swing.JButton();
@@ -244,20 +245,20 @@ public class Pannello_ordinazioni extends javax.swing.JPanel {
 
         tabella_ordini.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "ID", "Pietanza", "Quantita'", "Elimina"
+                "ID", "Pietanza", "Quantita'"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.Object.class, java.lang.String.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, true, true
+                false, false, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -276,11 +277,22 @@ public class Pannello_ordinazioni extends javax.swing.JPanel {
         });
         jScrollPane2.setViewportView(tabella_ordini);
         tabella_ordini.getColumnModel().getColumn(0).setResizable(false);
+        tabella_ordini.getColumnModel().getColumn(0).setHeaderValue(resourceMap.getString("tabella_ordini.columnModel.title0")); // NOI18N
         tabella_ordini.getColumnModel().getColumn(1).setResizable(false);
+        tabella_ordini.getColumnModel().getColumn(1).setHeaderValue(resourceMap.getString("tabella_ordini.columnModel.title1")); // NOI18N
         tabella_ordini.getColumnModel().getColumn(2).setResizable(false);
-        tabella_ordini.getColumnModel().getColumn(3).setResizable(false);
+        tabella_ordini.getColumnModel().getColumn(2).setHeaderValue(resourceMap.getString("tabella_ordini.columnModel.title2")); // NOI18N
 
-        pannello_ordini.add(jScrollPane2, java.awt.BorderLayout.SOUTH);
+        pannello_ordini.add(jScrollPane2, java.awt.BorderLayout.CENTER);
+
+        cancella.setText(resourceMap.getString("cancella.text")); // NOI18N
+        cancella.setName("cancella"); // NOI18N
+        cancella.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancellaActionPerformed(evt);
+            }
+        });
+        pannello_ordini.add(cancella, java.awt.BorderLayout.SOUTH);
 
         add(pannello_ordini, java.awt.BorderLayout.CENTER);
 
@@ -352,10 +364,23 @@ private void tabella_ordiniMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FI
     
 }//GEN-LAST:event_tabella_ordiniMouseClicked
 
+private void cancellaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancellaActionPerformed
+// TODO add your handling code here:
+    linea_ordine.setColumnVisible(id_ordini, true);
+    Long id=(Long) tabella_ordini.getValueAt(tabella_ordini.getSelectedRow(),0);
+    System.out.println("IDD: "+id);
+    ordinazioneFacade.rimuoviLineaOrdinazione(id);
+    linea_ordine.setColumnVisible(id_ordini, false);
+    this.setVisible(false);
+    Pannello_ordinazioni pannello=new Pannello_ordinazioni(frame, tavolo, tipo);
+    frame.setComponent(pannello);
+}//GEN-LAST:event_cancellaActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Annulla;
     private javax.swing.JButton OK;
     private javax.swing.JPanel bottoni;
+    private javax.swing.JButton cancella;
     private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
