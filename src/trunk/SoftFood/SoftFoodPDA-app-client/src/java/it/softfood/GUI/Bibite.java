@@ -52,7 +52,11 @@ public class Bibite extends javax.swing.JPanel {
         combo.addItem(4);
         combo.addItem(5);
 
-        tabella_bibite.setModel(new javax.swing.table.DefaultTableModel(new String[]{"ID", "Bevanda"}, bibite.size()));
+        tabella_bibite.setModel(new javax.swing.table.DefaultTableModel(new String[]{"ID", "Bevanda"}, bibite.size()) {
+             public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        });
 
         id_antipasto=new XTableColumnModel();
         tabella_bibite.setColumnModel(id_antipasto);
