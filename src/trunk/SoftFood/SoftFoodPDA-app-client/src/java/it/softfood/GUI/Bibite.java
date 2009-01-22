@@ -1,8 +1,3 @@
-/*
- * Antipasto.java
- *
- * Created on 19 gennaio 2009, 16.59
- */
 package it.softfood.GUI;
 
 import it.softfood.entity.LineaOrdinazione;
@@ -82,7 +77,11 @@ public class Bibite extends javax.swing.JPanel {
         i = 0;
         j = 0;
         
-        tabella_ordini.setModel(new javax.swing.table.DefaultTableModel(new Object [3][linee.size()],new String[]{"ID", "Pietanza","Quantita'"}));
+        tabella_ordini.setModel(new javax.swing.table.DefaultTableModel(new Object [3][linee.size()],new String[]{"ID", "Pietanza","Quantita'"}){
+             public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        });
 
         for (LineaOrdinazione linea : linee) {
             tabella_ordini.setValueAt(linea.getId(), i, j);

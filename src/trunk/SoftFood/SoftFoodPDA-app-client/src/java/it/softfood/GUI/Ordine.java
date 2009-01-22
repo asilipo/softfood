@@ -1,14 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
- * Ordine.java
- *
- * Created on 14-gen-2009, 11.10.00
- */
-
 package it.softfood.GUI;
 
 import org.jdesktop.application.FrameView;
@@ -18,9 +7,9 @@ import org.jdesktop.application.FrameView;
  * @author Marco Grasso
  * @author Francesco Pacilio
  */
+
 public class Ordine extends javax.swing.JPanel {
 
-    /** Creates new form Ordine */
     public Ordine(FrameView frame) {
         initComponents();
         this.frame=frame;
@@ -71,23 +60,21 @@ public class Ordine extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void InserimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InserimentoActionPerformed
-        // TODO add your handling code here:
         this.setVisible(false);
         Tavoli tavoli=new Tavoli(frame,true);
         frame.setComponent(tavoli);
     }//GEN-LAST:event_InserimentoActionPerformed
 
     private void GestioneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GestioneActionPerformed
-        // TODO add your handling code here:
         this.setVisible(false);
         Tavoli tavoli=new Tavoli(frame,false);
         frame.setComponent(tavoli);
     }//GEN-LAST:event_GestioneActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Gestione;
     private javax.swing.JButton Inserimento;
     // End of variables declaration//GEN-END:variables
     private FrameView frame;
+    
 }

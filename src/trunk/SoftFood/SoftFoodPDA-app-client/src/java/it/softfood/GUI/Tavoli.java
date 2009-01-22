@@ -16,6 +16,7 @@ import org.jdesktop.application.FrameView;
  * @author Marco Grasso
  * @author Francesco Pacilio
  */
+
 public class Tavoli extends javax.swing.JPanel {
 
     private TavoloFacadeRemote tavoloFacade;
@@ -29,7 +30,7 @@ public class Tavoli extends javax.swing.JPanel {
             tavoloFacade = (TavoloFacadeRemote) initial.lookup("it.softfood.facade.tavolo.TavoloFacade");
             ordinazioneFacade = (OrdinazioneFacadeRemote) initial.lookup("it.softfood.facade.ordinazione.OrdinazioneFacade");
         } catch (NamingException e) {
-            System.err.println("Errore binding: TavoloFacade e OrdinazioneFacade");
+            System.err.println("Errore binding: TavoloFacade - OrdinazioneFacade");
         }
     }
 
@@ -192,7 +193,6 @@ public class Tavoli extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void OkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OkActionPerformed
-        // TODO add your handling code here:
         Enumeration enumeration = model.elements();
         ArrayList<String> tav = new ArrayList<String>();
         for (; enumeration.hasMoreElements();) {
@@ -222,14 +222,9 @@ public class Tavoli extends javax.swing.JPanel {
                 Tavoli pannello_tavoli = new Tavoli(frame, vuoti);
                 frame.setComponent(pannello_tavoli);
             }
-            
-            
-            
-        }else{
+        } else {
             //Gestione
             ordine = ordinazioneFacade.selezionaOrdinazioneGiornalieraPerTavolo(tav.get(0),new Boolean("false"));
-            
-            System.out.println(ordine.getId());
         }
         
         this.setVisible(false);
@@ -239,19 +234,15 @@ public class Tavoli extends javax.swing.JPanel {
     }//GEN-LAST:event_OkActionPerformed
 
     private void AnnullaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AnnullaActionPerformed
-        // TODO add your handling code here:
         this.setVisible(false);
         Ordine ordine = new Ordine(frame);
         frame.setComponent(ordine);
     }//GEN-LAST:event_AnnullaActionPerformed
 
 private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActionPerformed
-// TODO add your handling code here:
     Ok.setEnabled(true);
     model.addElement((String) jComboBox1.getSelectedItem());
     jComboBox1.removeItemAt(jComboBox1.getSelectedIndex());
-    
-    //jComboBox1.setSelectedIndex(0);
 }//GEN-LAST:event_addActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -273,4 +264,5 @@ private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:eve
     private FrameView frame;
     private DefaultListModel model;
     private boolean vuoti;
+    
 }

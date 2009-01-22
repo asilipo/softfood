@@ -1,6 +1,7 @@
-/*
- * MainView.java
- */
+package it.softfood.GUI;
+
+import org.jdesktop.application.SingleFrameApplication;
+import org.jdesktop.application.FrameView;
 
 /**
  * @author Maria Rosaria Paone
@@ -8,51 +9,16 @@
  * @author Francesco Pacilio
  */
 
-package it.softfood.GUI;
-
-import org.jdesktop.application.Action;
-import org.jdesktop.application.ResourceMap;
-import org.jdesktop.application.SingleFrameApplication;
-import org.jdesktop.application.FrameView;
-import org.jdesktop.application.TaskMonitor;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.Timer;
-import javax.swing.Icon;
-import javax.swing.JDialog;
-import javax.swing.JFrame;
-
-/**
- * The application's main frame.
- */
 public class MainView extends FrameView {
 
     public MainView(SingleFrameApplication app) {
         super(app);
 
-        initComponents();
-        //Conferma conferma = new Conferma(this);
-        //setComponent(conferma);
-
-    //   Pietanza pietanza = new Pietanza(this);
-     //  setComponent(pietanza);
-
-         /*
-        Menu menu = new Menu();
-        setComponent(menu);
-       */
-     
-        //Tavoli tavoli= new Tavoli(this,false);
-        //setComponent(tavoli);
-       
+        initComponents();      
         
         Ordine ordine = new Ordine(this);
         setComponent(ordine);
-        
-
     }
-
-  
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -77,6 +43,5 @@ public class MainView extends FrameView {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel mainPanel;
     // End of variables declaration//GEN-END:variables
-
    
 }
