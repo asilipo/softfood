@@ -303,9 +303,9 @@ public class OrdinazioneFacade implements OrdinazioneFacadeRemote, OrdinazioneFa
         
         for (LineaOrdinazione lineaOrdinazione : lineeOrdinazione) {
             Articolo articolo = lineaOrdinazione.getArticolo();
-            if (articolo instanceof Bevanda) 
+            if (articolo instanceof Bevanda && tipoPietanza == null)
                 lineeOrdinazioneArticoli.add(lineaOrdinazione);
-            else 
+            if (articolo instanceof Pietanza)
                 if (((Pietanza)articolo).getTipo().equals(tipoPietanza))
                     lineeOrdinazioneArticoli.add(lineaOrdinazione);
             
