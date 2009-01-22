@@ -88,15 +88,7 @@ public class Pannello_ordinazioni extends javax.swing.JPanel {
 
         id_antipasto.setColumnVisible(id, false);
 
-        linea_ordine = new XTableColumnModel();
-
-        tabella_ordini.setColumnModel(linea_ordine);
-        tabella_ordini.createDefaultColumnsFromModel();
-
-        id_ordini = linea_ordine.getColumnByModelIndex(0);
-
-
-        linea_ordine.setColumnVisible(id_ordini, false);
+        
 
         tabella_pietanza.setRowHeight(tabella_pietanza.getRowHeight() * 15 / 10);
 
@@ -107,10 +99,10 @@ public class Pannello_ordinazioni extends javax.swing.JPanel {
 
         i = 0;
         j = 0;
-        
-        tabella_ordini.setModel(new javax.swing.table.DefaultTableModel(new String[]{"ID", "Pietanza","Quantita'"}, linee.size()));
+    
+        tabella_ordini.setModel(new javax.swing.table.DefaultTableModel(new Object [3][linee.size()],new String[]{"ID", "Pietanza","Quantita'"}));
 
-        linea_ordine.setColumnVisible(id_ordini, true);
+        
         
         for (LineaOrdinazione linea : linee) {
             tabella_ordini.setValueAt(linea.getId(), i, j);
@@ -121,7 +113,16 @@ public class Pannello_ordinazioni extends javax.swing.JPanel {
             j = 0;
             i++;
         }
+      
         
+        linea_ordine = new XTableColumnModel();
+
+        tabella_ordini.setColumnModel(linea_ordine);
+        tabella_ordini.createDefaultColumnsFromModel();
+
+        id_ordini = linea_ordine.getColumnByModelIndex(0);
+
+
         linea_ordine.setColumnVisible(id_ordini, false);
     }
 
