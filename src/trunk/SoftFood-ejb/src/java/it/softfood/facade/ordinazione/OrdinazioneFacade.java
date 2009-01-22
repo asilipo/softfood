@@ -234,40 +234,12 @@ public class OrdinazioneFacade implements OrdinazioneFacadeRemote, OrdinazioneFa
                 em.flush();
                 lineaOrdinazione = lineaOrdinazioneSessionBean.inserisciLineaOrdinazione(lineaOrdinazione);
                 Articolo articolo = lineaOrdinazione.getArticolo();
-                if (articolo instanceof Pietanza) {
-                    ArrayList<IngredientePietanza> ingredientiPietanze = (ArrayList<IngredientePietanza>) ingredientePietanzaSessionBeanRemote.selezionaIngredientiPietanze();
-                    ArrayList<IngredienteMagazzino> ingredientiMagazzino = (ArrayList<IngredienteMagazzino>) ingredienteMagazzinoSessionBeanRemote.selezionaIngredientiMagazzino();
-                    if (ingredientiPietanze != null && ingredientiMagazzino != null) {
-                        for (IngredientePietanza ingredientePietanza : ingredientiPietanze) {
-                            if (ingredientePietanza.getIngredientePietanzaPK().getPietanza().getId().equals(articolo.getId())) {
-                                for (IngredienteMagazzino ingredienteMagazzino : ingredientiMagazzino) {
-                                    if (ingredienteMagazzino.getIngredienteLungaConservazione().getId().
-                                            equals(ingredientePietanza.getIngredientePietanzaPK().getIngrediente().getId())) {
-                                        ingredienteMagazzino = em.merge(ingredienteMagazzino);
-                                        int quantita = ingredienteMagazzino.getQuantita();
-                                        ingredienteMagazzino.setQuantita(quantita - (lineaOrdinazione.getQuantita() * ingredientePietanza.getQuantita()));
-                                    }
-                                }
-                            }
-                        }
-                    } else {
-                        ejbContext.setRollbackOnly();
-                    }
-                } else {
-                    ArrayList<BevandaMagazzino> bevandeMagazzino = (ArrayList<BevandaMagazzino>) bevandaMagazzinoSessionBeanRemote.selezionaBevandeMagazzino();
-                    if (bevandeMagazzino != null) {
-                        for (BevandaMagazzino bevandaMagazzino : bevandeMagazzino) {
-                            if (bevandaMagazzino.getBevanda().getId().equals(articolo.getId())) {
-                                bevandaMagazzino = em.merge(bevandaMagazzino);
-                                int quantita = bevandaMagazzino.getQuantita();
-                                bevandaMagazzino.setQuantita(quantita - (lineaOrdinazione.getQuantita() * ((Bevanda) articolo).getCapacita().intValue()));
-                                em.flush();
-                            }
-                        }
-                    } else {
-                        ejbContext.setRollbackOnly();
-                    }
-                }
+                if (articolo instanceof Pietanza)
+                    if (this.aggiornaMagazzinoIngredienti(lineaOrdinazione, "-"))
+                        throw new Exception();
+                else
+                    if (this.aggiornaMagazzinoBevande(lineaOrdinazione, "-"))
+                        throw  new Exception();
             } catch (Exception e) {
                 ejbContext.setRollbackOnly();
             }
@@ -387,7 +359,7 @@ public class OrdinazioneFacade implements OrdinazioneFacadeRemote, OrdinazioneFa
                                     ingredienteMagazzino = em.merge(ingredienteMagazzino);
                                     int quantita = ingredienteMagazzino.getQuantita();
 
-                                    if (tipoAggiornamento.equals("Aggiungi"))
+                                    if (tipoAggiornamento.equals("+"))
                                         ingredienteMagazzino.setQuantita(quantita + (lineaOrdinazione.getQuantita() * ingredientePietanza.getQuantita()));
                                     else
                                          ingredienteMagazzino.setQuantita(quantita - (lineaOrdinazione.getQuantita() * ingredientePietanza.getQuantita()));
@@ -415,7 +387,7 @@ public class OrdinazioneFacade implements OrdinazioneFacadeRemote, OrdinazioneFa
                         bevandaMagazzino = em.merge(bevandaMagazzino);
                         int quantita = bevandaMagazzino.getQuantita();
 
-                        if (tipoAggiornamento.equals("+"))
+                        if (tipoAggiornamento.equals("+")) 
                             bevandaMagazzino.setQuantita(quantita + (lineaOrdinazione.getQuantita() * ((Bevanda) lineaOrdinazione.getArticolo()).getCapacita().intValue()));
                         else
                             bevandaMagazzino.setQuantita(quantita - (lineaOrdinazione.getQuantita() * ((Bevanda) lineaOrdinazione.getArticolo()).getCapacita().intValue()));
