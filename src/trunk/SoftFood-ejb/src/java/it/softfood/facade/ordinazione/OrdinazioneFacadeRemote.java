@@ -24,7 +24,7 @@ public interface OrdinazioneFacadeRemote {
 	
 	java.util.List<it.softfood.entity.Ordinazione> selezionaOrdinazioniGiornalierePerTavolo(it.softfood.entity.Tavolo tavolo, Boolean terminato);
 	
-	boolean rimuoviOrdinazione(Long id);
+	boolean rimuoviOrdinazione(Long id, java.lang.Boolean ripristinaPietanze);
 	
 	it.softfood.entity.LineaOrdinazione inserisciLineaOrdinazione(it.softfood.entity.LineaOrdinazione lineaOrdinazione);
 	

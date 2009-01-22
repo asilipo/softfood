@@ -176,7 +176,7 @@ public class OrdinazioneFacade implements OrdinazioneFacadeRemote, OrdinazioneFa
 		return null;
 	}
 	
-	public boolean rimuoviOrdinazione(Long id) {
+	public boolean rimuoviOrdinazione(Long id, Boolean ripristinaPietanze) {
 		if (id != null) {
             Boolean statoEliminazione = false;
             Ordinazione ordinazione = ordinazioneSessionBean.selezionaOrdinazionePerId(id);
@@ -184,8 +184,19 @@ public class OrdinazioneFacade implements OrdinazioneFacadeRemote, OrdinazioneFa
 
             if (lineeOrdinazione != null) {
                 try {
-                    for (LineaOrdinazione lineaOrdinazione : lineeOrdinazione)
+                    for (LineaOrdinazione lineaOrdinazione : lineeOrdinazione) {
+                        if (ripristinaPietanze) {
+                            Articolo articolo = lineaOrdinazione.getArticolo();
+                            if (articolo instanceof Pietanza) {
+                                if (!this.aggiornaMagazzinoIngredienti(lineaOrdinazione, "+"))
+                                    throw new Exception();
+                            } else if (articolo instanceof Bevanda) {
+                                if (!this.aggiornaMagazzinoBevande(lineaOrdinazione, "+"))
+                                    throw new Exception();
+                            }
+                        }
                         lineaOrdinazioneSessionBean.rimuoviLineaOrdinazione(lineaOrdinazione.getId());
+                    }
 
                     Tavolo tavolo = tavoloSessionBeanRemote.selezionaTavoloPerId(ordinazione.getTavolo().getId());
                     
@@ -363,4 +374,62 @@ public class OrdinazioneFacade implements OrdinazioneFacadeRemote, OrdinazioneFa
 		return false;
     }
 
+    private boolean aggiornaMagazzinoIngredienti(LineaOrdinazione lineaOrdinazione, String tipoAggiornamento) {
+        try {
+            ArrayList<IngredientePietanza> ingredientiPietanze = (ArrayList<IngredientePietanza>) ingredientePietanzaSessionBeanRemote.selezionaIngredientiPietanze();
+            ArrayList<IngredienteMagazzino> ingredientiMagazzino = (ArrayList<IngredienteMagazzino>) ingredienteMagazzinoSessionBeanRemote.selezionaIngredientiMagazzino();
+            if (ingredientiPietanze != null && ingredientiMagazzino != null) {
+                for (IngredientePietanza ingredientePietanza : ingredientiPietanze) {
+                    if (ingredientePietanza.getIngredientePietanzaPK().getPietanza().getId().equals(lineaOrdinazione.getArticolo().getId())) {
+                            for (IngredienteMagazzino ingredienteMagazzino : ingredientiMagazzino) {
+                                if (ingredienteMagazzino.getIngredienteLungaConservazione().getId().
+                                        equals(ingredientePietanza.getIngredientePietanzaPK().getIngrediente().getId())) {
+                                    ingredienteMagazzino = em.merge(ingredienteMagazzino);
+                                    int quantita = ingredienteMagazzino.getQuantita();
+
+                                    if (tipoAggiornamento.equals("Aggiungi"))
+                                        ingredienteMagazzino.setQuantita(quantita + (lineaOrdinazione.getQuantita() * ingredientePietanza.getQuantita()));
+                                    else
+                                         ingredienteMagazzino.setQuantita(quantita - (lineaOrdinazione.getQuantita() * ingredientePietanza.getQuantita()));
+
+                                    em.flush();
+                                }
+                            }
+                        }
+                }
+                return true;
+            }
+        } catch (Exception e) {
+            return false;
+        }
+        
+        return false;
+    }
+
+    private boolean aggiornaMagazzinoBevande(LineaOrdinazione lineaOrdinazione, String tipoAggiornamento) {
+        try {
+            ArrayList<BevandaMagazzino> bevandeMagazzino = (ArrayList<BevandaMagazzino>) bevandaMagazzinoSessionBeanRemote.selezionaBevandeMagazzino();
+            if (bevandeMagazzino != null) {
+                for (BevandaMagazzino bevandaMagazzino : bevandeMagazzino) {
+                    if (bevandaMagazzino.getBevanda().getId().equals(lineaOrdinazione.getArticolo().getId())) {
+                        bevandaMagazzino = em.merge(bevandaMagazzino);
+                        int quantita = bevandaMagazzino.getQuantita();
+
+                        if (tipoAggiornamento.equals("+"))
+                            bevandaMagazzino.setQuantita(quantita + (lineaOrdinazione.getQuantita() * ((Bevanda) lineaOrdinazione.getArticolo()).getCapacita().intValue()));
+                        else
+                            bevandaMagazzino.setQuantita(quantita - (lineaOrdinazione.getQuantita() * ((Bevanda) lineaOrdinazione.getArticolo()).getCapacita().intValue()));
+
+                        em.flush();
+                    }
+                }
+                return true;
+            }
+        } catch (Exception e) {
+            return false;
+        }
+
+        return false;
+    }
+    
 }
