@@ -111,7 +111,6 @@ public class OrdinazioneFacade implements OrdinazioneFacadeRemote, OrdinazioneFa
 
             if (ingredientePietanza.getIngredientePietanzaPK().getPietanza().getId().equals(pietanza.getId())) {
                 Ingrediente ingrediente = ingredientePietanza.getIngredientePietanzaPK().getIngrediente();
-                System.out.println("Pietanza " + pietanza.getNome() + " ingrediente " + ingrediente.getNome());
                 for (IngredienteMagazzino ingredienteMagazzino : ingredientiMagazzino)
                     if (ingredienteMagazzino.getIngredienteLungaConservazione().getId().equals(ingrediente.getId()) && ingredienteMagazzino.getQuantita() >=
                             (ingredientePietanza.getQuantita() + (ingredientePietanza.getQuantita() * disponibilita)) && ingrediente.getScadenza().after(data))
