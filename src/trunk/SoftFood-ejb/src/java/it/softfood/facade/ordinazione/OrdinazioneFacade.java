@@ -235,10 +235,10 @@ public class OrdinazioneFacade implements OrdinazioneFacadeRemote, OrdinazioneFa
                 lineaOrdinazione = lineaOrdinazioneSessionBean.inserisciLineaOrdinazione(lineaOrdinazione);
                 Articolo articolo = lineaOrdinazione.getArticolo();
                 if (articolo instanceof Pietanza)
-                    if (this.aggiornaMagazzinoIngredienti(lineaOrdinazione, "-"))
+                    if (!this.aggiornaMagazzinoIngredienti(lineaOrdinazione, "-"))
                         throw new Exception();
                 else
-                    if (this.aggiornaMagazzinoBevande(lineaOrdinazione, "-"))
+                    if (!this.aggiornaMagazzinoBevande(lineaOrdinazione, "-"))
                         throw  new Exception();
             } catch (Exception e) {
                 ejbContext.setRollbackOnly();
