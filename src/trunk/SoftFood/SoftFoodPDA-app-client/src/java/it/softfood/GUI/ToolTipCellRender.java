@@ -28,9 +28,9 @@ public class ToolTipCellRender extends DefaultTableCellRenderer {
     private OrdinazioneFacadeRemote ordinazioneFacade;
     private TableColumn id;
 
-    public ToolTipCellRender(OrdinazioneFacadeRemote ordinazioneFacade, TableColumn id,XTableColumnModel id_antipasto) {
+    public ToolTipCellRender(OrdinazioneFacadeRemote ordinazioneFacade, TableColumn id, XTableColumnModel id_antipasto) {
         super();
-        this.id=id;
+        this.id = id;
         this.id_antipasto = id_antipasto;
         this.ordinazioneFacade = ordinazioneFacade;
     }
@@ -49,32 +49,34 @@ public class ToolTipCellRender extends DefaultTableCellRenderer {
             Object obj, boolean isSelected, boolean hasFocus, int row, int column) {
         Component cell = super.getTableCellRendererComponent(
                 table, obj, isSelected, hasFocus, row, column);
+
+        id_antipasto.setColumnVisible(id, true);
+
+
         
-       id_antipasto.setColumnVisible(id, true);
-
-
-        System.out.println("PRIMA " +table.getValueAt(row, 0));
         Long id_linea = (Long) table.getValueAt(row, 0);
 
-        System.out.println(id_linea);
+        
         LineaOrdinazione lineaOrdinazione = ordinazioneFacade.selezionaLineaOrdinazionePerId(id_linea);
-                System.out.println(lineaOrdinazione);
+        
         varianti = (ArrayList<Variante>) ordinazioneFacade.selezionaVariantiPerLineaOrdinazione(lineaOrdinazione);
 
-
+        String tool="";
 
         if (varianti != null) {
 
 
             for (Variante var : varianti) {
-                System.out.println("TROVATO");
-                setBackground(Color.RED);
-
+                tool=tool + var.getTipoVariazione().toString() + " " + var.getIngrediente().getNome() + "\n";
 
             }
+            
+            setBackground(Color.LIGHT_GRAY);
+            setToolTipText(tool);
+            tool="";
 
-        }else{
-             System.out.println("VARIANTE NULL!");
+        } else {
+            setBackground(Color.WHITE);
         }
 
         id_antipasto.setColumnVisible(id, false);
