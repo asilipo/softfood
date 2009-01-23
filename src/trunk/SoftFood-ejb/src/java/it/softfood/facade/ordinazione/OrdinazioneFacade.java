@@ -307,8 +307,24 @@ public class OrdinazioneFacade implements OrdinazioneFacadeRemote, OrdinazioneFa
     }
 
     public Variante inserisciVariante(Variante variante) {
-        if (variante != null)
-            return varianteSessionBean.inserisciVariante(variante);
+        if (variante != null) {
+            LineaOrdinazione lineaOrdinazione = variante.getLineaOrdinazione();
+            Ingrediente ingrediente = variante.getIngrediente();
+            if (lineaOrdinazione != null && ingrediente != null) {
+                try {
+                    lineaOrdinazione = em.merge(lineaOrdinazione);
+                    ingrediente = em.merge(ingrediente);
+                    em.flush();
+
+                    variante.setIngrediente(ingrediente);
+                    variante.setLineaOrdinazione(lineaOrdinazione);
+
+                    return varianteSessionBean.inserisciVariante(variante);
+                } catch (Exception e) {
+                    ejbContext.setRollbackOnly();
+                }
+            }
+        }
 
         return null;
     }
