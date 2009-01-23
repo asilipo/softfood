@@ -33,6 +33,8 @@ public interface OrdinazioneFacadeRemote {
 
     it.softfood.entity.LineaOrdinazione selezionaLineaOrdinazionePerId(java.lang.Long id);
 
+    it.softfood.entity.Ingrediente selezionaIngredientePerNome (String ingrediente);
+
     java.util.List<it.softfood.entity.LineaOrdinazione> selezionaLineeOrdinazionePerOrdinazione(it.softfood.entity.Ordinazione ordinazione);
 
     java.util.List<it.softfood.entity.LineaOrdinazione> selezionaLineeOrdinazionePerOrdinazione(it.softfood.entity.Ordinazione ordinazione, it.softfood.enumeration.TipoPietanza tipoPietanza);
