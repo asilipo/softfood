@@ -54,7 +54,7 @@ public class VarianteSessionBean implements VarianteSessionBeanRemote, VarianteS
 	
 	public List<Variante> selezionaVariantiPerLineaOrdinazione(LineaOrdinazione lineaOrdinazione) {
         try {
-            return (ArrayList<Variante>) em.createNamedQuery("Variante.selezionaVariantiPerIngrediente")
+            return (ArrayList<Variante>) em.createNamedQuery("Variante.selezionaVariantiPerLineaOrdinazione")
                 .setParameter("linea_ordinazione", lineaOrdinazione).getResultList();
          } catch (Exception e) {
             System.err.println("VarianteSessionBean#selezionaVariantiPerLineaOrdinazione");
