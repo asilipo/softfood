@@ -303,9 +303,6 @@ private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     ArrayList<Ingrediente> ingredienti;
     if (opt.equalsIgnoreCase("-")) {
         ingredienti = (ArrayList<Ingrediente>) articolo.selezionaIngredientiPietanza(id);
-
-
-
     } else {
         ingredienti = (ArrayList<Ingrediente>) ordinazioneFacade.selezionaIngredientiPerVariante();
     }
