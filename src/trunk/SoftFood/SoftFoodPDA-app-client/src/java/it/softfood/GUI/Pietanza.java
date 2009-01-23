@@ -54,28 +54,28 @@ public class Pietanza extends javax.swing.JPanel {
         listaIngredienti.setListData(ingr);
 
         int disp;
-        if (tipo.equalsIgnoreCase("bibite")) {
+        if (tipo.equalsIgnoreCase("bibite")) 
             disp = articolo.selezionaDisponibilitaBevanda(id);
-        } else {
+        else 
             disp = (Integer) articolo.selezionaDisponibilitaPietanza(id);
-        }
+        
         disponibilita.setText(disponibilita.getText() + disp);
 
-        for (int idisp = 1; idisp <= disp; idisp++) {
+        for (int idisp = 1; idisp <= disp; idisp++) 
             jComboBox1.addItem(idisp);
-        }
+        
 
         if (!tipo.equalsIgnoreCase("bibite")) {
             ArrayList<Ingrediente> ing = (ArrayList<Ingrediente>) ordinazioneFacade.selezionaIngredientiPerVariante();
 
-            for (Ingrediente ingrediente : ing) {
+            for (Ingrediente ingrediente : ing) 
                 jComboBox3.addItem(ingrediente.getNome());
-            }
+            
         }
         
-
         jListModel = new DefaultListModel();
         jList1.setModel(jListModel);
+        
     }
 
     /** This method is called from within the constructor to

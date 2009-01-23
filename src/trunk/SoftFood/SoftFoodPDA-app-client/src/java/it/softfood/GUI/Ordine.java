@@ -61,14 +61,12 @@ public class Ordine extends javax.swing.JPanel {
 
     private void InserimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InserimentoActionPerformed
         this.setVisible(false);
-        Tavoli tavoli=new Tavoli(frame,true);
-        frame.setComponent(tavoli);
+        frame.setComponent(new Tavoli(frame,true));
     }//GEN-LAST:event_InserimentoActionPerformed
 
     private void GestioneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GestioneActionPerformed
         this.setVisible(false);
-        Tavoli tavoli=new Tavoli(frame,false);
-        frame.setComponent(tavoli);
+        frame.setComponent(new Tavoli(frame,false));
     }//GEN-LAST:event_GestioneActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

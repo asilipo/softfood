@@ -17,11 +17,11 @@ public class Conferma extends javax.swing.JPanel {
 
     private OrdinazioneFacadeRemote ordinazioneFacade;
 
-    private void initFacade(){
-        try{
+    private void initFacade() {
+        try {
             InitialContext initial=new InitialContext();
             ordinazioneFacade = (OrdinazioneFacadeRemote) initial.lookup("it.softfood.facade.ordinazione.OrdinazioneFacade");
-        }catch(NamingException e){
+        } catch(NamingException e) {
             System.err.println("Errore binding: OrdinazioneFacade");
         }
     }
@@ -35,11 +35,11 @@ public class Conferma extends javax.swing.JPanel {
         
         ArrayList<LineaOrdinazione> ordini=(ArrayList<LineaOrdinazione>) ordinazioneFacade.selezionaLineeOrdinazionePerOrdinazione(ordinazioneFacade.selezionaOrdinazionePerId(tavolo));
         
-        String data[]=new String[ordini.size()];
+        String data[] = new String[ordini.size()];
         
-        int i=0;
-        for(LineaOrdinazione linea:ordini)
-            data[i++] = linea.getArticolo().getNome()+" - "+linea.getQuantita();
+        int i = 0;
+        for(LineaOrdinazione linea : ordini)
+            data[i++] = linea.getArticolo().getNome() + " - " + linea.getQuantita();
         
         menu.setListData(data);
     }
@@ -124,23 +124,24 @@ public class Conferma extends javax.swing.JPanel {
 
     private void CancellaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancellaActionPerformed
         this.setVisible(false);
+
         ordinazioneFacade.rimuoviOrdinazione(tavolo, true);
+
         Ordine ordine = new Ordine(frame);
-        frame.setComponent(ordine);
-        
-       
+        frame.setComponent(ordine);   
     }//GEN-LAST:event_CancellaActionPerformed
 
     private void OKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OKActionPerformed
         this.setVisible(false);
+
         Ordine ordine = new Ordine(frame);
         frame.setComponent(ordine);
     }//GEN-LAST:event_OKActionPerformed
 
     private void AnnullaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AnnullaActionPerformed
         this.setVisible(false);
-        Menu menu = new Menu(frame,tavolo);
-        frame.setComponent(menu);
+        
+        frame.setComponent(new Menu(frame,tavolo));
     }//GEN-LAST:event_AnnullaActionPerformed
 
 

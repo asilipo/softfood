@@ -60,8 +60,6 @@ public class Pannello_ordinazioni extends javax.swing.JPanel {
 
         ArrayList<it.softfood.entity.Pietanza> pietanze = (ArrayList<it.softfood.entity.Pietanza>) articolo.selezionaPietanzeDisponibiliPerTipo(tipo_pietanza);
 
-        int i = 0;
-        int j = 0;
         tabella_pietanza.setModel(new javax.swing.table.DefaultTableModel(new String[]{"ID", "Pietanza"}, pietanze.size()){
             @Override
              public boolean isCellEditable(int row, int column) {
@@ -76,6 +74,8 @@ public class Pannello_ordinazioni extends javax.swing.JPanel {
 
         id = id_antipasto.getColumnByModelIndex(0);
 
+        int i = 0;
+        int j = 0;
         for (it.softfood.entity.Pietanza pietanza : pietanze) {
             tabella_pietanza.setValueAt(pietanza.getId(), i, j++);
             tabella_pietanza.setValueAt(pietanza.getNome(), i++, j);
@@ -112,13 +112,11 @@ public class Pannello_ordinazioni extends javax.swing.JPanel {
         tabella_ordini.createDefaultColumnsFromModel();
 
         id_ordini = linea_ordine.getColumnByModelIndex(0);
-
-
         linea_ordine.setColumnVisible(id_ordini, false);
+             
+        ToolTipCellRender tool = new ToolTipCellRender(ordinazioneFacade, id_ordini, linea_ordine);
+        tabella_ordini.setDefaultRenderer(tabella_ordini.getColumnClass(0), tool);
         
-        
-        ToolTipCellRender toll=new ToolTipCellRender(ordinazioneFacade,id_ordini, linea_ordine);
-        tabella_ordini.setDefaultRenderer(tabella_ordini.getColumnClass(0), toll);
     }
 
     /** This method is called from within the constructor to
@@ -321,20 +319,17 @@ public class Pannello_ordinazioni extends javax.swing.JPanel {
 
 private void OKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OKActionPerformed
     this.setVisible(false);
-    Menu menu = new Menu(frame, tavolo);
-    frame.setComponent(menu);
+    frame.setComponent(new Menu(frame, tavolo));
 }//GEN-LAST:event_OKActionPerformed
 
 private void AnnullaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AnnullaActionPerformed
     this.setVisible(false);
-    Menu menu = new Menu(frame, tavolo);
-    frame.setComponent(menu);
+    frame.setComponent(new Menu(frame, tavolo));
 }//GEN-LAST:event_AnnullaActionPerformed
 
 private void visuallizzaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_visuallizzaActionPerformed
-    int row=tabella_pietanza.getSelectedRow();
     id_antipasto.setColumnVisible(id, true);
-    long id_long = ((Long) tabella_pietanza.getValueAt(row, 0)).longValue();
+    long id_long = ((Long) tabella_pietanza.getValueAt(tabella_pietanza.getSelectedRow(), 0)).longValue();
     id_antipasto.setColumnVisible(id, false);
     this.setVisible(false);
     it.softfood.GUI.Pietanza pietanza = new it.softfood.GUI.Pietanza(frame, tavolo, id_long, tipo);
@@ -347,11 +342,9 @@ private void tabella_pietanzaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-
 
 private void tabella_ordiniMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabella_ordiniMouseClicked
     cancella.setEnabled(true);
-    
 }//GEN-LAST:event_tabella_ordiniMouseClicked
 
 private void cancellaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancellaActionPerformed
-    
     linea_ordine.setColumnVisible(id_ordini, true);
     Long id = (Long) tabella_ordini.getValueAt(tabella_ordini.getSelectedRow(),0);
     ordinazioneFacade.rimuoviLineaOrdinazione(id);
@@ -385,4 +378,5 @@ private void cancellaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     private TableColumn id_ordini;
     private TableColumn id;
     private String tipo;
+    
 }

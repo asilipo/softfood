@@ -4,13 +4,11 @@ import it.softfood.entity.Ordinazione;
 import it.softfood.entity.Tavolo;
 import it.softfood.facade.ordinazione.OrdinazioneFacadeRemote;
 import it.softfood.facade.tavolo.TavoloFacadeRemote;
-import java.awt.Component;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.swing.DefaultListModel;
-import javax.swing.JOptionPane;
 import org.jdesktop.application.FrameView;
 
 /**
@@ -37,18 +35,19 @@ public class Tavoli extends javax.swing.JPanel {
     }
 
     public Tavoli(FrameView frame, boolean vuoti) {
-        initComponents();
-        initFacade();
         this.frame = frame;
         this.vuoti = vuoti;
+
+        initComponents();
+        initFacade();
 
         if (vuoti) {
             SelezionaTavoli.setText(SelezionaTavoli.getText() + " un tavolo vuoto:");
             tavoli = (ArrayList<Tavolo>) tavoloFacade.selezionaTavoliLiberi();
-
         } else {
             SelezionaTavoli.setText(SelezionaTavoli.getText() + " un tavolo:");
             tavoli = (ArrayList<Tavolo>) tavoloFacade.selezionaTavoliOccupati();
+
             jComboBox2.setEnabled(false);
         }
 
@@ -197,18 +196,14 @@ public class Tavoli extends javax.swing.JPanel {
     private void OkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OkActionPerformed
         Enumeration enumeration = model.elements();
         ArrayList<String> tav = new ArrayList<String>();
-        for (; enumeration.hasMoreElements();) {
+        while(enumeration.hasMoreElements())
             tav.add((String) enumeration.nextElement());
-        }
 
         Ordinazione ordine = null;
         
         if (vuoti) { 
-            
             //Inserimento
-            
             Long tavoloSelezionato = tavoloFacade.occupaTavoli(tav);
-            System.out.println("TAVOLO ID " + tavoloSelezionato);
 
             ordine = new Ordinazione();
             ordine.setTavolo(tavoloFacade.selezionaTavolo(tavoloSelezionato));
@@ -223,24 +218,23 @@ public class Tavoli extends javax.swing.JPanel {
                 frame.setComponent(pannello_tavoli);
             }
         } else {
-            //Gestione
             ordine = ordinazioneFacade.selezionaOrdinazioneGiornalieraPerTavolo(tav.get(0),new Boolean("false"));
         }
         
         this.setVisible(false);
-        Menu menu = new Menu(frame, ordine.getId());
-        frame.setComponent(menu);
 
+        frame.setComponent(new Menu(frame, ordine.getId()));
     }//GEN-LAST:event_OkActionPerformed
 
     private void AnnullaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AnnullaActionPerformed
         this.setVisible(false);
-        Ordine ordine = new Ordine(frame);
-        frame.setComponent(ordine);
+
+        frame.setComponent(new Ordine(frame));
     }//GEN-LAST:event_AnnullaActionPerformed
 
 private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActionPerformed
     Ok.setEnabled(true);
+    
     model.addElement((String) jComboBox1.getSelectedItem());
     jComboBox1.removeItemAt(jComboBox1.getSelectedIndex());
 }//GEN-LAST:event_addActionPerformed
