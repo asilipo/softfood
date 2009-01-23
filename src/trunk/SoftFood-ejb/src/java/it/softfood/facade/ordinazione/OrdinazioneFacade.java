@@ -188,7 +188,7 @@ public class OrdinazioneFacade implements OrdinazioneFacadeRemote, OrdinazioneFa
                 try {
                     for (LineaOrdinazione lineaOrdinazione : lineeOrdinazione) {
                         ArrayList<Variante> varianti = (ArrayList<Variante>) varianteSessionBean.selezionaVariantiPerLineaOrdinazione(lineaOrdinazione);
-                        System.out.println("variante dimeeeeeeeeeeeeeeeee" + varianti.size());
+
                         if(varianti != null && varianti.size() > 0)
                             for (Variante variante : varianti)
                                 varianteSessionBean.rimuoviVariante(variante.getId());
@@ -394,6 +394,9 @@ public class OrdinazioneFacade implements OrdinazioneFacadeRemote, OrdinazioneFa
     public List<Variante> selezionaVariantiPerLineaOrdinazione(LineaOrdinazione lineaOrdinazione) {
         if (lineaOrdinazione != null) {
             ArrayList<Variante> varianti =(ArrayList<Variante>) varianteSessionBean.selezionaVariantiPerLineaOrdinazione(lineaOrdinazione);
+
+            if (varianti != null && varianti.size() > 0)
+                return varianti;
         }
 
         return null;
