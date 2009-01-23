@@ -349,6 +349,17 @@ public class OrdinazioneFacade implements OrdinazioneFacadeRemote, OrdinazioneFa
         return null;
     }
 
+    public Ingrediente selezionaIngredientePerNome (String ingrediente) {
+        if (ingrediente != null) {
+            ArrayList<Ingrediente> ingredienti = (ArrayList<Ingrediente>) ingredienteSessionBeanRemote.selezionaIngredientePerNome(ingrediente);
+
+            if (ingredienti != null)
+                return ingredienti.get(0);
+        }
+
+        return null;
+    }
+
     public List<Variante> selezionaVariantiPerIngrediente(Ingrediente ingrediente) {
         return null;
     }
