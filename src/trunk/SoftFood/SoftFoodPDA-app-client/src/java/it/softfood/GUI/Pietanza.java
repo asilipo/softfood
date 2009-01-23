@@ -260,7 +260,7 @@ private void OKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:even
                 variante.setTipoVariazione(TipoVariante.RIMOZIONE);
             }
             
-            //variante.setIngrediente();
+            variante.setIngrediente(ordinazioneFacade.selezionaIngredientePerNome(var.substring(2)));
             
             ordinazioneFacade.inserisciVariante(variante);
             variante = new Variante();
