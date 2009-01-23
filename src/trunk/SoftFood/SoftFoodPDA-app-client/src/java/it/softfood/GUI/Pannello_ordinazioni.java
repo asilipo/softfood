@@ -88,8 +88,9 @@ public class Pannello_ordinazioni extends javax.swing.JPanel {
         Ordinazione ordine = ordinazioneFacade.selezionaOrdinazionePerId(tavolo);
 
         ArrayList<LineaOrdinazione> linee = (ArrayList<LineaOrdinazione>) ordinazioneFacade.selezionaLineeOrdinazionePerOrdinazione(ordine, tipo_pietanza);
+        //ArrayList<LineaOrdinazione> linee_varianti = (ArrayList<LineaOrdinazione>) ordinazioneFacade.
 
-        tabella_ordini.setModel(new javax.swing.table.DefaultTableModel(new Object [3][linee.size()],new String[]{"ID", "Pietanza","Quantita'"}){
+        tabella_ordini.setModel(new javax.swing.table.DefaultTableModel(new Object [3][linee.size()/*+linee_varianti.size()*/],new String[]{"ID", "Pietanza","Quantita'"}){
              public boolean isCellEditable(int row, int column) {
                 return false;
             }

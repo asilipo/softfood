@@ -2,17 +2,15 @@ package it.softfood.GUI;
 
 import it.softfood.entity.Ingrediente;
 import it.softfood.entity.LineaOrdinazione;
+import it.softfood.entity.Variante;
+import it.softfood.enumeration.TipoVariante;
 import it.softfood.facade.articolomenu.ArticoloMenuFacadeRemote;
 import it.softfood.facade.ordinazione.OrdinazioneFacadeRemote;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
-import javax.swing.ComboBoxModel;
-import javax.swing.DefaultCellEditor;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
-import javax.swing.JComboBox;
-import javax.swing.table.TableColumn;
 import org.jdesktop.application.FrameView;
 
 /**
@@ -247,7 +245,29 @@ private void OKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:even
     linea.setArticolo(articolo.selezionaArticoloMenuPerId(id));
     linea.setQuantita((Integer) jComboBox1.getSelectedItem());
 
-    ordinazioneFacade.inserisciLineaOrdinazione(linea);
+    linea = ordinazioneFacade.inserisciLineaOrdinazione(linea);
+
+    Variante variante = new Variante();
+
+    if (!jListModel.isEmpty()) {
+        Enumeration enumeration = jListModel.elements();
+        while (enumeration.hasMoreElements()) {
+            String var = (String) enumeration.nextElement();
+            variante.setLineaOrdinazione(linea);
+            if (var.substring(0, 1).equalsIgnoreCase("+")) {
+                variante.setTipoVariazione(TipoVariante.AGGIUNTA);
+            } else {
+                variante.setTipoVariazione(TipoVariante.RIMOZIONE);
+            }
+            
+            //variante.setIngrediente();
+            
+            ordinazioneFacade.inserisciVariante(variante);
+            variante = new Variante();
+        }
+    }
+
+
 
     if (tipo.equalsIgnoreCase("bibite")) {
         Bibite pannello = new Bibite(frame, tavolo);
