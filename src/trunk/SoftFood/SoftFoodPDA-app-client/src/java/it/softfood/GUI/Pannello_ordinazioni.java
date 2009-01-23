@@ -8,6 +8,7 @@ import it.softfood.facade.ordinazione.OrdinazioneFacadeRemote;
 import java.util.ArrayList;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableColumn;
 import org.jdesktop.application.FrameView;
 
@@ -88,7 +89,10 @@ public class Pannello_ordinazioni extends javax.swing.JPanel {
         Ordinazione ordine = ordinazioneFacade.selezionaOrdinazionePerId(tavolo);
 
         ArrayList<LineaOrdinazione> linee = (ArrayList<LineaOrdinazione>) ordinazioneFacade.selezionaLineeOrdinazionePerOrdinazione(ordine, tipo_pietanza);
-        //ArrayList<LineaOrdinazione> linee_varianti = (ArrayList<LineaOrdinazione>) ordinazioneFacade.
+        
+        ToolTipCellRender toll=new ToolTipCellRender();
+        
+        tabella_ordini.setDefaultRenderer(tabella_ordini.getColumnClass(0), toll);
 
         tabella_ordini.setModel(new javax.swing.table.DefaultTableModel(new Object [linee.size()][3/*+linee_varianti.size()*/],new String[]{"ID", "Pietanza","Quantita'"}){
              public boolean isCellEditable(int row, int column) {
@@ -105,6 +109,7 @@ public class Pannello_ordinazioni extends javax.swing.JPanel {
             j++;
             tabella_ordini.setValueAt(linea.getQuantita(), i, j);
             j = 0;
+            toll.setValue("RIGA "+i);
             i++;
         }
       
