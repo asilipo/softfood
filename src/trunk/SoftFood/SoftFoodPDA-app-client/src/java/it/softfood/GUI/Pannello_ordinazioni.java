@@ -2,6 +2,7 @@ package it.softfood.GUI;
 
 import it.softfood.entity.LineaOrdinazione;
 import it.softfood.entity.Ordinazione;
+import it.softfood.entity.Variante;
 import it.softfood.enumeration.TipoPietanza;
 import it.softfood.facade.articolomenu.ArticoloMenuFacadeRemote;
 import it.softfood.facade.ordinazione.OrdinazioneFacadeRemote;
@@ -90,11 +91,16 @@ public class Pannello_ordinazioni extends javax.swing.JPanel {
 
         ArrayList<LineaOrdinazione> linee = (ArrayList<LineaOrdinazione>) ordinazioneFacade.selezionaLineeOrdinazionePerOrdinazione(ordine, tipo_pietanza);
         
-        ToolTipCellRender toll=new ToolTipCellRender(null);
         
-        tabella_ordini.setDefaultRenderer(tabella_ordini.getColumnClass(0), toll);
+        
+        
+        
+        
+        
 
-        tabella_ordini.setModel(new javax.swing.table.DefaultTableModel(new Object [linee.size()][3/*+linee_varianti.size()*/],new String[]{"ID", "Pietanza","Quantita'"}){
+        
+        
+        tabella_ordini.setModel(new javax.swing.table.DefaultTableModel(new Object [linee.size()/*+linee_varianti.size()*/][3/*+linee_varianti.size()*/],new String[]{"ID", "Pietanza","Quantita'"}){
              public boolean isCellEditable(int row, int column) {
                 return false;
             }
@@ -109,9 +115,10 @@ public class Pannello_ordinazioni extends javax.swing.JPanel {
             j++;
             tabella_ordini.setValueAt(linea.getQuantita(), i, j);
             j = 0;
-            toll.setValue("RIGA "+i);
+            
             i++;
         }
+        
       
         linea_ordine = new XTableColumnModel();
 
@@ -122,6 +129,10 @@ public class Pannello_ordinazioni extends javax.swing.JPanel {
 
 
         linea_ordine.setColumnVisible(id_ordini, false);
+        
+        
+        ToolTipCellRender toll=new ToolTipCellRender(ordinazioneFacade,id_ordini, linea_ordine);
+        tabella_ordini.setDefaultRenderer(tabella_ordini.getColumnClass(0), toll);
     }
 
     /** This method is called from within the constructor to
@@ -335,7 +346,7 @@ private void AnnullaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
 }//GEN-LAST:event_AnnullaActionPerformed
 
 private void visuallizzaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_visuallizzaActionPerformed
-    int row = tabella_pietanza.getSelectedRow();
+    int row=tabella_pietanza.getSelectedRow();
     id_antipasto.setColumnVisible(id, true);
     long id_long = ((Long) tabella_pietanza.getValueAt(row, 0)).longValue();
     id_antipasto.setColumnVisible(id, false);
@@ -354,6 +365,7 @@ private void tabella_ordiniMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FI
 }//GEN-LAST:event_tabella_ordiniMouseClicked
 
 private void cancellaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancellaActionPerformed
+    System.out.println("PPROVA "+ tabella_ordini.getValueAt(-1, 0));
     linea_ordine.setColumnVisible(id_ordini, true);
     Long id = (Long) tabella_ordini.getValueAt(tabella_ordini.getSelectedRow(),0);
     ordinazioneFacade.rimuoviLineaOrdinazione(id);
