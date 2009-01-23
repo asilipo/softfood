@@ -40,7 +40,6 @@ public class IngredienteFrescoSessionBean implements IngredienteFrescoSessionBea
         }
 	}
 	
-	@SuppressWarnings("unchecked")
 	public List<IngredienteFresco> selezionaIngredientiFreschi() {
         try {
             return (ArrayList<IngredienteFresco>) em.createNamedQuery("IngredienteFresco.selezionaIngredientiFreschi")

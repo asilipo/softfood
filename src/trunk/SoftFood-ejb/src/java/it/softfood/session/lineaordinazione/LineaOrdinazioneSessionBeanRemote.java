@@ -15,7 +15,6 @@ public interface LineaOrdinazioneSessionBeanRemote {
 	
 	it.softfood.entity.LineaOrdinazione selezionaLineaOrdinazionePerId(Long id);
 
-    @java.lang.SuppressWarnings(value = {"unchecked"})
 	java.util.List<it.softfood.entity.LineaOrdinazione> selezionaLineeOrdinazionePerOrdinazione(it.softfood.entity.Ordinazione ordinazione);
 	
 	boolean rimuoviLineaOrdinazione(Long id);

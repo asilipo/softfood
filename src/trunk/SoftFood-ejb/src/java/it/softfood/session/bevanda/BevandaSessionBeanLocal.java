@@ -17,7 +17,6 @@ public interface BevandaSessionBeanLocal {
 	
 	boolean rimuoviBevanda(Long id);
 
-    @java.lang.SuppressWarnings(value = {"unchecked"})
-    public java.util.List<it.softfood.entity.Bevanda> selezionaBevande();
+    java.util.List<it.softfood.entity.Bevanda> selezionaBevande();
 	
 }

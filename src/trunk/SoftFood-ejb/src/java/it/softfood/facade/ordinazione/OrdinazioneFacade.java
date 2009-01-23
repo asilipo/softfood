@@ -13,6 +13,7 @@ import it.softfood.entity.Tavolo;
 import it.softfood.entity.Variante;
 import it.softfood.enumeration.TipoPietanza;
 import it.softfood.session.bevandamagazzino.BevandaMagazzinoSessionBeanRemote;
+import it.softfood.session.ingrediente.IngredienteSessionBeanRemote;
 import it.softfood.session.ingredientemagazzino.IngredienteMagazzinoSessionBeanRemote;
 import it.softfood.session.ingredientepietanza.IngredientePietanzaSessionBeanRemote;
 import it.softfood.session.lineaordinazione.LineaOrdinazioneSessionBeanRemote;
@@ -59,6 +60,8 @@ public class OrdinazioneFacade implements OrdinazioneFacadeRemote, OrdinazioneFa
 	private BevandaMagazzinoSessionBeanRemote bevandaMagazzinoSessionBeanRemote;
     @EJB(beanName = "TavoloSessionBean")
 	private TavoloSessionBeanRemote tavoloSessionBeanRemote;
+    @EJB(beanName = "IngredienteSessionBean")
+	private IngredienteSessionBeanRemote ingredienteSessionBeanRemote;
 
 	public Ordinazione inserisciOrdinazione(Ordinazione ordinazione) {
 		if (ordinazione != null) {
@@ -308,6 +311,10 @@ public class OrdinazioneFacade implements OrdinazioneFacadeRemote, OrdinazioneFa
             return varianteSessionBean.inserisciVariante(variante);
 
         return null;
+    }
+
+    public List<Ingrediente> selezionaIngredientiPerVariante() {
+        return (ArrayList<Ingrediente>) ingredienteSessionBeanRemote.selezionaIngredientePerVariante();
     }
 
     public Variante modificaVariante(Variante nuovaVariante, Variante vecchiaVariante) {

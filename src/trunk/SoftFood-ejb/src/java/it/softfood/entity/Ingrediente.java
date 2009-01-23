@@ -32,7 +32,8 @@ import javax.persistence.Temporal;
 @DiscriminatorColumn(name = "tipo_ingrediente", discriminatorType = DiscriminatorType.STRING)
 @DiscriminatorValue(value = "Ingrediente")
 @NamedQueries({
-	@NamedQuery(name = "Ingrediente.selezionaIngredientiPerNome", query = "SELECT i FROM Ingrediente i WHERE nome = :nome")
+	@NamedQuery(name = "Ingrediente.selezionaIngredientiPerNome", query = "SELECT i FROM Ingrediente i WHERE nome = :nome"),
+    @NamedQuery(name = "Ingrediente.selezionaIngredientiPerVariante", query = "SELECT i FROM Ingrediente i WHERE variante = true")
 })
 public class Ingrediente implements Serializable {
 	
@@ -47,6 +48,8 @@ public class Ingrediente implements Serializable {
 	private String descrizione;
     @Column(name = "unita_misura", nullable = true)
 	private String unitaMisura;
+    @Column(name = "variante", nullable = false)
+	private Boolean variante;
 	@Column(name = "scadenza", nullable = false)
     @Temporal(javax.persistence.TemporalType.DATE)
 	private Date scadenza;
@@ -65,6 +68,14 @@ public class Ingrediente implements Serializable {
 
     public void setUnitaMisura(String unitaMisura) {
         this.unitaMisura = unitaMisura;
+    }
+
+    public Boolean getVariante() {
+        return variante;
+    }
+
+    public void setVariante(Boolean variante) {
+        this.variante = variante;
     }
 	
 	public String getNome() {

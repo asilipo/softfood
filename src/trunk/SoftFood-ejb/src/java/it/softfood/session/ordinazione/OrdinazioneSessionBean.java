@@ -42,7 +42,6 @@ public class OrdinazioneSessionBean implements OrdinazioneSessionBeanRemote, Ord
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<Ordinazione> selezionaOrdinazioni() {    
 		try {
 	       return (ArrayList<Ordinazione>) em.createNamedQuery("Ordinazione.selezionaOrdinazioni")
@@ -53,7 +52,6 @@ public class OrdinazioneSessionBean implements OrdinazioneSessionBeanRemote, Ord
 		}
 	}
 	
-	@SuppressWarnings("unchecked")
 	public List<Ordinazione> selezionaOrdinazioniPerData(Date data) {
 		try {
         	return (ArrayList<Ordinazione>) em.createNamedQuery("Ordinazione.selezionaOrdinazioniPerData")
@@ -63,8 +61,7 @@ public class OrdinazioneSessionBean implements OrdinazioneSessionBeanRemote, Ord
 			return null;
 		}
 	}
-	
-	@SuppressWarnings("unchecked")
+
 	public List<Ordinazione> selezionaOrdinazioniGionalierePerTavolo(Tavolo tavolo, Boolean terminato) {
         try {
 	        return (ArrayList<Ordinazione>) em.createNamedQuery("Ordinazione.selezionaOrdinazioniGionalierePerTavolo")

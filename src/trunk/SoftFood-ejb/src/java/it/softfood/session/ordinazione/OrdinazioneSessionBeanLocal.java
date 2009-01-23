@@ -15,13 +15,10 @@ public interface OrdinazioneSessionBeanLocal {
 	
 	it.softfood.entity.Ordinazione selezionaOrdinazionePerId(Long id);
 
-    @java.lang.SuppressWarnings(value = {"unchecked"})
 	java.util.List<it.softfood.entity.Ordinazione> selezionaOrdinazioni();
 
-    @java.lang.SuppressWarnings(value = {"unchecked"})
 	java.util.List<it.softfood.entity.Ordinazione> selezionaOrdinazioniPerData(java.util.Date data);
-
-    @java.lang.SuppressWarnings(value = {"unchecked"})
+    
 	java.util.List<it.softfood.entity.Ordinazione> selezionaOrdinazioniGionalierePerTavolo(it.softfood.entity.Tavolo tavolo, Boolean terminato);
 	
 	boolean rimuoviOrdinazione(Long id);

@@ -38,6 +38,8 @@ public interface OrdinazioneFacadeLocal {
 
     boolean rimuoviLineaOrdinazione(java.lang.Long id);
 
+    java.util.List<it.softfood.entity.Ingrediente> selezionaIngredientiPerVariante();
+
     it.softfood.entity.Variante inserisciVariante(it.softfood.entity.Variante variante);
 
     it.softfood.entity.Variante modificaVariante(it.softfood.entity.Variante nuovaVariante, it.softfood.entity.Variante vecchiaVariante);

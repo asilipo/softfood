@@ -41,7 +41,6 @@ public class LineaOrdinazioneSessionBean implements LineaOrdinazioneSessionBeanR
         }
 	}
 	
-	@SuppressWarnings("unchecked")
 	public List<LineaOrdinazione> selezionaLineeOrdinazionePerOrdinazione(Ordinazione ordinazione) {
         try {
            return (ArrayList<LineaOrdinazione>) em.createNamedQuery("LineaOrdinazione.selezionaLineeOrdinazionePerOrdinazione")

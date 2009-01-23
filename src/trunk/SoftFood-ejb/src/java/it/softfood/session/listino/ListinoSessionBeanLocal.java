@@ -15,7 +15,6 @@ public interface ListinoSessionBeanLocal {
 	
 	it.softfood.entity.Listino selezionaListinoPerId(Long id);
 
-    @java.lang.SuppressWarnings(value = {"unchecked"})
 	java.util.List<it.softfood.entity.Articolo> selezionaArticoli();
 	
 	boolean rimuoviListino(Long id);

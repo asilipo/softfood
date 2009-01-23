@@ -41,7 +41,6 @@ public class IngredienteLungaConservazioneSessionBean implements IngredienteLung
         }
 	}
 	
-	@SuppressWarnings("unchecked")
 	public List<IngredienteLungaConservazione> selezionaIngredientiLungaConservazione() {
         try {
             return (ArrayList<IngredienteLungaConservazione>) em.createNamedQuery("IngredienteLungaConservazione.selezionaIngredientiLungaConservazione")

@@ -39,7 +39,6 @@ public class BevandaSessionBean implements BevandaSessionBeanRemote, BevandaSess
         }
 	}
 
-    @SuppressWarnings("unchecked")
     public List<Bevanda> selezionaBevande() {
 		try {
 	        return (ArrayList<Bevanda>)em.createNamedQuery("Bevanda.selezionaBevande")

@@ -40,7 +40,6 @@ public class IngredienteMagazzinoSessionBean implements IngredienteMagazzinoSess
         }
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<IngredienteMagazzino> selezionaIngredientiMagazzino() {
         try {
             return (ArrayList<IngredienteMagazzino>) em.createNamedQuery("IngredienteMagazzino.selezionaIngredientiMagazzino")
@@ -51,7 +50,6 @@ public class IngredienteMagazzinoSessionBean implements IngredienteMagazzinoSess
         }
 	}
 	
-	@SuppressWarnings("unchecked")
 	public List<IngredienteMagazzino> selezionaIngredientiLungaConservazionePerQuantita(Integer quantita) {
         try {
             if (quantita == null || quantita < 0)
