@@ -7,7 +7,10 @@ import it.softfood.facade.ordinazione.OrdinazioneFacadeRemote;
 import java.util.ArrayList;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
+import javax.swing.ComboBoxModel;
 import javax.swing.DefaultCellEditor;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
 import javax.swing.JComboBox;
 import javax.swing.table.TableColumn;
 import org.jdesktop.application.FrameView;
@@ -17,7 +20,6 @@ import org.jdesktop.application.FrameView;
  * @author Marco Grasso
  * @author Francesco Pacilio
  */
-
 public class Pietanza extends javax.swing.JPanel {
 
     private ArticoloMenuFacadeRemote articolo;
@@ -52,24 +54,27 @@ public class Pietanza extends javax.swing.JPanel {
         }
         listaIngredienti.setListData(ingr);
 
-        piu = new JComboBox();
-        piu.addItem("+");
-        piu.addItem("-");
-
-        TableColumn sport = jTable1.getColumnModel().getColumn(0);
-        sport.setCellEditor(new DefaultCellEditor(piu));
-
         int disp;
-        if (tipo.equalsIgnoreCase("bibite")) 
+        if (tipo.equalsIgnoreCase("bibite")) {
             disp = articolo.selezionaDisponibilitaBevanda(id);
-        else 
+        } else {
             disp = (Integer) articolo.selezionaDisponibilitaPietanza(id);
-
+        }
         disponibilita.setText(disponibilita.getText() + disp);
 
         for (int idisp = 1; idisp <= disp; idisp++) {
             jComboBox1.addItem(idisp);
         }
+
+        ArrayList<Ingrediente> ing = (ArrayList<Ingrediente>) ordinazioneFacade.selezionaIngredientiPerVariante();
+
+
+        for (Ingrediente ingrediente : ing) {
+            jComboBox3.addItem(ingrediente.getNome());
+        }
+
+        jListModel = new DefaultListModel();
+        jList1.setModel(jListModel);
     }
 
     /** This method is called from within the constructor to
@@ -87,13 +92,18 @@ public class Pietanza extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         listaIngredienti = new javax.swing.JList();
         quantita = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
         combo = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox();
         cancella = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jComboBox2 = new javax.swing.JComboBox();
+        jComboBox3 = new javax.swing.JComboBox();
+        jButton1 = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList();
         pannello_bottoni = new javax.swing.JPanel();
         OK = new javax.swing.JButton();
         annulla = new javax.swing.JButton();
@@ -130,51 +140,6 @@ public class Pietanza extends javax.swing.JPanel {
         quantita.setName("quantita"); // NOI18N
         quantita.setLayout(new java.awt.BorderLayout(0, 2));
 
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText(resourceMap.getString("jLabel3.text")); // NOI18N
-        jLabel3.setName("jLabel3"); // NOI18N
-        quantita.add(jLabel3, java.awt.BorderLayout.CENTER);
-
-        jScrollPane2.setMaximumSize(new java.awt.Dimension(225, 60));
-        jScrollPane2.setMinimumSize(new java.awt.Dimension(225, 60));
-        jScrollPane2.setName("jScrollPane2"); // NOI18N
-        jScrollPane2.setPreferredSize(new java.awt.Dimension(225, 60));
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
-            },
-            new String [] {
-                " ", "Variante"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.String.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        jTable1.setMaximumSize(new java.awt.Dimension(225, 60));
-        jTable1.setMinimumSize(new java.awt.Dimension(226, 60));
-        jTable1.setName("jTable1"); // NOI18N
-        jTable1.setPreferredSize(new java.awt.Dimension(226, 60));
-        jScrollPane2.setViewportView(jTable1);
-        jTable1.getColumnModel().getColumn(0).setResizable(false);
-        jTable1.getColumnModel().getColumn(0).setHeaderValue(resourceMap.getString("jTable1.columnModel.title0")); // NOI18N
-        jTable1.getColumnModel().getColumn(1).setResizable(false);
-        jTable1.getColumnModel().getColumn(1).setHeaderValue(resourceMap.getString("jTable1.columnModel.title1")); // NOI18N
-
-        quantita.add(jScrollPane2, java.awt.BorderLayout.CENTER);
-
         combo.setName("combo"); // NOI18N
         combo.setPreferredSize(new java.awt.Dimension(20, 20));
         combo.setLayout(new java.awt.BorderLayout());
@@ -196,6 +161,52 @@ public class Pietanza extends javax.swing.JPanel {
             }
         });
         quantita.add(cancella, java.awt.BorderLayout.SOUTH);
+
+        jPanel1.setName("jPanel1"); // NOI18N
+        jPanel1.setLayout(new java.awt.BorderLayout());
+
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText(resourceMap.getString("jLabel3.text")); // NOI18N
+        jLabel3.setName("jLabel3"); // NOI18N
+        jPanel1.add(jLabel3, java.awt.BorderLayout.NORTH);
+
+        jPanel2.setMinimumSize(new java.awt.Dimension(155, 150));
+        jPanel2.setName("jPanel2"); // NOI18N
+        jPanel2.setPreferredSize(new java.awt.Dimension(100, 150));
+        jPanel2.setLayout(new java.awt.BorderLayout());
+
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "+", "-" }));
+        jComboBox2.setName("jComboBox2"); // NOI18N
+        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox2ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jComboBox2, java.awt.BorderLayout.WEST);
+
+        jComboBox3.setName("jComboBox3"); // NOI18N
+        jPanel2.add(jComboBox3, java.awt.BorderLayout.CENTER);
+
+        jButton1.setText(resourceMap.getString("jButton1.text")); // NOI18N
+        jButton1.setName("jButton1"); // NOI18N
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton1, java.awt.BorderLayout.PAGE_END);
+
+        jPanel1.add(jPanel2, java.awt.BorderLayout.CENTER);
+
+        jScrollPane2.setName("jScrollPane2"); // NOI18N
+        jScrollPane2.setPreferredSize(new java.awt.Dimension(260, 100));
+
+        jList1.setName("jList1"); // NOI18N
+        jScrollPane2.setViewportView(jList1);
+
+        jPanel1.add(jScrollPane2, java.awt.BorderLayout.SOUTH);
+
+        quantita.add(jPanel1, java.awt.BorderLayout.CENTER);
 
         add(quantita, java.awt.BorderLayout.CENTER);
 
@@ -224,44 +235,20 @@ public class Pietanza extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
 private void cancellaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancellaActionPerformed
-    jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object[][]{
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
-            },
-            new String[]{
-                " ", "Variante"
-            }) {
-
-        Class[] types = new Class[]{
-            java.lang.Object.class, java.lang.String.class
-        };
-
-        public Class getColumnClass(int columnIndex) {
-            return types[columnIndex];
-        }
-    });
-
-    TableColumn sport = jTable1.getColumnModel().getColumn(0);
-    sport.setCellEditor(new DefaultCellEditor(piu));
-
-
+    //jList1.remove(jList1.getSelectedIndex());
+    jListModel.removeElementAt(jList1.getSelectedIndex());
 }//GEN-LAST:event_cancellaActionPerformed
 
 private void OKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OKActionPerformed
     this.setVisible(false);
-    
-    LineaOrdinazione linea=new LineaOrdinazione();
+
+    LineaOrdinazione linea = new LineaOrdinazione();
     linea.setOrdinazione(ordinazioneFacade.selezionaOrdinazionePerId(tavolo));
     linea.setArticolo(articolo.selezionaArticoloMenuPerId(id));
     linea.setQuantita((Integer) jComboBox1.getSelectedItem());
-    
-    ordinazioneFacade.inserisciLineaOrdinazione(linea); 
-    
+
+    ordinazioneFacade.inserisciLineaOrdinazione(linea);
+
     if (tipo.equalsIgnoreCase("bibite")) {
         Bibite pannello = new Bibite(frame, tavolo);
         frame.setComponent(pannello);
@@ -281,6 +268,33 @@ private void annullaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
         frame.setComponent(pannello);
     }
 }//GEN-LAST:event_annullaActionPerformed
+
+private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+// TODO add your handling code here:
+    String data = (String) jComboBox2.getSelectedItem() + " " + (String) jComboBox3.getSelectedItem();
+    jListModel.addElement(data);
+}//GEN-LAST:event_jButton1ActionPerformed
+
+private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+// TODO add your handling code here:
+    String opt = (String) jComboBox2.getSelectedItem();
+    System.out.println("COMBO SELECTED INDEX: " + opt);
+    jComboBox3.removeAllItems();
+    ArrayList<Ingrediente> ingredienti;
+    if (opt.equalsIgnoreCase("-")) {
+        ingredienti = (ArrayList<Ingrediente>) articolo.selezionaIngredientiPietanza(id);
+
+
+
+    } else {
+        ingredienti = (ArrayList<Ingrediente>) ordinazioneFacade.selezionaIngredientiPerVariante();
+    }
+
+    for (Ingrediente ingrediente : ingredienti) {
+        jComboBox3.addItem(ingrediente.getNome());
+    }
+}//GEN-LAST:event_jComboBox2ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton OK;
     private javax.swing.JButton annulla;
@@ -288,13 +302,18 @@ private void annullaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
     private javax.swing.JPanel combo;
     private javax.swing.JLabel disponibilita;
     private javax.swing.JPanel ingredienti;
+    private javax.swing.JButton jButton1;
     private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JComboBox jComboBox2;
+    private javax.swing.JComboBox jComboBox3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JList jList1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
     private javax.swing.JList listaIngredienti;
     private javax.swing.JPanel pannello_bottoni;
     private javax.swing.JPanel quantita;
@@ -303,6 +322,5 @@ private void annullaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
     private Long tavolo;
     private Long id;
     private String tipo;
-    private JComboBox piu;
-    
+    private DefaultListModel jListModel;
 }
