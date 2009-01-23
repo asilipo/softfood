@@ -56,17 +56,22 @@ public class Conferma extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         menu = new javax.swing.JList();
         jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        Cancella = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
         OK = new javax.swing.JButton();
         Annulla = new javax.swing.JButton();
-        Cancella = new javax.swing.JButton();
 
         setMaximumSize(new java.awt.Dimension(225, 450));
         setMinimumSize(new java.awt.Dimension(225, 450));
         setName("Form"); // NOI18N
         setPreferredSize(new java.awt.Dimension(225, 450));
-        setLayout(new java.awt.BorderLayout());
+        setLayout(new java.awt.BorderLayout(5, 5));
 
+        jScrollPane1.setMaximumSize(new java.awt.Dimension(225, 350));
+        jScrollPane1.setMinimumSize(new java.awt.Dimension(225, 350));
         jScrollPane1.setName("jScrollPane1"); // NOI18N
+        jScrollPane1.setPreferredSize(new java.awt.Dimension(225, 350));
 
         menu.setName("menu"); // NOI18N
         jScrollPane1.setViewportView(menu);
@@ -76,7 +81,22 @@ public class Conferma extends javax.swing.JPanel {
         jPanel1.setName("jPanel1"); // NOI18N
         jPanel1.setLayout(new java.awt.GridLayout(1, 3));
 
+        jPanel2.setName("jPanel2"); // NOI18N
+        jPanel2.setLayout(new java.awt.BorderLayout());
+
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(it.softfood.GUI.Main.class).getContext().getResourceMap(Conferma.class);
+        Cancella.setText(resourceMap.getString("Cancella.text")); // NOI18N
+        Cancella.setName("Cancella"); // NOI18N
+        Cancella.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CancellaActionPerformed(evt);
+            }
+        });
+        jPanel2.add(Cancella, java.awt.BorderLayout.NORTH);
+
+        jPanel3.setName("jPanel3"); // NOI18N
+        jPanel3.setLayout(new java.awt.GridLayout(1, 2, 5, 5));
+
         OK.setText(resourceMap.getString("OK.text")); // NOI18N
         OK.setName("OK"); // NOI18N
         OK.addActionListener(new java.awt.event.ActionListener() {
@@ -84,7 +104,7 @@ public class Conferma extends javax.swing.JPanel {
                 OKActionPerformed(evt);
             }
         });
-        jPanel1.add(OK);
+        jPanel3.add(OK);
 
         Annulla.setText(resourceMap.getString("Annulla.text")); // NOI18N
         Annulla.setName("Annulla"); // NOI18N
@@ -93,16 +113,11 @@ public class Conferma extends javax.swing.JPanel {
                 AnnullaActionPerformed(evt);
             }
         });
-        jPanel1.add(Annulla);
+        jPanel3.add(Annulla);
 
-        Cancella.setText(resourceMap.getString("Cancella.text")); // NOI18N
-        Cancella.setName("Cancella"); // NOI18N
-        Cancella.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CancellaActionPerformed(evt);
-            }
-        });
-        jPanel1.add(Cancella);
+        jPanel2.add(jPanel3, java.awt.BorderLayout.SOUTH);
+
+        jPanel1.add(jPanel2);
 
         add(jPanel1, java.awt.BorderLayout.PAGE_END);
     }// </editor-fold>//GEN-END:initComponents
@@ -134,6 +149,8 @@ public class Conferma extends javax.swing.JPanel {
     private javax.swing.JButton Cancella;
     private javax.swing.JButton OK;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JList menu;
     // End of variables declaration//GEN-END:variables
