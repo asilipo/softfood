@@ -90,7 +90,7 @@ public class Pannello_ordinazioni extends javax.swing.JPanel {
 
         ArrayList<LineaOrdinazione> linee = (ArrayList<LineaOrdinazione>) ordinazioneFacade.selezionaLineeOrdinazionePerOrdinazione(ordine, tipo_pietanza);
         
-        ToolTipCellRender toll=new ToolTipCellRender();
+        ToolTipCellRender toll=new ToolTipCellRender(null);
         
         tabella_ordini.setDefaultRenderer(tabella_ordini.getColumnClass(0), toll);
 
