@@ -187,6 +187,12 @@ public class OrdinazioneFacade implements OrdinazioneFacadeRemote, OrdinazioneFa
             if (lineeOrdinazione != null) {
                 try {
                     for (LineaOrdinazione lineaOrdinazione : lineeOrdinazione) {
+                        ArrayList<Variante> varianti = (ArrayList<Variante>) varianteSessionBean.selezionaVariantiPerLineaOrdinazione(lineaOrdinazione);
+                        System.out.println("variante dimeeeeeeeeeeeeeeeee" + varianti.size());
+                        if(varianti != null && varianti.size() > 0)
+                            for (Variante variante : varianti)
+                                varianteSessionBean.rimuoviVariante(variante.getId());
+                        
                         if (ripristinaPietanze) {
                             Articolo articolo = lineaOrdinazione.getArticolo();
                             if (articolo instanceof Pietanza) {
@@ -242,6 +248,8 @@ public class OrdinazioneFacade implements OrdinazioneFacadeRemote, OrdinazioneFa
                 else
                     if (!this.aggiornaMagazzinoBevande(lineaOrdinazione, "-"))
                         throw  new Exception();
+
+                return lineaOrdinazione;
             } catch (Exception e) {
                 ejbContext.setRollbackOnly();
             }
@@ -310,6 +318,7 @@ public class OrdinazioneFacade implements OrdinazioneFacadeRemote, OrdinazioneFa
         if (variante != null) {
             LineaOrdinazione lineaOrdinazione = variante.getLineaOrdinazione();
             Ingrediente ingrediente = variante.getIngrediente();
+
             if (lineaOrdinazione != null && ingrediente != null) {
                 try {
                     lineaOrdinazione = em.merge(lineaOrdinazione);
@@ -331,13 +340,15 @@ public class OrdinazioneFacade implements OrdinazioneFacadeRemote, OrdinazioneFa
 
     public List<Ingrediente> selezionaIngredientiPerVariante() {
         ArrayList<IngredienteMagazzino> ingredientiMagazzino = (ArrayList<IngredienteMagazzino>) ingredienteMagazzinoSessionBeanRemote.selezionaIngredientiMagazzino();
+        ArrayList<Ingrediente> ingredienti = (ArrayList<Ingrediente>) ingredienteSessionBeanRemote.selezionaIngredientePerVariante();
 
-        if (ingredientiMagazzino != null) {
+        if (ingredientiMagazzino != null && ingredienti != null) {
             ArrayList<Ingrediente> ingredientiVariante = new ArrayList<Ingrediente>();
 
-            for (IngredienteMagazzino ingredienteMagazzino : ingredientiMagazzino)
-                if (ingredienteMagazzino.getQuantita() > 200)
-                    ingredientiVariante.add(ingredienteMagazzino.getIngredienteLungaConservazione());
+            for (Ingrediente ingrediente : ingredienti) 
+                for (IngredienteMagazzino ingredienteMagazzino : ingredientiMagazzino)
+                    if (ingrediente.getId().equals(ingredienteMagazzino.getIngredienteLungaConservazione().getId()) && ingredienteMagazzino.getQuantita() > 200)
+                        ingredientiVariante.add(ingredienteMagazzino.getIngredienteLungaConservazione());
 
             return ingredientiVariante;
         }
@@ -381,6 +392,10 @@ public class OrdinazioneFacade implements OrdinazioneFacadeRemote, OrdinazioneFa
     }
 
     public List<Variante> selezionaVariantiPerLineaOrdinazione(LineaOrdinazione lineaOrdinazione) {
+        if (lineaOrdinazione != null) {
+            ArrayList<Variante> varianti =(ArrayList<Variante>) varianteSessionBean.selezionaVariantiPerLineaOrdinazione(lineaOrdinazione);
+        }
+
         return null;
     }
 
