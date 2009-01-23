@@ -365,7 +365,7 @@ private void tabella_ordiniMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FI
 }//GEN-LAST:event_tabella_ordiniMouseClicked
 
 private void cancellaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancellaActionPerformed
-    System.out.println("PPROVA "+ tabella_ordini.getValueAt(-1, 0));
+    
     linea_ordine.setColumnVisible(id_ordini, true);
     Long id = (Long) tabella_ordini.getValueAt(tabella_ordini.getSelectedRow(),0);
     ordinazioneFacade.rimuoviLineaOrdinazione(id);
