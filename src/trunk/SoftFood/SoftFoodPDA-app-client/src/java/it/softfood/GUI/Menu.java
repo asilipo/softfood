@@ -144,12 +144,11 @@ public class Menu extends javax.swing.JPanel {
         this.setVisible(false);
         Conferma conferma = new Conferma(frame,tavolo);
         frame.setComponent(conferma);
-
     }//GEN-LAST:event_OkActionPerformed
 
 private void AntipastiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AntipastiActionPerformed
     this.setVisible(false);
-    Pannello_ordinazioni antipasto = new Pannello_ordinazioni(frame,tavolo,"antipasti");
+    Pannello_ordinazioni antipasto = new Pannello_ordinazioni(frame, tavolo, "antipasti");
     frame.setComponent(antipasto);
 }//GEN-LAST:event_AntipastiActionPerformed
 
