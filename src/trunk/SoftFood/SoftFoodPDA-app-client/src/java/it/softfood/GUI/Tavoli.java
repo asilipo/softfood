@@ -4,11 +4,13 @@ import it.softfood.entity.Ordinazione;
 import it.softfood.entity.Tavolo;
 import it.softfood.facade.ordinazione.OrdinazioneFacadeRemote;
 import it.softfood.facade.tavolo.TavoloFacadeRemote;
+import java.awt.Component;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 import org.jdesktop.application.FrameView;
 
 /**
