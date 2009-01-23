@@ -18,6 +18,7 @@ import org.jdesktop.application.FrameView;
  * @author Marco Grasso
  * @author Francesco Pacilio
  */
+
 public class Pietanza extends javax.swing.JPanel {
 
     private ArticoloMenuFacadeRemote articolo;
@@ -64,12 +65,14 @@ public class Pietanza extends javax.swing.JPanel {
             jComboBox1.addItem(idisp);
         }
 
-        ArrayList<Ingrediente> ing = (ArrayList<Ingrediente>) ordinazioneFacade.selezionaIngredientiPerVariante();
+        if (!tipo.equalsIgnoreCase("bibite")) {
+            ArrayList<Ingrediente> ing = (ArrayList<Ingrediente>) ordinazioneFacade.selezionaIngredientiPerVariante();
 
-
-        for (Ingrediente ingrediente : ing) {
-            jComboBox3.addItem(ingrediente.getNome());
+            for (Ingrediente ingrediente : ing) {
+                jComboBox3.addItem(ingrediente.getNome());
+            }
         }
+        
 
         jListModel = new DefaultListModel();
         jList1.setModel(jListModel);
@@ -151,60 +154,75 @@ public class Pietanza extends javax.swing.JPanel {
 
         quantita.add(combo, java.awt.BorderLayout.NORTH);
 
-        cancella.setText(resourceMap.getString("cancella.text")); // NOI18N
-        cancella.setName("cancella"); // NOI18N
+        if (!tipo.equalsIgnoreCase("bibite")) {
+            cancella.setText(resourceMap.getString("cancella.text")); // NOI18N
+            cancella.setName("cancella"); // NOI18N
+        }
         cancella.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cancellaActionPerformed(evt);
             }
         });
-        quantita.add(cancella, java.awt.BorderLayout.SOUTH);
+        if (!tipo.equalsIgnoreCase("bibite")) {
+            quantita.add(cancella, java.awt.BorderLayout.SOUTH);
+        }
 
-        jPanel1.setName("jPanel1"); // NOI18N
+        if (!tipo.equalsIgnoreCase("bibite")) {
+            jPanel1.setName("jPanel1"); // NOI18N
+        }
         jPanel1.setLayout(new java.awt.BorderLayout());
+        if (!tipo.equalsIgnoreCase("bibite")) {
 
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText(resourceMap.getString("jLabel3.text")); // NOI18N
-        jLabel3.setName("jLabel3"); // NOI18N
-        jPanel1.add(jLabel3, java.awt.BorderLayout.NORTH);
-
-        jPanel2.setMinimumSize(new java.awt.Dimension(155, 150));
-        jPanel2.setName("jPanel2"); // NOI18N
-        jPanel2.setPreferredSize(new java.awt.Dimension(100, 150));
-        jPanel2.setLayout(new java.awt.BorderLayout());
-
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "+", "-" }));
-        jComboBox2.setName("jComboBox2"); // NOI18N
-        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox2ActionPerformed(evt);
+            if (!tipo.equalsIgnoreCase("bibite")) {
+                jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+                jLabel3.setText(resourceMap.getString("jLabel3.text")); // NOI18N
+                jLabel3.setName("jLabel3"); // NOI18N
             }
-        });
-        jPanel2.add(jComboBox2, java.awt.BorderLayout.WEST);
+            jPanel1.add(jLabel3, java.awt.BorderLayout.NORTH);
 
-        jComboBox3.setName("jComboBox3"); // NOI18N
-        jPanel2.add(jComboBox3, java.awt.BorderLayout.CENTER);
+            jPanel2.setMinimumSize(new java.awt.Dimension(155, 150));
+            jPanel2.setName("jPanel2"); // NOI18N
+            jPanel2.setPreferredSize(new java.awt.Dimension(100, 150));
+            jPanel2.setLayout(new java.awt.BorderLayout());
 
-        jButton1.setText(resourceMap.getString("jButton1.text")); // NOI18N
-        jButton1.setName("jButton1"); // NOI18N
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+            if (!tipo.equalsIgnoreCase("bibite")) {
+                jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "+", "-" }));
+                jComboBox2.setName("jComboBox2"); // NOI18N
             }
-        });
-        jPanel2.add(jButton1, java.awt.BorderLayout.PAGE_END);
+            jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jComboBox2ActionPerformed(evt);
+                }
+            });
+            jPanel2.add(jComboBox2, java.awt.BorderLayout.WEST);
 
-        jPanel1.add(jPanel2, java.awt.BorderLayout.CENTER);
+            jComboBox3.setName("jComboBox3"); // NOI18N
+            jPanel2.add(jComboBox3, java.awt.BorderLayout.CENTER);
 
-        jScrollPane2.setName("jScrollPane2"); // NOI18N
-        jScrollPane2.setPreferredSize(new java.awt.Dimension(260, 100));
+            jButton1.setText(resourceMap.getString("jButton1.text")); // NOI18N
+            jButton1.setName("jButton1"); // NOI18N
+            jButton1.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jButton1ActionPerformed(evt);
+                }
+            });
+            jPanel2.add(jButton1, java.awt.BorderLayout.PAGE_END);
 
-        jList1.setName("jList1"); // NOI18N
-        jScrollPane2.setViewportView(jList1);
+            jPanel1.add(jPanel2, java.awt.BorderLayout.CENTER);
 
-        jPanel1.add(jScrollPane2, java.awt.BorderLayout.SOUTH);
+            jScrollPane2.setName("jScrollPane2"); // NOI18N
+            jScrollPane2.setPreferredSize(new java.awt.Dimension(260, 100));
 
-        quantita.add(jPanel1, java.awt.BorderLayout.CENTER);
+            jList1.setName("jList1"); // NOI18N
+            jScrollPane2.setViewportView(jList1);
+
+            jPanel1.add(jScrollPane2, java.awt.BorderLayout.SOUTH);
+
+        }
+
+        if (!tipo.equalsIgnoreCase("bibite")) {
+            quantita.add(jPanel1, java.awt.BorderLayout.CENTER);
+        }
 
         add(quantita, java.awt.BorderLayout.CENTER);
 
@@ -233,18 +251,15 @@ public class Pietanza extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
 private void cancellaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancellaActionPerformed
-    //jList1.remove(jList1.getSelectedIndex());
     jListModel.removeElementAt(jList1.getSelectedIndex());
 }//GEN-LAST:event_cancellaActionPerformed
 
 private void OKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OKActionPerformed
     this.setVisible(false);
-
     LineaOrdinazione linea = new LineaOrdinazione();
     linea.setOrdinazione(ordinazioneFacade.selezionaOrdinazionePerId(tavolo));
     linea.setArticolo(articolo.selezionaArticoloMenuPerId(id));
     linea.setQuantita((Integer) jComboBox1.getSelectedItem());
-
     linea = ordinazioneFacade.inserisciLineaOrdinazione(linea);
 
     Variante variante = new Variante();
@@ -267,8 +282,6 @@ private void OKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:even
         }
     }
 
-
-
     if (tipo.equalsIgnoreCase("bibite")) {
         Bibite pannello = new Bibite(frame, tavolo);
         frame.setComponent(pannello);
@@ -276,6 +289,7 @@ private void OKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:even
         Pannello_ordinazioni pannello = new Pannello_ordinazioni(frame, tavolo, tipo);
         frame.setComponent(pannello);
     }
+
 }//GEN-LAST:event_OKActionPerformed
 
 private void annullaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_annullaActionPerformed
@@ -290,15 +304,12 @@ private void annullaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
 }//GEN-LAST:event_annullaActionPerformed
 
 private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-// TODO add your handling code here:
     String data = (String) jComboBox2.getSelectedItem() + " " + (String) jComboBox3.getSelectedItem();
     jListModel.addElement(data);
 }//GEN-LAST:event_jButton1ActionPerformed
 
 private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
-// TODO add your handling code here:
     String opt = (String) jComboBox2.getSelectedItem();
-    System.out.println("COMBO SELECTED INDEX: " + opt);
     jComboBox3.removeAllItems();
     ArrayList<Ingrediente> ingredienti;
     if (opt.equalsIgnoreCase("-")) {
@@ -340,4 +351,5 @@ private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private Long id;
     private String tipo;
     private DefaultListModel jListModel;
+    
 }

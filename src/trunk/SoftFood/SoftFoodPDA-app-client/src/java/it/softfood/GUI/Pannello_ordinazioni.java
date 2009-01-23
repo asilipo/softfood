@@ -2,14 +2,12 @@ package it.softfood.GUI;
 
 import it.softfood.entity.LineaOrdinazione;
 import it.softfood.entity.Ordinazione;
-import it.softfood.entity.Variante;
 import it.softfood.enumeration.TipoPietanza;
 import it.softfood.facade.articolomenu.ArticoloMenuFacadeRemote;
 import it.softfood.facade.ordinazione.OrdinazioneFacadeRemote;
 import java.util.ArrayList;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableColumn;
 import org.jdesktop.application.FrameView;
 
@@ -65,6 +63,7 @@ public class Pannello_ordinazioni extends javax.swing.JPanel {
         int i = 0;
         int j = 0;
         tabella_pietanza.setModel(new javax.swing.table.DefaultTableModel(new String[]{"ID", "Pietanza"}, pietanze.size()){
+            @Override
              public boolean isCellEditable(int row, int column) {
                 return false;
             }
@@ -90,17 +89,9 @@ public class Pannello_ordinazioni extends javax.swing.JPanel {
         Ordinazione ordine = ordinazioneFacade.selezionaOrdinazionePerId(tavolo);
 
         ArrayList<LineaOrdinazione> linee = (ArrayList<LineaOrdinazione>) ordinazioneFacade.selezionaLineeOrdinazionePerOrdinazione(ordine, tipo_pietanza);
-        
-        
-        
-        
-        
-        
-        
 
-        
-        
-        tabella_ordini.setModel(new javax.swing.table.DefaultTableModel(new Object [linee.size()/*+linee_varianti.size()*/][3/*+linee_varianti.size()*/],new String[]{"ID", "Pietanza","Quantita'"}){
+        tabella_ordini.setModel(new javax.swing.table.DefaultTableModel(new Object [linee.size()][3],new String[]{"ID", "Pietanza","Quantita'"}){
+            @Override
              public boolean isCellEditable(int row, int column) {
                 return false;
             }
@@ -109,17 +100,12 @@ public class Pannello_ordinazioni extends javax.swing.JPanel {
         i = 0;
         j = 0;
         for (LineaOrdinazione linea : linee) {
-            tabella_ordini.setValueAt(linea.getId(), i, j);
-            j++;
-            tabella_ordini.setValueAt(linea.getArticolo().getNome(), i, j);
-            j++;
-            tabella_ordini.setValueAt(linea.getQuantita(), i, j);
+            tabella_ordini.setValueAt(linea.getId(), i, j++);
+            tabella_ordini.setValueAt(linea.getArticolo().getNome(), i, j++);
+            tabella_ordini.setValueAt(linea.getQuantita(), i++, j);
             j = 0;
-            
-            i++;
         }
         
-      
         linea_ordine = new XTableColumnModel();
 
         tabella_ordini.setColumnModel(linea_ordine);

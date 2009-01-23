@@ -1,29 +1,23 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package it.softfood.GUI;
 
 import it.softfood.entity.LineaOrdinazione;
-import it.softfood.entity.Ordinazione;
 import it.softfood.entity.Variante;
 import it.softfood.facade.ordinazione.OrdinazioneFacadeRemote;
 import java.awt.Color;
 import java.awt.Component;
 import java.util.ArrayList;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableColumn;
 
 /**
- *
- * @author marcograsso
+ * @author Maria Rosaria Paone
+ * @author Marco Grasso
+ * @author Francesco Pacilio
  */
+
 public class ToolTipCellRender extends DefaultTableCellRenderer {
 
-    private ArrayList<Variante> varianti;
     private XTableColumnModel id_antipasto;
     private OrdinazioneFacadeRemote ordinazioneFacade;
     private TableColumn id;
@@ -52,29 +46,20 @@ public class ToolTipCellRender extends DefaultTableCellRenderer {
 
         id_antipasto.setColumnVisible(id, true);
 
-
-        
         Long id_linea = (Long) table.getValueAt(row, 0);
 
-        
         LineaOrdinazione lineaOrdinazione = ordinazioneFacade.selezionaLineaOrdinazionePerId(id_linea);
         
-        varianti = (ArrayList<Variante>) ordinazioneFacade.selezionaVariantiPerLineaOrdinazione(lineaOrdinazione);
+        ArrayList<Variante> varianti = (ArrayList<Variante>) ordinazioneFacade.selezionaVariantiPerLineaOrdinazione(lineaOrdinazione);
 
-        String tool="";
-
+        String tool = "";
         if (varianti != null) {
-
-
-            for (Variante var : varianti) {
-                tool=tool + var.getTipoVariazione().toString() + " " + var.getIngrediente().getNome() + "\n";
-
-            }
+            for (Variante var : varianti)
+                tool = tool + var.getTipoVariazione().toString() + " " + var.getIngrediente().getNome() + " ";
             
-            setBackground(Color.LIGHT_GRAY);
-            setToolTipText(tool);
-            tool="";
-
+            this.setBackground(Color.LIGHT_GRAY);
+            this.setToolTipText(tool);
+            tool = "";
         } else {
             setBackground(Color.WHITE);
         }
@@ -83,4 +68,5 @@ public class ToolTipCellRender extends DefaultTableCellRenderer {
 
         return cell;
     }
+    
 }
