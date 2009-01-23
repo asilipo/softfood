@@ -49,8 +49,7 @@ public class TavoloSessionBean implements TavoloSessionBeanRemote, TavoloSession
 			return null;
 		}
 	}
-	
-	@SuppressWarnings("unchecked")
+
 	public List<Tavolo> selezionaTavoliPerNumeroPosti(Integer numeroPosti) {
 		try {	       
 	        return (ArrayList<Tavolo>) em.createNamedQuery("Tavolo.selezionaTavoliPerNumeroPosti")
@@ -60,8 +59,7 @@ public class TavoloSessionBean implements TavoloSessionBeanRemote, TavoloSession
 			return null;
 		}
 	}
-	
-	@SuppressWarnings("unchecked")
+
 	public List<Tavolo> selezionaTavoliLiberi() {    
 		try {
 	       return (ArrayList<Tavolo>) em.createNamedQuery("Tavolo.selezionaTavoliLiberi")
@@ -72,7 +70,6 @@ public class TavoloSessionBean implements TavoloSessionBeanRemote, TavoloSession
 		}
 	}
 
-    @SuppressWarnings("unchecked")
 	public List<Tavolo> selezionaTavoliOccupati() {
 		try {
 	       return (ArrayList<Tavolo>) em.createNamedQuery("Tavolo.selezionaTavoliOccupati")
@@ -83,7 +80,6 @@ public class TavoloSessionBean implements TavoloSessionBeanRemote, TavoloSession
 		}
 	}
 
-    @SuppressWarnings("unchecked")
 	public List<Tavolo> selezionaTavoliNonAttivi() {
 		try {
 	        return (ArrayList<Tavolo>) em.createNamedQuery("Tavolo.selezionaTavoliAttivi")

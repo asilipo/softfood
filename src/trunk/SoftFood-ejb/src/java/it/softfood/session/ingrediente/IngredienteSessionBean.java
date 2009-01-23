@@ -40,13 +40,22 @@ public class IngredienteSessionBean implements IngredienteSessionBeanRemote, Ing
         }
 	}
 	
-	@SuppressWarnings("unchecked")
 	public List<Ingrediente> selezionaIngredientePerNome(String nome) {
         try {
             return (ArrayList<Ingrediente>) em.createNamedQuery("Ingrediente.selezionaIngredientiPerNome")
                 .setParameter("nome", nome).getResultList();
         } catch (Exception e) {
             System.err.println("IngredienteSessionBean#selezionaIngredientePerNome");
+            return null;
+        }
+	}
+
+	public List<Ingrediente> selezionaIngredientePerVariante() {
+        try {
+            return (ArrayList<Ingrediente>) em.createNamedQuery("Ingrediente.selezionaIngredientiPerVariante")
+                .getResultList();
+        } catch (Exception e) {
+            System.err.println("IngredienteSessionBean#selezionaIngredientePerVariante");
             return null;
         }
 	}

@@ -40,7 +40,6 @@ public class PietanzaSessionBean implements PietanzaSessionBeanRemote, PietanzaS
         }
 	}
 
-    @SuppressWarnings("unchecked")
     public List<Pietanza> selezionaPietanzePerTipo(TipoPietanza tipoPietanza) {
 		try {
 	        return (ArrayList<Pietanza>) em.createNamedQuery("Pietanza.selezionaPietanzePerTipo")
@@ -51,7 +50,6 @@ public class PietanzaSessionBean implements PietanzaSessionBeanRemote, PietanzaS
         }
 	}
 
-    @SuppressWarnings("unchecked")
     public List<Pietanza> selezionaPietanze() {
 		try {
 	        return (ArrayList<Pietanza>) em.createNamedQuery("Pietanza.selezionaPietanze")

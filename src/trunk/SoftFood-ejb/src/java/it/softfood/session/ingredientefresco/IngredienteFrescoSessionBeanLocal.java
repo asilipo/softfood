@@ -15,7 +15,6 @@ public interface IngredienteFrescoSessionBeanLocal {
 	
 	it.softfood.entity.IngredienteFresco selezionaIngredienteFrescoPerId(Long id);
 
-    @java.lang.SuppressWarnings(value = {"unchecked"})
 	java.util.List<it.softfood.entity.IngredienteFresco> selezionaIngredientiFreschi();
 	
 	boolean rimuoviIngredienteFresco(Long id);

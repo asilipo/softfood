@@ -41,7 +41,6 @@ public class ListinoSessionBean implements ListinoSessionBeanRemote, ListinoSess
         }
 	}
 	
-	@SuppressWarnings("unchecked")
 	public List<Articolo> selezionaArticoli() {
         try {
             return (ArrayList<Articolo>) em.createNamedQuery("Listino.selezionaArticoli")

@@ -40,7 +40,6 @@ public class BevandaMagazzinoSessionBean implements BevandaMagazzinoSessionBeanR
         }
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<BevandaMagazzino> selezionaBevandeMagazzino() {
         try {
             return (ArrayList<BevandaMagazzino>) em.createNamedQuery("BevandaMagazzino.selezionaBevandeMagazzino")
@@ -51,7 +50,6 @@ public class BevandaMagazzinoSessionBean implements BevandaMagazzinoSessionBeanR
         }
 	}
 	
-	@SuppressWarnings("unchecked")
 	public List<BevandaMagazzino> selezionaBevandeMagazzinoPerQuantita(Integer quantita) {
         try {
             if (quantita == null || quantita < 0)

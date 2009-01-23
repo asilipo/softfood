@@ -42,7 +42,6 @@ public class VarianteSessionBean implements VarianteSessionBeanRemote, VarianteS
          }
 	}
 	
-	@SuppressWarnings("unchecked")
 	public List<Variante> selezionaVariantiPerIngrediente(Ingrediente ingrediente) {
         try {
             return (ArrayList<Variante>) em.createNamedQuery("Variante.selezionaVariantiPerIngrediente")
@@ -53,7 +52,6 @@ public class VarianteSessionBean implements VarianteSessionBeanRemote, VarianteS
          }
 	}
 	
-	@SuppressWarnings("unchecked")
 	public List<Variante> selezionaVariantiPerLineaOrdinazione(LineaOrdinazione lineaOrdinazione) {
         try {
             return (ArrayList<Variante>) em.createNamedQuery("Variante.selezionaVariantiPerIngrediente")
