@@ -314,7 +314,19 @@ public class OrdinazioneFacade implements OrdinazioneFacadeRemote, OrdinazioneFa
     }
 
     public List<Ingrediente> selezionaIngredientiPerVariante() {
-        return (ArrayList<Ingrediente>) ingredienteSessionBeanRemote.selezionaIngredientePerVariante();
+        ArrayList<IngredienteMagazzino> ingredientiMagazzino = (ArrayList<IngredienteMagazzino>) ingredienteMagazzinoSessionBeanRemote.selezionaIngredientiMagazzino();
+
+        if (ingredientiMagazzino != null) {
+            ArrayList<Ingrediente> ingredientiVariante = new ArrayList<Ingrediente>();
+
+            for (IngredienteMagazzino ingredienteMagazzino : ingredientiMagazzino)
+                if (ingredienteMagazzino.getQuantita() > 200)
+                    ingredientiVariante.add(ingredienteMagazzino.getIngredienteLungaConservazione());
+
+            return ingredientiVariante;
+        }
+        
+        return null;
     }
 
     public Variante modificaVariante(Variante nuovaVariante, Variante vecchiaVariante) {
