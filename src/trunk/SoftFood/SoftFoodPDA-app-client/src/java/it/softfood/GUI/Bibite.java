@@ -76,7 +76,7 @@ public class Bibite extends javax.swing.JPanel {
 
         ArrayList<LineaOrdinazione> linee = (ArrayList<LineaOrdinazione>) ordinazioneFacade.selezionaLineeOrdinazionePerOrdinazione(ordine, null);
 
-        tabella_ordini.setModel(new javax.swing.table.DefaultTableModel(new Object [3][linee.size()],new String[]{"ID", "Pietanza","Quantita'"}){
+        tabella_ordini.setModel(new javax.swing.table.DefaultTableModel(new Object [linee.size()][3],new String[]{"ID", "Pietanza","Quantita'"}){
              public boolean isCellEditable(int row, int column) {
                 return false;
             }
