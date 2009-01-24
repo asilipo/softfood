@@ -23,6 +23,7 @@ public class Tavoli extends javax.swing.JPanel {
     private OrdinazioneFacadeRemote ordinazioneFacade;
     private ArrayList<Tavolo> tavoli;
     private String[] listaTavoli;
+    private int numeroPosti = 0;
 
     private void initFacade() {
         try {
@@ -147,7 +148,6 @@ public class Tavoli extends javax.swing.JPanel {
         pannello_posti.setName("pannello_posti"); // NOI18N
         pannello_posti.setLayout(new java.awt.BorderLayout());
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15" }));
         jComboBox2.setName("jComboBox2"); // NOI18N
         pannello_posti.add(jComboBox2, java.awt.BorderLayout.CENTER);
 
@@ -234,9 +234,22 @@ public class Tavoli extends javax.swing.JPanel {
 
 private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActionPerformed
     Ok.setEnabled(true);
-    
-    model.addElement((String) jComboBox1.getSelectedItem());
+
+    int dim = 20;
+    String [] posti = new String [dim];
+    String riferimento = (String) jComboBox1.getSelectedItem();
+    model.addElement(riferimento);
     jComboBox1.removeItemAt(jComboBox1.getSelectedIndex());
+
+    for (Tavolo tavolo : tavoli) {
+        if (tavolo.getRiferimento().equals(riferimento))
+            numeroPosti = numeroPosti + tavolo.getNumeroPosti();
+    }
+
+    for(int i = 0; i < numeroPosti && i < dim; i++)
+        posti[i] = ((Integer)(i + 1)).toString();
+
+    jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(posti));
 }//GEN-LAST:event_addActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
