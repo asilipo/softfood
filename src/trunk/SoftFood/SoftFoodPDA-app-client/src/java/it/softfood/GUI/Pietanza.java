@@ -156,6 +156,7 @@ public class Pietanza extends javax.swing.JPanel {
 
         if (!tipo.equalsIgnoreCase("bibite")) {
             cancella.setText(resourceMap.getString("cancella.text")); // NOI18N
+            cancella.setEnabled(false);
             cancella.setName("cancella"); // NOI18N
         }
         cancella.addActionListener(new java.awt.event.ActionListener() {
@@ -214,6 +215,11 @@ public class Pietanza extends javax.swing.JPanel {
             jScrollPane2.setPreferredSize(new java.awt.Dimension(260, 100));
 
             jList1.setName("jList1"); // NOI18N
+            jList1.addMouseListener(new java.awt.event.MouseAdapter() {
+                public void mouseClicked(java.awt.event.MouseEvent evt) {
+                    jList1MouseClicked(evt);
+                }
+            });
             jScrollPane2.setViewportView(jList1);
 
             jPanel1.add(jScrollPane2, java.awt.BorderLayout.SOUTH);
@@ -252,6 +258,7 @@ public class Pietanza extends javax.swing.JPanel {
 
 private void cancellaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancellaActionPerformed
     jListModel.removeElementAt(jList1.getSelectedIndex());
+    cancella.setEnabled(false);
 }//GEN-LAST:event_cancellaActionPerformed
 
 private void OKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OKActionPerformed
@@ -322,6 +329,12 @@ private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
         jComboBox3.addItem(ingrediente.getNome());
     }
 }//GEN-LAST:event_jComboBox2ActionPerformed
+
+private void jList1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList1MouseClicked
+// TODO add your handling code here:
+    
+   cancella.setEnabled(true);
+}//GEN-LAST:event_jList1MouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton OK;
