@@ -49,7 +49,9 @@ public class Tavoli extends javax.swing.JPanel {
             SelezionaTavoli.setText(SelezionaTavoli.getText() + " un tavolo:");
             tavoli = (ArrayList<Tavolo>) tavoloFacade.selezionaTavoliOccupati();
 
-            jComboBox2.setEnabled(false);
+            jComboBox2.setVisible(false);
+            jLabel1.setVisible(false);
+            
         }
 
         int i = 0;

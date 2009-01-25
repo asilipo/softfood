@@ -18,7 +18,6 @@ import org.jdesktop.application.FrameView;
  * @author Marco Grasso
  * @author Francesco Pacilio
  */
-
 public class Pietanza extends javax.swing.JPanel {
 
     private ArticoloMenuFacadeRemote articolo;
@@ -54,28 +53,29 @@ public class Pietanza extends javax.swing.JPanel {
         listaIngredienti.setListData(ingr);
 
         int disp;
-        if (tipo.equalsIgnoreCase("bibite")) 
+        if (tipo.equalsIgnoreCase("bibite")) {
             disp = articolo.selezionaDisponibilitaBevanda(id);
-        else 
+            jPanel1.setVisible(false);
+            cancella.setVisible(false);
+        } else {
             disp = (Integer) articolo.selezionaDisponibilitaPietanza(id);
-        
+        }
         disponibilita.setText(disponibilita.getText() + disp);
 
-        for (int idisp = 1; idisp <= disp; idisp++) 
+        for (int idisp = 1; idisp <= disp; idisp++) {
             jComboBox1.addItem(idisp);
-        
-
+        }
         if (!tipo.equalsIgnoreCase("bibite")) {
             ArrayList<Ingrediente> ing = (ArrayList<Ingrediente>) ordinazioneFacade.selezionaIngredientiPerVariante();
 
-            for (Ingrediente ingrediente : ing) 
+            for (Ingrediente ingrediente : ing) {
                 jComboBox3.addItem(ingrediente.getNome());
-            
+            }
         }
-        
+
         jListModel = new DefaultListModel();
         jList1.setModel(jListModel);
-        
+
     }
 
     /** This method is called from within the constructor to
@@ -281,9 +281,9 @@ private void OKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:even
             } else {
                 variante.setTipoVariazione(TipoVariante.RIMOZIONE);
             }
-            
+
             variante.setIngrediente(ordinazioneFacade.selezionaIngredientePerNome(var.substring(2)));
-            
+
             ordinazioneFacade.inserisciVariante(variante);
             variante = new Variante();
         }
@@ -332,8 +332,8 @@ private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 
 private void jList1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList1MouseClicked
 // TODO add your handling code here:
-    
-   cancella.setEnabled(true);
+
+    cancella.setEnabled(true);
 }//GEN-LAST:event_jList1MouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -364,5 +364,4 @@ private void jList1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:even
     private Long id;
     private String tipo;
     private DefaultListModel jListModel;
-    
 }
