@@ -16,7 +16,6 @@ import org.jdesktop.application.FrameView;
  * @author Marco Grasso
  * @author Francesco Pacilio
  */
-
 public class Tavoli extends javax.swing.JPanel {
 
     private TavoloFacadeRemote tavoloFacade;
@@ -51,7 +50,7 @@ public class Tavoli extends javax.swing.JPanel {
 
             jComboBox2.setVisible(false);
             jLabel1.setVisible(false);
-            
+
         }
 
         int i = 0;
@@ -198,12 +197,12 @@ public class Tavoli extends javax.swing.JPanel {
     private void OkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OkActionPerformed
         Enumeration enumeration = model.elements();
         ArrayList<String> tav = new ArrayList<String>();
-        while(enumeration.hasMoreElements())
+        while (enumeration.hasMoreElements()) {
             tav.add((String) enumeration.nextElement());
-
+        }
         Ordinazione ordine = null;
-        
-        if (vuoti) { 
+
+        if (vuoti) {
             //Inserimento
             Long tavoloSelezionato = tavoloFacade.occupaTavoli(tav);
 
@@ -220,9 +219,9 @@ public class Tavoli extends javax.swing.JPanel {
                 frame.setComponent(pannello_tavoli);
             }
         } else {
-            ordine = ordinazioneFacade.selezionaOrdinazioneGiornalieraPerTavolo(tav.get(0),new Boolean("false"));
+            ordine = ordinazioneFacade.selezionaOrdinazioneGiornalieraPerTavolo(tav.get(0), new Boolean("false"));
         }
-        
+
         this.setVisible(false);
 
         frame.setComponent(new Menu(frame, ordine.getId()));
@@ -238,20 +237,26 @@ private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:eve
     Ok.setEnabled(true);
 
     int dim = 20;
-    String [] posti = new String [dim];
+    String[] posti = new String[dim];
     String riferimento = (String) jComboBox1.getSelectedItem();
     model.addElement(riferimento);
     jComboBox1.removeItemAt(jComboBox1.getSelectedIndex());
 
     for (Tavolo tavolo : tavoli) {
-        if (tavolo.getRiferimento().equals(riferimento))
+        if (tavolo.getRiferimento().equals(riferimento)) {
             numeroPosti = numeroPosti + tavolo.getNumeroPosti();
+        }
     }
 
-    for(int i = 0; i < numeroPosti && i < dim; i++)
-        posti[i] = ((Integer)(i + 1)).toString();
-
+    for (int i = 0; i < numeroPosti && i < dim; i++) {
+        posti[i] = ((Integer) (i + 1)).toString();
+    }
     jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(posti));
+
+    if (!vuoti) {
+        add.setEnabled(false);
+        jComboBox1.setEnabled(false);
+    }
 }//GEN-LAST:event_addActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -273,5 +278,4 @@ private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:eve
     private FrameView frame;
     private DefaultListModel model;
     private boolean vuoti;
-    
 }
