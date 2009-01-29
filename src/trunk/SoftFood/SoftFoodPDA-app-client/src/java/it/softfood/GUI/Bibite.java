@@ -16,7 +16,6 @@ import org.jdesktop.application.FrameView;
  * @author Marco Grasso
  * @author Francesco Pacilio
  */
-
 public class Bibite extends javax.swing.JPanel {
 
     private OrdinazioneFacadeRemote ordinazioneFacade;
@@ -49,6 +48,7 @@ public class Bibite extends javax.swing.JPanel {
         combo.addItem(5);
 
         tabella_bibite.setModel(new javax.swing.table.DefaultTableModel(new String[]{"ID", "Bevanda"}, bibite.size()) {
+
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
@@ -63,12 +63,15 @@ public class Bibite extends javax.swing.JPanel {
 
         int i = 0;
         int j = 0;
-        for (it.softfood.entity.Bevanda pietanza : bibite) {
-            tabella_bibite.setValueAt(pietanza.getId(), i, j++);
-            tabella_bibite.setValueAt(pietanza.getNome(), i++, j);
-            j = 0;
-        }
 
+        if (bibite != null) {
+            for (it.softfood.entity.Bevanda pietanza : bibite) {
+                tabella_bibite.setValueAt(pietanza.getId(), i, j++);
+                tabella_bibite.setValueAt(pietanza.getNome(), i++, j);
+                j = 0;
+            }
+        }
+        
         id_antipasto.setColumnVisible(id, false);
 
         tabella_bibite.setRowHeight(tabella_bibite.getRowHeight() * 15 / 10);
@@ -77,9 +80,10 @@ public class Bibite extends javax.swing.JPanel {
 
         ArrayList<LineaOrdinazione> linee = (ArrayList<LineaOrdinazione>) ordinazioneFacade.selezionaLineeOrdinazionePerOrdinazione(ordine, null);
 
-        tabella_ordini.setModel(new javax.swing.table.DefaultTableModel(new Object [linee.size()][3],new String[]{"ID", "Pietanza","Quantita'"}){
+        tabella_ordini.setModel(new javax.swing.table.DefaultTableModel(new Object[linee.size()][3], new String[]{"ID", "Pietanza", "Quantita'"}) {
+
             @Override
-             public boolean isCellEditable(int row, int column) {
+            public boolean isCellEditable(int row, int column) {
                 return false;
             }
         });
@@ -92,7 +96,7 @@ public class Bibite extends javax.swing.JPanel {
             tabella_ordini.setValueAt(linea.getQuantita(), i++, j);
             j = 0;
         }
-        
+
         linea_ordine = new XTableColumnModel();
 
         tabella_ordini.setColumnModel(linea_ordine);
@@ -322,11 +326,11 @@ private void tabella_bibiteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FI
 
 private void cancellaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancellaActionPerformed
     linea_ordine.setColumnVisible(id_ordini, true);
-    Long id=(Long) tabella_ordini.getValueAt(tabella_ordini.getSelectedRow(),0);
+    Long id = (Long) tabella_ordini.getValueAt(tabella_ordini.getSelectedRow(), 0);
     ordinazioneFacade.rimuoviLineaOrdinazione(id);
     linea_ordine.setColumnVisible(id_ordini, false);
     this.setVisible(false);
-    Bibite pannello=new Bibite(frame, tavolo);
+    Bibite pannello = new Bibite(frame, tavolo);
     frame.setComponent(pannello);
 }//GEN-LAST:event_cancellaActionPerformed
 
@@ -356,5 +360,4 @@ private void tabella_ordiniMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FI
     private XTableColumnModel linea_ordine;
     private TableColumn id_ordini;
     private TableColumn id;
-    
 }
