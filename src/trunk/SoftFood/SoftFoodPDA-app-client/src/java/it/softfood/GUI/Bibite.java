@@ -47,14 +47,23 @@ public class Bibite extends javax.swing.JPanel {
         combo.addItem(4);
         combo.addItem(5);
 
-        tabella_bibite.setModel(new javax.swing.table.DefaultTableModel(new String[]{"ID", "Bevanda"}, bibite.size()) {
+        if (bibite != null) {
+            tabella_bibite.setModel(new javax.swing.table.DefaultTableModel(new String[]{"ID", "Bevanda"}, bibite.size()) {
 
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                return false;
-            }
-        });
+                @Override
+                public boolean isCellEditable(int row, int column) {
+                    return false;
+                }
+            });
+        }else{
+            tabella_bibite.setModel(new javax.swing.table.DefaultTableModel(new String[]{"ID", "Bevanda"}, 0) {
 
+                @Override
+                public boolean isCellEditable(int row, int column) {
+                    return false;
+                }
+            });
+        }
         id_antipasto = new XTableColumnModel();
         tabella_bibite.setColumnModel(id_antipasto);
         tabella_bibite.createDefaultColumnsFromModel();
@@ -71,7 +80,7 @@ public class Bibite extends javax.swing.JPanel {
                 j = 0;
             }
         }
-        
+
         id_antipasto.setColumnVisible(id, false);
 
         tabella_bibite.setRowHeight(tabella_bibite.getRowHeight() * 15 / 10);
