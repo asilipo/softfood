@@ -193,7 +193,17 @@ public class ArticoloMenuFacade implements ArticoloMenuFacadeRemote, ArticoloMen
     }
 
     public List<Bevanda> selezionaBevandeDisponibili() {
-        return (ArrayList<Bevanda>) bevandaSessionBean.selezionaBevande();
+        ArrayList<BevandaMagazzino> bevandeMagazzino = (ArrayList<BevandaMagazzino>) bevandaMagazzinoSessionBeanRemote.selezionaBevandeMagazzinoPerQuantita(1);
+
+        if (bevandeMagazzino != null && bevandeMagazzino.size() > 0) {
+            ArrayList<Bevanda> bevande = new ArrayList<Bevanda>();
+            for (BevandaMagazzino bevandaMagazzino : bevandeMagazzino)
+                bevande.add(bevandaMagazzino.getBevanda());
+
+            return bevande;
+        }
+
+        return null;
     }
 
     public boolean rimuoviArticoloMenu(Long id) {
