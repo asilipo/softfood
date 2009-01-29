@@ -308,8 +308,20 @@ public class OrdinazioneFacade implements OrdinazioneFacadeRemote, OrdinazioneFa
     }
 
     public boolean rimuoviLineaOrdinazione(Long id) {
-        if (id != null)
-			return lineaOrdinazioneSessionBean.rimuoviLineaOrdinazione(id);
+        if (id != null) {
+            try {
+                ArrayList<Variante> varianti = (ArrayList<Variante>) varianteSessionBean.selezionaVariantiPerLineaOrdinazione(lineaOrdinazioneSessionBean.selezionaLineaOrdinazionePerId(id));
+                if (varianti != null && varianti.size() > 0) {
+                    for (Variante variante : varianti) {
+                        varianteSessionBean.rimuoviVariante(variante.getId());
+                    }
+                }
+
+                return lineaOrdinazioneSessionBean.rimuoviLineaOrdinazione(id);
+            } catch (Exception e){
+                ejbContext.setRollbackOnly();
+            }
+        }
 
 		return false;
     }
