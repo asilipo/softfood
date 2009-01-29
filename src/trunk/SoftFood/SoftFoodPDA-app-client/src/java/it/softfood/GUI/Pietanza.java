@@ -332,8 +332,12 @@ private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 
 private void jList1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList1MouseClicked
 // TODO add your handling code here:
-
-    cancella.setEnabled(true);
+    int i = jList1.getFirstVisibleIndex();
+    if (i == -1) {
+        cancella.setEnabled(false);
+    } else {
+        cancella.setEnabled(true);
+    }
 }//GEN-LAST:event_jList1MouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
