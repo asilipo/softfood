@@ -58,10 +58,12 @@ public class ToolTipCellRender extends DefaultTableCellRenderer {
                 tool = tool + var.getTipoVariazione().toString() + " " + var.getIngrediente().getNome() + " ";
             
             this.setBackground(Color.LIGHT_GRAY);
+            this.setForeground(Color.BLACK);
             this.setToolTipText(tool);
             tool = "";
         } else {
             setBackground(Color.WHITE);
+            this.setForeground(Color.BLACK);
         }
 
         id_antipasto.setColumnVisible(id, false);
