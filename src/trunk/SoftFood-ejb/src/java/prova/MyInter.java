@@ -7,6 +7,7 @@ package prova;
 
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.InvocationContext;
+import org.jboss.aop.Bind;
 
 /**
  *
