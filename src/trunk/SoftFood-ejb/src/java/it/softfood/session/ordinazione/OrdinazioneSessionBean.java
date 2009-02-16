@@ -8,8 +8,10 @@ import java.util.Date;
 import java.util.List;
 
 import javax.ejb.Stateless;
+import javax.interceptor.Interceptors;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import prova.MyInter;
 
 /**
  * @author Maria Rosaria Paone
@@ -22,7 +24,8 @@ public class OrdinazioneSessionBean implements OrdinazioneSessionBeanRemote, Ord
 
 	@PersistenceContext
     private EntityManager em;
-    
+
+    @Interceptors({MyInter.class})
 	public Ordinazione inserisciOrdinazione(Ordinazione ordinazione) {
 		try {
             em.persist(ordinazione);
