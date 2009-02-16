@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : jboss-aop.xml
+    Created on : 16 febbraio 2009, 23.56
+    Author     : marcograsso
+    Description:
+        Purpose of the document follows.
+-->
+
+<aop>
+    <aspect class="prova.MyInter"/>
+
+    <bind pointcut="execution(* it.softfood.session.ordinazione.OrdinazioneSessionBean->inserisciOrdinazione(it.softfood.entity.Ordinazione))">
+        <advice name="invoke" aspect="prova.MyInter"/>
+    </bind>
+</aop>
+
