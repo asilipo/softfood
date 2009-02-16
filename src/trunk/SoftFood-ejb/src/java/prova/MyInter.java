@@ -5,19 +5,31 @@
 
 package prova;
 
-import javax.interceptor.AroundInvoke;
-import javax.interceptor.InvocationContext;
-import org.jboss.aop.Bind;
+import org.jboss.aop.joinpoint.Invocation;
 
 /**
  *
  * @author nio
  */
-public class MyInter {
 
-    @AroundInvoke
-    public Object prova(InvocationContext ic) throws Exception {
+//@Aspect(scope=Scope.PER_VM)
+
+public class MyInter  {
+
+    
+    /*public Object prova(InvocationContext ic) throws Exception {
         System.out.println("Prova Interrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr");
         return ic.proceed();
+    }*/
+
+    public String getName() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+    
+    //@Bind(pointcut="execution(* it.softfood.session.ordinazione.OrdinazioneSessionBean->inserisciOrdinazione())")
+    
+     public Object invoke(Invocation arg0) throws Throwable {
+        System.out.println("Prova Interrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr");
+        return arg0.invokeNext();
     }
 }
