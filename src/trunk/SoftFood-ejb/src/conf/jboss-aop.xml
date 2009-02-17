@@ -9,10 +9,15 @@
 -->
 
 <aop>
-    <aspect class="prova.MyInter"/>
+  
+    <aspect name="logging" class="it.softfood.aspect.LoggingAspect"/>
 
+    
+    
     <bind pointcut="execution(* it.softfood.session.ordinazione.OrdinazioneSessionBean->inserisciOrdinazione(it.softfood.entity.Ordinazione))">
-        <advice name="invoke" aspect="prova.MyInter"/>
+        <advice name="logOrder" aspect="logging"/>
     </bind>
+    
+    
 </aop>
 
