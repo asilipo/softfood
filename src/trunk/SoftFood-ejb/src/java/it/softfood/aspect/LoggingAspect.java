@@ -17,6 +17,8 @@ public class LoggingAspect {
     private Logger logger = Logger.getLogger(LoggingAspect.class.getName());
     
     public Object logOrder(MethodInvocation invocation) throws Throwable{
+        //INVOCANDO ALL'INIZIO DEL METODO L'ISTRUZIONE INVOKENEXT() SI
+        //APPLICA LA TECNICA BEFORE
         Object obj=invocation.invokeNext();
         Object[] arguments=invocation.getArguments();
         Ordinazione ordine=(Ordinazione) arguments[0];
