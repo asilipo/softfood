@@ -5,6 +5,7 @@ import it.softfood.entity.Ordinazione;
 import it.softfood.facade.articolomenu.ArticoloMenuFacadeRemote;
 import it.softfood.facade.ordinazione.OrdinazioneFacadeRemote;
 import java.util.ArrayList;
+import java.util.Hashtable;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.swing.JComboBox;
@@ -21,9 +22,9 @@ public class Bibite extends javax.swing.JPanel {
     private OrdinazioneFacadeRemote ordinazioneFacade;
     private ArticoloMenuFacadeRemote articolo;
 
-    private void initFacade() {
+    private void initFacade(Hashtable hash) {
         try {
-            InitialContext initial = new InitialContext();
+            InitialContext initial = new InitialContext(hash);
             ordinazioneFacade = (OrdinazioneFacadeRemote) initial.lookup("it.softfood.facade.ordinazione.OrdinazioneFacade");
             articolo = (ArticoloMenuFacadeRemote) initial.lookup("it.softfood.facade.articolomenu.ArticoloMenuFacade");
         } catch (NamingException e) {
@@ -36,7 +37,7 @@ public class Bibite extends javax.swing.JPanel {
         this.tavolo = tavolo;
 
         initComponents();
-        initFacade();
+        initFacade(null);
 
         ArrayList<it.softfood.entity.Bevanda> bibite = (ArrayList<it.softfood.entity.Bevanda>) articolo.selezionaBevandeDisponibili();
 
@@ -67,7 +68,7 @@ public class Bibite extends javax.swing.JPanel {
         id_antipasto = new XTableColumnModel();
         tabella_bibite.setColumnModel(id_antipasto);
         tabella_bibite.createDefaultColumnsFromModel();
-
+        
         id = id_antipasto.getColumnByModelIndex(0);
 
         int i = 0;

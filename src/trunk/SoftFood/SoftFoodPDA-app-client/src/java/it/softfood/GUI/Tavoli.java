@@ -6,6 +6,8 @@ import it.softfood.facade.ordinazione.OrdinazioneFacadeRemote;
 import it.softfood.facade.tavolo.TavoloFacadeRemote;
 import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.Hashtable;
+import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.swing.DefaultListModel;
@@ -24,13 +26,17 @@ public class Tavoli extends javax.swing.JPanel {
     private String[] listaTavoli;
     private int numeroPosti = 0;
 
-    private void initFacade() {
+    private void initFacade(Hashtable hash) {
+        System.out.println("PPPPPRRRRRROOOOOVVVVVVAAAAAAAAA INIT");
         try {
-            InitialContext initial = new InitialContext();
+            System.out.println("PPPPPRRRRRROOOOOVVVVVVAAAAAAAAA "+hash);
+            InitialContext initial = new InitialContext(hash);
             tavoloFacade = (TavoloFacadeRemote) initial.lookup("it.softfood.facade.tavolo.TavoloFacade");
             ordinazioneFacade = (OrdinazioneFacadeRemote) initial.lookup("it.softfood.facade.ordinazione.OrdinazioneFacade");
         } catch (NamingException e) {
             System.err.println("Errore binding: TavoloFacade - OrdinazioneFacade");
+        } catch(NullPointerException ex){
+            System.err.println("Errore null pointer");
         }
     }
 
@@ -38,8 +44,9 @@ public class Tavoli extends javax.swing.JPanel {
         this.frame = frame;
         this.vuoti = vuoti;
 
+        System.out.println("PPPPPRRRRRROOOOOVVVVVVAAAAAAAAA CALLCLASS");
         initComponents();
-        initFacade();
+        initFacade(null);
 
         if (vuoti) {
             SelezionaTavoli.setText(SelezionaTavoli.getText() + " un tavolo vuoto:");
