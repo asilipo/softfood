@@ -8,6 +8,7 @@ import it.softfood.facade.articolomenu.ArticoloMenuFacadeRemote;
 import it.softfood.facade.ordinazione.OrdinazioneFacadeRemote;
 import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.Hashtable;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.swing.DefaultListModel;
@@ -23,9 +24,9 @@ public class Pietanza extends javax.swing.JPanel {
     private ArticoloMenuFacadeRemote articolo;
     private OrdinazioneFacadeRemote ordinazioneFacade;
 
-    private void initFacade() {
+    private void initFacade(Hashtable hash) {
         try {
-            InitialContext initial = new InitialContext();
+            InitialContext initial = new InitialContext(hash);
             articolo = (ArticoloMenuFacadeRemote) initial.lookup("it.softfood.facade.articolomenu.ArticoloMenuFacade");
             ordinazioneFacade = (OrdinazioneFacadeRemote) initial.lookup("it.softfood.facade.ordinazione.OrdinazioneFacade");
         } catch (NamingException e) {
@@ -38,7 +39,7 @@ public class Pietanza extends javax.swing.JPanel {
         this.tipo = tipo;
 
         initComponents();
-        initFacade();
+        initFacade(null);
 
         this.frame = frame;
         this.id = id;
