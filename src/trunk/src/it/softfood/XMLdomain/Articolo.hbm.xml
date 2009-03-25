@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 22-mar-2009 12.42.10 by Hibernate Tools 3.2.2.GA -->
+<hibernate-mapping>
+    <class name="it.softfood.entity.Articolo" table="articolo" schema="public">
+        <id name="id" type="java.lang.Long">
+            <column name="id" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="listino" class="it.softfood.entity.Listino" fetch="select">
+            <column name="listino" />
+        </many-to-one>
+        <property name="tipoArticolo" type="string">
+            <column name="tipo_articolo" length="31" not-null="true" />
+        </property>
+        <property name="descrizione" type="string">
+            <column name="descrizione" />
+        </property>
+        <property name="nome" type="string">
+            <column name="nome" not-null="true" />
+        </property>
+        <property name="capacita" type="java.lang.Float">
+            <column name="capacita" precision="8" scale="8" />
+        </property>
+        <property name="tipoPietanza" type="java.lang.Integer">
+            <column name="tipo_pietanza" />
+        </property>
+        <set name="ingredientePietanzas" inverse="true">
+            <key>
+                <column name="pietanza" not-null="true" />
+            </key>
+            <one-to-many class="it.softfood.entity.IngredientePietanza" />
+        </set>
+        <set name="bevandaMagazzinos" inverse="true">
+            <key>
+                <column name="bevanda" />
+            </key>
+            <one-to-many class="it.softfood.entity.BevandaMagazzino" />
+        </set>
+        <set name="lineaOrdinaziones" inverse="true">
+            <key>
+                <column name="articolo" not-null="true" />
+            </key>
+            <one-to-many class="it.softfood.entity.LineaOrdinazione" />
+        </set>
+    </class>
+</hibernate-mapping>
