@@ -4,7 +4,7 @@ import org.hibernate.Session;
 
 public aspect Persistence {
 
-	declare parents: it.softfood.session.TavoloSession implements SessionHolder;
+	declare parents: it.softfood.session.* implements SessionHolder;
 
 	public Persistence() {
 		try {
