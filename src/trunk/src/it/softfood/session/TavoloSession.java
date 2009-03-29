@@ -19,6 +19,15 @@ import org.hibernate.criterion.Example;
 public class TavoloSession {
 
 	private Session session;
+	
+	
+	private static TavoloSession tavoloSingleton;
+
+	public synchronized static TavoloSession getInstance(){
+		if(tavoloSingleton==null)
+			tavoloSingleton=new TavoloSession();
+		return(tavoloSingleton);
+	}
 
 	// @PersistenceContext
 	// private EntityManager em;
