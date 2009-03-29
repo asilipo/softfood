@@ -23,8 +23,27 @@ public class TavoloSession {
 	// @PersistenceContext
 	// private EntityManager em;
 
-	public Tavolo inserisciTavolo(Tavolo tavolo) {
+	private Long getNewId(){
+		Long id = new Long(0);
+		try{
+			String str ="select max(id) from it.softfood.entity.Tavolo";
+			Query q = session.createQuery(str);
+			 List list = q.list();
+		     id = ((Long)list.get(0));
+		    
+		}catch(Exception e){
+			System.out.println("Error in getNewId");
+		}
+		id++;
+		return id;
+	}
+		public Tavolo inserisciTavolo(Tavolo tavolo) {
+		
 		try {
+			Long id = this.getNewId();
+			System.out.println("Inserisci Tavolo "+id);
+			tavolo.setId(id);
+			
 			session.persist(tavolo);
 			return tavolo;
 		} catch (Exception e) {
@@ -62,11 +81,10 @@ public class TavoloSession {
 	public List<Tavolo> selezionaTavoliPerNumeroPosti(Integer numeroPosti) {
 		try {
 			List<Tavolo> result;
-			String str = " from it.softfood.entity.Tavolo t where t.numero_posti = ? ";
+			String str = " from it.softfood.entity.Tavolo t where t.numeroPosti = ? ";
 			Query q = session.createQuery(str);
 			q.setInteger(0, numeroPosti);
 			result = q.list();
-
 			return result;
 			
 		} catch (Exception e) {

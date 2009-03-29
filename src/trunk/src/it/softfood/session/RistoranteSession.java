@@ -31,9 +31,12 @@ public class RistoranteSession {
 	public Ristorante selezionaRistorantePerRagioneSociale(String ragioneSociale) {
 		try {
 			Ristorante r;
-
-			String str = " from it.softfood.entity.Ristorante r where r.ragione_sociale = ?";
-			Query q = this.getSession().createQuery(str);
+			System.out.println("selezionaRistorantePerRagioneSociale");
+			String str = " from it.softfood.entity.Ristorante r where r.ragioneSociale =  ? ";
+			
+			Query q = session.createQuery(str); //problema sulla sessione
+			
+			System.out.println("QUERY "+q);
 			q.setString(0, ragioneSociale);
 			r = (Ristorante) q.uniqueResult();
 			return r;
@@ -49,8 +52,9 @@ public class RistoranteSession {
 		try {
 			Ristorante r;
 
-			String str = " from it.softfood.entity.Ristorante r where r.partita_iva = ?";
-			Query q = this.getSession().createQuery(str);
+			String str = " from it.softfood.entity.Ristorante r where r.partitaIva = ?";
+			Query q = session.createQuery(str);
+			
 			q.setString(0, partitaIva);
 			r = (Ristorante) q.uniqueResult();
 			return r;
