@@ -36,9 +36,6 @@ public class TavoloSession {
 
 	public Tavolo selezionaTavoloPerId(Long id) {
 		try {
-			System.out.println("dfsadfgadgf");
-			System.out.println("RICHIESTA DA ID "+id+" DI UN TAVOLOOOOOOOOOO");
-			System.out.println("ATTENZIONE PROBLEMA SULLA SESSION "+session.isConnected());
 			return (Tavolo) session.get(Tavolo.class, id);
 		} catch (Exception e) {
 			System.err.println("TavoloSessionBean#selezionaTavoloPerId");
@@ -49,7 +46,7 @@ public class TavoloSession {
 	public Tavolo selezionaTavoloPerRiferimento(String riferimento) {
 		try {
 			Tavolo result;
-			String str = " from softfood.tavolo where riferimento = ? ";
+			String str = " from it.softfood.entity.Tavolo t where t.riferimento = ? ";
 			Query q = session.createQuery(str);
 			q.setString(0, riferimento);
 			result = (Tavolo) q.uniqueResult();
@@ -65,7 +62,7 @@ public class TavoloSession {
 	public List<Tavolo> selezionaTavoliPerNumeroPosti(Integer numeroPosti) {
 		try {
 			List<Tavolo> result;
-			String str = " from softfood.tavolo where numero_posti = ? ";
+			String str = " from it.softfood.entity.Tavolo t where t.numero_posti = ? ";
 			Query q = session.createQuery(str);
 			q.setInteger(0, numeroPosti);
 			result = q.list();
@@ -84,24 +81,8 @@ public class TavoloSession {
 			Tavolo t;
 			List<Tavolo> result;
 			String str = " from it.softfood.entity.Tavolo t where t.occupato = ?";
-	
-			System.out.println("++++++++INIT QUERY NOT NULLLLLLLLLLLLLLLLLL-"+ this.getSession().isConnected());
-			
-			if(session.isConnected())
-				System.out.println("Tavolo---SESSION CONNECTEDDDDDDDDDDDDDDDDD");
-			
-			if(session.isOpen())
-				System.out.println("Tavolo---SESSION OPENEDDDDDDDDDDDDDDDDDDDDD");
-			
-
-			Query q = this.getSession().createQuery(str);
-			
-			System.out.println("Tavolo -- SESSION NOT NULLLLLLLLLLLLLLLLLL");
-			
-//			Problema sulla query
+			Query q = session.createQuery(str);
 			q.setBoolean(0, false);
-			
-			System.out.println("Tavolo -- QUERY NOT NULLLLLLLLLLLLLLLLLL");
 			result = q.list();
 			return result;
 		} catch (Exception e) {
@@ -116,7 +97,7 @@ public class TavoloSession {
 	public List<Tavolo> selezionaTavoliOccupati() {
 		try {
 			List<Tavolo> result;
-			String str = " from softfood.tavolo where occupato = ? ";
+			String str = " from it.softfood.entity.Tavolo t where t.occupato = ? ";
 			Query q = session.createQuery(str);
 			q.setBoolean(0, true);
 			result = q.list();
@@ -132,7 +113,7 @@ public class TavoloSession {
 	public List<Tavolo> selezionaTavoliNonAttivi() {
 		try {
 			List<Tavolo> result;
-			String str = " from it.softfood.entity.Tavolo where attivo = ? ";
+			String str = " from it.softfood.entity.Tavolo t where t.attivo = ? ";
 			Query q = session.createQuery(str);
 			q.setBoolean(0, false);
 			result = q.list();
@@ -149,7 +130,7 @@ public class TavoloSession {
 		try {
 			tavolo.setOccupato(occupato);
 
-			//tavolo = (Tavolo) this.getSession().merge(tavolo);
+			tavolo = (Tavolo) session.merge(tavolo);
 
 			return true;
 		} catch (Exception e) {
@@ -162,7 +143,7 @@ public class TavoloSession {
 		try {
 			Tavolo tavolo = this.selezionaTavoloPerId(id);
 			if (tavolo != null) {
-				//this.getSession().delete(tavolo);
+				session.delete(tavolo);
 				return true;
 			}
 

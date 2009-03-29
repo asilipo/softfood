@@ -9,6 +9,11 @@ import java.util.Set;
  */
 public class Ristorante implements java.io.Serializable {
 
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String ragioneSociale;
 	private Indirizzo indirizzo;
 	private String partitaIva;
