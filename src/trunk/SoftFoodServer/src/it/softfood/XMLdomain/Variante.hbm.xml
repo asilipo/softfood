@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 22-mar-2009 12.42.10 by Hibernate Tools 3.2.2.GA -->
+<hibernate-mapping>
+    <class name="it.softfood.entity.Variante" table="variante" schema="public">
+        <id name="id" type="long">
+            <column name="id" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="lineaOrdinazione" class="it.softfood.entity.LineaOrdinazione" fetch="select">
+            <column name="linea_ordinazione" not-null="true" />
+        </many-to-one>
+        <many-to-one name="ingrediente" class="it.softfood.entity.Ingrediente" fetch="select">
+            <column name="ingrediente" not-null="true" />
+        </many-to-one>
+        <property name="tipoVariazione" type="java.lang.Integer">
+            <column name="tipo_variazione" />
+        </property>
+    </class>
+</hibernate-mapping>
