@@ -17,11 +17,11 @@
         <property name="descrizione" type="string">
             <column name="descrizione" />
         </property>
-        <set name="entratas" inverse="true">
+        <list name="entrate" inverse="true">
             <key>
                 <column name="registro" not-null="true" />
             </key>
             <one-to-many class="it.softfood.entity.Entrata" />
-        </set>
+        </list>
     </class>
 </hibernate-mapping>

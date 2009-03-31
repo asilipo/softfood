@@ -26,23 +26,23 @@
         <property name="tipoPietanza" type="java.lang.Integer">
             <column name="tipo_pietanza" />
         </property>
-        <set name="ingredientePietanzas" inverse="true">
+        <list name="ingredientiPietanza" inverse="true">
             <key>
                 <column name="pietanza" not-null="true" />
             </key>
             <one-to-many class="it.softfood.entity.IngredientePietanza" />
-        </set>
-        <set name="bevandaMagazzinos" inverse="true">
+        </list>
+        <list name="bevandeMagazzino" inverse="true">
             <key>
                 <column name="bevanda" />
             </key>
             <one-to-many class="it.softfood.entity.BevandaMagazzino" />
-        </set>
-        <set name="lineaOrdinaziones" inverse="true">
+        </list>
+        <list name="lineeOrdinazione" inverse="true">
             <key>
                 <column name="articolo" not-null="true" />
             </key>
             <one-to-many class="it.softfood.entity.LineaOrdinazione" />
-        </set>
+        </list>
     </class>
 </hibernate-mapping>

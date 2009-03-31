@@ -26,23 +26,23 @@
         <property name="variante" type="boolean">
             <column name="variante" not-null="true" />
         </property>
-        <set name="variantes" inverse="true">
+        <list name="varianti" inverse="true">
             <key>
                 <column name="ingrediente" not-null="true" />
             </key>
             <one-to-many class="it.softfood.entity.Variante" />
-        </set>
-        <set name="ingredientePietanzas" inverse="true">
+        </list>
+        <list name="ingredientiPietanza" inverse="true">
             <key>
                 <column name="ingrediente" not-null="true" />
             </key>
             <one-to-many class="it.softfood.entity.IngredientePietanza" />
-        </set>
-        <set name="ingredienteMagazzinos" inverse="true">
+        </list>
+        <list name="ingredientiMagazzino" inverse="true">
             <key>
                 <column name="ingrediente" not-null="true" />
             </key>
             <one-to-many class="it.softfood.entity.IngredienteMagazzino" />
-        </set>
+        </list>
     </class>
 </hibernate-mapping>

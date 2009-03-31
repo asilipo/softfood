@@ -1,11 +1,19 @@
 package it.softfood.entity;
 
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
+
+/**
+ * @author Maria Rosaria Paone
+ * @author Marco Grasso
+ * @author Francesco Pacilio
+ */
 
 public class Ingrediente implements java.io.Serializable {
 
+	private static final long serialVersionUID = 1L;
+	
 	private Long id;
 	private String tipoIngrediente;
 	private String descrizione;
@@ -13,17 +21,14 @@ public class Ingrediente implements java.io.Serializable {
 	private Date scadenza;
 	private String unitaMisura;
 	private boolean variante;
-	private Set<Variante> variantes = new HashSet<Variante>(0);
-	private Set<IngredientePietanza> ingredientePietanzas = new HashSet<IngredientePietanza>(
-			0);
-	private Set<IngredienteMagazzino> ingredienteMagazzinos = new HashSet<IngredienteMagazzino>(
-			0);
+	private List<Variante> varianti = new ArrayList<Variante>(0);
+	private List<IngredientePietanza> ingredientiPietanza = new ArrayList<IngredientePietanza>(0);
+	private List<IngredienteMagazzino> ingredientiMagazzino = new ArrayList<IngredienteMagazzino>(0);
 
 	public Ingrediente() {
 	}
 
-	public Ingrediente(Long id, String tipoIngrediente, String nome,
-			Date scadenza, boolean variante) {
+	public Ingrediente(Long id, String tipoIngrediente, String nome, Date scadenza, boolean variante) {
 		this.id = id;
 		this.tipoIngrediente = tipoIngrediente;
 		this.nome = nome;
@@ -31,11 +36,9 @@ public class Ingrediente implements java.io.Serializable {
 		this.variante = variante;
 	}
 
-	public Ingrediente(Long id, String tipoIngrediente, String descrizione,
-			String nome, Date scadenza, String unitaMisura, boolean variante,
-			Set<Variante> variantes,
-			Set<IngredientePietanza> ingredientePietanzas,
-			Set<IngredienteMagazzino> ingredienteMagazzinos) {
+	public Ingrediente(Long id, String tipoIngrediente, String descrizione, String nome, 
+			Date scadenza, String unitaMisura, boolean variante, List<Variante> varianti, 
+				List<IngredientePietanza> ingredientiPietanza,	List<IngredienteMagazzino> ingredientiMagazzino) {
 		this.id = id;
 		this.tipoIngrediente = tipoIngrediente;
 		this.descrizione = descrizione;
@@ -43,11 +46,10 @@ public class Ingrediente implements java.io.Serializable {
 		this.scadenza = scadenza;
 		this.unitaMisura = unitaMisura;
 		this.variante = variante;
-		this.variantes = variantes;
-		this.ingredientePietanzas = ingredientePietanzas;
-		this.ingredienteMagazzinos = ingredienteMagazzinos;
+		this.varianti = varianti;
+		this.ingredientiPietanza = ingredientiPietanza;
+		this.ingredientiMagazzino = ingredientiMagazzino;
 	}
-
 
 	public Long getId() {
 		return this.id;
@@ -57,7 +59,6 @@ public class Ingrediente implements java.io.Serializable {
 		this.id = id;
 	}
 
-	
 	public String getTipoIngrediente() {
 		return this.tipoIngrediente;
 	}
@@ -66,7 +67,6 @@ public class Ingrediente implements java.io.Serializable {
 		this.tipoIngrediente = tipoIngrediente;
 	}
 
-	
 	public String getDescrizione() {
 		return this.descrizione;
 	}
@@ -75,7 +75,6 @@ public class Ingrediente implements java.io.Serializable {
 		this.descrizione = descrizione;
 	}
 
-	
 	public String getNome() {
 		return this.nome;
 	}
@@ -84,7 +83,6 @@ public class Ingrediente implements java.io.Serializable {
 		this.nome = nome;
 	}
 
-	
 	public Date getScadenza() {
 		return this.scadenza;
 	}
@@ -93,7 +91,6 @@ public class Ingrediente implements java.io.Serializable {
 		this.scadenza = scadenza;
 	}
 
-	
 	public String getUnitaMisura() {
 		return this.unitaMisura;
 	}
@@ -102,7 +99,6 @@ public class Ingrediente implements java.io.Serializable {
 		this.unitaMisura = unitaMisura;
 	}
 
-	
 	public boolean isVariante() {
 		return this.variante;
 	}
@@ -111,37 +107,32 @@ public class Ingrediente implements java.io.Serializable {
 		this.variante = variante;
 	}
 
-	public Set<Variante> getVariantes() {
-		return this.variantes;
+	public List<Variante> getVarianti() {
+		return this.varianti;
 	}
 
-	public void setVariantes(Set<Variante> variantes) {
-		this.variantes = variantes;
+	public void setVarianti(List<Variante> varianti) {
+		this.varianti = varianti;
 	}
 
-	
-	public Set<IngredientePietanza> getIngredientePietanzas() {
-		return this.ingredientePietanzas;
+	public List<IngredientePietanza> getIngredientiPietanza() {
+		return this.ingredientiPietanza;
 	}
 
-	public void setIngredientePietanzas(
-			Set<IngredientePietanza> ingredientePietanzas) {
-		this.ingredientePietanzas = ingredientePietanzas;
+	public void setIngredientiPietanza(List<IngredientePietanza> ingredientiPietanza) {
+		this.ingredientiPietanza = ingredientiPietanza;
 	}
 
-	
-	public Set<IngredienteMagazzino> getIngredienteMagazzinos() {
-		return this.ingredienteMagazzinos;
+	public List<IngredienteMagazzino> getIngredientiMagazzino() {
+		return this.ingredientiMagazzino;
 	}
 
-	public void setIngredienteMagazzinos(
-			Set<IngredienteMagazzino> ingredienteMagazzinos) {
-		this.ingredienteMagazzinos = ingredienteMagazzinos;
+	public void setIngredienteMagazzinos(List<IngredienteMagazzino> ingredientiMagazzino) {
+		this.ingredientiMagazzino = ingredientiMagazzino;
 	}
         
-        @Override
+    @Override
 	public boolean equals(Object arg0) {
-		// TODO Auto-generated method stub
 		return super.equals(arg0);
 	}
 

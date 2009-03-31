@@ -23,23 +23,23 @@
         <property name="via" type="string">
             <column name="via" />
         </property>
-        <set name="ristorantes" inverse="true">
+        <list name="ristoranti" inverse="true">
             <key>
                 <column name="indirizzo" not-null="true" />
             </key>
             <one-to-many class="it.softfood.entity.Ristorante" />
-        </set>
-        <set name="magazzinos" inverse="true">
+        </list>
+        <list name="magazzini" inverse="true">
             <key>
                 <column name="indirizzo" />
             </key>
             <one-to-many class="it.softfood.entity.Magazzino" />
-        </set>
-        <set name="fornitores" inverse="true">
+        </list>
+        <list name="fornitori" inverse="true">
             <key>
                 <column name="indirizzo" not-null="true" />
             </key>
             <one-to-many class="it.softfood.entity.Fornitore" />
-        </set>
+        </list>
     </class>
 </hibernate-mapping>

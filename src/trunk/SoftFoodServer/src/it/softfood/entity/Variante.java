@@ -1,7 +1,15 @@
 package it.softfood.entity;
 
+/**
+ * @author Maria Rosaria Paone
+ * @author Marco Grasso
+ * @author Francesco Pacilio
+ */
+
 public class Variante implements java.io.Serializable {
 
+	private static final long serialVersionUID = 1L;
+	
 	private Long id;
 	private LineaOrdinazione lineaOrdinazione;
 	private Ingrediente ingrediente;
@@ -25,7 +33,6 @@ public class Variante implements java.io.Serializable {
 		this.tipoVariazione = tipoVariazione;
 	}
 
-	
 	public Long getId() {
 		return this.id;
 	}
@@ -34,7 +41,6 @@ public class Variante implements java.io.Serializable {
 		this.id = id;
 	}
 
-	
 	public LineaOrdinazione getLineaOrdinazione() {
 		return this.lineaOrdinazione;
 	}
@@ -43,7 +49,6 @@ public class Variante implements java.io.Serializable {
 		this.lineaOrdinazione = lineaOrdinazione;
 	}
 
-	
 	public Ingrediente getIngrediente() {
 		return this.ingrediente;
 	}
@@ -52,7 +57,6 @@ public class Variante implements java.io.Serializable {
 		this.ingrediente = ingrediente;
 	}
 
-	
 	public Integer getTipoVariazione() {
 		return this.tipoVariazione;
 	}
@@ -60,9 +64,9 @@ public class Variante implements java.io.Serializable {
 	public void setTipoVariazione(Integer tipoVariazione) {
 		this.tipoVariazione = tipoVariazione;
 	}
-        @Override
+        
+	@Override
 	public boolean equals(Object arg0) {
-		// TODO Auto-generated method stub
 		return super.equals(arg0);
 	}
 

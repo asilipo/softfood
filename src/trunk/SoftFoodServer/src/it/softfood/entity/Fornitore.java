@@ -1,8 +1,15 @@
 package it.softfood.entity;
 
+/**
+ * @author Maria Rosaria Paone
+ * @author Marco Grasso
+ * @author Francesco Pacilio
+ */
 
 public class Fornitore implements java.io.Serializable {
 
+	private static final long serialVersionUID = 1L;
+	
 	private String ragioneSociale;
 	private Ristorante ristorante;
 	private Indirizzo indirizzo;
@@ -29,7 +36,6 @@ public class Fornitore implements java.io.Serializable {
 		this.partitaIva = partitaIva;
 	}
 
-
 	public String getRagioneSociale() {
 		return this.ragioneSociale;
 	}
@@ -37,7 +43,6 @@ public class Fornitore implements java.io.Serializable {
 	public void setRagioneSociale(String ragioneSociale) {
 		this.ragioneSociale = ragioneSociale;
 	}
-
 
 	public Ristorante getRistorante() {
 		return this.ristorante;
@@ -47,7 +52,6 @@ public class Fornitore implements java.io.Serializable {
 		this.ristorante = ristorante;
 	}
 
-
 	public Indirizzo getIndirizzo() {
 		return this.indirizzo;
 	}
@@ -55,7 +59,6 @@ public class Fornitore implements java.io.Serializable {
 	public void setIndirizzo(Indirizzo indirizzo) {
 		this.indirizzo = indirizzo;
 	}
-
 
 	public String getDescrizione() {
 		return this.descrizione;
@@ -65,7 +68,6 @@ public class Fornitore implements java.io.Serializable {
 		this.descrizione = descrizione;
 	}
 
-
 	public String getPartitaIva() {
 		return this.partitaIva;
 	}
@@ -74,9 +76,8 @@ public class Fornitore implements java.io.Serializable {
 		this.partitaIva = partitaIva;
 	}
         
-        @Override
+    @Override
 	public boolean equals(Object arg0) {
-		// TODO Auto-generated method stub
 		return super.equals(arg0);
 	}
 
