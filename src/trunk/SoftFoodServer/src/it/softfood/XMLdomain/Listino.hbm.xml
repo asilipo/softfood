@@ -17,11 +17,11 @@
         <property name="prezzo" type="double">
             <column name="prezzo" precision="17" scale="17" not-null="true" />
         </property>
-        <set name="articolos" inverse="true">
+        <list name="articoli" inverse="true">
             <key>
                 <column name="listino" />
             </key>
             <one-to-many class="it.softfood.entity.Articolo" />
-        </set>
+        </list>
     </class>
 </hibernate-mapping>

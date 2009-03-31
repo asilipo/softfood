@@ -14,11 +14,11 @@
         <property name="descrizione" type="string">
             <column name="descrizione" />
         </property>
-        <set name="listinos" inverse="true">
+        <list name="listini" inverse="true">
             <key>
                 <column name="menu" not-null="true" />
             </key>
             <one-to-many class="it.softfood.entity.Listino" />
-        </set>
+        </list>
     </class>
 </hibernate-mapping>

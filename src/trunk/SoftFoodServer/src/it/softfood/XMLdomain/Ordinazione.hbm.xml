@@ -26,17 +26,17 @@
         <property name="totale" type="java.lang.Double">
             <column name="totale" precision="17" scale="17" />
         </property>
-        <set name="entratas" inverse="true">
+        <list name="entrate" inverse="true">
             <key>
                 <column name="ordinazione" not-null="true" />
             </key>
             <one-to-many class="it.softfood.entity.Entrata" />
-        </set>
-        <set name="lineaOrdinaziones" inverse="true">
+        </list>
+        <list name="lineeOrdinazione" inverse="true">
             <key>
                 <column name="ordinazione" not-null="true" />
             </key>
             <one-to-many class="it.softfood.entity.LineaOrdinazione" />
-        </set>
+        </list>
     </class>
 </hibernate-mapping>
