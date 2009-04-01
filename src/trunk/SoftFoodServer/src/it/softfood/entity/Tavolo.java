@@ -36,7 +36,7 @@ public class Tavolo implements java.io.Serializable {
 
 	public Tavolo(Long id, Ristorante ristorante, boolean attivo,
 			int numeroPosti, boolean occupato, String riferimento,
-			List<Ordinazione> ordinazioni) {
+				List<Ordinazione> ordinazioni) {
 		this.id = id;
 		this.ristorante = ristorante;
 		this.attivo = attivo;
