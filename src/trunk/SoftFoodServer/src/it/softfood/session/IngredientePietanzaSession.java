@@ -24,21 +24,9 @@ public class IngredientePietanzaSession {
 			ingredientePietanzaSession = new IngredientePietanzaSession();
 		return ingredientePietanzaSession;
 	}
-
-	private Long getNewId() {
-		try {
-			Query q = session.createQuery("select max(id) from it.softfood.entity.IngredientePietanza");
-			List list = q.list();
-		    return (((Long)list.get(0)) + 1);
-		} catch(Exception e) {
-			System.out.println("IngredientePietanzaSession#getNewId");
-			return null;
-		}		
-	}
     
 	public IngredientePietanza inserisciIngredientePietanza(IngredientePietanza ingredientePietanza) {
 		try {
-			Long id = this.getNewId();
 			IngredientePietanzaPK ingredientePietanzaPK = new IngredientePietanzaPK();
 			ingredientePietanzaPK.setIngrediente(ingredientePietanza.getIngrediente().getId());
 			ingredientePietanzaPK.setPietanza(ingredientePietanza.getArticolo().getId());
