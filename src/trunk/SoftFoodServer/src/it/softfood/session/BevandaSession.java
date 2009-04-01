@@ -7,7 +7,6 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.classic.Session;
 
-
 /**
  * @author Maria Rosaria Paone
  * @author Marco Grasso
@@ -90,11 +89,9 @@ public class BevandaSession {
 	public Session getSession() {
 		return session;
 	}
-
+	
 	public void setSession(Session session) {
 		this.session = session;
 	}
 
 }
-
-
