@@ -5,7 +5,7 @@ import it.softfood.entity.Bevanda;
 import java.util.List;
 
 import org.hibernate.Query;
-import org.hibernate.classic.Session;
+import org.hibernate.Session;
 
 /**
  * @author Maria Rosaria Paone
