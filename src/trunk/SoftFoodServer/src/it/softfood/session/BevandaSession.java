@@ -7,6 +7,7 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.classic.Session;
 
+
 /**
  * @author Maria Rosaria Paone
  * @author Marco Grasso
@@ -15,10 +16,10 @@ import org.hibernate.classic.Session;
 
 public class BevandaSession {
 
-    private Session session;
-    private static BevandaSession bevandaSession;
-    
-    public synchronized static BevandaSession getInstance() {
+	private Session session;
+	private static BevandaSession bevandaSession;
+
+	public synchronized static BevandaSession getInstance() {
 		if(bevandaSession == null)
 			bevandaSession = new BevandaSession();
 		return bevandaSession;
@@ -28,26 +29,26 @@ public class BevandaSession {
 		try {
 			Query q = session.createQuery("select max(id) from it.softfood.entity.Bevanda");
 			List list = q.list();
-		    return (((Long)list.get(0)) + 1);
+			return (((Long)list.get(0)) + 1);
 		} catch(Exception e) {
 			System.out.println("BevandaSession#getNewId");
 			return null;
 		}		
 	}
-    
+
 	public Bevanda inserisciBevanda(Bevanda bevanda) {
 		try {
 			Long id = this.getNewId();
 			bevanda.setId(id);
 			session.persist(bevanda);
-			
+
 			return (Bevanda) session.get(Bevanda.class, bevanda);
 		} catch (Exception e) {
 			System.err.println("BevandaSession#inserisciBevanda");
 			return null;
 		}
 	}
-	
+
 	public Bevanda selezionaBevandaPerId(Long id) {
 		try {
 			return (Bevanda) session.get(Bevanda.class, id);
@@ -57,7 +58,7 @@ public class BevandaSession {
 		}
 	}
 
-    public List<Bevanda> selezionaBevande() {
+	public List<Bevanda> selezionaBevande() {
 		try {
 			Query q = session.createQuery("from it.softfood.entity.Bevanda b");
 			return (List<Bevanda>) q.list();			
@@ -67,7 +68,7 @@ public class BevandaSession {
 		}
 	}
 
-    public boolean rimuoviBevanda(Long id) {
+	public boolean rimuoviBevanda(Long id) {
 		try {
 			Bevanda bevanda = this.selezionaBevandaPerId(id);
 			if (bevanda != null) {
@@ -80,8 +81,8 @@ public class BevandaSession {
 			System.err.println("BevandaSession#selezionaBevandaPerId");
 			return false;
 		}
-    }
-    
+	}
+
 	public void flush() {
 		this.session.flush();
 	}
@@ -93,5 +94,7 @@ public class BevandaSession {
 	public void setSession(Session session) {
 		this.session = session;
 	}
-    
+
 }
+
+
