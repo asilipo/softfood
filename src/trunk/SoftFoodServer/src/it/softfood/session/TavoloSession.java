@@ -1,14 +1,11 @@
 package it.softfood.session;
 
-import it.softfood.aspect.HibernateUtil;
 import it.softfood.entity.Tavolo;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.criterion.Example;
 
 /**
  * @author Maria Rosaria Paone
@@ -19,45 +16,34 @@ import org.hibernate.criterion.Example;
 public class TavoloSession {
 
 	private Session session;
-	
-	
-	private static TavoloSession tavoloSingleton;
+	private static TavoloSession tavoloSession;
 
-	public synchronized static TavoloSession getInstance(){
-		if(tavoloSingleton==null)
-			tavoloSingleton=new TavoloSession();
-		return(tavoloSingleton);
+	public synchronized static TavoloSession getInstance() {
+		if(tavoloSession == null)
+			tavoloSession = new TavoloSession();
+		return tavoloSession;
 	}
 
-	// @PersistenceContext
-	// private EntityManager em;
-
-	private Long getNewId(){
-		Long id = new Long(0);
-		try{
-			String str ="select max(id) from it.softfood.entity.Tavolo";
-			Query q = session.createQuery(str);
-			 List list = q.list();
-		     id = ((Long)list.get(0));
-		    
-		}catch(Exception e){
-			System.out.println("Error in getNewId");
-		}
-		id++;
-		return id;
+	private Long getNewId() {
+		try {
+			Query q = session.createQuery("select max(id) from it.softfood.entity.Tavolo");
+			List list = q.list();
+		    return (((Long)list.get(0)) + 1);
+		} catch(Exception e) {
+			System.out.println("TavoloSession#getNewId");
+			return null;
+		}		
 	}
-		public Tavolo inserisciTavolo(Tavolo tavolo) {
-		
+	
+	public Tavolo inserisciTavolo(Tavolo tavolo) {
 		try {
 			Long id = this.getNewId();
-			System.out.println("Inserisci Tavolo "+id);
 			tavolo.setId(id);
-			
 			session.persist(tavolo);
-			return tavolo;
+			
+			return (Tavolo) session.get(Tavolo.class, tavolo);
 		} catch (Exception e) {
-			System.err.println("TavoloSessionBean#inserisciTavolo");
-			System.err.println(e);
+			System.err.println("TavoloSession#inserisciTavolo");
 			return null;
 		}
 	}
@@ -66,89 +52,62 @@ public class TavoloSession {
 		try {
 			return (Tavolo) session.get(Tavolo.class, id);
 		} catch (Exception e) {
-			System.err.println("TavoloSessionBean#selezionaTavoloPerId");
+			System.err.println("TavoloSession#selezionaTavoloPerId");
 			return null;
 		}
 	}
 
 	public Tavolo selezionaTavoloPerRiferimento(String riferimento) {
 		try {
-			Tavolo result;
-			String str = " from it.softfood.entity.Tavolo t where t.riferimento = ? ";
-			Query q = session.createQuery(str);
+			Query q = session.createQuery("from it.softfood.entity.Tavolo t where t.riferimento = ?");
 			q.setString(0, riferimento);
-			result = (Tavolo) q.uniqueResult();
-
-			return result;
+			return (Tavolo) q.uniqueResult();
 		} catch (Exception e) {
-			System.err
-					.println("TavoloSessionBean#selezionaTavoloPerRiferimento");
+			System.err.println("TavoloSession#selezionaTavoloPerRiferimento");
 			return null;
 		}
 	}
 
 	public List<Tavolo> selezionaTavoliPerNumeroPosti(Integer numeroPosti) {
 		try {
-			List<Tavolo> result;
-			String str = " from it.softfood.entity.Tavolo t where t.numeroPosti = ? ";
-			Query q = session.createQuery(str);
+			Query q = session.createQuery("from it.softfood.entity.Tavolo t where t.numeroPosti = ?");
 			q.setInteger(0, numeroPosti);
-			result = q.list();
-			return result;
-			
+			return (List<Tavolo>) q.list();			
 		} catch (Exception e) {
-			System.err
-					.println("TavoloSessionBean#selezionaTavoliPerNumeroPosti");
+			System.err.println("TavoloSession#selezionaTavoliPerNumeroPosti");
 			return null;
 		}
 	}
 
 	public List<Tavolo> selezionaTavoliLiberi() {
 		try {
-			Tavolo t;
-			List<Tavolo> result;
-			String str = " from it.softfood.entity.Tavolo t where t.occupato = ?";
-			Query q = session.createQuery(str);
+			Query q = session.createQuery("from it.softfood.entity.Tavolo t where t.occupato = ?");
 			q.setBoolean(0, false);
-			result = q.list();
-			return result;
+			return (List<Tavolo>) q.list();
 		} catch (Exception e) {
-			System.err.println("TavoloSessionBean#selezionaTavoliLiberi");
-			System.err.println(e);
-			return null;
-		} catch (Throwable e) {
+			System.err.println("TavoloSession#selezionaTavoliLiberi");
 			return null;
 		}
 	}
 
 	public List<Tavolo> selezionaTavoliOccupati() {
 		try {
-			List<Tavolo> result;
-			String str = " from it.softfood.entity.Tavolo t where t.occupato = ? ";
-			Query q = session.createQuery(str);
+			Query q = session.createQuery("from it.softfood.entity.Tavolo t where t.occupato = ?");
 			q.setBoolean(0, true);
-			result = q.list();
-
-			return result;
-			
+			return (List<Tavolo>) q.list();			
 		} catch (Exception e) {
-			System.err.println("TavoloSessionBean#selezionaTavoliOccupati");
+			System.err.println("TavoloSession#selezionaTavoliOccupati");
 			return null;
 		}
 	}
 
 	public List<Tavolo> selezionaTavoliNonAttivi() {
 		try {
-			List<Tavolo> result;
-			String str = " from it.softfood.entity.Tavolo t where t.attivo = ? ";
-			Query q = session.createQuery(str);
+			Query q = session.createQuery("from it.softfood.entity.Tavolo t where t.attivo = ?");
 			q.setBoolean(0, false);
-			result = q.list();
-
-			return result;
-			
+			return (List<Tavolo>) q.list();			
 		} catch (Exception e) {
-			System.err.println("TavoloSessionBean#selezionaTavoliNonAttivi");
+			System.err.println("TavoloSession#selezionaTavoliNonAttivi");
 			return null;
 		}
 	}
@@ -156,12 +115,11 @@ public class TavoloSession {
 	public boolean modificaStatoTavolo(Tavolo tavolo, Boolean occupato) {
 		try {
 			tavolo.setOccupato(occupato);
-
 			tavolo = (Tavolo) session.merge(tavolo);
 
 			return true;
 		} catch (Exception e) {
-			System.err.println("TavoloSessionBean#modificaStatoTavolo");
+			System.err.println("TavoloSession#modificaStatoTavolo");
 			return false;
 		}
 	}
@@ -176,7 +134,7 @@ public class TavoloSession {
 
 			return false;
 		} catch (Exception e) {
-			System.err.println("TavoloSessionBean#rimuoviTavolo");
+			System.err.println("TavoloSession#rimuoviTavolo");
 			return false;
 		}
 	}
@@ -186,11 +144,11 @@ public class TavoloSession {
 	}
 
 	public Session getSession() {
-		
 		return session;
 	}
 
 	public void setSession(Session session) {
 		this.session = session;
 	}
+	
 }
