@@ -31,6 +31,7 @@ public class TavoloFacade implements ITavoloFacade {
 		
 		
 	}
+	
 	public synchronized static TavoloFacade getInstance() {
 		if (singleton == null) {
 			singleton = new TavoloFacade();
@@ -119,7 +120,7 @@ public class TavoloFacade implements ITavoloFacade {
                     String riferimento = riferimenti.get(0);
                     if (riferimento != null) {
                         Tavolo tavolo = tavoloSession.selezionaTavoloPerRiferimento(riferimento);
-                        tavolo = tavoloSession.merge(tavolo);
+//                        tavolo = tavoloSession.merge(tavolo);
                         if (!tavolo.isOccupato()) {
                             tavolo.setOccupato(true);
                             return tavolo.getId();
@@ -137,7 +138,7 @@ public class TavoloFacade implements ITavoloFacade {
                     for (String riferimento : riferimenti) {
                         if (riferimento != null) {
                             Tavolo tavolo = tavoloSession.selezionaTavoloPerRiferimento(riferimento);
-                            tavolo = tavoloSession.merge(tavolo);
+//                            tavolo = tavoloSession.merge(tavolo);
                             if (!tavolo.isOccupato()) {
                                 tavolo.setAttivo(false);
                                 if (riferimentoTavoli == null)
