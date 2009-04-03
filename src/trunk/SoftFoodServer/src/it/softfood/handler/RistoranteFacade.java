@@ -1,12 +1,8 @@
 package it.softfood.facade.ristorante;
 
 import it.softfood.entity.Ristorante;
-import it.softfood.session.ristorante.RistoranteSessionBeanRemote;
+import it.softfood.session.RistoranteSession;
 
-import javax.ejb.EJB;
-import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 
 /**
  * @author Maria Rosaria Paone
@@ -14,50 +10,63 @@ import javax.persistence.PersistenceContext;
  * @author Francesco Pacilio
  */
 
-@Stateless
-public class RistoranteFacade implements RistoranteFacadeRemote, RistoranteFacadeLocal {
 
-	@PersistenceContext
-    private EntityManager em;
-	@EJB(beanName = "RistoranteSessionBean")
-	private RistoranteSessionBeanRemote ristoranteSessionBean;
+public class RistoranteFacade  {
+
+
+	private RistoranteSession ristoranteSession=RistoranteSession.getInstance();
 	
+	/* (non-Javadoc)
+	 * @see it.softfood.handler.IRistoranteSession#inserisciRistorante(it.softfood.entity.Ristorante)
+	 */
 	public Ristorante inserisciRistorante(Ristorante ristorante) {
 		if (ristorante != null)
-			return ristoranteSessionBean.inserisciRistorante(ristorante);
+			return ristoranteSession.inserisciRistorante(ristorante);
 		
 		return null;
 	}
 	
+	/* (non-Javadoc)
+	 * @see it.softfood.handler.IRistoranteSession#modificaRistorante(it.softfood.entity.Ristorante, it.softfood.entity.Ristorante)
+	 */
 	public Ristorante modificaRistorante(Ristorante nuovoRistorante, Ristorante vecchioRistorante) {
 		if (nuovoRistorante != null && vecchioRistorante != null) {
-			Ristorante ristorante = em.merge(vecchioRistorante);
+			Ristorante ristorante = vecchioRistorante;
 			ristorante.setIndirizzo(nuovoRistorante.getIndirizzo());
 			ristorante.setPartitaIva(nuovoRistorante.getPartitaIva());
-
+			ristoranteSession.update(ristorante);
             return ristorante;
 		}
 		
 		return null;
 	}
 	
+	/* (non-Javadoc)
+	 * @see it.softfood.handler.IRistoranteSession#selezionaRistorantePerRagioneSociale(java.lang.String)
+	 */
 	public Ristorante selezionaRistorantePerRagioneSociale(String ragioneSociale) {
 		if (ragioneSociale != null)
-			return ristoranteSessionBean.selezionaRistorantePerRagioneSociale(ragioneSociale);
+			return ristoranteSession.selezionaRistorantePerRagioneSociale(ragioneSociale);
 		
 		return null;
 	}
 	
+	/* (non-Javadoc)
+	 * @see it.softfood.handler.IRistoranteSession#selezionaRistorantePerPartitaIva(java.lang.String)
+	 */
 	public Ristorante selezionaRistorantePerPartitaIva(String partitaIva) {
 		if (partitaIva != null)
-			return ristoranteSessionBean.selezionaRistorantePerPartitaIva(partitaIva);
+			return ristoranteSession.selezionaRistorantePerPartitaIva(partitaIva);
 		
 		return null;
 	}
 	
+	/* (non-Javadoc)
+	 * @see it.softfood.handler.IRistoranteSession#rimuoviRistorante(java.lang.String)
+	 */
 	public boolean rimuoviRistorante(String ragioneSociale) {
 		if (ragioneSociale != null)
-			return ristoranteSessionBean.rimuoviRistorante(ragioneSociale);
+			return ristoranteSession.rimuoviRistorante(ragioneSociale);
 		
 		return false;
 	}
