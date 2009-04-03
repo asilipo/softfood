@@ -14,35 +14,35 @@
         <property name="partitaIva" type="string">
             <column name="partita_iva" not-null="true" unique="true" />
         </property>
-        <list name="registri" inverse="true">
+        <set name="registri" inverse="true">
             <key>
                 <column name="ristorante" not-null="true" />
             </key>
             <one-to-many class="it.softfood.entity.Registro" />
-        </list>
-        <list name="fornitori" inverse="true">
+        </set>
+        <set name="fornitori" inverse="true">
             <key>
                 <column name="ristorante" not-null="true" />
             </key>
             <one-to-many class="it.softfood.entity.Fornitore" />
-        </list>
-        <list name="staff" inverse="true">
+        </set>
+        <set name="staff" inverse="true">
             <key>
                 <column name="ristorante" not-null="true" />
             </key>
             <one-to-many class="it.softfood.entity.Staff" />
-        </list>
-        <list name="tavoli" inverse="true">
+        </set>
+        <set name="tavoli" inverse="true">
             <key>
                 <column name="ristorante" not-null="true" />
             </key>
             <one-to-many class="it.softfood.entity.Tavolo" />
-        </list>
-        <list name="menu" inverse="true">
+        </set>
+        <set name="menu" inverse="true">
             <key>
                 <column name="ristorante" not-null="true" />
             </key>
             <one-to-many class="it.softfood.entity.Menu" />
-        </list>
+        </set>
     </class>
 </hibernate-mapping>
