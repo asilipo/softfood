@@ -29,7 +29,8 @@ public class OrdinazioneSession {
 	private Long getNewId() {
 		try {
 			Query q = session.createQuery("select max(id) from it.softfood.entity.Ordinazione");
-		    return (((Long)q.list().get(0)) + 1);
+		    Long id = (Long)q.list().get(0);
+			return (id + 1);
 		} catch(Exception e) {
 			System.out.println("OrdinazioneSession#getNewId");
 			return null;
@@ -41,8 +42,8 @@ public class OrdinazioneSession {
 			Long id = this.getNewId();
 			ordinazione.setId(id);
 			session.persist(ordinazione);
-			
-			return (Ordinazione) session.get(Ordinazione.class, ordinazione);
+			ordinazione = (Ordinazione) session.get(Ordinazione.class, ordinazione);
+			return ordinazione;
 		} catch (Exception e) {
 			System.err.println("OrdinazioneSession#inserisciOrdinazione");
 			return null;
@@ -51,7 +52,8 @@ public class OrdinazioneSession {
 	
 	public Ordinazione selezionaOrdinazionePerId(Long id) {
 		try {
-			return (Ordinazione) session.get(Ordinazione.class, id);
+			Ordinazione ordinazione = (Ordinazione) session.get(Ordinazione.class, id);
+			return ordinazione;
 		} catch (Exception e) {
 			System.err.println("OrdinazioneSession#selezionaOrdinazionePerId");
 			return null;
@@ -119,6 +121,10 @@ public class OrdinazioneSession {
 
 	public void setSession(Session session) {
 		this.session = session;
+	}
+	
+	public void update(Ordinazione ordinazione) {
+		session.update(ordinazione);
 	}
 
 }
