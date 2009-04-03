@@ -1,6 +1,8 @@
 package it.softfood.aspect;
 
 
+import it.softfood.facade.ISoftfoodFacade;
+
 import java.rmi.Naming;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
@@ -14,13 +16,13 @@ public aspect Distribution{
 
 //	private String xmlparameter="config_authorization_file";
 
-	declare parents: it.softfood.facade.SoftfoodFacade implements ISoftfoodFacade;
+	declare parents: it.softfood.handler.TavoloFacade implements it.softfood.handler.ITavoloFacade;
 	
 	   
 
-	pointcut init(it.softfood.facade.SoftfoodFacade f): execution( it.softfood.facade.SoftfoodFacade.new(..)) && this(f);
+	pointcut init(it.softfood.handler.TavoloFacade t): execution( it.softfood.handler.TavoloFacade.new(..)) && this(t);
 	
-	after(it.softfood.facade.SoftfoodFacade f): init(f){
+	after(it.softfood.handler.TavoloFacade t): init(t){
 		try{
 			System.out.println("Distribution Aspect");
 //			XmlReader xml= new XmlReader();
@@ -32,11 +34,11 @@ public aspect Distribution{
 			    System.setSecurityManager(new SecurityManager());
 			}
 			System.out.println("Object Exporting....");
-			ISoftfoodFacade ff=(ISoftfoodFacade)java.rmi.server.UnicastRemoteObject.exportObject(f,0);
+			ISoftfoodFacade ff=(ISoftfoodFacade)java.rmi.server.UnicastRemoteObject.exportObject(t,0);
 			System.out.println("Object exported");
 			Registry registry =LocateRegistry.getRegistry("localhost",1099);
 			System.out.println("Get registry");
-			Naming.rebind("softfood", f);
+			Naming.rebind("softfood", t);
 			System.out.println("Server created and ready.");
 		}
 		catch (Exception e){
