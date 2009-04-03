@@ -13,8 +13,19 @@ import it.softfood.session.RistoranteSession;
 
 public class RistoranteFacade  {
 
+	private static RistoranteFacade singleton;
 
 	private RistoranteSession ristoranteSession=RistoranteSession.getInstance();
+	
+	public RistoranteFacade() {
+	}
+	
+	public synchronized static RistoranteFacade getInstance() {
+		if (singleton == null) {
+			singleton = new RistoranteFacade();
+		}
+		return singleton;
+	}
 	
 	/* (non-Javadoc)
 	 * @see it.softfood.handler.IRistoranteSession#inserisciRistorante(it.softfood.entity.Ristorante)
