@@ -30,12 +30,8 @@ public class Tavoli extends javax.swing.JPanel {
     private void initFacade() {
         System.out.println("PPPPPRRRRRROOOOOVVVVVVAAAAAAAAA INIT");
         try {
-            //Hashtable hash=new Hashtable();
-            //hash.put("java.naming.factory.initial","org.jnp.interfaces.NamingContextFactory");
-            //hash.put("java.naming.provider.url","jnp://localhost:1099");
             tavoloFacade=new PDATavoloFacade();
             
-            //ordinazioneFacade = (OrdinazioneFacadeRemote) initial.lookup("OrdinazioneFacade");
         
         } catch (NullPointerException ex) {
             System.err.println("Errore null pointer");
@@ -55,7 +51,7 @@ public class Tavoli extends javax.swing.JPanel {
             tavoli = (ArrayList<Tavolo>) tavoloFacade.selezionaTavoliLiberi();
         } else {
             SelezionaTavoli.setText(SelezionaTavoli.getText() + " un tavolo:");
-            //tavoli = (ArrayList<Tavolo>) tavoloFacade.selezionaTavoliOccupati();
+            tavoli = (ArrayList<Tavolo>) tavoloFacade.selezionaTavoliOccupati();
 
             jComboBox2.setVisible(false);
             jLabel1.setVisible(false);
