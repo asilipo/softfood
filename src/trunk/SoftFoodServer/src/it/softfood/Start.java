@@ -6,9 +6,10 @@ import java.util.List;
 import it.softfood.entity.Ristorante;
 import it.softfood.entity.Tavolo;
 import it.softfood.facade.SoftfoodFacade;
+import it.softfood.handler.ITavoloFacade;
 import it.softfood.handler.OrdinazioneFacade;
+import it.softfood.handler.RistoranteFacade;
 import it.softfood.handler.TavoloFacade;
-import it.softfood.session.RistoranteSession;
 
 public class Start {
 
@@ -60,8 +61,9 @@ public class Start {
 //        Long id=facade.occupaTavoli(list);
 //        facade.rimuoviTavolo(id);
 		
-		TavoloFacade tav=TavoloFacade.getInstance();
+		ITavoloFacade tav=TavoloFacade.getInstance();
 		OrdinazioneFacade ord=OrdinazioneFacade.getInstance();
+		RistoranteFacade rist=RistoranteFacade.getInstance();
         
 
 

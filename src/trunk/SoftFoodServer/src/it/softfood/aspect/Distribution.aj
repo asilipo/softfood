@@ -17,9 +17,9 @@ public aspect Distribution {
 	declare parents: it.softfood.handler.OrdinazioneFacade implements IOrdinazioneFacade;
 	declare parents: it.softfood.handler.RistoranteFacade implements IRistoranteFacade;
 
-	pointcut initTavolo(it.softfood.handler.TavoloFacade t): execution(it.softfood.handler.TavoloFacade.new(..)) && this(t);
+	pointcut initTavolo(ITavoloFacade t): execution(it.softfood.handler.TavoloFacade.new(..)) && this(t);
 
-	after(it.softfood.handler.TavoloFacade t): initTavolo(t){
+	after(ITavoloFacade t): initTavolo(t){
 		try {
 			System.out.println("Distribution Aspect");
 			// XmlReader xml= new XmlReader();

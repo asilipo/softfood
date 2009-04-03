@@ -19,9 +19,9 @@ import java.util.logging.Logger;
  */
 
 
-public class TavoloFacade {
+public class TavoloFacade implements ITavoloFacade {
 	
-	private static TavoloFacade singleton; 
+	private static ITavoloFacade singleton; 
 
 	private TavoloSession tavoloSession=TavoloSession.getInstance();
 
@@ -30,13 +30,16 @@ public class TavoloFacade {
 	public TavoloFacade() {
 	}
 	
-	public synchronized static TavoloFacade getInstance() {
+	public synchronized static ITavoloFacade getInstance() {
 		if (singleton == null) {
 			singleton = new TavoloFacade();
 		}
 		return singleton;
 	}
 
+	/* (non-Javadoc)
+	 * @see it.softfood.handler.ITavoloFacade#inserisciTavolo(it.softfood.entity.Tavolo)
+	 */
 	/* (non-Javadoc)
 	 * @see it.softfood.handler.ITavoloFacade#inserisciTavolo(it.softfood.entity.Tavolo)
 	 */
@@ -50,6 +53,9 @@ public class TavoloFacade {
 	/* (non-Javadoc)
 	 * @see it.softfood.handler.ITavoloFacade#liberaTavolo(it.softfood.entity.Tavolo)
 	 */
+	/* (non-Javadoc)
+	 * @see it.softfood.handler.ITavoloFacade#liberaTavolo(it.softfood.entity.Tavolo)
+	 */
 	public boolean liberaTavolo(Tavolo tavolo) {
 		if (tavolo != null)
 			return tavoloSession.modificaStatoTavolo(tavolo, false);
@@ -57,6 +63,9 @@ public class TavoloFacade {
 		return false;
 	}
 	
+	/* (non-Javadoc)
+	 * @see it.softfood.handler.ITavoloFacade#occupaTavolo(it.softfood.entity.Tavolo)
+	 */
 	/* (non-Javadoc)
 	 * @see it.softfood.handler.ITavoloFacade#occupaTavolo(it.softfood.entity.Tavolo)
 	 */
@@ -70,6 +79,9 @@ public class TavoloFacade {
 	/* (non-Javadoc)
 	 * @see it.softfood.handler.ITavoloFacade#selezionaTavolo(java.lang.Long)
 	 */
+	/* (non-Javadoc)
+	 * @see it.softfood.handler.ITavoloFacade#selezionaTavolo(java.lang.Long)
+	 */
 	public Tavolo selezionaTavolo(Long id) {
 		if (id != null)
 			return tavoloSession.selezionaTavoloPerId(id);
@@ -80,10 +92,16 @@ public class TavoloFacade {
 	/* (non-Javadoc)
 	 * @see it.softfood.handler.ITavoloFacade#selezionaTavoliLiberi()
 	 */
+	/* (non-Javadoc)
+	 * @see it.softfood.handler.ITavoloFacade#selezionaTavoliLiberi()
+	 */
 	public List<Tavolo> selezionaTavoliLiberi() {
 		return tavoloSession.selezionaTavoliLiberi();
 	}
 
+    /* (non-Javadoc)
+	 * @see it.softfood.handler.ITavoloFacade#selezionaTavoliOccupati()
+	 */
     /* (non-Javadoc)
 	 * @see it.softfood.handler.ITavoloFacade#selezionaTavoliOccupati()
 	 */
@@ -94,10 +112,16 @@ public class TavoloFacade {
     /* (non-Javadoc)
 	 * @see it.softfood.handler.ITavoloFacade#selezionaTavoliNonAttivi()
 	 */
+    /* (non-Javadoc)
+	 * @see it.softfood.handler.ITavoloFacade#selezionaTavoliNonAttivi()
+	 */
     public List<Tavolo> selezionaTavoliNonAttivi() {
         return tavoloSession.selezionaTavoliNonAttivi();
     }
 	
+	/* (non-Javadoc)
+	 * @see it.softfood.handler.ITavoloFacade#rimuoviTavolo(java.lang.Long)
+	 */
 	/* (non-Javadoc)
 	 * @see it.softfood.handler.ITavoloFacade#rimuoviTavolo(java.lang.Long)
 	 */
@@ -108,6 +132,9 @@ public class TavoloFacade {
 		return false;
 	}
     
+    /* (non-Javadoc)
+	 * @see it.softfood.handler.ITavoloFacade#occupaTavoli(java.util.List)
+	 */
     /* (non-Javadoc)
 	 * @see it.softfood.handler.ITavoloFacade#occupaTavoli(java.util.List)
 	 */

@@ -1,4 +1,4 @@
-package it.softfood.facade.ristorante;
+package it.softfood.handler;
 
 import it.softfood.entity.Ristorante;
 import it.softfood.session.RistoranteSession;
