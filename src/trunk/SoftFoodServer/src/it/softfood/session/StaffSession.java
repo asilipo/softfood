@@ -1,6 +1,7 @@
 package it.softfood.session;
 
 import it.softfood.entity.Staff;
+import it.softfood.entity.Tavolo;
 import it.softfood.enumeration.TipoStaff;
 
 import org.hibernate.Query;
@@ -26,7 +27,9 @@ public class StaffSession {
 	private Long getNewId() {
 		try {
 			Query q = session.createQuery("select max(id) from it.softfood.entity.Staff");
-		    return (((Long)q.list().get(0)) + 1);
+		    Long id = (Long) q.list().get(0);
+		    
+			return (id + 1);
 		} catch(Exception e) {
 			System.out.println("StaffSession#getNewId");
 			return null;
@@ -38,8 +41,9 @@ public class StaffSession {
 			Long id = this.getNewId();
 			staff.setId(id);
 			session.persist(staff);
+			staff = (Staff) session.get(Staff.class, staff);
 			
-			return (Staff) session.get(Staff.class, staff);
+			return staff; 
 		} catch (Exception e) {
 			System.err.println("StaffSession#inserisciStaff");
 			return null;
@@ -48,7 +52,9 @@ public class StaffSession {
 	
 	public Staff selezionaStaffPerId(Long id) {
 		try {
-			return (Staff) session.get(Staff.class, id);
+			Staff staff = (Staff) session.get(Staff.class, id);
+			
+			return staff;
 		} catch (Exception e) {
 			System.err.println("StaffSession#selezionaStaffPerId");
 			return null;
@@ -60,6 +66,7 @@ public class StaffSession {
 			Query q = session.createQuery("from it.softfood.entity.Staff s where tipoStaff = ?");
 			q.setString(0, tipoStaff.toString());
 			Staff staff = (Staff) q.list().get(0);
+			
 			return staff;
 		} catch (Exception e) {
 			System.err.println("StaffSession#selezionaStaffPerTipo");
@@ -92,6 +99,10 @@ public class StaffSession {
 
 	public void setSession(Session session) {
 		this.session = session;
+	}
+	
+	public void update(Tavolo tavolo) {
+		session.update(tavolo);
 	}
 	
 }

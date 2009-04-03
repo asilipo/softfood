@@ -28,7 +28,9 @@ public class PietanzaSession {
 	private Long getNewId() {
 		try {
 			Query q = session.createQuery("select max(id) from it.softfood.entity.Pietanza");
-		    return (((Long)q.list().get(0)) + 1);
+		    Long id = (Long)q.list().get(0);
+		    
+			return (id + 1);
 		} catch(Exception e) {
 			System.out.println("PietanzaSession#getNewId");
 			return null;
@@ -40,8 +42,9 @@ public class PietanzaSession {
 			Long id = this.getNewId();
 			pietanza.setId(id);
 			session.persist(pietanza);
+			pietanza = (Pietanza) session.get(Pietanza.class, pietanza);
 			
-			return (Pietanza) session.get(Pietanza.class, pietanza);
+			return pietanza; 
 		} catch (Exception e) {
 			System.err.println("PietanzaSession#inserisciPietanza");
 			return null;
@@ -50,7 +53,9 @@ public class PietanzaSession {
 	
 	public Pietanza selezionaPietanzaPerId(Long id) {
 		try {
-			return (Pietanza) session.get(Pietanza.class, id);
+			Pietanza pietanza = (Pietanza) session.get(Pietanza.class, id);
+			
+			return pietanza; 
 		} catch (Exception e) {
 			System.err.println("PietanzaSession#selezionaPietanzaPerId");
 			return null;
@@ -62,6 +67,7 @@ public class PietanzaSession {
 			Query q = session.createQuery("from it.softfood.entity.Pietanza o where tipoPietanza = ?");
 			q.setString(0, tipoPietanza.toString());
 			List<Pietanza> list = (List<Pietanza>) q.list();
+			
 			return list;
 		} catch (Exception e) {
 			System.err.println("PietanzaSession#selezionaPietanzePerTipo");
@@ -73,6 +79,7 @@ public class PietanzaSession {
     	try {
 			Query q = session.createQuery("from it.softfood.entity.Pietanza o where tipoArticolo = 'Pietanza'");
 			List<Pietanza> list = (List<Pietanza>) q.list();
+			
 			return list;
 		} catch (Exception e) {
 			System.err.println("PietanzaSession#selezionaPietanze");
@@ -107,5 +114,9 @@ public class PietanzaSession {
 		this.session = session;
 	}
     
+	public void update(Pietanza pietanza) {
+		session.update(pietanza);
+	}
+	
 }
 
