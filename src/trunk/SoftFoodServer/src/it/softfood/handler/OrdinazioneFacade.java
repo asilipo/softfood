@@ -150,25 +150,26 @@ public OrdinazioneFacade(){
 	 * @see it.softfood.handler.IOrdinazioneFacade#selezionaOrdinazionePerId(java.lang.Long)
 	 */
 	public Ordinazione selezionaOrdinazionePerId(Long id) {
-		if (id != null) 
-			return ordinazioneSession.selezionaOrdinazionePerId(id);
-		
+		if (id != null) {
+			Ordinazione ord=ordinazioneSession.selezionaOrdinazionePerId(id);
+			return ord;
+		}
 		return null;
 	}
 	
 	/* (non-Javadoc)
 	 * @see it.softfood.handler.IOrdinazioneFacade#selezionaOrdinazioni()
 	 */
-	public List<Ordinazione> selezionaOrdinazioni() {
-		return ordinazioneSession.selezionaOrdinazioni();
+	public ArrayList<Ordinazione> selezionaOrdinazioni() {
+		return (ArrayList<Ordinazione>) ordinazioneSession.selezionaOrdinazioni();
 	}
 	
 	/* (non-Javadoc)
 	 * @see it.softfood.handler.IOrdinazioneFacade#selezionaOrdinazioniPerData(java.util.Date)
 	 */
-	public List<Ordinazione> selezionaOrdinazioniPerData(Date data) {
+	public ArrayList<Ordinazione> selezionaOrdinazioniPerData(Date data) {
 		if (data != null) 
-			return ordinazioneSession.selezionaOrdinazioniPerData(data);
+			return (ArrayList<Ordinazione>) ordinazioneSession.selezionaOrdinazioniPerData(data);
 		
 		return null;
 	}
@@ -176,9 +177,9 @@ public OrdinazioneFacade(){
 	/* (non-Javadoc)
 	 * @see it.softfood.handler.IOrdinazioneFacade#selezionaOrdinazioniGiornalierePerTavolo(it.softfood.entity.Tavolo, java.lang.Boolean)
 	 */
-	public List<Ordinazione> selezionaOrdinazioniGiornalierePerTavolo(Tavolo tavolo, Boolean terminato) {
+	public ArrayList<Ordinazione> selezionaOrdinazioniGiornalierePerTavolo(Tavolo tavolo, Boolean terminato) {
 		if (tavolo != null && terminato != null) 
-			return ordinazioneSession.selezionaOrdinazioniGionalierePerTavolo(tavolo, terminato);
+			return (ArrayList<Ordinazione>) ordinazioneSession.selezionaOrdinazioniGionalierePerTavolo(tavolo, terminato);
 		
 		return null;
 	}
@@ -187,9 +188,10 @@ public OrdinazioneFacade(){
 	 * @see it.softfood.handler.IOrdinazioneFacade#selezionaOrdinazioneGiornalieraPerTavolo(it.softfood.entity.Tavolo, java.lang.Boolean)
 	 */
     public Ordinazione selezionaOrdinazioneGiornalieraPerTavolo(Tavolo tavolo, Boolean terminato) {
-		if (tavolo != null && terminato != null)
-			return ((ArrayList<Ordinazione>)ordinazioneSession.selezionaOrdinazioniGionalierePerTavolo(tavolo, terminato)).get(0);
-
+		if (tavolo != null && terminato != null){
+			Ordinazione ord=((ArrayList<Ordinazione>)ordinazioneSession.selezionaOrdinazioniGionalierePerTavolo(tavolo, terminato)).get(0);
+			return ord;
+		}
 		return null;
 	}
 
@@ -198,6 +200,7 @@ public OrdinazioneFacade(){
 	 */
     public Ordinazione selezionaOrdinazioneGiornalieraPerTavolo(String riferimentoTavolo, Boolean terminato) {
 		if (riferimentoTavolo != null && terminato != null){
+			System.out.println("SEI INNNNNNNNNNNNN ORDINAZIONEFACADE selezionaOrdinazioneGiornalieraPerTavolo");
 			ArrayList<Ordinazione> list=((ArrayList<Ordinazione>)ordinazioneSession.selezionaOrdinazioniGionalierePerTavolo(tavoloSession.selezionaTavoloPerRiferimento(riferimentoTavolo), terminato));
 			return list.get(0);
 		}
@@ -321,17 +324,18 @@ public OrdinazioneFacade(){
     /* (non-Javadoc)
 	 * @see it.softfood.handler.IOrdinazioneFacade#selezionaLineeOrdinazionePerOrdinazione(it.softfood.entity.Ordinazione)
 	 */
-    public List<LineaOrdinazione> selezionaLineeOrdinazionePerOrdinazione(Ordinazione ordinazione) {
-        if (ordinazione != null)
-			return lineaOrdinazioneSession.selezionaLineeOrdinazionePerOrdinazione(ordinazione);
-
+    public ArrayList<LineaOrdinazione> selezionaLineeOrdinazionePerOrdinazione(Ordinazione ordinazione) {
+        if (ordinazione != null){
+        	ArrayList<LineaOrdinazione> linea=(ArrayList<LineaOrdinazione>) lineaOrdinazioneSession.selezionaLineeOrdinazionePerOrdinazione(ordinazione);
+			return linea;
+        }
         return null;
     }
 
     /* (non-Javadoc)
 	 * @see it.softfood.handler.IOrdinazioneFacade#selezionaLineeOrdinazionePerOrdinazione(it.softfood.entity.Ordinazione, it.softfood.enumeration.TipoPietanza)
 	 */
-    public List<LineaOrdinazione> selezionaLineeOrdinazionePerOrdinazione(Ordinazione ordinazione,
+    public ArrayList<LineaOrdinazione> selezionaLineeOrdinazionePerOrdinazione(Ordinazione ordinazione,
             TipoPietanza tipoPietanza) {
         ArrayList<LineaOrdinazione> lineeOrdinazione = new ArrayList<LineaOrdinazione>();
         if (ordinazione != null) 
@@ -406,7 +410,7 @@ public OrdinazioneFacade(){
     /* (non-Javadoc)
 	 * @see it.softfood.handler.IOrdinazioneFacade#selezionaIngredientiPerVariante()
 	 */
-    public List<Ingrediente> selezionaIngredientiPerVariante() {
+    public ArrayList<Ingrediente> selezionaIngredientiPerVariante() {
         ArrayList<IngredienteMagazzino> ingredientiMagazzino = (ArrayList<IngredienteMagazzino>) ingredienteMagazzinoSession.selezionaIngredientiMagazzino();
         ArrayList<Ingrediente> ingredienti = (ArrayList<Ingrediente>) ingredienteSession.selezionaIngredientePerVariante();
 
@@ -467,14 +471,14 @@ public OrdinazioneFacade(){
     /* (non-Javadoc)
 	 * @see it.softfood.handler.IOrdinazioneFacade#selezionaVariantiPerIngrediente(it.softfood.entity.Ingrediente)
 	 */
-    public List<Variante> selezionaVariantiPerIngrediente(Ingrediente ingrediente) {
+    public ArrayList<Variante> selezionaVariantiPerIngrediente(Ingrediente ingrediente) {
         return null;
     }
 
     /* (non-Javadoc)
 	 * @see it.softfood.handler.IOrdinazioneFacade#selezionaVariantiPerLineaOrdinazione(it.softfood.entity.LineaOrdinazione)
 	 */
-    public List<Variante> selezionaVariantiPerLineaOrdinazione(LineaOrdinazione lineaOrdinazione) {
+    public ArrayList<Variante> selezionaVariantiPerLineaOrdinazione(LineaOrdinazione lineaOrdinazione) {
         if (lineaOrdinazione != null) {
             ArrayList<Variante> varianti =(ArrayList<Variante>) varianteSession.selezionaVariantiPerLineaOrdinazione(lineaOrdinazione);
 
