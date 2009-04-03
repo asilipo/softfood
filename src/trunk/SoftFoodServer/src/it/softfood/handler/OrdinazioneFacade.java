@@ -1,4 +1,4 @@
-package it.softfood.facade.ordinazione;
+package it.softfood.handler;
 
 import it.softfood.entity.Articolo;
 import it.softfood.entity.Bevanda;

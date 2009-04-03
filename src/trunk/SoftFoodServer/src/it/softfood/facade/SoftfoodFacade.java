@@ -1,6 +1,5 @@
 package it.softfood.facade;
 
-import it.softfood.aspect.ISoftfoodFacade;
 import it.softfood.entity.Tavolo;
 import it.softfood.session.TavoloSession;
 

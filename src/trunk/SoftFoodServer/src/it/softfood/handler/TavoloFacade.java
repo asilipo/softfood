@@ -1,19 +1,15 @@
-package it.softfood.facade.tavolo;
+package it.softfood.handler;
 
 import it.softfood.entity.Tavolo;
-import it.softfood.session.ristorante.RistoranteSessionBeanRemote;
-import it.softfood.session.tavolo.TavoloSessionBeanRemote;
+import it.softfood.session.RistoranteSession;
+import it.softfood.session.TavoloSession;
+
 
 import java.util.List;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.annotation.Resource;
-import javax.ejb.EJB;
-import javax.ejb.EJBContext;
-import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+
 
 /**
  * @author Maria Rosaria Paone
@@ -21,82 +17,104 @@ import javax.persistence.PersistenceContext;
  * @author Francesco Pacilio
  */
 
-@Stateless
-public class TavoloFacade implements TavoloFacadeRemote, TavoloFacadeLocal {
 
-    @Resource
-    private EJBContext ejbCtx;
-    @PersistenceContext
-    private EntityManager em;
-	@EJB(beanName = "TavoloSessionBean")
-	private TavoloSessionBeanRemote tavoloSessionBean;
-	@EJB(beanName = "RistoranteSessionBean")
-	private RistoranteSessionBeanRemote ristoranteSessionBeanRemote;
+public class TavoloFacade implements ITavoloFacade {
 
+	private TavoloSession tavoloSession;
+
+	private RistoranteSession ristoranteSessionBeanRemote;
+
+	/* (non-Javadoc)
+	 * @see it.softfood.handler.ITavoloFacade#inserisciTavolo(it.softfood.entity.Tavolo)
+	 */
 	public Tavolo inserisciTavolo(Tavolo tavolo) {
 		if (tavolo != null)
-			return tavoloSessionBean.inserisciTavolo(tavolo);
+			return tavoloSession.inserisciTavolo(tavolo);
 		
 		return null;
 	}
 	
+	/* (non-Javadoc)
+	 * @see it.softfood.handler.ITavoloFacade#liberaTavolo(it.softfood.entity.Tavolo)
+	 */
 	public boolean liberaTavolo(Tavolo tavolo) {
 		if (tavolo != null)
-			return tavoloSessionBean.modificaStatoTavolo(tavolo, false);
+			return tavoloSession.modificaStatoTavolo(tavolo, false);
 		
 		return false;
 	}
 	
+	/* (non-Javadoc)
+	 * @see it.softfood.handler.ITavoloFacade#occupaTavolo(it.softfood.entity.Tavolo)
+	 */
 	public boolean occupaTavolo(Tavolo tavolo) {
 		if (tavolo != null)
-			return tavoloSessionBean.modificaStatoTavolo(tavolo, true);	
+			return tavoloSession.modificaStatoTavolo(tavolo, true);	
 		
 		return false;
 	}
 	
+	/* (non-Javadoc)
+	 * @see it.softfood.handler.ITavoloFacade#selezionaTavolo(java.lang.Long)
+	 */
 	public Tavolo selezionaTavolo(Long id) {
 		if (id != null)
-			return tavoloSessionBean.selezionaTavoloPerId(id);
+			return tavoloSession.selezionaTavoloPerId(id);
 		
 		return null;
 	}
 	
+	/* (non-Javadoc)
+	 * @see it.softfood.handler.ITavoloFacade#selezionaTavoliLiberi()
+	 */
 	public List<Tavolo> selezionaTavoliLiberi() {
-		return tavoloSessionBean.selezionaTavoliLiberi();
+		return tavoloSession.selezionaTavoliLiberi();
 	}
 
+    /* (non-Javadoc)
+	 * @see it.softfood.handler.ITavoloFacade#selezionaTavoliOccupati()
+	 */
     public List<Tavolo> selezionaTavoliOccupati() {
-		return tavoloSessionBean.selezionaTavoliOccupati();
+		return tavoloSession.selezionaTavoliOccupati();
 	}
 
+    /* (non-Javadoc)
+	 * @see it.softfood.handler.ITavoloFacade#selezionaTavoliNonAttivi()
+	 */
     public List<Tavolo> selezionaTavoliNonAttivi() {
-        return tavoloSessionBean.selezionaTavoliNonAttivi();
+        return tavoloSession.selezionaTavoliNonAttivi();
     }
 	
+	/* (non-Javadoc)
+	 * @see it.softfood.handler.ITavoloFacade#rimuoviTavolo(java.lang.Long)
+	 */
 	public boolean rimuoviTavolo(Long id) {
 		if (id != null)
-			return tavoloSessionBean.rimuoviTavolo(id);
+			return tavoloSession.rimuoviTavolo(id);
 		
 		return false;
 	}
     
+    /* (non-Javadoc)
+	 * @see it.softfood.handler.ITavoloFacade#occupaTavoli(java.util.List)
+	 */
     public Long occupaTavoli(List<String> riferimenti) {
         try {
             if (riferimenti != null) {
                 if (riferimenti.size() == 1) {
                     String riferimento = riferimenti.get(0);
                     if (riferimento != null) {
-                        Tavolo tavolo = tavoloSessionBean.selezionaTavoloPerRiferimento(riferimento);
-                        tavolo = em.merge(tavolo);
-                        if (!tavolo.getOccupato()) {
+                        Tavolo tavolo = tavoloSession.selezionaTavoloPerRiferimento(riferimento);
+//                        tavolo = em.merge(tavolo);
+                        if (!tavolo.isOccupato()) {
                             tavolo.setOccupato(true);
                             return tavolo.getId();
                         } else {
-                            ejbCtx.setRollbackOnly();
+                        	tavolo.setOccupato(false);
                             return null;
                         }
                     } else {
-                        ejbCtx.setRollbackOnly();
+//                        ejbCtx.setRollbackOnly();
                         return null;
                     }
                 } else if (riferimenti.size() > 1) {
@@ -104,9 +122,9 @@ public class TavoloFacade implements TavoloFacadeRemote, TavoloFacadeLocal {
                     Integer numeroPosti = 0;
                     for (String riferimento : riferimenti) {
                         if (riferimento != null) {
-                            Tavolo tavolo = tavoloSessionBean.selezionaTavoloPerRiferimento(riferimento);
-                            tavolo = em.merge(tavolo);
-                            if (!tavolo.getOccupato()) {
+                            Tavolo tavolo = tavoloSession.selezionaTavoloPerRiferimento(riferimento);
+//                            tavolo = em.merge(tavolo);
+                            if (!tavolo.isOccupato()) {
                                 tavolo.setAttivo(false);
                                 if (riferimentoTavoli == null)
                                     riferimentoTavoli = tavolo.getRiferimento();
@@ -115,11 +133,11 @@ public class TavoloFacade implements TavoloFacadeRemote, TavoloFacadeLocal {
                                 numeroPosti = numeroPosti + tavolo.getNumeroPosti();
                             }
                             else {
-                                ejbCtx.setRollbackOnly();
+                            	tavolo.setAttivo(true);
                                 return null;
                             }
                         } else {
-                            ejbCtx.setRollbackOnly();
+//                            ejbCtx.setRollbackOnly();
                             return null;
                         }
                     }
@@ -131,14 +149,14 @@ public class TavoloFacade implements TavoloFacadeRemote, TavoloFacadeLocal {
                     nuovoTavolo.setRiferimento(riferimentoTavoli);
                     nuovoTavolo.setRistorante(ristoranteSessionBeanRemote.selezionaRistorantePerRagioneSociale("La taverna"));
 
-                    return (tavoloSessionBean.inserisciTavolo(nuovoTavolo)).getId();
+                    return (tavoloSession.inserisciTavolo(nuovoTavolo)).getId();
                 }
             }
         } catch (SecurityException ex) {
-            ejbCtx.setRollbackOnly();
+//            ejbCtx.setRollbackOnly();
             Logger.getLogger(TavoloFacade.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IllegalStateException ex) {
-            ejbCtx.setRollbackOnly();
+//            ejbCtx.setRollbackOnly();
             Logger.getLogger(TavoloFacade.class.getName()).log(Level.SEVERE, null, ex);
         }
         
