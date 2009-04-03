@@ -153,5 +153,10 @@ public class TavoloSession {
 	public void setSession(Session session) {
 		this.session = session;
 	}
+
+	public Tavolo merge(Tavolo tavolo) {
+		Tavolo tav=(Tavolo) session.merge(tavolo);
+		return tav;
+	}
 	
 }
