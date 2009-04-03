@@ -1,27 +1,19 @@
 package it.softfood.entity;
 
-import java.util.ArrayList;
-import java.util.List;
-
-/**
- * @author Maria Rosaria Paone
- * @author Marco Grasso
- * @author Francesco Pacilio
- */
+import java.util.HashSet;
+import java.util.Set;
 
 public class Indirizzo implements java.io.Serializable {
 
-	private static final long serialVersionUID = 1L;
-	
 	private Long id;
 	private String cap;
 	private String citta;
 	private String civico;
 	private String provincia;
 	private String via;
-	private List<Ristorante> ristoranti = new ArrayList<Ristorante>(0);
-	private List<Magazzino> magazzini = new ArrayList<Magazzino>(0);
-	private List<Fornitore> fornitori = new ArrayList<Fornitore>(0);
+	private Set<Ristorante> ristorantes = new HashSet<Ristorante>(0);
+	private Set<Magazzino> magazzinos = new HashSet<Magazzino>(0);
+	private Set<Fornitore> fornitores = new HashSet<Fornitore>(0);
 
 	public Indirizzo() {
 	}
@@ -31,18 +23,19 @@ public class Indirizzo implements java.io.Serializable {
 	}
 
 	public Indirizzo(Long id, String cap, String citta, String civico,
-			String provincia, String via, List<Ristorante> ristoranti,
-				List<Magazzino> magazzini, List<Fornitore> fornitori) {
+			String provincia, String via, Set<Ristorante> ristorantes,
+			Set<Magazzino> magazzinos, Set<Fornitore> fornitores) {
 		this.id = id;
 		this.cap = cap;
 		this.citta = citta;
 		this.civico = civico;
 		this.provincia = provincia;
 		this.via = via;
-		this.ristoranti = ristoranti;
-		this.magazzini = magazzini;
-		this.fornitori = fornitori;
+		this.ristorantes = ristorantes;
+		this.magazzinos = magazzinos;
+		this.fornitores = fornitores;
 	}
+
 
 	public Long getId() {
 		return this.id;
@@ -52,6 +45,7 @@ public class Indirizzo implements java.io.Serializable {
 		this.id = id;
 	}
 
+
 	public String getCap() {
 		return this.cap;
 	}
@@ -60,6 +54,7 @@ public class Indirizzo implements java.io.Serializable {
 		this.cap = cap;
 	}
 
+	
 	public String getCitta() {
 		return this.citta;
 	}
@@ -68,6 +63,7 @@ public class Indirizzo implements java.io.Serializable {
 		this.citta = citta;
 	}
 
+	
 	public String getCivico() {
 		return this.civico;
 	}
@@ -76,6 +72,7 @@ public class Indirizzo implements java.io.Serializable {
 		this.civico = civico;
 	}
 
+	
 	public String getProvincia() {
 		return this.provincia;
 	}
@@ -84,6 +81,7 @@ public class Indirizzo implements java.io.Serializable {
 		this.provincia = provincia;
 	}
 
+	
 	public String getVia() {
 		return this.via;
 	}
@@ -92,32 +90,36 @@ public class Indirizzo implements java.io.Serializable {
 		this.via = via;
 	}
 
-	public List<Ristorante> getRistoranti() {
-		return this.ristoranti;
+	
+	public Set<Ristorante> getRistorantes() {
+		return this.ristorantes;
 	}
 
-	public void setRistorantes(List<Ristorante> ristoranti) {
-		this.ristoranti = ristoranti;
+	public void setRistorantes(Set<Ristorante> ristorantes) {
+		this.ristorantes = ristorantes;
 	}
 
-	public List<Magazzino> getMagazzini() {
-		return this.magazzini;
+	
+	public Set<Magazzino> getMagazzinos() {
+		return this.magazzinos;
 	}
 
-	public void setMagazzinos(List<Magazzino> magazzini) {
-		this.magazzini = magazzini;
+	public void setMagazzinos(Set<Magazzino> magazzinos) {
+		this.magazzinos = magazzinos;
 	}
 
-	public List<Fornitore> getFornitori() {
-		return this.fornitori;
+	
+	public Set<Fornitore> getFornitores() {
+		return this.fornitores;
 	}
 
-	public void setFornitori(List<Fornitore> fornitori) {
-		this.fornitori = fornitori;
+	public void setFornitores(Set<Fornitore> fornitores) {
+		this.fornitores = fornitores;
 	}
         
-    @Override
+        @Override
 	public boolean equals(Object arg0) {
+		// TODO Auto-generated method stub
 		return super.equals(arg0);
 	}
 

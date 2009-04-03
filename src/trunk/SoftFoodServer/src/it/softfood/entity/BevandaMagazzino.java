@@ -1,15 +1,7 @@
 package it.softfood.entity;
 
-/**
- * @author Maria Rosaria Paone
- * @author Marco Grasso
- * @author Francesco Pacilio
- */
-
 public class BevandaMagazzino implements java.io.Serializable {
 
-	private static final long serialVersionUID = 1L;
-	
 	private Long id;
 	private Magazzino magazzino;
 	private Articolo articolo;
@@ -32,6 +24,7 @@ public class BevandaMagazzino implements java.io.Serializable {
 		this.quantita = quantita;
 	}
 
+
 	public Long getId() {
 		return this.id;
 	}
@@ -39,6 +32,7 @@ public class BevandaMagazzino implements java.io.Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
+
 
 	public Magazzino getMagazzino() {
 		return this.magazzino;
@@ -48,6 +42,7 @@ public class BevandaMagazzino implements java.io.Serializable {
 		this.magazzino = magazzino;
 	}
 
+
 	public Articolo getArticolo() {
 		return this.articolo;
 	}
@@ -56,6 +51,7 @@ public class BevandaMagazzino implements java.io.Serializable {
 		this.articolo = articolo;
 	}
 
+	
 	public int getQuantita() {
 		return this.quantita;
 	}
@@ -64,9 +60,9 @@ public class BevandaMagazzino implements java.io.Serializable {
 		this.quantita = quantita;
 	}
 
-    @Override
+        @Override
 	public boolean equals(Object arg0) {
+		// TODO Auto-generated method stub
 		return super.equals(arg0);
 	}
-    
 }
