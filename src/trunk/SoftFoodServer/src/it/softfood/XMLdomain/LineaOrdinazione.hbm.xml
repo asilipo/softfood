@@ -17,11 +17,11 @@
         <property name="quantita" type="int">
             <column name="quantita" not-null="true" />
         </property>
-        <list name="varianti" inverse="true">
+        <set name="varianti" inverse="true">
             <key>
                 <column name="linea_ordinazione" not-null="true" />
             </key>
             <one-to-many class="it.softfood.entity.Variante" />
-        </list>
+        </set>
     </class>
 </hibernate-mapping>

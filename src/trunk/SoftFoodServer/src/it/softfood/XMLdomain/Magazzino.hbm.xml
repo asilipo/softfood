@@ -14,17 +14,17 @@
         <property name="descrizione" type="string">
             <column name="descrizione" />
         </property>
-        <list name="ingredientiMagazzino" inverse="true">
+        <set name="ingredientiMagazzino" inverse="true">
             <key>
                 <column name="magazzino" not-null="true" />
             </key>
             <one-to-many class="it.softfood.entity.IngredienteMagazzino" />
-        </list>
-        <list name="bevandeMagazzino" inverse="true">
+        </set>
+        <set name="bevandeMagazzino" inverse="true">
             <key>
                 <column name="magazzino" not-null="true" />
             </key>
             <one-to-many class="it.softfood.entity.BevandaMagazzino" />
-        </list>
+        </set>
     </class>
 </hibernate-mapping>
