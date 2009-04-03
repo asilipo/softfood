@@ -23,11 +23,11 @@
         <property name="riferimento" type="string">
             <column name="riferimento" not-null="true" unique="true" />
         </property>
-        <list name="ordinazioni" inverse="true">
+        <set name="ordinazioni" inverse="true">
             <key>
                 <column name="tavolo" not-null="true" />
             </key>
             <one-to-many class="it.softfood.entity.Ordinazione" />
-        </list>
+        </set>
     </class>
 </hibernate-mapping>
