@@ -23,7 +23,7 @@
         <property name="riferimento" type="string">
             <column name="riferimento" not-null="true" unique="true" />
         </property>
-        <set name="ordinazioni" inverse="true">
+        <set name="ordinaziones" inverse="true">
             <key>
                 <column name="tavolo" not-null="true" />
             </key>

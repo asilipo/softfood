@@ -23,19 +23,19 @@
         <property name="via" type="string">
             <column name="via" />
         </property>
-        <set name="ristoranti" inverse="true">
+        <set name="ristorantes" inverse="true">
             <key>
                 <column name="indirizzo" not-null="true" />
             </key>
             <one-to-many class="it.softfood.entity.Ristorante" />
         </set>
-        <set name="magazzini" inverse="true">
+        <set name="magazzinos" inverse="true">
             <key>
                 <column name="indirizzo" />
             </key>
             <one-to-many class="it.softfood.entity.Magazzino" />
         </set>
-        <set name="fornitori" inverse="true">
+        <set name="fornitores" inverse="true">
             <key>
                 <column name="indirizzo" not-null="true" />
             </key>
