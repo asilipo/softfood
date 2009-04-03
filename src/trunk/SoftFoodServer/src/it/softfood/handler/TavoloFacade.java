@@ -25,7 +25,7 @@ public class TavoloFacade implements ITavoloFacade {
 
 	private TavoloSession tavoloSession=TavoloSession.getInstance();
 
-	private RistoranteSession ristoranteSessionBeanRemote;
+	private RistoranteSession ristoranteSession=RistoranteSession.getInstance();
 	
 	public TavoloFacade(){
 		
@@ -119,7 +119,7 @@ public class TavoloFacade implements ITavoloFacade {
                     String riferimento = riferimenti.get(0);
                     if (riferimento != null) {
                         Tavolo tavolo = tavoloSession.selezionaTavoloPerRiferimento(riferimento);
-//                        tavolo = em.merge(tavolo);
+                        tavolo = tavoloSession.merge(tavolo);
                         if (!tavolo.isOccupato()) {
                             tavolo.setOccupato(true);
                             return tavolo.getId();
@@ -128,8 +128,8 @@ public class TavoloFacade implements ITavoloFacade {
                             return null;
                         }
                     } else {
-//                        ejbCtx.setRollbackOnly();
-                        return null;
+                        throw new IllegalStateException();
+//                        return null;
                     }
                 } else if (riferimenti.size() > 1) {
                     String riferimentoTavoli = null;
@@ -137,7 +137,7 @@ public class TavoloFacade implements ITavoloFacade {
                     for (String riferimento : riferimenti) {
                         if (riferimento != null) {
                             Tavolo tavolo = tavoloSession.selezionaTavoloPerRiferimento(riferimento);
-//                            tavolo = em.merge(tavolo);
+                            tavolo = tavoloSession.merge(tavolo);
                             if (!tavolo.isOccupato()) {
                                 tavolo.setAttivo(false);
                                 if (riferimentoTavoli == null)
@@ -151,8 +151,7 @@ public class TavoloFacade implements ITavoloFacade {
                                 return null;
                             }
                         } else {
-//                            ejbCtx.setRollbackOnly();
-                            return null;
+                            throw new IllegalStateException();
                         }
                     }
 
@@ -161,7 +160,7 @@ public class TavoloFacade implements ITavoloFacade {
                     nuovoTavolo.setNumeroPosti(numeroPosti);
                     nuovoTavolo.setOccupato(true);
                     nuovoTavolo.setRiferimento(riferimentoTavoli);
-                    nuovoTavolo.setRistorante(ristoranteSessionBeanRemote.selezionaRistorantePerRagioneSociale("La taverna"));
+                    nuovoTavolo.setRistorante(ristoranteSession.selezionaRistorantePerRagioneSociale("La taverna"));
 
                     return (tavoloSession.inserisciTavolo(nuovoTavolo)).getId();
                 }
