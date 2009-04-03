@@ -28,7 +28,9 @@ public class LineaOrdinazioneSession {
 	private Long getNewId() {
 		try {
 			Query q = session.createQuery("select max(id) from it.softfood.entity.LineaOrdinazione");
-		    return (((Long)q.list().get(0)) + 1);
+		    Long id = (Long)q.list().get(0);
+			
+			return (id + 1);
 		} catch(Exception e) {
 			System.out.println("LineaOrdinazioneSession#getNewId");
 			return null;
@@ -40,8 +42,9 @@ public class LineaOrdinazioneSession {
 			Long id = this.getNewId();
 			lineaOrdinazione.setId(id);
 			session.persist(lineaOrdinazione);
+			lineaOrdinazione = (LineaOrdinazione) session.get(LineaOrdinazione.class, lineaOrdinazione);
 			
-			return (LineaOrdinazione) session.get(LineaOrdinazione.class, lineaOrdinazione);
+			return lineaOrdinazione;
 		} catch (Exception e) {
 			System.err.println("LineaOrdinazioneSession#inserisciLineaOrdinazione");
 			return null;
@@ -50,7 +53,9 @@ public class LineaOrdinazioneSession {
 	
 	public LineaOrdinazione selezionaLineaOrdinazionePerId(Long id) {
 		try {
-			return (LineaOrdinazione) session.get(LineaOrdinazione.class, id);
+			LineaOrdinazione lineaOrdinazione = (LineaOrdinazione) session.get(LineaOrdinazione.class, id);
+			
+			return lineaOrdinazione;
 		} catch (Exception e) {
 			System.err.println("LineaOrdinazioneSession#selezionaLineaOrdinazionePerId");
 			return null;
@@ -61,7 +66,9 @@ public class LineaOrdinazioneSession {
 		try {
 			Query q = session.createQuery("from it.softfood.entity.LineaOrdinazione l where l.ordinazione = ?");
 			q.setLong(0, ordinazione.getId());
-			return (List<LineaOrdinazione>) q.list();			
+			List<LineaOrdinazione> list = (List<LineaOrdinazione>) q.list();
+			
+			return list;
 		} catch (Exception e) {
 			System.err.println("LineaOrdinazioneSession#selezionaLineeOrdinazionePerOrdinazione");
 			return null;
@@ -95,4 +102,8 @@ public class LineaOrdinazioneSession {
 		this.session = session;
 	}
     
+	public void update(LineaOrdinazione lineaOrdinazione) {
+		session.update(lineaOrdinazione);
+	}
+	
 }
