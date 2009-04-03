@@ -3,6 +3,7 @@ package it.softfood;
 import java.util.ArrayList;
 import java.util.List;
 
+import it.softfood.entity.Ordinazione;
 import it.softfood.entity.Ristorante;
 import it.softfood.entity.Tavolo;
 import it.softfood.facade.SoftfoodFacade;
@@ -10,6 +11,7 @@ import it.softfood.handler.ITavoloFacade;
 import it.softfood.handler.OrdinazioneFacade;
 import it.softfood.handler.RistoranteFacade;
 import it.softfood.handler.TavoloFacade;
+import it.softfood.session.OrdinazioneSession;
 
 public class Start {
 
@@ -51,7 +53,7 @@ public class Start {
 		//List<Tavolo> l=	facade.selezionaTavoliLiberi();
 		//System.out.println("sddddddddddddddddddddddddd"+l);
 //		TavoloFacade facade=new TavoloFacade();
-//        Tavolo tav=facade.selezionaTavolo(new Long(18));
+//        Tavolo tavo=facade.selezionaTavolo(new Long(2));
 //        Tavolo tav1=facade.selezionaTavolo(new Long(19));
 //        ArrayList<String> list=new ArrayList<String>();
 //        list.add(tav.getRiferimento());
@@ -64,6 +66,12 @@ public class Start {
 		ITavoloFacade tav=TavoloFacade.getInstance();
 		OrdinazioneFacade ord=OrdinazioneFacade.getInstance();
 		RistoranteFacade rist=RistoranteFacade.getInstance();
+		
+	
+//		Ordinazione ordine=new Ordinazione();
+//		ordine.setTavolo(tavo);
+//		
+//		System.out.println("ID NUOVO ORDINE: "+ord.selezionaOrdinazioneGiornalieraPerTavolo(tavo, false).getId());
         
 
 

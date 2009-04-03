@@ -29,10 +29,12 @@ public class OrdinazioneSession {
 	private Long getNewId() {
 		try {
 			Query q = session.createQuery("select max(id) from it.softfood.entity.Ordinazione");
-		    Long id = (Long)q.list().get(0);
+		    Long id = (Long)q.uniqueResult();
+		    if(id==null)
+		    	return new Long(0);
 			return (id + 1);
 		} catch(Exception e) {
-			System.out.println("OrdinazioneSession#getNewId");
+			System.err.println("OrdinazioneSession#getNewId");
 			return null;
 		}		
 	}
@@ -42,7 +44,7 @@ public class OrdinazioneSession {
 			Long id = this.getNewId();
 			ordinazione.setId(id);
 			session.persist(ordinazione);
-			ordinazione = (Ordinazione) session.get(Ordinazione.class, ordinazione);
+			ordinazione = this.selezionaOrdinazionePerId(ordinazione.getId());
 			return ordinazione;
 		} catch (Exception e) {
 			System.err.println("OrdinazioneSession#inserisciOrdinazione");
@@ -85,7 +87,8 @@ public class OrdinazioneSession {
 
 	public List<Ordinazione> selezionaOrdinazioniGionalierePerTavolo(Tavolo tavolo, Boolean terminato) {
 		try {
-			Query q = session.createQuery("from it.softfood.entity.Ordinazioni o where tavolo = ? and terminato = ?");
+			System.out.println("SEI INNNNNNNNNNNNN ORDINESESSION selezionaOrdinazioniGionalierePerTavolo");
+			Query q = session.createQuery("from it.softfood.entity.Ordinazione o where o.tavolo = ? and o.terminato = ?");
 			q.setLong(0, tavolo.getId());
 			q.setBoolean(1, terminato);
 			List<Ordinazione> list = (List<Ordinazione>) q.list();
