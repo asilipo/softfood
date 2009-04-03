@@ -14,31 +14,31 @@
         <property name="partitaIva" type="string">
             <column name="partita_iva" not-null="true" unique="true" />
         </property>
-        <set name="registri" inverse="true">
+        <set name="registros" inverse="true">
             <key>
                 <column name="ristorante" not-null="true" />
             </key>
             <one-to-many class="it.softfood.entity.Registro" />
         </set>
-        <set name="fornitori" inverse="true">
+        <set name="fornitores" inverse="true">
             <key>
                 <column name="ristorante" not-null="true" />
             </key>
             <one-to-many class="it.softfood.entity.Fornitore" />
         </set>
-        <set name="staff" inverse="true">
+        <set name="staffs" inverse="true">
             <key>
                 <column name="ristorante" not-null="true" />
             </key>
             <one-to-many class="it.softfood.entity.Staff" />
         </set>
-        <set name="tavoli" inverse="true">
+        <set name="tavolos" inverse="true">
             <key>
                 <column name="ristorante" not-null="true" />
             </key>
             <one-to-many class="it.softfood.entity.Tavolo" />
         </set>
-        <set name="menu" inverse="true">
+        <set name="menus" inverse="true">
             <key>
                 <column name="ristorante" not-null="true" />
             </key>

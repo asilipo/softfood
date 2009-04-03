@@ -17,7 +17,7 @@
         <property name="prezzo" type="double">
             <column name="prezzo" precision="17" scale="17" not-null="true" />
         </property>
-        <set name="articoli" inverse="true">
+        <set name="articolos" inverse="true">
             <key>
                 <column name="listino" />
             </key>

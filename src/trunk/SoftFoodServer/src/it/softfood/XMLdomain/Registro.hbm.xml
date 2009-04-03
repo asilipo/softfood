@@ -17,7 +17,7 @@
         <property name="descrizione" type="string">
             <column name="descrizione" />
         </property>
-        <set name="entrate" inverse="true">
+        <set name="entratas" inverse="true">
             <key>
                 <column name="registro" not-null="true" />
             </key>
