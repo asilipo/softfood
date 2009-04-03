@@ -1,18 +1,10 @@
 package it.softfood.entity;
 
-import java.util.ArrayList;
-import java.util.List;
-
-/**
- * @author Maria Rosaria Paone
- * @author Marco Grasso
- * @author Francesco Pacilio
- */
+import java.util.HashSet;
+import java.util.Set;
 
 public class Articolo implements java.io.Serializable {
 
-	private static final long serialVersionUID = 1L;
-	
 	private Long id;
 	private Listino listino;
 	private String tipoArticolo;
@@ -20,9 +12,12 @@ public class Articolo implements java.io.Serializable {
 	private String nome;
 	private Float capacita;
 	private Integer tipoPietanza;
-	private List<IngredientePietanza> ingredientiPietanza = new ArrayList<IngredientePietanza>(0);
-	private List<BevandaMagazzino> bevandeMagazzino = new ArrayList<BevandaMagazzino>(0);
-	private List<LineaOrdinazione> lineeOrdinazione = new ArrayList<LineaOrdinazione>(0);
+	private Set<IngredientePietanza> ingredientePietanzas = new HashSet<IngredientePietanza>(
+			0);
+	private Set<BevandaMagazzino> bevandaMagazzinos = new HashSet<BevandaMagazzino>(
+			0);
+	private Set<LineaOrdinazione> lineaOrdinaziones = new HashSet<LineaOrdinazione>(
+			0);
 
 	public Articolo() {
 	}
@@ -33,9 +28,12 @@ public class Articolo implements java.io.Serializable {
 		this.nome = nome;
 	}
 
-	public Articolo(Long id, Listino listino, String tipoArticolo, String descrizione, 
-			String nome, Float capacita, Integer tipoPietanza, List<IngredientePietanza> ingredientiPietanza,
-				List<BevandaMagazzino> bevandeMagazzino, List<LineaOrdinazione> lineeOrdinazione) {
+	public Articolo(Long id, Listino listino, String tipoArticolo,
+			String descrizione, String nome, Float capacita,
+			Integer tipoPietanza,
+			Set<IngredientePietanza> ingredientePietanzas,
+			Set<BevandaMagazzino> bevandaMagazzinos,
+			Set<LineaOrdinazione> lineaOrdinaziones) {
 		this.id = id;
 		this.listino = listino;
 		this.tipoArticolo = tipoArticolo;
@@ -43,11 +41,12 @@ public class Articolo implements java.io.Serializable {
 		this.nome = nome;
 		this.capacita = capacita;
 		this.tipoPietanza = tipoPietanza;
-		this.bevandeMagazzino = bevandeMagazzino;
-		this.lineeOrdinazione = lineeOrdinazione;
-		this.ingredientiPietanza = ingredientiPietanza;
+		this.ingredientePietanzas = ingredientePietanzas;
+		this.bevandaMagazzinos = bevandaMagazzinos;
+		this.lineaOrdinaziones = lineaOrdinaziones;
 	}
 
+	
 	public Long getId() {
 		return this.id;
 	}
@@ -56,6 +55,7 @@ public class Articolo implements java.io.Serializable {
 		this.id = id;
 	}
 
+	
 	public Listino getListino() {
 		return this.listino;
 	}
@@ -64,6 +64,7 @@ public class Articolo implements java.io.Serializable {
 		this.listino = listino;
 	}
 
+	
 	public String getTipoArticolo() {
 		return this.tipoArticolo;
 	}
@@ -72,6 +73,7 @@ public class Articolo implements java.io.Serializable {
 		this.tipoArticolo = tipoArticolo;
 	}
 
+	
 	public String getDescrizione() {
 		return this.descrizione;
 	}
@@ -80,6 +82,7 @@ public class Articolo implements java.io.Serializable {
 		this.descrizione = descrizione;
 	}
 
+	
 	public String getNome() {
 		return this.nome;
 	}
@@ -88,6 +91,7 @@ public class Articolo implements java.io.Serializable {
 		this.nome = nome;
 	}
 
+	
 	public Float getCapacita() {
 		return this.capacita;
 	}
@@ -96,6 +100,7 @@ public class Articolo implements java.io.Serializable {
 		this.capacita = capacita;
 	}
 
+	
 	public Integer getTipoPietanza() {
 		return this.tipoPietanza;
 	}
@@ -104,32 +109,37 @@ public class Articolo implements java.io.Serializable {
 		this.tipoPietanza = tipoPietanza;
 	}
 
-	public List<IngredientePietanza> getIngredientiPietanza() {
-		return this.ingredientiPietanza;
+	
+	public Set<IngredientePietanza> getIngredientePietanzas() {
+		return this.ingredientePietanzas;
 	}
 
-	public void setIngredientiPietanze(List<IngredientePietanza> ingredientiPietanza) {
-		this.ingredientiPietanza = ingredientiPietanza;
+	public void setIngredientePietanzas(
+			Set<IngredientePietanza> ingredientePietanzas) {
+		this.ingredientePietanzas = ingredientePietanzas;
 	}
 
-	public List<BevandaMagazzino> getBevandeMagazzino() {
-		return this.bevandeMagazzino;
+	
+	public Set<BevandaMagazzino> getBevandaMagazzinos() {
+		return this.bevandaMagazzinos;
 	}
 
-	public void setBevandaMagazzinos(List<BevandaMagazzino> bevandeMagazzino) {
-		this.bevandeMagazzino = bevandeMagazzino;
+	public void setBevandaMagazzinos(Set<BevandaMagazzino> bevandaMagazzinos) {
+		this.bevandaMagazzinos = bevandaMagazzinos;
 	}
 
-	public List<LineaOrdinazione> getLineeOrdinazione() {
-		return this.lineeOrdinazione;
+	
+	public Set<LineaOrdinazione> getLineaOrdinaziones() {
+		return this.lineaOrdinaziones;
 	}
 
-	public void setLineeOrdinazione(List<LineaOrdinazione> lineeOrdinazione) {
-		this.lineeOrdinazione = lineeOrdinazione;
+	public void setLineaOrdinaziones(Set<LineaOrdinazione> lineaOrdinaziones) {
+		this.lineaOrdinaziones = lineaOrdinaziones;
 	}
         
-    @Override
+        @Override
 	public boolean equals(Object arg0) {
+		// TODO Auto-generated method stub
 		return super.equals(arg0);
 	}
 
