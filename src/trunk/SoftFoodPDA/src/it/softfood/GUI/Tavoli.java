@@ -2,6 +2,7 @@ package it.softfood.GUI;
 
 
 import it.softfood.aspect.ExecuteFacade;
+import it.softfood.entity.Ordinazione;
 import it.softfood.entity.Tavolo;
 import it.softfood.facade.PDATavoloFacade;
 import it.softfood.handler.TavoloFacade;
@@ -199,7 +200,7 @@ public class Tavoli extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void OkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OkActionPerformed
-        /*Enumeration enumeration = model.elements();
+        Enumeration enumeration = model.elements();
         ArrayList<String> tav = new ArrayList<String>();
         while (enumeration.hasMoreElements()) {
             tav.add((String) enumeration.nextElement());
@@ -216,15 +217,15 @@ public class Tavoli extends javax.swing.JPanel {
             ordine.setTerminato(false);
 
             try {
-                ordine = ordinazioneFacade.inserisciOrdinazione(ordine);
+                //ordine = ordinazioneFacade.inserisciOrdinazione(ordine);
             } catch (NullPointerException e) {
                 this.setVisible(false);
                 Tavoli pannello_tavoli = new Tavoli(frame, vuoti);
                 frame.setComponent(pannello_tavoli);
             }
         } else {
-            ordine = ordinazioneFacade.selezionaOrdinazioneGiornalieraPerTavolo(tav.get(0), new Boolean("false"));
-        }*/
+           // ordine = ordinazioneFacade.selezionaOrdinazioneGiornalieraPerTavolo(tav.get(0), new Boolean("false"));
+        }
 
         this.setVisible(false);
 
