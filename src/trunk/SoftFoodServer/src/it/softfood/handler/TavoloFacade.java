@@ -23,7 +23,7 @@ public class TavoloFacade implements ITavoloFacade {
 	
 	private static TavoloFacade singleton; 
 
-	private TavoloSession tavoloSession;
+	private TavoloSession tavoloSession=TavoloSession.getInstance();
 
 	private RistoranteSession ristoranteSessionBeanRemote;
 	
