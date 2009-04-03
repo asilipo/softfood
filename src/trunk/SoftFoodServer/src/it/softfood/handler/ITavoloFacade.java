@@ -4,6 +4,7 @@ import it.softfood.entity.Tavolo;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 import java.util.List;
 
 public interface ITavoloFacade extends Remote{
@@ -51,6 +52,6 @@ public interface ITavoloFacade extends Remote{
 	/* (non-Javadoc)
 	 * @see it.softfood.handler.ITavoloFacade#occupaTavoli(java.util.List)
 	 */
-	public abstract Long occupaTavoli(List<String> riferimenti)throws RemoteException;
+	public abstract Long occupaTavoli(ArrayList<String> riferimenti)throws RemoteException;
 
 }
