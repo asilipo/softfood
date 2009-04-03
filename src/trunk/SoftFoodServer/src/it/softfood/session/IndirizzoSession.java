@@ -28,7 +28,9 @@ public class IndirizzoSession {
 		try {
 			Query q = session.createQuery("select max(id) from it.softfood.entity.Indirizzo");
 			List list = q.list();
-		    return (((Long)list.get(0)) + 1);
+			Long id = (Long) list.get(0);
+			
+		    return (id + 1);
 		} catch(Exception e) {
 			System.out.println("IndirizzoSession#getNewId");
 			return null;
@@ -40,8 +42,9 @@ public class IndirizzoSession {
 			Long id = this.getNewId();
 			indirizzo.setId(id);
 			session.persist(indirizzo);
+			indirizzo = (Indirizzo) session.get(Indirizzo.class, indirizzo);
 			
-			return (Indirizzo) session.get(Indirizzo.class, indirizzo);
+			return indirizzo; 
 		} catch (Exception e) {
 			System.err.println("IndirizzoSession#inserisciIndirizzo");
 			return null;
@@ -50,7 +53,9 @@ public class IndirizzoSession {
 	
 	public Indirizzo selezionaIndirizzoPerId(Long id) {
 		try {
-			return (Indirizzo) session.get(Indirizzo.class, id);
+			Indirizzo indirizzo = (Indirizzo) session.get(Indirizzo.class, id);
+			
+			return indirizzo;
 		} catch (Exception e) {
 			System.err.println("IndirizzoSession#selezionaIndirizzoPerId");
 			return null;
@@ -82,6 +87,10 @@ public class IndirizzoSession {
 
 	public void setSession(Session session) {
 		this.session = session;
+	}
+	
+	public void update(Indirizzo indirizzo) {
+		session.update(indirizzo);
 	}
 
 }

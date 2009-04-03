@@ -28,7 +28,9 @@ public class IngredienteFrescoSession {
 		try {
 			Query q = session.createQuery("select max(id) from it.softfood.entity.Ingrediente");
 			List list = q.list();
-		    return (((Long)list.get(0)) + 1);
+			Long id = (Long) list.get(0);
+			
+		    return (id + 1);
 		} catch(Exception e) {
 			System.out.println("IngredienteFrescoSession#getNewId");
 			return null;
@@ -40,8 +42,9 @@ public class IngredienteFrescoSession {
 			Long id = this.getNewId();
 			ingrediente.setId(id);
 			session.persist(ingrediente);
+			ingrediente = (Ingrediente) session.get(Ingrediente.class, ingrediente);
 			
-			return (Ingrediente) session.get(Ingrediente.class, ingrediente);
+			return ingrediente; 
 		} catch (Exception e) {
 			System.err.println("IngredienteFrescoSession#inserisciIngredienteFresco");
 			return null;
@@ -50,7 +53,9 @@ public class IngredienteFrescoSession {
 	
 	public Ingrediente selezionaIngredienteFrescoPerId(Long id) {
 		try {
-			return (Ingrediente) session.get(Ingrediente.class, id);
+			Ingrediente ingrediente = (Ingrediente) session.get(Ingrediente.class, id);
+			
+			return ingrediente;
 		} catch (Exception e) {
 			System.err.println("IngredienteFrescoSession#selezionaIngredienteFrescoPerId");
 			return null;
@@ -60,7 +65,9 @@ public class IngredienteFrescoSession {
 	public List<Ingrediente> selezionaIngredientiFreschi() {
 		try {
 			Query q = session.createQuery("from it.softfood.entity.Ingrediente");
-			return (List<Ingrediente>) q.list();			
+			List<Ingrediente> list = (List<Ingrediente>) q.list();
+			
+			return list;			
 		} catch (Exception e) {
 			System.err.println("IngredienteFrescoSession#selezionaIngredientiFreschi");
 			return null;
@@ -92,6 +99,10 @@ public class IngredienteFrescoSession {
 
 	public void setSession(Session session) {
 		this.session = session;
+	}
+	
+	public void update(Ingrediente ingrediente) {
+		session.update(ingrediente);
 	}
     
 }

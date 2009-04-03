@@ -1,13 +1,9 @@
 package it.softfood.session;
 
-import java.util.List;
-
 import it.softfood.entity.Entrata;
 import it.softfood.entity.Ordinazione;
-import it.softfood.entity.Tavolo;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+import java.util.List;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -33,7 +29,9 @@ public class EntrataSession {
 		try {
 			Query q = session.createQuery("select max(id) from it.softfood.entity.Entrata");
 			List list = q.list();
-			return (((Long)list.get(0)) + 1);
+			Long id = (Long) list.get(0);
+			
+			return (id + 1);
 		} catch(Exception e) {
 			System.out.println("EntrataSession#getNewId");
 			return null;
@@ -45,8 +43,9 @@ public class EntrataSession {
 			Long id = this.getNewId();
 			entrata.setId(id);
 			session.persist(entrata);
+			entrata = (Entrata) session.get(Entrata.class, entrata);
 			
-			return (Entrata) session.get(Entrata.class, entrata);
+			return entrata;
 		} catch (Exception e) {
 			System.err.println("EntrataSession#inserisciEntrata");
 			return null;
@@ -55,7 +54,9 @@ public class EntrataSession {
 	
 	public Entrata selezionaEntrataPerId(Long id) {
 		try {
-			return (Entrata) session.get(Entrata.class, id);
+			Entrata entrata = (Entrata) session.get(Entrata.class, id);
+			
+			return entrata;
 		} catch (Exception e) {
 			System.err.println("EntrataSession#selezionaEntrataPerId");
 			return null;
@@ -66,7 +67,9 @@ public class EntrataSession {
 		try {
 			Query q = session.createQuery("from it.softfood.entity.Entrata e where e.ordinazione = ?");
 			q.setLong(0, ordinazione.getId());
-			return (Ordinazione) q.uniqueResult();
+			ordinazione = (Ordinazione) q.uniqueResult();
+			
+			return ordinazione; 
 		} catch (Exception e) {
 			System.err.println("EntrataSession#selezionaBevandeMagazzinoEntrataPerOrdinazione");
 			return null;
@@ -100,4 +103,8 @@ public class EntrataSession {
 		this.session = session;
 	}
     
+	public void update(Entrata entrata) {
+		session.update(entrata);
+	}
+	
 }
