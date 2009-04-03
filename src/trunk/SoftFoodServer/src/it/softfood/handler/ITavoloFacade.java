@@ -7,22 +7,22 @@ import java.util.List;
 
 public interface ITavoloFacade extends Remote {
 
-	public abstract Tavolo inserisciTavolo(Tavolo tavolo)throws RemoteException;
+	public Tavolo inserisciTavolo(Tavolo tavolo) throws RemoteException;
 
-	public abstract boolean liberaTavolo(Tavolo tavolo)throws RemoteException;
+	public boolean liberaTavolo(Tavolo tavolo) throws RemoteException;
 
-	public abstract boolean occupaTavolo(Tavolo tavolo)throws RemoteException;
+	public boolean occupaTavolo(Tavolo tavolo) throws RemoteException;
 
-	public abstract Tavolo selezionaTavolo(Long id)throws RemoteException;
+	public Tavolo selezionaTavolo(Long id) throws RemoteException;
 
-	public abstract List<Tavolo> selezionaTavoliLiberi()throws RemoteException;
+	public List<Tavolo> selezionaTavoliLiberi() throws RemoteException;
 
-	public abstract List<Tavolo> selezionaTavoliOccupati()throws RemoteException;
+	public List<Tavolo> selezionaTavoliOccupati() throws RemoteException;
 
-	public abstract List<Tavolo> selezionaTavoliNonAttivi()throws RemoteException;
+	public List<Tavolo> selezionaTavoliNonAttivi() throws RemoteException;
 
-	public abstract boolean rimuoviTavolo(Long id)throws RemoteException;
+	public boolean rimuoviTavolo(Long id) throws RemoteException;
 
-	public abstract Long occupaTavoli(List<String> riferimenti)throws RemoteException;
+	public Long occupaTavoli(List<String> riferimenti) throws RemoteException;
 
 }

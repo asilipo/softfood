@@ -19,7 +19,7 @@ import java.util.logging.Logger;
  */
 
 
-public class TavoloFacade implements ITavoloFacade {
+public class TavoloFacade {
 	
 	private static TavoloFacade singleton; 
 
@@ -27,9 +27,7 @@ public class TavoloFacade implements ITavoloFacade {
 
 	private RistoranteSession ristoranteSession=RistoranteSession.getInstance();
 	
-	public TavoloFacade(){
-		
-		
+	public TavoloFacade() {
 	}
 	
 	public synchronized static TavoloFacade getInstance() {

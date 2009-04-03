@@ -36,7 +36,7 @@ import javax.annotation.Resource;
  */
 
 
-public class OrdinazioneFacade implements IOrdinazioneFacade {
+public class OrdinazioneFacade {
 
 	private static OrdinazioneFacade singleton;
 	private TavoloSession tavoloSession=TavoloSession.getInstance();
