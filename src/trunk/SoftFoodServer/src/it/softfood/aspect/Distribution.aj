@@ -2,14 +2,13 @@ package it.softfood.aspect;
 
 
 import it.softfood.facade.ISoftfoodFacade;
+import it.softfood.handler.ITavoloFacade;
 
 import java.rmi.Naming;
-import java.rmi.Remote;
-import java.rmi.RemoteException;
+
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
-import java.rmi.server.UnicastRemoteObject;
-import java.security.Principal;
+
 
 
 public aspect Distribution{
@@ -34,11 +33,11 @@ public aspect Distribution{
 			    System.setSecurityManager(new SecurityManager());
 			}
 			System.out.println("Object Exporting....");
-			ISoftfoodFacade ff=(ISoftfoodFacade)java.rmi.server.UnicastRemoteObject.exportObject(t,0);
+			ITavoloFacade tt=(ITavoloFacade)java.rmi.server.UnicastRemoteObject.exportObject(t,0);
 			System.out.println("Object exported");
 			Registry registry =LocateRegistry.getRegistry("localhost",1099);
 			System.out.println("Get registry");
-			Naming.rebind("softfood", t);
+			Naming.rebind("TavoloFacade", tt);
 			System.out.println("Server created and ready.");
 		}
 		catch (Exception e){
