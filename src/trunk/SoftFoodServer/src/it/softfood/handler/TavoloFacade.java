@@ -21,7 +21,7 @@ import java.util.logging.Logger;
 
 public class TavoloFacade implements ITavoloFacade {
 	
-	private static ITavoloFacade singleton; 
+	private static TavoloFacade singleton; 
 
 	private TavoloSession tavoloSession=TavoloSession.getInstance();
 
@@ -30,7 +30,7 @@ public class TavoloFacade implements ITavoloFacade {
 	public TavoloFacade() {
 	}
 	
-	public synchronized static ITavoloFacade getInstance() {
+	public synchronized static TavoloFacade getInstance() {
 		if (singleton == null) {
 			singleton = new TavoloFacade();
 		}
