@@ -31,10 +31,11 @@ public class PDATavoloFacade {
 		return list;
 	}
 
-	public Long occupaTavoli(List<String> tav) {
+	public Long occupaTavoli(ArrayList<String> tav) {
 		Long id = null;
 		try {
 			TavoloFacade tavolo = TavoloFacade.getInstance();
+			System.out.println(tav.getClass());
 			id = tavolo.occupaTavoli(tav);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
