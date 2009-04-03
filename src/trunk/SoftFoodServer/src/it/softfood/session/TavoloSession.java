@@ -96,7 +96,8 @@ public class TavoloSession {
 		try {
 			Query q = session.createQuery("from it.softfood.entity.Tavolo t where t.occupato = ?");
 			q.setBoolean(0, true);
-			return (List<Tavolo>) q.list();			
+			List<Tavolo> list = (List<Tavolo>) q.list();
+			return list;			
 		} catch (Exception e) {
 			System.err.println("TavoloSession#selezionaTavoliOccupati");
 			return null;
