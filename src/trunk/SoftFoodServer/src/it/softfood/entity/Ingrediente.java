@@ -6,6 +6,8 @@ import java.util.Set;
 
 public class Ingrediente implements java.io.Serializable {
 
+	private static final long serialVersionUID = 1L;
+	
 	private Long id;
 	private String tipoIngrediente;
 	private String descrizione;
@@ -14,16 +16,13 @@ public class Ingrediente implements java.io.Serializable {
 	private String unitaMisura;
 	private boolean variante;
 	private Set<Variante> variantes = new HashSet<Variante>(0);
-	private Set<IngredientePietanza> ingredientePietanzas = new HashSet<IngredientePietanza>(
-			0);
-	private Set<IngredienteMagazzino> ingredienteMagazzinos = new HashSet<IngredienteMagazzino>(
-			0);
+	private Set<IngredientePietanza> ingredientePietanzas = new HashSet<IngredientePietanza>(0);
+	private Set<IngredienteMagazzino> ingredienteMagazzinos = new HashSet<IngredienteMagazzino>(0);
 
 	public Ingrediente() {
 	}
 
-	public Ingrediente(Long id, String tipoIngrediente, String nome,
-			Date scadenza, boolean variante) {
+	public Ingrediente(Long id, String tipoIngrediente, String nome, Date scadenza, boolean variante) {
 		this.id = id;
 		this.tipoIngrediente = tipoIngrediente;
 		this.nome = nome;
@@ -31,11 +30,9 @@ public class Ingrediente implements java.io.Serializable {
 		this.variante = variante;
 	}
 
-	public Ingrediente(Long id, String tipoIngrediente, String descrizione,
-			String nome, Date scadenza, String unitaMisura, boolean variante,
-			Set<Variante> variantes,
-			Set<IngredientePietanza> ingredientePietanzas,
-			Set<IngredienteMagazzino> ingredienteMagazzinos) {
+	public Ingrediente(Long id, String tipoIngrediente, String descrizione, String nome, 
+			Date scadenza, String unitaMisura, boolean variante, Set<Variante> variantes,
+				Set<IngredientePietanza> ingredientePietanzas, Set<IngredienteMagazzino> ingredienteMagazzinos) {
 		this.id = id;
 		this.tipoIngrediente = tipoIngrediente;
 		this.descrizione = descrizione;
@@ -48,7 +45,6 @@ public class Ingrediente implements java.io.Serializable {
 		this.ingredienteMagazzinos = ingredienteMagazzinos;
 	}
 
-
 	public Long getId() {
 		return this.id;
 	}
@@ -56,7 +52,6 @@ public class Ingrediente implements java.io.Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
-
 	
 	public String getTipoIngrediente() {
 		return this.tipoIngrediente;
@@ -65,7 +60,6 @@ public class Ingrediente implements java.io.Serializable {
 	public void setTipoIngrediente(String tipoIngrediente) {
 		this.tipoIngrediente = tipoIngrediente;
 	}
-
 	
 	public String getDescrizione() {
 		return this.descrizione;
@@ -74,7 +68,6 @@ public class Ingrediente implements java.io.Serializable {
 	public void setDescrizione(String descrizione) {
 		this.descrizione = descrizione;
 	}
-
 	
 	public String getNome() {
 		return this.nome;
@@ -92,7 +85,6 @@ public class Ingrediente implements java.io.Serializable {
 	public void setScadenza(Date scadenza) {
 		this.scadenza = scadenza;
 	}
-
 	
 	public String getUnitaMisura() {
 		return this.unitaMisura;
@@ -118,7 +110,6 @@ public class Ingrediente implements java.io.Serializable {
 	public void setVariantes(Set<Variante> variantes) {
 		this.variantes = variantes;
 	}
-
 	
 	public Set<IngredientePietanza> getIngredientePietanzas() {
 		return this.ingredientePietanzas;
@@ -128,7 +119,6 @@ public class Ingrediente implements java.io.Serializable {
 			Set<IngredientePietanza> ingredientePietanzas) {
 		this.ingredientePietanzas = ingredientePietanzas;
 	}
-
 	
 	public Set<IngredienteMagazzino> getIngredienteMagazzinos() {
 		return this.ingredienteMagazzinos;
@@ -139,9 +129,8 @@ public class Ingrediente implements java.io.Serializable {
 		this.ingredienteMagazzinos = ingredienteMagazzinos;
 	}
         
-        @Override
+    @Override
 	public boolean equals(Object arg0) {
-		// TODO Auto-generated method stub
 		return super.equals(arg0);
 	}
 

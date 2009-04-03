@@ -3,8 +3,16 @@ package it.softfood.entity;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * @author Maria Rosaria Paone
+ * @author Marco Grasso
+ * @author Francesco Pacilio
+ */
+
 public class Articolo implements java.io.Serializable {
 
+	private static final long serialVersionUID = 1L;
+	
 	private Long id;
 	private Listino listino;
 	private String tipoArticolo;
@@ -12,12 +20,9 @@ public class Articolo implements java.io.Serializable {
 	private String nome;
 	private Float capacita;
 	private Integer tipoPietanza;
-	private Set<IngredientePietanza> ingredientePietanzas = new HashSet<IngredientePietanza>(
-			0);
-	private Set<BevandaMagazzino> bevandaMagazzinos = new HashSet<BevandaMagazzino>(
-			0);
-	private Set<LineaOrdinazione> lineaOrdinaziones = new HashSet<LineaOrdinazione>(
-			0);
+	private Set<IngredientePietanza> ingredientePietanzas = new HashSet<IngredientePietanza>(0);
+	private Set<BevandaMagazzino> bevandaMagazzinos = new HashSet<BevandaMagazzino>(0);
+	private Set<LineaOrdinazione> lineaOrdinaziones = new HashSet<LineaOrdinazione>(0);
 
 	public Articolo() {
 	}
@@ -28,12 +33,9 @@ public class Articolo implements java.io.Serializable {
 		this.nome = nome;
 	}
 
-	public Articolo(Long id, Listino listino, String tipoArticolo,
-			String descrizione, String nome, Float capacita,
-			Integer tipoPietanza,
-			Set<IngredientePietanza> ingredientePietanzas,
-			Set<BevandaMagazzino> bevandaMagazzinos,
-			Set<LineaOrdinazione> lineaOrdinaziones) {
+	public Articolo(Long id, Listino listino, String tipoArticolo, String descrizione, 
+			String nome, Float capacita, Integer tipoPietanza, Set<IngredientePietanza> ingredientePietanzas,
+				Set<BevandaMagazzino> bevandaMagazzinos, Set<LineaOrdinazione> lineaOrdinaziones) {
 		this.id = id;
 		this.listino = listino;
 		this.tipoArticolo = tipoArticolo;
@@ -45,7 +47,6 @@ public class Articolo implements java.io.Serializable {
 		this.bevandaMagazzinos = bevandaMagazzinos;
 		this.lineaOrdinaziones = lineaOrdinaziones;
 	}
-
 	
 	public Long getId() {
 		return this.id;
@@ -54,7 +55,6 @@ public class Articolo implements java.io.Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
-
 	
 	public Listino getListino() {
 		return this.listino;
@@ -63,7 +63,6 @@ public class Articolo implements java.io.Serializable {
 	public void setListino(Listino listino) {
 		this.listino = listino;
 	}
-
 	
 	public String getTipoArticolo() {
 		return this.tipoArticolo;
@@ -72,7 +71,6 @@ public class Articolo implements java.io.Serializable {
 	public void setTipoArticolo(String tipoArticolo) {
 		this.tipoArticolo = tipoArticolo;
 	}
-
 	
 	public String getDescrizione() {
 		return this.descrizione;
@@ -82,7 +80,6 @@ public class Articolo implements java.io.Serializable {
 		this.descrizione = descrizione;
 	}
 
-	
 	public String getNome() {
 		return this.nome;
 	}
@@ -90,7 +87,6 @@ public class Articolo implements java.io.Serializable {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
 	
 	public Float getCapacita() {
 		return this.capacita;
@@ -99,7 +95,6 @@ public class Articolo implements java.io.Serializable {
 	public void setCapacita(Float capacita) {
 		this.capacita = capacita;
 	}
-
 	
 	public Integer getTipoPietanza() {
 		return this.tipoPietanza;
@@ -108,7 +103,6 @@ public class Articolo implements java.io.Serializable {
 	public void setTipoPietanza(Integer tipoPietanza) {
 		this.tipoPietanza = tipoPietanza;
 	}
-
 	
 	public Set<IngredientePietanza> getIngredientePietanzas() {
 		return this.ingredientePietanzas;
@@ -118,7 +112,6 @@ public class Articolo implements java.io.Serializable {
 			Set<IngredientePietanza> ingredientePietanzas) {
 		this.ingredientePietanzas = ingredientePietanzas;
 	}
-
 	
 	public Set<BevandaMagazzino> getBevandaMagazzinos() {
 		return this.bevandaMagazzinos;
@@ -127,7 +120,6 @@ public class Articolo implements java.io.Serializable {
 	public void setBevandaMagazzinos(Set<BevandaMagazzino> bevandaMagazzinos) {
 		this.bevandaMagazzinos = bevandaMagazzinos;
 	}
-
 	
 	public Set<LineaOrdinazione> getLineaOrdinaziones() {
 		return this.lineaOrdinaziones;
@@ -137,9 +129,8 @@ public class Articolo implements java.io.Serializable {
 		this.lineaOrdinaziones = lineaOrdinaziones;
 	}
         
-        @Override
+    @Override
 	public boolean equals(Object arg0) {
-		// TODO Auto-generated method stub
 		return super.equals(arg0);
 	}
 
