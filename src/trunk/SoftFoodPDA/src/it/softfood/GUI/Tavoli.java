@@ -3,6 +3,7 @@ package it.softfood.GUI;
 
 import it.softfood.aspect.ExecuteFacade;
 import it.softfood.entity.Tavolo;
+import it.softfood.handler.TavoloFacade;
 
 import java.util.ArrayList;
 import java.util.Enumeration;
@@ -20,7 +21,7 @@ import org.jdesktop.application.FrameView;
  */
 public class Tavoli extends javax.swing.JPanel {
 
-   private ExecuteFacade tavoloFacade;
+   private TavoloFacade tavoloFacade;
     private ArrayList<Tavolo> tavoli;
     private String[] listaTavoli;
     private int numeroPosti = 0;
@@ -31,7 +32,7 @@ public class Tavoli extends javax.swing.JPanel {
             //Hashtable hash=new Hashtable();
             //hash.put("java.naming.factory.initial","org.jnp.interfaces.NamingContextFactory");
             //hash.put("java.naming.provider.url","jnp://localhost:1099");
-            tavoloFacade=new ExecuteFacade();
+            tavoloFacade=new TavoloFacade();
             
             //ordinazioneFacade = (OrdinazioneFacadeRemote) initial.lookup("OrdinazioneFacade");
         
