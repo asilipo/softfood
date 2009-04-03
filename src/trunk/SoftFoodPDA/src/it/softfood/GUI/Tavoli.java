@@ -1,7 +1,7 @@
 package it.softfood.GUI;
 
 
-import it.softfood.aspect.ExecuteFacade;
+
 import it.softfood.entity.Ordinazione;
 import it.softfood.entity.Tavolo;
 import it.softfood.facade.PDATavoloFacade;
@@ -202,12 +202,15 @@ public class Tavoli extends javax.swing.JPanel {
     private void OkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OkActionPerformed
         Enumeration enumeration = model.elements();
         ArrayList<String> tav = new ArrayList<String>();
+      
         while (enumeration.hasMoreElements()) {
             tav.add((String) enumeration.nextElement());
         }
+        System.out.println("TAVOLI SELEZIONATI: "+tav.size());
         Ordinazione ordine = null;
 
         if (vuoti) {
+            System.out.println("VUOTIIIIIIIIIIIIIIIIIIII");
             //Inserimento
             Long tavoloSelezionato = tavoloFacade.occupaTavoli(tav);
 

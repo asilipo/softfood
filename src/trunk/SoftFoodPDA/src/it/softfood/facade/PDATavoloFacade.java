@@ -10,49 +10,43 @@ import java.util.List;
 
 public class PDATavoloFacade {
 	
+	
 	public List<Tavolo> selezionaTavoliLiberi(){
+		TavoloFacade tavolo = TavoloFacade.getInstance();
 		System.out.println("GIUS");
-		ITavoloFacade tavolo = TavoloFacade.getInstance();
+		List<Tavolo> list = null;
 		try {
-			return tavolo.selezionaTavoliLiberi();
-		} catch (RemoteException e) {
+			
+			list = tavolo.selezionaTavoliLiberi();
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return null;
 		}
+		return list;
 	}
 
 	public List<Tavolo> selezionaTavoliOccupati() {
-		ITavoloFacade tavolo = TavoloFacade.getInstance();
-		try {
-			return tavolo.selezionaTavoliOccupati();
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return null;
-		}
+		TavoloFacade tavolo = TavoloFacade.getInstance();
+		List<Tavolo> list=tavolo.selezionaTavoliOccupati();
+		return list;
 	}
 
 	public Long occupaTavoli(List<String> tav) {
-		ITavoloFacade tavolo = TavoloFacade.getInstance();
+		Long id = null;
 		try {
-			return tavolo.occupaTavoli(tav);
-		} catch (RemoteException e) {
+			TavoloFacade tavolo = TavoloFacade.getInstance();
+			id = tavolo.occupaTavoli(tav);
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return null;
 		}
+		return id;
 	}
 
 	public Tavolo selezionaTavolo(Long tavoloSelezionato) {
-		ITavoloFacade tavolo = TavoloFacade.getInstance();
-		try {
-			return tavolo.selezionaTavolo(tavoloSelezionato);
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return null;
-		}
+		TavoloFacade tavolo = TavoloFacade.getInstance();
+		Tavolo tav=tavolo.selezionaTavolo(tavoloSelezionato);
+		return tav;
 	}
 
 }
