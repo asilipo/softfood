@@ -1,6 +1,7 @@
 package it.softfood.handler;
 
 import it.softfood.entity.Tavolo;
+import it.softfood.facade.SoftfoodFacade;
 import it.softfood.session.RistoranteSession;
 import it.softfood.session.TavoloSession;
 
@@ -19,10 +20,19 @@ import java.util.logging.Logger;
 
 
 public class TavoloFacade implements ITavoloFacade {
+	
+	private static TavoloFacade singleton; 
 
 	private TavoloSession tavoloSession;
 
 	private RistoranteSession ristoranteSessionBeanRemote;
+	
+	public synchronized static TavoloFacade getInstance() {
+		if (singleton == null) {
+			singleton = new TavoloFacade();
+		}
+		return singleton;
+	}
 
 	/* (non-Javadoc)
 	 * @see it.softfood.handler.ITavoloFacade#inserisciTavolo(it.softfood.entity.Tavolo)
