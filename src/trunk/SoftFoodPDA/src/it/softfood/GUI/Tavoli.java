@@ -4,6 +4,7 @@ package it.softfood.GUI;
 
 import it.softfood.entity.Ordinazione;
 import it.softfood.entity.Tavolo;
+import it.softfood.facade.PDAOrdinazioneFacade;
 import it.softfood.facade.PDATavoloFacade;
 import it.softfood.handler.TavoloFacade;
 
@@ -24,6 +25,7 @@ import org.jdesktop.application.FrameView;
 public class Tavoli extends javax.swing.JPanel {
 
    private PDATavoloFacade tavoloFacade;
+   private PDAOrdinazioneFacade ordinazioneFacade;
     private ArrayList<Tavolo> tavoli;
     private String[] listaTavoli;
     private int numeroPosti = 0;
@@ -32,6 +34,7 @@ public class Tavoli extends javax.swing.JPanel {
         System.out.println("PPPPPRRRRRROOOOOVVVVVVAAAAAAAAA INIT");
         try {
             tavoloFacade=new PDATavoloFacade();
+            ordinazioneFacade=new PDAOrdinazioneFacade();
             
         
         } catch (NullPointerException ex) {
@@ -202,11 +205,12 @@ public class Tavoli extends javax.swing.JPanel {
     private void OkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OkActionPerformed
         Enumeration enumeration = model.elements();
         ArrayList<String> tav = new ArrayList<String>();
-      
+        
         while (enumeration.hasMoreElements()) {
             tav.add((String) enumeration.nextElement());
         }
         System.out.println("TAVOLI SELEZIONATI: "+tav.size());
+        System.out.println("TAVOLO INSERITO "+tav.get(0));
         Ordinazione ordine = null;
 
         if (vuoti) {
@@ -220,19 +224,20 @@ public class Tavoli extends javax.swing.JPanel {
             ordine.setTerminato(false);
 
             try {
-                //ordine = ordinazioneFacade.inserisciOrdinazione(ordine);
+                ordine = ordinazioneFacade.inserisciOrdinazione(ordine);
             } catch (NullPointerException e) {
                 this.setVisible(false);
                 Tavoli pannello_tavoli = new Tavoli(frame, vuoti);
                 frame.setComponent(pannello_tavoli);
             }
         } else {
-           // ordine = ordinazioneFacade.selezionaOrdinazioneGiornalieraPerTavolo(tav.get(0), new Boolean("false"));
+            ordine = ordinazioneFacade.selezionaOrdinazioneGiornalieraPerTavolo((String)tav.get(0), new Boolean("false"));
         }
 
         this.setVisible(false);
+        System.out.println("ORDINE RECUPERATO O CREATO "+ordine.getId());
 
-        frame.setComponent(new Menu(frame, /*ordine.getId()*/null));
+        frame.setComponent(new Menu(frame, ordine.getId()));
     }//GEN-LAST:event_OkActionPerformed
 
     private void AnnullaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AnnullaActionPerformed
