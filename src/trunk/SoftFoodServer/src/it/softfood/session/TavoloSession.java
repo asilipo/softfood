@@ -40,8 +40,8 @@ public class TavoloSession {
 			Long id = this.getNewId();
 			tavolo.setId(id);
 			session.persist(tavolo);
-			
-			return (Tavolo) session.get(Tavolo.class, tavolo);
+			tavolo=this.selezionaTavoloPerId(id);
+			return tavolo;
 		} catch (Exception e) {
 			System.err.println("TavoloSession#inserisciTavolo");
 			return null;
@@ -154,9 +154,9 @@ public class TavoloSession {
 		this.session = session;
 	}
 
-	public Tavolo merge(Tavolo tavolo) {
-		Tavolo tav=(Tavolo) session.merge(tavolo);
-		return tav;
+	public void update(Tavolo tavolo) {
+		session.update(tavolo);
+
 	}
 	
 }

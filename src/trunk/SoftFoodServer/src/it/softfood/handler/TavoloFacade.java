@@ -123,6 +123,7 @@ public class TavoloFacade implements ITavoloFacade {
 //                        tavolo = tavoloSession.merge(tavolo);
                         if (!tavolo.isOccupato()) {
                             tavolo.setOccupato(true);
+                            tavoloSession.update(tavolo);
                             return tavolo.getId();
                         } else {
                         	tavolo.setOccupato(false);
@@ -141,6 +142,7 @@ public class TavoloFacade implements ITavoloFacade {
 //                            tavolo = tavoloSession.merge(tavolo);
                             if (!tavolo.isOccupato()) {
                                 tavolo.setAttivo(false);
+                                tavoloSession.update(tavolo);
                                 if (riferimentoTavoli == null)
                                     riferimentoTavoli = tavolo.getRiferimento();
                                 else
@@ -149,8 +151,10 @@ public class TavoloFacade implements ITavoloFacade {
                             }
                             else {
                             	tavolo.setAttivo(true);
+                            	tavoloSession.update(tavolo);
                                 return null;
                             }
+                            
                         } else {
                             throw new IllegalStateException();
                         }
@@ -162,8 +166,8 @@ public class TavoloFacade implements ITavoloFacade {
                     nuovoTavolo.setOccupato(true);
                     nuovoTavolo.setRiferimento(riferimentoTavoli);
                     nuovoTavolo.setRistorante(ristoranteSession.selezionaRistorantePerRagioneSociale("La taverna"));
-
-                    return (tavoloSession.inserisciTavolo(nuovoTavolo)).getId();
+                    nuovoTavolo=(tavoloSession.inserisciTavolo(nuovoTavolo));
+                    return nuovoTavolo.getId();
                 }
             }
         } catch (SecurityException ex) {
