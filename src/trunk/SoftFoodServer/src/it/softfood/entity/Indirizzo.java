@@ -3,8 +3,16 @@ package it.softfood.entity;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * @author Maria Rosaria Paone
+ * @author Marco Grasso
+ * @author Francesco Pacilio
+ */
+
 public class Indirizzo implements java.io.Serializable {
 
+	private static final long serialVersionUID = 1L;
+	
 	private Long id;
 	private String cap;
 	private String citta;
@@ -24,7 +32,7 @@ public class Indirizzo implements java.io.Serializable {
 
 	public Indirizzo(Long id, String cap, String citta, String civico,
 			String provincia, String via, Set<Ristorante> ristorantes,
-			Set<Magazzino> magazzinos, Set<Fornitore> fornitores) {
+				Set<Magazzino> magazzinos, Set<Fornitore> fornitores) {
 		this.id = id;
 		this.cap = cap;
 		this.citta = citta;
@@ -35,7 +43,6 @@ public class Indirizzo implements java.io.Serializable {
 		this.magazzinos = magazzinos;
 		this.fornitores = fornitores;
 	}
-
 
 	public Long getId() {
 		return this.id;
@@ -45,7 +52,6 @@ public class Indirizzo implements java.io.Serializable {
 		this.id = id;
 	}
 
-
 	public String getCap() {
 		return this.cap;
 	}
@@ -53,7 +59,6 @@ public class Indirizzo implements java.io.Serializable {
 	public void setCap(String cap) {
 		this.cap = cap;
 	}
-
 	
 	public String getCitta() {
 		return this.citta;
@@ -62,7 +67,6 @@ public class Indirizzo implements java.io.Serializable {
 	public void setCitta(String citta) {
 		this.citta = citta;
 	}
-
 	
 	public String getCivico() {
 		return this.civico;
@@ -71,7 +75,6 @@ public class Indirizzo implements java.io.Serializable {
 	public void setCivico(String civico) {
 		this.civico = civico;
 	}
-
 	
 	public String getProvincia() {
 		return this.provincia;
@@ -80,7 +83,6 @@ public class Indirizzo implements java.io.Serializable {
 	public void setProvincia(String provincia) {
 		this.provincia = provincia;
 	}
-
 	
 	public String getVia() {
 		return this.via;
@@ -89,7 +91,6 @@ public class Indirizzo implements java.io.Serializable {
 	public void setVia(String via) {
 		this.via = via;
 	}
-
 	
 	public Set<Ristorante> getRistorantes() {
 		return this.ristorantes;
@@ -98,7 +99,6 @@ public class Indirizzo implements java.io.Serializable {
 	public void setRistorantes(Set<Ristorante> ristorantes) {
 		this.ristorantes = ristorantes;
 	}
-
 	
 	public Set<Magazzino> getMagazzinos() {
 		return this.magazzinos;
@@ -107,7 +107,6 @@ public class Indirizzo implements java.io.Serializable {
 	public void setMagazzinos(Set<Magazzino> magazzinos) {
 		this.magazzinos = magazzinos;
 	}
-
 	
 	public Set<Fornitore> getFornitores() {
 		return this.fornitores;
@@ -117,9 +116,8 @@ public class Indirizzo implements java.io.Serializable {
 		this.fornitores = fornitores;
 	}
         
-        @Override
+    @Override
 	public boolean equals(Object arg0) {
-		// TODO Auto-generated method stub
 		return super.equals(arg0);
 	}
 
