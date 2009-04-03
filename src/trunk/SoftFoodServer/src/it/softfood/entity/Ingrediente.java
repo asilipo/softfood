@@ -1,8 +1,8 @@
 package it.softfood.entity;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @author Maria Rosaria Paone
@@ -21,9 +21,9 @@ public class Ingrediente implements java.io.Serializable {
 	private Date scadenza;
 	private String unitaMisura;
 	private boolean variante;
-	private List<Variante> varianti = new ArrayList<Variante>(0);
-	private List<IngredientePietanza> ingredientiPietanza = new ArrayList<IngredientePietanza>(0);
-	private List<IngredienteMagazzino> ingredientiMagazzino = new ArrayList<IngredienteMagazzino>(0);
+	private Set<Variante> varianti = new HashSet<Variante>(0);
+	private Set<IngredientePietanza> ingredientiPietanza = new HashSet<IngredientePietanza>(0);
+	private Set<IngredienteMagazzino> ingredientiMagazzino = new HashSet<IngredienteMagazzino>(0);
 
 	public Ingrediente() {
 	}
@@ -37,8 +37,8 @@ public class Ingrediente implements java.io.Serializable {
 	}
 
 	public Ingrediente(Long id, String tipoIngrediente, String descrizione, String nome, 
-			Date scadenza, String unitaMisura, boolean variante, List<Variante> varianti, 
-				List<IngredientePietanza> ingredientiPietanza,	List<IngredienteMagazzino> ingredientiMagazzino) {
+			Date scadenza, String unitaMisura, boolean variante, Set<Variante> varianti, 
+			Set<IngredientePietanza> ingredientiPietanza,	Set<IngredienteMagazzino> ingredientiMagazzino) {
 		this.id = id;
 		this.tipoIngrediente = tipoIngrediente;
 		this.descrizione = descrizione;
@@ -107,27 +107,27 @@ public class Ingrediente implements java.io.Serializable {
 		this.variante = variante;
 	}
 
-	public List<Variante> getVarianti() {
+	public Set<Variante> getVarianti() {
 		return this.varianti;
 	}
 
-	public void setVarianti(List<Variante> varianti) {
+	public void setVarianti(Set<Variante> varianti) {
 		this.varianti = varianti;
 	}
 
-	public List<IngredientePietanza> getIngredientiPietanza() {
+	public Set<IngredientePietanza> getIngredientiPietanza() {
 		return this.ingredientiPietanza;
 	}
 
-	public void setIngredientiPietanza(List<IngredientePietanza> ingredientiPietanza) {
+	public void setIngredientiPietanza(Set<IngredientePietanza> ingredientiPietanza) {
 		this.ingredientiPietanza = ingredientiPietanza;
 	}
 
-	public List<IngredienteMagazzino> getIngredientiMagazzino() {
+	public Set<IngredienteMagazzino> getIngredientiMagazzino() {
 		return this.ingredientiMagazzino;
 	}
 
-	public void setIngredienteMagazzinos(List<IngredienteMagazzino> ingredientiMagazzino) {
+	public void setIngredienteMagazzinos(Set<IngredienteMagazzino> ingredientiMagazzino) {
 		this.ingredientiMagazzino = ingredientiMagazzino;
 	}
         
