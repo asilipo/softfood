@@ -1,7 +1,6 @@
 package it.softfood.session;
 
 import it.softfood.entity.Bevanda;
-import it.softfood.entity.BevandaMagazzino;
 
 import java.util.List;
 
@@ -29,7 +28,9 @@ public class BevandaSession {
 		try {
 			Query q = session.createQuery("select max(id) from it.softfood.entity.Bevanda");
 			List list = q.list();
-			return (((Long)list.get(0)) + 1);
+			Long id = (Long) list.get(0);
+			
+			return (id + 1);
 		} catch(Exception e) {
 			System.out.println("BevandaSession#getNewId");
 			return null;
@@ -41,8 +42,9 @@ public class BevandaSession {
 			Long id = this.getNewId();
 			bevanda.setId(id);
 			session.persist(bevanda);
-
-			return (Bevanda) session.get(Bevanda.class, bevanda);
+			bevanda = (Bevanda) session.get(Bevanda.class, bevanda);
+			
+			return bevanda; 
 		} catch (Exception e) {
 			System.err.println("BevandaSession#inserisciBevanda");
 			return null;
@@ -51,7 +53,9 @@ public class BevandaSession {
 
 	public Bevanda selezionaBevandaPerId(Long id) {
 		try {
-			return (Bevanda) session.get(Bevanda.class, id);
+			Bevanda bevanda = (Bevanda) session.get(Bevanda.class, id);
+			
+			return bevanda; 
 		} catch (Exception e) {
 			System.err.println("BevandaSession#selezionaBevandaPerId");
 			return null;
@@ -61,7 +65,9 @@ public class BevandaSession {
 	public List<Bevanda> selezionaBevande() {
 		try {
 			Query q = session.createQuery("from it.softfood.entity.Bevanda b");
-			return (List<Bevanda>) q.list();			
+			List<Bevanda> list = (List<Bevanda>) q.list();
+			
+			return list;			
 		} catch (Exception e) {
 			System.err.println("BevandaSession#selezionaBevande");
 			return null;
@@ -95,8 +101,8 @@ public class BevandaSession {
 		this.session = session;
 	}
 
-	public void update(BevandaMagazzino bevandaMagazzino) {
-		session.update(bevandaMagazzino);
+	public void update(Bevanda bevanda) {
+		session.update(bevanda);
 	}
 	
 }

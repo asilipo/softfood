@@ -101,4 +101,8 @@ public class IngredienteLungaConservazioneSession {
 		this.session = session;
 	}
     
+	public void update(Ingrediente ingrediente) {
+		session.update(ingrediente);
+	}
+	
 }
