@@ -55,7 +55,6 @@ public class Tavoli extends javax.swing.JPanel {
 
             jComboBox2.setVisible(false);
             jLabel1.setVisible(false);
-
         }
 
         int i = 0;
