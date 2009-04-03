@@ -1,7 +1,10 @@
 package it.softfood.GUI;
 
 import it.softfood.entity.LineaOrdinazione;
-import it.softfood.facade.ordinazione.OrdinazioneFacadeRemote;
+import it.softfood.facade.PDAOrdinazioneFacade;
+
+import it.softfood.handler.OrdinazioneFacade;
+
 import java.util.ArrayList;
 import java.util.Hashtable;
 import javax.naming.InitialContext;
@@ -16,13 +19,13 @@ import org.jdesktop.application.FrameView;
 
 public class Conferma extends javax.swing.JPanel {
 
-    private OrdinazioneFacadeRemote ordinazioneFacade;
+    private PDAOrdinazioneFacade ordinazioneFacade;
 
     private void initFacade(Hashtable hash) {
         try {
-            InitialContext initial=new InitialContext(hash);
-            ordinazioneFacade = (OrdinazioneFacadeRemote) initial.lookup("it.softfood.facade.ordinazione.OrdinazioneFacade");
-        } catch(NamingException e) {
+            
+            ordinazioneFacade = new PDAOrdinazioneFacade();
+        } catch(Exception e) {
             System.err.println("Errore binding: OrdinazioneFacade");
         }
     }
