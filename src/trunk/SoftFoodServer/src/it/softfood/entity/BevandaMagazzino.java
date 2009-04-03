@@ -1,5 +1,11 @@
 package it.softfood.entity;
 
+/**
+ * @author Maria Rosaria Paone
+ * @author Marco Grasso
+ * @author Francesco Pacilio
+ */
+
 public class BevandaMagazzino implements java.io.Serializable {
 
 	private Long id;
