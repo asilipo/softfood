@@ -1,5 +1,8 @@
 package it.softfood;
 
+import java.util.List;
+
+import it.softfood.entity.Tavolo;
 import it.softfood.facade.SoftfoodFacade;
 
 public class Start {
@@ -37,6 +40,8 @@ public class Start {
 //		tavolo.modificaStatoTavolo(t, false);
 		
 		SoftfoodFacade facade=SoftfoodFacade.getInstance();
+		//List<Tavolo> l=	facade.selezionaTavoliLiberi();
+		//System.out.println("sddddddddddddddddddddddddd"+l);
 
 	}
 	
