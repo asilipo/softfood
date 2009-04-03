@@ -34,7 +34,7 @@ public class RistoranteSession {
 
 	public Ristorante selezionaRistorantePerRagioneSociale(String ragioneSociale) {
 		try {			
-			Query q = session.createQuery("from it.softfood.entity.Ristorante r where r.ragioneSociale =  ? "); //problema sulla sessione
+			Query q = session.createQuery("from it.softfood.entity.Ristorante r where r.ragioneSociale =  ?");
 			q.setString(0, ragioneSociale);
 			
 		    return (Ristorante) q.uniqueResult();
