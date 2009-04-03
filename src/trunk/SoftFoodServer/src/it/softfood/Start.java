@@ -1,10 +1,13 @@
 package it.softfood;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import it.softfood.entity.Ristorante;
 import it.softfood.entity.Tavolo;
 import it.softfood.facade.SoftfoodFacade;
 import it.softfood.handler.TavoloFacade;
+import it.softfood.session.RistoranteSession;
 
 public class Start {
 
@@ -14,7 +17,7 @@ public class Start {
 	public static void main(String[] args) throws Exception{
 		// TODO Auto-generated method stub
 //		TavoloSession tavolo=new TavoloSession();
-//		RistoranteSession ristorante=new RistoranteSession();
+		RistoranteSession ristorante= RistoranteSession.getInstance();
 //		List<Tavolo> tav=tavolo.selezionaTavoliLiberi();
 //		Tavolo tav1=tavolo.selezionaTavoloPerId(new Long(1));
 //		System.out.println("Oggetto tavolo : "+tav);
@@ -22,7 +25,8 @@ public class Start {
 //		System.out.println("TAVOLI SELEZIONATO: "+tav1.getRiferimento());
 //		
 //		
-//		Ristorante rist=ristorante.selezionaRistorantePerRagioneSociale("La taverna");
+		Ristorante rist= ristorante.selezionaRistorantePerRagioneSociale("La taverna");
+		System.out.println("ristoranteeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee " +rist.getPartitaIva());
 ////		Ristorante rist=ristorante.selezionaRistorantePerPartitaIva("12032874912");
 //		System.out.println("RISTORANTE: "+rist);
 //		
@@ -41,9 +45,20 @@ public class Start {
 //		tavolo.modificaStatoTavolo(t, false);
 		
 //		SoftfoodFacade facade=SoftfoodFacade.getInstance();
-		TavoloFacade facade=TavoloFacade.getInstance();
+//		TavoloFacade facade=TavoloFacade.getInstance();
 		//List<Tavolo> l=	facade.selezionaTavoliLiberi();
 		//System.out.println("sddddddddddddddddddddddddd"+l);
+		TavoloFacade facade=new TavoloFacade();
+        Tavolo tav=facade.selezionaTavolo(new Long(18));
+        Tavolo tav1=facade.selezionaTavolo(new Long(19));
+        ArrayList<String> list=new ArrayList<String>();
+        list.add(tav.getRiferimento());
+        System.out.println("AGGIUNTO TAVOLO "+tav.getRiferimento());
+        list.add(tav1.getRiferimento());
+        System.out.println("AGGIUNTO TAVOLO "+tav1.getRiferimento());
+        facade.occupaTavoli(list);
+
+
 
 	}
 	
