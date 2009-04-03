@@ -1,7 +1,6 @@
 package it.softfood.aspect;
 
 
-import it.softfood.facade.ISoftfoodFacade;
 import it.softfood.handler.ITavoloFacade;
 
 import java.rmi.Naming;
