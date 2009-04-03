@@ -4,6 +4,12 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * @author Maria Rosaria Paone
+ * @author Marco Grasso
+ * @author Francesco Pacilio
+ */
+
 public class Ingrediente implements java.io.Serializable {
 
 	private static final long serialVersionUID = 1L;
