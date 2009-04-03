@@ -6,6 +6,7 @@ import it.softfood.session.RistoranteSession;
 import it.softfood.session.TavoloSession;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import java.util.logging.Level;
@@ -138,7 +139,7 @@ public class TavoloFacade implements ITavoloFacade {
     /* (non-Javadoc)
 	 * @see it.softfood.handler.ITavoloFacade#occupaTavoli(java.util.List)
 	 */
-    public Long occupaTavoli(List<String> riferimenti) {
+    public Long occupaTavoli(ArrayList<String> riferimenti) {
         try {
             if (riferimenti != null) {
                 if (riferimenti.size() == 1) {
