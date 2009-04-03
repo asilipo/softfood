@@ -1,7 +1,7 @@
 package it.softfood.handler;
 
 import it.softfood.entity.Tavolo;
-import it.softfood.facade.SoftfoodFacade;
+
 import it.softfood.session.RistoranteSession;
 import it.softfood.session.TavoloSession;
 
@@ -27,6 +27,10 @@ public class TavoloFacade implements ITavoloFacade {
 
 	private RistoranteSession ristoranteSessionBeanRemote;
 	
+	public TavoloFacade(){
+		
+		
+	}
 	public synchronized static TavoloFacade getInstance() {
 		if (singleton == null) {
 			singleton = new TavoloFacade();

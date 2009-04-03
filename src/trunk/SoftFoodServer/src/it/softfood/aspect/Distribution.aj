@@ -15,7 +15,7 @@ public aspect Distribution{
 
 //	private String xmlparameter="config_authorization_file";
 
-	declare parents: it.softfood.handler.TavoloFacade implements it.softfood.handler.ITavoloFacade;
+	declare parents: it.softfood.handler.TavoloFacade implements ITavoloFacade;
 	
 	   
 
