@@ -2,6 +2,9 @@ package it.softfood.aspect;
 
 
 
+
+import it.softfood.handler.ITavoloFacade;
+
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
@@ -10,7 +13,7 @@ import java.rmi.registry.Registry;
 
 public aspect ClientDistribution {
 	
-	private ISoftfoodFacade facade;
+	private ITavoloFacade tavolofacade;
 	
 	
 	
@@ -21,7 +24,7 @@ public aspect ClientDistribution {
 		     }
 			try {
 	            Registry registry = LocateRegistry.getRegistry("localhost");
-	            facade = (ISoftfoodFacade) registry.lookup("softfood");
+	            tavolofacade = (ITavoloFacade) registry.lookup("TavoloFacade");
 	        } 
 			catch (Exception e) {
 	            System.err.println("Exception to obtain the reference to the remote object");
@@ -31,12 +34,12 @@ public aspect ClientDistribution {
 		
 	}
 	
-	pointcut distributefacadeCalls(): execution(* it.softfood.aspect.ExecuteFacade.*(..)) && !execution(it.softfood.aspect.ExecuteFacade.new(..));
+	pointcut distributefacadeCalls(): execution(* it.softfood.facade.*.*(..)) && !execution(it.softfood.facade.*.new(..));
 	
 	
 	Object around(): distributefacadeCalls()  {
 		Object obj =null;
-		  obj = ExecuteMetod.invoke(facade, thisJoinPoint.getSignature().getName(), thisJoinPoint.getArgs());
+		  obj = ExecuteMetod.invoke(tavolofacade, thisJoinPoint.getSignature().getName(), thisJoinPoint.getArgs());
 		 Object[] params=thisJoinPoint.getArgs();
 		 return obj;
 	}
