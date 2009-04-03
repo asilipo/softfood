@@ -27,7 +27,7 @@ public class RistoranteSession {
 			session.persist(ristorante);
 			return (Ristorante) session.get(Ristorante.class, ristorante);
 		} catch (Exception e) {
-			System.err.println("RistoranteSessionBean#inserisciRistorante");
+			System.err.println("RistoranteSession#inserisciRistorante");
 			return null;
 		}
 	}
@@ -39,7 +39,7 @@ public class RistoranteSession {
 			
 		    return (Ristorante) q.uniqueResult();
 		} catch (Exception e) {
-			System.err.println("RistoranteSessionBean#selezionaRistorantePerRagioneSociale");
+			System.err.println("RistoranteSession#selezionaRistorantePerRagioneSociale");
 			return null;
 		}
 	}
@@ -51,7 +51,7 @@ public class RistoranteSession {
 			
 			return (Ristorante) q.uniqueResult();
 		} catch (Exception e) {
-			System.err.println("RistoranteSessionBean#selezionaRistorantePerPartitaIva");
+			System.err.println("RistoranteSession#selezionaRistorantePerPartitaIva");
 			return null;
 		}
 	}
@@ -66,7 +66,7 @@ public class RistoranteSession {
 
 			return false;
 		} catch (Exception e) {
-			System.err.println("RistoranteSessionBean#rimuoviRistorante");
+			System.err.println("RistoranteSession#rimuoviRistorante");
 			return false;
 		}
 	}
