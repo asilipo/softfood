@@ -25,7 +25,9 @@ public class ListinoSession {
 	private Long getNewId() {
 		try {
 			Query q = session.createQuery("select max(id) from it.softfood.entity.Listino");
-		    return (((Long)q.list().get(0)) + 1);
+		    Long id = (Long) q.list().get(0);
+		    
+			return (id + 1);
 		} catch(Exception e) {
 			System.out.println("ListinoSession#getNewId");
 			return null;
@@ -37,8 +39,9 @@ public class ListinoSession {
 			Long id = this.getNewId();
 			listino.setId(id);
 			session.persist(listino);
+			listino = (Listino) session.get(Listino.class, listino);
 			
-			return (Listino) session.get(Listino.class, listino);
+			return listino; 
 		} catch (Exception e) {
 			System.err.println("ListinoSession#inserisciListino");
 			return null;
@@ -47,7 +50,9 @@ public class ListinoSession {
 	
 	public Listino selezionaListinoPerId(Long id) {
 		try {
-			return (Listino) session.get(Listino.class, id);
+			Listino listino = (Listino) session.get(Listino.class, id);
+			
+			return listino;
 		} catch (Exception e) {
 			System.err.println("ListinoSession#selezionaListinoPerId");
 			return null;
@@ -81,4 +86,8 @@ public class ListinoSession {
 		this.session = session;
 	}
 
+	public void update(Listino listino) {
+		session.update(listino);
+	}
+	
 }

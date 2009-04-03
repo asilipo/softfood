@@ -27,7 +27,9 @@ public class IngredienteSession {
 	private Long getNewId() {
 		try {
 			Query q = session.createQuery("select max(id) from it.softfood.entity.IngredienteSession");
-		    return (((Long)q.list().get(0)) + 1);
+		    Long id = (Long) q.list().get(0);
+			
+			return (id + 1);
 		} catch(Exception e) {
 			System.out.println("IngredienteSession#getNewId");
 			return null;
@@ -39,8 +41,9 @@ public class IngredienteSession {
 			Long id = this.getNewId();
 			ingrediente.setId(id);
 			session.persist(ingrediente);
+			ingrediente = (Ingrediente) session.get(Ingrediente.class, ingrediente);
 			
-			return (Ingrediente) session.get(Ingrediente.class, ingrediente);
+			return ingrediente;
 		} catch (Exception e) {
 			System.err.println("IngredienteSession#inserisciIngrediente");
 			return null;
@@ -49,7 +52,9 @@ public class IngredienteSession {
 	
 	public Ingrediente selezionaIngredientePerId(Long id) {
 		try {
-			return (Ingrediente) session.get(Ingrediente.class, id);
+			Ingrediente ingrediente = (Ingrediente) session.get(Ingrediente.class, id);
+			
+			return ingrediente;
 		} catch (Exception e) {
 			System.err.println("IngredienteSession#selezionaIngredientePerId");
 			return null;
@@ -60,7 +65,9 @@ public class IngredienteSession {
 		try {
 			Query q = session.createQuery("from it.softfood.entity.Ingrediente i where i.nome = ?");
 			q.setString(0, nome);
-			return (List<Ingrediente>) q.list();	
+			List<Ingrediente> list = (List<Ingrediente>) q.list();
+			
+			return list; 	
 		} catch (Exception e) {
 			System.err.println("IngredienteSession#selezionaIngredientePerNome");
 			return null;
@@ -70,7 +77,9 @@ public class IngredienteSession {
 	public List<Ingrediente> selezionaIngredientePerVariante() {
 		try {
 			Query q = session.createQuery("from it.softfood.entity.Ingrediente i");
-			return (List<Ingrediente>) q.list();	
+			List<Ingrediente> list = (List<Ingrediente>) q.list();
+			
+			return list; 	
 		} catch (Exception e) {
 			System.err.println("IngredienteSession#selezionaIngredientePerVariante");
 			return null;
@@ -104,4 +113,8 @@ public class IngredienteSession {
 		this.session = session;
 	}
 
+	public void update(Ingrediente ingrediente) {
+		session.update(ingrediente);
+	}
+	
 }

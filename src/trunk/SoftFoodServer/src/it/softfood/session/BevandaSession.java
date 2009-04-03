@@ -1,6 +1,7 @@
 package it.softfood.session;
 
 import it.softfood.entity.Bevanda;
+import it.softfood.entity.BevandaMagazzino;
 
 import java.util.List;
 
@@ -94,4 +95,8 @@ public class BevandaSession {
 		this.session = session;
 	}
 
+	public void update(BevandaMagazzino bevandaMagazzino) {
+		session.update(bevandaMagazzino);
+	}
+	
 }

@@ -1,6 +1,7 @@
 package it.softfood.session;
 
 import it.softfood.entity.Menu;
+import it.softfood.entity.Pietanza;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -25,7 +26,9 @@ public class MenuSession {
 	private Long getNewId() {
 		try {
 			Query q = session.createQuery("select max(id) from it.softfood.entity.Menu");
-		    return (((Long)q.list().get(0)) + 1);
+		    Long id = ((Long)q.list().get(0));
+		    
+			return (id + 1);
 		} catch(Exception e) {
 			System.out.println("MenuSession#getNewId");
 			return null;
@@ -37,8 +40,9 @@ public class MenuSession {
 			Long id = this.getNewId();
 			menu.setId(id.toString());
 			session.persist(menu);
+			menu = (Menu) session.get(Menu.class, menu);
 			
-			return (Menu) session.get(Menu.class, menu);
+			return menu; 
 		} catch (Exception e) {
 			System.err.println("MenuSession#inserisciMenu");
 			return null;
@@ -47,7 +51,9 @@ public class MenuSession {
 	
 	public Menu selezionaMenuPerId(Long id) {
 		try {
-			return (Menu) session.get(Menu.class, id);
+			Menu menu = (Menu) session.get(Menu.class, id);
+			
+			return menu;
 		} catch (Exception e) {
 			System.err.println("MenuSession#selezionaMenuPerId");
 			return null;
@@ -79,6 +85,10 @@ public class MenuSession {
 
 	public void setSession(Session session) {
 		this.session = session;
+	}
+	
+	public void update(Menu menu) {
+		session.update(menu);
 	}
 	
 }

@@ -29,7 +29,8 @@ public class VarianteSession  {
 	private Long getNewId() {
 		try {
 			Query q = session.createQuery("select max(id) from it.softfood.entity.Variante");
-		    return (((Long)q.list().get(0)) + 1);
+		    Long id = (Long)q.list().get(0);
+			return (id + 1);
 		} catch(Exception e) {
 			System.out.println("VarianteSession#getNewId");
 			return null;
@@ -41,8 +42,9 @@ public class VarianteSession  {
 			Long id = this.getNewId();
 			variante.setId(id);
 			session.persist(variante);
+			variante = (Variante) session.get(Variante.class, variante);
 			
-			return (Variante) session.get(Variante.class, variante);
+			return variante; 
 		} catch (Exception e) {
 			System.err.println("VarianteSession#inserisciVariante");
 			return null;
@@ -51,7 +53,9 @@ public class VarianteSession  {
 	
 	public Variante selezionaVariantePerId(Long id) {
 		try {
-			return (Variante) session.get(Variante.class, id);
+			Variante variante = (Variante) session.get(Variante.class, id);
+			
+			return variante;
 		} catch (Exception e) {
 			System.err.println("VarianteSession#selezionaVariantePerId");
 			return null;
@@ -63,6 +67,7 @@ public class VarianteSession  {
 			Query q = session.createQuery("from it.softfood.entity.Variante v where ingrediente = ?");
 			q.setLong(0, ingrediente.getId());
 			List<Variante> list = (List<Variante>) q.list();
+			
 			return list;
 		} catch (Exception e) {
 			System.err.println("VarianteSession#selezionaVariantiPerIngrediente");
@@ -75,6 +80,7 @@ public class VarianteSession  {
 			Query q = session.createQuery("from it.softfood.entity.Variante v where lineaOrdinazione = ?");
 			q.setLong(0, lineaOrdinazione.getId());
 			List<Variante> list = (List<Variante>) q.list();
+			
 			return list;
 		} catch (Exception e) {
 			System.err.println("VarianteSession#selezionaVariantiPerLineaOrdinazione");
@@ -107,6 +113,10 @@ public class VarianteSession  {
 
 	public void setSession(Session session) {
 		this.session = session;
+	}
+	
+	public void update(Variante variante) {
+		session.update(variante);
 	}
     
 }

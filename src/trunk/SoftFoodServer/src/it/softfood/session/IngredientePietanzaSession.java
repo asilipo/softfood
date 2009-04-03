@@ -32,8 +32,9 @@ public class IngredientePietanzaSession {
 			ingredientePietanzaPK.setPietanza(ingredientePietanza.getArticolo().getId());
 			ingredientePietanza.setId(ingredientePietanzaPK);
 			session.persist(ingredientePietanza);
-			
-			return (IngredientePietanza) session.get(IngredientePietanza.class, ingredientePietanza);
+			ingredientePietanza = (IngredientePietanza) session.get(IngredientePietanza.class, ingredientePietanza);
+						
+			return ingredientePietanza; 
 		} catch (Exception e) {
 			System.err.println("IngredientePietanzaSession#inserisciIngredientePietanza");
 			return null;
@@ -42,7 +43,9 @@ public class IngredientePietanzaSession {
 	
 	public IngredientePietanza selezionaIngredientePietanzaPerId(Long id) {
 		try {
-			return (IngredientePietanza) session.get(IngredientePietanza.class, id);
+			IngredientePietanza ingredientePietanza = (IngredientePietanza) session.get(IngredientePietanza.class, id);
+			
+			return ingredientePietanza; 
 		} catch (Exception e) {
 			System.err.println("IngredientePietanzaSession#selezionaIngredientePietanzaPerId");
 			return null;
@@ -52,7 +55,9 @@ public class IngredientePietanzaSession {
     public List<IngredientePietanza> selezionaIngredientiPietanze() {
     	try {
 			Query q = session.createQuery("from it.softfood.entity.IngredientePietanza i");
-			return (List<IngredientePietanza>) q.list();			
+			List<IngredientePietanza> list = (List<IngredientePietanza>) q.list();
+			
+			return list;			
 		} catch (Exception e) {
 			System.err.println("IngredientePietanzaSession#selezionaIngredientePietanzaPerId");
 			return null;
@@ -86,4 +91,8 @@ public class IngredientePietanzaSession {
 		this.session = session;
 	}
     
+	public void update(IngredientePietanza ingredientePietanza) {
+		session.update(ingredientePietanza);
+	}
+	
 }

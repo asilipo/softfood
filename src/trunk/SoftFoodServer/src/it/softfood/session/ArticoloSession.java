@@ -1,6 +1,7 @@
 package it.softfood.session;
 
 import it.softfood.entity.Articolo;
+import it.softfood.entity.Ordinazione;
 
 import java.util.List;
 
@@ -28,8 +29,8 @@ public class ArticoloSession {
 		try {
 			Query q = session.createQuery("select max(id) from it.softfood.entity.Articolo");
 			List list = q.list();
-		    Long id = (((Long)list.get(0)) + 1);
-		    return id;
+		    Long id = ((Long)list.get(0));
+		    return (id + 1);
 		} catch(Exception e) {
 			System.out.println("ArticoloSession#getNewId");
 			return null;
@@ -41,8 +42,9 @@ public class ArticoloSession {
 			Long id = this.getNewId();
 			articolo.setId(id);
 			session.persist(articolo);
+			articolo = (Articolo) session.get(Articolo.class, articolo);
 			
-			return (Articolo) session.get(Articolo.class, articolo);
+			return articolo;
 		} catch (Exception e) {
 			System.err.println("ArticoloSession#inserisciArticolo");
 			return null;
@@ -51,7 +53,8 @@ public class ArticoloSession {
 	
 	public Articolo selezionaArticoloPerId(Long id) {
 		try {
-			return (Articolo) session.get(Articolo.class, id);
+			Articolo articolo = (Articolo) session.get(Articolo.class, id); 
+			return articolo;
 		} catch (Exception e) {
 			System.err.println("ArticoloSession#selezionaArticoloPerId");
 			return null;
@@ -83,6 +86,10 @@ public class ArticoloSession {
 
 	public void setSession(Session session) {
 		this.session = session;
+	}
+	
+	public void update(Articolo articolo) {
+		session.update(articolo);
 	}
 	
 }

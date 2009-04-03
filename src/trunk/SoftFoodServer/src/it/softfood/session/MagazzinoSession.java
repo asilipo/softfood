@@ -1,10 +1,9 @@
 package it.softfood.session;
 
+import it.softfood.entity.Magazzino;
+
 import org.hibernate.Query;
 import org.hibernate.Session;
-
-import it.softfood.entity.Listino;
-import it.softfood.entity.Magazzino;
 
 /**
  * @author Maria Rosaria Paone
@@ -26,7 +25,9 @@ public class MagazzinoSession {
 	private Long getNewId() {
 		try {
 			Query q = session.createQuery("select max(id) from it.softfood.entity.Magazzino");
-		    return (((Long)q.list().get(0)) + 1);
+		    Long id = (Long)q.list().get(0);
+			
+			return (id + 1);
 		} catch(Exception e) {
 			System.out.println("MagazzinoSession#getNewId");
 			return null;
@@ -38,8 +39,9 @@ public class MagazzinoSession {
 			Long id = this.getNewId();
 			magazzino.setId(id);
 			session.persist(magazzino);
+			magazzino = (Magazzino) session.get(Magazzino.class, magazzino);
 			
-			return (Magazzino) session.get(Magazzino.class, magazzino);
+			return magazzino;
 		} catch (Exception e) {
 			System.err.println("MagazzinoSession#inserisciMagazzino");
 			return null;
@@ -48,7 +50,9 @@ public class MagazzinoSession {
 	
 	public Magazzino selezionaMagazzinoPerId(Long id) {
 		try {
-			return (Magazzino) session.get(Magazzino.class, id);
+			Magazzino magazzino = (Magazzino) session.get(Magazzino.class, id);
+			
+			return magazzino;
 		} catch (Exception e) {
 			System.err.println("MagazzinoSession#selezionaMagazzinoPerId");
 			return null;
@@ -82,4 +86,8 @@ public class MagazzinoSession {
 		this.session = session;
 	}
 
+	public void update(Magazzino magazzino) {
+		session.update(magazzino);
+	}
+	
 }
