@@ -21,12 +21,14 @@ public aspect Persistence {
 		return session;
 	}
 
-	pointcut operation(): execution(* it.softfood.session.*.*(..)) && !execution(* it.softfood.session.*.*Session(..));
+	pointcut operation(): execution(* it.softfood.session.*.*(..)) && !cflowbelow(execution(* it.softfood.session.*.*(..))) && !execution(* it.softfood.session.*.*Session(..));
 
 	/**
 	 * Before initializing a handler, init the session
 	 */
 	before() :  operation() {
+
+		
 		System.out.println("Persistenza - OPENING SESSIONNNNNNNNNNNNNNNNNNNNN");
 		
 		session = HibernateUtil.openSession();

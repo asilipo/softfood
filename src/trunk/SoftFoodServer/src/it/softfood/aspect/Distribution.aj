@@ -18,7 +18,7 @@ public aspect Distribution{
 	
 	   
 
-	pointcut init(it.softfood.handler.TavoloFacade t): execution( it.softfood.handler.TavoloFacade.new(..)) && this(t);
+	pointcut init(it.softfood.handler.TavoloFacade t): execution(it.softfood.handler.TavoloFacade.new(..)) && this(t);
 	
 	after(it.softfood.handler.TavoloFacade t): init(t){
 		try{

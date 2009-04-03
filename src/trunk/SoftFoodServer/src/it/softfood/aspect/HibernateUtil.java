@@ -43,6 +43,7 @@ public class HibernateUtil {
 	}
 
 	public static Session openSession() {
+
 		Session session = (Session) sharedSession.get();
 		System.out.println("HIBERNATE UTIL OPENING SESSION");
 		if (session == null) {
