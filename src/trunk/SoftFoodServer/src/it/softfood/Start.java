@@ -56,8 +56,9 @@ public class Start {
         System.out.println("AGGIUNTO TAVOLO "+tav.getRiferimento());
         list.add(tav1.getRiferimento());
         System.out.println("AGGIUNTO TAVOLO "+tav1.getRiferimento());
-        facade.occupaTavoli(list);
-
+        Long id=facade.occupaTavoli(list);
+        facade.rimuoviTavolo(id);
+        
 
 
 	}

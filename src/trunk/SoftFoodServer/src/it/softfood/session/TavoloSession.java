@@ -59,8 +59,9 @@ public class TavoloSession {
 
 	public Tavolo selezionaTavoloPerRiferimento(String riferimento) {
 		try {
-			Query q = session.createQuery("from it.softfood.entity.Tavolo t where t.riferimento = ?");
+			Query q = session.createQuery("from it.softfood.entity.Tavolo t where t.riferimento = ? AND t.attivo = ?");
 			q.setString(0, riferimento);
+			q.setBoolean(1, true);
 			return (Tavolo) q.uniqueResult();
 		} catch (Exception e) {
 			System.err.println("TavoloSession#selezionaTavoloPerRiferimento");
@@ -70,8 +71,9 @@ public class TavoloSession {
 
 	public List<Tavolo> selezionaTavoliPerNumeroPosti(Integer numeroPosti) {
 		try {
-			Query q = session.createQuery("from it.softfood.entity.Tavolo t where t.numeroPosti = ?");
+			Query q = session.createQuery("from it.softfood.entity.Tavolo t where t.numeroPosti = ? AND t.attivo = ?");
 			q.setInteger(0, numeroPosti);
+			q.setBoolean(1, true);
 			List<Tavolo> list = (List<Tavolo>) q.list();
 			return list;			
 		} catch (Exception e) {
@@ -82,8 +84,9 @@ public class TavoloSession {
 
 	public List<Tavolo> selezionaTavoliLiberi() {
 		try {
-			Query q = session.createQuery("from it.softfood.entity.Tavolo t where t.occupato = ? order by numeroPosti");
+			Query q = session.createQuery("from it.softfood.entity.Tavolo t where t.occupato = ? AND t.attivo = ? order by numeroPosti");
 			q.setBoolean(0, false);
+			q.setBoolean(1, true);
 			List<Tavolo> list = (List<Tavolo>) q.list();
 			return list;
 		} catch (Exception e) {
@@ -94,8 +97,9 @@ public class TavoloSession {
 
 	public List<Tavolo> selezionaTavoliOccupati() {
 		try {
-			Query q = session.createQuery("from it.softfood.entity.Tavolo t where t.occupato = ? order by numeroPosti");
+			Query q = session.createQuery("from it.softfood.entity.Tavolo t where t.occupato = ? AND t.attivo = ? order by numeroPosti");
 			q.setBoolean(0, true);
+			q.setBoolean(1, true);
 			List<Tavolo> list = (List<Tavolo>) q.list();
 			return list;			
 		} catch (Exception e) {
