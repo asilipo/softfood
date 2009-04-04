@@ -5,6 +5,7 @@ import it.softfood.entity.Ordinazione;
 import it.softfood.enumeration.TipoPietanza;
 import it.softfood.facade.PDAArticoloMenuFacade;
 import it.softfood.facade.PDAOrdinazioneFacade;
+import it.softfood.entity.Pietanza;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
@@ -59,8 +60,8 @@ public class Pannello_ordinazioni extends javax.swing.JPanel {
             jLabel2.setText(jLabel2.getText() + " dolce:");
             tipo_pietanza = TipoPietanza.DOLCE;
         }
-
-        ArrayList<it.softfood.entity.Pietanza> pietanze = (ArrayList<it.softfood.entity.Pietanza>) articolo.selezionaPietanzeDisponibiliPerTipo(tipo_pietanza);
+        System.out.println("TipoPietanzaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa " + tipo_pietanza.toString());
+        ArrayList<Pietanza> pietanze = (ArrayList<Pietanza>) articolo.selezionaPietanzeDisponibiliPerTipo(tipo_pietanza);
 
         tabella_pietanza.setModel(new javax.swing.table.DefaultTableModel(new String[]{"ID", "Pietanza"}, pietanze.size()){
             @Override
