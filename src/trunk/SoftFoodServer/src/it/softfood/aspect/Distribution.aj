@@ -10,9 +10,13 @@ import java.rmi.Naming;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
-public aspect Distribution {
+/**
+ * @author Maria Rosaria Paone
+ * @author Marco Grasso
+ * @author Francesco Pacilio
+ */
 
-	// private String xmlparameter="config_authorization_file";
+public aspect Distribution {
 
 	declare parents: it.softfood.handler.TavoloFacade implements ITavoloFacade;
 	declare parents: it.softfood.handler.OrdinazioneFacade implements IOrdinazioneFacade;
@@ -23,23 +27,16 @@ public aspect Distribution {
 
 	after(ITavoloFacade t): initTavolo(t){
 		try {
-			System.out.println("Distribution Aspect");
-			// XmlReader xml= new XmlReader();
-			// String file=xml.leggi(xmlparameter);
 			System.setProperty("java.security.policy", "authorization.policy");
 			System.setProperty("java.security.policy", "authorization.policy");
+			
 			if (System.getSecurityManager() == null) {
-				System.out.println("Security Manager null....");
 				System.setSecurityManager(new SecurityManager());
 			}
-			System.out.println("Object Exporting....");
-			ITavoloFacade tt = (ITavoloFacade) java.rmi.server.UnicastRemoteObject
-					.exportObject(t, 0);
-			System.out.println("Object exported");
+			
+			ITavoloFacade tt = (ITavoloFacade) java.rmi.server.UnicastRemoteObject.exportObject(t, 0);
 			Registry registry = LocateRegistry.getRegistry("localhost", 1099);
-			System.out.println("Get registry");
 			Naming.rebind("TavoloFacade", tt);
-			System.out.println("Server created and ready.");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -49,23 +46,18 @@ public aspect Distribution {
 
 	after(IOrdinazioneFacade t): initOrdine(t){
 		try {
-			System.out.println("Distribution Aspect");
-			// XmlReader xml= new XmlReader();
-			// String file=xml.leggi(xmlparameter);
 			System.setProperty("java.security.policy", "authorization.policy");
 			System.setProperty("java.security.policy", "authorization.policy");
 			if (System.getSecurityManager() == null) {
 				System.out.println("Security Manager null....");
 				System.setSecurityManager(new SecurityManager());
 			}
-			System.out.println("Object Exporting....");
-			IOrdinazioneFacade tt = (IOrdinazioneFacade) java.rmi.server.UnicastRemoteObject
-					.exportObject(t, 0);
+
+			IOrdinazioneFacade tt = (IOrdinazioneFacade) java.rmi.server.UnicastRemoteObject.exportObject(t, 0);
 			System.out.println("Object exported");
+			
 			Registry registry = LocateRegistry.getRegistry("localhost", 1099);
-			System.out.println("Get registry");
 			Naming.rebind("OrdineFacade", tt);
-			System.out.println("Server created and ready.");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -75,23 +67,18 @@ public aspect Distribution {
 
 	after(IRistoranteFacade t): initRistorante(t){
 		try {
-			System.out.println("Distribution Aspect");
-			// XmlReader xml= new XmlReader();
-			// String file=xml.leggi(xmlparameter);
 			System.setProperty("java.security.policy", "authorization.policy");
 			System.setProperty("java.security.policy", "authorization.policy");
+			
 			if (System.getSecurityManager() == null) {
-				System.out.println("Security Manager null....");
 				System.setSecurityManager(new SecurityManager());
 			}
-			System.out.println("Object Exporting....");
-			IRistoranteFacade tt = (IRistoranteFacade) java.rmi.server.UnicastRemoteObject
-					.exportObject(t, 0);
+
+			IRistoranteFacade tt = (IRistoranteFacade) java.rmi.server.UnicastRemoteObject.exportObject(t, 0);
 			System.out.println("Object exported");
+			
 			Registry registry = LocateRegistry.getRegistry("localhost", 1099);
-			System.out.println("Get registry");
 			Naming.rebind("RistoranteFacade", tt);
-			System.out.println("Server created and ready.");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -101,23 +88,17 @@ public aspect Distribution {
 
 	after(IArticoloMenuFacade t): initArticolo(t){
 		try {
-			System.out.println("Distribution Aspect");
-			// XmlReader xml= new XmlReader();
-			// String file=xml.leggi(xmlparameter);
 			System.setProperty("java.security.policy", "authorization.policy");
 			System.setProperty("java.security.policy", "authorization.policy");
+			
 			if (System.getSecurityManager() == null) {
-				System.out.println("Security Manager null....");
 				System.setSecurityManager(new SecurityManager());
 			}
-			System.out.println("Object Exporting....");
-			IArticoloMenuFacade tt = (IArticoloMenuFacade) java.rmi.server.UnicastRemoteObject
-					.exportObject(t, 0);
-			System.out.println("Object exported");
+			
+			IArticoloMenuFacade tt = (IArticoloMenuFacade) java.rmi.server.UnicastRemoteObject.exportObject(t, 0);
+
 			Registry registry = LocateRegistry.getRegistry("localhost", 1099);
-			System.out.println("Get registry");
 			Naming.rebind("ArticoloFacade", tt);
-			System.out.println("Server created and ready.");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
