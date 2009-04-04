@@ -5,13 +5,11 @@ import it.softfood.entity.Tavolo;
 import it.softfood.session.RistoranteSession;
 import it.softfood.session.TavoloSession;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 
 /**
  * @author Maria Rosaria Paone
@@ -19,14 +17,11 @@ import java.util.logging.Logger;
  * @author Francesco Pacilio
  */
 
-
 public class TavoloFacade implements ITavoloFacade {
 	
 	private static TavoloFacade singleton; 
-
-	private TavoloSession tavoloSession=TavoloSession.getInstance();
-
-	private RistoranteSession ristoranteSession=RistoranteSession.getInstance();
+	private TavoloSession tavoloSession = TavoloSession.getInstance();
+	private RistoranteSession ristoranteSession = RistoranteSession.getInstance();
 	
 	public TavoloFacade() {
 	}
@@ -35,15 +30,10 @@ public class TavoloFacade implements ITavoloFacade {
 		if (singleton == null) {
 			singleton = new TavoloFacade();
 		}
+		
 		return singleton;
 	}
 
-	/* (non-Javadoc)
-	 * @see it.softfood.handler.ITavoloFacade#inserisciTavolo(it.softfood.entity.Tavolo)
-	 */
-	/* (non-Javadoc)
-	 * @see it.softfood.handler.ITavoloFacade#inserisciTavolo(it.softfood.entity.Tavolo)
-	 */
 	public Tavolo inserisciTavolo(Tavolo tavolo) {
 		if (tavolo != null)
 			return tavoloSession.inserisciTavolo(tavolo);
@@ -51,12 +41,6 @@ public class TavoloFacade implements ITavoloFacade {
 		return null;
 	}
 	
-	/* (non-Javadoc)
-	 * @see it.softfood.handler.ITavoloFacade#liberaTavolo(it.softfood.entity.Tavolo)
-	 */
-	/* (non-Javadoc)
-	 * @see it.softfood.handler.ITavoloFacade#liberaTavolo(it.softfood.entity.Tavolo)
-	 */
 	public boolean liberaTavolo(Tavolo tavolo) {
 		if (tavolo != null)
 			return tavoloSession.modificaStatoTavolo(tavolo, false);
@@ -64,12 +48,6 @@ public class TavoloFacade implements ITavoloFacade {
 		return false;
 	}
 	
-	/* (non-Javadoc)
-	 * @see it.softfood.handler.ITavoloFacade#occupaTavolo(it.softfood.entity.Tavolo)
-	 */
-	/* (non-Javadoc)
-	 * @see it.softfood.handler.ITavoloFacade#occupaTavolo(it.softfood.entity.Tavolo)
-	 */
 	public boolean occupaTavolo(Tavolo tavolo) {
 		if (tavolo != null)
 			return tavoloSession.modificaStatoTavolo(tavolo, true);	
@@ -77,12 +55,6 @@ public class TavoloFacade implements ITavoloFacade {
 		return false;
 	}
 	
-	/* (non-Javadoc)
-	 * @see it.softfood.handler.ITavoloFacade#selezionaTavolo(java.lang.Long)
-	 */
-	/* (non-Javadoc)
-	 * @see it.softfood.handler.ITavoloFacade#selezionaTavolo(java.lang.Long)
-	 */
 	public Tavolo selezionaTavolo(Long id) {
 		if (id != null)
 			return tavoloSession.selezionaTavoloPerId(id);
@@ -90,32 +62,14 @@ public class TavoloFacade implements ITavoloFacade {
 		return null;
 	}
 	
-	/* (non-Javadoc)
-	 * @see it.softfood.handler.ITavoloFacade#selezionaTavoliLiberi()
-	 */
-	/* (non-Javadoc)
-	 * @see it.softfood.handler.ITavoloFacade#selezionaTavoliLiberi()
-	 */
 	public List<Tavolo> selezionaTavoliLiberi() {
 		return tavoloSession.selezionaTavoliLiberi();
 	}
 
-    /* (non-Javadoc)
-	 * @see it.softfood.handler.ITavoloFacade#selezionaTavoliOccupati()
-	 */
-    /* (non-Javadoc)
-	 * @see it.softfood.handler.ITavoloFacade#selezionaTavoliOccupati()
-	 */
     public List<Tavolo> selezionaTavoliOccupati() {
 		return tavoloSession.selezionaTavoliOccupati();
 	}
 
-    /* (non-Javadoc)
-	 * @see it.softfood.handler.ITavoloFacade#selezionaTavoliNonAttivi()
-	 */
-    /* (non-Javadoc)
-	 * @see it.softfood.handler.ITavoloFacade#selezionaTavoliNonAttivi()
-	 */
     public List<Tavolo> selezionaTavoliNonAttivi() {
         return tavoloSession.selezionaTavoliNonAttivi();
     }
