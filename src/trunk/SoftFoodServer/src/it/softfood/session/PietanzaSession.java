@@ -1,5 +1,6 @@
 package it.softfood.session;
 
+import it.softfood.entity.Articolo;
 import it.softfood.entity.Pietanza;
 import it.softfood.enumeration.TipoPietanza;
 
@@ -63,11 +64,11 @@ public class PietanzaSession {
 		}
 	}
 
-    public List<Pietanza> selezionaPietanzePerTipo(TipoPietanza tipoPietanza) {
+    public List<Articolo> selezionaPietanzePerTipo(TipoPietanza tipoPietanza) {
     	try {
 			Query q = session.createQuery("from it.softfood.entity.Articolo o where o.tipoPietanza = ?");
 			q.setInteger(0, tipoPietanza.ordinal());
-			List<Pietanza> list = (List<Pietanza>) q.list();
+			List<Articolo> list = (List<Articolo>) q.list();
 			
 			return list;
 		} catch (Exception e) {

@@ -21,6 +21,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.swing.text.html.HTMLDocument.HTMLReader.IsindexAction;
+
 /**
  * @author Maria Rosaria Paone
  * @author Marco Grasso
@@ -96,12 +98,12 @@ public class ArticoloMenuFacade  {
     }
 
     public ArrayList<Pietanza> selezionaPietanzeDisponibiliPerTipo(TipoPietanza tipoPietanza) {
-        ArrayList<Pietanza> pietanze = (ArrayList<Pietanza>) pietanzaSessionBean.selezionaPietanzePerTipo(tipoPietanza);
-        ArrayList<Pietanza> pietanzeDisponibili = new ArrayList<Pietanza>();
+        ArrayList<Articolo> pietanze = (ArrayList<Articolo>) pietanzaSessionBean.selezionaPietanzePerTipo(tipoPietanza);
+        ArrayList<Articolo> pietanzeDisponibili = new ArrayList<Articolo>();
 
         if (pietanze != null) {
-            for (Pietanza pietanza : pietanze) {
-                if (this.verificaIngredientiPietanza(pietanza) > 0) {
+            for (Articolo pietanza : pietanze) {
+                if (pietanza instanceof Pietanza && this.verificaIngredientiPietanza((Pietanza)pietanza) > 0) {
                     pietanzeDisponibili.add(pietanza);
                 }
             }
