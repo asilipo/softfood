@@ -64,13 +64,31 @@ public class PietanzaSession {
 		}
 	}
 
-    public List<Articolo> selezionaPietanzePerTipo(TipoPietanza tipoPietanza) {
+    public List<Pietanza> selezionaPietanzePerTipo(TipoPietanza tipoPietanza) {
     	try {
 			Query q = session.createQuery("from it.softfood.entity.Articolo o where o.tipoPietanza = ?");
 			q.setInteger(0, tipoPietanza.ordinal());
-			List<Articolo> list = (List<Articolo>) q.list();
+			List<Articolo> articoli = (List<Articolo>) q.list();
+			List<Pietanza> pietanze = new ArrayList<Pietanza>();
 			
-			return list;
+			for (Articolo articolo : articoli) {
+				if (articolo.getTipoArticolo().equals("Pietanza")) {
+					Pietanza pietanza = new Pietanza();
+					pietanza.setDescrizione(articolo.getDescrizione());
+					pietanza.setId(articolo.getId());
+					pietanza.setIngredientePietanzas(articolo.getIngredientePietanzas());
+					pietanza.setLineaOrdinaziones(articolo.getLineaOrdinaziones());
+					pietanza.setListino(articolo.getListino());
+					pietanza.setNome(articolo.getNome());
+					pietanza.setTipo(TipoPietanza.values()[articolo.getTipoPietanza()]);
+					pietanza.setTipoArticolo(articolo.getTipoArticolo());
+					pietanza.setTipoPietanza(articolo.getTipoPietanza());
+					
+					pietanze.add(pietanza);
+				}
+			}
+			
+			return pietanze;
 		} catch (Exception e) {
 			System.err.println("PietanzaSession#selezionaPietanzePerTipo" + e);
 			return null;
