@@ -66,7 +66,7 @@ public aspect ClientDistribution {
 		return obj;
 	}
 	
-	pointcut distributeArticoloFacadeCalls(): execution(* it.softfood.facade.PDAArticoloMenu.*(..)) && !execution(it.softfood.facade.PDAArticoloMenu.new(..));
+	pointcut distributeArticoloFacadeCalls(): execution(* it.softfood.facade.PDAArticoloMenuFacade.*(..)) && !execution(it.softfood.facade.PDAArticoloMenu.new(..));
 
 	Object around(): distributeArticoloFacadeCalls()  {
 		Object obj = null;
