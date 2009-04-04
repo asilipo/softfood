@@ -31,6 +31,7 @@ public aspect ClientDistribution {
 			tavolofacade = (ITavoloFacade) registry.lookup("TavoloFacade");
 			ristorantefacade = (IRistoranteFacade) registry.lookup("RistoranteFacade");
 			ordinazionefacade = (IOrdinazioneFacade) registry.lookup("OrdineFacade");
+			articolofacade = (IArticoloMenuFacade) registry.lookup("ArticoloFacade");
 		} catch (Exception e) {
 			System.err.println("Exception to obtain the reference to the remote object: " + e);
 		}
