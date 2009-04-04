@@ -7,6 +7,12 @@ import it.softfood.handler.ITavoloFacade;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
+/**
+ * @author Maria Rosaria Paone
+ * @author Marco Grasso
+ * @author Francesco Pacilio
+ */
+
 public aspect ClientDistribution {
 
 	private ITavoloFacade tavolofacade;
@@ -24,11 +30,8 @@ public aspect ClientDistribution {
 			ristorantefacade = (IRistoranteFacade) registry.lookup("RistoranteFacade");
 			ordinazionefacade = (IOrdinazioneFacade) registry.lookup("OrdineFacade");
 		} catch (Exception e) {
-			System.err
-					.println("Exception to obtain the reference to the remote object");
-			e.printStackTrace();
+			System.err.println("Exception to obtain the reference to the remote object: " + e);
 		}
-
 	}
 
 	pointcut distributeRistoranteFacadeCalls(): execution(* it.softfood.facade.PDARistoranteFacade.*(..)) && !execution(it.softfood.facade.PDARistoranteFacade.new(..));
@@ -37,7 +40,7 @@ public aspect ClientDistribution {
 		Object obj = null;
 		obj = ExecuteMetod.invoke(ristorantefacade, thisJoinPoint.getSignature()
 				.getName(), thisJoinPoint.getArgs());
-		Object[] params = thisJoinPoint.getArgs();
+		//Object[] params = thisJoinPoint.getArgs();
 		return obj;
 	}
 	
@@ -47,7 +50,7 @@ public aspect ClientDistribution {
 		Object obj = null;
 		obj = ExecuteMetod.invoke(tavolofacade, thisJoinPoint.getSignature()
 				.getName(), thisJoinPoint.getArgs());
-		Object[] params = thisJoinPoint.getArgs();
+		//Object[] params = thisJoinPoint.getArgs();
 		return obj;
 	}
 	
@@ -57,7 +60,7 @@ public aspect ClientDistribution {
 		Object obj = null;
 		obj = ExecuteMetod.invoke(ordinazionefacade, thisJoinPoint.getSignature()
 				.getName(), thisJoinPoint.getArgs());
-		Object[] params = thisJoinPoint.getArgs();
+		//Object[] params = thisJoinPoint.getArgs();
 		return obj;
 	}
 
