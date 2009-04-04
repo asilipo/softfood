@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import it.softfood.entity.Ordinazione;
 import it.softfood.entity.Tavolo;
+import it.softfood.enumeration.TipoPietanza;
+import it.softfood.facade.PDAArticoloMenuFacade;
 import it.softfood.facade.PDAOrdinazioneFacade;
 import it.softfood.facade.PDATavoloFacade;
 
@@ -16,10 +18,13 @@ public class Start {
 		// TODO Auto-generated method stub
 		PDATavoloFacade pda=new PDATavoloFacade();
 		PDAOrdinazioneFacade pdaOrd=new PDAOrdinazioneFacade();
-		Tavolo tav=pda.selezionaTavolo(new Long(0));
-		Ordinazione ordine = pdaOrd.selezionaOrdinazioneGiornalieraPerTavolo(tav.getRiferimento(), new Boolean("false"));
+		PDAArticoloMenuFacade articolo = new PDAArticoloMenuFacade();
+//		Tavolo tav=pda.selezionaTavolo(new Long(0));
+//		Ordinazione ordine = pdaOrd.selezionaOrdinazioneGiornalieraPerTavolo(tav.getRiferimento(), new Boolean("false"));
+//		
+//		System.out.println("TERMINATO OK! "+ordine.getId());
 		
-		System.out.println("TERMINATO OK! "+ordine.getId());
+		articolo.selezionaPietanzeDisponibiliPerTipo(TipoPietanza.PRIMO_PIATTO);
 		
 		
 
