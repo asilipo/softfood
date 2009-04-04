@@ -21,7 +21,7 @@ import org.jdesktop.application.FrameView;
  */
 public class Pietanza extends javax.swing.JPanel {
 
-    private ArticoloMenuFacadeRemote articolo;
+    private PDAArticoloMenuFacade articolo;
     private OrdinazioneFacadeRemote ordinazioneFacade;
 
     private void initFacade(Hashtable hash) {

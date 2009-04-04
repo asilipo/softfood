@@ -3,8 +3,9 @@ package it.softfood.GUI;
 import it.softfood.entity.LineaOrdinazione;
 import it.softfood.entity.Ordinazione;
 import it.softfood.enumeration.TipoPietanza;
-import it.softfood.facade.articolomenu.ArticoloMenuFacadeRemote;
-import it.softfood.facade.ordinazione.OrdinazioneFacadeRemote;
+import it.softfood.facade.PDAArticoloMenuFacade;
+import it.softfood.facade.PDAOrdinazioneFacade;
+
 import java.util.ArrayList;
 import java.util.Hashtable;
 import javax.naming.InitialContext;
@@ -20,15 +21,15 @@ import org.jdesktop.application.FrameView;
 
 public class Pannello_ordinazioni extends javax.swing.JPanel {
 
-    private OrdinazioneFacadeRemote ordinazioneFacade;
-    private ArticoloMenuFacadeRemote articolo;
+    private PDAOrdinazioneFacade ordinazioneFacade;
+    private PDAArticoloMenuFacade articolo;
 
     private void initFacade(Hashtable hash) {
         try {
-            InitialContext initial = new InitialContext(hash);
-            ordinazioneFacade = (OrdinazioneFacadeRemote) initial.lookup("it.softfood.facade.ordinazione.OrdinazioneFacade");
-            articolo = (ArticoloMenuFacadeRemote) initial.lookup("it.softfood.facade.articolomenu.ArticoloMenuFacade");
-        } catch (NamingException e) {
+            
+            ordinazioneFacade = new PDAOrdinazioneFacade();
+            articolo = new PDAArticoloMenuFacade();
+        } catch (Exception e) {
             System.err.println("Errore binding: OrdinazioneFacade e ArticoloMenuFacade");
         }
     }

@@ -2,7 +2,8 @@ package it.softfood.GUI;
 
 import it.softfood.entity.LineaOrdinazione;
 import it.softfood.entity.Variante;
-import it.softfood.facade.ordinazione.OrdinazioneFacadeRemote;
+import it.softfood.facade.PDAOrdinazioneFacade;
+
 import java.awt.Color;
 import java.awt.Component;
 import java.util.ArrayList;
@@ -19,10 +20,10 @@ import javax.swing.table.TableColumn;
 public class ToolTipCellRender extends DefaultTableCellRenderer {
 
     private XTableColumnModel id_antipasto;
-    private OrdinazioneFacadeRemote ordinazioneFacade;
+    private PDAOrdinazioneFacade ordinazioneFacade;
     private TableColumn id;
 
-    public ToolTipCellRender(OrdinazioneFacadeRemote ordinazioneFacade, TableColumn id, XTableColumnModel id_antipasto) {
+    public ToolTipCellRender(PDAOrdinazioneFacade ordinazioneFacade, TableColumn id, XTableColumnModel id_antipasto) {
         super();
         this.id = id;
         this.id_antipasto = id_antipasto;
