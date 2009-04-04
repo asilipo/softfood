@@ -6,6 +6,8 @@ import it.softfood.entity.LineaOrdinazione;
 import it.softfood.entity.Ordinazione;
 import it.softfood.handler.OrdinazioneFacade;
 
+import java.lang.Boolean;
+
 public class PDAOrdinazioneFacade {
 
 	public Ordinazione inserisciOrdinazione(Ordinazione ordine) {
