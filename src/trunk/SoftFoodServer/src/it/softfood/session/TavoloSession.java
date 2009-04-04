@@ -61,13 +61,13 @@ public class TavoloSession {
 		}
 	}
 
-	public Tavolo selezionaTavoloPerRiferimento(String riferimento) {
+	public Tavolo selezionaTavoloPerRiferimento(String riferimento, Boolean attivo) {
 		try {
-			System.out.println("SEI INNNNNNNNNNNNN TAVOLOSESSION selezionaTavoloPerRiferimento");
 			Query q = session.createQuery("from it.softfood.entity.Tavolo t where t.riferimento = ? AND t.attivo = ?");
 			q.setString(0, riferimento);
-			q.setBoolean(1, true);
-			Tavolo tav=(Tavolo) q.uniqueResult();
+			q.setBoolean(1, attivo);			
+			Tavolo tav = (Tavolo) q.uniqueResult();
+	
 			return tav;
 		} catch (Exception e) {
 			System.err.println("TavoloSession#selezionaTavoloPerRiferimento");
