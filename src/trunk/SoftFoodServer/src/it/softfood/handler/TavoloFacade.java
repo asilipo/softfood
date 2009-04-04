@@ -119,13 +119,7 @@ public class TavoloFacade implements ITavoloFacade {
     public List<Tavolo> selezionaTavoliNonAttivi() {
         return tavoloSession.selezionaTavoliNonAttivi();
     }
-	
-	/* (non-Javadoc)
-	 * @see it.softfood.handler.ITavoloFacade#rimuoviTavolo(java.lang.Long)
-	 */
-	/* (non-Javadoc)
-	 * @see it.softfood.handler.ITavoloFacade#rimuoviTavolo(java.lang.Long)
-	 */
+    
 	public boolean rimuoviTavolo(Long id) {
 		if (id != null)
 			return tavoloSession.rimuoviTavolo(id);
@@ -133,20 +127,13 @@ public class TavoloFacade implements ITavoloFacade {
 		return false;
 	}
     
-    /* (non-Javadoc)
-	 * @see it.softfood.handler.ITavoloFacade#occupaTavoli(java.util.List)
-	 */
-    /* (non-Javadoc)
-	 * @see it.softfood.handler.ITavoloFacade#occupaTavoli(java.util.List)
-	 */
     public Long occupaTavoli(ArrayList<String> riferimenti) {
         try {
             if (riferimenti != null) {
                 if (riferimenti.size() == 1) {
                     String riferimento = riferimenti.get(0);
                     if (riferimento != null) {
-                        Tavolo tavolo = tavoloSession.selezionaTavoloPerRiferimento(riferimento);
-//                        tavolo = tavoloSession.merge(tavolo);
+                        Tavolo tavolo = tavoloSession.selezionaTavoloPerRiferimento(riferimento, true);
                         if (!tavolo.isOccupato()) {
                             tavolo.setOccupato(true);
                             tavoloSession.update(tavolo);
@@ -157,15 +144,13 @@ public class TavoloFacade implements ITavoloFacade {
                         }
                     } else {
                         throw new IllegalStateException();
-//                        return null;
                     }
                 } else if (riferimenti.size() > 1) {
                     String riferimentoTavoli = null;
                     Integer numeroPosti = 0;
                     for (String riferimento : riferimenti) {
                         if (riferimento != null) {
-                            Tavolo tavolo = tavoloSession.selezionaTavoloPerRiferimento(riferimento);
-//                            tavolo = tavoloSession.merge(tavolo);
+                            Tavolo tavolo = tavoloSession.selezionaTavoloPerRiferimento(riferimento, true);
                             if (!tavolo.isOccupato()) {
                                 tavolo.setAttivo(false);
                                 tavoloSession.update(tavolo);
@@ -179,8 +164,7 @@ public class TavoloFacade implements ITavoloFacade {
                             	tavolo.setAttivo(true);
                             	tavoloSession.update(tavolo);
                                 return null;
-                            }
-                            
+                            } 
                         } else {
                             throw new IllegalStateException();
                         }

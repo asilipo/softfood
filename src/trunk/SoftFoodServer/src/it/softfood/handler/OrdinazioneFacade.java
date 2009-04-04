@@ -76,7 +76,7 @@ public OrdinazioneFacade(){
                         StringTokenizer st = new StringTokenizer(riferimento, "+");
                         while(st.hasMoreTokens()) {
                             String temp = st.nextToken();
-                            Tavolo tavoloDaAttivare = tavoloSession.selezionaTavoloPerRiferimento(temp);
+                            Tavolo tavoloDaAttivare = tavoloSession.selezionaTavoloPerRiferimento(temp, false);
 //                            tavoloDaAttivare = em.merge(tavoloDaAttivare);
                             tavoloDaAttivare.setAttivo(true);
                             tavoloSession.update(tavoloDaAttivare);
@@ -210,18 +210,12 @@ public OrdinazioneFacade(){
     public Ordinazione selezionaOrdinazioneGiornalieraPerTavolo(String riferimentoTavolo, Boolean terminato) {
 		if (riferimentoTavolo != null && terminato != null){
 			System.out.println("SEI INNNNNNNNNNNNN ORDINAZIONEFACADE selezionaOrdinazioneGiornalieraPerTavolo");
-			ArrayList<Ordinazione> list=((ArrayList<Ordinazione>)ordinazioneSession.selezionaOrdinazioniGionalierePerTavolo(tavoloSession.selezionaTavoloPerRiferimento(riferimentoTavolo), terminato));
+			ArrayList<Ordinazione> list=((ArrayList<Ordinazione>)ordinazioneSession.selezionaOrdinazioniGionalierePerTavolo(tavoloSession.selezionaTavoloPerRiferimento(riferimentoTavolo, true), terminato));
 			return list.get(0);
 		}
 		return null;
 	}
 	
-	/* (non-Javadoc)
-	 * @see it.softfood.handler.IOrdinazioneFacade#rimuoviOrdinazione(java.lang.Long, java.lang.Boolean)
-	 */
-	/* (non-Javadoc)
-	 * @see it.softfood.handler.IOrdinazioneFacade#rimuoviOrdinazione(java.lang.Long, java.lang.Boolean)
-	 */
 	public boolean rimuoviOrdinazione(Long id, Boolean ripristinaPietanze) {
 		if (id != null) {
             Boolean statoEliminazione = false;
@@ -255,9 +249,11 @@ public OrdinazioneFacade(){
                     if (tavolo.getRiferimento().contains("+")) {
                         String riferimento = tavolo.getRiferimento();
                         StringTokenizer st = new StringTokenizer(riferimento, "+");
+                        System.out.println("*****************************************riferimento"+riferimento);
                         while(st.hasMoreTokens()) {
                             String temp = st.nextToken();
-                            Tavolo tavoloDaAttivare = tavoloSession.selezionaTavoloPerRiferimento(temp);
+                            System.out.println("*******************************************************teeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeemp"+temp);
+                            Tavolo tavoloDaAttivare = tavoloSession.selezionaTavoloPerRiferimento(temp, false);
 //                            tavoloDaAttivare = em.merge(tavoloDaAttivare);
                             tavoloDaAttivare.setAttivo(true);
                             tavoloSession.update(tavoloDaAttivare);
@@ -513,22 +509,10 @@ public OrdinazioneFacade(){
         return null;
     }
 
-    /* (non-Javadoc)
-	 * @see it.softfood.handler.IOrdinazioneFacade#selezionaVariantiPerIngrediente(it.softfood.entity.Ingrediente)
-	 */
-    /* (non-Javadoc)
-	 * @see it.softfood.handler.IOrdinazioneFacade#selezionaVariantiPerIngrediente(it.softfood.entity.Ingrediente)
-	 */
     public ArrayList<Variante> selezionaVariantiPerIngrediente(Ingrediente ingrediente) {
         return null;
     }
 
-    /* (non-Javadoc)
-	 * @see it.softfood.handler.IOrdinazioneFacade#selezionaVariantiPerLineaOrdinazione(it.softfood.entity.LineaOrdinazione)
-	 */
-    /* (non-Javadoc)
-	 * @see it.softfood.handler.IOrdinazioneFacade#selezionaVariantiPerLineaOrdinazione(it.softfood.entity.LineaOrdinazione)
-	 */
     public ArrayList<Variante> selezionaVariantiPerLineaOrdinazione(LineaOrdinazione lineaOrdinazione) {
         if (lineaOrdinazione != null) {
             ArrayList<Variante> varianti =(ArrayList<Variante>) varianteSession.selezionaVariantiPerLineaOrdinazione(lineaOrdinazione);
@@ -540,12 +524,6 @@ public OrdinazioneFacade(){
         return null;
     }
 
-    /* (non-Javadoc)
-	 * @see it.softfood.handler.IOrdinazioneFacade#rimuoviVariante(java.lang.Long)
-	 */
-    /* (non-Javadoc)
-	 * @see it.softfood.handler.IOrdinazioneFacade#rimuoviVariante(java.lang.Long)
-	 */
     public boolean rimuoviVariante(Long id) {
         if (id != null)
 			return varianteSession.rimuoviVariante(id);
