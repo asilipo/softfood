@@ -3,6 +3,7 @@ package it.softfood.session;
 import it.softfood.entity.Pietanza;
 import it.softfood.enumeration.TipoPietanza;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -64,21 +65,21 @@ public class PietanzaSession {
 
     public List<Pietanza> selezionaPietanzePerTipo(TipoPietanza tipoPietanza) {
     	try {
-			Query q = session.createQuery("from it.softfood.entity.Pietanza o where tipoPietanza = ?");
-			q.setString(0, tipoPietanza.toString());
+			Query q = session.createQuery("from it.softfood.entity.Articolo o where o.tipoPietanza = ?");
+			q.setInteger(0, tipoPietanza.ordinal());
 			List<Pietanza> list = (List<Pietanza>) q.list();
 			
 			return list;
 		} catch (Exception e) {
-			System.err.println("PietanzaSession#selezionaPietanzePerTipo");
+			System.err.println("PietanzaSession#selezionaPietanzePerTipo" + e);
 			return null;
 		}
 	}
 
-    public List<Pietanza> selezionaPietanze() {
+    public ArrayList<Pietanza> selezionaPietanze() {
     	try {
 			Query q = session.createQuery("from it.softfood.entity.Pietanza o where tipoArticolo = 'Pietanza'");
-			List<Pietanza> list = (List<Pietanza>) q.list();
+			ArrayList<Pietanza> list = (ArrayList<Pietanza>) q.list();
 			
 			return list;
 		} catch (Exception e) {

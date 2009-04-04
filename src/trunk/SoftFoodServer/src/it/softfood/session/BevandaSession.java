@@ -2,6 +2,7 @@ package it.softfood.session;
 
 import it.softfood.entity.Bevanda;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -62,10 +63,10 @@ public class BevandaSession {
 		}
 	}
 
-	public List<Bevanda> selezionaBevande() {
+	public ArrayList<Bevanda> selezionaBevande() {
 		try {
 			Query q = session.createQuery("from it.softfood.entity.Bevanda b");
-			List<Bevanda> list = (List<Bevanda>) q.list();
+			ArrayList<Bevanda> list = (ArrayList<Bevanda>) q.list();
 			
 			return list;			
 		} catch (Exception e) {
