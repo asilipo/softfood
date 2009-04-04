@@ -24,14 +24,12 @@ public class PDAOrdinazioneFacade {
 		return ord;
 	}
 
-	public Ordinazione selezionaOrdinazioneGiornalieraPerTavolo(String riferimentoTavolo,
-			Boolean terminato) {
+	public Ordinazione selezionaOrdinazioneGiornalieraPerTavolo(String riferimentoTavolo, Boolean terminato) {
 		IOrdinazioneFacade ordineFacade=OrdinazioneFacade.getInstance();
 		Ordinazione ord = null;
 		try {
 			ord = ordineFacade.selezionaOrdinazioneGiornalieraPerTavolo(riferimentoTavolo, terminato);
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return ord;
@@ -43,9 +41,9 @@ public class PDAOrdinazioneFacade {
 		try {
 			ord = ordineFacade.selezionaOrdinazionePerId(tavolo);
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		return ord;
 	}
 
@@ -56,9 +54,9 @@ public class PDAOrdinazioneFacade {
 		try {
 			ord = (ArrayList<LineaOrdinazione>) ordineFacade.selezionaLineeOrdinazionePerOrdinazione(selezionaOrdinazionePerId);
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		return ord;
 	}
 
@@ -68,12 +66,10 @@ public class PDAOrdinazioneFacade {
 		try {
 			result = ordineFacade.rimuoviOrdinazione(tavolo, b);
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		if(!result)
 			new Exception();
-		
 	}
 
 }
