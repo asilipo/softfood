@@ -24,7 +24,7 @@ import org.jdesktop.application.FrameView;
  */
 public class Tavoli extends javax.swing.JPanel {
 
-   private PDATavoloFacade tavoloFacade;
+	private PDATavoloFacade tavoloFacade;
    private PDAOrdinazioneFacade ordinazioneFacade;
     private ArrayList<Tavolo> tavoli;
     private String[] listaTavoli;
@@ -231,7 +231,7 @@ public class Tavoli extends javax.swing.JPanel {
                 frame.setComponent(pannello_tavoli);
             }
         } else {
-            ordine = ordinazioneFacade.selezionaOrdinazioneGiornalieraPerTavolo((String)tav.get(0), new Boolean("false"));
+            ordine = ordinazioneFacade.selezionaOrdinazioneGiornalieraPerTavolo(((String)tav.get(0)), false);
         }
 
         this.setVisible(false);
