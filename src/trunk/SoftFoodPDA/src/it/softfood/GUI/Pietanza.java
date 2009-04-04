@@ -4,8 +4,9 @@ import it.softfood.entity.Ingrediente;
 import it.softfood.entity.LineaOrdinazione;
 import it.softfood.entity.Variante;
 import it.softfood.enumeration.TipoVariante;
-import it.softfood.facade.articolomenu.ArticoloMenuFacadeRemote;
-import it.softfood.facade.ordinazione.OrdinazioneFacadeRemote;
+import it.softfood.facade.PDAArticoloMenuFacade;
+import it.softfood.facade.PDAOrdinazioneFacade;
+
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Hashtable;
@@ -22,14 +23,14 @@ import org.jdesktop.application.FrameView;
 public class Pietanza extends javax.swing.JPanel {
 
     private PDAArticoloMenuFacade articolo;
-    private OrdinazioneFacadeRemote ordinazioneFacade;
+    private PDAOrdinazioneFacade ordinazioneFacade;
 
     private void initFacade(Hashtable hash) {
         try {
-            InitialContext initial = new InitialContext(hash);
-            articolo = (ArticoloMenuFacadeRemote) initial.lookup("it.softfood.facade.articolomenu.ArticoloMenuFacade");
-            ordinazioneFacade = (OrdinazioneFacadeRemote) initial.lookup("it.softfood.facade.ordinazione.OrdinazioneFacade");
-        } catch (NamingException e) {
+            
+            articolo = new PDAArticoloMenuFacade();
+            ordinazioneFacade = new PDAOrdinazioneFacade();
+        } catch (Exception e) {
             System.err.println("Errore binding: ArticoloMenuFacade - OrdinazioneFacade");
         }
     }
