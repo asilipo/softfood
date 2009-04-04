@@ -11,7 +11,7 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+import java.lang.Boolean;
 
 public interface IOrdinazioneFacade extends Remote{
 
@@ -26,9 +26,9 @@ public interface IOrdinazioneFacade extends Remote{
 
 	public abstract ArrayList<Ordinazione> selezionaOrdinazioniPerData(Date data)throws RemoteException;
 
-	public abstract ArrayList<Ordinazione> selezionaOrdinazioniGiornalierePerTavolo(
+/*	public abstract ArrayList<Ordinazione> selezionaOrdinazioniGiornalierePerTavolo(
 			Tavolo tavolo, Boolean terminato)throws RemoteException;
-
+*/
 	public abstract Ordinazione selezionaOrdinazioneGiornalieraPerTavolo(
 			Tavolo tavolo, Boolean terminato)throws RemoteException;
 
