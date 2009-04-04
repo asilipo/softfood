@@ -99,12 +99,12 @@ public class ArticoloMenuFacade  {
 
     public ArrayList<Pietanza> selezionaPietanzeDisponibiliPerTipo(TipoPietanza tipoPietanza) {
         ArrayList<Articolo> pietanze = (ArrayList<Articolo>) pietanzaSessionBean.selezionaPietanzePerTipo(tipoPietanza);
-        ArrayList<Articolo> pietanzeDisponibili = new ArrayList<Articolo>();
+        ArrayList<Pietanza> pietanzeDisponibili = new ArrayList<Pietanza>();
 
         if (pietanze != null) {
             for (Articolo pietanza : pietanze) {
                 if (pietanza instanceof Pietanza && this.verificaIngredientiPietanza((Pietanza)pietanza) > 0) {
-                    pietanzeDisponibili.add(pietanza);
+                    pietanzeDisponibili.add((Pietanza)pietanza);
                 }
             }
         }
