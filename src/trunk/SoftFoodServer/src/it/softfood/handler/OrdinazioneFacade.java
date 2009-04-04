@@ -33,7 +33,6 @@ import java.lang.Boolean;
  * @author Francesco Pacilio
  */
 
-
 public class OrdinazioneFacade {
 
 	private static OrdinazioneFacade singleton;
@@ -47,10 +46,7 @@ public class OrdinazioneFacade {
 	private BevandaMagazzinoSession bevandaMagazzinoSession=BevandaMagazzinoSession.getInstance();
 	
 	
-public OrdinazioneFacade(){
-		
-		
-	}
+	public OrdinazioneFacade(){}
 	
 	public synchronized static OrdinazioneFacade getInstance() {
 		if (singleton == null) {
@@ -59,12 +55,6 @@ public OrdinazioneFacade(){
 		return singleton;
 	}
 	
-	/* (non-Javadoc)
-	 * @see it.softfood.handler.IOrdinazioneFacade#inserisciOrdinazione(it.softfood.entity.Ordinazione)
-	 */
-	/* (non-Javadoc)
-	 * @see it.softfood.handler.IOrdinazioneFacade#inserisciOrdinazione(it.softfood.entity.Ordinazione)
-	 */
 	public Ordinazione inserisciOrdinazione(Ordinazione ordinazione) {
 		if (ordinazione != null) {
             Tavolo tavolo = tavoloSession.selezionaTavoloPerId(ordinazione.getTavolo().getId());
@@ -129,12 +119,6 @@ public OrdinazioneFacade(){
         return disponibilita;
     }
 
-    /* (non-Javadoc)
-	 * @see it.softfood.handler.IOrdinazioneFacade#modificaOrdinazione(it.softfood.entity.Ordinazione, it.softfood.entity.Ordinazione)
-	 */
-    /* (non-Javadoc)
-	 * @see it.softfood.handler.IOrdinazioneFacade#modificaOrdinazione(it.softfood.entity.Ordinazione, it.softfood.entity.Ordinazione)
-	 */
     public Ordinazione modificaOrdinazione(Ordinazione nuovaOrdinazione, Ordinazione vecchiaOrdinazione) {
 		if (nuovaOrdinazione != null && vecchiaOrdinazione != null) {
 			Ordinazione ordinazione = ordinazioneSession.selezionaOrdinazionePerId(vecchiaOrdinazione.getId());
@@ -149,13 +133,7 @@ public OrdinazioneFacade(){
 
 		return null;
 	}
-	
-	/* (non-Javadoc)
-	 * @see it.softfood.handler.IOrdinazioneFacade#selezionaOrdinazionePerId(java.lang.Long)
-	 */
-	/* (non-Javadoc)
-	 * @see it.softfood.handler.IOrdinazioneFacade#selezionaOrdinazionePerId(java.lang.Long)
-	 */
+
 	public Ordinazione selezionaOrdinazionePerId(Long id) {
 		if (id != null) {
 			Ordinazione ord=ordinazioneSession.selezionaOrdinazionePerId(id);
@@ -164,22 +142,10 @@ public OrdinazioneFacade(){
 		return null;
 	}
 	
-	/* (non-Javadoc)
-	 * @see it.softfood.handler.IOrdinazioneFacade#selezionaOrdinazioni()
-	 */
-	/* (non-Javadoc)
-	 * @see it.softfood.handler.IOrdinazioneFacade#selezionaOrdinazioni()
-	 */
 	public ArrayList<Ordinazione> selezionaOrdinazioni() {
 		return (ArrayList<Ordinazione>) ordinazioneSession.selezionaOrdinazioni();
 	}
 	
-	/* (non-Javadoc)
-	 * @see it.softfood.handler.IOrdinazioneFacade#selezionaOrdinazioniPerData(java.util.Date)
-	 */
-	/* (non-Javadoc)
-	 * @see it.softfood.handler.IOrdinazioneFacade#selezionaOrdinazioniPerData(java.util.Date)
-	 */
 	public ArrayList<Ordinazione> selezionaOrdinazioniPerData(Date data) {
 		if (data != null) 
 			return (ArrayList<Ordinazione>) ordinazioneSession.selezionaOrdinazioniPerData(data);
@@ -187,12 +153,6 @@ public OrdinazioneFacade(){
 		return null;
 	}
 	
-	/* (non-Javadoc)
-	 * @see it.softfood.handler.IOrdinazioneFacade#selezionaOrdinazioniGiornalierePerTavolo(it.softfood.entity.Tavolo, java.lang.Boolean)
-	 */
-	/* (non-Javadoc)
-	 * @see it.softfood.handler.IOrdinazioneFacade#selezionaOrdinazioniGiornalierePerTavolo(it.softfood.entity.Tavolo, java.lang.Boolean)
-	 */
 	public ArrayList<Ordinazione> selezionaOrdinazioniGiornalierePerTavolo(Tavolo tavolo, Boolean terminato) {
 		if (tavolo != null && terminato != null) 
 			return (ArrayList<Ordinazione>) ordinazioneSession.selezionaOrdinazioniGionalierePerTavolo(tavolo, terminato);
@@ -200,17 +160,10 @@ public OrdinazioneFacade(){
 		return null;
 	}
 
-
-    /* (non-Javadoc)
-	 * @see it.softfood.handler.IOrdinazioneFacade#selezionaOrdinazioneGiornalieraPerTavolo(java.lang.String, java.lang.Boolean)
-	 */
-    /* (non-Javadoc)
-	 * @see it.softfood.handler.IOrdinazioneFacade#selezionaOrdinazioneGiornalieraPerTavolo(java.lang.String, java.lang.Boolean)
-	 */
     public Ordinazione selezionaOrdinazioneGiornalieraPerTavolo(String riferimentoTavolo, Boolean terminato) {
 		if (riferimentoTavolo != null && terminato != null){
-			System.out.println("SEI INNNNNNNNNNNNN ORDINAZIONEFACADE selezionaOrdinazioneGiornalieraPerTavolo");
 			ArrayList<Ordinazione> list=((ArrayList<Ordinazione>)ordinazioneSession.selezionaOrdinazioniGionalierePerTavolo(tavoloSession.selezionaTavoloPerRiferimento(riferimentoTavolo, true), terminato));
+			
 			return list.get(0);
 		}
 		return null;
@@ -249,15 +202,11 @@ public OrdinazioneFacade(){
                     if (tavolo.getRiferimento().contains("+")) {
                         String riferimento = tavolo.getRiferimento();
                         StringTokenizer st = new StringTokenizer(riferimento, "+");
-                        System.out.println("*****************************************riferimento"+riferimento);
                         while(st.hasMoreTokens()) {
                             String temp = st.nextToken();
-                            System.out.println("*******************************************************teeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeemp"+temp);
-                            Tavolo tavoloDaAttivare = tavoloSession.selezionaTavoloPerRiferimento(temp, false);
-//                            tavoloDaAttivare = em.merge(tavoloDaAttivare);
+                            Tavolo tavoloDaAttivare = tavoloSession.selezionaTavoloPerRiferimento(temp, false);                       
                             tavoloDaAttivare.setAttivo(true);
                             tavoloSession.update(tavoloDaAttivare);
-//                            em.flush();
                         }
                         statoEliminazione = ordinazioneSession.rimuoviOrdinazione(id);
                         tavoloSession.rimuoviTavolo(tavolo.getId());
@@ -268,7 +217,7 @@ public OrdinazioneFacade(){
 
                     return statoEliminazione;
                 } catch (Exception e) {
-                	System.out.println("ERROREEEEEEEEEEEEEEEEEEEEEEEE IN ORDINAZIONEFACADE.rimuoviOrdinazione"+e);
+                	System.out.println("OrdinazioneFacade#rimuoviOrdinazione: " + e);
                 }
             }
         }
@@ -276,12 +225,6 @@ public OrdinazioneFacade(){
 		return false;
 	}
 	
-	/* (non-Javadoc)
-	 * @see it.softfood.handler.IOrdinazioneFacade#inserisciLineaOrdinazione(it.softfood.entity.LineaOrdinazione)
-	 */
-	/* (non-Javadoc)
-	 * @see it.softfood.handler.IOrdinazioneFacade#inserisciLineaOrdinazione(it.softfood.entity.LineaOrdinazione)
-	 */
 	public LineaOrdinazione inserisciLineaOrdinazione(LineaOrdinazione lineaOrdinazione) {
 		if (lineaOrdinazione != null) {
             try {
