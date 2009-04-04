@@ -1,5 +1,6 @@
 package it.softfood.aspect;
 
+import it.softfood.handler.IArticoloMenuFacade;
 import it.softfood.handler.IOrdinazioneFacade;
 import it.softfood.handler.IRistoranteFacade;
 import it.softfood.handler.ITavoloFacade;
@@ -18,6 +19,7 @@ public aspect ClientDistribution {
 	private ITavoloFacade tavolofacade;
 	private IRistoranteFacade ristorantefacade;
 	private IOrdinazioneFacade ordinazionefacade;
+	private IArticoloMenuFacade articolofacade;
 
 	public ClientDistribution() {
 		System.setProperty("java.security.policy", "polis.policy");
@@ -61,6 +63,16 @@ public aspect ClientDistribution {
 		obj = ExecuteMetod.invoke(ordinazionefacade, thisJoinPoint.getSignature()
 				.getName(), thisJoinPoint.getArgs());
 		//Object[] params = thisJoinPoint.getArgs();
+		return obj;
+	}
+	
+	pointcut distributeArticoloFacadeCalls(): execution(* it.softfood.facade.PDAArticoloMenu.*(..)) && !execution(it.softfood.facade.PDAArticoloMenu.new(..));
+
+	Object around(): distributeArticoloFacadeCalls()  {
+		Object obj = null;
+		obj = ExecuteMetod.invoke(articolofacade, thisJoinPoint.getSignature()
+				.getName(), thisJoinPoint.getArgs());
+		Object[] params = thisJoinPoint.getArgs();
 		return obj;
 	}
 
