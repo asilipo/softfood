@@ -1,4 +1,4 @@
-package it.softfood.facade.articolomenu;
+package it.softfood.handler;
 
 import it.softfood.entity.Articolo;
 import it.softfood.entity.Bevanda;
@@ -8,32 +8,21 @@ import it.softfood.entity.IngredienteMagazzino;
 import it.softfood.entity.IngredientePietanza;
 import it.softfood.entity.Pietanza;
 import it.softfood.enumeration.TipoPietanza;
-import it.softfood.session.articolo.ArticoloSessionBeanRemote;
-import it.softfood.session.bevanda.BevandaSessionBeanRemote;
-import it.softfood.session.bevandamagazzino.BevandaMagazzinoSessionBeanRemote;
-import it.softfood.session.ingredientemagazzino.IngredienteMagazzinoSessionBeanRemote;
-import it.softfood.session.ingredientepietanza.IngredientePietanzaSessionBeanRemote;
-import it.softfood.session.pietanza.PietanzaSessionBeanRemote;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import javax.ejb.EJB;
-import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 
 /**
  * @author Maria Rosaria Paone
  * @author Marco Grasso
  * @author Francesco Pacilio
  */
-@Stateless
-public class ArticoloMenuFacade implements ArticoloMenuFacadeRemote, ArticoloMenuFacadeLocal {
 
-    @PersistenceContext
-    private EntityManager em;
-    @EJB(beanName = "ArticoloSessionBean")
+public class ArticoloMenuFacade  {
+
+    
     private ArticoloSessionBeanRemote articoloSessionBean;
     @EJB(beanName = "PietanzaSessionBean")
     private PietanzaSessionBeanRemote pietanzaSessionBean;
