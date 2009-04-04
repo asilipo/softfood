@@ -7,6 +7,10 @@ import it.softfood.entity.Ordinazione;
 import it.softfood.entity.Ristorante;
 import it.softfood.entity.Tavolo;
 import it.softfood.facade.SoftfoodFacade;
+import it.softfood.handler.ArticoloMenuFacade;
+import it.softfood.handler.IArticoloMenuFacade;
+import it.softfood.handler.IOrdinazioneFacade;
+import it.softfood.handler.IRistoranteFacade;
 import it.softfood.handler.ITavoloFacade;
 import it.softfood.handler.OrdinazioneFacade;
 import it.softfood.handler.RistoranteFacade;
@@ -64,8 +68,9 @@ public class Start {
 //        facade.rimuoviTavolo(id);
 		
 		ITavoloFacade tav=TavoloFacade.getInstance();
-		OrdinazioneFacade ord=OrdinazioneFacade.getInstance();
-		RistoranteFacade rist=RistoranteFacade.getInstance();
+		IOrdinazioneFacade ord=OrdinazioneFacade.getInstance();
+		IRistoranteFacade rist=RistoranteFacade.getInstance();
+		IArticoloMenuFacade art=ArticoloMenuFacade.getInstance();
 		
 	
 //		Ordinazione ordine=new Ordinazione();
