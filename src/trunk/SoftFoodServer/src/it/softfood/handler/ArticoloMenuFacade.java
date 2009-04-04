@@ -19,9 +19,8 @@ import it.softfood.session.PietanzaSession;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
-
-import javax.swing.text.html.HTMLDocument.HTMLReader.IsindexAction;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @author Maria Rosaria Paone
@@ -160,7 +159,7 @@ public class ArticoloMenuFacade  {
         return pietanzeDisponibili;
     }
 
-    private Integer verificaIngredientiPietanza(Pietanza pietanza) {
+    public Integer verificaIngredientiPietanza(Pietanza pietanza) {
         ArrayList<IngredientePietanza> ingredientiPietanze = (ArrayList<IngredientePietanza>) ingredientePietanzaSessionBeanRemote.selezionaIngredientiPietanze();
         ArrayList<IngredienteMagazzino> ingredientiMagazzino = (ArrayList<IngredienteMagazzino>) ingredienteMagazzinoSessionBeanRemote.selezionaIngredientiMagazzino();
         Date data = new Date(System.currentTimeMillis());
@@ -170,6 +169,8 @@ public class ArticoloMenuFacade  {
         int disponibilitaMinima = 1000;
         int numeroIngredienti = 0;
         for (IngredientePietanza ingredientePietanza : ingredientiPietanze) {
+        	System.out.println(ingredientePietanza.getId().getIngrediente());
+        	System.out.println(ingredientePietanza.getId().getPietanza());
             if (ingredientePietanza.getId().getPietanza().equals(pietanza.getId())) {
                 numeroIngredienti++;
                 Ingrediente ingrediente = ingredienteSession.selezionaIngredientePerId(ingredientePietanza.getId().getIngrediente());

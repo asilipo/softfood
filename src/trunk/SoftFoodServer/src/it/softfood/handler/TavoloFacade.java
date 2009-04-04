@@ -1,13 +1,11 @@
 package it.softfood.handler;
 
 import it.softfood.entity.Tavolo;
-
 import it.softfood.session.RistoranteSession;
 import it.softfood.session.TavoloSession;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import java.util.logging.Level;
 import java.util.logging.Logger;
 

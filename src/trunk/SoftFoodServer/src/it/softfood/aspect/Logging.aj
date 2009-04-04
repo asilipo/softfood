@@ -1,10 +1,14 @@
 package it.softfood.aspect;
 
-import org.apache.log4j.*;
-import org.aspectj.lang.*;
-import java.util.Date;
 import it.softfood.util.XmlReader;
-import it.softfood.facade.*;
+
+import java.util.Date;
+
+import org.apache.log4j.FileAppender;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
+import org.apache.log4j.SimpleLayout;
+import org.aspectj.lang.Signature;
    
 public aspect Logging {      
 	     

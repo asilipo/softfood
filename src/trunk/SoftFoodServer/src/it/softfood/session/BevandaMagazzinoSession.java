@@ -1,6 +1,5 @@
 package it.softfood.session;
 
-import it.softfood.entity.Articolo;
 import it.softfood.entity.BevandaMagazzino;
 
 import java.util.List;

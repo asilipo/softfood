@@ -26,19 +26,19 @@
         <property name="tipoPietanza" type="java.lang.Integer">
             <column name="tipo_pietanza" />
         </property>
-        <set name="ingredientePietanzas" inverse="true">
+        <set name="ingredientePietanzas" lazy="false" inverse="true">
             <key>
                 <column name="pietanza" not-null="true" />
             </key>
             <one-to-many class="it.softfood.entity.IngredientePietanza" />
         </set>
-        <set name="bevandaMagazzinos" inverse="true">
+        <set name="bevandaMagazzinos" lazy="false" inverse="true">
             <key>
                 <column name="bevanda" />
             </key>
             <one-to-many class="it.softfood.entity.BevandaMagazzino" />
         </set>
-        <set name="lineaOrdinaziones" inverse="true">
+        <set name="lineaOrdinaziones" lazy="false" inverse="true">
             <key>
                 <column name="articolo" not-null="true" />
             </key>

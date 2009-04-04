@@ -1,9 +1,9 @@
 package it.softfood.handler;
 
+import it.softfood.entity.Ristorante;
+
 import java.rmi.Remote;
 import java.rmi.RemoteException;
-
-import it.softfood.entity.Ristorante;
 
 public interface IRistoranteFacade extends Remote{
 

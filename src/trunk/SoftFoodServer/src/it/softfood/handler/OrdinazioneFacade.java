@@ -25,8 +25,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.StringTokenizer;
 
-import java.lang.Boolean;
-
 /**
  * @author Maria Rosaria Paone
  * @author Marco Grasso
