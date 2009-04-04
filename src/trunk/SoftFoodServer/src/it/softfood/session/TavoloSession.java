@@ -91,7 +91,7 @@ public class TavoloSession {
 
 	public List<Tavolo> selezionaTavoliLiberi() {
 		try {
-			Query q = session.createQuery("from it.softfood.entity.Tavolo t where t.occupato = ? AND t.attivo = ? order by numeroPosti");
+			Query q = session.createQuery("from it.softfood.entity.Tavolo t where t.occupato = ? AND t.attivo = ? order by t.riferimento");
 			q.setBoolean(0, false);
 			q.setBoolean(1, true);
 			List<Tavolo> list = (List<Tavolo>) q.list();
@@ -105,7 +105,7 @@ public class TavoloSession {
 
 	public List<Tavolo> selezionaTavoliOccupati() {
 		try {
-			Query q = session.createQuery("from it.softfood.entity.Tavolo t where t.occupato = ? AND t.attivo = ? order by numeroPosti");
+			Query q = session.createQuery("from it.softfood.entity.Tavolo t where t.occupato = ? AND t.attivo = ? order by t.riferimento");
 			q.setBoolean(0, true);
 			q.setBoolean(1, true);
 			List<Tavolo> list = (List<Tavolo>) q.list();
