@@ -62,6 +62,9 @@ public OrdinazioneFacade(){
 	/* (non-Javadoc)
 	 * @see it.softfood.handler.IOrdinazioneFacade#inserisciOrdinazione(it.softfood.entity.Ordinazione)
 	 */
+	/* (non-Javadoc)
+	 * @see it.softfood.handler.IOrdinazioneFacade#inserisciOrdinazione(it.softfood.entity.Ordinazione)
+	 */
 	public Ordinazione inserisciOrdinazione(Ordinazione ordinazione) {
 		if (ordinazione != null) {
             Tavolo tavolo = tavoloSession.selezionaTavoloPerId(ordinazione.getTavolo().getId());
@@ -129,6 +132,9 @@ public OrdinazioneFacade(){
     /* (non-Javadoc)
 	 * @see it.softfood.handler.IOrdinazioneFacade#modificaOrdinazione(it.softfood.entity.Ordinazione, it.softfood.entity.Ordinazione)
 	 */
+    /* (non-Javadoc)
+	 * @see it.softfood.handler.IOrdinazioneFacade#modificaOrdinazione(it.softfood.entity.Ordinazione, it.softfood.entity.Ordinazione)
+	 */
     public Ordinazione modificaOrdinazione(Ordinazione nuovaOrdinazione, Ordinazione vecchiaOrdinazione) {
 		if (nuovaOrdinazione != null && vecchiaOrdinazione != null) {
 			Ordinazione ordinazione = ordinazioneSession.selezionaOrdinazionePerId(vecchiaOrdinazione.getId());
@@ -147,6 +153,9 @@ public OrdinazioneFacade(){
 	/* (non-Javadoc)
 	 * @see it.softfood.handler.IOrdinazioneFacade#selezionaOrdinazionePerId(java.lang.Long)
 	 */
+	/* (non-Javadoc)
+	 * @see it.softfood.handler.IOrdinazioneFacade#selezionaOrdinazionePerId(java.lang.Long)
+	 */
 	public Ordinazione selezionaOrdinazionePerId(Long id) {
 		if (id != null) {
 			Ordinazione ord=ordinazioneSession.selezionaOrdinazionePerId(id);
@@ -158,10 +167,16 @@ public OrdinazioneFacade(){
 	/* (non-Javadoc)
 	 * @see it.softfood.handler.IOrdinazioneFacade#selezionaOrdinazioni()
 	 */
+	/* (non-Javadoc)
+	 * @see it.softfood.handler.IOrdinazioneFacade#selezionaOrdinazioni()
+	 */
 	public ArrayList<Ordinazione> selezionaOrdinazioni() {
 		return (ArrayList<Ordinazione>) ordinazioneSession.selezionaOrdinazioni();
 	}
 	
+	/* (non-Javadoc)
+	 * @see it.softfood.handler.IOrdinazioneFacade#selezionaOrdinazioniPerData(java.util.Date)
+	 */
 	/* (non-Javadoc)
 	 * @see it.softfood.handler.IOrdinazioneFacade#selezionaOrdinazioniPerData(java.util.Date)
 	 */
@@ -175,6 +190,9 @@ public OrdinazioneFacade(){
 	/* (non-Javadoc)
 	 * @see it.softfood.handler.IOrdinazioneFacade#selezionaOrdinazioniGiornalierePerTavolo(it.softfood.entity.Tavolo, java.lang.Boolean)
 	 */
+	/* (non-Javadoc)
+	 * @see it.softfood.handler.IOrdinazioneFacade#selezionaOrdinazioniGiornalierePerTavolo(it.softfood.entity.Tavolo, java.lang.Boolean)
+	 */
 	public ArrayList<Ordinazione> selezionaOrdinazioniGiornalierePerTavolo(Tavolo tavolo, Boolean terminato) {
 		if (tavolo != null && terminato != null) 
 			return (ArrayList<Ordinazione>) ordinazioneSession.selezionaOrdinazioniGionalierePerTavolo(tavolo, terminato);
@@ -182,17 +200,10 @@ public OrdinazioneFacade(){
 		return null;
 	}
 
-    /* (non-Javadoc)
-	 * @see it.softfood.handler.IOrdinazioneFacade#selezionaOrdinazioneGiornalieraPerTavolo(it.softfood.entity.Tavolo, java.lang.Boolean)
-	 */
-    /*public Ordinazione selezionaOrdinazioneGiornalieraPerTavolo(Tavolo tavolo, Boolean terminato) {
-		if (tavolo != null && terminato != null){
-			Ordinazione ord=((ArrayList<Ordinazione>)ordinazioneSession.selezionaOrdinazioniGionalierePerTavolo(tavolo, terminato)).get(0);
-			return ord;
-		}
-		return null;
-	}*/
 
+    /* (non-Javadoc)
+	 * @see it.softfood.handler.IOrdinazioneFacade#selezionaOrdinazioneGiornalieraPerTavolo(java.lang.String, java.lang.Boolean)
+	 */
     /* (non-Javadoc)
 	 * @see it.softfood.handler.IOrdinazioneFacade#selezionaOrdinazioneGiornalieraPerTavolo(java.lang.String, java.lang.Boolean)
 	 */
@@ -205,6 +216,9 @@ public OrdinazioneFacade(){
 		return null;
 	}
 	
+	/* (non-Javadoc)
+	 * @see it.softfood.handler.IOrdinazioneFacade#rimuoviOrdinazione(java.lang.Long, java.lang.Boolean)
+	 */
 	/* (non-Javadoc)
 	 * @see it.softfood.handler.IOrdinazioneFacade#rimuoviOrdinazione(java.lang.Long, java.lang.Boolean)
 	 */
@@ -258,7 +272,7 @@ public OrdinazioneFacade(){
 
                     return statoEliminazione;
                 } catch (Exception e) {
-                	System.out.println("ERROREEEEEEEEEEEEEEEEEEEEEEEE "+e);
+                	System.out.println("ERROREEEEEEEEEEEEEEEEEEEEEEEE IN ORDINAZIONEFACADE.rimuoviOrdinazione"+e);
                 }
             }
         }
@@ -266,6 +280,9 @@ public OrdinazioneFacade(){
 		return false;
 	}
 	
+	/* (non-Javadoc)
+	 * @see it.softfood.handler.IOrdinazioneFacade#inserisciLineaOrdinazione(it.softfood.entity.LineaOrdinazione)
+	 */
 	/* (non-Javadoc)
 	 * @see it.softfood.handler.IOrdinazioneFacade#inserisciLineaOrdinazione(it.softfood.entity.LineaOrdinazione)
 	 */
@@ -295,6 +312,9 @@ public OrdinazioneFacade(){
 	/* (non-Javadoc)
 	 * @see it.softfood.handler.IOrdinazioneFacade#modificaLineaOrdinazione(it.softfood.entity.LineaOrdinazione, it.softfood.entity.LineaOrdinazione)
 	 */
+	/* (non-Javadoc)
+	 * @see it.softfood.handler.IOrdinazioneFacade#modificaLineaOrdinazione(it.softfood.entity.LineaOrdinazione, it.softfood.entity.LineaOrdinazione)
+	 */
 	public LineaOrdinazione modificaLineaOrdinazione(LineaOrdinazione nuovaLineaOrdinazione,
             LineaOrdinazione vecchiaLineaOrdinazione) {
         if (nuovaLineaOrdinazione != null && vecchiaLineaOrdinazione != null) {
@@ -312,6 +332,9 @@ public OrdinazioneFacade(){
     /* (non-Javadoc)
 	 * @see it.softfood.handler.IOrdinazioneFacade#selezionaLineaOrdinazionePerId(java.lang.Long)
 	 */
+    /* (non-Javadoc)
+	 * @see it.softfood.handler.IOrdinazioneFacade#selezionaLineaOrdinazionePerId(java.lang.Long)
+	 */
     public LineaOrdinazione selezionaLineaOrdinazionePerId(Long id) {
         if (id != null)
 			return lineaOrdinazioneSession.selezionaLineaOrdinazionePerId(id);
@@ -319,6 +342,9 @@ public OrdinazioneFacade(){
         return null;
     }
     
+    /* (non-Javadoc)
+	 * @see it.softfood.handler.IOrdinazioneFacade#selezionaLineeOrdinazionePerOrdinazione(it.softfood.entity.Ordinazione)
+	 */
     /* (non-Javadoc)
 	 * @see it.softfood.handler.IOrdinazioneFacade#selezionaLineeOrdinazionePerOrdinazione(it.softfood.entity.Ordinazione)
 	 */
@@ -330,6 +356,9 @@ public OrdinazioneFacade(){
         return null;
     }
 
+    /* (non-Javadoc)
+	 * @see it.softfood.handler.IOrdinazioneFacade#selezionaLineeOrdinazionePerOrdinazione(it.softfood.entity.Ordinazione, it.softfood.enumeration.TipoPietanza)
+	 */
     /* (non-Javadoc)
 	 * @see it.softfood.handler.IOrdinazioneFacade#selezionaLineeOrdinazionePerOrdinazione(it.softfood.entity.Ordinazione, it.softfood.enumeration.TipoPietanza)
 	 */
@@ -357,6 +386,9 @@ public OrdinazioneFacade(){
     /* (non-Javadoc)
 	 * @see it.softfood.handler.IOrdinazioneFacade#rimuoviLineaOrdinazione(java.lang.Long)
 	 */
+    /* (non-Javadoc)
+	 * @see it.softfood.handler.IOrdinazioneFacade#rimuoviLineaOrdinazione(java.lang.Long)
+	 */
     public boolean rimuoviLineaOrdinazione(Long id) {
         if (id != null) {
             try {
@@ -376,6 +408,9 @@ public OrdinazioneFacade(){
 		return false;
     }
 
+    /* (non-Javadoc)
+	 * @see it.softfood.handler.IOrdinazioneFacade#inserisciVariante(it.softfood.entity.Variante)
+	 */
     /* (non-Javadoc)
 	 * @see it.softfood.handler.IOrdinazioneFacade#inserisciVariante(it.softfood.entity.Variante)
 	 */
@@ -408,6 +443,9 @@ public OrdinazioneFacade(){
     /* (non-Javadoc)
 	 * @see it.softfood.handler.IOrdinazioneFacade#selezionaIngredientiPerVariante()
 	 */
+    /* (non-Javadoc)
+	 * @see it.softfood.handler.IOrdinazioneFacade#selezionaIngredientiPerVariante()
+	 */
     public ArrayList<Ingrediente> selezionaIngredientiPerVariante() {
         ArrayList<IngredienteMagazzino> ingredientiMagazzino = (ArrayList<IngredienteMagazzino>) ingredienteMagazzinoSession.selezionaIngredientiMagazzino();
         ArrayList<Ingrediente> ingredienti = (ArrayList<Ingrediente>) ingredienteSession.selezionaIngredientePerVariante();
@@ -429,6 +467,9 @@ public OrdinazioneFacade(){
     /* (non-Javadoc)
 	 * @see it.softfood.handler.IOrdinazioneFacade#modificaVariante(it.softfood.entity.Variante, it.softfood.entity.Variante)
 	 */
+    /* (non-Javadoc)
+	 * @see it.softfood.handler.IOrdinazioneFacade#modificaVariante(it.softfood.entity.Variante, it.softfood.entity.Variante)
+	 */
     public Variante modificaVariante(Variante nuovaVariante, Variante vecchiaVariante) {
         if (nuovaVariante != null && vecchiaVariante != null) {
 			Variante variante = vecchiaVariante;
@@ -445,6 +486,9 @@ public OrdinazioneFacade(){
     /* (non-Javadoc)
 	 * @see it.softfood.handler.IOrdinazioneFacade#selezionaVariantePerId(java.lang.Long)
 	 */
+    /* (non-Javadoc)
+	 * @see it.softfood.handler.IOrdinazioneFacade#selezionaVariantePerId(java.lang.Long)
+	 */
     public Variante selezionaVariantePerId(Long id) {
         if (id != null)
 			return varianteSession.selezionaVariantePerId(id);
@@ -452,6 +496,9 @@ public OrdinazioneFacade(){
         return null;
     }
 
+    /* (non-Javadoc)
+	 * @see it.softfood.handler.IOrdinazioneFacade#selezionaIngredientePerNome(java.lang.String)
+	 */
     /* (non-Javadoc)
 	 * @see it.softfood.handler.IOrdinazioneFacade#selezionaIngredientePerNome(java.lang.String)
 	 */
@@ -469,10 +516,16 @@ public OrdinazioneFacade(){
     /* (non-Javadoc)
 	 * @see it.softfood.handler.IOrdinazioneFacade#selezionaVariantiPerIngrediente(it.softfood.entity.Ingrediente)
 	 */
+    /* (non-Javadoc)
+	 * @see it.softfood.handler.IOrdinazioneFacade#selezionaVariantiPerIngrediente(it.softfood.entity.Ingrediente)
+	 */
     public ArrayList<Variante> selezionaVariantiPerIngrediente(Ingrediente ingrediente) {
         return null;
     }
 
+    /* (non-Javadoc)
+	 * @see it.softfood.handler.IOrdinazioneFacade#selezionaVariantiPerLineaOrdinazione(it.softfood.entity.LineaOrdinazione)
+	 */
     /* (non-Javadoc)
 	 * @see it.softfood.handler.IOrdinazioneFacade#selezionaVariantiPerLineaOrdinazione(it.softfood.entity.LineaOrdinazione)
 	 */
@@ -487,6 +540,9 @@ public OrdinazioneFacade(){
         return null;
     }
 
+    /* (non-Javadoc)
+	 * @see it.softfood.handler.IOrdinazioneFacade#rimuoviVariante(java.lang.Long)
+	 */
     /* (non-Javadoc)
 	 * @see it.softfood.handler.IOrdinazioneFacade#rimuoviVariante(java.lang.Long)
 	 */
