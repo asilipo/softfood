@@ -70,19 +70,19 @@ public class ArticoloMenuFacade  {
         return null;
     }
 
-    public List<Pietanza> selezionaPietanzePerTipo(TipoPietanza tipoPietanza) {
+    public ArrayList<Pietanza> selezionaPietanzePerTipo(TipoPietanza tipoPietanza) {
         if (tipoPietanza != null) {
-            return pietanzaSessionBean.selezionaPietanzePerTipo(tipoPietanza);
+            return (ArrayList<Pietanza>) pietanzaSessionBean.selezionaPietanzePerTipo(tipoPietanza);
         }
 
         return null;
     }
 
-    public List<Pietanza> selezionaPietanze() {
+    public ArrayList<Pietanza> selezionaPietanze() {
         return pietanzaSessionBean.selezionaPietanze();
     }
 
-    public List<Pietanza> selezionaPietanzeDisponibili() {
+    public ArrayList<Pietanza> selezionaPietanzeDisponibili() {
         ArrayList<Pietanza> pietanze = (ArrayList<Pietanza>) pietanzaSessionBean.selezionaPietanze();
         ArrayList<Pietanza> pietanzeDisponibili = new ArrayList<Pietanza>();
 
@@ -196,11 +196,11 @@ public class ArticoloMenuFacade  {
         return 0;
     }
 
-    public List<Bevanda> selezionaBevande() {
+    public ArrayList<Bevanda> selezionaBevande() {
         return bevandaSessionBean.selezionaBevande();
     }
 
-    public List<Bevanda> selezionaBevandeDisponibili() {
+    public ArrayList<Bevanda> selezionaBevandeDisponibili() {
         ArrayList<BevandaMagazzino> bevandeMagazzino = (ArrayList<BevandaMagazzino>) bevandaMagazzinoSessionBeanRemote.selezionaBevandeMagazzinoPerQuantita(1);
 
         if (bevandeMagazzino != null && bevandeMagazzino.size() > 0) {
@@ -222,7 +222,7 @@ public class ArticoloMenuFacade  {
         return false;
     }
 
-    public List<Ingrediente> selezionaIngredientiPietanza(Long id) {
+    public ArrayList<Ingrediente> selezionaIngredientiPietanza(Long id) {
         if (id != null) {
             ArrayList<Ingrediente> ingredienti = new ArrayList<Ingrediente>();
             ArrayList<IngredientePietanza> ingredientiPietanze = (ArrayList<IngredientePietanza>) ingredientePietanzaSessionBeanRemote.selezionaIngredientiPietanze();

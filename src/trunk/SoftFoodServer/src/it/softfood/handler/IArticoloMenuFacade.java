@@ -9,7 +9,7 @@ import it.softfood.enumeration.TipoPietanza;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.HashMap;
-import java.util.List;
+import java.util.ArrayList;
 
 public interface IArticoloMenuFacade extends Remote{
 
@@ -17,14 +17,13 @@ public interface IArticoloMenuFacade extends Remote{
 
 	public Articolo selezionaArticoloMenuPerId(Long id)throws RemoteException;
 
-	public List<Pietanza> selezionaPietanzePerTipo(TipoPietanza tipoPietanza)throws RemoteException;
+	public ArrayList<Pietanza> selezionaPietanzePerTipo(TipoPietanza tipoPietanza)throws RemoteException;
 
-	public List<Pietanza> selezionaPietanze()throws RemoteException;
+	public ArrayList<Pietanza> selezionaPietanze()throws RemoteException;
 
-	public List<Pietanza> selezionaPietanzeDisponibili()throws RemoteException;
+	public ArrayList<Pietanza> selezionaPietanzeDisponibili()throws RemoteException;
 
-	public List<Pietanza> selezionaPietanzeDisponibiliPerTipo(
-			TipoPietanza tipoPietanza)throws RemoteException;
+	public ArrayList<Pietanza> selezionaPietanzeDisponibiliPerTipo(TipoPietanza tipoPietanza)throws RemoteException;
 
 	public HashMap<Pietanza, Integer> selezionaDisponibilitaPietanze()throws RemoteException;
 
@@ -32,15 +31,14 @@ public interface IArticoloMenuFacade extends Remote{
 
 	public Integer selezionaDisponibilitaBevanda(Long id)throws RemoteException;
 
-	public HashMap<Pietanza, Integer> selezionaDisponibilitaPietanzePerTipo(
-			TipoPietanza tipoPietanza)throws RemoteException;
+	public HashMap<Pietanza, Integer> selezionaDisponibilitaPietanzePerTipo(TipoPietanza tipoPietanza)throws RemoteException;
 
-	public List<Bevanda> selezionaBevande()throws RemoteException;
+	public ArrayList<Bevanda> selezionaBevande()throws RemoteException;
 
-	public List<Bevanda> selezionaBevandeDisponibili()throws RemoteException;
+	public ArrayList<Bevanda> selezionaBevandeDisponibili()throws RemoteException;
 
 	public boolean rimuoviArticoloMenu(Long id)throws RemoteException;
 
-	public List<Ingrediente> selezionaIngredientiPietanza(Long id)throws RemoteException;
+	public ArrayList<Ingrediente> selezionaIngredientiPietanza(Long id)throws RemoteException;
 
 }
