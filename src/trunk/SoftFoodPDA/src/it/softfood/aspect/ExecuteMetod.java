@@ -7,14 +7,13 @@ import java.lang.reflect.Method;
 public class ExecuteMetod {
 
 	public synchronized static Object invoke(Object target, String methodName, Object[] params) {
-		 try {
-			 
+		 try {	 
 			 Method m = findMethod(target.getClass().getDeclaredMethods(), methodName, params);
 			 if (m == null) {
 				 m = findMethod(target.getClass().getMethods(), methodName, params);
 			 }
-			 return m.invoke(target, params);
 			 
+			 return m.invoke(target, params);
 		 } catch (IllegalAccessException e) {
 			 e.printStackTrace();
 			 return null;
@@ -31,12 +30,11 @@ public class ExecuteMetod {
 				 return methods[i];
 			 }
 		 }
-		 return null;
 		 
+		 return null;
 	 }
 		 
 	 public static boolean compareMethod(Method method, String name, Object[] params) {
-		 
 		 if (! name.equals(method.getName()) || method.getParameterTypes().length != params.length) {
 			 return false;
 		 }
@@ -55,8 +53,10 @@ public class ExecuteMetod {
 		 if (type.equals(param) ||
 			 toPrimitive(type).equals(toPrimitive(param)) ||
 			 checkSuperTypes(type, param)) {
+			 
 			 return true;
 		 }
+		 
 		 return false;
 	 }
 	 
@@ -78,6 +78,7 @@ public class ExecuteMetod {
 		 } else if (type.getName().equals("java.lang.Boolean")) {
 			 return boolean.class;
 		 }
+		 
 		 return type;
 	 }
 		
