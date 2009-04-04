@@ -8,6 +8,13 @@ import it.softfood.entity.IngredienteMagazzino;
 import it.softfood.entity.IngredientePietanza;
 import it.softfood.entity.Pietanza;
 import it.softfood.enumeration.TipoPietanza;
+import it.softfood.session.ArticoloSession;
+import it.softfood.session.BevandaMagazzinoSession;
+import it.softfood.session.BevandaSession;
+import it.softfood.session.IngredienteMagazzinoSession;
+import it.softfood.session.IngredientePietanzaSession;
+import it.softfood.session.IngredienteSession;
+import it.softfood.session.PietanzaSession;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -23,18 +30,30 @@ import java.util.List;
 public class ArticoloMenuFacade  {
 
     
-    private ArticoloSessionBeanRemote articoloSessionBean;
-    @EJB(beanName = "PietanzaSessionBean")
-    private PietanzaSessionBeanRemote pietanzaSessionBean;
-    @EJB(beanName = "BevandaSessionBean")
-    private BevandaSessionBeanRemote bevandaSessionBean;
-    @EJB(beanName = "IngredientePietanzaSessionBean")
-    private IngredientePietanzaSessionBeanRemote ingredientePietanzaSessionBeanRemote;
-    @EJB(beanName = "IngredienteMagazzinoSessionBean")
-    private IngredienteMagazzinoSessionBeanRemote ingredienteMagazzinoSessionBeanRemote;
-    @EJB(beanName = "BevandaMagazzinoSessionBean")
-    private BevandaMagazzinoSessionBeanRemote bevandaMagazzinoSessionBeanRemote;
+	private static ArticoloMenuFacade singleton;
+	
+    private ArticoloSession articoloSessionBean=ArticoloSession.getInstance();
+    
+    private PietanzaSession pietanzaSessionBean=PietanzaSession.getInstance();
+ 
+    private BevandaSession bevandaSessionBean=BevandaSession.getInstance();
+    
+    private IngredienteSession ingredienteSession=IngredienteSession.getInstance();
+    
+    private IngredientePietanzaSession ingredientePietanzaSessionBeanRemote=IngredientePietanzaSession.getInstance();
+    
+    private IngredienteMagazzinoSession ingredienteMagazzinoSessionBeanRemote=IngredienteMagazzinoSession.getInstance();
+   
+    private BevandaMagazzinoSession bevandaMagazzinoSessionBeanRemote=BevandaMagazzinoSession.getInstance();
 
+    
+    public synchronized static ArticoloMenuFacade getInstance() {
+		if (singleton == null) {
+			singleton = new ArticoloMenuFacade();
+		}
+		return singleton;
+	}
+    
     public Articolo inserisciArticoloMenu(Articolo articolo) {
         if (articolo != null) {
             return articoloSessionBean.inserisciArticolo(articolo);
@@ -117,7 +136,7 @@ public class ArticoloMenuFacade  {
             ArrayList<BevandaMagazzino> bevandeMagazzino = (ArrayList<BevandaMagazzino>) bevandaMagazzinoSessionBeanRemote.selezionaBevandeMagazzino();
 
             for (BevandaMagazzino bevandaMagazzino : bevandeMagazzino) {
-                if (bevandaMagazzino.getBevanda().getId().equals(id)) {
+                if (bevandaMagazzino.getArticolo().getId().equals(id)) {
                     return (bevandaMagazzino.getQuantita()) / (bevanda.getCapacita()).intValue();
                 }
             }
@@ -147,12 +166,12 @@ public class ArticoloMenuFacade  {
         int disponibilitaMinima = 1000;
         int numeroIngredienti = 0;
         for (IngredientePietanza ingredientePietanza : ingredientiPietanze) {
-            if (ingredientePietanza.getIngredientePietanzaPK().getPietanza().getId().equals(pietanza.getId())) {
+            if (ingredientePietanza.getId().getPietanza().equals(pietanza.getId())) {
                 numeroIngredienti++;
-                Ingrediente ingrediente = ingredientePietanza.getIngredientePietanzaPK().getIngrediente();
+                Ingrediente ingrediente = ingredienteSession.selezionaIngredientePerId(ingredientePietanza.getId().getIngrediente());
                 
                 for (IngredienteMagazzino ingredienteMagazzino : ingredientiMagazzino) {
-                    if (ingredienteMagazzino.getIngredienteLungaConservazione().getId().equals(ingrediente.getId())) {
+                    if (ingredienteMagazzino.getIngrediente().getId().equals(ingrediente.getId())) {
                         contatore++;
                         if (ingredienteMagazzino.getQuantita() >= ingredientePietanza.getQuantita()
                                 && ingrediente.getScadenza().after(data)) {
@@ -187,7 +206,7 @@ public class ArticoloMenuFacade  {
         if (bevandeMagazzino != null && bevandeMagazzino.size() > 0) {
             ArrayList<Bevanda> bevande = new ArrayList<Bevanda>();
             for (BevandaMagazzino bevandaMagazzino : bevandeMagazzino)
-                bevande.add(bevandaMagazzino.getBevanda());
+                bevande.add((Bevanda) bevandaMagazzino.getArticolo());
 
             return bevande;
         }
@@ -197,7 +216,7 @@ public class ArticoloMenuFacade  {
 
     public boolean rimuoviArticoloMenu(Long id) {
         if (id != null) {
-            return articoloSessionBean.rimuoviBevanda(id);
+            return articoloSessionBean.rimuoviArticolo(id);
         }
 
         return false;
@@ -210,8 +229,8 @@ public class ArticoloMenuFacade  {
 
             if (ingredientiPietanze != null) {
                 for (IngredientePietanza ingredientePietanza : ingredientiPietanze) {
-                    if (ingredientePietanza.getIngredientePietanzaPK().getPietanza().getId().equals(id)) {
-                        ingredienti.add(ingredientePietanza.getIngredientePietanzaPK().getIngrediente());
+                    if (ingredientePietanza.getId().getPietanza().equals(id)) {
+                        ingredienti.add(ingredienteSession.selezionaIngredientePerId(ingredientePietanza.getId().getIngrediente()));
                     }
                 }
             }
