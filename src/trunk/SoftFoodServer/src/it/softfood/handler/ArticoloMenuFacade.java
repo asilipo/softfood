@@ -95,7 +95,7 @@ public class ArticoloMenuFacade  {
         return pietanzeDisponibili;
     }
 
-    public List<Pietanza> selezionaPietanzeDisponibiliPerTipo(TipoPietanza tipoPietanza) {
+    public ArrayList<Pietanza> selezionaPietanzeDisponibiliPerTipo(TipoPietanza tipoPietanza) {
         ArrayList<Pietanza> pietanze = (ArrayList<Pietanza>) pietanzaSessionBean.selezionaPietanzePerTipo(tipoPietanza);
         ArrayList<Pietanza> pietanzeDisponibili = new ArrayList<Pietanza>();
 
