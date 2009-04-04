@@ -9,12 +9,19 @@ import it.softfood.handler.ArticoloMenuFacade;
 
 import java.util.ArrayList;
 
+/**
+ * @author Maria Rosaria Paone
+ * @author Marco Grasso
+ * @author Francesco Pacilio
+ */
+
 public class PDAArticoloMenuFacade {
 
-	public ArrayList<Pietanza> selezionaPietanzeDisponibiliPerTipo(
-			TipoPietanza tipo_pietanza) {
-		ArticoloMenuFacade articolo=ArticoloMenuFacade.getInstance();
-		ArrayList<Pietanza> pietanze=(ArrayList<Pietanza>) articolo.selezionaPietanzeDisponibiliPerTipo(tipo_pietanza);
+	public ArrayList<Pietanza> selezionaPietanzeDisponibiliPerTipo(TipoPietanza tipo_pietanza) {
+		System.out.println("PDAArticoloMenuFacade#selezionaPietanzeDisponibiliPerTipo " + tipo_pietanza);
+		ArticoloMenuFacade articolo = ArticoloMenuFacade.getInstance();
+
+		ArrayList<Pietanza> pietanze = (ArrayList<Pietanza>) articolo.selezionaPietanzeDisponibiliPerTipo(tipo_pietanza);
 		return pietanze;
 	}
 
