@@ -1,12 +1,11 @@
 package it.softfood.aspect;
 
-import it.softfood.handler.ITavoloFacade;
+import it.softfood.handler.IArticoloMenuFacade;
 import it.softfood.handler.IOrdinazioneFacade;
 import it.softfood.handler.IRistoranteFacade;
-import it.softfood.handler.IArticoloMenuFacade;
+import it.softfood.handler.ITavoloFacade;
 
 import java.rmi.Naming;
-
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 

@@ -57,6 +57,10 @@ public class IngredientePietanzaSession {
 			Query q = session.createQuery("from it.softfood.entity.IngredientePietanza i");
 			List<IngredientePietanza> list = (List<IngredientePietanza>) q.list();
 			
+			/*for (IngredientePietanza ingredientePietanza : list) {
+				System.out.println(ingredientePietanza.getArticolo().getNome());
+				System.out.println(ingredientePietanza.getIngrediente().getNome());
+			}*/
 			return list;			
 		} catch (Exception e) {
 			System.err.println("IngredientePietanzaSession#selezionaIngredientePietanzaPerId");

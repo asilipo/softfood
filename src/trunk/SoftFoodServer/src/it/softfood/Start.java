@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import it.softfood.entity.Ordinazione;
+import it.softfood.entity.Pietanza;
 import it.softfood.entity.Ristorante;
 import it.softfood.entity.Tavolo;
 import it.softfood.facade.SoftfoodFacade;
@@ -68,18 +69,25 @@ public class Start {
 //        facade.rimuoviTavolo(id);
 		
 		ITavoloFacade tav=TavoloFacade.getInstance();
-		IOrdinazioneFacade ord=OrdinazioneFacade.getInstance();
+		IOrdinazioneFacade ord=(IOrdinazioneFacade) OrdinazioneFacade.getInstance();
 		IRistoranteFacade rist=RistoranteFacade.getInstance();
-		IArticoloMenuFacade art=ArticoloMenuFacade.getInstance();
+		IArticoloMenuFacade art=(IArticoloMenuFacade) ArticoloMenuFacade.getInstance();
 		
-	
+		Pietanza p = new Pietanza();
+		p.setId(51L);
+		p.setNome("Patatine");
+		p.setDescrizione("Patatine");
+		
 //		Ordinazione ordine=new Ordinazione();
 //		ordine.setTavolo(tavo);
 //		
 //		System.out.println("ID NUOVO ORDINE: "+ord.selezionaOrdinazioneGiornalieraPerTavolo(tavo, false).getId());
         
 
-
+		ArticoloMenuFacade a = ArticoloMenuFacade.getInstance();
+		
+		int b = a.verificaIngredientiPietanza(p);
+		System.out.print(b);
 	}
 	
 

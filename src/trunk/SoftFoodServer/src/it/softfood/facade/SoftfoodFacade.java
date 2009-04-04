@@ -4,8 +4,6 @@ import it.softfood.entity.Tavolo;
 import it.softfood.session.TavoloSession;
 
 import java.io.Serializable;
-import java.rmi.RemoteException;
-import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
  
     

@@ -1,7 +1,6 @@
 package it.softfood.session;
 
 import it.softfood.entity.Menu;
-import it.softfood.entity.Pietanza;
 
 import org.hibernate.Query;
 import org.hibernate.Session;

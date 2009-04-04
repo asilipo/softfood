@@ -1,7 +1,6 @@
 package it.softfood.session;
 
 import it.softfood.entity.Articolo;
-import it.softfood.entity.Ordinazione;
 
 import java.util.List;
 

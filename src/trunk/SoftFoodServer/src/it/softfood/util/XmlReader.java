@@ -2,9 +2,9 @@ package it.softfood.util;
 
 
 import org.apache.xerces.parsers.DOMParser;
-import org.xml.sax.ErrorHandler;
-import org.w3c.dom.*;
-import java.io.IOException;
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 public class XmlReader
 {
