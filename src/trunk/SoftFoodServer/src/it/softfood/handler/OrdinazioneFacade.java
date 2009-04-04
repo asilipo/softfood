@@ -21,13 +21,11 @@ import it.softfood.session.OrdinazioneSession;
 import it.softfood.session.TavoloSession;
 import it.softfood.session.VarianteSession;
 
-import java.util.Date;
 import java.util.ArrayList;
-import java.util.List;
-
+import java.util.Date;
 import java.util.StringTokenizer;
-import javax.annotation.Resource;
 
+import java.lang.Boolean;
 
 /**
  * @author Maria Rosaria Paone
@@ -187,13 +185,13 @@ public OrdinazioneFacade(){
     /* (non-Javadoc)
 	 * @see it.softfood.handler.IOrdinazioneFacade#selezionaOrdinazioneGiornalieraPerTavolo(it.softfood.entity.Tavolo, java.lang.Boolean)
 	 */
-    public Ordinazione selezionaOrdinazioneGiornalieraPerTavolo(Tavolo tavolo, Boolean terminato) {
+    /*public Ordinazione selezionaOrdinazioneGiornalieraPerTavolo(Tavolo tavolo, Boolean terminato) {
 		if (tavolo != null && terminato != null){
 			Ordinazione ord=((ArrayList<Ordinazione>)ordinazioneSession.selezionaOrdinazioniGionalierePerTavolo(tavolo, terminato)).get(0);
 			return ord;
 		}
 		return null;
-	}
+	}*/
 
     /* (non-Javadoc)
 	 * @see it.softfood.handler.IOrdinazioneFacade#selezionaOrdinazioneGiornalieraPerTavolo(java.lang.String, java.lang.Boolean)
