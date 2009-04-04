@@ -74,7 +74,13 @@ public class ArticoloMenuFacade  {
 
     public ArrayList<Pietanza> selezionaPietanzePerTipo(TipoPietanza tipoPietanza) {
         if (tipoPietanza != null) {
-            return (ArrayList<Pietanza>) pietanzaSessionBean.selezionaPietanzePerTipo(tipoPietanza);
+        	ArrayList<Articolo> articoli = (ArrayList<Articolo>) pietanzaSessionBean.selezionaPietanzePerTipo(tipoPietanza);
+        	ArrayList<Pietanza> pietanze = new ArrayList<Pietanza>();
+        	for (Articolo articolo : articoli) {
+        			pietanze.add((Pietanza) articolo);
+        	}
+        	
+        	return pietanze;
         }
 
         return null;
@@ -148,7 +154,13 @@ public class ArticoloMenuFacade  {
     }
 
     public HashMap<Pietanza, Integer> selezionaDisponibilitaPietanzePerTipo(TipoPietanza tipoPietanza) {
-        ArrayList<Pietanza> pietanze = (ArrayList<Pietanza>) pietanzaSessionBean.selezionaPietanzePerTipo(tipoPietanza);
+        ArrayList<Articolo> articoli = (ArrayList<Articolo>) pietanzaSessionBean.selezionaPietanzePerTipo(tipoPietanza);
+        
+        ArrayList<Pietanza> pietanze = new ArrayList<Pietanza>();
+    	for (Articolo articolo : articoli) {
+    			pietanze.add((Pietanza) articolo);
+    	}
+        
         HashMap<Pietanza, Integer> pietanzeDisponibili = new HashMap<Pietanza, Integer>();
 
         for (Pietanza pietanza : pietanze) {
