@@ -3,6 +3,7 @@ package it.softfood.facade;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
+import it.softfood.entity.Ingrediente;
 import it.softfood.entity.LineaOrdinazione;
 import it.softfood.entity.Ordinazione;
 import it.softfood.entity.Variante;
@@ -124,6 +125,51 @@ public class PDAOrdinazioneFacade {
 			e.printStackTrace();
 		}
 		return linee;
+	}
+
+	public ArrayList<Ingrediente> selezionaIngredientiPerVariante() {
+		OrdinazioneFacade ordineFacade=OrdinazioneFacade.getInstance();
+		ArrayList<Ingrediente> ingrediente=null;
+	
+		try {
+			ingrediente = ordineFacade.selezionaIngredientiPerVariante();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ingrediente;
+	}
+
+	public LineaOrdinazione inserisciLineaOrdinazione(LineaOrdinazione linea) {
+		OrdinazioneFacade ordineFacade=OrdinazioneFacade.getInstance();
+		LineaOrdinazione ord = null;
+		try {
+			ord = ordineFacade.inserisciLineaOrdinazione(linea);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return ord;
+	}
+
+	public Ingrediente selezionaIngredientePerNome(String nome) {
+		OrdinazioneFacade ordineFacade=OrdinazioneFacade.getInstance();
+		Ingrediente ingr = null;
+		try {
+			ingr = ordineFacade.selezionaIngredientePerNome(nome);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return ingr;
+	}
+
+	public void inserisciVariante(Variante variante) {
+		OrdinazioneFacade ordineFacade=OrdinazioneFacade.getInstance();
+		Variante v=ordineFacade.inserisciVariante(variante);
+		if(v==null){
+			new Exception();
+		}
+		
 	}
 
 }
