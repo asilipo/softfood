@@ -1,3 +1,27 @@
-grant  {
-    permission java.security.AllPermission "","";
+grant Principal it.softfood.entity.User "m"{ 
+    permission it.softfood.aspect.OperationPermission "login";
+    permission it.softfood.aspect.OperationPermission "logout";
+}; 
+grant Principal it.softfood.entity.User "a"{
+    permission aspects.authorization.OperationPermission "login"; 
+    permission aspects.authorization.OperationPermission "op3";
+    permission aspects.authorization.OperationPermission "op4";
+    permission aspects.authorization.OperationPermission "logout";
+};  
+grant Principal it.softfood.entity.User "system_administrator"{
+    permission aspects.authorization.OperationPermission "op2"; 
+    permission aspects.authorization.OperationPermission "op3";
+    permission aspects.authorization.OperationPermission "op4";
+    permission aspects.authorization.OperationPermission "logout";
+}; 
+
+grant {
+    permission java.net.SocketPermission "*", "listen, resolve, accept, connect";
+    permission java.util.PropertyPermission "*", "read, write";
+    permission java.lang.reflect.ReflectPermission "*";
+    permission java.io.FilePermission "/-", "read,write";
+    permission java.net.NetPermission "*";
+    permission javax.security.auth.AuthPermission "*", "read,write";
+      permission java.lang.RuntimePermission "*";
+
 };
