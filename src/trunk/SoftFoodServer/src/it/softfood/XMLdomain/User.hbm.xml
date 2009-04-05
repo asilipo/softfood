@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 5-apr-2009 13.08.53 by Hibernate Tools 3.2.2.GA -->
+<hibernate-mapping>
+    <class name="it.softfood.entity.User" table="utente" schema="public">
+        <id name="userName" type="string">
+            <column name="userName" length="100" />
+            <generator class="assigned" />
+        </id>
+        <property name="password" type="string">
+            <column name="password" length="100" not-null="true" />
+        </property>
+        <property name="ruolo" type="string">
+            <column name="ruolo" length="100" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>
