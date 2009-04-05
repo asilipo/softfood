@@ -25,5 +25,12 @@ public class UserFacade {
 		User u = user.selezionaUtente(username,password);
 		return u;
 	}
+	
+	public User insert(User role, User u){
+		
+		u=user.inserisciUser(u);
+		return u;
+		
+	}
 
 }

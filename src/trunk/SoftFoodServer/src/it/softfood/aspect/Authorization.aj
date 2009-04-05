@@ -38,9 +38,9 @@ public aspect Authorization{
 		execution(* it.softfood.session.UserSession.*(..)) && !execution(it.softfood.session.*.new(..)) && args(user,..);
 	*/
 
-	pointcut authOperations(User user): execution(* it.softfood.session.UserSession.*.*(..)) &&
-    !execution(* it.softfood.session.UserSession.*.login(String,String)) &&
-    !execution(* it.softfood.session.UserSession.*.getInstance()) &&
+	pointcut authOperations(User user): execution(* it.softfood.handler.*.*(User,..)) &&
+    !execution(* it.softfood.handler.*.login(String,String)) &&
+    !execution(* it.softfood.handler.*.getInstance()) &&
      args(user,..);
     
 	before(User user) : authOperations(user) {
@@ -59,7 +59,7 @@ public aspect Authorization{
         return new OperationPermission(joinPointStaticPart.getSignature().getName());
     }
      
-	  Object around(final User user): authOperations(user)&& !cflowbelow(authOperations(User)) {     
+	  Object around(final User user): authOperations(user) && !cflowbelow(authOperations(User)) {     
 		  try {
 			  LoginHandler login=LoginHandler.getInstance();
 			  Hashtable hT=login.getSubjectTable();
