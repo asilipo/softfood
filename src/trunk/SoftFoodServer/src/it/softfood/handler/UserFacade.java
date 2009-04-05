@@ -26,11 +26,24 @@ public class UserFacade {
 		return u;
 	}
 	
-	public User insert(User role, User u){
-		
+	public User insert(User role, User u){		
 		u=user.inserisciUser(u);
-		return u;
-		
+		System.out.println();
+		return u;		
 	}
-
+	public User selezionaUserName(User role, User u){		
+		u = user.selezionaUserPerUserName(u.getUserName());
+		return u;
+	}
+	public User selezionaPassword(User role, User u){		
+		u = user.selezionaUserPerPassword(u.getPassword());
+		return u;
+	}
+	public boolean modificaRuolo(User role, User u, String ruolo){
+		boolean v = user.modificaRuoloUser(u, ruolo);
+		return v;
+	}
+	public boolean eliminaUtente(User role, User r){
+		return user.rimuoviUser(r.getUserName());
+	}
 }
