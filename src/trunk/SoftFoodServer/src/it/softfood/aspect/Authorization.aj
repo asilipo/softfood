@@ -15,7 +15,7 @@ import java.security.PrivilegedExceptionAction;
 import it.softfood.entity.User;
 import it.softfood.login.AuthorizationException;
 import it.softfood.login.LoginHandler;
-import it.softfood.login.OperationPermission;
+
 
 import org.aspectj.lang.JoinPoint;
 
@@ -30,7 +30,7 @@ public aspect Authorization{
 		System.out.println("New Autentication Aspect");
 		XmlReader xml= new XmlReader();
 	    String file=xml.leggi(xmlparameter);
-		System.setProperty("java.security.policy","authorization.policy");
+		System.setProperty("java.security.policy",file);
 	}
 	
 	/*
