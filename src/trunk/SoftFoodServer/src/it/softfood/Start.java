@@ -7,6 +7,7 @@ import it.softfood.entity.Ordinazione;
 import it.softfood.entity.Pietanza;
 import it.softfood.entity.Ristorante;
 import it.softfood.entity.Tavolo;
+import it.softfood.entity.User;
 import it.softfood.facade.SoftfoodFacade;
 import it.softfood.handler.ArticoloMenuFacade;
 import it.softfood.handler.IArticoloMenuFacade;
@@ -16,7 +17,10 @@ import it.softfood.handler.ITavoloFacade;
 import it.softfood.handler.OrdinazioneFacade;
 import it.softfood.handler.RistoranteFacade;
 import it.softfood.handler.TavoloFacade;
+import it.softfood.login.LoginHandler;
 import it.softfood.session.OrdinazioneSession;
+import it.softfood.session.UserSession;
+import it.softfood.handler.*;
 
 public class Start {
 
@@ -68,15 +72,15 @@ public class Start {
 //        Long id=facade.occupaTavoli(list);
 //        facade.rimuoviTavolo(id);
 		
-		ITavoloFacade tav=TavoloFacade.getInstance();
-		IOrdinazioneFacade ord=(IOrdinazioneFacade) OrdinazioneFacade.getInstance();
-		IRistoranteFacade rist=RistoranteFacade.getInstance();
-		IArticoloMenuFacade art=(IArticoloMenuFacade) ArticoloMenuFacade.getInstance();
-		
-		Pietanza p = new Pietanza();
-		p.setId(51L);
-		p.setNome("Patatine");
-		p.setDescrizione("Patatine");
+//		ITavoloFacade tav=TavoloFacade.getInstance();
+//		IOrdinazioneFacade ord=(IOrdinazioneFacade) OrdinazioneFacade.getInstance();
+//		IRistoranteFacade rist=RistoranteFacade.getInstance();
+//		IArticoloMenuFacade art=(IArticoloMenuFacade) ArticoloMenuFacade.getInstance();
+//		
+//		Pietanza p = new Pietanza();
+//		p.setId(51L);
+//		p.setNome("Patatine");
+//		p.setDescrizione("Patatine");
 		
 //		Ordinazione ordine=new Ordinazione();
 //		ordine.setTavolo(tavo);
@@ -84,10 +88,30 @@ public class Start {
 //		System.out.println("ID NUOVO ORDINE: "+ord.selezionaOrdinazioneGiornalieraPerTavolo(tavo, false).getId());
         
 
-		ArticoloMenuFacade a = ArticoloMenuFacade.getInstance();
+//		ArticoloMenuFacade a = ArticoloMenuFacade.getInstance();
+//		
+//		int b = a.verificaIngredientiPietanza(p);
+//		System.out.print(b);
 		
-		int b = a.verificaIngredientiPietanza(p);
-		System.out.print(b);
+		User u = new User();
+        u.setUserName("m");
+        u.setPassword("m");
+        u.setRuolo("amministratore");
+
+        UserFacade ut = UserFacade.getInstance();
+        LoginHandler facade = LoginHandler.getInstance();
+        User user1 = facade.login("mary", "mary");
+        ut.insert(user1, u);
+    
+        //Maria
+//        System.out.println("UTENTE "+ut.selezionaUserName(user1, u));
+//       System.out.println(ut.selezionaPassword(user1, u));
+        	
+//		System.out.println(ut.modificaRuolo(user1, u, "cassiere"));
+		System.out.println(ut.eliminaUtente(user1, u));
+        
+        facade.logout(user1);	
+		
 	}
 	
 
