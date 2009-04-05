@@ -2,6 +2,7 @@ package it.softfood.GUI;
 
 import org.jdesktop.application.SingleFrameApplication;
 import org.jdesktop.application.FrameView;
+import it.softfood.GUI.Login;
 
 /**
  * @author Maria Rosaria Paone
@@ -16,7 +17,7 @@ public class MainView extends FrameView {
 
         initComponents();      
         
-        Ordine ordine = new Ordine(this);
+        Login ordine = new Login(this);
         setComponent(ordine);
     }
 
