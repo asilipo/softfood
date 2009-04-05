@@ -47,18 +47,20 @@ public class UserSession {
 		}
 	}
 
-	public List<User> selezionaUserPerPassword(String password) {
+	public User selezionaUserPerPassword(String password) {
 		try {
-			List<User> result;
+			User result;
 			String str = " from it.softfood.entity.User t where t.password = ? ";
 			Query q = session.createQuery(str);
 			q.setString(0, password);
-			result = q.list();
+			result = (User) q.list().get(0);
 			return result;
 			
 		} catch (Exception e) {
 			System.err
 					.println("UserSessionBean#selezionaUserPerPassword");
+			System.err
+			.println(e);
 			return null;
 		}
 	}
@@ -106,5 +108,16 @@ public class UserSession {
 
 	public void update(User u) {
 		session.update(u);
+	}
+
+
+	public User selezionaUtente(String username, String password) {
+		User result;
+		String str = " from it.softfood.entity.User t where t.userName = ? AND t.password = ? ";
+		Query q = session.createQuery(str);
+		q.setString(0, username);
+		q.setString(1, password);
+		result = (User) q.uniqueResult();
+		return result;
 	}
 }
