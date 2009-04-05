@@ -50,7 +50,7 @@ public class User implements  Principal, java.io.Serializable {
 
 	public String getName() {
 		// TODO Auto-generated method stub
-		return null;
+		return ruolo;
 	}
 
 
