@@ -43,6 +43,7 @@
         <mapping resource="it/softfood/XMLdomain/Ristorante.hbm.xml" />
         <mapping resource="it/softfood/XMLdomain/Staff.hbm.xml" />
         <mapping resource="it/softfood/XMLdomain/Tavolo.hbm.xml" />
+        <mapping resource="it/softfood/XMLdomain/User.hbm.xml" />
         <mapping resource="it/softfood/XMLdomain/Variante.hbm.xml" />
         
     </session-factory>
