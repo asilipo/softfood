@@ -4,6 +4,7 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 
 import it.softfood.entity.User;
+import it.softfood.login.LoginHandler;
 
 public interface IUserFacade extends Remote {
 
@@ -18,5 +19,9 @@ public interface IUserFacade extends Remote {
 	public boolean modificaRuolo(User role, User u, String ruolo)throws RemoteException;
 
 	public boolean eliminaUtente(User role, User r)throws RemoteException;
+	
+	public User login(String username,String password)throws RemoteException;
+	
+	public void logout(User u)throws RemoteException;
 
 }
