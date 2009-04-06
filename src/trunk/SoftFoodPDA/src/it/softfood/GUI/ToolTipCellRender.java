@@ -25,7 +25,7 @@ public class ToolTipCellRender extends DefaultTableCellRenderer {
     private User role;
     private TableColumn id;
 
-    public ToolTipCellRender(User role,PDAOrdinazioneFacade ordinazioneFacade, TableColumn id, XTableColumnModel id_antipasto) {
+    public ToolTipCellRender(User role, PDAOrdinazioneFacade ordinazioneFacade, TableColumn id, XTableColumnModel id_antipasto) {
         super();
         this.id = id;
         this.id_antipasto = id_antipasto;

@@ -4,6 +4,7 @@ package it.softfood.GUI;
 import it.softfood.entity.LineaOrdinazione;
 import it.softfood.entity.Ordinazione;
 import it.softfood.entity.User;
+import it.softfood.enumeration.TipoPietanza;
 import it.softfood.facade.PDAArticoloMenuFacade;
 import it.softfood.facade.PDAOrdinazioneFacade;
 
@@ -94,7 +95,7 @@ public class Bibite extends javax.swing.JPanel {
 
         Ordinazione ordine = ordinazioneFacade.selezionaOrdinazionePerId(role,tavolo);
 
-        ArrayList<LineaOrdinazione> linee = new ArrayList<LineaOrdinazione>();//(ArrayList<LineaOrdinazione>) ordinazioneFacade.selezionaLineeOrdinazionePerOrdinazioneTipoPietanza(ordine, null);
+        ArrayList<LineaOrdinazione> linee = (ArrayList<LineaOrdinazione>) ordinazioneFacade.selezionaLineeOrdinazionePerOrdinazioneTipoPietanza(role, ordine, TipoPietanza.BEVANDA);
 
         tabella_ordini.setModel(new javax.swing.table.DefaultTableModel(new Object[linee.size()][3], new String[]{"ID", "Pietanza", "Quantita'"}) {
 
@@ -379,3 +380,4 @@ private void tabella_ordiniMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FI
     private TableColumn id_ordini;
     private TableColumn id;
 }
+
