@@ -23,6 +23,7 @@ public class Bibite extends javax.swing.JPanel {
 
 	private PDAOrdinazioneFacade ordinazioneFacade;
 	private PDAArticoloMenuFacade articolo;
+	private User role;
 
 	   private void initFacade() {
 		   try {
@@ -35,14 +36,15 @@ public class Bibite extends javax.swing.JPanel {
 			
 		}
 	
-    public Bibite(FrameView frame, Long tavolo) {
+    public Bibite(User role,FrameView frame, Long tavolo) {
         this.frame = frame;
         this.tavolo = tavolo;
+        this.role = role;
 
         initComponents();
         initFacade();
 
-        ArrayList<it.softfood.entity.Bevanda> bibite = (ArrayList<it.softfood.entity.Bevanda>) articolo.selezionaBevandeDisponibili();
+        ArrayList<it.softfood.entity.Bevanda> bibite = (ArrayList<it.softfood.entity.Bevanda>) articolo.selezionaBevandeDisponibili(role);
 
         JComboBox combo = new JComboBox();
         combo.addItem(1);
@@ -89,7 +91,7 @@ public class Bibite extends javax.swing.JPanel {
 
         tabella_bibite.setRowHeight(tabella_bibite.getRowHeight() * 15 / 10);
 
-        Ordinazione ordine = ordinazioneFacade.selezionaOrdinazionePerId(tavolo);
+        Ordinazione ordine = ordinazioneFacade.selezionaOrdinazionePerId(role,tavolo);
 
         ArrayList<LineaOrdinazione> linee = new ArrayList<LineaOrdinazione>();//(ArrayList<LineaOrdinazione>) ordinazioneFacade.selezionaLineeOrdinazionePerOrdinazioneTipoPietanza(ordine, null);
 
@@ -342,10 +344,10 @@ private void tabella_bibiteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FI
 private void cancellaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancellaActionPerformed
     linea_ordine.setColumnVisible(id_ordini, true);
     Long id = (Long) tabella_ordini.getValueAt(tabella_ordini.getSelectedRow(), 0);
-    ordinazioneFacade.rimuoviLineaOrdinazione(id);
+    ordinazioneFacade.rimuoviLineaOrdinazione(role,id);
     linea_ordine.setColumnVisible(id_ordini, false);
     this.setVisible(false);
-    Bibite pannello = new Bibite(frame, tavolo);
+    Bibite pannello = new Bibite(role,frame, tavolo);
     frame.setComponent(pannello);
 }//GEN-LAST:event_cancellaActionPerformed
 

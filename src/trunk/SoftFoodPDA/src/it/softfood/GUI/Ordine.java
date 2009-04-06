@@ -9,10 +9,13 @@ import org.jdesktop.application.FrameView;
  */
 
 public class Ordine extends javax.swing.JPanel {
-
-    public Ordine(FrameView frame) {
+	
+	private User role;
+	
+    public Ordine(User role,FrameView frame) {
         initComponents();
-        this.frame=frame;
+        this.frame = frame;
+        this.role = role;
     }
 
     /** This method is called from within the constructor to
@@ -61,12 +64,12 @@ public class Ordine extends javax.swing.JPanel {
 
     private void InserimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InserimentoActionPerformed
         this.setVisible(false);
-        frame.setComponent(new Tavoli(frame,true));
+        frame.setComponent(new Tavoli(role,frame,true));
     }//GEN-LAST:event_InserimentoActionPerformed
 
     private void GestioneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GestioneActionPerformed
         this.setVisible(false);
-        frame.setComponent(new Tavoli(frame,false));
+        frame.setComponent(new Tavoli(role,frame,false));
     }//GEN-LAST:event_GestioneActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
