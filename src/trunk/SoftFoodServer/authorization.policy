@@ -37,7 +37,7 @@ grant Principal it.softfood.entity.User "cuoco"{
 grant Principal it.softfood.entity.User "amministratore"{
   permission it.softfood.aspect.OperationPermission "login"; 
   permission it.softfood.aspect.OperationPermission "logout";
-  permission it.softfood.aspect.OperationPermission "insert";
+  permission it.softfood.aspect.OperationPermission "inserisciUtente";
   permission it.softfood.aspect.OperationPermission "selezionaUserName";
   permission it.softfood.aspect.OperationPermission "selezionaPassword";
   permission it.softfood.aspect.OperationPermission "modificaRuolo";
