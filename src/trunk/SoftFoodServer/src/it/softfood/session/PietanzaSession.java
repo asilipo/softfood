@@ -55,7 +55,19 @@ public class PietanzaSession {
 	
 	public Pietanza selezionaPietanzaPerId(Long id) {
 		try {
-			Pietanza pietanza = (Pietanza) session.get(Pietanza.class, id);
+			Articolo articolo = (Articolo) session.get(Articolo.class, id);
+			Pietanza pietanza=new Pietanza();
+			pietanza.setBevandaMagazzinos(articolo.getBevandaMagazzinos());
+			pietanza.setCapacita(articolo.getCapacita());
+			pietanza.setDescrizione(articolo.getDescrizione());
+			pietanza.setId(articolo.getId());
+			pietanza.setIngredientePietanzas(articolo.getIngredientePietanzas());
+			pietanza.setLineaOrdinaziones(articolo.getLineaOrdinaziones());
+			pietanza.setListino(articolo.getListino());
+			pietanza.setNome(articolo.getNome());
+			pietanza.setTipoArticolo(articolo.getTipoArticolo());
+			pietanza.setTipoPietanza(articolo.getTipoPietanza());
+			
 			
 			return pietanza; 
 		} catch (Exception e) {
