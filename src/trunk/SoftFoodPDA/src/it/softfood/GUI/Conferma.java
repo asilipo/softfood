@@ -1,6 +1,7 @@
 package it.softfood.GUI;
 
 import it.softfood.entity.LineaOrdinazione;
+import it.softfood.entity.User;
 import it.softfood.facade.PDAOrdinazioneFacade;
 
 import it.softfood.handler.OrdinazioneFacade;
@@ -20,6 +21,7 @@ import org.jdesktop.application.FrameView;
 public class Conferma extends javax.swing.JPanel {
 
     private PDAOrdinazioneFacade ordinazioneFacade;
+    private User role;
 
     private void initFacade(Hashtable hash) {
         try {
@@ -30,14 +32,15 @@ public class Conferma extends javax.swing.JPanel {
         }
     }
     
-    public Conferma(FrameView frame,Long tavolo) {
+    public Conferma(User role,FrameView frame,Long tavolo) {
         this.frame = frame;
         this.tavolo = tavolo;
+        this.role = role;
 
         initComponents();
         initFacade(null);
         
-        ArrayList<LineaOrdinazione> ordini=(ArrayList<LineaOrdinazione>) ordinazioneFacade.selezionaLineeOrdinazionePerOrdinazione(ordinazioneFacade.selezionaOrdinazionePerId(tavolo));
+        ArrayList<LineaOrdinazione> ordini=(ArrayList<LineaOrdinazione>) ordinazioneFacade.selezionaLineeOrdinazionePerOrdinazione(role,ordinazioneFacade.selezionaOrdinazionePerId(role,tavolo));
         
         String data[] = new String[ordini.size()];
         
@@ -129,7 +132,7 @@ public class Conferma extends javax.swing.JPanel {
     private void CancellaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancellaActionPerformed
         this.setVisible(false);
 
-        ordinazioneFacade.rimuoviOrdinazione(tavolo, true);
+        ordinazioneFacade.rimuoviOrdinazione(role,tavolo, true);
 
         Ordine ordine = new Ordine(frame);
         frame.setComponent(ordine);   
@@ -145,7 +148,7 @@ public class Conferma extends javax.swing.JPanel {
     private void AnnullaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AnnullaActionPerformed
         this.setVisible(false);
         
-        frame.setComponent(new Menu(frame,tavolo));
+        frame.setComponent(new Menu(role,frame,tavolo));
     }//GEN-LAST:event_AnnullaActionPerformed
 
 
