@@ -133,15 +133,14 @@ public class Conferma extends javax.swing.JPanel {
         this.setVisible(false);
 
         ordinazioneFacade.rimuoviOrdinazione(role,tavolo, true);
-
-        Ordine ordine = new Ordine(frame);
+        Ordine ordine = new Ordine(role, frame);
         frame.setComponent(ordine);   
     }//GEN-LAST:event_CancellaActionPerformed
 
     private void OKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OKActionPerformed
         this.setVisible(false);
 
-        Ordine ordine = new Ordine(frame);
+        Ordine ordine = new Ordine(role,frame);
         frame.setComponent(ordine);
     }//GEN-LAST:event_OKActionPerformed
 
