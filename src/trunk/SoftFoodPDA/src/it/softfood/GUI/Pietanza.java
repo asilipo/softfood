@@ -24,6 +24,7 @@ public class Pietanza extends javax.swing.JPanel {
 
     private PDAArticoloMenuFacade articolo;
     private PDAOrdinazioneFacade ordinazioneFacade;
+    private User role;
 
     private void initFacade(Hashtable hash) {
         try {
@@ -35,9 +36,10 @@ public class Pietanza extends javax.swing.JPanel {
         }
     }
 
-    public Pietanza(FrameView frame, Long tavolo, Long id, String tipo) {
+    public Pietanza(User role,FrameView frame, Long tavolo, Long id, String tipo) {
         this.tavolo = tavolo;
         this.tipo = tipo;
+        this.role = role;
 
         initComponents();
         initFacade(null);
@@ -45,7 +47,7 @@ public class Pietanza extends javax.swing.JPanel {
         this.frame = frame;
         this.id = id;
 
-        ArrayList<Ingrediente> ingredienti = (ArrayList<Ingrediente>) articolo.selezionaIngredientiPietanza(id);
+        ArrayList<Ingrediente> ingredienti = (ArrayList<Ingrediente>) articolo.selezionaIngredientiPietanza(role,id);
 
         String ingr[] = new String[ingredienti.size()];
         int i = 0;
@@ -56,11 +58,11 @@ public class Pietanza extends javax.swing.JPanel {
 
         int disp;
         if (tipo.equalsIgnoreCase("bibite")) {
-            disp = articolo.selezionaDisponibilitaBevanda(id);
+            disp = articolo.selezionaDisponibilitaBevanda(role,id);
             jPanel1.setVisible(false);
             cancella.setVisible(false);
         } else {
-            disp = (Integer) articolo.selezionaDisponibilitaPietanza(id);
+            disp = (Integer) articolo.selezionaDisponibilitaPietanza(role,id);
         }
         disponibilita.setText(disponibilita.getText() + disp);
 
@@ -68,7 +70,7 @@ public class Pietanza extends javax.swing.JPanel {
             jComboBox1.addItem(idisp);
         }
         if (!tipo.equalsIgnoreCase("bibite")) {
-            ArrayList<Ingrediente> ing = (ArrayList<Ingrediente>) ordinazioneFacade.selezionaIngredientiPerVariante();
+            ArrayList<Ingrediente> ing = (ArrayList<Ingrediente>) ordinazioneFacade.selezionaIngredientiPerVariante(role);
 
             for (Ingrediente ingrediente : ing) {
                 jComboBox3.addItem(ingrediente.getNome());
@@ -266,10 +268,10 @@ private void cancellaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 private void OKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OKActionPerformed
     this.setVisible(false);
     LineaOrdinazione linea = new LineaOrdinazione();
-    linea.setOrdinazione(ordinazioneFacade.selezionaOrdinazionePerId(tavolo));
-    linea.setArticolo(articolo.selezionaArticoloMenuPerId(id));
+    linea.setOrdinazione(ordinazioneFacade.selezionaOrdinazionePerId(role,tavolo));
+    linea.setArticolo(articolo.selezionaArticoloMenuPerId(role,id));
     linea.setQuantita((Integer) jComboBox1.getSelectedItem());
-    linea = ordinazioneFacade.inserisciLineaOrdinazione(linea);
+    linea = ordinazioneFacade.inserisciLineaOrdinazione(role,linea);
 
     Variante variante = new Variante();
 
@@ -284,18 +286,18 @@ private void OKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:even
                 //variante.setTipoVariazione(TipoVariante.RIMOZIONE);
             }
 
-            variante.setIngrediente(ordinazioneFacade.selezionaIngredientePerNome(var.substring(2)));
+            variante.setIngrediente(ordinazioneFacade.selezionaIngredientePerNome(role,var.substring(2)));
 
-            ordinazioneFacade.inserisciVariante(variante);
+            ordinazioneFacade.inserisciVariante(role,variante);
             variante = new Variante();
         }
     }
 
     if (tipo.equalsIgnoreCase("bibite")) {
-        Bibite pannello = new Bibite(frame, tavolo);
+        Bibite pannello = new Bibite(role,frame, tavolo);
         frame.setComponent(pannello);
     } else {
-        Pannello_ordinazioni pannello = new Pannello_ordinazioni(frame, tavolo, tipo);
+        Pannello_ordinazioni pannello = new Pannello_ordinazioni(role,frame, tavolo, tipo);
         frame.setComponent(pannello);
     }
 
@@ -304,10 +306,10 @@ private void OKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:even
 private void annullaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_annullaActionPerformed
     this.setVisible(false);
     if (tipo.equalsIgnoreCase("bibite")) {
-        Bibite pannello = new Bibite(frame, tavolo);
+        Bibite pannello = new Bibite(role,frame, tavolo);
         frame.setComponent(pannello);
     } else {
-        Pannello_ordinazioni pannello = new Pannello_ordinazioni(frame, tavolo, tipo);
+        Pannello_ordinazioni pannello = new Pannello_ordinazioni(role,frame, tavolo, tipo);
         frame.setComponent(pannello);
     }
 }//GEN-LAST:event_annullaActionPerformed
@@ -322,9 +324,9 @@ private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     jComboBox3.removeAllItems();
     ArrayList<Ingrediente> ingredienti;
     if (opt.equalsIgnoreCase("-")) {
-        ingredienti = (ArrayList<Ingrediente>) articolo.selezionaIngredientiPietanza(id);
+        ingredienti = (ArrayList<Ingrediente>) articolo.selezionaIngredientiPietanza(role,id);
     } else {
-        ingredienti = (ArrayList<Ingrediente>) ordinazioneFacade.selezionaIngredientiPerVariante();
+        ingredienti = (ArrayList<Ingrediente>) ordinazioneFacade.selezionaIngredientiPerVariante(role);
     }
 
     for (Ingrediente ingrediente : ingredienti) {
