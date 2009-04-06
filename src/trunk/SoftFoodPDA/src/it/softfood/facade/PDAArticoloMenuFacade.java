@@ -4,9 +4,9 @@ import it.softfood.entity.Articolo;
 import it.softfood.entity.Bevanda;
 import it.softfood.entity.Ingrediente;
 import it.softfood.entity.Pietanza;
+import it.softfood.entity.User;
 import it.softfood.enumeration.TipoPietanza;
 import it.softfood.handler.ArticoloMenuFacade;
-import it.softfood.entity.User;
 
 import java.util.ArrayList;
 
