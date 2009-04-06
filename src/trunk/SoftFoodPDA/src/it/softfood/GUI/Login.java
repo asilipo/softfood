@@ -1,6 +1,7 @@
 package it.softfood.GUI;
 
 import it.softfood.entity.User;
+import it.softfood.facade.PDAUserFacade;
 
 import org.jdesktop.application.FrameView;
 
@@ -19,10 +20,13 @@ import org.jdesktop.application.FrameView;
  * @author  marcograsso
  */
 public class Login extends javax.swing.JPanel {
+	
+	public PDAUserFacade userFacade;
 
 	private FrameView frame;
     /** Creates new form Login */
     public Login(FrameView frame) {
+    	userFacade=new PDAUserFacade();
     	this.frame=frame;
         initComponents();
     }
@@ -265,7 +269,7 @@ private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
 
 private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
 // TODO add your handling code here:
-	User u=null;
+	User u=userFacade.login("mary","mary");
     this.setVisible(false);
 	 Ordine ordine = new Ordine(u,frame);
      frame.setComponent(ordine);
