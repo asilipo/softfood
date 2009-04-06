@@ -259,93 +259,91 @@ public class Pietanza extends javax.swing.JPanel {
         pannello_bottoni.add(annulla);
 
         add(pannello_bottoni, java.awt.BorderLayout.SOUTH);
-    }// </editor-fold>//GEN-END:initComponents
-
-private void cancellaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancellaActionPerformed
-    jListModel.removeElementAt(jList1.getSelectedIndex());
-    cancella.setEnabled(false);
-}//GEN-LAST:event_cancellaActionPerformed
-
-private void OKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OKActionPerformed
-    this.setVisible(false);
-    LineaOrdinazione linea = new LineaOrdinazione();
-    linea.setOrdinazione(ordinazioneFacade.selezionaOrdinazionePerId(role,tavolo));
-    linea.setArticolo(articolo.selezionaArticoloMenuPerId(role,id));
-    linea.setQuantita((Integer) jComboBox1.getSelectedItem());
-    linea = ordinazioneFacade.inserisciLineaOrdinazione(role,linea);
-
-    Variante variante = new Variante();
-
-    if (!jListModel.isEmpty()) {
-        Enumeration enumeration = jListModel.elements();
-        while (enumeration.hasMoreElements()) {
-            String var = (String) enumeration.nextElement();
-            variante.setLineaOrdinazione(linea);
-            if (var.substring(0, 1).equalsIgnoreCase("+")) {
-                //variante.setTipoVariazione(TipoVariante.AGGIUNTA);
-            } else {
-                //variante.setTipoVariazione(TipoVariante.RIMOZIONE);
-            }
-
-            variante.setIngrediente(ordinazioneFacade.selezionaIngredientePerNome(role,var.substring(2)));
-
-            ordinazioneFacade.inserisciVariante(role,variante);
-            variante = new Variante();
-        }
     }
 
-    if (tipo.equalsIgnoreCase("bibite")) {
-        Bibite pannello = new Bibite(role,frame, tavolo);
-        frame.setComponent(pannello);
-    } else {
-        Pannello_ordinazioni pannello = new Pannello_ordinazioni(role,frame, tavolo, tipo);
-        frame.setComponent(pannello);
-    }
+	private void cancellaActionPerformed(java.awt.event.ActionEvent evt) {
+	    jListModel.removeElementAt(jList1.getSelectedIndex());
+	    cancella.setEnabled(false);
+	}
 
-}//GEN-LAST:event_OKActionPerformed
+	private void OKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OKActionPerformed
+	    this.setVisible(false);
+	    LineaOrdinazione linea = new LineaOrdinazione();
+	    linea.setOrdinazione(ordinazioneFacade.selezionaOrdinazionePerId(role,tavolo));
+	    linea.setArticolo(articolo.selezionaArticoloMenuPerId(role,id));
+	    linea.setQuantita((Integer) jComboBox1.getSelectedItem());
+	    linea = ordinazioneFacade.inserisciLineaOrdinazione(role, linea);
+	
+	    Variante variante = new Variante();
+	
+	    if (!jListModel.isEmpty()) {
+	        Enumeration enumeration = jListModel.elements();
+	        while (enumeration.hasMoreElements()) {
+	            String var = (String) enumeration.nextElement();
+	            variante.setLineaOrdinazione(linea);
+	            if (var.substring(0, 1).equalsIgnoreCase("+")) {
+	                //variante.setTipoVariazione(TipoVariante.AGGIUNTA);
+	            } else {
+	                //variante.setTipoVariazione(TipoVariante.RIMOZIONE);
+	            }
+	
+	            variante.setIngrediente(ordinazioneFacade.selezionaIngredientePerNome(role,var.substring(2)));
+	
+	            ordinazioneFacade.inserisciVariante(role,variante);
+	            variante = new Variante();
+	        }
+	    }
+	
+	    if (tipo.equalsIgnoreCase("bibite")) {
+	        Bibite pannello = new Bibite(role,frame, tavolo);
+	        frame.setComponent(pannello);
+	    } else {
+	        Pannello_ordinazioni pannello = new Pannello_ordinazioni(role,frame, tavolo, tipo);
+	        frame.setComponent(pannello);
+	    }
+	
+	}
 
-private void annullaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_annullaActionPerformed
-    this.setVisible(false);
-    if (tipo.equalsIgnoreCase("bibite")) {
-        Bibite pannello = new Bibite(role,frame, tavolo);
-        frame.setComponent(pannello);
-    } else {
-        Pannello_ordinazioni pannello = new Pannello_ordinazioni(role,frame, tavolo, tipo);
-        frame.setComponent(pannello);
-    }
-}//GEN-LAST:event_annullaActionPerformed
+	private void annullaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_annullaActionPerformed
+	    this.setVisible(false);
+	    if (tipo.equalsIgnoreCase("bibite")) {
+	        Bibite pannello = new Bibite(role,frame, tavolo);
+	        frame.setComponent(pannello);
+	    } else {
+	        Pannello_ordinazioni pannello = new Pannello_ordinazioni(role,frame, tavolo, tipo);
+	        frame.setComponent(pannello);
+	    }
+	}//GEN-LAST:event_annullaActionPerformed
+	
+	private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+	    String data = (String) jComboBox2.getSelectedItem() + " " + (String) jComboBox3.getSelectedItem();
+	    jListModel.addElement(data);
+	}//GEN-LAST:event_jButton1ActionPerformed
+	
+	private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+	    String opt = (String) jComboBox2.getSelectedItem();
+	    jComboBox3.removeAllItems();
+	    ArrayList<Ingrediente> ingredienti;
+	    if (opt.equalsIgnoreCase("-")) {
+	        ingredienti = (ArrayList<Ingrediente>) articolo.selezionaIngredientiPietanza(role,id);
+	    } else {
+	        ingredienti = (ArrayList<Ingrediente>) ordinazioneFacade.selezionaIngredientiPerVariante(role);
+	    }
+	
+	    for (Ingrediente ingrediente : ingredienti) {
+	        jComboBox3.addItem(ingrediente.getNome());
+	    }
+	}
+	
+	private void jList1MouseClicked(java.awt.event.MouseEvent evt) {
+	    int i = jList1.getFirstVisibleIndex();
+	    if (i == -1) {
+	        cancella.setEnabled(false);
+	    } else {
+	        cancella.setEnabled(true);
+	    }
+	}
 
-private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    String data = (String) jComboBox2.getSelectedItem() + " " + (String) jComboBox3.getSelectedItem();
-    jListModel.addElement(data);
-}//GEN-LAST:event_jButton1ActionPerformed
-
-private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
-    String opt = (String) jComboBox2.getSelectedItem();
-    jComboBox3.removeAllItems();
-    ArrayList<Ingrediente> ingredienti;
-    if (opt.equalsIgnoreCase("-")) {
-        ingredienti = (ArrayList<Ingrediente>) articolo.selezionaIngredientiPietanza(role,id);
-    } else {
-        ingredienti = (ArrayList<Ingrediente>) ordinazioneFacade.selezionaIngredientiPerVariante(role);
-    }
-
-    for (Ingrediente ingrediente : ingredienti) {
-        jComboBox3.addItem(ingrediente.getNome());
-    }
-}//GEN-LAST:event_jComboBox2ActionPerformed
-
-private void jList1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList1MouseClicked
-// TODO add your handling code here:
-    int i = jList1.getFirstVisibleIndex();
-    if (i == -1) {
-        cancella.setEnabled(false);
-    } else {
-        cancella.setEnabled(true);
-    }
-}//GEN-LAST:event_jList1MouseClicked
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton OK;
     private javax.swing.JButton annulla;
     private javax.swing.JButton cancella;
@@ -367,11 +365,12 @@ private void jList1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:even
     private javax.swing.JList listaIngredienti;
     private javax.swing.JPanel pannello_bottoni;
     private javax.swing.JPanel quantita;
-    // End of variables declaration//GEN-END:variables
+
     private FrameView frame;
     private Long tavolo;
     private Long id;
     private String tipo;
     private DefaultListModel jListModel;
+    
 }
 
