@@ -240,7 +240,7 @@ public class OrdinazioneFacade {
 
                 return lineaOrdinazione;
             } catch (Exception e) {
-            	System.out.println("ERROREEEEEEEEEEEEEEEEEEEEEEEE "+e);
+            	System.out.println("OrdinazioneFacade#inserisciLineaOrdinazione " + e);
             }
 		}
 		
