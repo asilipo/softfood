@@ -197,8 +197,7 @@ public class ArticoloMenuFacade  {
                 }
             }
         }
-		System.out.println("dooooooooooooooookkkkkkkkkkkkkeyyyyyyyyyyyyyyyyyyyyyyyyyy "+disponibilitaMinima);
-        
+		
         if (contatore == numeroIngredienti && contatore > 0)
             return disponibilitaMinima;
 
@@ -214,9 +213,21 @@ public class ArticoloMenuFacade  {
 
         if (bevandeMagazzino != null && bevandeMagazzino.size() > 0) {
             ArrayList<Bevanda> bevande = new ArrayList<Bevanda>();
-            for (BevandaMagazzino bevandaMagazzino : bevandeMagazzino)
-                bevande.add((Bevanda) bevandaMagazzino.getArticolo());
-
+			for (BevandaMagazzino bevandaMagazzino : bevandeMagazzino) {
+            	Articolo articolo = bevandaMagazzino.getArticolo();
+            	Bevanda bevanda = new Bevanda();
+            	bevanda.setCapacita(articolo.getCapacita());
+            	bevanda.setDescrizione(articolo.getDescrizione());
+            	bevanda.setId(articolo.getId());
+            	bevanda.setListino(articolo.getListino());
+            	bevanda.setNome(articolo.getNome());
+            	bevanda.setTipoArticolo(articolo.getTipoArticolo());
+            	bevanda.setBevandaMagazzinos(articolo.getBevandaMagazzinos());
+            	bevanda.setLineaOrdinaziones(articolo.getLineaOrdinaziones());
+            	
+                bevande.add(bevanda);
+			}
+			
             return bevande;
         }
 

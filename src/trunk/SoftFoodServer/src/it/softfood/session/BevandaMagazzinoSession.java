@@ -77,7 +77,7 @@ public class BevandaMagazzinoSession {
 	
 	public List<BevandaMagazzino> selezionaBevandeMagazzinoPerQuantita(Integer quantita) {
 		try {
-			Query q = session.createQuery("from it.softfood.entity.BevandaMagazzino b where b.quantita = ?");
+			Query q = session.createQuery("from it.softfood.entity.BevandaMagazzino b where b.quantita >= ?");
 			q.setInteger(0, quantita);
 			List<BevandaMagazzino> list = (List<BevandaMagazzino>) q.list();
 			

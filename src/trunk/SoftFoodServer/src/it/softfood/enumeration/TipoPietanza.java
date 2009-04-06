@@ -8,7 +8,7 @@ package it.softfood.enumeration;
 
 public enum TipoPietanza {
 
-	ANTIPASTI, PRIMO_PIATTO, SECONDO_PIATTO, CONTORNO, DOLCE;
+	ANTIPASTI, PRIMO_PIATTO, SECONDO_PIATTO, CONTORNO, DOLCE, BEVANDA;
 
 	@Override
 	public String toString() {
