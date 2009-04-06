@@ -21,12 +21,12 @@ public class UserFacade {
 		return singleton;
 	}
 
-	public User findByUsernamePassword(String username, String password) {
+	public User selezionaUtentePerUserPassword(String username, String password) {
 		User u = user.selezionaUtente(username,password);
 		return u;
 	}
 	
-	public User insert(User role, User u){		
+	public User inserisciUtente(User role, User u){		
 		u=user.inserisciUser(u);
 		System.out.println();
 		return u;		

@@ -4,6 +4,7 @@ import it.softfood.handler.IArticoloMenuFacade;
 import it.softfood.handler.IOrdinazioneFacade;
 import it.softfood.handler.IRistoranteFacade;
 import it.softfood.handler.ITavoloFacade;
+import it.softfood.handler.IUserFacade;
 
 import java.rmi.Naming;
 import java.rmi.registry.LocateRegistry;
@@ -21,6 +22,7 @@ public aspect Distribution {
 	declare parents: it.softfood.handler.OrdinazioneFacade implements IOrdinazioneFacade;
 	declare parents: it.softfood.handler.RistoranteFacade implements IRistoranteFacade;
 	declare parents: it.softfood.handler.ArticoloMenuFacade implements IArticoloMenuFacade;
+	declare parents: it.softfood.handler.UserFacade implements IUserFacade;
 
 	pointcut initTavolo(ITavoloFacade t): execution(it.softfood.handler.TavoloFacade.new(..)) && this(t);
 
@@ -98,6 +100,26 @@ public aspect Distribution {
 
 			Registry registry = LocateRegistry.getRegistry("localhost", 1099);
 			Naming.rebind("ArticoloFacade", tt);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	pointcut initUser(IUserFacade t): execution(it.softfood.handler.UserFacade.new(..)) && this(t);
+
+	after(IUserFacade t): initUser(t){
+		try {
+			System.setProperty("java.security.policy", "authorization.policy");
+			System.setProperty("java.security.policy", "authorization.policy");
+			
+			if (System.getSecurityManager() == null) {
+				System.setSecurityManager(new SecurityManager());
+			}
+			
+			IUserFacade tt = (IUserFacade) java.rmi.server.UnicastRemoteObject.exportObject(t, 0);
+
+			Registry registry = LocateRegistry.getRegistry("localhost", 1099);
+			Naming.rebind("UserFacade", tt);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
