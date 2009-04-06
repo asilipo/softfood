@@ -46,4 +46,8 @@ public class UserFacade {
 	public boolean eliminaUtente(User role, User r){
 		return user.rimuoviUser(r.getUserName());
 	}
+	public User selezionaUtente(User role,String username, String password)
+	{
+		return user.selezionaUtente(username,password);
+	}
 }
