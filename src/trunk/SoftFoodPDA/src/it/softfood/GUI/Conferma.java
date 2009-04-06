@@ -141,7 +141,7 @@ public class Conferma extends javax.swing.JPanel {
     private void AnnullaActionPerformed(java.awt.event.ActionEvent evt) {
         this.setVisible(false);
         
-        frame.setComponent(new Menu(role,frame,tavolo));
+        frame.setComponent(new Menu(role, frame, tavolo));
     }
 
     private javax.swing.JButton Annulla;

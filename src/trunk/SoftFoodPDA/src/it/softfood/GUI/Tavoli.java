@@ -205,7 +205,6 @@ public class Tavoli extends javax.swing.JPanel {
         Ordinazione ordine = null;
 
         if (vuoti) {
-            //Inserimento
             Long tavoloSelezionato = tavoloFacade.occupaTavoli(role,tav);
 
             ordine = new Ordinazione();
@@ -221,22 +220,22 @@ public class Tavoli extends javax.swing.JPanel {
                 frame.setComponent(pannello_tavoli);
             }
         } else {
-            ordine = ordinazioneFacade.selezionaOrdinazioneGiornalieraPerTavolo(role,((String)tav.get(0)), false);
+            ordine = ordinazioneFacade.selezionaOrdinazioneGiornalieraPerTavolo(role, ((String)tav.get(0)), false);
         }
 
         this.setVisible(false);
-        System.out.println("ORDINE RECUPERATO O CREATO "+ordine.getId());
+        System.out.println("ORDINE RECUPERATO O CREATO " + ordine.getId());
 
-        frame.setComponent(new Menu(role,frame, ordine.getId()));
+        frame.setComponent(new Menu(role, frame, ordine.getId()));
     }
 
-    private void AnnullaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AnnullaActionPerformed
+    private void AnnullaActionPerformed(java.awt.event.ActionEvent evt) {
         this.setVisible(false);
 
-        frame.setComponent(new Ordine(role,frame));
-    }//GEN-LAST:event_AnnullaActionPerformed
+        frame.setComponent(new Ordine(role, frame));
+    }
 
-private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActionPerformed
+private void addActionPerformed(java.awt.event.ActionEvent evt) {
     Ok.setEnabled(true);
 
     int dim = 20;
