@@ -1,5 +1,6 @@
 package it.softfood.session;
 
+import it.softfood.entity.Articolo;
 import it.softfood.entity.Bevanda;
 
 import java.util.ArrayList;
@@ -54,11 +55,20 @@ public class BevandaSession {
 
 	public Bevanda selezionaBevandaPerId(Long id) {
 		try {
-			Bevanda bevanda = (Bevanda) session.get(Bevanda.class, id);
+			Articolo articolo = (Articolo) session.get(Articolo.class, id);
+			Bevanda bevanda = new Bevanda();
+			bevanda.setBevandaMagazzinos(articolo.getBevandaMagazzinos());
+			bevanda.setCapacita(articolo.getCapacita());
+			bevanda.setDescrizione(articolo.getDescrizione());
+			bevanda.setId(articolo.getId());
+			bevanda.setLineaOrdinaziones(articolo.getLineaOrdinaziones());
+			bevanda.setListino(articolo.getListino());
+			bevanda.setNome(articolo.getNome());
+			bevanda.setTipoArticolo(articolo.getTipoArticolo());
 			
 			return bevanda; 
 		} catch (Exception e) {
-			System.err.println("BevandaSession#selezionaBevandaPerId");
+			System.err.println("BevandaSession#selezionaBevandaPerId " + e);
 			return null;
 		}
 	}

@@ -302,7 +302,7 @@ public class OrdinazioneFacade {
         
         for (LineaOrdinazione lineaOrdinazione : lineeOrdinazione) {
             Articolo articolo = lineaOrdinazione.getArticolo();
-            if (articolo.getTipoArticolo().equals("Bevanda") && tipoPietanza == null)
+            if (articolo.getTipoArticolo().equals("Bevanda") && tipoPietanza.equals(TipoPietanza.BEVANDA))
                 lineeOrdinazioneArticoli.add(lineaOrdinazione);
             if (articolo.getTipoArticolo().equals("Pietanza"))
                 if (((Pietanza)articolo).getTipo().equals(tipoPietanza))
