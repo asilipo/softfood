@@ -273,7 +273,7 @@ public class Pietanza extends javax.swing.JPanel {
 	    linea.setArticolo(articolo.selezionaArticoloMenuPerId(role,id));
 	    linea.setQuantita((Integer) jComboBox1.getSelectedItem());
 	    linea = ordinazioneFacade.inserisciLineaOrdinazione(role, linea);
-	
+
 	    Variante variante = new Variante();
 	
 	    if (!jListModel.isEmpty()) {
@@ -304,7 +304,7 @@ public class Pietanza extends javax.swing.JPanel {
 	
 	}
 
-	private void annullaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_annullaActionPerformed
+	private void annullaActionPerformed(java.awt.event.ActionEvent evt) {
 	    this.setVisible(false);
 	    if (tipo.equalsIgnoreCase("bibite")) {
 	        Bibite pannello = new Bibite(role,frame, tavolo);
@@ -313,14 +313,14 @@ public class Pietanza extends javax.swing.JPanel {
 	        Pannello_ordinazioni pannello = new Pannello_ordinazioni(role,frame, tavolo, tipo);
 	        frame.setComponent(pannello);
 	    }
-	}//GEN-LAST:event_annullaActionPerformed
+	}
 	
-	private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+	private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
 	    String data = (String) jComboBox2.getSelectedItem() + " " + (String) jComboBox3.getSelectedItem();
 	    jListModel.addElement(data);
-	}//GEN-LAST:event_jButton1ActionPerformed
+	}
 	
-	private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+	private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {
 	    String opt = (String) jComboBox2.getSelectedItem();
 	    jComboBox3.removeAllItems();
 	    ArrayList<Ingrediente> ingredienti;
