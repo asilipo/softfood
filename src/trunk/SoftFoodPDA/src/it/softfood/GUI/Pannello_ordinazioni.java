@@ -2,6 +2,7 @@ package it.softfood.GUI;
 
 import it.softfood.entity.LineaOrdinazione;
 import it.softfood.entity.Ordinazione;
+import it.softfood.entity.User;
 import it.softfood.enumeration.TipoPietanza;
 import it.softfood.facade.PDAArticoloMenuFacade;
 import it.softfood.facade.PDAOrdinazioneFacade;
@@ -119,7 +120,7 @@ public class Pannello_ordinazioni extends javax.swing.JPanel {
         id_ordini = linea_ordine.getColumnByModelIndex(0);
         linea_ordine.setColumnVisible(id_ordini, false);
              
-        ToolTipCellRender tool = new ToolTipCellRender(ordinazioneFacade, id_ordini, linea_ordine);
+        ToolTipCellRender tool = new ToolTipCellRender(role,ordinazioneFacade, id_ordini, linea_ordine);
         tabella_ordini.setDefaultRenderer(tabella_ordini.getColumnClass(0), tool);
         
     }

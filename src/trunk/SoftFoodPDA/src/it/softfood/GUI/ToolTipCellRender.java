@@ -1,6 +1,7 @@
 package it.softfood.GUI;
 
 import it.softfood.entity.LineaOrdinazione;
+import it.softfood.entity.User;
 import it.softfood.entity.Variante;
 import it.softfood.facade.PDAOrdinazioneFacade;
 
@@ -21,13 +22,15 @@ public class ToolTipCellRender extends DefaultTableCellRenderer {
 
     private XTableColumnModel id_antipasto;
     private PDAOrdinazioneFacade ordinazioneFacade;
+    private User role;
     private TableColumn id;
 
-    public ToolTipCellRender(PDAOrdinazioneFacade ordinazioneFacade, TableColumn id, XTableColumnModel id_antipasto) {
+    public ToolTipCellRender(User role,PDAOrdinazioneFacade ordinazioneFacade, TableColumn id, XTableColumnModel id_antipasto) {
         super();
         this.id = id;
         this.id_antipasto = id_antipasto;
         this.ordinazioneFacade = ordinazioneFacade;
+        this.role=role;
     }
 
     public void setValue(String aValue) {
@@ -49,9 +52,9 @@ public class ToolTipCellRender extends DefaultTableCellRenderer {
 
         Long id_linea = (Long) table.getValueAt(row, 0);
 
-        LineaOrdinazione lineaOrdinazione = ordinazioneFacade.selezionaLineaOrdinazionePerId(id_linea);
+        LineaOrdinazione lineaOrdinazione = ordinazioneFacade.selezionaLineaOrdinazionePerId(role,id_linea);
         
-        ArrayList<Variante> varianti = (ArrayList<Variante>) ordinazioneFacade.selezionaVariantiPerLineaOrdinazione(lineaOrdinazione);
+        ArrayList<Variante> varianti = (ArrayList<Variante>) ordinazioneFacade.selezionaVariantiPerLineaOrdinazione(role,lineaOrdinazione);
 
         String tool = "";
         if (varianti != null) {

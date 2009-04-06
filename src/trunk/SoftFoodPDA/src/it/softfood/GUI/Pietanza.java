@@ -2,6 +2,7 @@ package it.softfood.GUI;
 
 import it.softfood.entity.Ingrediente;
 import it.softfood.entity.LineaOrdinazione;
+import it.softfood.entity.User;
 import it.softfood.entity.Variante;
 import it.softfood.enumeration.TipoVariante;
 import it.softfood.facade.PDAArticoloMenuFacade;

@@ -1,5 +1,7 @@
 package it.softfood.GUI;
 
+import it.softfood.entity.User;
+
 import org.jdesktop.application.FrameView;
 
 
@@ -140,7 +142,7 @@ public class Menu extends javax.swing.JPanel {
 
     private void OkActionPerformed(java.awt.event.ActionEvent evt) {
         this.setVisible(false);
-        Conferma conferma = new Conferma(frame,tavolo);
+        Conferma conferma = new Conferma(role,frame,tavolo);
         frame.setComponent(conferma);
     }
 
