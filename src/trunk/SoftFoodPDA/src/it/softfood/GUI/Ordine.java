@@ -12,6 +12,8 @@ import org.jdesktop.application.FrameView;
 
 public class Ordine extends javax.swing.JPanel {
 	
+	private static final long serialVersionUID = 1L;
+	
 	private User role;
 	
     public Ordine(User role, FrameView frame) {
@@ -26,15 +28,15 @@ public class Ordine extends javax.swing.JPanel {
 
         setMaximumSize(new java.awt.Dimension(225, 450));
         setMinimumSize(new java.awt.Dimension(225, 450));
-        setName("Form"); // NOI18N
+        setName("Form");
         setPreferredSize(new java.awt.Dimension(225, 450));
         setLayout(new java.awt.GridLayout(2, 1, 5, 5));
 
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(it.softfood.GUI.Main.class).getContext().getResourceMap(Ordine.class);
-        Inserimento.setIcon(resourceMap.getIcon("Inserimento.icon")); // NOI18N
-        Inserimento.setText(resourceMap.getString("Inserimento.text")); // NOI18N
+        Inserimento.setIcon(resourceMap.getIcon("Inserimento.icon")); 
+        Inserimento.setText(resourceMap.getString("Inserimento.text")); 
         Inserimento.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        Inserimento.setName("Inserimento"); // NOI18N
+        Inserimento.setName("Inserimento"); 
         Inserimento.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         Inserimento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -43,10 +45,10 @@ public class Ordine extends javax.swing.JPanel {
         });
         add(Inserimento);
 
-        Gestione.setIcon(resourceMap.getIcon("Gestione.icon")); // NOI18N
-        Gestione.setText(resourceMap.getString("Gestione.text")); // NOI18N
+        Gestione.setIcon(resourceMap.getIcon("Gestione.icon"));
+        Gestione.setText(resourceMap.getString("Gestione.text")); 
         Gestione.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        Gestione.setName("Gestione"); // NOI18N
+        Gestione.setName("Gestione"); 
         Gestione.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         Gestione.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -54,22 +56,20 @@ public class Ordine extends javax.swing.JPanel {
             }
         });
         add(Gestione);
-    }// </editor-fold>//GEN-END:initComponents
+    }
 
-    private void InserimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InserimentoActionPerformed
+    private void InserimentoActionPerformed(java.awt.event.ActionEvent evt) {
         this.setVisible(false);
         frame.setComponent(new Tavoli(role,frame,true));
-    }//GEN-LAST:event_InserimentoActionPerformed
+    }
 
-    private void GestioneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GestioneActionPerformed
+    private void GestioneActionPerformed(java.awt.event.ActionEvent evt) {
         this.setVisible(false);
         frame.setComponent(new Tavoli(role,frame,false));
-    }//GEN-LAST:event_GestioneActionPerformed
+    }
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Gestione;
     private javax.swing.JButton Inserimento;
-    // End of variables declaration//GEN-END:variables
     private FrameView frame;
     
 }
