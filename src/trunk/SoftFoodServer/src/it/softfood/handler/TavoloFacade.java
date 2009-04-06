@@ -1,6 +1,7 @@
 package it.softfood.handler;
 
 import it.softfood.entity.Tavolo;
+import it.softfood.entity.User;
 import it.softfood.session.RistoranteSession;
 import it.softfood.session.TavoloSession;
 
@@ -32,54 +33,54 @@ public class TavoloFacade implements ITavoloFacade {
 		return singleton;
 	}
 
-	public Tavolo inserisciTavolo(Tavolo tavolo) {
+	public Tavolo inserisciTavolo(User role,Tavolo tavolo) {
 		if (tavolo != null)
 			return tavoloSession.inserisciTavolo(tavolo);
 		
 		return null;
 	}
 	
-	public boolean liberaTavolo(Tavolo tavolo) {
+	public boolean liberaTavolo(User role,Tavolo tavolo) {
 		if (tavolo != null)
 			return tavoloSession.modificaStatoTavolo(tavolo, false);
 		
 		return false;
 	}
 	
-	public boolean occupaTavolo(Tavolo tavolo) {
+	public boolean occupaTavolo(User role,Tavolo tavolo) {
 		if (tavolo != null)
 			return tavoloSession.modificaStatoTavolo(tavolo, true);	
 		
 		return false;
 	}
 	
-	public Tavolo selezionaTavolo(Long id) {
+	public Tavolo selezionaTavolo(User role,Long id) {
 		if (id != null)
 			return tavoloSession.selezionaTavoloPerId(id);
 		
 		return null;
 	}
 	
-	public List<Tavolo> selezionaTavoliLiberi() {
+	public List<Tavolo> selezionaTavoliLiberi(User role) {
 		return tavoloSession.selezionaTavoliLiberi();
 	}
 
-    public List<Tavolo> selezionaTavoliOccupati() {
+    public List<Tavolo> selezionaTavoliOccupati(User role) {
 		return tavoloSession.selezionaTavoliOccupati();
 	}
 
-    public List<Tavolo> selezionaTavoliNonAttivi() {
+    public List<Tavolo> selezionaTavoliNonAttivi(User role) {
         return tavoloSession.selezionaTavoliNonAttivi();
     }
     
-	public boolean rimuoviTavolo(Long id) {
+	public boolean rimuoviTavolo(User role,Long id) {
 		if (id != null)
 			return tavoloSession.rimuoviTavolo(id);
 		
 		return false;
 	}
     
-    public Long occupaTavoli(ArrayList<String> riferimenti) {
+    public Long occupaTavoli(User role,ArrayList<String> riferimenti) {
         try {
             if (riferimenti != null) {
                 if (riferimenti.size() == 1) {

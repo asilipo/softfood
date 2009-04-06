@@ -1,6 +1,7 @@
 package it.softfood.handler;
 
 import it.softfood.entity.User;
+import it.softfood.login.LoginHandler;
 import it.softfood.session.UserSession;
 
 
@@ -49,5 +50,14 @@ public class UserFacade {
 	public User selezionaUtente(User role,String username, String password)
 	{
 		return user.selezionaUtente(username,password);
+	}
+	
+	public User login(String username,String password){
+		User u=LoginHandler.getInstance().login(username, password);
+		return u;
+	}
+	
+	public void logout(User u){
+		LoginHandler.getInstance().logout(u);
 	}
 }

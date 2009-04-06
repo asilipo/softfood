@@ -10,6 +10,7 @@ import it.softfood.entity.LineaOrdinazione;
 import it.softfood.entity.Ordinazione;
 import it.softfood.entity.Pietanza;
 import it.softfood.entity.Tavolo;
+import it.softfood.entity.User;
 import it.softfood.entity.Variante;
 import it.softfood.enumeration.TipoPietanza;
 import it.softfood.session.BevandaMagazzinoSession;
@@ -53,7 +54,7 @@ public class OrdinazioneFacade {
 		return singleton;
 	}
 	
-	public Ordinazione inserisciOrdinazione(Ordinazione ordinazione) {
+	public Ordinazione inserisciOrdinazione(User role,Ordinazione ordinazione) {
 		if (ordinazione != null) {
             Tavolo tavolo = tavoloSession.selezionaTavoloPerId(ordinazione.getTavolo().getId());
 
@@ -97,7 +98,7 @@ public class OrdinazioneFacade {
 		return null;
 	}
 
-    private Integer verificaIngredientiPietanza(Pietanza pietanza) {
+    private Integer verificaIngredientiPietanza(User role,Pietanza pietanza) {
         ArrayList<IngredientePietanza> ingredientiPietanze = (ArrayList<IngredientePietanza>) ingredientePietanzaSession.selezionaIngredientiPietanze();
         ArrayList<IngredienteMagazzino> ingredientiMagazzino = (ArrayList<IngredienteMagazzino>) ingredienteMagazzinoSession.selezionaIngredientiMagazzino();
         Date data = new Date(System.currentTimeMillis());
@@ -117,7 +118,7 @@ public class OrdinazioneFacade {
         return disponibilita;
     }
 
-    public Ordinazione modificaOrdinazione(Ordinazione nuovaOrdinazione, Ordinazione vecchiaOrdinazione) {
+    public Ordinazione modificaOrdinazione(User role,Ordinazione nuovaOrdinazione, Ordinazione vecchiaOrdinazione) {
 		if (nuovaOrdinazione != null && vecchiaOrdinazione != null) {
 			Ordinazione ordinazione = ordinazioneSession.selezionaOrdinazionePerId(vecchiaOrdinazione.getId());
             ordinazione.setData(nuovaOrdinazione.getData());
@@ -132,7 +133,7 @@ public class OrdinazioneFacade {
 		return null;
 	}
 
-	public Ordinazione selezionaOrdinazionePerId(Long id) {
+	public Ordinazione selezionaOrdinazionePerId(User role,Long id) {
 		if (id != null) {
 			Ordinazione ord=ordinazioneSession.selezionaOrdinazionePerId(id);
 			return ord;
@@ -140,25 +141,25 @@ public class OrdinazioneFacade {
 		return null;
 	}
 	
-	public ArrayList<Ordinazione> selezionaOrdinazioni() {
+	public ArrayList<Ordinazione> selezionaOrdinazioni(User role) {
 		return (ArrayList<Ordinazione>) ordinazioneSession.selezionaOrdinazioni();
 	}
 	
-	public ArrayList<Ordinazione> selezionaOrdinazioniPerData(Date data) {
+	public ArrayList<Ordinazione> selezionaOrdinazioniPerData(User role,Date data) {
 		if (data != null) 
 			return (ArrayList<Ordinazione>) ordinazioneSession.selezionaOrdinazioniPerData(data);
 		
 		return null;
 	}
 	
-	public ArrayList<Ordinazione> selezionaOrdinazioniGiornalierePerTavolo(Tavolo tavolo, Boolean terminato) {
+	public ArrayList<Ordinazione> selezionaOrdinazioniGiornalierePerTavolo(User role,Tavolo tavolo, Boolean terminato) {
 		if (tavolo != null && terminato != null) 
 			return (ArrayList<Ordinazione>) ordinazioneSession.selezionaOrdinazioniGionalierePerTavolo(tavolo, terminato);
 		
 		return null;
 	}
 
-    public Ordinazione selezionaOrdinazioneGiornalieraPerTavolo(String riferimentoTavolo, Boolean terminato) {
+    public Ordinazione selezionaOrdinazioneGiornalieraPerTavolo(User role,String riferimentoTavolo, Boolean terminato) {
 		if (riferimentoTavolo != null && terminato != null){
 			ArrayList<Ordinazione> list=((ArrayList<Ordinazione>)ordinazioneSession.selezionaOrdinazioniGionalierePerTavolo(tavoloSession.selezionaTavoloPerRiferimento(riferimentoTavolo, true), terminato));
 			
@@ -167,7 +168,7 @@ public class OrdinazioneFacade {
 		return null;
 	}
 	
-	public boolean rimuoviOrdinazione(Long id, Boolean ripristinaPietanze) {
+	public boolean rimuoviOrdinazione(User role,Long id, Boolean ripristinaPietanze) {
 		if (id != null) {
             Boolean statoEliminazione = false;
             Ordinazione ordinazione = ordinazioneSession.selezionaOrdinazionePerId(id);
@@ -185,10 +186,10 @@ public class OrdinazioneFacade {
                         if (ripristinaPietanze) {
                             Articolo articolo = lineaOrdinazione.getArticolo();
                             if (articolo instanceof Pietanza) {
-                                if (!this.aggiornaMagazzinoIngredienti(lineaOrdinazione, "+"))
+                                if (!this.aggiornaMagazzinoIngredienti(role,lineaOrdinazione, "+"))
                                     throw new Exception();
                             } else if (articolo instanceof Bevanda) {
-                                if (!this.aggiornaMagazzinoBevande(lineaOrdinazione, "+"))
+                                if (!this.aggiornaMagazzinoBevande(role,lineaOrdinazione, "+"))
                                     throw new Exception();
                             }
                         }
@@ -223,7 +224,7 @@ public class OrdinazioneFacade {
 		return false;
 	}
 	
-	public LineaOrdinazione inserisciLineaOrdinazione(LineaOrdinazione lineaOrdinazione) {
+	public LineaOrdinazione inserisciLineaOrdinazione(User role,LineaOrdinazione lineaOrdinazione) {
 		if (lineaOrdinazione != null) {
             try {
                 lineaOrdinazione.setOrdinazione(lineaOrdinazione.getOrdinazione());
@@ -231,10 +232,10 @@ public class OrdinazioneFacade {
                 lineaOrdinazione = lineaOrdinazioneSession.inserisciLineaOrdinazione(lineaOrdinazione);
                 Articolo articolo = lineaOrdinazione.getArticolo();
                 if (articolo instanceof Pietanza)
-                    if (!this.aggiornaMagazzinoIngredienti(lineaOrdinazione, "-"))
+                    if (!this.aggiornaMagazzinoIngredienti(role,lineaOrdinazione, "-"))
                         throw new Exception();
                 else
-                    if (!this.aggiornaMagazzinoBevande(lineaOrdinazione, "-"))
+                    if (!this.aggiornaMagazzinoBevande(role,lineaOrdinazione, "-"))
                         throw  new Exception();
 
                 return lineaOrdinazione;
@@ -252,7 +253,7 @@ public class OrdinazioneFacade {
 	/* (non-Javadoc)
 	 * @see it.softfood.handler.IOrdinazioneFacade#modificaLineaOrdinazione(it.softfood.entity.LineaOrdinazione, it.softfood.entity.LineaOrdinazione)
 	 */
-	public LineaOrdinazione modificaLineaOrdinazione(LineaOrdinazione nuovaLineaOrdinazione,
+	public LineaOrdinazione modificaLineaOrdinazione(User role,LineaOrdinazione nuovaLineaOrdinazione,
             LineaOrdinazione vecchiaLineaOrdinazione) {
         if (nuovaLineaOrdinazione != null && vecchiaLineaOrdinazione != null) {
 			LineaOrdinazione lineaOrdinazione = vecchiaLineaOrdinazione;
@@ -272,7 +273,7 @@ public class OrdinazioneFacade {
     /* (non-Javadoc)
 	 * @see it.softfood.handler.IOrdinazioneFacade#selezionaLineaOrdinazionePerId(java.lang.Long)
 	 */
-    public LineaOrdinazione selezionaLineaOrdinazionePerId(Long id) {
+    public LineaOrdinazione selezionaLineaOrdinazionePerId(User role,Long id) {
         if (id != null)
 			return lineaOrdinazioneSession.selezionaLineaOrdinazionePerId(id);
 
@@ -285,7 +286,7 @@ public class OrdinazioneFacade {
     /* (non-Javadoc)
 	 * @see it.softfood.handler.IOrdinazioneFacade#selezionaLineeOrdinazionePerOrdinazione(it.softfood.entity.Ordinazione)
 	 */
-    public ArrayList<LineaOrdinazione> selezionaLineeOrdinazionePerOrdinazione(Ordinazione ordinazione) {
+    public ArrayList<LineaOrdinazione> selezionaLineeOrdinazionePerOrdinazione(User role,Ordinazione ordinazione) {
         if (ordinazione != null){
         	ArrayList<LineaOrdinazione> linea=(ArrayList<LineaOrdinazione>) lineaOrdinazioneSession.selezionaLineeOrdinazionePerOrdinazione(ordinazione);
 			return linea;
@@ -293,7 +294,7 @@ public class OrdinazioneFacade {
         return null;
     }
 
-    public ArrayList<LineaOrdinazione> selezionaLineeOrdinazionePerOrdinazioneTipoPietanza(Ordinazione ordinazione, TipoPietanza tipoPietanza) {
+    public ArrayList<LineaOrdinazione> selezionaLineeOrdinazionePerOrdinazioneTipoPietanza(User role,Ordinazione ordinazione, TipoPietanza tipoPietanza) {
         ArrayList<LineaOrdinazione> lineeOrdinazione = new ArrayList<LineaOrdinazione>();
         if (ordinazione != null) 
 			 lineeOrdinazione = (ArrayList<LineaOrdinazione>) lineaOrdinazioneSession.selezionaLineeOrdinazionePerOrdinazione(ordinazione);
@@ -312,7 +313,7 @@ public class OrdinazioneFacade {
         return lineeOrdinazioneArticoli;
     }
 
-    public boolean rimuoviLineaOrdinazione(Long id) {
+    public boolean rimuoviLineaOrdinazione(User role,Long id) {
         if (id != null) {
             try {
                 ArrayList<Variante> varianti = (ArrayList<Variante>) varianteSession.selezionaVariantiPerLineaOrdinazione(lineaOrdinazioneSession.selezionaLineaOrdinazionePerId(id));
@@ -331,7 +332,7 @@ public class OrdinazioneFacade {
 		return false;
     }
 
-    public Variante inserisciVariante(Variante variante) {
+    public Variante inserisciVariante(User role,Variante variante) {
         if (variante != null) {
             LineaOrdinazione lineaOrdinazione = variante.getLineaOrdinazione();
             Ingrediente ingrediente = variante.getIngrediente();
@@ -357,7 +358,7 @@ public class OrdinazioneFacade {
         return null;
     }
 
-    public ArrayList<Ingrediente> selezionaIngredientiPerVariante () {
+    public ArrayList<Ingrediente> selezionaIngredientiPerVariante (User role) {
         ArrayList<IngredienteMagazzino> ingredientiMagazzino = (ArrayList<IngredienteMagazzino>) ingredienteMagazzinoSession.selezionaIngredientiMagazzino();
         ArrayList<Ingrediente> ingredienti = (ArrayList<Ingrediente>) ingredienteSession.selezionaIngredientePerVariante();
 
@@ -375,7 +376,7 @@ public class OrdinazioneFacade {
         return null;
     }
 
-    public Variante modificaVariante(Variante nuovaVariante, Variante vecchiaVariante) {
+    public Variante modificaVariante(User role,Variante nuovaVariante, Variante vecchiaVariante) {
         if (nuovaVariante != null && vecchiaVariante != null) {
 			Variante variante = vecchiaVariante;
             variante.setIngrediente(vecchiaVariante.getIngrediente());
@@ -388,14 +389,14 @@ public class OrdinazioneFacade {
 		return null;
 	}
 
-    public Variante selezionaVariantePerId(Long id) {
+    public Variante selezionaVariantePerId(User role,Long id) {
         if (id != null)
 			return varianteSession.selezionaVariantePerId(id);
 
         return null;
     }
 
-    public Ingrediente selezionaIngredientePerNome (String ingrediente) {
+    public Ingrediente selezionaIngredientePerNome (User role,String ingrediente) {
         if (ingrediente != null) {
             ArrayList<Ingrediente> ingredienti = (ArrayList<Ingrediente>) ingredienteSession.selezionaIngredientePerNome(ingrediente);
 
@@ -406,11 +407,11 @@ public class OrdinazioneFacade {
         return null;
     }
 
-    public ArrayList<Variante> selezionaVariantiPerIngrediente(Ingrediente ingrediente) {
+    public ArrayList<Variante> selezionaVariantiPerIngrediente(User role,Ingrediente ingrediente) {
         return null;
     }
 
-    public ArrayList<Variante> selezionaVariantiPerLineaOrdinazione(LineaOrdinazione lineaOrdinazione) {
+    public ArrayList<Variante> selezionaVariantiPerLineaOrdinazione(User role,LineaOrdinazione lineaOrdinazione) {
         if (lineaOrdinazione != null) {
             ArrayList<Variante> varianti =(ArrayList<Variante>) varianteSession.selezionaVariantiPerLineaOrdinazione(lineaOrdinazione);
 
@@ -421,14 +422,14 @@ public class OrdinazioneFacade {
         return null;
     }
 
-    public boolean rimuoviVariante(Long id) {
+    public boolean rimuoviVariante(User role,Long id) {
         if (id != null)
 			return varianteSession.rimuoviVariante(id);
 
 		return false;
     }
 
-    private boolean aggiornaMagazzinoIngredienti(LineaOrdinazione lineaOrdinazione, String tipoAggiornamento) {
+    private boolean aggiornaMagazzinoIngredienti(User role,LineaOrdinazione lineaOrdinazione, String tipoAggiornamento) {
         try {
             ArrayList<IngredientePietanza> ingredientiPietanze = (ArrayList<IngredientePietanza>) ingredientePietanzaSession.selezionaIngredientiPietanze();
             ArrayList<IngredienteMagazzino> ingredientiMagazzino = (ArrayList<IngredienteMagazzino>) ingredienteMagazzinoSession.selezionaIngredientiMagazzino();
@@ -460,7 +461,7 @@ public class OrdinazioneFacade {
         return false;
     }
 
-    private boolean aggiornaMagazzinoBevande(LineaOrdinazione lineaOrdinazione, String tipoAggiornamento) {
+    private boolean aggiornaMagazzinoBevande(User role,LineaOrdinazione lineaOrdinazione, String tipoAggiornamento) {
         try {
             ArrayList<BevandaMagazzino> bevandeMagazzino = (ArrayList<BevandaMagazzino>) bevandaMagazzinoSession.selezionaBevandeMagazzino();
             if (bevandeMagazzino != null) {
