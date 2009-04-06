@@ -1,18 +1,14 @@
 package it.softfood.facade;
 
-import java.rmi.RemoteException;
-import java.util.ArrayList;
-
 import it.softfood.entity.Ingrediente;
 import it.softfood.entity.LineaOrdinazione;
 import it.softfood.entity.Ordinazione;
+import it.softfood.entity.User;
 import it.softfood.entity.Variante;
-import it.softfood.entity.User;;
 import it.softfood.enumeration.TipoPietanza;
-import it.softfood.handler.IOrdinazioneFacade;
 import it.softfood.handler.OrdinazioneFacade;
 
-import java.lang.Boolean;
+import java.util.ArrayList;
 
 public class PDAOrdinazioneFacade {
 
