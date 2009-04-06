@@ -6,6 +6,7 @@ import it.softfood.entity.Ingrediente;
 import it.softfood.entity.Pietanza;
 import it.softfood.enumeration.TipoPietanza;
 import it.softfood.handler.ArticoloMenuFacade;
+import it.softfood.entity.User;
 
 import java.util.ArrayList;
 
@@ -17,41 +18,41 @@ import java.util.ArrayList;
 
 public class PDAArticoloMenuFacade {
 
-	public ArrayList<Pietanza> selezionaPietanzeDisponibiliPerTipo(TipoPietanza tipo_pietanza) {
+	public ArrayList<Pietanza> selezionaPietanzeDisponibiliPerTipo(User role,TipoPietanza tipo_pietanza) {
 		System.out.println("PDAArticoloMenuFacade#selezionaPietanzeDisponibiliPerTipo " + tipo_pietanza);
 		ArticoloMenuFacade articolo = ArticoloMenuFacade.getInstance();
 
-		ArrayList<Pietanza> pietanze = (ArrayList<Pietanza>) articolo.selezionaPietanzeDisponibiliPerTipo(tipo_pietanza);
+		ArrayList<Pietanza> pietanze = (ArrayList<Pietanza>) articolo.selezionaPietanzeDisponibiliPerTipo(role,tipo_pietanza);
 		return pietanze;
 	}
 
-	public ArrayList<Ingrediente> selezionaIngredientiPietanza(Long id) {
+	public ArrayList<Ingrediente> selezionaIngredientiPietanza(User role,Long id) {
 		ArticoloMenuFacade articolo=ArticoloMenuFacade.getInstance();
-		ArrayList<Ingrediente> ingredienti= (ArrayList<Ingrediente>) articolo.selezionaIngredientiPietanza(id);
+		ArrayList<Ingrediente> ingredienti= (ArrayList<Ingrediente>) articolo.selezionaIngredientiPietanza(role,id);
 		return ingredienti;
 	}
 
-	public int selezionaDisponibilitaBevanda(Long id) {
+	public int selezionaDisponibilitaBevanda(User role,Long id) {
 		ArticoloMenuFacade articolo=ArticoloMenuFacade.getInstance();
-		int disponibilita=articolo.selezionaDisponibilitaBevanda(id);
+		int disponibilita=articolo.selezionaDisponibilitaBevanda(role,id);
 		return disponibilita;
 	}
 
-	public int selezionaDisponibilitaPietanza(Long id) {
+	public int selezionaDisponibilitaPietanza(User role,Long id) {
 		ArticoloMenuFacade articolo=ArticoloMenuFacade.getInstance();
-		int disponibilita=articolo.selezionaDisponibilitaPietanza(id);
+		int disponibilita=articolo.selezionaDisponibilitaPietanza(role,id);
 		return disponibilita;
 	}
 
-	public Articolo selezionaArticoloMenuPerId(Long id) {
+	public Articolo selezionaArticoloMenuPerId(User role,Long id) {
 		ArticoloMenuFacade articolo=ArticoloMenuFacade.getInstance();
-		Articolo art=articolo.selezionaArticoloMenuPerId(id);
+		Articolo art=articolo.selezionaArticoloMenuPerId(role,id);
 		return art;
 	}
 
-	public ArrayList<Bevanda> selezionaBevandeDisponibili() {
+	public ArrayList<Bevanda> selezionaBevandeDisponibili(User role) {
 		ArticoloMenuFacade articolo=ArticoloMenuFacade.getInstance();
-		ArrayList<Bevanda> bevande= (ArrayList<Bevanda>) articolo.selezionaBevandeDisponibili();
+		ArrayList<Bevanda> bevande= (ArrayList<Bevanda>) articolo.selezionaBevandeDisponibili(role);
 		return bevande;
 	}
 
