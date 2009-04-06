@@ -38,7 +38,7 @@ public interface IOrdinazioneFacade  extends Remote{
 
 	public ArrayList<LineaOrdinazione> selezionaLineeOrdinazionePerOrdinazione(Ordinazione ordinazione) throws RemoteException;
 
-	public ArrayList<LineaOrdinazione> selezionaLineeOrdinazionePerOrdinazione(Ordinazione ordinazione, TipoPietanza tipoPietanza) throws RemoteException;
+	public ArrayList<LineaOrdinazione> selezionaLineeOrdinazionePerOrdinazioneTipoPietanza(Ordinazione ordinazione, TipoPietanza tipoPietanza) throws RemoteException;
 
 	public boolean rimuoviLineaOrdinazione(Long id) throws RemoteException;
 
