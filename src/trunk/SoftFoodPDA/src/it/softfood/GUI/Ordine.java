@@ -12,7 +12,7 @@ public class Ordine extends javax.swing.JPanel {
 	
 	private User role;
 	
-    public Ordine(User role,FrameView frame) {
+    public Ordine(User role, FrameView frame) {
         initComponents();
         this.frame = frame;
         this.role = role;

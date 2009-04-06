@@ -146,31 +146,31 @@ public class Menu extends javax.swing.JPanel {
 
 	private void AntipastiActionPerformed(java.awt.event.ActionEvent evt) {
 	    this.setVisible(false);
-	    Pannello_ordinazioni antipasto = new Pannello_ordinazioni(frame, tavolo, "antipasti");
+	    Pannello_ordinazioni antipasto = new Pannello_ordinazioni(role,frame, tavolo, "antipasti");
 	    frame.setComponent(antipasto);
 	}
 
 	private void PrimiActionPerformed(java.awt.event.ActionEvent evt) {
 	    this.setVisible(false);
-	    Pannello_ordinazioni primi = new Pannello_ordinazioni(frame,tavolo,"primi");
+	    Pannello_ordinazioni primi = new Pannello_ordinazioni(role,frame,tavolo,"primi");
 	    frame.setComponent(primi);
 	}
 	
 	private void SecondiActionPerformed(java.awt.event.ActionEvent evt) {
 	    this.setVisible(false);
-	    Pannello_ordinazioni secondi = new Pannello_ordinazioni(frame,tavolo,"secondi");
+	    Pannello_ordinazioni secondi = new Pannello_ordinazioni(role,frame,tavolo,"secondi");
 	    frame.setComponent(secondi);
 	}
 
 	private void ContorniActionPerformed(java.awt.event.ActionEvent evt) {
 	    this.setVisible(false);
-	    Pannello_ordinazioni contorni = new Pannello_ordinazioni(frame,tavolo,"contorni");
+	    Pannello_ordinazioni contorni = new Pannello_ordinazioni(role,frame,tavolo,"contorni");
 	    frame.setComponent(contorni);
 	}
 	
 	private void DolciActionPerformed(java.awt.event.ActionEvent evt) {
 	    this.setVisible(false);
-	    Pannello_ordinazioni dolci = new Pannello_ordinazioni(frame,tavolo,"dolci");
+	    Pannello_ordinazioni dolci = new Pannello_ordinazioni(role,frame,tavolo,"dolci");
 	    frame.setComponent(dolci);
 	}
 	

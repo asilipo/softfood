@@ -317,13 +317,13 @@ public class Bibite extends javax.swing.JPanel {
 
 private void OKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OKActionPerformed
     this.setVisible(false);
-    Menu menu = new Menu(frame, tavolo);
+    Menu menu = new Menu(role,frame, tavolo);
     frame.setComponent(menu);
 }//GEN-LAST:event_OKActionPerformed
 
 private void AnnullaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AnnullaActionPerformed
     this.setVisible(false);
-    Menu menu = new Menu(frame, tavolo);
+    Menu menu = new Menu(role,frame, tavolo);
     frame.setComponent(menu);
 }//GEN-LAST:event_AnnullaActionPerformed
 
@@ -333,7 +333,7 @@ private void visuallizzaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     long id_long = ((Long) tabella_bibite.getValueAt(row, 0)).longValue();
     id_antipasto.setColumnVisible(id, false);
     this.setVisible(false);
-    it.softfood.GUI.Pietanza pietanza = new it.softfood.GUI.Pietanza(frame, tavolo, id_long, "bibite");
+    it.softfood.GUI.Pietanza pietanza = new it.softfood.GUI.Pietanza(role,frame, tavolo, id_long, "bibite");
     frame.setComponent(pietanza);
 }//GEN-LAST:event_visuallizzaActionPerformed
 
