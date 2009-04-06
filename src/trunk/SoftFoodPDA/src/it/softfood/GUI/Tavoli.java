@@ -29,6 +29,7 @@ public class Tavoli extends javax.swing.JPanel {
     private ArrayList<Tavolo> tavoli;
     private String[] listaTavoli;
     private int numeroPosti = 0;
+    private User role;
 
     private void initFacade() {
         try {
@@ -41,19 +42,20 @@ public class Tavoli extends javax.swing.JPanel {
         }
     }
 
-    public Tavoli(FrameView frame, boolean vuoti) {
+    public Tavoli(User role,FrameView frame, boolean vuoti) {
         this.frame = frame;
         this.vuoti = vuoti;
+        this.role = role;
 
         initComponents();
         initFacade();
 
         if (vuoti) {
             SelezionaTavoli.setText(SelezionaTavoli.getText() + " un tavolo vuoto:");
-            tavoli = (ArrayList<Tavolo>) tavoloFacade.selezionaTavoliLiberi();
+            tavoli = (ArrayList<Tavolo>) tavoloFacade.selezionaTavoliLiberi(role);
         } else {
             SelezionaTavoli.setText(SelezionaTavoli.getText() + " un tavolo:");
-            tavoli = (ArrayList<Tavolo>) tavoloFacade.selezionaTavoliOccupati();
+            tavoli = (ArrayList<Tavolo>) tavoloFacade.selezionaTavoliOccupati(role);
 
             jComboBox2.setVisible(false);
             jLabel1.setVisible(false);
@@ -203,34 +205,34 @@ public class Tavoli extends javax.swing.JPanel {
 
         if (vuoti) {
             //Inserimento
-            Long tavoloSelezionato = tavoloFacade.occupaTavoli(tav);
+            Long tavoloSelezionato = tavoloFacade.occupaTavoli(role,tav);
 
             ordine = new Ordinazione();
-            ordine.setTavolo(tavoloFacade.selezionaTavolo(tavoloSelezionato));
+            ordine.setTavolo(tavoloFacade.selezionaTavolo(role,tavoloSelezionato));
             ordine.setCoperti(Integer.parseInt((String) jComboBox2.getSelectedItem()));
             ordine.setTerminato(false);
 
             try {
-                ordine = ordinazioneFacade.inserisciOrdinazione(ordine);
+                ordine = ordinazioneFacade.inserisciOrdinazione(role,ordine);
             } catch (NullPointerException e) {
                 this.setVisible(false);
-                Tavoli pannello_tavoli = new Tavoli(frame, vuoti);
+                Tavoli pannello_tavoli = new Tavoli(role,frame, vuoti);
                 frame.setComponent(pannello_tavoli);
             }
         } else {
-            ordine = ordinazioneFacade.selezionaOrdinazioneGiornalieraPerTavolo(((String)tav.get(0)), false);
+            ordine = ordinazioneFacade.selezionaOrdinazioneGiornalieraPerTavolo(role,((String)tav.get(0)), false);
         }
 
         this.setVisible(false);
         System.out.println("ORDINE RECUPERATO O CREATO "+ordine.getId());
 
-        frame.setComponent(new Menu(frame, ordine.getId()));
+        frame.setComponent(new Menu(role,frame, ordine.getId()));
     }
 
     private void AnnullaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AnnullaActionPerformed
         this.setVisible(false);
 
-        frame.setComponent(new Ordine(frame));
+        frame.setComponent(new Ordine(role,frame));
     }//GEN-LAST:event_AnnullaActionPerformed
 
 private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActionPerformed
