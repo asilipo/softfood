@@ -42,6 +42,9 @@ grant Principal it.softfood.entity.User "amministratore"{
   permission it.softfood.aspect.OperationPermission "selezionaPassword";
   permission it.softfood.aspect.OperationPermission "modificaRuolo";
   permission it.softfood.aspect.OperationPermission "eliminaUtente";
+  permission it.softfood.aspect.OperationPermission "selezionaUtente";
+
+
 
 
 }; 
