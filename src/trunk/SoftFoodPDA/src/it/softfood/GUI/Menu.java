@@ -2,6 +2,7 @@ package it.softfood.GUI;
 
 import org.jdesktop.application.FrameView;
 
+
 /**
  * @author Maria Rosaria Paone
  * @author Marco Grasso
@@ -11,11 +12,13 @@ import org.jdesktop.application.FrameView;
 public class Menu extends javax.swing.JPanel {
 
 	private static final long serialVersionUID = 1L;
+	private User role;
 	
-	public Menu(FrameView frame,Long tavolo) {
+	public Menu(User role,FrameView frame,Long tavolo) {
         initComponents();
         this.frame = frame;
         this.tavolo = tavolo;
+        this.role = role;
     }
 
     private void initComponents() {
@@ -173,7 +176,7 @@ public class Menu extends javax.swing.JPanel {
 	
 	private void BibiteActionPerformed(java.awt.event.ActionEvent evt) {
 	    this.setVisible(false);
-	    Bibite bibite = new Bibite(frame,tavolo);
+	    Bibite bibite = new Bibite(role,frame,tavolo);
 	    frame.setComponent(bibite);
 	}
 

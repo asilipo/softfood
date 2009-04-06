@@ -24,6 +24,7 @@ public class Pannello_ordinazioni extends javax.swing.JPanel {
 
     private PDAOrdinazioneFacade ordinazioneFacade;
     private PDAArticoloMenuFacade articolo;
+    private User role;
 
     private void initFacade(Hashtable hash) {
         try {
@@ -35,10 +36,11 @@ public class Pannello_ordinazioni extends javax.swing.JPanel {
         }
     }
 
-    public Pannello_ordinazioni(FrameView frame, Long tavolo, String tipo) {
+    public Pannello_ordinazioni(User role,FrameView frame, Long tavolo, String tipo) {
         this.frame = frame;
         this.tavolo = tavolo;
         this.tipo = tipo;
+        this.role = role;
 
         initComponents();
         initFacade(null);
@@ -61,7 +63,7 @@ public class Pannello_ordinazioni extends javax.swing.JPanel {
             tipo_pietanza = TipoPietanza.DOLCE;
         }
 
-        ArrayList<Pietanza> pietanze = (ArrayList<Pietanza>) articolo.selezionaPietanzeDisponibiliPerTipo(tipo_pietanza);
+        ArrayList<Pietanza> pietanze = (ArrayList<Pietanza>) articolo.selezionaPietanzeDisponibiliPerTipo(role,tipo_pietanza);
 
         tabella_pietanza.setModel(new javax.swing.table.DefaultTableModel(new String[]{"ID", "Pietanza"}, pietanze.size()){
             @Override
@@ -89,9 +91,9 @@ public class Pannello_ordinazioni extends javax.swing.JPanel {
 
         tabella_pietanza.setRowHeight(tabella_pietanza.getRowHeight() * 15 / 10);
 
-        Ordinazione ordine = ordinazioneFacade.selezionaOrdinazionePerId(tavolo);
+        Ordinazione ordine = ordinazioneFacade.selezionaOrdinazionePerId(role,tavolo);
 
-        ArrayList<LineaOrdinazione> linee = (ArrayList<LineaOrdinazione>) ordinazioneFacade.selezionaLineeOrdinazionePerOrdinazioneTipoPietanza(ordine, tipo_pietanza);
+        ArrayList<LineaOrdinazione> linee = (ArrayList<LineaOrdinazione>) ordinazioneFacade.selezionaLineeOrdinazionePerOrdinazioneTipoPietanza(role,ordine, tipo_pietanza);
 
         tabella_ordini.setModel(new javax.swing.table.DefaultTableModel(new Object [linee.size()][3],new String[]{"ID", "Pietanza","Quantita'"}){
             @Override
@@ -322,12 +324,12 @@ public class Pannello_ordinazioni extends javax.swing.JPanel {
 
 private void OKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OKActionPerformed
     this.setVisible(false);
-    frame.setComponent(new Menu(frame, tavolo));
+    frame.setComponent(new Menu(role,frame, tavolo));
 }//GEN-LAST:event_OKActionPerformed
 
 private void AnnullaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AnnullaActionPerformed
     this.setVisible(false);
-    frame.setComponent(new Menu(frame, tavolo));
+    frame.setComponent(new Menu(role,frame, tavolo));
 }//GEN-LAST:event_AnnullaActionPerformed
 
 private void visuallizzaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_visuallizzaActionPerformed
@@ -335,7 +337,7 @@ private void visuallizzaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     long id_long = ((Long) tabella_pietanza.getValueAt(tabella_pietanza.getSelectedRow(), 0)).longValue();
     id_antipasto.setColumnVisible(id, false);
     this.setVisible(false);
-    it.softfood.GUI.Pietanza pietanza = new it.softfood.GUI.Pietanza(frame, tavolo, id_long, tipo);
+    it.softfood.GUI.Pietanza pietanza = new it.softfood.GUI.Pietanza(role,frame, tavolo, id_long, tipo);
     frame.setComponent(pietanza);
 }//GEN-LAST:event_visuallizzaActionPerformed
 
@@ -351,10 +353,10 @@ private void cancellaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     linea_ordine.setColumnVisible(id_ordini, true);
     Long id = (Long) tabella_ordini.getValueAt(tabella_ordini.getSelectedRow(),0);
     
-    ordinazioneFacade.rimuoviLineaOrdinazione(id);
+    ordinazioneFacade.rimuoviLineaOrdinazione(role,id);
     linea_ordine.setColumnVisible(id_ordini, false);
     this.setVisible(false);
-    Pannello_ordinazioni pannello=new Pannello_ordinazioni(frame, tavolo, tipo);
+    Pannello_ordinazioni pannello=new Pannello_ordinazioni(role,frame, tavolo, tipo);
     frame.setComponent(pannello);
 }//GEN-LAST:event_cancellaActionPerformed
 
