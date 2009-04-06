@@ -34,6 +34,7 @@ public class XmlReader
       if (type == Node.ELEMENT_NODE){
          if(properties.equals(node.getNodeName())){
                    s=node.getFirstChild().getNodeValue();
+              
                return s;
           }
       }
