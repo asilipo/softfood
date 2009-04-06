@@ -68,7 +68,8 @@ public class Login extends javax.swing.JPanel {
 
         jScrollPane1.setName("jScrollPane1"); // NOI18N
 
-        text.setColumns(2);
+        text.setColumns(1);
+        
       
         text.setName("text"); // NOI18N
         text.setSize(150, 10);
