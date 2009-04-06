@@ -60,7 +60,7 @@ public class Pannello_ordinazioni extends javax.swing.JPanel {
             jLabel2.setText(jLabel2.getText() + " dolce:");
             tipo_pietanza = TipoPietanza.DOLCE;
         }
-        System.out.println("TipoPietanzaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa " + tipo_pietanza.toString());
+
         ArrayList<Pietanza> pietanze = (ArrayList<Pietanza>) articolo.selezionaPietanzeDisponibiliPerTipo(tipo_pietanza);
 
         tabella_pietanza.setModel(new javax.swing.table.DefaultTableModel(new String[]{"ID", "Pietanza"}, pietanze.size()){
@@ -91,7 +91,7 @@ public class Pannello_ordinazioni extends javax.swing.JPanel {
 
         Ordinazione ordine = ordinazioneFacade.selezionaOrdinazionePerId(tavolo);
 
-        ArrayList<LineaOrdinazione> linee = (ArrayList<LineaOrdinazione>) ordinazioneFacade.selezionaLineeOrdinazionePerOrdinazione(ordine, tipo_pietanza);
+        ArrayList<LineaOrdinazione> linee = (ArrayList<LineaOrdinazione>) ordinazioneFacade.selezionaLineeOrdinazionePerOrdinazioneTipoPietanza(ordine, tipo_pietanza);
 
         tabella_ordini.setModel(new javax.swing.table.DefaultTableModel(new Object [linee.size()][3],new String[]{"ID", "Pietanza","Quantita'"}){
             @Override
