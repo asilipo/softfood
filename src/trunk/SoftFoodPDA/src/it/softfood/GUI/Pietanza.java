@@ -374,3 +374,4 @@ private void jList1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:even
     private String tipo;
     private DefaultListModel jListModel;
 }
+
