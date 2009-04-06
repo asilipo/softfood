@@ -7,6 +7,7 @@ import it.softfood.entity.Ingrediente;
 import it.softfood.entity.LineaOrdinazione;
 import it.softfood.entity.Ordinazione;
 import it.softfood.entity.Variante;
+import it.softfood.entity.User;;
 import it.softfood.enumeration.TipoPietanza;
 import it.softfood.handler.IOrdinazioneFacade;
 import it.softfood.handler.OrdinazioneFacade;
@@ -15,33 +16,33 @@ import java.lang.Boolean;
 
 public class PDAOrdinazioneFacade {
 
-	public Ordinazione inserisciOrdinazione(Ordinazione ordine) {
+	public Ordinazione inserisciOrdinazione(User role,Ordinazione ordine) {
 		OrdinazioneFacade ordineFacade=OrdinazioneFacade.getInstance();
 		Ordinazione ord = null;
 		try {
-			ord = ordineFacade.inserisciOrdinazione(ordine);
+			ord = ordineFacade.inserisciOrdinazione(role,ordine);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return ord;
 	}
 
-	public Ordinazione selezionaOrdinazioneGiornalieraPerTavolo(String riferimentoTavolo, Boolean terminato) {
+	public Ordinazione selezionaOrdinazioneGiornalieraPerTavolo(User role,String riferimentoTavolo, Boolean terminato) {
 		OrdinazioneFacade ordineFacade=OrdinazioneFacade.getInstance();
 		Ordinazione ord = null;
 		try {
-			ord = ordineFacade.selezionaOrdinazioneGiornalieraPerTavolo(riferimentoTavolo, terminato);
+			ord = ordineFacade.selezionaOrdinazioneGiornalieraPerTavolo(role,riferimentoTavolo, terminato);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return ord;
 	}
 
-	public Ordinazione selezionaOrdinazionePerId(Long tavolo) {
+	public Ordinazione selezionaOrdinazionePerId(User role,Long tavolo) {
 		OrdinazioneFacade ordineFacade=OrdinazioneFacade.getInstance();
 		Ordinazione ord = null;
 		try {
-			ord = ordineFacade.selezionaOrdinazionePerId(tavolo);
+			ord = ordineFacade.selezionaOrdinazionePerId(role,tavolo);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -49,12 +50,12 @@ public class PDAOrdinazioneFacade {
 		return ord;
 	}
 
-	public ArrayList<LineaOrdinazione> selezionaLineeOrdinazionePerOrdinazione(
+	public ArrayList<LineaOrdinazione> selezionaLineeOrdinazionePerOrdinazione(User role,
 			Ordinazione selezionaOrdinazionePerId) {
 		OrdinazioneFacade ordineFacade=OrdinazioneFacade.getInstance();
 		ArrayList<LineaOrdinazione> ord = null;
 		try {
-			ord = (ArrayList<LineaOrdinazione>) ordineFacade.selezionaLineeOrdinazionePerOrdinazione(selezionaOrdinazionePerId);
+			ord = (ArrayList<LineaOrdinazione>) ordineFacade.selezionaLineeOrdinazionePerOrdinazione(role,selezionaOrdinazionePerId);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -62,11 +63,11 @@ public class PDAOrdinazioneFacade {
 		return ord;
 	}
 
-	public void rimuoviOrdinazione(Long tavolo, Boolean b) {
+	public void rimuoviOrdinazione(User role,Long tavolo, Boolean b) {
 		OrdinazioneFacade ordineFacade=OrdinazioneFacade.getInstance();
 		boolean result = false;
 		try {
-			result = ordineFacade.rimuoviOrdinazione(tavolo, b);
+			result = ordineFacade.rimuoviOrdinazione(role,tavolo, b);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -74,24 +75,24 @@ public class PDAOrdinazioneFacade {
 			new Exception();
 	}
 
-	public ArrayList<LineaOrdinazione> selezionaLineeOrdinazionePerOrdinazioneTipoPietanza(Ordinazione ordine, TipoPietanza tipo_pietanza) {
+	public ArrayList<LineaOrdinazione> selezionaLineeOrdinazionePerOrdinazioneTipoPietanza(User role,Ordinazione ordine, TipoPietanza tipo_pietanza) {
 		OrdinazioneFacade ordineFacade = OrdinazioneFacade.getInstance();
 		ArrayList<LineaOrdinazione> linee = null;
 	    
 		try {
-			linee = ordineFacade.selezionaLineeOrdinazionePerOrdinazioneTipoPietanza(ordine, tipo_pietanza);
+			linee = ordineFacade.selezionaLineeOrdinazionePerOrdinazioneTipoPietanza(role,ordine, tipo_pietanza);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return linee;
 	}
 
-	public void rimuoviLineaOrdinazione(Long id) {
+	public void rimuoviLineaOrdinazione(User role,Long id) {
 		OrdinazioneFacade ordineFacade=OrdinazioneFacade.getInstance();
 		boolean result=false;
 	
 		try {
-			result = ordineFacade.rimuoviLineaOrdinazione(id);
+			result = ordineFacade.rimuoviLineaOrdinazione(role,id);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -100,11 +101,11 @@ public class PDAOrdinazioneFacade {
 		
 	}
 
-	public LineaOrdinazione selezionaLineaOrdinazionePerId(Long id_linea) {
+	public LineaOrdinazione selezionaLineaOrdinazionePerId(User role,Long id_linea) {
 		OrdinazioneFacade ordineFacade=OrdinazioneFacade.getInstance();
 		LineaOrdinazione ord = null;
 		try {
-			ord = ordineFacade.selezionaLineaOrdinazionePerId(id_linea);
+			ord = ordineFacade.selezionaLineaOrdinazionePerId(role,id_linea);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -112,36 +113,36 @@ public class PDAOrdinazioneFacade {
 		return ord;
 	}
 
-	public ArrayList<Variante> selezionaVariantiPerLineaOrdinazione(
+	public ArrayList<Variante> selezionaVariantiPerLineaOrdinazione(User role,
 			LineaOrdinazione lineaOrdinazione) {
 		OrdinazioneFacade ordineFacade=OrdinazioneFacade.getInstance();
 		ArrayList<Variante> linee=null;
 	
 		try {
-			linee = ordineFacade.selezionaVariantiPerLineaOrdinazione(lineaOrdinazione);
+			linee = ordineFacade.selezionaVariantiPerLineaOrdinazione(role,lineaOrdinazione);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return linee;
 	}
 
-	public ArrayList<Ingrediente> selezionaIngredientiPerVariante() {
+	public ArrayList<Ingrediente> selezionaIngredientiPerVariante(User role) {
 		OrdinazioneFacade ordineFacade=OrdinazioneFacade.getInstance();
 		ArrayList<Ingrediente> ingrediente=null;
 	
 		try {
-			ingrediente = ordineFacade.selezionaIngredientiPerVariante();
+			ingrediente = ordineFacade.selezionaIngredientiPerVariante(role);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return ingrediente;
 	}
 
-	public LineaOrdinazione inserisciLineaOrdinazione(LineaOrdinazione linea) {
+	public LineaOrdinazione inserisciLineaOrdinazione(User role,LineaOrdinazione linea) {
 		OrdinazioneFacade ordineFacade=OrdinazioneFacade.getInstance();
 		LineaOrdinazione ord = null;
 		try {
-			ord = ordineFacade.inserisciLineaOrdinazione(linea);
+			ord = ordineFacade.inserisciLineaOrdinazione(role,linea);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -149,11 +150,11 @@ public class PDAOrdinazioneFacade {
 		return ord;
 	}
 
-	public Ingrediente selezionaIngredientePerNome(String nome) {
+	public Ingrediente selezionaIngredientePerNome(User role,String nome) {
 		OrdinazioneFacade ordineFacade=OrdinazioneFacade.getInstance();
 		Ingrediente ingr = null;
 		try {
-			ingr = ordineFacade.selezionaIngredientePerNome(nome);
+			ingr = ordineFacade.selezionaIngredientePerNome(role,nome);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -161,9 +162,9 @@ public class PDAOrdinazioneFacade {
 		return ingr;
 	}
 
-	public void inserisciVariante(Variante variante) {
+	public void inserisciVariante(User role,Variante variante) {
 		OrdinazioneFacade ordineFacade=OrdinazioneFacade.getInstance();
-		Variante v=ordineFacade.inserisciVariante(variante);
+		Variante v=ordineFacade.inserisciVariante(role,variante);
 		if(v==null){
 			new Exception();
 		}
