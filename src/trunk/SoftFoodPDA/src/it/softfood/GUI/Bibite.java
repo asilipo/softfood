@@ -91,7 +91,7 @@ public class Bibite extends javax.swing.JPanel {
 
         Ordinazione ordine = ordinazioneFacade.selezionaOrdinazionePerId(tavolo);
 
-        ArrayList<LineaOrdinazione> linee = (ArrayList<LineaOrdinazione>) ordinazioneFacade.selezionaLineeOrdinazionePerOrdinazione(ordine, null);
+        ArrayList<LineaOrdinazione> linee = new ArrayList<LineaOrdinazione>();//(ArrayList<LineaOrdinazione>) ordinazioneFacade.selezionaLineeOrdinazionePerOrdinazioneTipoPietanza(ordine, null);
 
         tabella_ordini.setModel(new javax.swing.table.DefaultTableModel(new Object[linee.size()][3], new String[]{"ID", "Pietanza", "Quantita'"}) {
 

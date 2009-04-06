@@ -21,7 +21,6 @@ public class PDAOrdinazioneFacade {
 		try {
 			ord = ordineFacade.inserisciOrdinazione(ordine);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return ord;
@@ -75,13 +74,12 @@ public class PDAOrdinazioneFacade {
 			new Exception();
 	}
 
-	public ArrayList<LineaOrdinazione> selezionaLineeOrdinazionePerOrdinazione(
-			Ordinazione ordine, TipoPietanza tipo_pietanza) {
-		OrdinazioneFacade ordineFacade=OrdinazioneFacade.getInstance();
-		ArrayList<LineaOrdinazione> linee=null;
-	
+	public ArrayList<LineaOrdinazione> selezionaLineeOrdinazionePerOrdinazioneTipoPietanza(Ordinazione ordine, TipoPietanza tipo_pietanza) {
+		OrdinazioneFacade ordineFacade = OrdinazioneFacade.getInstance();
+		ArrayList<LineaOrdinazione> linee = null;
+	    
 		try {
-			linee = ordineFacade.selezionaLineeOrdinazionePerOrdinazione(ordine, tipo_pietanza);
+			linee = ordineFacade.selezionaLineeOrdinazionePerOrdinazioneTipoPietanza(ordine, tipo_pietanza);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -63,7 +63,7 @@ public aspect ClientDistribution {
 		Object obj = null;
 		obj = ExecuteMetod.invoke(ordinazionefacade, thisJoinPoint.getSignature()
 				.getName(), thisJoinPoint.getArgs());
-		//Object[] params = thisJoinPoint.getArgs();
+
 		return obj;
 	}
 	
