@@ -12,22 +12,22 @@ import java.util.ArrayList;
 
 public class PDAOrdinazioneFacade {
 
-	public Ordinazione inserisciOrdinazione(User role,Ordinazione ordine) {
+	public Ordinazione inserisciOrdinazione(User role, Ordinazione ordine) {
 		OrdinazioneFacade ordineFacade=OrdinazioneFacade.getInstance();
 		Ordinazione ord = null;
 		try {
-			ord = ordineFacade.inserisciOrdinazione(role,ordine);
+			ord = ordineFacade.inserisciOrdinazione(role, ordine);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return ord;
 	}
 
-	public Ordinazione selezionaOrdinazioneGiornalieraPerTavolo(User role,String riferimentoTavolo, Boolean terminato) {
+	public Ordinazione selezionaOrdinazioneGiornalieraPerTavolo(User role, String riferimentoTavolo, Boolean terminato) {
 		OrdinazioneFacade ordineFacade=OrdinazioneFacade.getInstance();
 		Ordinazione ord = null;
 		try {
-			ord = ordineFacade.selezionaOrdinazioneGiornalieraPerTavolo(role,riferimentoTavolo, terminato);
+			ord = ordineFacade.selezionaOrdinazioneGiornalieraPerTavolo(role, riferimentoTavolo, terminato);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -134,7 +134,7 @@ public class PDAOrdinazioneFacade {
 		return ingrediente;
 	}
 
-	public LineaOrdinazione inserisciLineaOrdinazione(User role,LineaOrdinazione linea) {
+	public LineaOrdinazione inserisciLineaOrdinazione(User role, LineaOrdinazione linea) {
 		OrdinazioneFacade ordineFacade=OrdinazioneFacade.getInstance();
 		LineaOrdinazione ord = null;
 		try {
