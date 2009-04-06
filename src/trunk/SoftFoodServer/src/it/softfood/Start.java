@@ -101,14 +101,16 @@ public class Start {
         UserFacade ut = UserFacade.getInstance();
         LoginHandler facade = LoginHandler.getInstance();
         User user1 = facade.login("mary", "mary");
-        ut.insert(user1, u);
+//        ut.insert(user1, u);
     
         //Maria
 //        System.out.println("UTENTE "+ut.selezionaUserName(user1, u));
 //       System.out.println(ut.selezionaPassword(user1, u));
         	
 //		System.out.println(ut.modificaRuolo(user1, u, "cassiere"));
-		System.out.println(ut.eliminaUtente(user1, u));
+//		System.out.println("cancellazione"+ut.eliminaUtente(user1, u));
+		
+		System.out.println("selezione "+(ut.selezionaUtente(user1, "m", "m")).getUserName());
         
         facade.logout(user1);	
 		
