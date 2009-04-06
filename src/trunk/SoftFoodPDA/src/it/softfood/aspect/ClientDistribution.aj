@@ -4,6 +4,7 @@ import it.softfood.handler.IArticoloMenuFacade;
 import it.softfood.handler.IOrdinazioneFacade;
 import it.softfood.handler.IRistoranteFacade;
 import it.softfood.handler.ITavoloFacade;
+import it.softfood.handler.IUserFacade;
 
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -20,6 +21,7 @@ public aspect ClientDistribution {
 	private IRistoranteFacade ristorantefacade;
 	private IOrdinazioneFacade ordinazionefacade;
 	private IArticoloMenuFacade articolofacade;
+	private IUserFacade userfacade;
 
 	public ClientDistribution() {
 		System.setProperty("java.security.policy", "polis.policy");
@@ -32,6 +34,7 @@ public aspect ClientDistribution {
 			ristorantefacade = (IRistoranteFacade) registry.lookup("RistoranteFacade");
 			ordinazionefacade = (IOrdinazioneFacade) registry.lookup("OrdineFacade");
 			articolofacade = (IArticoloMenuFacade) registry.lookup("ArticoloFacade");
+			userfacade= (IUserFacade) registry.lookup("UserFacade");
 		} catch (Exception e) {
 			System.err.println("Exception to obtain the reference to the remote object: " + e);
 		}
@@ -72,6 +75,16 @@ public aspect ClientDistribution {
 	Object around(): distributeArticoloFacadeCalls()  {
 		Object obj = null;
 		obj = ExecuteMetod.invoke(articolofacade, thisJoinPoint.getSignature()
+				.getName(), thisJoinPoint.getArgs());
+		Object[] params = thisJoinPoint.getArgs();
+		return obj;
+	}
+	
+	pointcut distributeUserFacadeCalls(): execution(* it.softfood.facade.PDAUserFacade.*(..)) && !execution(it.softfood.facade.PDAUserFacade.new(..));
+
+	Object around(): distributeUserFacadeCalls()  {
+		Object obj = null;
+		obj = ExecuteMetod.invoke(userfacade, thisJoinPoint.getSignature()
 				.getName(), thisJoinPoint.getArgs());
 		Object[] params = thisJoinPoint.getArgs();
 		return obj;
