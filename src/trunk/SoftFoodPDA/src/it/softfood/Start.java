@@ -3,6 +3,7 @@ package it.softfood;
 import java.util.ArrayList;
 
 import it.softfood.entity.Ordinazione;
+import it.softfood.entity.Pietanza;
 import it.softfood.entity.Tavolo;
 import it.softfood.enumeration.TipoPietanza;
 import it.softfood.facade.PDAArticoloMenuFacade;
@@ -24,8 +25,9 @@ public class Start {
 //		
 //		System.out.println("TERMINATO OK! "+ordine.getId());
 		
-		articolo.selezionaPietanzeDisponibiliPerTipo(TipoPietanza.PRIMO_PIATTO);
+		ArrayList<Pietanza> array= articolo.selezionaPietanzeDisponibiliPerTipo(TipoPietanza.DOLCE);
 		
+		System.out.println(array.size());
 		
 
 	}

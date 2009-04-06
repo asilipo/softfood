@@ -4,6 +4,7 @@ package it.softfood.GUI;
 
 import it.softfood.entity.Ordinazione;
 import it.softfood.entity.Tavolo;
+import it.softfood.entity.User;
 import it.softfood.facade.PDAOrdinazioneFacade;
 import it.softfood.facade.PDATavoloFacade;
 import it.softfood.handler.TavoloFacade;

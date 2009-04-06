@@ -1,5 +1,7 @@
 package it.softfood.GUI;
 
+import it.softfood.entity.User;
+
 import org.jdesktop.application.FrameView;
 
 
