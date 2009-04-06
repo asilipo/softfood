@@ -27,14 +27,13 @@ public aspect Authorization{
 	private String xmlparameter="config_authorization_file";
 	
 	public Authorization()throws Exception{
-		System.out.println("New Autentication Aspect");
 		XmlReader xml= new XmlReader();
-	    String file=xml.leggi(xmlparameter);
-		System.setProperty("java.security.policy",file);
+	    String file = xml.leggi(xmlparameter);
+		System.setProperty("java.security.policy", file);
 	}
 	
 	pointcut authOperations(User user): execution(* it.softfood.handler.*.*(User,..)) &&
-    !execution(* it.softfood.handler.*.login(String,String)) &&
+    execution(* it.softfood.handler.*.login(String,String)) &&
     !execution(* it.softfood.handler.*.getInstance()) &&
      args(user,..);
     
