@@ -42,8 +42,10 @@ package it.softfood.login;
 
 
 
+import it.softfood.handler.IUserFacade;
 import it.softfood.handler.UserFacade;
 
+import java.rmi.RemoteException;
 import java.security.Principal;
 import java.util.*;
 import java.io.IOException;
@@ -210,8 +212,14 @@ public class Softfood_LoginModule implements LoginModule {
      * @param password
      */
     private User controlCredential(String username,String password){
-		UserFacade emp=UserFacade.getInstance();
-		User employee=emp.findByUsernamePassword(username, password);
+		IUserFacade emp=UserFacade.getInstance();
+		User employee=null;
+		try {
+			employee = emp.selezionaUtentePerUserPassword(username, password);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		if(employee==null){
 			return(null);
 		}
