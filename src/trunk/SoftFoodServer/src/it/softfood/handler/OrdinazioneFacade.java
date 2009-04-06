@@ -224,18 +224,20 @@ public class OrdinazioneFacade {
 		return false;
 	}
 	
-	public LineaOrdinazione inserisciLineaOrdinazione(User role,LineaOrdinazione lineaOrdinazione) {
+	public LineaOrdinazione inserisciLineaOrdinazione(User role, LineaOrdinazione lineaOrdinazione) {
 		if (lineaOrdinazione != null) {
             try {
-                lineaOrdinazione.setOrdinazione(lineaOrdinazione.getOrdinazione());
-//                em.flush();
+            	lineaOrdinazione.setOrdinazione(lineaOrdinazione.getOrdinazione());
+
                 lineaOrdinazione = lineaOrdinazioneSession.inserisciLineaOrdinazione(lineaOrdinazione);
                 Articolo articolo = lineaOrdinazione.getArticolo();
-                if (articolo instanceof Pietanza)
-                    if (!this.aggiornaMagazzinoIngredienti(role,lineaOrdinazione, "-"))
+                System.out.println("Ordinazioneeeeeeeeeeeeeeeeee"+lineaOrdinazione.getOrdinazione());
+                
+                if (articolo.getTipoArticolo().equals("Pietanza"))
+                    if (!this.aggiornaMagazzinoIngredienti(role, lineaOrdinazione, "-"))
                         throw new Exception();
                 else
-                    if (!this.aggiornaMagazzinoBevande(role,lineaOrdinazione, "-"))
+                    if (!this.aggiornaMagazzinoBevande(role, lineaOrdinazione, "-"))
                         throw  new Exception();
 
                 return lineaOrdinazione;
@@ -471,9 +473,9 @@ public class OrdinazioneFacade {
                         int quantita = bevandaMagazzino.getQuantita();
 
                         if (tipoAggiornamento.equals("+")) 
-                            bevandaMagazzino.setQuantita(quantita + (lineaOrdinazione.getQuantita() * ((Bevanda) lineaOrdinazione.getArticolo()).getCapacita().intValue()));
+                            bevandaMagazzino.setQuantita(quantita + (lineaOrdinazione.getQuantita() * (lineaOrdinazione.getArticolo()).getCapacita().intValue()));
                         else
-                            bevandaMagazzino.setQuantita(quantita - (lineaOrdinazione.getQuantita() * ((Bevanda) lineaOrdinazione.getArticolo()).getCapacita().intValue()));
+                            bevandaMagazzino.setQuantita(quantita - (lineaOrdinazione.getQuantita() * (lineaOrdinazione.getArticolo()).getCapacita().intValue()));
 
                         bevandaMagazzinoSession.update(bevandaMagazzino);
                     }
