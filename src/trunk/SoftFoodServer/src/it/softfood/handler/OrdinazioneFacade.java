@@ -293,14 +293,7 @@ public class OrdinazioneFacade {
         return null;
     }
 
-    /* (non-Javadoc)
-	 * @see it.softfood.handler.IOrdinazioneFacade#selezionaLineeOrdinazionePerOrdinazione(it.softfood.entity.Ordinazione, it.softfood.enumeration.TipoPietanza)
-	 */
-    /* (non-Javadoc)
-	 * @see it.softfood.handler.IOrdinazioneFacade#selezionaLineeOrdinazionePerOrdinazione(it.softfood.entity.Ordinazione, it.softfood.enumeration.TipoPietanza)
-	 */
-    public ArrayList<LineaOrdinazione> selezionaLineeOrdinazionePerOrdinazione(Ordinazione ordinazione,
-            TipoPietanza tipoPietanza) {
+    public ArrayList<LineaOrdinazione> selezionaLineeOrdinazionePerOrdinazioneTipoPietanza(Ordinazione ordinazione, TipoPietanza tipoPietanza) {
         ArrayList<LineaOrdinazione> lineeOrdinazione = new ArrayList<LineaOrdinazione>();
         if (ordinazione != null) 
 			 lineeOrdinazione = (ArrayList<LineaOrdinazione>) lineaOrdinazioneSession.selezionaLineeOrdinazionePerOrdinazione(ordinazione);
@@ -309,23 +302,16 @@ public class OrdinazioneFacade {
         
         for (LineaOrdinazione lineaOrdinazione : lineeOrdinazione) {
             Articolo articolo = lineaOrdinazione.getArticolo();
-            if (articolo instanceof Bevanda && tipoPietanza == null)
+            if (articolo.getTipoArticolo().equals("Bevanda") && tipoPietanza == null)
                 lineeOrdinazioneArticoli.add(lineaOrdinazione);
-            if (articolo instanceof Pietanza)
+            if (articolo.getTipoArticolo().equals("Pietanza"))
                 if (((Pietanza)articolo).getTipo().equals(tipoPietanza))
                     lineeOrdinazioneArticoli.add(lineaOrdinazione);
-            
         }
 
         return lineeOrdinazioneArticoli;
     }
 
-    /* (non-Javadoc)
-	 * @see it.softfood.handler.IOrdinazioneFacade#rimuoviLineaOrdinazione(java.lang.Long)
-	 */
-    /* (non-Javadoc)
-	 * @see it.softfood.handler.IOrdinazioneFacade#rimuoviLineaOrdinazione(java.lang.Long)
-	 */
     public boolean rimuoviLineaOrdinazione(Long id) {
         if (id != null) {
             try {
@@ -338,19 +324,13 @@ public class OrdinazioneFacade {
 
                 return lineaOrdinazioneSession.rimuoviLineaOrdinazione(id);
             } catch (Exception e){
-            	System.out.println("ERROREEEEEEEEEEEEEEEEEEEEEEEE "+e);
+            	System.out.println("OrdinazioneFacade#rimuoviLineaOrdinazione " + e);
             }
         }
 
 		return false;
     }
 
-    /* (non-Javadoc)
-	 * @see it.softfood.handler.IOrdinazioneFacade#inserisciVariante(it.softfood.entity.Variante)
-	 */
-    /* (non-Javadoc)
-	 * @see it.softfood.handler.IOrdinazioneFacade#inserisciVariante(it.softfood.entity.Variante)
-	 */
     public Variante inserisciVariante(Variante variante) {
         if (variante != null) {
             LineaOrdinazione lineaOrdinazione = variante.getLineaOrdinazione();
@@ -369,7 +349,7 @@ public class OrdinazioneFacade {
                     
                     return variante;
                 } catch (Exception e) {
-                	System.out.println("ERROREEEEEEEEEEEEEEEEEEEEEEEE "+e);
+                	System.out.println("OrdinazioneFacade#inserisciVariante: " + e);
                 }
             }
         }
@@ -377,13 +357,7 @@ public class OrdinazioneFacade {
         return null;
     }
 
-    /* (non-Javadoc)
-	 * @see it.softfood.handler.IOrdinazioneFacade#selezionaIngredientiPerVariante()
-	 */
-    /* (non-Javadoc)
-	 * @see it.softfood.handler.IOrdinazioneFacade#selezionaIngredientiPerVariante()
-	 */
-    public ArrayList<Ingrediente> selezionaIngredientiPerVariante() {
+    public ArrayList<Ingrediente> selezionaIngredientiPerVariante () {
         ArrayList<IngredienteMagazzino> ingredientiMagazzino = (ArrayList<IngredienteMagazzino>) ingredienteMagazzinoSession.selezionaIngredientiMagazzino();
         ArrayList<Ingrediente> ingredienti = (ArrayList<Ingrediente>) ingredienteSession.selezionaIngredientePerVariante();
 
@@ -401,12 +375,6 @@ public class OrdinazioneFacade {
         return null;
     }
 
-    /* (non-Javadoc)
-	 * @see it.softfood.handler.IOrdinazioneFacade#modificaVariante(it.softfood.entity.Variante, it.softfood.entity.Variante)
-	 */
-    /* (non-Javadoc)
-	 * @see it.softfood.handler.IOrdinazioneFacade#modificaVariante(it.softfood.entity.Variante, it.softfood.entity.Variante)
-	 */
     public Variante modificaVariante(Variante nuovaVariante, Variante vecchiaVariante) {
         if (nuovaVariante != null && vecchiaVariante != null) {
 			Variante variante = vecchiaVariante;
@@ -420,12 +388,6 @@ public class OrdinazioneFacade {
 		return null;
 	}
 
-    /* (non-Javadoc)
-	 * @see it.softfood.handler.IOrdinazioneFacade#selezionaVariantePerId(java.lang.Long)
-	 */
-    /* (non-Javadoc)
-	 * @see it.softfood.handler.IOrdinazioneFacade#selezionaVariantePerId(java.lang.Long)
-	 */
     public Variante selezionaVariantePerId(Long id) {
         if (id != null)
 			return varianteSession.selezionaVariantePerId(id);
@@ -433,12 +395,6 @@ public class OrdinazioneFacade {
         return null;
     }
 
-    /* (non-Javadoc)
-	 * @see it.softfood.handler.IOrdinazioneFacade#selezionaIngredientePerNome(java.lang.String)
-	 */
-    /* (non-Javadoc)
-	 * @see it.softfood.handler.IOrdinazioneFacade#selezionaIngredientePerNome(java.lang.String)
-	 */
     public Ingrediente selezionaIngredientePerNome (String ingrediente) {
         if (ingrediente != null) {
             ArrayList<Ingrediente> ingredienti = (ArrayList<Ingrediente>) ingredienteSession.selezionaIngredientePerNome(ingrediente);

@@ -103,7 +103,8 @@ public class ArticoloMenuFacade  {
         
         if (pietanze != null) {
             for (Pietanza pietanza : pietanze) {
-                if (this.verificaIngredientiPietanza((Pietanza)pietanza) > 0) {
+            	int disponibilita = this.verificaIngredientiPietanza((Pietanza)pietanza);
+                if (disponibilita > 0) {
                     pietanzeDisponibili.add(pietanza);
                 }
             }
@@ -168,18 +169,18 @@ public class ArticoloMenuFacade  {
         int disponibilita = 0;
         int disponibilitaMinima = 1000;
         int numeroIngredienti = 0;
-        for (IngredientePietanza ingredientePietanza : ingredientiPietanze) {
-        	System.out.println(ingredientePietanza.getId().getIngrediente());
-        	System.out.println(ingredientePietanza.getId().getPietanza());
-            if (ingredientePietanza.getId().getPietanza().equals(pietanza.getId())) {
-                numeroIngredienti++;
+
+		for (IngredientePietanza ingredientePietanza : ingredientiPietanze) {
+        	if (ingredientePietanza.getId().getPietanza().equals(pietanza.getId())) {
+            	numeroIngredienti++;
                 Ingrediente ingrediente = ingredienteSession.selezionaIngredientePerId(ingredientePietanza.getId().getIngrediente());
                 
                 for (IngredienteMagazzino ingredienteMagazzino : ingredientiMagazzino) {
-                    if (ingredienteMagazzino.getIngrediente().getId().equals(ingrediente.getId())) {
+                	
+                	if (ingredienteMagazzino.getIngrediente().getId().equals(ingrediente.getId())) {
                         contatore++;
-                        if (ingredienteMagazzino.getQuantita() >= ingredientePietanza.getQuantita()
-                                && ingrediente.getScadenza().after(data)) {
+                        
+                        if (ingredienteMagazzino.getQuantita() >= ingredientePietanza.getQuantita() && ingrediente.getScadenza().after(data)) {
                             try {
                                 disponibilita = ingredienteMagazzino.getQuantita() / ingredientePietanza.getQuantita();
                             } catch (NumberFormatException nfe) {
@@ -190,11 +191,14 @@ public class ArticoloMenuFacade  {
                         if (disponibilita < disponibilitaMinima)
                             disponibilitaMinima = disponibilita;
                         disponibilita = 0;
+                        System.out.println("disponibilita minima " + disponibilitaMinima);
+                        
                     }
                 }
             }
         }
-
+		System.out.println("dooooooooooooooookkkkkkkkkkkkkeyyyyyyyyyyyyyyyyyyyyyyyyyy "+disponibilitaMinima);
+        
         if (contatore == numeroIngredienti && contatore > 0)
             return disponibilitaMinima;
 

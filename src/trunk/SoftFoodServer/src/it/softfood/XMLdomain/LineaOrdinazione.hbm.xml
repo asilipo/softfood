@@ -17,7 +17,7 @@
         <property name="quantita" type="int">
             <column name="quantita" not-null="true" />
         </property>
-        <set name="variantes" inverse="true">
+        <set name="variantes" lazy="false" inverse="true">
             <key>
                 <column name="linea_ordinazione" not-null="true" />
             </key>

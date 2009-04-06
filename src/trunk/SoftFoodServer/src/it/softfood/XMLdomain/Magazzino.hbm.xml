@@ -14,13 +14,13 @@
         <property name="descrizione" type="string">
             <column name="descrizione" />
         </property>
-        <set name="ingredienteMagazzinos" inverse="true">
+        <set name="ingredienteMagazzinos" lazy="false" inverse="true">
             <key>
                 <column name="magazzino" not-null="true" />
             </key>
             <one-to-many class="it.softfood.entity.IngredienteMagazzino" />
         </set>
-        <set name="bevandaMagazzinos" inverse="true">
+        <set name="bevandaMagazzinos" lazy="false" inverse="true">
             <key>
                 <column name="magazzino" not-null="true" />
             </key>
