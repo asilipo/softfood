@@ -33,11 +33,6 @@ public aspect Authorization{
 		System.setProperty("java.security.policy",file);
 	}
 	
-	/*
-	pointcut authOperations(User user): 
-		execution(* it.softfood.session.UserSession.*(..)) && !execution(it.softfood.session.*.new(..)) && args(user,..);
-	*/
-
 	pointcut authOperations(User user): execution(* it.softfood.handler.*.*(User,..)) &&
     !execution(* it.softfood.handler.*.login(String,String)) &&
     !execution(* it.softfood.handler.*.getInstance()) &&
