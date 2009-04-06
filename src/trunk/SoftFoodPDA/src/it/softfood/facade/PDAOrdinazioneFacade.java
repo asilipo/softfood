@@ -136,14 +136,14 @@ public class PDAOrdinazioneFacade {
 
 	public LineaOrdinazione inserisciLineaOrdinazione(User role, LineaOrdinazione linea) {
 		OrdinazioneFacade ordineFacade=OrdinazioneFacade.getInstance();
-		LineaOrdinazione ord = null;
+		LineaOrdinazione lineaOrdinazione = null;
 		try {
-			ord = ordineFacade.inserisciLineaOrdinazione(role,linea);
+			lineaOrdinazione = ordineFacade.inserisciLineaOrdinazione(role, linea);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		return ord;
+		return lineaOrdinazione;
 	}
 
 	public Ingrediente selezionaIngredientePerNome(User role,String nome) {
