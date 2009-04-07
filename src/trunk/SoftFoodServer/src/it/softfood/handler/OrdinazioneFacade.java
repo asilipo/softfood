@@ -296,7 +296,7 @@ public class OrdinazioneFacade {
             if (articolo.getTipoArticolo().equals("Bevanda") && tipoPietanza.equals(TipoPietanza.BEVANDA))
                 lineeOrdinazioneArticoli.add(lineaOrdinazione);
             if (articolo.getTipoArticolo().equals("Pietanza"))
-                if (((Pietanza)articolo).getTipo().equals(tipoPietanza))
+    //            if (((Pietanza)articolo).getTipo().equals(tipoPietanza))
                     lineeOrdinazioneArticoli.add(lineaOrdinazione);
         }
 
@@ -322,7 +322,7 @@ public class OrdinazioneFacade {
 		return false;
     }
 
-    public Variante inserisciVariante(User role,Variante variante) {
+    public Variante inserisciVariante(User role, Variante variante) {
         if (variante != null) {
             LineaOrdinazione lineaOrdinazione = variante.getLineaOrdinazione();
             Ingrediente ingrediente = variante.getIngrediente();
@@ -332,7 +332,7 @@ public class OrdinazioneFacade {
 //                    lineaOrdinazione = em.merge(lineaOrdinazione);
 //                    ingrediente = em.merge(ingrediente);
 //                    em.flush();
-
+                	
                     variante.setIngrediente(ingrediente);
                     variante.setLineaOrdinazione(lineaOrdinazione);
                     
@@ -429,8 +429,7 @@ public class OrdinazioneFacade {
                             for (IngredienteMagazzino ingredienteMagazzino : ingredientiMagazzino) {
                                 if (ingredienteMagazzino.getIngrediente().getId().
                                         equals(ingredientePietanza.getId().getIngrediente())) {
-                                	System.err.println("Tipo pietanzaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" + tipoAggiornamento);
-                                    
+                                	
                                 	int quantita = ingredienteMagazzino.getQuantita();
                                 	if (tipoAggiornamento.equalsIgnoreCase("+"))
                                         ingredienteMagazzino.setQuantita(quantita + (lineaOrdinazione.getQuantita() * ingredientePietanza.getQuantita()));
@@ -458,8 +457,7 @@ public class OrdinazioneFacade {
                 for (BevandaMagazzino bevandaMagazzino : bevandeMagazzino) {
                     if (bevandaMagazzino.getArticolo().getId().equals(lineaOrdinazione.getArticolo().getId())) {
                     	int quantita = bevandaMagazzino.getQuantita();
-                    	System.err.println("Tipo aaaaaaaaaaaaaaaagggggggggggggggggggg" + tipoAggiornamento);
-                        
+                    	
                     	if (tipoAggiornamento.equalsIgnoreCase("+")) {
                             bevandaMagazzino.setQuantita(quantita + (lineaOrdinazione.getQuantita() * (lineaOrdinazione.getArticolo()).getCapacita().intValue()));
                         } else {
