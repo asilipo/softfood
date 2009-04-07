@@ -282,9 +282,9 @@ public class Pietanza extends javax.swing.JPanel {
 	            String var = (String) enumeration.nextElement();
 	            variante.setLineaOrdinazione(linea);
 	            if (var.substring(0, 1).equalsIgnoreCase("+")) {
-	                //variante.setTipoVariazione(TipoVariante.AGGIUNTA);
+	                variante.setTipoVariazione(TipoVariante.AGGIUNTA.ordinal());
 	            } else {
-	                //variante.setTipoVariazione(TipoVariante.RIMOZIONE);
+	                variante.setTipoVariazione(TipoVariante.RIMOZIONE.ordinal());
 	            }
 	
 	            variante.setIngrediente(ordinazioneFacade.selezionaIngredientePerNome(role,var.substring(2)));
