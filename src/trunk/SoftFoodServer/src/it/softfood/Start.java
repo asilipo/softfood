@@ -1,26 +1,21 @@
 package it.softfood;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import it.softfood.entity.Bevanda;
 import it.softfood.entity.Ordinazione;
-import it.softfood.entity.Pietanza;
-import it.softfood.entity.Ristorante;
 import it.softfood.entity.Tavolo;
 import it.softfood.entity.User;
-import it.softfood.facade.SoftfoodFacade;
 import it.softfood.handler.ArticoloMenuFacade;
 import it.softfood.handler.IArticoloMenuFacade;
 import it.softfood.handler.IOrdinazioneFacade;
 import it.softfood.handler.IRistoranteFacade;
 import it.softfood.handler.ITavoloFacade;
+import it.softfood.handler.IUserFacade;
 import it.softfood.handler.OrdinazioneFacade;
 import it.softfood.handler.RistoranteFacade;
 import it.softfood.handler.TavoloFacade;
-import it.softfood.login.LoginHandler;
-import it.softfood.session.OrdinazioneSession;
-import it.softfood.session.UserSession;
-import it.softfood.handler.*;
+import it.softfood.handler.UserFacade;
+
+import java.util.ArrayList;
 
 public class Start {
 
@@ -72,15 +67,19 @@ public class Start {
 //        Long id=facade.occupaTavoli(list);
 //        facade.rimuoviTavolo(id);
 		
-//		ITavoloFacade tav=TavoloFacade.getInstance();
-//		IOrdinazioneFacade ord=(IOrdinazioneFacade) OrdinazioneFacade.getInstance();
-//		IRistoranteFacade rist=RistoranteFacade.getInstance();
-//		IArticoloMenuFacade art=(IArticoloMenuFacade) ArticoloMenuFacade.getInstance();
+		ITavoloFacade tav=TavoloFacade.getInstance();
+		IOrdinazioneFacade ord=(IOrdinazioneFacade) OrdinazioneFacade.getInstance();
+		IRistoranteFacade rist=RistoranteFacade.getInstance();
+		IArticoloMenuFacade art=(IArticoloMenuFacade) ArticoloMenuFacade.getInstance();
+		IUserFacade iuser = (IUserFacade) UserFacade.getInstance();
 //		
 //		Pietanza p = new Pietanza();
 //		p.setId(51L);
 //		p.setNome("Patatine");
 //		p.setDescrizione("Patatine");
+		
+//		ArrayList<LineaOrdinazione> linee = ord.selezionaLineeOrdinazionePerOrdinazioneTipoPietanza(o, null);
+//		System.out.println("lineeeeeeeeeeeeeeeeeeeee" + linee.size());
 		
 //		Ordinazione ordine=new Ordinazione();
 //		ordine.setTavolo(tavo);
@@ -93,29 +92,30 @@ public class Start {
 //		int b = a.verificaIngredientiPietanza(p);
 //		System.out.print(b);
 		
-		User u = new User();
+		/*User u = new User();
         u.setUserName("m");
         u.setPassword("m");
         u.setRuolo("amministratore");
 
         UserFacade ut = UserFacade.getInstance();
-        LoginHandler facade = LoginHandler.getInstance();
-        User user1 = facade.login("mary", "mary");
-//        ut.insert(user1, u);
+        LoginHandler facade = LoginHandler.getInstance();*/
+      //  User user1 = iuser.login("mary", "mary");
+
     
         //Maria
 //        System.out.println("UTENTE "+ut.selezionaUserName(user1, u));
 //       System.out.println(ut.selezionaPassword(user1, u));
         	
 //		System.out.println(ut.modificaRuolo(user1, u, "cassiere"));
-//		System.out.println("cancellazione"+ut.eliminaUtente(user1, u));
-		
-		System.out.println("selezione "+(ut.selezionaUtente(user1, "m", "m")).getUserName());
+//		System.out.println(ut.eliminaUtente(user1, u));
         
-        facade.logout(user1);	
-		
+//        facade.logout(user1);	
+//		User user = new User("mary", "mary", "amministratore");
+//		ArrayList<Bevanda> bevande = art.selezionaBevandeDisponibili(user);
+//		System.out.println("Bevande "+ bevande.size());
 	}
 	
 
 }
+
 
