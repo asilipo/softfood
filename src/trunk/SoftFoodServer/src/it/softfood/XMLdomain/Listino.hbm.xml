@@ -8,7 +8,7 @@
             <column name="id" />
             <generator class="assigned" />
         </id>
-        <many-to-one name="menu" class="it.softfood.entity.Menu" fetch="select">
+        <many-to-one name="menu" lazy="false" class="it.softfood.entity.Menu" fetch="select">
             <column name="menu" not-null="true" />
         </many-to-one>
         <property name="descrizione" type="string">
@@ -17,7 +17,7 @@
         <property name="prezzo" type="double">
             <column name="prezzo" precision="17" scale="17" not-null="true" />
         </property>
-        <set name="articolos" inverse="true">
+        <set name="articolos" lazy="false" inverse="true">
             <key>
                 <column name="listino" />
             </key>

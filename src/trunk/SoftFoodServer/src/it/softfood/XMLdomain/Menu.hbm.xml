@@ -8,13 +8,13 @@
             <column name="id" />
             <generator class="assigned" />
         </id>
-        <many-to-one name="ristorante" class="it.softfood.entity.Ristorante" fetch="select">
+        <many-to-one name="ristorante" lazy="false" class="it.softfood.entity.Ristorante" fetch="select">
             <column name="ristorante" not-null="true" />
         </many-to-one>
         <property name="descrizione" type="string">
             <column name="descrizione" />
         </property>
-        <set name="listinos" inverse="true">
+        <set name="listinos" lazy="false" inverse="true">
             <key>
                 <column name="menu" not-null="true" />
             </key>
