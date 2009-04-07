@@ -32,18 +32,13 @@ public aspect Persistence {
 	before() :  operation() {		
 		session = HibernateUtil.openSession();
 		
-		if(session.isConnected())
-			System.out.println("Persistenza - ASPECT SESSION CONNECTED");
-		if(session.isOpen())
-			System.out.println("Persistenza - ASPECT SESSION OPENED");
 		
-		System.out.println("Persistenza - OPENED SESSION");
 	}
 
 	after() : operation()  {
-		System.out.println("Dopo - Persistenza - CLOSING SESSION");
+//		System.out.println("Dopo - Persistenza - CLOSING SESSION");
 		HibernateUtil.closeSession();
-		System.out.println("Dopo - Persistenza - CLOSED SESSION");
+//		System.out.println("Dopo - Persistenza - CLOSED SESSION");
 	}
 
 }
