@@ -10,30 +10,33 @@ import org.apache.log4j.Logger;
 import org.apache.log4j.SimpleLayout;
 import org.aspectj.lang.Signature;
    
+/**
+ * @author Maria Rosaria Paone
+ * @author Marco Grasso
+ * @author Francesco Pacilio
+ */
+
 public aspect Logging {      
 	     
-	private Logger _logger = Logger.getLogger("trace");
-	
+	private Logger _logger = Logger.getLogger("trace");	
 	private final String xmlparameter="fileLog";
-	
 	 
 	public Logging() {
 		XmlReader xml= new XmlReader();
 		String file=xml.leggi(xmlparameter);
-		 SimpleLayout layout = new SimpleLayout();
-	      FileAppender appender = null;
-	       try {
+		SimpleLayout layout = new SimpleLayout();
+	    FileAppender appender = null;
+	    try {
 	         appender = new FileAppender(layout,file,false);
-	      } catch(Exception e) {
+	    } catch(Exception e) {
 	    	  e.printStackTrace();
-	    	  }
+	    }
 
-	      _logger.addAppender(appender);
-	      _logger.setLevel(Level.ALL); 
+	    _logger.addAppender(appender);
+	    _logger.setLevel(Level.ALL); 
+	    
 	}
 
-	//pointcut traceMethods(User user): execution(* it.softfood.session.*.*(..)) && !execution(it.softfood.session.*.new(..));
-	
 	pointcut traceMethods() : 	
 		execution(* it.softfood.session.*.*(..)) && !execution(it.softfood.session.*.new(..));
 	
@@ -55,5 +58,5 @@ public aspect Logging {
 		    		                           + "."+ sig.getName() + "]. By:"+
 		    		                           ". Date+"+new Date().toString());
 		}
-	  }
 	}
+}

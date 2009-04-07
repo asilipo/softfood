@@ -29,7 +29,6 @@ public aspect Persistence {
 
 	pointcut operation(): execution(* it.softfood.session.*.*(..)) && !cflowbelow(execution(* it.softfood.session.*.*(..))) && !execution(* it.softfood.session.*.*Session(..));
 
-
 	before() :  operation() {		
 		session = HibernateUtil.openSession();
 		
@@ -42,11 +41,9 @@ public aspect Persistence {
 	}
 
 	after() : operation()  {
-
 		System.out.println("Dopo - Persistenza - CLOSING SESSION");
 		HibernateUtil.closeSession();
 		System.out.println("Dopo - Persistenza - CLOSED SESSION");
 	}
-	
 
 }

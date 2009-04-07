@@ -27,7 +27,7 @@ public aspect Authorization{
 	private String xmlparameter="config_authorization_file";
 
 	public Authorization()throws Exception{
-		XmlReader xml= new XmlReader();
+		XmlReader xml = new XmlReader();
 		String file = xml.leggi(xmlparameter);
 		System.setProperty("java.security.policy", file);
 	}
