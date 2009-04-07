@@ -46,7 +46,6 @@ public aspect ClientDistribution {
 		Object obj = null;
 		obj = ExecuteMetod.invoke(ristorantefacade, thisJoinPoint.getSignature()
 				.getName(), thisJoinPoint.getArgs());
-		//Object[] params = thisJoinPoint.getArgs();
 		return obj;
 	}
 	
@@ -56,7 +55,6 @@ public aspect ClientDistribution {
 		Object obj = null;
 		obj = ExecuteMetod.invoke(tavolofacade, thisJoinPoint.getSignature()
 				.getName(), thisJoinPoint.getArgs());
-		//Object[] params = thisJoinPoint.getArgs();
 		return obj;
 	}
 	
