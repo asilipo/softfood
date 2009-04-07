@@ -77,7 +77,7 @@ public class OrdinazioneFacade {
                     }
                 } catch (Exception e) {
 //                    ejbContext.setRollbackOnly();
-                	System.out.println("ERROREEEEEEEEEEEEEEEEEEEEEEEE "+e);
+                	System.out.println("OrdinazioneFacade#inserisciOrdinazione " + e);
                 }
 
                 return null;
@@ -88,10 +88,10 @@ public class OrdinazioneFacade {
                 ordinazione.setSconto(0d);
                 ordinazione.setTotale(0d);
                 ordinazione.setTerminato(false);
-                ordinazione=ordinazioneSession.inserisciOrdinazione(ordinazione);
+                ordinazione = ordinazioneSession.inserisciOrdinazione(ordinazione);
                 return ordinazione;
             } catch (Exception e) {
-            	System.out.println("ERROREEEEEEEEEEEEEEEEEEEEEEEE "+e);
+            	System.out.println("OrdinazioneFacade#inserisciOrdinazione " + e);
             }
         }
 
@@ -185,10 +185,10 @@ public class OrdinazioneFacade {
                         
                         if (ripristinaPietanze) {
                             Articolo articolo = lineaOrdinazione.getArticolo();
-                            if (articolo instanceof Pietanza) {
+                            if (articolo.getTipoArticolo().equals("Pietanza")) {
                                 if (!this.aggiornaMagazzinoIngredienti(role,lineaOrdinazione, "+"))
                                     throw new Exception();
-                            } else if (articolo instanceof Bevanda) {
+                            } else {
                                 if (!this.aggiornaMagazzinoBevande(role,lineaOrdinazione, "+"))
                                     throw new Exception();
                             }
@@ -230,16 +230,16 @@ public class OrdinazioneFacade {
             	lineaOrdinazione.setOrdinazione(lineaOrdinazione.getOrdinazione());
 
                 lineaOrdinazione = lineaOrdinazioneSession.inserisciLineaOrdinazione(lineaOrdinazione);
-                Articolo articolo = lineaOrdinazione.getArticolo();
-                System.out.println("Ordinazioneeeeeeeeeeeeeeeeee"+lineaOrdinazione.getOrdinazione());
                 
-                if (articolo.getTipoArticolo().equals("Pietanza"))
+                Articolo articolo = lineaOrdinazione.getArticolo();
+                
+                if (articolo.getTipoArticolo().equals("Pietanza")) {
                     if (!this.aggiornaMagazzinoIngredienti(role, lineaOrdinazione, "-"))
                         throw new Exception();
-                else
-                    if (!this.aggiornaMagazzinoBevande(role, lineaOrdinazione, "-"))
+                } else {
+                	if (!this.aggiornaMagazzinoBevande(role, lineaOrdinazione, "-"))
                         throw  new Exception();
-
+                }
                 return lineaOrdinazione;
             } catch (Exception e) {
             	System.out.println("OrdinazioneFacade#inserisciLineaOrdinazione " + e);
@@ -249,12 +249,6 @@ public class OrdinazioneFacade {
 		return null;
 	}
 	
-	/* (non-Javadoc)
-	 * @see it.softfood.handler.IOrdinazioneFacade#modificaLineaOrdinazione(it.softfood.entity.LineaOrdinazione, it.softfood.entity.LineaOrdinazione)
-	 */
-	/* (non-Javadoc)
-	 * @see it.softfood.handler.IOrdinazioneFacade#modificaLineaOrdinazione(it.softfood.entity.LineaOrdinazione, it.softfood.entity.LineaOrdinazione)
-	 */
 	public LineaOrdinazione modificaLineaOrdinazione(User role,LineaOrdinazione nuovaLineaOrdinazione,
             LineaOrdinazione vecchiaLineaOrdinazione) {
         if (nuovaLineaOrdinazione != null && vecchiaLineaOrdinazione != null) {
@@ -269,12 +263,6 @@ public class OrdinazioneFacade {
 		return null;
 	}
 
-    /* (non-Javadoc)
-	 * @see it.softfood.handler.IOrdinazioneFacade#selezionaLineaOrdinazionePerId(java.lang.Long)
-	 */
-    /* (non-Javadoc)
-	 * @see it.softfood.handler.IOrdinazioneFacade#selezionaLineaOrdinazionePerId(java.lang.Long)
-	 */
     public LineaOrdinazione selezionaLineaOrdinazionePerId(User role,Long id) {
         if (id != null)
 			return lineaOrdinazioneSession.selezionaLineaOrdinazionePerId(id);
@@ -441,10 +429,10 @@ public class OrdinazioneFacade {
                             for (IngredienteMagazzino ingredienteMagazzino : ingredientiMagazzino) {
                                 if (ingredienteMagazzino.getIngrediente().getId().
                                         equals(ingredientePietanza.getId().getIngrediente())) {
-//                                    ingredienteMagazzino = em.merge(ingredienteMagazzino);
-                                    int quantita = ingredienteMagazzino.getQuantita();
-
-                                    if (tipoAggiornamento.equals("+"))
+                                	System.err.println("Tipo pietanzaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" + tipoAggiornamento);
+                                    
+                                	int quantita = ingredienteMagazzino.getQuantita();
+                                	if (tipoAggiornamento.equalsIgnoreCase("+"))
                                         ingredienteMagazzino.setQuantita(quantita + (lineaOrdinazione.getQuantita() * ingredientePietanza.getQuantita()));
                                     else
                                          ingredienteMagazzino.setQuantita(quantita - (lineaOrdinazione.getQuantita() * ingredientePietanza.getQuantita()));
@@ -469,14 +457,14 @@ public class OrdinazioneFacade {
             if (bevandeMagazzino != null) {
                 for (BevandaMagazzino bevandaMagazzino : bevandeMagazzino) {
                     if (bevandaMagazzino.getArticolo().getId().equals(lineaOrdinazione.getArticolo().getId())) {
-//                        bevandaMagazzino = em.merge(bevandaMagazzino);
-                        int quantita = bevandaMagazzino.getQuantita();
-
-                        if (tipoAggiornamento.equals("+")) 
+                    	int quantita = bevandaMagazzino.getQuantita();
+                    	System.err.println("Tipo aaaaaaaaaaaaaaaagggggggggggggggggggg" + tipoAggiornamento);
+                        
+                    	if (tipoAggiornamento.equalsIgnoreCase("+")) {
                             bevandaMagazzino.setQuantita(quantita + (lineaOrdinazione.getQuantita() * (lineaOrdinazione.getArticolo()).getCapacita().intValue()));
-                        else
-                            bevandaMagazzino.setQuantita(quantita - (lineaOrdinazione.getQuantita() * (lineaOrdinazione.getArticolo()).getCapacita().intValue()));
-
+                        } else {
+                        	bevandaMagazzino.setQuantita(quantita - (lineaOrdinazione.getQuantita() * (lineaOrdinazione.getArticolo()).getCapacita().intValue()));
+                        }
                         bevandaMagazzinoSession.update(bevandaMagazzino);
                     }
                 }
