@@ -44,7 +44,7 @@ public class PietanzaSession {
 			Long id = this.getNewId();
 			pietanza.setId(id);
 			session.persist(pietanza);
-			pietanza = (Pietanza) session.get(Pietanza.class, pietanza);
+			pietanza = (Pietanza) this.selezionaPietanzaPerId(pietanza.getId());
 			
 			return pietanza; 
 		} catch (Exception e) {
@@ -66,8 +66,8 @@ public class PietanzaSession {
 			pietanza.setListino(articolo.getListino());
 			pietanza.setNome(articolo.getNome());
 			pietanza.setTipoArticolo(articolo.getTipoArticolo());
-			pietanza.setTipoPietanza(articolo.getTipoPietanza());
-			
+			pietanza.setTipoPietanza(articolo.getTipoPietanza());	
+			pietanza.setTipo(TipoPietanza.values()[articolo.getTipoPietanza()]);
 			
 			return pietanza; 
 		} catch (Exception e) {
