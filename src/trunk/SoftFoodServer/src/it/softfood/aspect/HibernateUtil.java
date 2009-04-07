@@ -35,6 +35,7 @@ public class HibernateUtil {
 			session = (Session) sessionFactory.openSession();
 			sharedSession.set(session);
 		}
+		
 		return session;
 	}
 
@@ -45,7 +46,6 @@ public class HibernateUtil {
 			shSession.close();
 			sharedSession.set(null);
 		}
-
 	}
 
 	public static Session getSession() throws Exception {
@@ -53,6 +53,7 @@ public class HibernateUtil {
 		if (shSession == null) {
 			throw new Exception("Session is null.");
 		}
+		
 		return shSession;
 	}
 	
