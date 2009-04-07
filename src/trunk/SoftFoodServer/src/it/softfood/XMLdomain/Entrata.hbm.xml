@@ -8,10 +8,10 @@
             <column name="id" />
             <generator class="assigned" />
         </id>
-        <many-to-one name="ordinazione" class="it.softfood.entity.Ordinazione" fetch="select">
+        <many-to-one name="ordinazione" lazy="false" class="it.softfood.entity.Ordinazione" fetch="select">
             <column name="ordinazione" not-null="true" />
         </many-to-one>
-        <many-to-one name="registro" class="it.softfood.entity.Registro" fetch="select">
+        <many-to-one name="registro" lazy="false" class="it.softfood.entity.Registro" fetch="select">
             <column name="registro" not-null="true" />
         </many-to-one>
     </class>

@@ -8,37 +8,37 @@
             <column name="ragione_sociale" />
             <generator class="assigned" />
         </id>
-        <many-to-one name="indirizzo" class="it.softfood.entity.Indirizzo" fetch="select">
+        <many-to-one lazy="false"  name="indirizzo" class="it.softfood.entity.Indirizzo" fetch="select">
             <column name="indirizzo" not-null="true" />
         </many-to-one>
         <property name="partitaIva" type="string">
             <column name="partita_iva" not-null="true" unique="true" />
         </property>
-        <set name="registros" inverse="true">
+        <set name="registros" lazy="false" inverse="true">
             <key>
                 <column name="ristorante" not-null="true" />
             </key>
             <one-to-many class="it.softfood.entity.Registro" />
         </set>
-        <set name="fornitores" inverse="true">
+        <set name="fornitores" lazy="false" inverse="true">
             <key>
                 <column name="ristorante" not-null="true" />
             </key>
             <one-to-many class="it.softfood.entity.Fornitore" />
         </set>
-        <set name="staffs" inverse="true">
+        <set name="staffs" lazy="false" inverse="true">
             <key>
                 <column name="ristorante" not-null="true" />
             </key>
             <one-to-many class="it.softfood.entity.Staff" />
         </set>
-        <set name="tavolos" inverse="true">
+        <set name="tavolos" lazy="false" inverse="true">
             <key>
                 <column name="ristorante" not-null="true" />
             </key>
             <one-to-many class="it.softfood.entity.Tavolo" />
         </set>
-        <set name="menus" inverse="true">
+        <set name="menus" lazy="false" inverse="true">
             <key>
                 <column name="ristorante" not-null="true" />
             </key>
