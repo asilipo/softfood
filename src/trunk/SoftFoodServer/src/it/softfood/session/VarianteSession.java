@@ -29,7 +29,9 @@ public class VarianteSession  {
 	private Long getNewId() {
 		try {
 			Query q = session.createQuery("select max(id) from it.softfood.entity.Variante");
-		    Long id = (Long)q.list().get(0);
+			Long id = (Long)q.uniqueResult();
+		    if(id==null)
+		    	return new Long(0);
 			return (id + 1);
 		} catch(Exception e) {
 			System.out.println("VarianteSession#getNewId");
@@ -39,10 +41,14 @@ public class VarianteSession  {
 
 	public Variante inserisciVariante(Variante variante) {
 		try {
+			System.out.println("Ingrediente"+variante.getIngrediente());
+			System.out.println("LineaOrdinazione"+variante.getLineaOrdinazione());
+			System.out.println("TipoVArizione"+variante.getTipoVariazione());
+			
 			Long id = this.getNewId();
 			variante.setId(id);
 			session.persist(variante);
-			variante = (Variante) session.get(Variante.class, variante);
+			variante = (Variante) this.selezionaVariantePerId(variante.getId());
 			
 			return variante; 
 		} catch (Exception e) {
@@ -64,7 +70,7 @@ public class VarianteSession  {
 	
 	public List<Variante> selezionaVariantiPerIngrediente(Ingrediente ingrediente) {
 		try {
-			Query q = session.createQuery("from it.softfood.entity.Variante v where ingrediente = ?");
+			Query q = session.createQuery("from it.softfood.entity.Variante v where v.ingrediente = ?");
 			q.setLong(0, ingrediente.getId());
 			List<Variante> list = (List<Variante>) q.list();
 			
@@ -77,7 +83,7 @@ public class VarianteSession  {
 	
 	public List<Variante> selezionaVariantiPerLineaOrdinazione(LineaOrdinazione lineaOrdinazione) {
 		try {
-			Query q = session.createQuery("from it.softfood.entity.Variante v where lineaOrdinazione = ?");
+			Query q = session.createQuery("from it.softfood.entity.Variante v where v.lineaOrdinazione = ?");
 			q.setLong(0, lineaOrdinazione.getId());
 			List<Variante> list = (List<Variante>) q.list();
 			
