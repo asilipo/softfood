@@ -8,7 +8,7 @@
             <column name="id" />
             <generator class="assigned" />
         </id>
-        <many-to-one name="tavolo" class="it.softfood.entity.Tavolo" fetch="select">
+        <many-to-one  lazy="false"  name="tavolo" class="it.softfood.entity.Tavolo" fetch="select">
             <column name="tavolo" not-null="true" />
         </many-to-one>
         <property name="coperti" type="int">
@@ -26,13 +26,13 @@
         <property name="totale" type="java.lang.Double">
             <column name="totale" precision="17" scale="17" />
         </property>
-        <set name="entratas" inverse="true">
+        <set lazy="false"  name="entratas" inverse="true">
             <key>
                 <column name="ordinazione" not-null="true" />
             </key>
             <one-to-many class="it.softfood.entity.Entrata" />
         </set>
-        <set name="lineaOrdinaziones" inverse="true">
+        <set lazy="false"  name="lineaOrdinaziones" inverse="true">
             <key>
                 <column name="ordinazione" not-null="true" />
             </key>

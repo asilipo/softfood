@@ -8,10 +8,10 @@
             <column name="id" />
             <generator class="assigned" />
         </id>
-        <many-to-one name="lineaOrdinazione" class="it.softfood.entity.LineaOrdinazione" fetch="select">
+        <many-to-one lazy="false"  name="lineaOrdinazione" class="it.softfood.entity.LineaOrdinazione" fetch="select">
             <column name="linea_ordinazione" not-null="true" />
         </many-to-one>
-        <many-to-one name="ingrediente" class="it.softfood.entity.Ingrediente" fetch="select">
+        <many-to-one lazy="false"  name="ingrediente" class="it.softfood.entity.Ingrediente" fetch="select">
             <column name="ingrediente" not-null="true" />
         </many-to-one>
         <property name="tipoVariazione" type="java.lang.Integer">
