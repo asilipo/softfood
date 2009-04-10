@@ -1,14 +1,15 @@
 package it.softfood.session;
 
-
-
-import java.util.List;
-import org.hibernate.Query;
-import org.hibernate.Session;
-import it.softfood.aspect.HibernateUtil;
-import it.softfood.entity.Tavolo;
 import it.softfood.entity.User;
 
+import org.hibernate.Query;
+import org.hibernate.Session;
+
+/**
+ * @author Maria Rosaria Paone
+ * @author Marco Grasso
+ * @author Francesco Pacilio
+ */
 
 public class UserSession {
 	
