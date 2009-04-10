@@ -14,6 +14,7 @@ import it.softfood.handler.OrdinazioneFacade;
 import it.softfood.handler.RistoranteFacade;
 import it.softfood.handler.TavoloFacade;
 import it.softfood.handler.UserFacade;
+import it.softfood.login.LoginHandler;
 
 import java.util.ArrayList;
 
@@ -96,10 +97,11 @@ public class Start {
         u.setUserName("m");
         u.setPassword("m");
         u.setRuolo("amministratore");
-
-        UserFacade ut = UserFacade.getInstance();
-        LoginHandler facade = LoginHandler.getInstance();*/
-      //  User user1 = iuser.login("mary", "mary");
+*/
+//        UserFacade ut = UserFacade.getInstance();
+//
+//        LoginHandler facade = LoginHandler.getInstance();
+//        User user1 = iuser.login("mary", "mary");
 
     
         //Maria
@@ -113,9 +115,12 @@ public class Start {
 //		User user = new User("mary", "mary", "amministratore");
 //		ArrayList<Bevanda> bevande = art.selezionaBevandeDisponibili(user);
 //		System.out.println("Bevande "+ bevande.size());
+//		Ordinazione o=ord.selezionaOrdinazionePerId(user1, new Long(0));
+//		ord.rimuoviOrdinazione(user1, o.getId(), true);
 	}
 	
 
 }
+
 
 
