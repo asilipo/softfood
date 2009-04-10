@@ -1,7 +1,6 @@
 package it.softfood.handler;
 
 import it.softfood.entity.Articolo;
-import it.softfood.entity.Bevanda;
 import it.softfood.entity.BevandaMagazzino;
 import it.softfood.entity.Ingrediente;
 import it.softfood.entity.IngredienteMagazzino;
@@ -98,7 +97,7 @@ public class OrdinazioneFacade {
 		return null;
 	}
 
-    private Integer verificaIngredientiPietanza(User role,Pietanza pietanza) {
+    private Integer verificaIngredientiPietanza(User role, Pietanza pietanza) {
         ArrayList<IngredientePietanza> ingredientiPietanze = (ArrayList<IngredientePietanza>) ingredientePietanzaSession.selezionaIngredientiPietanze();
         ArrayList<IngredienteMagazzino> ingredientiMagazzino = (ArrayList<IngredienteMagazzino>) ingredienteMagazzinoSession.selezionaIngredientiMagazzino();
         Date data = new Date(System.currentTimeMillis());
@@ -270,12 +269,6 @@ public class OrdinazioneFacade {
         return null;
     }
     
-    /* (non-Javadoc)
-	 * @see it.softfood.handler.IOrdinazioneFacade#selezionaLineeOrdinazionePerOrdinazione(it.softfood.entity.Ordinazione)
-	 */
-    /* (non-Javadoc)
-	 * @see it.softfood.handler.IOrdinazioneFacade#selezionaLineeOrdinazionePerOrdinazione(it.softfood.entity.Ordinazione)
-	 */
     public ArrayList<LineaOrdinazione> selezionaLineeOrdinazionePerOrdinazione(User role,Ordinazione ordinazione) {
         if (ordinazione != null){
         	ArrayList<LineaOrdinazione> linea=(ArrayList<LineaOrdinazione>) lineaOrdinazioneSession.selezionaLineeOrdinazionePerOrdinazione(ordinazione);
@@ -419,7 +412,7 @@ public class OrdinazioneFacade {
 		return false;
     }
 
-    private boolean aggiornaMagazzinoIngredienti(User role,LineaOrdinazione lineaOrdinazione, String tipoAggiornamento) {
+    private boolean aggiornaMagazzinoIngredienti(User role, LineaOrdinazione lineaOrdinazione, String tipoAggiornamento) {
         try {
             ArrayList<IngredientePietanza> ingredientiPietanze = (ArrayList<IngredientePietanza>) ingredientePietanzaSession.selezionaIngredientiPietanze();
             ArrayList<IngredienteMagazzino> ingredientiMagazzino = (ArrayList<IngredienteMagazzino>) ingredienteMagazzinoSession.selezionaIngredientiMagazzino();

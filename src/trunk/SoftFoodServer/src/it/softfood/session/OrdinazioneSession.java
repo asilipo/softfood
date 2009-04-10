@@ -87,7 +87,6 @@ public class OrdinazioneSession {
 
 	public List<Ordinazione> selezionaOrdinazioniGionalierePerTavolo(Tavolo tavolo, Boolean terminato) {
 		try {
-			System.out.println("SEI INNNNNNNNNNNNN ORDINESESSION selezionaOrdinazioniGionalierePerTavolo");
 			Query q = session.createQuery("from it.softfood.entity.Ordinazione o where o.tavolo = ? and o.terminato = ?");
 			q.setLong(0, tavolo.getId());
 			q.setBoolean(1, terminato);
