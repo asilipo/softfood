@@ -58,9 +58,14 @@ public class ToolTipCellRender extends DefaultTableCellRenderer {
 
         String tool = "";
         if (varianti != null) {
-            for (Variante var : varianti)
-                tool = tool + var.getTipoVariazione().toString() + " " + var.getIngrediente().getNome() + " ";
-            
+            for (Variante var : varianti){
+            	String variation=null;
+            	if(var.getTipoVariazione()==0)
+            		variation="+";
+            	else
+            		variation="-";
+                tool = tool + variation + " " + var.getIngrediente().getNome() + " ";
+            }
             this.setBackground(Color.LIGHT_GRAY);
             this.setForeground(Color.BLACK);
             this.setToolTipText(tool);
