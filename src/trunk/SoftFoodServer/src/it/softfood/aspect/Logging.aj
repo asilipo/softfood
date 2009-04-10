@@ -37,12 +37,11 @@ public aspect Logging {
 	    
 	}
 
-	pointcut traceMethods() : 	
-		execution(* it.softfood.session.*.*(..)) && !execution(it.softfood.session.*.new(..));
 	
-	pointcut traceLogin() : 	execution(* itsoftfood.session.*.*(..));
+	
+	pointcut traceLogin(): 	execution(* itsoftfood.session.*.*(..));
 
-	before() : traceLogin() {
+	before(): traceLogin() {
 		if (_logger.isEnabledFor(Level.INFO)) {
 		    Signature sig = thisJoinPointStaticPart.getSignature();
 		    _logger.log(Level.INFO,"Execution ["+ sig.getDeclaringType().getName() 
@@ -51,7 +50,9 @@ public aspect Logging {
 		}
 	  }
 	
-	before() : traceMethods() {
+	pointcut traceMethods(): execution(* it.softfood.session.*.*(..)) && !execution(it.softfood.session.*.new(..));
+	
+	before(): traceMethods() {
 		if (_logger.isEnabledFor(Level.INFO)) {
 		    Signature sig = thisJoinPointStaticPart.getSignature();
 		    _logger.log(Level.INFO,"Execution ["+ sig.getDeclaringType().getName() 
