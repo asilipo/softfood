@@ -289,7 +289,7 @@ public class OrdinazioneFacade {
             if (articolo.getTipoArticolo().equals("Bevanda") && tipoPietanza.equals(TipoPietanza.BEVANDA))
                 lineeOrdinazioneArticoli.add(lineaOrdinazione);
             if (articolo.getTipoArticolo().equals("Pietanza"))
-    //            if (((Pietanza)articolo).getTipo().equals(tipoPietanza))
+                if (articolo.getTipoPietanza()==(tipoPietanza.ordinal()))
                     lineeOrdinazioneArticoli.add(lineaOrdinazione);
         }
 
