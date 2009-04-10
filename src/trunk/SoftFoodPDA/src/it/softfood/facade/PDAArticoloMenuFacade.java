@@ -19,7 +19,6 @@ import java.util.ArrayList;
 public class PDAArticoloMenuFacade {
 
 	public ArrayList<Pietanza> selezionaPietanzeDisponibiliPerTipo(User role,TipoPietanza tipo_pietanza) {
-		System.out.println("PDAArticoloMenuFacade#selezionaPietanzeDisponibiliPerTipo " + tipo_pietanza);
 		ArticoloMenuFacade articolo = ArticoloMenuFacade.getInstance();
 
 		ArrayList<Pietanza> pietanze = (ArrayList<Pietanza>) articolo.selezionaPietanzeDisponibiliPerTipo(role,tipo_pietanza);

@@ -46,8 +46,7 @@ public class PDAOrdinazioneFacade {
 		return ord;
 	}
 
-	public ArrayList<LineaOrdinazione> selezionaLineeOrdinazionePerOrdinazione(User role,
-			Ordinazione selezionaOrdinazionePerId) {
+	public ArrayList<LineaOrdinazione> selezionaLineeOrdinazionePerOrdinazione(User role, Ordinazione selezionaOrdinazionePerId) {
 		OrdinazioneFacade ordineFacade=OrdinazioneFacade.getInstance();
 		ArrayList<LineaOrdinazione> ord = null;
 		try {
@@ -59,7 +58,7 @@ public class PDAOrdinazioneFacade {
 		return ord;
 	}
 
-	public void rimuoviOrdinazione(User role,Long tavolo, Boolean b) {
+	public void rimuoviOrdinazione(User role, Long tavolo, Boolean b) {
 		OrdinazioneFacade ordineFacade=OrdinazioneFacade.getInstance();
 		boolean result = false;
 		try {
@@ -123,8 +122,8 @@ public class PDAOrdinazioneFacade {
 	}
 
 	public ArrayList<Ingrediente> selezionaIngredientiPerVariante(User role) {
-		OrdinazioneFacade ordineFacade=OrdinazioneFacade.getInstance();
-		ArrayList<Ingrediente> ingrediente=null;
+		OrdinazioneFacade ordineFacade = OrdinazioneFacade.getInstance();
+		ArrayList<Ingrediente> ingrediente = null;
 	
 		try {
 			ingrediente = ordineFacade.selezionaIngredientiPerVariante(role);
