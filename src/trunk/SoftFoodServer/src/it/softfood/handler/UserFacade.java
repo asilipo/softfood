@@ -53,7 +53,8 @@ public class UserFacade {
 	}
 	
 	public User login(String username,String password){
-		User u=LoginHandler.getInstance().login(username, password);
+		LoginHandler l = LoginHandler.getInstance();
+		User u = l.login(username, password);
 		return u;
 	}
 	

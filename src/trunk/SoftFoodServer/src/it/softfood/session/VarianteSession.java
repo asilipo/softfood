@@ -84,9 +84,10 @@ public class VarianteSession  {
 	public List<Variante> selezionaVariantiPerLineaOrdinazione(LineaOrdinazione lineaOrdinazione) {
 		try {
 			Query q = session.createQuery("from it.softfood.entity.Variante v where v.lineaOrdinazione = ?");
-			q.setLong(0, lineaOrdinazione.getId());
+			System.out.println("Query" + q);
+			q.setLong(0, lineaOrdinazione.getId());			
 			List<Variante> list = (List<Variante>) q.list();
-			
+			System.out.println("dimensione lista variante" + list.size());
 			return list;
 		} catch (Exception e) {
 			System.err.println("VarianteSession#selezionaVariantiPerLineaOrdinazione");
