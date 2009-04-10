@@ -110,7 +110,6 @@ public class UserSession {
 		session.update(u);
 	}
 
-
 	public User selezionaUtente(String username, String password) {
 		User result;
 		String str = " from it.softfood.entity.User t where t.userName = ? AND t.password = ? ";
@@ -120,4 +119,5 @@ public class UserSession {
 		result = (User) q.uniqueResult();
 		return result;
 	}
+	
 }
