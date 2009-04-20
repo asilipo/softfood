@@ -2,6 +2,7 @@ package it.softfood;
 
 import it.softfood.entity.Bevanda;
 import it.softfood.entity.Ordinazione;
+import it.softfood.entity.Ristorante;
 import it.softfood.entity.Tavolo;
 import it.softfood.entity.User;
 import it.softfood.handler.ArticoloMenuFacade;
@@ -15,6 +16,8 @@ import it.softfood.handler.RistoranteFacade;
 import it.softfood.handler.TavoloFacade;
 import it.softfood.handler.UserFacade;
 import it.softfood.login.LoginHandler;
+import it.softfood.session.OrdinazioneSession;
+import it.softfood.session.RistoranteSession;
 
 import java.util.ArrayList;
 
@@ -117,10 +120,25 @@ public class Start {
 //		System.out.println("Bevande "+ bevande.size());
 //		Ordinazione o=ord.selezionaOrdinazionePerId(user1, new Long(0));
 //		ord.rimuoviOrdinazione(user1, o.getId(), true);
+		
+		RistoranteSession ristorante= RistoranteSession.getInstance();
+		Ristorante risto = ristorante.selezionaRistorantePerRagioneSociale("La taverna");
+		Tavolo t=new Tavolo();
+		t.setRistorante(risto);
+		t.setRiferimento("NUOVO TAVOLO");
+		t.setId(new Long(1));
+		t.setNumeroPosti(4);
+		t.setOccupato(true);
+		t.setAttivo(true);
+		OrdinazioneSession o = new OrdinazioneSession();
+		o.selezionaOrdinazioniGionalierePerTavolo(t, false);
+		
+		
 	}
 	
 
 }
+
 
 
 

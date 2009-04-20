@@ -14,7 +14,7 @@
         <property name="coperti" type="int">
             <column name="coperti" not-null="true" />
         </property>
-        <property name="data" type="date">
+        <property name="data" type="timestamp">
             <column name="data" length="13" not-null="true" />
         </property>
         <property name="sconto" type="java.lang.Double">
