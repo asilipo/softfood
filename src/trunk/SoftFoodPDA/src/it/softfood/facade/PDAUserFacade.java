@@ -13,6 +13,7 @@ public class PDAUserFacade {
 	}
 	
 	public void logout(User u){
+		System.out.println(u);
 		UserFacade role=UserFacade.getInstance();
 		role.logout(u);
 	}
