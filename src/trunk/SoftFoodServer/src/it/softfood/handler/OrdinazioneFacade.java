@@ -21,7 +21,9 @@ import it.softfood.session.OrdinazioneSession;
 import it.softfood.session.TavoloSession;
 import it.softfood.session.VarianteSession;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.StringTokenizer;
 
@@ -65,24 +67,21 @@ public class OrdinazioneFacade {
                         while(st.hasMoreTokens()) {
                             String temp = st.nextToken();
                             Tavolo tavoloDaAttivare = tavoloSession.selezionaTavoloPerRiferimento(temp, false);
-//                            tavoloDaAttivare = em.merge(tavoloDaAttivare);
                             tavoloDaAttivare.setAttivo(true);
                             tavoloSession.update(tavoloDaAttivare);
-//                            tavoloDaAttivare.flush();
                         }
                         tavoloSession.rimuoviTavolo(tavolo.getId());
                     } else {
                         tavoloSession.modificaStatoTavolo(tavolo, false);
                     }
                 } catch (Exception e) {
-//                    ejbContext.setRollbackOnly();
                 	System.out.println("OrdinazioneFacade#inserisciOrdinazione " + e);
                 }
 
                 return null;
             }
 
-            try {
+            try {    		    
                 ordinazione.setData(new Date(System.currentTimeMillis()));
                 ordinazione.setSconto(0d);
                 ordinazione.setTotale(0d);
