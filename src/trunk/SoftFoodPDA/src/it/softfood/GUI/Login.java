@@ -266,7 +266,7 @@ public class Login extends javax.swing.JPanel {
 	// TODO add your handling code here:
 		User u = null;
 		try {
-			u = userFacade.login("mary", text.getText());
+			u = userFacade.login("cameriere", text.getText());
 			if (u == null)
 				throw new Exception();
 			this.setVisible(false);
