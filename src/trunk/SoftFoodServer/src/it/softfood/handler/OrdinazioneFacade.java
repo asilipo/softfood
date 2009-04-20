@@ -150,8 +150,8 @@ public class OrdinazioneFacade {
 		return null;
 	}
 	
-	public ArrayList<Ordinazione> selezionaOrdinazioniGiornalierePerTavolo(User role, Tavolo tavolo) {
-		if (tavolo != null) 
+	public ArrayList<Ordinazione> selezionaOrdinazioniGiornalierePerTavolo(User role, Tavolo tavolo, Boolean terminato) {
+		if (tavolo != null && terminato != null) 
 			return (ArrayList<Ordinazione>) ordinazioneSession.selezionaOrdinazioniGionalierePerTavolo(tavolo, terminato);
 		
 		return null;
