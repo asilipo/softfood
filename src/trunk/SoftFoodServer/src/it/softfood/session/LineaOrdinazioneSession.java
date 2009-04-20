@@ -76,6 +76,20 @@ public class LineaOrdinazioneSession {
 		}
 	}
 	
+	public List<LineaOrdinazione> selezionaLineeOrdinazioneEvasePerOrdinazione(Ordinazione ordinazione, Boolean evase) {
+		try {
+			Query q = session.createQuery("from it.softfood.entity.LineaOrdinazione l where l.ordinazione = ? and l.evaso = ?");
+			q.setLong(0, ordinazione.getId());
+			q.setBoolean(1, evase);
+			List<LineaOrdinazione> list = (List<LineaOrdinazione>) q.list();
+			
+			return list;
+		} catch (Exception e) {
+			System.err.println("LineaOrdinazioneSession#selezionaLineeOrdinazionePerOrdinazione");
+			return null;
+		}
+	}
+	
     public boolean rimuoviLineaOrdinazione(Long id) {
 		try {
 			LineaOrdinazione lineaOrdinazione = this.selezionaLineaOrdinazionePerId(id);

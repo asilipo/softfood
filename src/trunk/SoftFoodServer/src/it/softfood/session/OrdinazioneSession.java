@@ -3,11 +3,18 @@ package it.softfood.session;
 import it.softfood.entity.Ordinazione;
 import it.softfood.entity.Tavolo;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import javax.print.attribute.standard.DateTimeAtCompleted;
+
+import org.apache.tools.ant.util.DateUtils;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.type.DateType;
 
 /**
  * @author Maria Rosaria Paone
@@ -40,7 +47,7 @@ public class OrdinazioneSession {
 	}
 	
 	public Ordinazione inserisciOrdinazione(Ordinazione ordinazione) {
-		try {
+		try {		    
 			Long id = this.getNewId();
 			ordinazione.setId(id);
 			session.persist(ordinazione);
@@ -87,12 +94,27 @@ public class OrdinazioneSession {
 
 	public List<Ordinazione> selezionaOrdinazioniGionalierePerTavolo(Tavolo tavolo, Boolean terminato) {
 		try {
-			Query q = session.createQuery("from it.softfood.entity.Ordinazione o where o.tavolo = ? and o.terminato = ?");
+		    Date date = new Date(System.currentTimeMillis()); 
+		    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		    String a = sdf.format(date);
+		    date = sdf.parse(a);
+
+			Query q = session.createQuery("from it.softfood.entity.Ordinazione o where o.tavolo = ? and o.terminato = ? order by o.data");
 			q.setLong(0, tavolo.getId());
 			q.setBoolean(1, terminato);
 			List<Ordinazione> list = (List<Ordinazione>) q.list();
-			return list;
+			List<Ordinazione> list1 = new ArrayList<Ordinazione>();
+			
+			for (Ordinazione ordinazione : list) {
+				if (ordinazione.getData().after(date)) {
+					list1.add(ordinazione);
+					System.out.println(ordinazione.getData());
+				}
+			}
+			
+			return list1;
 		} catch (Exception e) {
+			e.printStackTrace();
 			System.err.println("OrdinazioneSession#selezionaOrdinazioniGionalierePerTavolo");
 			return null;
 		}

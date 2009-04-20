@@ -17,6 +17,7 @@ public class LineaOrdinazione implements java.io.Serializable {
 	private Ordinazione ordinazione;
 	private Articolo articolo;
 	private int quantita;
+	private Boolean evaso;
 	private Set<Variante> variantes = new HashSet<Variante>(0);
 
 	public LineaOrdinazione() {
@@ -38,12 +39,20 @@ public class LineaOrdinazione implements java.io.Serializable {
 		this.variantes = variantes;
 	}
 
-	public long getId() {
-		return this.id;
+	public Boolean getEvaso() {
+		return evaso;
 	}
 
-	public void setId(long id) {
+	public void setEvaso(Boolean evaso) {
+		this.evaso = evaso;
+	}
+
+	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public long getId() {
+		return this.id;
 	}
 	
 	public Ordinazione getOrdinazione() {
