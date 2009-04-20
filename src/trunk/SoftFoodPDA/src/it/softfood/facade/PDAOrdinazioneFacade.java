@@ -108,8 +108,7 @@ public class PDAOrdinazioneFacade {
 		return ord;
 	}
 
-	public ArrayList<Variante> selezionaVariantiPerLineaOrdinazione(User role,
-			LineaOrdinazione lineaOrdinazione) {
+	public ArrayList<Variante> selezionaVariantiPerLineaOrdinazione(User role, LineaOrdinazione lineaOrdinazione) {
 		OrdinazioneFacade ordineFacade=OrdinazioneFacade.getInstance();
 		ArrayList<Variante> linee=null;
 	
@@ -159,8 +158,8 @@ public class PDAOrdinazioneFacade {
 
 	public void inserisciVariante(User role,Variante variante) {
 		OrdinazioneFacade ordineFacade=OrdinazioneFacade.getInstance();
-		Variante v=ordineFacade.inserisciVariante(role,variante);
-		if(v==null){
+		Variante v = ordineFacade.inserisciVariante(role,variante);
+		if(v == null){
 			new Exception();
 		}
 		

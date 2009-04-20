@@ -26,7 +26,7 @@ import org.jdesktop.application.FrameView;
 public class Tavoli extends javax.swing.JPanel {
 
 	private PDATavoloFacade tavoloFacade;
-   private PDAOrdinazioneFacade ordinazioneFacade;
+    private PDAOrdinazioneFacade ordinazioneFacade;
     private ArrayList<Tavolo> tavoli;
     private String[] listaTavoli;
     private int numeroPosti = 0;
@@ -213,7 +213,7 @@ public class Tavoli extends javax.swing.JPanel {
             ordine.setTerminato(false);
 
             try {
-                ordine = ordinazioneFacade.inserisciOrdinazione(role,ordine);
+                ordine = ordinazioneFacade.inserisciOrdinazione(role, ordine);
             } catch (NullPointerException e) {
                 this.setVisible(false);
                 Tavoli pannello_tavoli = new Tavoli(role,frame, vuoti);
