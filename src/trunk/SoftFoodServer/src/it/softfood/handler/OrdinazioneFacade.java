@@ -143,15 +143,15 @@ public class OrdinazioneFacade {
 		return (ArrayList<Ordinazione>) ordinazioneSession.selezionaOrdinazioni();
 	}
 	
-	public ArrayList<Ordinazione> selezionaOrdinazioniPerData(User role,Date data) {
+	public ArrayList<Ordinazione> selezionaOrdinazioniPerData(User role, Date data) {
 		if (data != null) 
 			return (ArrayList<Ordinazione>) ordinazioneSession.selezionaOrdinazioniPerData(data);
 		
 		return null;
 	}
 	
-	public ArrayList<Ordinazione> selezionaOrdinazioniGiornalierePerTavolo(User role,Tavolo tavolo, Boolean terminato) {
-		if (tavolo != null && terminato != null) 
+	public ArrayList<Ordinazione> selezionaOrdinazioniGiornalierePerTavolo(User role, Tavolo tavolo) {
+		if (tavolo != null) 
 			return (ArrayList<Ordinazione>) ordinazioneSession.selezionaOrdinazioniGionalierePerTavolo(tavolo, terminato);
 		
 		return null;
