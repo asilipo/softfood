@@ -76,8 +76,12 @@ public class LoginHandler {
 
 	public boolean logout(User user) {
 		try {
-			LoginContext lc = (LoginContext) subjectTable.remove(user);
+			User u=check(user);
+			System.out.println(subjectTable);
+			LoginContext lc = (LoginContext) subjectTable.remove(u);
+			System.out.println(lc);
 			lc.logout();
+
 			return true;
 		} catch (Exception e) {
 			System.err.println("Error in logout operation");
@@ -85,6 +89,20 @@ public class LoginHandler {
 			return false;
 		}
 
+	}
+
+	private User check(User user) {
+		// TODO Auto-generated method stub
+		String user_name=user.getUserName();
+		String pass=user.getPassword();
+		Enumeration e = subjectTable.keys();
+		User u;
+		while (e.hasMoreElements()) {
+			u = (User) e.nextElement();
+			if (u.getUserName().equals(user_name) && u.getPassword().equals(pass))
+				return u;
+		}
+		return null;
 	}
 
 	/**
