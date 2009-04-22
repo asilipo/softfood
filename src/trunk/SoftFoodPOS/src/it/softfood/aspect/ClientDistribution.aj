@@ -6,6 +6,8 @@ import it.softfood.handler.IRistoranteFacade;
 import it.softfood.handler.ITavoloFacade;
 import it.softfood.handler.IUserFacade;
 
+import it.softfood.entity.User;
+
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 

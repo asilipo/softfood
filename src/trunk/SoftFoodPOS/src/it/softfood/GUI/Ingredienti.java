@@ -6,6 +6,15 @@
 
 package it.softfood.GUI;
 
+import java.util.ArrayList;
+
+import it.softfood.entity.Ingrediente;
+import it.softfood.entity.LineaOrdinazione;
+import it.softfood.entity.User;
+import it.softfood.entity.Variante;
+import it.softfood.facade.POSArticoloMenuFacade;
+import it.softfood.facade.POSOrdinazioneFacade;
+
 /**
  *
  * @author  marcograsso
@@ -13,10 +22,48 @@ package it.softfood.GUI;
 public class Ingredienti extends javax.swing.JPanel {
 
     private MainView frame;
+    private Long id;
+    private POSArticoloMenuFacade articoloFacade;
+    private POSOrdinazioneFacade ordiniFacade;
+    private User u;
+    
     /** Creates new form Ingredienti */
-    public Ingredienti(MainView frame) {
+    public Ingredienti(MainView frame, Long id) {
+    	this.id=id;
         this.frame=frame;
         initComponents();
+        
+        u=frame.getUser();
+        
+        articoloFacade=new POSArticoloMenuFacade();
+        ordiniFacade=new POSOrdinazioneFacade();
+        
+        LineaOrdinazione linea=ordiniFacade.getLinea(u, id);
+        System.out.println("LINEA"+linea);
+        
+        String ingredienti[]=null;
+        
+        ArrayList<Ingrediente> ingr=articoloFacade.selezionaIngredienti(u, linea.getArticolo().getId());
+        
+        ArrayList<Variante> var=ordiniFacade.getVariante(u, linea);
+        
+        String data[]=new String[ingr.size()+var.size()+3];
+        
+        int i=0;
+        
+        for(Ingrediente ingrediente : ingr)
+        	data[i++]=ingrediente.getNome();
+        
+        data[i++]="-----------------------------------------";
+        data[i++]="-                VARIANTI               -";
+        data[i++]="-----------------------------------------";
+        
+        for(Variante variante : var)
+        	data[i++]=variante.getIngrediente().getNome();
+        
+        jList1.setListData(data);
+        
+        
     }
 
     /** This method is called from within the constructor to
@@ -49,7 +96,7 @@ public class Ingredienti extends javax.swing.JPanel {
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(it.softfood.GUI.Main.class).getContext().getResourceMap(Ingredienti.class);
         jList1.setFont(resourceMap.getFont("jList1.font")); // NOI18N
         jList1.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "PASTA", "SUGO" };
+            String[] strings = { };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });

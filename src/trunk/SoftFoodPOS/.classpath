@@ -4,7 +4,7 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.ajdt.core.ASPECTJRT_CONTAINER"/>
 	<classpathentry kind="lib" path="/Users/marcograsso/Desktop/trunk/SoftFood/build/swing-worker-1.1.jar"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/SoftFoodServer"/>
 	<classpathentry kind="lib" path="/Users/marcograsso/Desktop/trunk/SoftFood/build/appframework-1.0.3.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/SoftFoodServer"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
