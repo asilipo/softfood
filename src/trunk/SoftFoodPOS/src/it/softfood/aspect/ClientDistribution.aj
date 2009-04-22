@@ -40,7 +40,7 @@ public aspect ClientDistribution {
 		}
 	}
 
-	pointcut distributeRistoranteFacadeCalls(): execution(* it.softfood.facade.POSRistoranteFacade.*(..)) && !execution(it.softfood.facade.PDARistoranteFacade.new(..));
+	pointcut distributeRistoranteFacadeCalls(): execution(* it.softfood.facade.POSRistoranteFacade.*(..)) && !execution(it.softfood.facade.POSRistoranteFacade.new(..));
 
 	Object around(): distributeRistoranteFacadeCalls()  {
 		Object obj = null;
@@ -49,7 +49,7 @@ public aspect ClientDistribution {
 		return obj;
 	}
 	
-	pointcut distributeTavoloFacadeCalls(): execution(* it.softfood.facade.POSTavoloFacade.*(..)) && !execution(it.softfood.facade.PDATavoloFacade.new(..));
+	pointcut distributeTavoloFacadeCalls(): execution(* it.softfood.facade.POSTavoloFacade.*(..)) && !execution(it.softfood.facade.POSTavoloFacade.new(..));
 
 	Object around(): distributeTavoloFacadeCalls()  {
 		Object obj = null;
@@ -58,7 +58,7 @@ public aspect ClientDistribution {
 		return obj;
 	}
 	
-	pointcut distributeOrdinazioneFacadeCalls(): execution(* it.softfood.facade.POSOrdinazioneFacade.*(..)) && !execution(it.softfood.facade.PDAOrdinazioneFacade.new(..));
+	pointcut distributeOrdinazioneFacadeCalls(): execution(* it.softfood.facade.POSOrdinazioneFacade.*(..)) && !execution(it.softfood.facade.POSOrdinazioneFacade.new(..));
 
 	Object around(): distributeOrdinazioneFacadeCalls()  {
 		Object obj = null;
@@ -68,7 +68,7 @@ public aspect ClientDistribution {
 		return obj;
 	}
 	
-	pointcut distributeArticoloFacadeCalls(): execution(* it.softfood.facade.POSArticoloMenuFacade.*(..)) && !execution(it.softfood.facade.PDAArticoloMenu.new(..));
+	pointcut distributeArticoloFacadeCalls(): execution(* it.softfood.facade.POSArticoloMenuFacade.*(..)) && !execution(it.softfood.facade.POSArticoloMenu.new(..));
 
 	Object around(): distributeArticoloFacadeCalls()  {
 		Object obj = null;
@@ -78,7 +78,7 @@ public aspect ClientDistribution {
 		return obj;
 	}
 	
-	pointcut distributeUserFacadeCalls(): execution(* it.softfood.facade.POSUserFacade.*(..)) && !execution(it.softfood.facade.PDAUserFacade.new(..));
+	pointcut distributeUserFacadeCalls(): execution(* it.softfood.facade.POSUserFacade.*(..)) && !execution(it.softfood.facade.POSUserFacade.new(..));
 
 	Object around(): distributeUserFacadeCalls()  {
 		Object obj = null;
