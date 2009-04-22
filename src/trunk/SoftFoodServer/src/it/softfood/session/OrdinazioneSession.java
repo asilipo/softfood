@@ -80,19 +80,33 @@ public class OrdinazioneSession {
 		}
 	}
 	
-	public List<Ordinazione> selezionaOrdinazioniPerData(Date data) {
+	public List<Ordinazione> selezionaOrdinazioniGiornaliere() {
 		try {
-			Query q = session.createQuery("from it.softfood.entity.Ordinazioni o where data = ?");
-			q.setDate(0, data);
+		    Date date = new Date(System.currentTimeMillis()); 
+		    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		    String a = sdf.format(date);
+		    date = sdf.parse(a);
+
+			Query q = session.createQuery("from it.softfood.entity.Ordinazione o where o.terminato = true order by o.data");
 			List<Ordinazione> list = (List<Ordinazione>) q.list();
-			return list;
+			List<Ordinazione> list1 = new ArrayList<Ordinazione>();
+			
+			for (Ordinazione ordinazione : list) {
+				if (ordinazione.getData().after(date)) {
+					list1.add(ordinazione);
+					System.out.println(ordinazione.getData());
+				}
+			}
+			
+			return list1;
 		} catch (Exception e) {
-			System.err.println("OrdinazioneSession#selezionaOrdinazioniPerData");
+			e.printStackTrace();
+			System.err.println("OrdinazioneSession#selezionaOrdinazioniGiornaliere");
 			return null;
 		}
 	}
 
-	public List<Ordinazione> selezionaOrdinazioniGionalieraPerTavolo(Tavolo tavolo, Boolean terminato) {
+	public List<Ordinazione> selezionaOrdinazioniGionalierePerTavolo(Tavolo tavolo, Boolean terminato) {
 		try {
 		    Date date = new Date(System.currentTimeMillis()); 
 		    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
