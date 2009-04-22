@@ -143,7 +143,7 @@ public class OrdinazioneFacade {
 		return (ArrayList<Ordinazione>) ordinazioneSession.selezionaOrdinazioni();
 	}
 	
-	public ArrayList<Ordinazione> selezionaOrdinazioniPerData(User role, Date data) {
+	public ArrayList<Ordinazione> selezionaOrdinazioniGiornaliere(User role) {
 		if (data != null) 
 			return (ArrayList<Ordinazione>) ordinazioneSession.selezionaOrdinazioniPerData(data);
 		
