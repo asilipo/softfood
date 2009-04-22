@@ -21,6 +21,7 @@ import it.softfood.session.OrdinazioneSession;
 import it.softfood.session.TavoloSession;
 import it.softfood.session.VarianteSession;
 
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -82,7 +83,7 @@ public class OrdinazioneFacade {
             }
 
             try {    		    
-                ordinazione.setData(new Date(System.currentTimeMillis()));
+                ordinazione.setData(new Timestamp(System.currentTimeMillis()));
                 ordinazione.setSconto(0d);
                 ordinazione.setTotale(0d);
                 ordinazione.setTerminato(false);
