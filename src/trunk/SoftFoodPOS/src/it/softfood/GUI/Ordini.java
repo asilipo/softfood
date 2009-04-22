@@ -31,7 +31,7 @@ public class Ordini extends javax.swing.JPanel {
         u=frame.getUser();
         ordinazioniFacade=new POSOrdinazioneFacade();
         
-        ArrayList<LineaOrdinazione> ordini=ordinazioniFacade.selezionaOrdinazionePerData(u);
+        ArrayList<LineaOrdinazione> ordini=ordinazioniFacade.selezionaOrdinazioniGiornaliere(u);
         String[] strings = new String[ordini.size()];
         int i=0;
         for(LineaOrdinazione lin : ordini){
