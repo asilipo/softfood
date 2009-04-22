@@ -6,17 +6,40 @@
 
 package it.softfood.GUI;
 
+import java.util.ArrayList;
+
+import it.softfood.entity.LineaOrdinazione;
+import it.softfood.entity.Ordinazione;
+import it.softfood.entity.User;
+import it.softfood.facade.POSOrdinazioneFacade;
+
 /**
  *
  * @author  marcograsso
  */
 public class Ordini extends javax.swing.JPanel {
 
+	private User u;
+	private POSOrdinazioneFacade ordinazioniFacade;
+	
     private MainView frame;
     /** Creates new form Ordini */
     public Ordini(MainView frame) {
         this.frame=frame;
         initComponents();
+        
+        u=frame.getUser();
+        ordinazioniFacade=new POSOrdinazioneFacade();
+        
+        ArrayList<LineaOrdinazione> ordini=ordinazioniFacade.selezionaOrdinazionePerData(u);
+        String[] strings = new String[ordini.size()];
+        int i=0;
+        for(LineaOrdinazione lin : ordini){
+        	strings[i++]=lin.getArticolo().getNome();
+        }
+        
+        jList1.setListData(strings);
+        
     }
 
     /** This method is called from within the constructor to
@@ -42,7 +65,7 @@ public class Ordini extends javax.swing.JPanel {
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(it.softfood.GUI.Main.class).getContext().getResourceMap(Ordini.class);
         jList1.setFont(resourceMap.getFont("jList1.font")); // NOI18N
         jList1.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "LASAGNE ALLA BOLOGNESE" };
+            String[] strings = { };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
