@@ -92,7 +92,7 @@ public class OrdinazioneSession {
 		}
 	}
 
-	public List<Ordinazione> selezionaOrdinazioniGionalierePerTavolo(Tavolo tavolo, Boolean terminato) {
+	public List<Ordinazione> selezionaOrdinazioniGionalieraPerTavolo(Tavolo tavolo, Boolean terminato) {
 		try {
 		    Date date = new Date(System.currentTimeMillis()); 
 		    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");

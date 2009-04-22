@@ -1,10 +1,14 @@
 package it.softfood;
 
 import it.softfood.entity.Bevanda;
+import it.softfood.entity.IngredientePietanza;
+import it.softfood.entity.Listino;
 import it.softfood.entity.Ordinazione;
+import it.softfood.entity.Pietanza;
 import it.softfood.entity.Ristorante;
 import it.softfood.entity.Tavolo;
 import it.softfood.entity.User;
+import it.softfood.enumeration.TipoPietanza;
 import it.softfood.handler.ArticoloMenuFacade;
 import it.softfood.handler.IArticoloMenuFacade;
 import it.softfood.handler.IOrdinazioneFacade;
@@ -16,7 +20,10 @@ import it.softfood.handler.RistoranteFacade;
 import it.softfood.handler.TavoloFacade;
 import it.softfood.handler.UserFacade;
 import it.softfood.login.LoginHandler;
+import it.softfood.session.IngredientePietanzaSession;
+import it.softfood.session.ListinoSession;
 import it.softfood.session.OrdinazioneSession;
+import it.softfood.session.PietanzaSession;
 import it.softfood.session.RistoranteSession;
 
 import java.util.ArrayList;
@@ -120,18 +127,23 @@ public class Start {
 //		System.out.println("Bevande "+ bevande.size());
 //		Ordinazione o=ord.selezionaOrdinazionePerId(user1, new Long(0));
 //		ord.rimuoviOrdinazione(user1, o.getId(), true);
+		ListinoSession ls = ListinoSession.getInstance();
+		Listino listino = ls.selezionaListinoPerId(0L);
 		
-		RistoranteSession ristorante= RistoranteSession.getInstance();
-		Ristorante risto = ristorante.selezionaRistorantePerRagioneSociale("La taverna");
-		Tavolo t=new Tavolo();
-		t.setRistorante(risto);
-		t.setRiferimento("NUOVO TAVOLO");
-		t.setId(new Long(1));
-		t.setNumeroPosti(4);
-		t.setOccupato(true);
-		t.setAttivo(true);
-		OrdinazioneSession o = new OrdinazioneSession();
-		o.selezionaOrdinazioniGionalierePerTavolo(t, false);
+		IngredientePietanzaSession ips = IngredientePietanzaSession.getInstance();
+		ArrayList<IngredientePietanza> ip = new ArrayList<IngredientePietanza>();
+		
+		PietanzaSession ps = PietanzaSession.getInstance();
+		Pietanza p = new Pietanza();
+		p.setDescrizione("test_descrizione");
+		p.setId(1000L);
+		p.setIngredientePietanzas(ingredientePietanzas);
+		p.setListino(listino);
+		p.setNome("test_nome");
+		p.setTipo(TipoPietanza.ANTIPASTI);
+		p.setTipoArticolo(TipoPietanza.ANTIPASTI.toString());
+		p.setTipoPietanza(TipoPietanza.ANTIPASTI.ordinal());
+		ps.inserisciPietanza(p);
 		
 		
 	}
