@@ -27,6 +27,7 @@ import it.softfood.session.PietanzaSession;
 import it.softfood.session.RistoranteSession;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public class Start {
 
@@ -131,13 +132,17 @@ public class Start {
 		Listino listino = ls.selezionaListinoPerId(0L);
 		
 		IngredientePietanzaSession ips = IngredientePietanzaSession.getInstance();
-		ArrayList<IngredientePietanza> ip = new ArrayList<IngredientePietanza>();
+		IngredientePietanza ip1 = ips.selezionaIngredientePietanzaPerId(1L);
+		IngredientePietanza ip2 = ips.selezionaIngredientePietanzaPerId(2L);
+		HashSet<IngredientePietanza> ip = new HashSet<IngredientePietanza>();
+		ip.add(ip1);
+		ip.add(ip2);
 		
 		PietanzaSession ps = PietanzaSession.getInstance();
 		Pietanza p = new Pietanza();
 		p.setDescrizione("test_descrizione");
 		p.setId(1000L);
-		p.setIngredientePietanzas(ingredientePietanzas);
+		p.setIngredientePietanzas(ip);
 		p.setListino(listino);
 		p.setNome("test_nome");
 		p.setTipo(TipoPietanza.ANTIPASTI);
