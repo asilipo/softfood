@@ -1,11 +1,8 @@
 package it.softfood.facade;
 
-import it.softfood.entity.Ingrediente;
 import it.softfood.entity.LineaOrdinazione;
 import it.softfood.entity.Ordinazione;
 import it.softfood.entity.User;
-import it.softfood.entity.Variante;
-import it.softfood.enumeration.TipoPietanza;
 import it.softfood.handler.OrdinazioneFacade;
 
 import java.text.ParseException;
