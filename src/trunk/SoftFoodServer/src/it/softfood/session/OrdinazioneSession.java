@@ -71,11 +71,12 @@ public class OrdinazioneSession {
 
 	public List<Ordinazione> selezionaOrdinazioni() {    
 		try {
-			Query q = session.createQuery("from it.softfood.entity.Ordinazioni o");
+			Query q = session.createQuery("from it.softfood.entity.Ordinazione o");
 			List<Ordinazione> list = (List<Ordinazione>) q.list();
 			return list;
 		} catch (Exception e) {
 			System.err.println("OrdinazioneSession#selezionaOrdinazioni");
+			e.printStackTrace();
 			return null;
 		}
 	}
@@ -87,7 +88,7 @@ public class OrdinazioneSession {
 		    String a = sdf.format(date);
 		    date = sdf.parse(a);
 
-			Query q = session.createQuery("from it.softfood.entity.Ordinazione o where o.terminato = true order by o.data");
+			Query q = session.createQuery("from it.softfood.entity.Ordinazione o where o.terminato = false order by o.data");
 			List<Ordinazione> list = (List<Ordinazione>) q.list();
 			List<Ordinazione> list1 = new ArrayList<Ordinazione>();
 			
