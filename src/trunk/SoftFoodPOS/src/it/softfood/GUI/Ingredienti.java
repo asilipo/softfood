@@ -12,6 +12,7 @@ import it.softfood.entity.Ingrediente;
 import it.softfood.entity.LineaOrdinazione;
 import it.softfood.entity.User;
 import it.softfood.entity.Variante;
+import it.softfood.enumeration.TipoVariante;
 import it.softfood.facade.POSArticoloMenuFacade;
 import it.softfood.facade.POSOrdinazioneFacade;
 
@@ -26,6 +27,7 @@ public class Ingredienti extends javax.swing.JPanel {
     private POSArticoloMenuFacade articoloFacade;
     private POSOrdinazioneFacade ordiniFacade;
     private User u;
+    private LineaOrdinazione linea;
     
     /** Creates new form Ingredienti */
     public Ingredienti(MainView frame, Long id) {
@@ -38,28 +40,47 @@ public class Ingredienti extends javax.swing.JPanel {
         articoloFacade=new POSArticoloMenuFacade();
         ordiniFacade=new POSOrdinazioneFacade();
         
-        LineaOrdinazione linea=ordiniFacade.getLinea(u, id);
-        System.out.println("LINEA"+linea);
+        linea=ordiniFacade.selezionaLineaOrdinazionePerId(u, id);
+        System.out.println("LINEA "+linea);
         
         String ingredienti[]=null;
         
-        ArrayList<Ingrediente> ingr=articoloFacade.selezionaIngredienti(u, linea.getArticolo().getId());
+        ArrayList<Ingrediente> ingr=articoloFacade.selezionaIngredientiPietanza(u, linea.getArticolo().getId());
         
-        ArrayList<Variante> var=ordiniFacade.getVariante(u, linea);
+        ArrayList<Variante> var=ordiniFacade.selezionaVariantiPerLineaOrdinazione(u, linea);
         
-        String data[]=new String[ingr.size()+var.size()+3];
+        int ingr_size=0;
+        int var_size=0;
+        
+        try{
+        	ingr_size=ingr.size();
+        }catch(Exception e){
+        	ingr_size=0;
+        }
+        
+        try{
+        	var_size=var.size();
+        }catch(Exception e){
+        	var_size=0;
+        }
+        
+        String data[]=new String[ingr_size+var_size+6];
         
         int i=0;
         
-        for(Ingrediente ingrediente : ingr)
-        	data[i++]=ingrediente.getNome();
+        data[i++]="-----------------------------------------";
+        data[i++]="-             INGREDIENTI               -";
+        data[i++]="-----------------------------------------";
+        
+        for(int is=0;is<ingr_size;is++)
+        	data[i++]=ingr.get(is).getNome();
         
         data[i++]="-----------------------------------------";
         data[i++]="-                VARIANTI               -";
         data[i++]="-----------------------------------------";
         
-        for(Variante variante : var)
-        	data[i++]=variante.getIngrediente().getNome();
+        for(int is=0;is<var_size;is++)
+        	data[i++]=TipoVariante.values()[var.get(is).getTipoVariazione()]+" - "+var.get(is).getIngrediente().getNome();
         
         jList1.setListData(data);
         
@@ -146,6 +167,10 @@ private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 // TODO add your handling code here:
     
     //SETTARE ORDINE COME EVASO
+	linea.setEvaso(true);
+	
+	ordiniFacade.setLineaEvasa(u, linea);
+	
     frame.getActualPanel().setVisible(false);
     Ordini ordini=new Ordini(frame);
     frame.setActualPanel(ordini);

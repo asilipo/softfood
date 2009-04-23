@@ -21,16 +21,21 @@ public class POSOrdinazioneFacade {
 		return non_evasi;
 	}
 
-	public LineaOrdinazione getLinea(User role,Long id){
+	public LineaOrdinazione selezionaLineaOrdinazionePerId(User role,Long id){
 		OrdinazioneFacade ordinazionefacade=OrdinazioneFacade.getInstance();
 		LineaOrdinazione linea=ordinazionefacade.selezionaLineaOrdinazionePerId(role, id);
-		System.out.println("LINEA POS"+linea);
+		System.out.println("LINEA POS "+linea);
 		return linea;
 	}
 	
-	public ArrayList<Variante> getVariante(User role,LineaOrdinazione lin){
+	public ArrayList<Variante> selezionaVariantiPerLineaOrdinazione(User role,LineaOrdinazione lin){
 		OrdinazioneFacade ordinazionefacade=OrdinazioneFacade.getInstance();
 		ArrayList<Variante> linea=ordinazionefacade.selezionaVariantiPerLineaOrdinazione(role, lin);
 		return linea;
+	}
+	
+	public void setLineaEvasa(User role, LineaOrdinazione linea){
+		OrdinazioneFacade ordinazionefacade=OrdinazioneFacade.getInstance();
+		ordinazionefacade.setLineaEvasa(role, linea);
 	}
 }

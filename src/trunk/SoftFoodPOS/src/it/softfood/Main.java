@@ -22,9 +22,14 @@ public class Main {
 		User u=userFacade.login("cuoco", "1234");
 		
 		ArrayList<LineaOrdinazione> array=ordiniFacade.selezionaOrdinazioniGiornaliere(u);
+		
+		Long id=array.get(0).getId();
+		
+		LineaOrdinazione linea=ordiniFacade.selezionaLineaOrdinazionePerId(u, id);
 
 		System.out.println("PIPPO "+array.size());
 		System.out.println("PIPPO "+array);
+		System.out.println("LINEA "+linea);
 		
 		userFacade.logout(u);
 	}
