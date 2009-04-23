@@ -32,6 +32,11 @@ grant Principal it.softfood.entity.User "cassiere"{
 grant Principal it.softfood.entity.User "cuoco"{
     permission  it.softfood.aspect.OperationPermission "login"; 
     permission  it.softfood.aspect.OperationPermission "logout";
+    permission  it.softfood.aspect.OperationPermission "selezionaOrdinazioniGiornaliere";
+    permission  it.softfood.aspect.OperationPermission "selezionaLineaOrdinazionePerId";
+    permission  it.softfood.aspect.OperationPermission "selezionaVariantiPerLineaOrdinazione";
+    permission  it.softfood.aspect.OperationPermission "selezionaIngredientiPietanza";
+    
 };  
 
 grant Principal it.softfood.entity.User "amministratore"{
