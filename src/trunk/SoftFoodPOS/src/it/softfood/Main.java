@@ -21,7 +21,7 @@ public class Main {
 		
 		User u=userFacade.login("cuoco", "1234");
 		
-		ArrayList<LineaOrdinazione> array=ordiniFacade.selezionaOrdinazioni(u);
+		ArrayList<LineaOrdinazione> array=ordiniFacade.selezionaOrdinazioniGiornaliere(u);
 
 		System.out.println("PIPPO "+array.size());
 		System.out.println("PIPPO "+array);

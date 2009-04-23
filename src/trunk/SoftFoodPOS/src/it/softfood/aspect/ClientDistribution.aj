@@ -66,11 +66,11 @@ public aspect ClientDistribution {
 		Object obj = null;
 		obj = ExecuteMetod.invoke(ordinazionefacade, thisJoinPoint.getSignature()
 				.getName(), thisJoinPoint.getArgs());
-
+		Object[] params = thisJoinPoint.getArgs();
 		return obj;
 	}
 	
-	pointcut distributeArticoloFacadeCalls(): execution(* it.softfood.facade.POSArticoloMenuFacade.*(..)) && !execution(it.softfood.facade.POSArticoloMenu.new(..));
+	pointcut distributeArticoloFacadeCalls(): execution(* it.softfood.facade.POSArticoloMenuFacade.*(..)) && !execution(it.softfood.facade.POSArticoloMenuFacade.new(..));
 
 	Object around(): distributeArticoloFacadeCalls()  {
 		Object obj = null;
