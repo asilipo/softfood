@@ -58,5 +58,7 @@ public interface IOrdinazioneFacade  extends Remote{
 	public ArrayList<Variante> selezionaVariantiPerLineaOrdinazione(User role,LineaOrdinazione lineaOrdinazione) throws RemoteException;
 
 	public boolean rimuoviVariante(User role,Long id) throws RemoteException;
+	
+	public void setLineaEvasa(User role,LineaOrdinazione linea) throws RemoteException;
 
 }
