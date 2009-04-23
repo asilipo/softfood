@@ -23,7 +23,7 @@ public interface IOrdinazioneFacade  extends Remote{
 
 	public ArrayList<Ordinazione> selezionaOrdinazioni(User role) throws RemoteException;
 
-	public ArrayList<Ordinazione> selezionaOrdinazioniGiornaliere(User role) throws RemoteException;
+	public ArrayList<LineaOrdinazione> selezionaOrdinazioniGiornaliere(User role) throws RemoteException;
 
 	public ArrayList<Ordinazione> selezionaOrdinazioniGiornalierePerTavolo(User role, Tavolo tavolo, Boolean terminato) throws RemoteException;
 
