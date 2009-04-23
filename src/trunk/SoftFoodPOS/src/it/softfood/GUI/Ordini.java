@@ -34,6 +34,7 @@ public class Ordini extends javax.swing.JPanel {
 		ordinazioniFacade = new POSOrdinazioneFacade();
 
 		ordini = ordinazioniFacade.selezionaOrdinazioniGiornaliere(u);
+		
 		String[] strings = new String[ordini.size()];
 		int i = 0;
 		for (LineaOrdinazione lin : ordini) {
@@ -96,8 +97,9 @@ public class Ordini extends javax.swing.JPanel {
 	private void jList1MouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jList1MouseClicked
 	// TODO add your handling code here:
 		String obj = (String) jList1.getSelectedValue();
-		Long id = Long.valueOf((obj.indexOf("-") + 2));
-		System.out.println(id);
+		System.out.println(obj);
+		Long id = Long.valueOf(obj.substring(obj.indexOf("-")+2));
+		System.out.println(id.toString());
 		if (id < 0) {
 			frame.getActualPanel().setVisible(false);
 			Ordini ord = new Ordini(frame);

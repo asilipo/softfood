@@ -18,7 +18,7 @@ import java.util.ArrayList;
 
 public class POSArticoloMenuFacade {
 	
-	public ArrayList<Ingrediente> selezionaIngredienti(User role, Long id){
+	public ArrayList<Ingrediente> selezionaIngredientiPietanza(User role, Long id){
 		ArticoloMenuFacade articolo=ArticoloMenuFacade.getInstance();
 		ArrayList<Ingrediente> ingr=articolo.selezionaIngredientiPietanza(role, id);
 		return ingr;
