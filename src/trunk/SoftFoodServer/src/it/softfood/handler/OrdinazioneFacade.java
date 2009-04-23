@@ -22,10 +22,13 @@ import it.softfood.session.TavoloSession;
 import it.softfood.session.VarianteSession;
 
 import java.sql.Timestamp;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.StringTokenizer;
 
 /**
@@ -144,8 +147,41 @@ public class OrdinazioneFacade {
 		return (ArrayList<Ordinazione>) ordinazioneSession.selezionaOrdinazioni();
 	}
 	
-	public ArrayList<Ordinazione> selezionaOrdinazioniGiornaliere(User role) {
-		return (ArrayList<Ordinazione>) ordinazioneSession.selezionaOrdinazioniGiornaliere();
+	public ArrayList<LineaOrdinazione> selezionaOrdinazioniGiornaliere(User role) {
+		
+		System.out.println("ENTRO");
+		Date data=new Date(System.currentTimeMillis());
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+		String a=sdf.format(data);
+		System.out.println("INIZIALIZZO");
+		try {
+			data=sdf.parse(a);
+		} catch (ParseException e1) {
+			System.err.println("ERRORE 1");
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		System.out.println("PARSO");
+		ArrayList<Ordinazione> ord = null;
+		ArrayList<LineaOrdinazione> non_evasi = new ArrayList<LineaOrdinazione>();
+		Set<LineaOrdinazione> linea=new HashSet<LineaOrdinazione>();
+		
+		try {
+			ord = (ArrayList<Ordinazione>) ordinazioneSession.selezionaOrdinazioniGiornaliere();
+			System.out.println("ORDINI PRESENTI "+ord.size());
+			for(Ordinazione o : ord){
+				linea=o.getLineaOrdinaziones();
+				for(LineaOrdinazione lin : linea)
+					if(!lin.getEvaso())
+						non_evasi.add((LineaOrdinazione)lin);
+			}
+			
+		} catch (Exception e) {
+			System.err.println("ERRORE 2");
+			e.printStackTrace();
+		}
+		
+		return non_evasi;
 	}
 	
 	public ArrayList<Ordinazione> selezionaOrdinazioniGiornalierePerTavolo(User role, Tavolo tavolo, Boolean terminato) {
@@ -224,7 +260,7 @@ public class OrdinazioneFacade {
 		if (lineaOrdinazione != null) {
             try {
             	lineaOrdinazione.setOrdinazione(lineaOrdinazione.getOrdinazione());
-
+            	lineaOrdinazione.setEvaso(false);
                 lineaOrdinazione = lineaOrdinazioneSession.inserisciLineaOrdinazione(lineaOrdinazione);
                 
                 Articolo articolo = lineaOrdinazione.getArticolo();
