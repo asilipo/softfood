@@ -36,7 +36,6 @@ public class PietanzaSession {
 		    	id = 0L;
 		    return (id + 1);
 		} catch(Exception e) {
-			e.printStackTrace();
 			System.out.println("PietanzaSession#getNewId");
 			return null;
 		}		
@@ -150,7 +149,6 @@ public class PietanzaSession {
 			session.delete(articolo);
 			return true;
 		} catch (Exception e) {
-			e.printStackTrace();
 			System.err.println("PietanzaSession#rimuoviPietanza");
 			return false;
 		}
