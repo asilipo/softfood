@@ -53,7 +53,9 @@ public interface IArticoloMenuFacade extends Remote{
 
 	public ArrayList<Bevanda> selezionaBevandeDisponibili(User role) throws RemoteException;
 
-	public boolean rimuoviArticoloMenu(User role, Long id) throws RemoteException;
+	public boolean rimuoviBevandaMenu(User role, Long id) throws RemoteException;
+
+	public boolean rimuoviPietanzaMenu(User role, Long id) throws RemoteException;
 
 	public ArrayList<Ingrediente> selezionaIngredientiPietanza(User role, Long id) throws RemoteException;
 

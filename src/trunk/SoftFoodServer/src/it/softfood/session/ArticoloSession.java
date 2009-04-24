@@ -44,11 +44,10 @@ public class ArticoloSession {
 			Long id = this.getNewId();
 			articolo.setId(id);
 			session.persist(articolo);
-			articolo = (Articolo) session.get(Articolo.class, articolo);
+			articolo = (Articolo) session.get(Articolo.class, articolo.getId());
 			
 			return articolo;
 		} catch (Exception e) {
-			e.printStackTrace();
 			System.err.println("ArticoloSession#inserisciArticolo");
 			return null;
 		}	
