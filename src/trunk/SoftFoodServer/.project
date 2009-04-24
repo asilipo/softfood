@@ -15,16 +15,10 @@
 			<arguments>
 			</arguments>
 		</buildCommand>
-		<buildCommand>
-			<name>net.genady.rmi.RMIBuilder</name>
-			<arguments>
-			</arguments>
-		</buildCommand>
 	</buildSpec>
 	<natures>
 		<nature>org.eclipse.ajdt.ui.ajnature</nature>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 		<nature>RMIc.RMIcNature</nature>
-		<nature>net.genady.rmi.RMINature</nature>
 	</natures>
 </projectDescription>

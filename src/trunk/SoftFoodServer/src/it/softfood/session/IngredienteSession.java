@@ -73,6 +73,18 @@ public class IngredienteSession {
 			return null;
 		}
 	}
+	
+	public List<Ingrediente> selezionaIngredienti() {
+		try {
+			Query q = session.createQuery("from it.softfood.entity.Ingrediente i");
+			List<Ingrediente> list = (List<Ingrediente>) q.list();
+			
+			return list; 	
+		} catch (Exception e) {
+			System.err.println("IngredienteSession#selezionaIngredienti");
+			return null;
+		}
+	}
 
 	public List<Ingrediente> selezionaIngredientePerVariante() {
 		try {

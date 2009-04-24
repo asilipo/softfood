@@ -29,7 +29,6 @@ import java.util.HashMap;
 
 public class ArticoloMenuFacade  {
 
-    
 	private static ArticoloMenuFacade singleton;
 	
     private ArticoloSession articoloSessionBean=ArticoloSession.getInstance();
@@ -259,4 +258,10 @@ public class ArticoloMenuFacade  {
 
         return null;
     }
+    
+    public ArrayList<Ingrediente> selezionaIngredienti(User role) {
+    	ArrayList<Ingrediente> ingredienti = (ArrayList<Ingrediente>) ingredienteSession.selezionaIngredienti();
+    	return ingredienti;
+    }
+    
 }
