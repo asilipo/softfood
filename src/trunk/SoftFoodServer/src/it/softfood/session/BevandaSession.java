@@ -99,6 +99,7 @@ public class BevandaSession {
 					bevanda.setDescrizione(articolo.getDescrizione());
 					bevanda.setId(articolo.getId());
 					bevanda.setLineaOrdinaziones(articolo.getLineaOrdinaziones());
+					bevanda.setBevandaMagazzinos(articolo.getBevandaMagazzinos());
 					bevanda.setListino(articolo.getListino());
 					bevanda.setNome(articolo.getNome());
 					bevanda.setCapacita(articolo.getCapacita());
