@@ -29,11 +29,14 @@ public class PietanzaSession {
 
 	private Long getNewId() {
 		try {
-			Query q = session.createQuery("select max(id) from it.softfood.entity.Pietanza");
-		    Long id = (Long)q.list().get(0);
-		    
-			return (id + 1);
+			Query q = session.createQuery("select max(id) from it.softfood.entity.Articolo");
+			List list = q.list();
+		    Long id = ((Long)list.get(0));
+		    if (id == null)
+		    	id = 0L;
+		    return (id + 1);
 		} catch(Exception e) {
+			e.printStackTrace();
 			System.out.println("PietanzaSession#getNewId");
 			return null;
 		}		
@@ -42,10 +45,17 @@ public class PietanzaSession {
 	public Pietanza inserisciPietanza(Pietanza pietanza) {
 		try {
 			Long id = this.getNewId();
-			pietanza.setId(id);
-			session.persist(pietanza);
-			pietanza = (Pietanza) this.selezionaPietanzaPerId(pietanza.getId());
 			
+			Articolo articolo = new Articolo();
+			articolo.setDescrizione(pietanza.getDescrizione());
+			articolo.setId(id);
+			articolo.setListino(pietanza.getListino());
+			articolo.setNome(pietanza.getNome());
+			articolo.setTipoArticolo(pietanza.getTipoArticolo());
+			articolo.setTipoPietanza(pietanza.getTipoPietanza());
+			session.persist(articolo);
+			pietanza = (Pietanza) this.selezionaPietanzaPerId(articolo.getId());
+
 			return pietanza; 
 		} catch (Exception e) {
 			System.err.println("PietanzaSession#inserisciPietanza");
@@ -56,21 +66,24 @@ public class PietanzaSession {
 	public Pietanza selezionaPietanzaPerId(Long id) {
 		try {
 			Articolo articolo = (Articolo) session.get(Articolo.class, id);
-			Pietanza pietanza=new Pietanza();
-			pietanza.setBevandaMagazzinos(articolo.getBevandaMagazzinos());
-			pietanza.setCapacita(articolo.getCapacita());
-			pietanza.setDescrizione(articolo.getDescrizione());
-			pietanza.setId(articolo.getId());
-			pietanza.setIngredientePietanzas(articolo.getIngredientePietanzas());
-			pietanza.setLineaOrdinaziones(articolo.getLineaOrdinaziones());
-			pietanza.setListino(articolo.getListino());
-			pietanza.setNome(articolo.getNome());
-			pietanza.setTipoArticolo(articolo.getTipoArticolo());
-			pietanza.setTipoPietanza(articolo.getTipoPietanza());	
-			pietanza.setTipo(TipoPietanza.values()[articolo.getTipoPietanza()]);
-			
-			return pietanza; 
+			if(articolo != null) {
+				Pietanza pietanza = new Pietanza();
+				pietanza.setBevandaMagazzinos(articolo.getBevandaMagazzinos());
+				pietanza.setCapacita(articolo.getCapacita());
+				pietanza.setDescrizione(articolo.getDescrizione());
+				pietanza.setId(articolo.getId());
+				pietanza.setIngredientePietanzas(articolo.getIngredientePietanzas());
+				pietanza.setLineaOrdinaziones(articolo.getLineaOrdinaziones());
+				pietanza.setListino(articolo.getListino());
+				pietanza.setNome(articolo.getNome());
+				pietanza.setTipoArticolo(articolo.getTipoArticolo());
+				pietanza.setTipoPietanza(articolo.getTipoPietanza());	
+				pietanza.setTipo(TipoPietanza.values()[articolo.getTipoPietanza()]);
+				return pietanza;
+			}
+			return null;
 		} catch (Exception e) {
+			e.printStackTrace();
 			System.err.println("PietanzaSession#selezionaPietanzaPerId");
 			return null;
 		}
@@ -121,14 +134,23 @@ public class PietanzaSession {
 
     public boolean rimuoviPietanza(Long id) {
 	  	try {
-	  		Pietanza pietanza = this.selezionaPietanzaPerId(id);
-			if (pietanza != null) {
-				session.delete(pietanza);
-				return true;
-			}
-
-			return false;
+	  		Articolo articolo = (Articolo) session.get(Articolo.class, id);
+	  		if (articolo == null) {
+	  			Pietanza pietanza = this.selezionaPietanzaPerId(id);
+	  			if (pietanza != null) {
+		  			articolo = new Articolo();
+					articolo.setDescrizione(pietanza.getDescrizione());
+					articolo.setId(pietanza.getId());
+					articolo.setListino(pietanza.getListino());
+					articolo.setNome(pietanza.getNome());
+					articolo.setTipoArticolo(pietanza.getTipoArticolo());
+					articolo.setTipoPietanza(pietanza.getTipoPietanza());
+	  			}
+	  		}
+			session.delete(articolo);
+			return true;
 		} catch (Exception e) {
+			e.printStackTrace();
 			System.err.println("PietanzaSession#rimuoviPietanza");
 			return false;
 		}

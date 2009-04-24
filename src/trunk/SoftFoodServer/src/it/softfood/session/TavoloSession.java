@@ -29,6 +29,8 @@ public class TavoloSession {
 			Query q = session.createQuery("select max(id) from it.softfood.entity.Tavolo");
 			List list = q.list();
 			Long id = (Long)list.get(0);
+		    if (id == null)
+		    	id = 0L;
 		    return (id + 1);
 		} catch(Exception e) {
 			System.out.println("TavoloSession#getNewId");
