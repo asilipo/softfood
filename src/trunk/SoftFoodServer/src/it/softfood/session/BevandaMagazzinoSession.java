@@ -45,6 +45,7 @@ public class BevandaMagazzinoSession {
 			
 			return bevandaMagazzino; 
 		} catch (Exception e) {
+			e.printStackTrace();
 			System.err.println("BevandaMagazzinoSession#inserisciBevandaMagazzino");
 			return null;
 		}

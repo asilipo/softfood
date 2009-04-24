@@ -21,6 +21,8 @@ public interface IArticoloMenuFacade extends Remote{
 	
 	public boolean updateIngrediente(User role, Ingrediente ingrediente) throws RemoteException;
 	
+	public boolean updateBevandaMagazzino(User role, BevandaMagazzino bevandaMagazzino) throws RemoteException;
+
 	public BevandaMagazzino inserisciBevandaMagazzino(User role, Long id, Integer quantita) throws RemoteException;
 	
 	public Ingrediente inserisciIngrediente(User role, Ingrediente ingrediente) throws RemoteException;
