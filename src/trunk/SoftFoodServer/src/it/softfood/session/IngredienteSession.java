@@ -26,7 +26,7 @@ public class IngredienteSession {
 
 	private Long getNewId() {
 		try {
-			Query q = session.createQuery("select max(id) from it.softfood.entity.IngredienteSession");
+			Query q = session.createQuery("select max(id) from it.softfood.entity.Ingrediente");
 			List list = q.list();
 		    Long id = ((Long)list.get(0));
 		    if (id == null)
@@ -43,7 +43,7 @@ public class IngredienteSession {
 			Long id = this.getNewId();
 			ingrediente.setId(id);
 			session.persist(ingrediente);
-			ingrediente = (Ingrediente) session.get(Ingrediente.class, ingrediente);
+			ingrediente = (Ingrediente) session.get(Ingrediente.class, ingrediente.getId());
 			
 			return ingrediente;
 		} catch (Exception e) {

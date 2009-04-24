@@ -1,6 +1,7 @@
 package it.softfood;
 
 import it.softfood.entity.Bevanda;
+import it.softfood.entity.Ingrediente;
 import it.softfood.entity.IngredientePietanza;
 import it.softfood.entity.IngredientePietanzaPK;
 import it.softfood.entity.Listino;
@@ -24,6 +25,7 @@ import it.softfood.handler.UserFacade;
 import it.softfood.login.LoginHandler;
 import it.softfood.session.BevandaSession;
 import it.softfood.session.IngredientePietanzaSession;
+import it.softfood.session.IngredienteSession;
 import it.softfood.session.ListinoSession;
 import it.softfood.session.MenuSession;
 import it.softfood.session.OrdinazioneSession;
@@ -31,6 +33,7 @@ import it.softfood.session.PietanzaSession;
 import it.softfood.session.RistoranteSession;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
 
 public class Start {
@@ -144,6 +147,18 @@ public class Start {
 		
 		ls.inserisciListino(listino);
 		
+/*		PietanzaSession ps = PietanzaSession.getInstance();
+		Pietanza p = new Pietanza();
+		p.setDescrizione("test_descrizione");
+		p.setListino(listino);
+		p.setNome("test_nome");
+		p.setTipo(TipoPietanza.ANTIPASTI);
+		p.setTipoArticolo("Pietanza");
+		p.setTipoPietanza(TipoPietanza.ANTIPASTI.ordinal());
+		p=ps.inserisciPietanza(p);
+		
+		ps.rimuoviPietanza(p.getId());
+		
 		BevandaSession bs = BevandaSession.getInstance();
 		Bevanda b = new Bevanda();
 		b.setDescrizione("test_descrizione");
@@ -155,8 +170,20 @@ public class Start {
 		//b=bs.inserisciBevanda(b);
 		
 		//bs.rimuoviBevanda(80L);
-		
-		
+*/		
+		IngredienteSession is = IngredienteSession.getInstance();
+		Ingrediente i = new Ingrediente();
+		i.setDescrizione("test_descrizione");
+		//i.setIngredienteMagazzinos(ingredienteMagazzinos);
+		//i.setIngredientePietanzas(ingredientePietanzas);
+		i.setNome("test_nome");
+		i.setScadenza(new Date(System.currentTimeMillis()));
+		i.setTipoIngrediente("IngredienteLungaConservazione");
+		i.setUnitaMisura("ml");
+		i.setVariante(false);
+		//i.setVariantes(variantes);
+		//is.inserisciIngrediente(i);
+		is.rimuoviIngrediente(48L);
 	}
 	
 
