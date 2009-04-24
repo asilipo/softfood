@@ -319,8 +319,10 @@ public class ArticoloMenuFacade  {
     public boolean rimuoviBevandaMenu(User role, Long id) {
         if (id != null) {
         	Bevanda bevanda = bevandaSession.selezionaBevandaPerId(id);
-        	bevandaMagazzinoSession.rimuoviBevandaMagazzino(((BevandaMagazzino)bevanda.getBevandaMagazzinos().toArray()[0]).getId());
-            return bevandaSession.rimuoviBevanda(id);
+        	try {
+        		bevandaMagazzinoSession.rimuoviBevandaMagazzino(((BevandaMagazzino)bevanda.getBevandaMagazzinos().toArray()[0]).getId());
+        	} catch (Exception e){}
+        	return bevandaSession.rimuoviBevanda(id);
         }
 
         return false;
