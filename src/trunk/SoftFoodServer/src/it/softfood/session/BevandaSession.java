@@ -156,7 +156,7 @@ public class BevandaSession {
 
 	public void update(Bevanda bevanda) {
 		if (bevanda != null) {
-			Articolo articolo = (Articolo) session.get(Bevanda.class, bevanda.getId());
+			Articolo articolo = (Articolo) session.get(Articolo.class, bevanda.getId());
 			if(articolo == null) {
 				articolo = new Articolo();
 				articolo.setDescrizione(bevanda.getDescrizione());
