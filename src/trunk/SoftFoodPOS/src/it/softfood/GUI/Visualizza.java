@@ -26,6 +26,9 @@ public class Visualizza extends javax.swing.JPanel {
     private POSOrdinazioneFacade ordinazionefacade;
     private POSArticoloMenuFacade articolofacade;
     private User role;
+    private ArrayList<Pietanza> pietanze;
+    private ArrayList<Bevanda> bevande;
+    private ArrayList<Ingrediente> ingredienti;
 
     /** Creates new form Visualizza */
     public Visualizza(MainView frame, String tipo) {
@@ -37,9 +40,7 @@ public class Visualizza extends javax.swing.JPanel {
         role=frame.getUser();
         Vector<String> element = new Vector<String>();
         String data[]=null;
-        ArrayList<Pietanza> pietanze;
-        ArrayList<Bevanda> bevande;
-        ArrayList<Ingrediente> ingredienti;
+        
         int i=0;
 
         if (tipo.equalsIgnoreCase("Pietanza")) {
@@ -143,7 +144,7 @@ private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 	System.out.println(id.toString());
 	
 	try{
-		articolofacade.rimuoviArticoloMenu(role, id);
+		articolofacade.rimuoviBevandaMenu(role, id);
 	}catch(Exception e){}
 	
     frame.getActualPanel().setVisible(false);
@@ -155,12 +156,6 @@ private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 // TODO add your handling code here:
 	
-	String obj = (String) jList1.getSelectedValue();
-	System.out.println(obj);
-	Long id = Long.valueOf(obj.substring(obj.indexOf("-")+2));
-	System.out.println(id.toString());
-	
-	
     frame.getActualPanel().setVisible(false);
 
     if (tipo.equalsIgnoreCase("Pietanza")) {
@@ -168,7 +163,7 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         frame.setActualPanel(pietanza);
         frame.setComponent(pietanza);
     } else if (tipo.equalsIgnoreCase("Bevanda")) {
-        Nuova_bevanda bevanda = new Nuova_bevanda(frame);
+        Nuova_bevanda bevanda = new Nuova_bevanda(frame, new Bevanda(), "NUOVO");
         frame.setActualPanel(bevanda);
         frame.setComponent(bevanda);
     } else {
@@ -183,7 +178,7 @@ private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 	
 	String obj = (String) jList1.getSelectedValue();
 	System.out.println(obj);
-	Long id = Long.valueOf(obj.substring(obj.indexOf("-")+2));
+	Long id = Long.valueOf(obj.substring(obj.lastIndexOf("-")+2));
 	System.out.println(id.toString());
 	
 	
@@ -194,7 +189,7 @@ private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         frame.setActualPanel(pietanza);
         frame.setComponent(pietanza);
     } else if (tipo.equalsIgnoreCase("Bevanda")) {
-        Nuova_bevanda bevanda = new Nuova_bevanda(frame);
+        Nuova_bevanda bevanda = new Nuova_bevanda(frame, bevande.get(jList1.getSelectedIndex()), "MODIFICA");
         frame.setActualPanel(bevanda);
         frame.setComponent(bevanda);
     } else {
