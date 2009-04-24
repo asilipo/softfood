@@ -33,19 +33,19 @@ public class ArticoloMenuFacade  {
 
 	private static ArticoloMenuFacade singleton;
 	
-    private ArticoloSession articoloSessionBean=ArticoloSession.getInstance();
+    private ArticoloSession articoloSessionBean = ArticoloSession.getInstance();
     
-    private PietanzaSession pietanzaSessionBean=PietanzaSession.getInstance();
+    private PietanzaSession pietanzaSessionBean = PietanzaSession.getInstance();
  
-    private BevandaSession bevandaSessionBean=BevandaSession.getInstance();
+    private BevandaSession bevandaSessionBean = BevandaSession.getInstance();
     
-    private IngredienteSession ingredienteSession=IngredienteSession.getInstance();
+    private IngredienteSession ingredienteSession = IngredienteSession.getInstance();
     
-    private IngredientePietanzaSession ingredientePietanzaSessionBeanRemote=IngredientePietanzaSession.getInstance();
+    private IngredientePietanzaSession ingredientePietanzaSessionBeanRemote = IngredientePietanzaSession.getInstance();
     
-    private IngredienteMagazzinoSession ingredienteMagazzinoSessionBeanRemote=IngredienteMagazzinoSession.getInstance();
+    private IngredienteMagazzinoSession ingredienteMagazzinoSessionBeanRemote = IngredienteMagazzinoSession.getInstance();
    
-    private BevandaMagazzinoSession bevandaMagazzinoSessionBeanRemote=BevandaMagazzinoSession.getInstance();
+    private BevandaMagazzinoSession bevandaMagazzinoSessionBeanRemote = BevandaMagazzinoSession.getInstance();
 
     
     public synchronized static ArticoloMenuFacade getInstance() {
