@@ -9,7 +9,6 @@ package it.softfood.GUI;
 import java.util.ArrayList;
 
 import it.softfood.entity.LineaOrdinazione;
-import it.softfood.entity.Ordinazione;
 import it.softfood.entity.User;
 import it.softfood.facade.POSOrdinazioneFacade;
 
@@ -19,6 +18,10 @@ import it.softfood.facade.POSOrdinazioneFacade;
  */
 public class Ordini extends javax.swing.JPanel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private User u;
 	private POSOrdinazioneFacade ordinazioniFacade;
 	private ArrayList<LineaOrdinazione> ordini;
