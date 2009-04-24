@@ -185,7 +185,21 @@ public class PietanzaSession {
 	}
     
 	public void update(Pietanza pietanza) {
-		session.update(pietanza);
+		if (pietanza != null) {
+			Articolo articolo = (Articolo) session.get(Articolo.class, pietanza.getId());
+			if(articolo == null) {
+				articolo = new Articolo();
+				articolo.setDescrizione(pietanza.getDescrizione());
+				articolo.setId(pietanza.getId());
+				articolo.setIngredientePietanzas(pietanza.getIngredientePietanzas());
+				articolo.setLineaOrdinaziones(pietanza.getLineaOrdinaziones());
+				articolo.setListino(pietanza.getListino());
+				articolo.setNome(pietanza.getNome());
+				articolo.setTipoArticolo(pietanza.getTipoArticolo());
+				articolo.setTipoPietanza(pietanza.getTipoPietanza());
+			}
+			session.update(articolo);
+		}
 	}
 	
 }
