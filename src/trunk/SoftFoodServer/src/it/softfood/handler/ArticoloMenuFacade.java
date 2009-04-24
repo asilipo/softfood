@@ -35,11 +35,11 @@ public class ArticoloMenuFacade  {
 
 	private static ArticoloMenuFacade singleton;
 	
-    private ArticoloSession articoloSessionBean = ArticoloSession.getInstance();
+    private ArticoloSession articoloSession = ArticoloSession.getInstance();
     
     private MagazzinoSession magazzinoSession = MagazzinoSession.getInstance();
     
-    private PietanzaSession pietanzaSessionBean = PietanzaSession.getInstance();
+    private PietanzaSession pietanzaSession = PietanzaSession.getInstance();
  
     private BevandaSession bevandaSessionBean = BevandaSession.getInstance();
     
@@ -61,9 +61,17 @@ public class ArticoloMenuFacade  {
 		return singleton;
 	}
     
-    public Articolo inserisciArticoloMenu(User role,Articolo articolo) {
+    public Articolo inserisciArticoloMenu(User role, Articolo articolo) {
         if (articolo != null) {
-            return articoloSessionBean.inserisciArticolo(articolo);
+            return articoloSession.inserisciArticolo(articolo);
+        }
+
+        return null;
+    }
+    
+    public Ingrediente inserisciIngrediente(User role, Ingrediente ingrediente) {
+        if (ingrediente != null) {
+            return ingredienteSession.inserisciIngrediente(ingrediente);
         }
 
         return null;
@@ -72,7 +80,7 @@ public class ArticoloMenuFacade  {
     public BevandaMagazzino inserisciBevandaMagazzino(User role, Long id, Integer quantita) {
         if (id != null) {
         	BevandaMagazzino bevandaMagazzino = new BevandaMagazzino();
-        	bevandaMagazzino.setArticolo(articoloSessionBean.selezionaArticoloPerId(id));
+        	bevandaMagazzino.setArticolo(articoloSession.selezionaArticoloPerId(id));
         	bevandaMagazzino.setMagazzino(magazzinoSession.selezionaMagazzinoPerId(0L));
         	if (quantita != null)
         		bevandaMagazzino.setQuantita(quantita);
@@ -87,7 +95,7 @@ public class ArticoloMenuFacade  {
 
     public Articolo selezionaArticoloMenuPerId(User role,Long id) {
         if (id != null) {
-            return articoloSessionBean.selezionaArticoloPerId(id);
+            return articoloSession.selezionaArticoloPerId(id);
         }
 
         return null;
@@ -95,7 +103,7 @@ public class ArticoloMenuFacade  {
 
     public ArrayList<Pietanza> selezionaPietanzePerTipo(User role,TipoPietanza tipoPietanza) {
         if (tipoPietanza != null) {
-        	ArrayList<Pietanza> pietanze = (ArrayList<Pietanza>) pietanzaSessionBean.selezionaPietanzePerTipo(tipoPietanza);
+        	ArrayList<Pietanza> pietanze = (ArrayList<Pietanza>) pietanzaSession.selezionaPietanzePerTipo(tipoPietanza);
         	return pietanze;
         }
 
@@ -103,12 +111,12 @@ public class ArticoloMenuFacade  {
     }
 
     public ArrayList<Pietanza> selezionaPietanze(User role) {
-        ArrayList<Pietanza> pietanze = pietanzaSessionBean.selezionaPietanze();
+        ArrayList<Pietanza> pietanze = pietanzaSession.selezionaPietanze();
         return pietanze;
     }
 
     public ArrayList<Pietanza> selezionaPietanzeDisponibili(User role) {
-        ArrayList<Pietanza> pietanze = (ArrayList<Pietanza>) pietanzaSessionBean.selezionaPietanze();
+        ArrayList<Pietanza> pietanze = (ArrayList<Pietanza>) pietanzaSession.selezionaPietanze();
         ArrayList<Pietanza> pietanzeDisponibili = new ArrayList<Pietanza>();
 
         for (Pietanza pietanza : pietanze) {
@@ -121,7 +129,7 @@ public class ArticoloMenuFacade  {
     }
 
     public ArrayList<Pietanza> selezionaPietanzeDisponibiliPerTipo(User role,TipoPietanza tipoPietanza) {
-        ArrayList<Pietanza> pietanze = (ArrayList<Pietanza>) pietanzaSessionBean.selezionaPietanzePerTipo(tipoPietanza);
+        ArrayList<Pietanza> pietanze = (ArrayList<Pietanza>) pietanzaSession.selezionaPietanzePerTipo(tipoPietanza);
         ArrayList<Pietanza> pietanzeDisponibili = new ArrayList<Pietanza>();
         
         if (pietanze != null) {
@@ -137,7 +145,7 @@ public class ArticoloMenuFacade  {
     }
 
     public HashMap<Pietanza, Integer> selezionaDisponibilitaPietanze(User role) {
-        ArrayList<Pietanza> pietanze = (ArrayList<Pietanza>) pietanzaSessionBean.selezionaPietanze();
+        ArrayList<Pietanza> pietanze = (ArrayList<Pietanza>) pietanzaSession.selezionaPietanze();
         HashMap<Pietanza, Integer> pietanzeDisponibili = new HashMap<Pietanza, Integer>();
 
         for (Pietanza pietanza : pietanze) {
@@ -149,7 +157,7 @@ public class ArticoloMenuFacade  {
 
     public Integer selezionaDisponibilitaPietanza(User role,Long id) {
         if (id != null) {
-            Pietanza pietanza = pietanzaSessionBean.selezionaPietanzaPerId(id);
+            Pietanza pietanza = pietanzaSession.selezionaPietanzaPerId(id);
             return this.verificaIngredientiPietanza(role,pietanza);
         }
 
@@ -172,7 +180,7 @@ public class ArticoloMenuFacade  {
     }
 
     public HashMap<Pietanza, Integer> selezionaDisponibilitaPietanzePerTipo(User role,TipoPietanza tipoPietanza) {
-        ArrayList<Pietanza> pietanze = (ArrayList<Pietanza>) pietanzaSessionBean.selezionaPietanzePerTipo(tipoPietanza);
+        ArrayList<Pietanza> pietanze = (ArrayList<Pietanza>) pietanzaSession.selezionaPietanzePerTipo(tipoPietanza);
         
         HashMap<Pietanza, Integer> pietanzeDisponibili = new HashMap<Pietanza, Integer>();
 
@@ -231,6 +239,21 @@ public class ArticoloMenuFacade  {
         ArrayList<Bevanda> bevande = bevandaSessionBean.selezionaBevande();
         return bevande;
     }
+    
+    public boolean update(User role, Object object, String tipo) {
+        if (object != null && tipo != null) {
+        	if (tipo.equalsIgnoreCase("Pietanza"))
+        		pietanzaSession.update((Pietanza) object);
+        	else if(tipo.equalsIgnoreCase("Bevanda"))
+        		bevandaSessionBean.update((Bevanda) object);
+        	else if(tipo.equalsIgnoreCase("Ingrediente"))
+        		ingredienteSession.update((Ingrediente) object);
+         		
+        	return true;
+        }
+        	
+        return false;
+    }
 
     public ArrayList<Bevanda> selezionaBevandeDisponibili(User role) {
         ArrayList<BevandaMagazzino> bevandeMagazzino = (ArrayList<BevandaMagazzino>) bevandaMagazzinoSessionBeanRemote.selezionaBevandeMagazzinoPerQuantita(1);
@@ -260,7 +283,7 @@ public class ArticoloMenuFacade  {
 
     public boolean rimuoviArticoloMenu(User role,Long id) {
         if (id != null) {
-            return articoloSessionBean.rimuoviArticolo(id);
+            return articoloSession.rimuoviArticolo(id);
         }
 
         return false;
