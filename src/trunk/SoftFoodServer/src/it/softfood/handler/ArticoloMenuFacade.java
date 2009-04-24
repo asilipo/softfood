@@ -61,10 +61,16 @@ public class ArticoloMenuFacade  {
 		return singleton;
 	}
     
-    public Articolo inserisciArticoloMenu(User role, Articolo articolo) {
-        if (articolo != null) {
-            return articoloSession.inserisciArticolo(articolo);
-        }
+    public Pietanza inserisciPietanzaMenu(User role, Pietanza pietanza) {
+        if (pietanza != null)
+    		return pietanzaSession.inserisciPietanza(pietanza);
+
+        return null;
+    }
+    
+    public Bevanda inserisciBevandaMenu(User role, Bevanda bevanda) {
+        if (bevanda != null)
+    		return bevandaSession.inserisciBevanda(bevanda);
 
         return null;
     }

@@ -25,8 +25,10 @@ public interface IArticoloMenuFacade extends Remote{
 	
 	public Ingrediente inserisciIngrediente(User role, Ingrediente ingrediente) throws RemoteException;
 	
-	public Articolo inserisciArticoloMenu(User role, Articolo articolo) throws RemoteException;
-
+    public Bevanda inserisciBevandaMenu(User role, Bevanda bevanda) throws RemoteException;
+    
+    public Pietanza inserisciPietanzaMenu(User role, Pietanza pietanza) throws RemoteException;
+    
 	public Articolo selezionaArticoloMenuPerId(User role, Long id) throws RemoteException;
 
 	public ArrayList<Pietanza> selezionaPietanzePerTipo(User role, TipoPietanza tipoPietanza) throws RemoteException;
