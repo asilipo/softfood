@@ -41,7 +41,7 @@ public class BevandaMagazzinoSession {
 			Long id = this.getNewId();
 			bevandaMagazzino.setId(id);
 			session.persist(bevandaMagazzino);
-			bevandaMagazzino = (BevandaMagazzino) session.get(BevandaMagazzino.class, bevandaMagazzino);
+			bevandaMagazzino = (BevandaMagazzino) session.get(BevandaMagazzino.class, bevandaMagazzino.getId());
 			
 			return bevandaMagazzino; 
 		} catch (Exception e) {
