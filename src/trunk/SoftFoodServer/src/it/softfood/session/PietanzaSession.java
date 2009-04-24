@@ -121,7 +121,7 @@ public class PietanzaSession {
 
     public ArrayList<Pietanza> selezionaPietanze() {
     	try {
-			Query q = session.createQuery("from it.softfood.entity.Pietanza o where tipoArticolo = 'Pietanza'");
+			Query q = session.createQuery("from it.softfood.entity.Articolo o where tipoArticolo = 'Pietanza'");
 			List<Articolo> articoli = (List<Articolo>) q.list();
 			ArrayList<Pietanza> pietanze = new ArrayList<Pietanza>();
 			
