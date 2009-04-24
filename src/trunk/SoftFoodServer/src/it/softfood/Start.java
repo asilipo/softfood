@@ -22,6 +22,7 @@ import it.softfood.handler.RistoranteFacade;
 import it.softfood.handler.TavoloFacade;
 import it.softfood.handler.UserFacade;
 import it.softfood.login.LoginHandler;
+import it.softfood.session.BevandaSession;
 import it.softfood.session.IngredientePietanzaSession;
 import it.softfood.session.ListinoSession;
 import it.softfood.session.MenuSession;
@@ -143,17 +144,17 @@ public class Start {
 		
 		ls.inserisciListino(listino);
 		
-		PietanzaSession ps = PietanzaSession.getInstance();
-		Pietanza p = new Pietanza();
-		p.setDescrizione("test_descrizione");
-		p.setListino(listino);
-		p.setNome("test_nome");
-		p.setTipo(TipoPietanza.ANTIPASTI);
-		p.setTipoArticolo("Pietanza");
-		p.setTipoPietanza(TipoPietanza.ANTIPASTI.ordinal());
-		p=ps.inserisciPietanza(p);
+		BevandaSession bs = BevandaSession.getInstance();
+		Bevanda b = new Bevanda();
+		b.setDescrizione("test_descrizione");
+		b.setListino(listino);
+		b.setNome("test_nome");
+		b.setCapacita(1000F);
+		b.setTipoArticolo("Bevanda");
+		b.setTipoPietanza(TipoPietanza.BEVANDA.ordinal());
+		//b=bs.inserisciBevanda(b);
 		
-		ps.rimuoviPietanza(p.getId());
+		//bs.rimuoviBevanda(80L);
 		
 		
 	}
