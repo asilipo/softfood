@@ -91,28 +91,27 @@ public class BevandaSession {
 		try {
 			Query q = session.createQuery("from it.softfood.entity.Articolo o where tipoArticolo = 'Bevanda'");
 			List<Articolo> articoli = (List<Articolo>) q.list();
-			ArrayList<Pietanza> pietanze = new ArrayList<Pietanza>();
+			ArrayList<Bevanda> bevande = new ArrayList<Bevanda>();
 			
 			for (Articolo articolo : articoli) {
-				if (articolo.getTipoArticolo().equals("Pietanza")) {
-					Pietanza pietanza = new Pietanza();
-					pietanza.setDescrizione(articolo.getDescrizione());
-					pietanza.setId(articolo.getId());
-					pietanza.setIngredientePietanzas(articolo.getIngredientePietanzas());
-					pietanza.setLineaOrdinaziones(articolo.getLineaOrdinaziones());
-					pietanza.setListino(articolo.getListino());
-					pietanza.setNome(articolo.getNome());
-					pietanza.setTipo(TipoPietanza.values()[articolo.getTipoPietanza()]);
-					pietanza.setTipoArticolo(articolo.getTipoArticolo());
-					pietanza.setTipoPietanza(articolo.getTipoPietanza());
+				if (articolo.getTipoArticolo().equals("Bevanda")) {
+					Bevanda bevanda = new Bevanda();
+					bevanda.setDescrizione(articolo.getDescrizione());
+					bevanda.setId(articolo.getId());
+					bevanda.setLineaOrdinaziones(articolo.getLineaOrdinaziones());
+					bevanda.setListino(articolo.getListino());
+					bevanda.setNome(articolo.getNome());
+					bevanda.setCapacita(articolo.getCapacita());
+					bevanda.setTipoArticolo(articolo.getTipoArticolo());
+					bevanda.setTipoPietanza(articolo.getTipoPietanza());
 					
-					pietanze.add(pietanza);
+					bevande.add(bevanda);
 				}
 			}
 			
-			return pietanze;
+			return bevande;
 		} catch (Exception e) {
-			System.err.println("PietanzaSession#selezionaPietanze");
+			System.err.println("BevandaSession#selezionaBevande");
 			return null;
 		}
 	}
