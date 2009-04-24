@@ -166,6 +166,7 @@ public class BevandaSession {
 				articolo.setNome(bevanda.getNome());
 				articolo.setTipoArticolo(bevanda.getTipoArticolo());
 				articolo.setTipoPietanza(bevanda.getTipoPietanza());
+				articolo.setBevandaMagazzinos(bevanda.getBevandaMagazzinos());
 			}
 			session.update(articolo);
 		}
