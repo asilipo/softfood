@@ -2,6 +2,7 @@ package it.softfood.handler;
 
 import it.softfood.entity.Articolo;
 import it.softfood.entity.Bevanda;
+import it.softfood.entity.BevandaMagazzino;
 import it.softfood.entity.Ingrediente;
 import it.softfood.entity.Pietanza;
 import it.softfood.entity.User;
@@ -14,6 +15,8 @@ import java.util.HashMap;
 
 public interface IArticoloMenuFacade extends Remote{
 
+	public BevandaMagazzino inserisciBevandaMagazzino(User role, Long id, Integer quantita)throws RemoteException;
+	
 	public Articolo inserisciArticoloMenu(User role, Articolo articolo)throws RemoteException;
 
 	public Articolo selezionaArticoloMenuPerId(User role, Long id)throws RemoteException;

@@ -6,6 +6,7 @@ import it.softfood.entity.BevandaMagazzino;
 import it.softfood.entity.Ingrediente;
 import it.softfood.entity.IngredienteMagazzino;
 import it.softfood.entity.IngredientePietanza;
+import it.softfood.entity.Magazzino;
 import it.softfood.entity.Pietanza;
 import it.softfood.entity.User;
 import it.softfood.enumeration.TipoPietanza;
@@ -15,6 +16,7 @@ import it.softfood.session.BevandaSession;
 import it.softfood.session.IngredienteMagazzinoSession;
 import it.softfood.session.IngredientePietanzaSession;
 import it.softfood.session.IngredienteSession;
+import it.softfood.session.MagazzinoSession;
 import it.softfood.session.PietanzaSession;
 
 import java.util.ArrayList;
@@ -35,9 +37,13 @@ public class ArticoloMenuFacade  {
 	
     private ArticoloSession articoloSessionBean = ArticoloSession.getInstance();
     
+    private MagazzinoSession magazzinoSession = MagazzinoSession.getInstance();
+    
     private PietanzaSession pietanzaSessionBean = PietanzaSession.getInstance();
  
     private BevandaSession bevandaSessionBean = BevandaSession.getInstance();
+    
+    private BevandaMagazzinoSession bevandaMagazzinoSession = BevandaMagazzinoSession.getInstance();
     
     private IngredienteSession ingredienteSession = IngredienteSession.getInstance();
     
@@ -58,6 +64,22 @@ public class ArticoloMenuFacade  {
     public Articolo inserisciArticoloMenu(User role,Articolo articolo) {
         if (articolo != null) {
             return articoloSessionBean.inserisciArticolo(articolo);
+        }
+
+        return null;
+    }
+    
+    public BevandaMagazzino inserisciBevandaMagazzino(User role, Long id, Integer quantita) {
+        if (id != null) {
+        	BevandaMagazzino bevandaMagazzino = new BevandaMagazzino();
+        	bevandaMagazzino.setArticolo(articoloSessionBean.selezionaArticoloPerId(id));
+        	bevandaMagazzino.setMagazzino(magazzinoSession.selezionaMagazzinoPerId(0L));
+        	if (quantita != null)
+        		bevandaMagazzino.setQuantita(quantita);
+        	else
+        		bevandaMagazzino.setQuantita(0);
+        	
+            return bevandaMagazzinoSession.inserisciBevandaMagazzino(bevandaMagazzino);
         }
 
         return null;
