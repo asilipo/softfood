@@ -2,8 +2,10 @@ package it.softfood;
 
 import java.util.ArrayList;
 
+import it.softfood.entity.Bevanda;
 import it.softfood.entity.LineaOrdinazione;
 import it.softfood.entity.User;
+import it.softfood.facade.POSArticoloMenuFacade;
 import it.softfood.facade.POSOrdinazioneFacade;
 import it.softfood.facade.POSUserFacade;
 
@@ -18,18 +20,26 @@ public class Main {
 		
 		POSUserFacade userFacade=new POSUserFacade();
 		POSOrdinazioneFacade ordiniFacade=new POSOrdinazioneFacade();
+		POSArticoloMenuFacade articoloFacade=new POSArticoloMenuFacade();
 		
 		User u=userFacade.login("cuoco", "1234");
 		
-		ArrayList<LineaOrdinazione> array=ordiniFacade.selezionaOrdinazioniGiornaliere(u);
+//		ArrayList<LineaOrdinazione> array=ordiniFacade.selezionaOrdinazioniGiornaliere(u);
+//		
+//		Long id=array.get(0).getId();
+//		
+//		LineaOrdinazione linea=ordiniFacade.selezionaLineaOrdinazionePerId(u, id);
+//
+//		System.out.println("PIPPO "+array.size());
+//		System.out.println("PIPPO "+array);
+//		System.out.println("LINEA "+linea);
 		
-		Long id=array.get(0).getId();
+		ArrayList<Bevanda> bevande=articoloFacade.selezionaBevande(u);
+		Bevanda bevanda=bevande.get(0);
 		
-		LineaOrdinazione linea=ordiniFacade.selezionaLineaOrdinazionePerId(u, id);
-
-		System.out.println("PIPPO "+array.size());
-		System.out.println("PIPPO "+array);
-		System.out.println("LINEA "+linea);
+		articoloFacade.updateBevanda(u, bevanda);
+//		
+		
 		
 		userFacade.logout(u);
 	}

@@ -1,9 +1,12 @@
 package it.softfood.facade;
 
+import it.softfood.entity.Articolo;
 import it.softfood.entity.Bevanda;
+import it.softfood.entity.BevandaMagazzino;
 import it.softfood.entity.Ingrediente;
 import it.softfood.entity.Pietanza;
 import it.softfood.entity.User;
+import it.softfood.handler.ArticoloMenuFacade;
 import it.softfood.handler.IArticoloMenuFacade;
 
 import java.rmi.RemoteException;
@@ -18,9 +21,9 @@ import java.util.ArrayList;
 public class POSArticoloMenuFacade {
 	
 	private IArticoloMenuFacade articolo;
+//	private ArticoloMenuFacade articolo=ArticoloMenuFacade.getInstance();
 	
 	public ArrayList<Ingrediente> selezionaIngredientiPietanza(User role, Long id){
-//		ArticoloMenuFacade articolo=ArticoloMenuFacade.getInstance();
 		ArrayList<Ingrediente> ingr = null;
 		try {
 			ingr = articolo.selezionaIngredientiPietanza(role, id);
@@ -64,15 +67,67 @@ public class POSArticoloMenuFacade {
 		return ingrediente;
 	}
 	
-	public void rimuoviArticoloMenu(User role, Long id){
+	public void rimuoviBevandaMenu(User role, Long id){
 		try {
-			articolo.rimuoviArticoloMenu(role, id);
+			articolo.rimuoviBevandaMenu(role, id);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public void rimuoviPietanzaMenu(User role, Long id){
+		try {
+			articolo.rimuoviPietanzaMenu(role, id);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void updateBevanda(User role, Bevanda bevanda){
+		try {
+			articolo.updateBevanda(role, bevanda);
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	
 	}
-
+	
+	public void updateBevandaMagazzino(User role, BevandaMagazzino bevanda){
+		try {
+			articolo.updateBevandaMagazzino(role, bevanda);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
+	}
+	
+	
+	public Articolo inserisciBevandaMenu(User role, Bevanda art){
+		
+		try {
+			art=articolo.inserisciBevandaMenu(role, art);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return art;
+	
+	}
+	
+	public BevandaMagazzino inserisciBevandaMagazzino(User role, Long id, Integer quantita){
+		BevandaMagazzino bevanda=null;
+		try {
+			bevanda=articolo.inserisciBevandaMagazzino(role, id, quantita);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return bevanda;
+	}
 
 }
