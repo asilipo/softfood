@@ -21,6 +21,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
+import com.sun.corba.se.internal.Interceptors.PIORB;
+
 /**
  * @author Maria Rosaria Paone
  * @author Marco Grasso
@@ -79,7 +81,8 @@ public class ArticoloMenuFacade  {
     }
 
     public ArrayList<Pietanza> selezionaPietanze(User role) {
-        return pietanzaSessionBean.selezionaPietanze();
+        ArrayList<Pietanza> pietanze = pietanzaSessionBean.selezionaPietanze();
+        return pietanze;
     }
 
     public ArrayList<Pietanza> selezionaPietanzeDisponibili(User role) {
@@ -203,7 +206,8 @@ public class ArticoloMenuFacade  {
     }
 
     public ArrayList<Bevanda> selezionaBevande(User role) {
-        return bevandaSessionBean.selezionaBevande();
+        ArrayList<Bevanda> bevande = bevandaSessionBean.selezionaBevande();
+        return bevande;
     }
 
     public ArrayList<Bevanda> selezionaBevandeDisponibili(User role) {
