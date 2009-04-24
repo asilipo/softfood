@@ -1,6 +1,7 @@
 package it.softfood.session;
 
 import it.softfood.entity.Articolo;
+import it.softfood.entity.Pietanza;
 
 import java.util.List;
 
@@ -64,13 +65,13 @@ public class ArticoloSession {
 
     public boolean rimuoviArticolo(Long id) {
 		try {
-			Articolo articolo = this.selezionaArticoloPerId(id);
-			if (articolo != null) {
-				session.delete(articolo);
-				return true;
+			Articolo articolo = (Articolo) session.get(Articolo.class, id);
+			if (articolo == null) {
+				articolo = (Articolo) this.selezionaArticoloPerId(id);
 			}
-
-			return false;
+			session.delete(articolo);
+			
+			return true;
 		} catch (Exception e) {
 			System.err.println("ArticoloSession#rimuoviArticolo");
 			return false;
