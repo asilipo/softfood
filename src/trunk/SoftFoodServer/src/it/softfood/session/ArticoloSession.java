@@ -48,6 +48,7 @@ public class ArticoloSession {
 			
 			return articolo;
 		} catch (Exception e) {
+			e.printStackTrace();
 			System.err.println("ArticoloSession#inserisciArticolo");
 			return null;
 		}	
