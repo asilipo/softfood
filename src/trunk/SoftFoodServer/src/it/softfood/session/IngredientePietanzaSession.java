@@ -41,7 +41,7 @@ public class IngredientePietanzaSession {
 		}
 	}
 	
-	public IngredientePietanza selezionaIngredientePietanzaPerId(Long id) {
+	public IngredientePietanza selezionaIngredientePietanzaPerId(IngredientePietanzaPK id) {
 		try {
 			IngredientePietanza ingredientePietanza = (IngredientePietanza) session.get(IngredientePietanza.class, id);
 			
@@ -68,7 +68,7 @@ public class IngredientePietanzaSession {
 		}
 	}
 	
-    public boolean rimuoviIngredientePietanza(Long id) {
+    public boolean rimuoviIngredientePietanza(IngredientePietanzaPK id) {
     	try {
     		IngredientePietanza ingredientePietanza = this.selezionaIngredientePietanzaPerId(id);
 			if (ingredientePietanza != null) {

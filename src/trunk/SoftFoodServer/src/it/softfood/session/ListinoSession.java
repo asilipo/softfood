@@ -1,6 +1,9 @@
 package it.softfood.session;
 
+import java.util.List;
+
 import it.softfood.entity.Listino;
+import it.softfood.entity.Menu;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -25,9 +28,11 @@ public class ListinoSession {
 	private Long getNewId() {
 		try {
 			Query q = session.createQuery("select max(id) from it.softfood.entity.Listino");
-		    Long id = (Long) q.list().get(0);
-		    
-			return (id + 1);
+			List list = q.list();
+		    Long id = ((Long)list.get(0));
+		    if (id == null)
+		    	id = 0L;
+		    return (id + 1);
 		} catch(Exception e) {
 			System.out.println("ListinoSession#getNewId");
 			return null;
@@ -39,7 +44,7 @@ public class ListinoSession {
 			Long id = this.getNewId();
 			listino.setId(id);
 			session.persist(listino);
-			listino = (Listino) session.get(Listino.class, listino);
+			listino = (Listino) session.get(Listino.class, listino.getId());
 			
 			return listino; 
 		} catch (Exception e) {
@@ -50,7 +55,9 @@ public class ListinoSession {
 	
 	public Listino selezionaListinoPerId(Long id) {
 		try {
-			Listino listino = (Listino) session.get(Listino.class, id);
+			Query q = session.createQuery("from it.softfood.entity.Listino l where l.id = ?");
+			q.setLong(0, id);
+			Listino listino = (Listino) q.uniqueResult();
 			
 			return listino;
 		} catch (Exception e) {

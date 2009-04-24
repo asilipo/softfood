@@ -1,5 +1,8 @@
 package it.softfood.session;
 
+import java.util.List;
+
+import it.softfood.entity.Articolo;
 import it.softfood.entity.Menu;
 
 import org.hibernate.Query;
@@ -48,9 +51,11 @@ public class MenuSession {
 		}
 	}
 	
-	public Menu selezionaMenuPerId(Long id) {
+	public Menu selezionaMenuPerId(String id) {
 		try {
-			Menu menu = (Menu) session.get(Menu.class, id);
+			Query q = session.createQuery("from it.softfood.entity.Menu m where m.id = ?");
+			q.setString(0, id);
+			Menu menu = (Menu)q.uniqueResult();
 			
 			return menu;
 		} catch (Exception e) {
@@ -59,7 +64,7 @@ public class MenuSession {
 		}
 	}
 	
-    public boolean rimuoviMenu(Long id) {
+    public boolean rimuoviMenu(String id) {
     	try {
     		Menu menu = this.selezionaMenuPerId(id);
 			if (menu != null) {

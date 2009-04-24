@@ -2,7 +2,9 @@ package it.softfood;
 
 import it.softfood.entity.Bevanda;
 import it.softfood.entity.IngredientePietanza;
+import it.softfood.entity.IngredientePietanzaPK;
 import it.softfood.entity.Listino;
+import it.softfood.entity.Menu;
 import it.softfood.entity.Ordinazione;
 import it.softfood.entity.Pietanza;
 import it.softfood.entity.Ristorante;
@@ -22,6 +24,7 @@ import it.softfood.handler.UserFacade;
 import it.softfood.login.LoginHandler;
 import it.softfood.session.IngredientePietanzaSession;
 import it.softfood.session.ListinoSession;
+import it.softfood.session.MenuSession;
 import it.softfood.session.OrdinazioneSession;
 import it.softfood.session.PietanzaSession;
 import it.softfood.session.RistoranteSession;
@@ -112,7 +115,7 @@ public class Start {
 //        UserFacade ut = UserFacade.getInstance();
 //
 //        LoginHandler facade = LoginHandler.getInstance();
-//        User user1 = iuser.login("mary", "mary");
+        User user1 = iuser.login("cuoco", "1234");
 
     
         //Maria
@@ -128,27 +131,29 @@ public class Start {
 //		System.out.println("Bevande "+ bevande.size());
 //		Ordinazione o=ord.selezionaOrdinazionePerId(user1, new Long(0));
 //		ord.rimuoviOrdinazione(user1, o.getId(), true);
-		ListinoSession ls = ListinoSession.getInstance();
-		Listino listino = ls.selezionaListinoPerId(0L);
+		MenuSession ms = MenuSession.getInstance();
+		Menu menu = ms.selezionaMenuPerId("Menu 1");
 		
-		IngredientePietanzaSession ips = IngredientePietanzaSession.getInstance();
-		IngredientePietanza ip1 = ips.selezionaIngredientePietanzaPerId(1L);
-		IngredientePietanza ip2 = ips.selezionaIngredientePietanzaPerId(2L);
-		HashSet<IngredientePietanza> ip = new HashSet<IngredientePietanza>();
-		ip.add(ip1);
-		ip.add(ip2);
+		ListinoSession ls = ListinoSession.getInstance();
+		Listino listino = new Listino();
+		
+		listino.setDescrizione("test_descrizione");
+		listino.setMenu(menu);
+		listino.setPrezzo(9.9);
+		
+		ls.inserisciListino(listino);
 		
 		PietanzaSession ps = PietanzaSession.getInstance();
 		Pietanza p = new Pietanza();
 		p.setDescrizione("test_descrizione");
-		p.setId(1000L);
-		p.setIngredientePietanzas(ip);
 		p.setListino(listino);
 		p.setNome("test_nome");
 		p.setTipo(TipoPietanza.ANTIPASTI);
-		p.setTipoArticolo(TipoPietanza.ANTIPASTI.toString());
+		p.setTipoArticolo("Pietanza");
 		p.setTipoPietanza(TipoPietanza.ANTIPASTI.ordinal());
-		ps.inserisciPietanza(p);
+		p=ps.inserisciPietanza(p);
+		
+		ps.rimuoviPietanza(p.getId());
 		
 		
 	}
