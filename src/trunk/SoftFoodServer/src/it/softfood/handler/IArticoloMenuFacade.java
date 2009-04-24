@@ -15,8 +15,12 @@ import java.util.HashMap;
 
 public interface IArticoloMenuFacade extends Remote{
 
-	public boolean update(User role, Object object, String tipo) throws RemoteException;
+	public boolean update(User role, Pietanza pietanza) throws RemoteException;
 	 
+	public boolean update(User role, Bevanda bevanda) throws RemoteException;
+	
+	public boolean update(User role, Ingrediente ingrediente) throws RemoteException;
+	
 	public BevandaMagazzino inserisciBevandaMagazzino(User role, Long id, Integer quantita) throws RemoteException;
 	
 	public Ingrediente inserisciIngrediente(User role, Ingrediente ingrediente) throws RemoteException;
