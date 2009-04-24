@@ -41,7 +41,7 @@ public class ArticoloMenuFacade  {
     
     private PietanzaSession pietanzaSession = PietanzaSession.getInstance();
  
-    private BevandaSession bevandaSessionBean = BevandaSession.getInstance();
+    private BevandaSession bevandaSession = BevandaSession.getInstance();
     
     private BevandaMagazzinoSession bevandaMagazzinoSession = BevandaMagazzinoSession.getInstance();
     
@@ -166,7 +166,7 @@ public class ArticoloMenuFacade  {
 
     public Integer selezionaDisponibilitaBevanda(User role,Long id) {
         if (id != null) {
-            Bevanda bevanda = bevandaSessionBean.selezionaBevandaPerId(id);
+            Bevanda bevanda = bevandaSession.selezionaBevandaPerId(id);
             ArrayList<BevandaMagazzino> bevandeMagazzino = (ArrayList<BevandaMagazzino>) bevandaMagazzinoSessionBeanRemote.selezionaBevandeMagazzino();
 
             for (BevandaMagazzino bevandaMagazzino : bevandeMagazzino) {
@@ -236,19 +236,34 @@ public class ArticoloMenuFacade  {
     }
 
     public ArrayList<Bevanda> selezionaBevande(User role) {
-        ArrayList<Bevanda> bevande = bevandaSessionBean.selezionaBevande();
+        ArrayList<Bevanda> bevande = bevandaSession.selezionaBevande();
         return bevande;
     }
     
-    public boolean update(User role, Object object, String tipo) {
-        if (object != null && tipo != null) {
-        	if (tipo.equalsIgnoreCase("Pietanza"))
-        		pietanzaSession.update((Pietanza) object);
-        	else if(tipo.equalsIgnoreCase("Bevanda"))
-        		bevandaSessionBean.update((Bevanda) object);
-        	else if(tipo.equalsIgnoreCase("Ingrediente"))
-        		ingredienteSession.update((Ingrediente) object);
-         		
+    public boolean update(User role, Bevanda bevanda) {
+        if (bevanda != null) {
+    		bevandaSession.update(bevanda);
+        		
+        	return true;
+        }
+        	
+        return false;
+    }
+    
+    public boolean update(User role, Pietanza pietanza) {
+        if (pietanza != null) {
+    		pietanzaSession.update(pietanza);
+        		
+        	return true;
+        }
+        	
+        return false;
+    }
+    
+    public boolean update(User role, Ingrediente ingrediente) {
+        if (ingrediente != null) {
+    		ingredienteSession.update(ingrediente);
+        		
         	return true;
         }
         	
