@@ -417,20 +417,6 @@ public class OrdinazioneFacade {
        
        lineaOrdinazioneSession.update(linea);
        
-       Ordinazione ordine=linea.getOrdinazione();
-       
-       Set<LineaOrdinazione> set=ordine.getLineaOrdinaziones();
-       
-       boolean terminate=true;
-       
-       for(LineaOrdinazione lin : set)
-    	   if(!lin.getEvaso())
-    		   terminate=false;
-       
-       if(terminate)
-    	   ordine.setTerminato(true);
-       
-       ordinazioneSession.update(ordine);
     }
 
     public Ingrediente selezionaIngredientePerNome (User role,String ingrediente) {
