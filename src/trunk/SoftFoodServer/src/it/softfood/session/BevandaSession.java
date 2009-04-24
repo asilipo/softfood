@@ -3,6 +3,7 @@ package it.softfood.session;
 import it.softfood.entity.Articolo;
 import it.softfood.entity.Bevanda;
 import it.softfood.entity.Pietanza;
+import it.softfood.enumeration.TipoPietanza;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -88,12 +89,30 @@ public class BevandaSession {
 
 	public ArrayList<Bevanda> selezionaBevande() {
 		try {
-			Query q = session.createQuery("from it.softfood.entity.Bevanda b");
-			ArrayList<Bevanda> list = (ArrayList<Bevanda>) q.list();
+			Query q = session.createQuery("from it.softfood.entity.Articolo o where tipoArticolo = 'Bevanda'");
+			List<Articolo> articoli = (List<Articolo>) q.list();
+			ArrayList<Pietanza> pietanze = new ArrayList<Pietanza>();
 			
-			return list;			
+			for (Articolo articolo : articoli) {
+				if (articolo.getTipoArticolo().equals("Pietanza")) {
+					Pietanza pietanza = new Pietanza();
+					pietanza.setDescrizione(articolo.getDescrizione());
+					pietanza.setId(articolo.getId());
+					pietanza.setIngredientePietanzas(articolo.getIngredientePietanzas());
+					pietanza.setLineaOrdinaziones(articolo.getLineaOrdinaziones());
+					pietanza.setListino(articolo.getListino());
+					pietanza.setNome(articolo.getNome());
+					pietanza.setTipo(TipoPietanza.values()[articolo.getTipoPietanza()]);
+					pietanza.setTipoArticolo(articolo.getTipoArticolo());
+					pietanza.setTipoPietanza(articolo.getTipoPietanza());
+					
+					pietanze.add(pietanza);
+				}
+			}
+			
+			return pietanze;
 		} catch (Exception e) {
-			System.err.println("BevandaSession#selezionaBevande");
+			System.err.println("PietanzaSession#selezionaPietanze");
 			return null;
 		}
 	}
