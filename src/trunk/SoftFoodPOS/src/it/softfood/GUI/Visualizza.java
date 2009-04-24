@@ -5,6 +5,14 @@
  */
 package it.softfood.GUI;
 
+import it.softfood.facade.POSArticoloMenuFacade;
+import it.softfood.facade.POSOrdinazioneFacade;
+import it.softfood.entity.Bevanda;
+import it.softfood.entity.Ingrediente;
+import it.softfood.entity.Pietanza;
+import it.softfood.entity.User;
+
+import java.util.ArrayList;
 import java.util.Vector;
 
 /**
@@ -15,23 +23,45 @@ public class Visualizza extends javax.swing.JPanel {
 
     private MainView frame;
     private String tipo;
+    private POSOrdinazioneFacade ordinazionefacade;
+    private POSArticoloMenuFacade articolofacade;
+    private User role;
 
     /** Creates new form Visualizza */
     public Visualizza(MainView frame, String tipo) {
         this.frame = frame;
         this.tipo = tipo;
         initComponents();
+        ordinazionefacade=new POSOrdinazioneFacade();
+        articolofacade=new POSArticoloMenuFacade();
+        role=frame.getUser();
         Vector<String> element = new Vector<String>();
+        String data[]=null;
+        ArrayList<Pietanza> pietanze;
+        ArrayList<Bevanda> bevande;
+        ArrayList<Ingrediente> ingredienti;
+        int i=0;
 
         if (tipo.equalsIgnoreCase("Pietanza")) {
-            element.add("LASAGNE ALLA BOLOGNESE");
+        	pietanze=articolofacade.selezionaPietanze(role);
+        	data=new String[pietanze.size()];
+        	for(Pietanza pietanza : pietanze)
+        		data[i++]=pietanza.getNome()+" - "+pietanza.getId();
         } else if (tipo.equalsIgnoreCase("Bevanda")) {
-            element.add("COCA COLA");
+            bevande=articolofacade.selezionaBevande(role);
+            data=new String[bevande.size()];
+            for(Bevanda bevanda : bevande)
+            	data[i++]=bevanda.getNome()+" - "+bevanda.getId();
         } else {
-            element.add("CAROTE");
+            ingredienti=articolofacade.selezionaIngredienti(role);
+            data=new String[ingredienti.size()];
+            for(Ingrediente ingrediente : ingredienti)
+            	data[i++]=ingrediente.getNome()+" - "+ingrediente.getId();
         }
+        
+        
 
-        jList1.setListData(element);
+        jList1.setListData(data);
     }
 
     /** This method is called from within the constructor to
@@ -106,6 +136,16 @@ public class Visualizza extends javax.swing.JPanel {
 
 private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 // TODO add your handling code here:
+	
+	String obj = (String) jList1.getSelectedValue();
+	System.out.println(obj);
+	Long id = Long.valueOf(obj.substring(obj.indexOf("-")+2));
+	System.out.println(id.toString());
+	
+	try{
+		articolofacade.rimuoviArticoloMenu(role, id);
+	}catch(Exception e){}
+	
     frame.getActualPanel().setVisible(false);
     Gestione gestione = new Gestione(frame);
     frame.setActualPanel(gestione);
@@ -114,6 +154,13 @@ private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 
 private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 // TODO add your handling code here:
+	
+	String obj = (String) jList1.getSelectedValue();
+	System.out.println(obj);
+	Long id = Long.valueOf(obj.substring(obj.indexOf("-")+2));
+	System.out.println(id.toString());
+	
+	
     frame.getActualPanel().setVisible(false);
 
     if (tipo.equalsIgnoreCase("Pietanza")) {
@@ -133,6 +180,13 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 
 private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
 // TODO add your handling code here:
+	
+	String obj = (String) jList1.getSelectedValue();
+	System.out.println(obj);
+	Long id = Long.valueOf(obj.substring(obj.indexOf("-")+2));
+	System.out.println(id.toString());
+	
+	
     frame.getActualPanel().setVisible(false);
 
     if (tipo.equalsIgnoreCase("Pietanza")) {
