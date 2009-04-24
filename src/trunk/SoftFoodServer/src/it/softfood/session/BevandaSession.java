@@ -155,7 +155,20 @@ public class BevandaSession {
 	}
 
 	public void update(Bevanda bevanda) {
-		session.update(bevanda);
+		if (bevanda != null) {
+			Articolo articolo = (Articolo) session.get(Bevanda.class, bevanda.getId());
+			if(articolo == null) {
+				articolo = new Articolo();
+				articolo.setDescrizione(bevanda.getDescrizione());
+				articolo.setId(bevanda.getId());
+				articolo.setLineaOrdinaziones(bevanda.getLineaOrdinaziones());
+				articolo.setListino(bevanda.getListino());
+				articolo.setNome(bevanda.getNome());
+				articolo.setTipoArticolo(bevanda.getTipoArticolo());
+				articolo.setTipoPietanza(bevanda.getTipoPietanza());
+			}
+			session.update(articolo);
+		}
 	}
 	
 }

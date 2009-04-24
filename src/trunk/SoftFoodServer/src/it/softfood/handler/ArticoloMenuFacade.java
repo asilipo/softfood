@@ -242,7 +242,7 @@ public class ArticoloMenuFacade  {
     
     public boolean updateBevanda(User role, Bevanda bevanda) {
         if (bevanda != null) {
-    		articoloSession.update(bevanda);
+    		bevandaSession.update(bevanda);
         		
         	return true;
         }
@@ -252,7 +252,7 @@ public class ArticoloMenuFacade  {
     
     public boolean updatePietanza(User role, Pietanza pietanza) {
         if (pietanza != null) {
-    		articoloSession.update(pietanza);
+    		pietanzaSession.update(pietanza);
         		
         	return true;
         }
