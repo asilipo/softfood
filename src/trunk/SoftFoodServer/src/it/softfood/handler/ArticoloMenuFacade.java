@@ -276,6 +276,16 @@ public class ArticoloMenuFacade  {
         return false;
     }
 
+    public boolean updateBevandaMagazzino(User role, BevandaMagazzino bevandaMagazzino) {
+        if (bevandaMagazzino != null) {
+        	bevandaMagazzinoSession.update(bevandaMagazzino);
+        		
+        	return true;
+        }
+        	
+        return false;
+    }
+    
     public ArrayList<Bevanda> selezionaBevandeDisponibili(User role) {
         ArrayList<BevandaMagazzino> bevandeMagazzino = (ArrayList<BevandaMagazzino>) bevandaMagazzinoSessionBeanRemote.selezionaBevandeMagazzinoPerQuantita(1);
 
