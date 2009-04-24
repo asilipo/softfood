@@ -2,8 +2,6 @@ package it.softfood.session;
 
 import it.softfood.entity.Articolo;
 import it.softfood.entity.Bevanda;
-import it.softfood.entity.Pietanza;
-import it.softfood.enumeration.TipoPietanza;
 
 import java.util.ArrayList;
 import java.util.List;

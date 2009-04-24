@@ -6,7 +6,6 @@ import it.softfood.entity.BevandaMagazzino;
 import it.softfood.entity.Ingrediente;
 import it.softfood.entity.IngredienteMagazzino;
 import it.softfood.entity.IngredientePietanza;
-import it.softfood.entity.Magazzino;
 import it.softfood.entity.Pietanza;
 import it.softfood.entity.User;
 import it.softfood.enumeration.TipoPietanza;
@@ -22,8 +21,6 @@ import it.softfood.session.PietanzaSession;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-
-import com.sun.corba.se.internal.Interceptors.PIORB;
 
 /**
  * @author Maria Rosaria Paone
@@ -269,7 +266,6 @@ public class ArticoloMenuFacade  {
     public boolean updateIngrediente(User role, Ingrediente ingrediente) {
         if (ingrediente != null) {
     		ingredienteSession.update(ingrediente);
-        		
         	return true;
         }
         	
@@ -312,9 +308,17 @@ public class ArticoloMenuFacade  {
         return null;
     }
 
-    public boolean rimuoviArticoloMenu(User role,Long id) {
+    public boolean rimuoviPietanzaMenu(User role,Long id) {
         if (id != null) {
-            return articoloSession.rimuoviArticolo(id);
+            return pietanzaSession.rimuoviPietanza(id);
+        }
+
+        return false;
+    }
+    
+    public boolean rimuoviBevandaMenu(User role,Long id) {
+        if (id != null) {
+            return bevandaSession.rimuoviBevanda(id);
         }
 
         return false;
