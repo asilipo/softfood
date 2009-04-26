@@ -22,7 +22,7 @@ public class Main {
 		POSOrdinazioneFacade ordiniFacade=new POSOrdinazioneFacade();
 		POSArticoloMenuFacade articoloFacade=new POSArticoloMenuFacade();
 		
-		User u=userFacade.login("cuoco", "1234");
+//		User u=userFacade.login("cuoco", "1234");
 		
 //		ArrayList<LineaOrdinazione> array=ordiniFacade.selezionaOrdinazioniGiornaliere(u);
 //		
@@ -34,14 +34,14 @@ public class Main {
 //		System.out.println("PIPPO "+array);
 //		System.out.println("LINEA "+linea);
 		
-		ArrayList<Bevanda> bevande=articoloFacade.selezionaBevande(u);
-		Bevanda bevanda=bevande.get(0);
-		
-		articoloFacade.updateBevanda(u, bevanda);
+//		ArrayList<Bevanda> bevande=articoloFacade.selezionaBevande(u);
+//		Bevanda bevanda=bevande.get(0);
 //		
-		
-		
-		userFacade.logout(u);
+//		articoloFacade.updateBevanda(u, bevanda);
+////		
+//		
+//		
+//		userFacade.logout(u);
 	}
 
 }
