@@ -95,6 +95,22 @@ public class ArticoloMenuFacade  {
 
         return null;
     }
+    
+    public IngredienteMagazzino inserisciIngredienteMagazzino(User role, Long id, Integer quantita) {
+        if (id != null) {
+        	IngredienteMagazzino ingredienteMagazzino = new IngredienteMagazzino();
+        	ingredienteMagazzino.setIngrediente(ingredienteSession.selezionaIngredientePerId(id));
+        	ingredienteMagazzino.setMagazzino(magazzinoSession.selezionaMagazzinoPerId(0L));
+        	if (quantita != null)
+        		ingredienteMagazzino.setQuantita(quantita);
+        	else
+        		ingredienteMagazzino.setQuantita(0);
+        	
+            return ingredienteMagazzinoSessionBeanRemote.inserisciIngredienteMagazzino(ingredienteMagazzino);
+        }
+
+        return null;
+    }
 
     public Articolo selezionaArticoloMenuPerId(User role,Long id) {
         if (id != null) {
@@ -102,6 +118,22 @@ public class ArticoloMenuFacade  {
         }
 
         return null;
+    }
+    
+    public Ingrediente selezionaIngredientePerNome(User role,String nome) {
+        if (nome != null) {
+            return (Ingrediente) ingredienteSession.selezionaIngredientePerNome(nome).get(0);
+        }
+
+        return null;
+    }
+    
+    public IngredientePietanza inserisciIngredientePietanza(User role, IngredientePietanza ingrediente){
+    	if(ingrediente!=null){
+    		ingrediente=ingredientePietanzaSessionBeanRemote.inserisciIngredientePietanza(ingrediente);
+    		return ingrediente;
+    	}
+    	return null;
     }
 
     public ArrayList<Pietanza> selezionaPietanzePerTipo(User role,TipoPietanza tipoPietanza) {
@@ -271,6 +303,27 @@ public class ArticoloMenuFacade  {
         	
         return false;
     }
+    
+    
+    public boolean updateIngredienteMagazzino(User role, IngredienteMagazzino ingredienteMagazzino) {
+        if (ingredienteMagazzino != null) {
+        	ingredienteMagazzinoSessionBeanRemote.update(ingredienteMagazzino);
+        		
+        	return true;
+        }
+        	
+        return false;
+    }
+    
+    public boolean updateIngredientePietanza(User role, IngredientePietanza ingredientePietanza) {
+        if (ingredientePietanza != null) {
+        	ingredientePietanzaSessionBeanRemote.update(ingredientePietanza);
+        		
+        	return true;
+        }
+        	
+        return false;
+    }
 
     public boolean updateBevandaMagazzino(User role, BevandaMagazzino bevandaMagazzino) {
         if (bevandaMagazzino != null) {
@@ -311,6 +364,14 @@ public class ArticoloMenuFacade  {
     public boolean rimuoviPietanzaMenu(User role,Long id) {
         if (id != null) {
             return pietanzaSession.rimuoviPietanza(id);
+        }
+
+        return false;
+    }
+    
+    public boolean rimuoviIngrediente(User role,Long id) {
+        if (id != null) {
+            return ingredienteSession.rimuoviIngrediente(id);
         }
 
         return false;

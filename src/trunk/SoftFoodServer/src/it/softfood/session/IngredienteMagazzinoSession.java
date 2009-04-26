@@ -41,7 +41,7 @@ public class IngredienteMagazzinoSession {
 			Long id = this.getNewId();
 			ingredienteMagazzino.setId(id);
 			session.persist(ingredienteMagazzino);
-			ingredienteMagazzino = (IngredienteMagazzino) session.get(IngredienteMagazzino.class, ingredienteMagazzino);
+			ingredienteMagazzino = (IngredienteMagazzino) session.get(IngredienteMagazzino.class, ingredienteMagazzino.getId());
 			
 			return ingredienteMagazzino;
 		} catch (Exception e) {
