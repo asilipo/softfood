@@ -13,6 +13,7 @@ import it.softfood.entity.Bevanda;
 import it.softfood.entity.BevandaMagazzino;
 import it.softfood.entity.Ingrediente;
 import it.softfood.entity.IngredientePietanza;
+import it.softfood.entity.IngredientePietanzaPK;
 import it.softfood.entity.Pietanza;
 import it.softfood.entity.User;
 import it.softfood.enumeration.TipoPietanza;
@@ -272,25 +273,30 @@ public class Nuova_pietanza extends javax.swing.JPanel {
 					.inserisciPietanzaMenu(role, pietanza);
 
 		HashSet<IngredientePietanza> set = new HashSet<IngredientePietanza>();
-		IngredientePietanza in=new IngredientePietanza();
+		IngredientePietanza in=null;
+		
 		
 		for(int i=0;i<data.length;i++){
+			in=new IngredientePietanza();
 			in.setArticolo(pietanza);
 			in.setIngrediente(articolo.selezionaIngredientePerNome(role, data[i]));
 			in.setQuantita(0);
+			in.setId(new IngredientePietanzaPK(articolo.selezionaIngredientePerNome(role, data[i]).getId(),pietanza.getId()));
 			set.add(in);
 		}
 		
-		pietanza.setIngredientePietanzas(set);
+//		pietanza.setIngredientePietanzas(set);
+		
+		System.out.println("SET "+set.size());
 
 //		articolo.inserisciIngredientePietanza(role, ingrediente)
 		
-		articolo.updatePietanza(role, pietanza);
+//		articolo.updatePietanza(role, pietanza);
 
 		frame.getActualPanel().setVisible(false);
-		Visualizza visualizza = new Visualizza(frame, "Pietanza");
-		frame.setActualPanel(visualizza);
-		frame.setComponent(visualizza);
+		Quantita quantita = new Quantita(frame, pietanza, set.toArray());
+		frame.setActualPanel(quantita);
+		frame.setComponent(quantita);
 	}
 
 	private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {
@@ -300,6 +306,8 @@ public class Nuova_pietanza extends javax.swing.JPanel {
 		frame.setActualPanel(visualizza);
 		frame.setComponent(visualizza);
 	}
+	
+	
 
 	// Variables declaration - do not modify
 	private javax.swing.JButton jButton1;
