@@ -78,19 +78,22 @@ public class ArticoloMenuFacade  {
         return null;
     }
     
-    public boolean inserisciIngredientiPietanze(User role, HashSet<IngredientePietanza> ingredientiPietanza) {
-        if (ingredientiPietanza != null) {
+    public HashSet<IngredientePietanza> inserisciIngredientiPietanze(User role, HashSet<IngredientePietanza> ingredientiPietanza) {
+    	HashSet<IngredientePietanza> ip = new HashSet<IngredientePietanza>();
+    	if (ingredientiPietanza != null) {
         	try {
 	        	for (IngredientePietanza ingredientePietanza : ingredientiPietanza)
-	        		if (ingredientePietanza != null)
-	        			ingredientePietanzaSession.inserisciIngredientePietanza(ingredientePietanza);
+	        		if (ingredientePietanza != null) {
+	        			ingredientePietanza = ingredientePietanzaSession.inserisciIngredientePietanza(ingredientePietanza);
+	        			ip.add(ingredientePietanza);
+	        		}
         	} catch (Exception e) {
         		System.out.println("ArticoloMenuFacade#inserisciIngredientiPietanze");
-        		return false;
+        		return null;
         	}
         }
 
-        return true;
+        return ip;
     }
     
     public BevandaMagazzino inserisciBevandaMagazzino(User role, Long id, Integer quantita) {
