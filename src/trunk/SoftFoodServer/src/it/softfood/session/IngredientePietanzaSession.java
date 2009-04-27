@@ -32,7 +32,7 @@ public class IngredientePietanzaSession {
 			ingredientePietanzaPK.setPietanza(ingredientePietanza.getArticolo().getId());
 			ingredientePietanza.setId(ingredientePietanzaPK);
 			session.persist(ingredientePietanza);
-			ingredientePietanza = (IngredientePietanza) session.get(IngredientePietanza.class, ingredientePietanza);
+			ingredientePietanza = (IngredientePietanza) session.get(IngredientePietanza.class, ingredientePietanza.getId());
 						
 			return ingredientePietanza; 
 		} catch (Exception e) {
