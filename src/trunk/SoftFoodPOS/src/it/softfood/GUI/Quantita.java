@@ -25,12 +25,14 @@ public class Quantita extends javax.swing.JPanel {
 	private POSArticoloMenuFacade articolo;
 	private User role;
 	private Pietanza pietanza;
+	private String tipo;
 
 	/** Creates new form Quantita */
-	public Quantita(MainView frame, Pietanza pietanza, Object[] ingredienti) {
+	public Quantita(MainView frame, Pietanza pietanza, Object[] ingredienti, String tipo) {
 		this.frame = frame;
 		this.ingredienti = ingredienti;
 		this.pietanza=pietanza;
+		this.tipo=tipo;
 		articolo=new POSArticoloMenuFacade();
 		role=frame.getUser();
 		initComponents();
@@ -70,7 +72,7 @@ public class Quantita extends javax.swing.JPanel {
 
 		for (int i = 0; i < ingredienti.length; i++) {
 			jLabel1[i].setText(((IngredientePietanza) ingredienti[i])
-					.getIngrediente().getNome()); // NOI18N
+					.getIngrediente().getNome()+" ("+((IngredientePietanza)ingredienti[i]).getIngrediente().getUnitaMisura()+")"); // NOI18N
 			jLabel1[i].setName("jLabel" + i); // NOI18N
 			jPanel1.add(jLabel1[i]);
 
@@ -79,6 +81,8 @@ public class Quantita extends javax.swing.JPanel {
 			jTextArea1[i].setColumns(10);
 			jTextArea1[i].setRows(2);
 			jTextArea1[i].setName("jTextArea" + i); // NOI18N
+			if(tipo.equalsIgnoreCase("MODIFICA"))
+				jTextArea1[i].setText(((Integer)((IngredientePietanza)ingredienti[i]).getQuantita()).toString());
 			jScrollPane1[i].setViewportView(jTextArea1[i]);
 
 			jPanel1.add(jScrollPane1[i]);
@@ -121,8 +125,10 @@ public class Quantita extends javax.swing.JPanel {
 				set.add((IngredientePietanza) ingredienti[i]);
 			}
 			
-			
-			set=articolo.inserisciIngredientiPietanze(role, set);
+			if(tipo.equalsIgnoreCase("NUOVO"))
+				set=articolo.inserisciIngredientiPietanze(role, set);
+			else
+				articolo.updateIndredientiPietanza(role, set);
 			
 			pietanza.setIngredientePietanzas(set);
 			
@@ -136,7 +142,7 @@ public class Quantita extends javax.swing.JPanel {
 			
 		}catch(Exception e){
 			frame.getActualPanel().setVisible(false);
-			Quantita quant = new Quantita(frame, pietanza, ingredienti);
+			Quantita quant = new Quantita(frame, pietanza, ingredienti,tipo);
 			frame.setActualPanel(quant);
 			frame.setComponent(quant);
 			

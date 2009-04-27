@@ -140,6 +140,16 @@ public class POSArticoloMenuFacade {
 		}
 
 	}
+	
+	public void updateIndredientiPietanza(User role, HashSet<IngredientePietanza> ingredientiPietanza) {
+		try {
+			articolo.updateIndredientiPietanza(role, ingredientiPietanza);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
 
 	public void updateIngredienteMagazzino(User role,
 			IngredienteMagazzino ingredienteMagazzino) {
