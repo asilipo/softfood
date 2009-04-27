@@ -27,19 +27,19 @@
             <column name="tipo_pietanza" />
         </property>
         <set name="ingredientePietanzas" lazy="false" inverse="true">
-            <key>
+            <key on-delete="noaction"> 
                 <column name="pietanza" not-null="true" />
             </key>
             <one-to-many class="it.softfood.entity.IngredientePietanza" />
         </set>
-        <set name="bevandaMagazzinos" lazy="false" inverse="true">
+        <set name="bevandaMagazzinos" cascade="delete" lazy="false" inverse="true">
             <key>
                 <column name="bevanda" />
             </key>
             <one-to-many class="it.softfood.entity.BevandaMagazzino" />
         </set>
-        <set name="lineaOrdinaziones" lazy="false" inverse="true">
-            <key>
+        <set name="lineaOrdinaziones" cascade="none" lazy="false" inverse="true">
+            <key on-delete="noaction">
                 <column name="articolo" not-null="true" />
             </key>
             <one-to-many class="it.softfood.entity.LineaOrdinazione" />

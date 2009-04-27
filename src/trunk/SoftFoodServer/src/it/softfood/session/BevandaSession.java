@@ -135,6 +135,7 @@ public class BevandaSession {
 			session.delete(articolo);
 			return true;
 		} catch (Exception e) {
+			e.printStackTrace();
 			System.err.println("PietanzaSession#rimuoviPietanza");
 			return false;
 		}
