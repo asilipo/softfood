@@ -13,6 +13,7 @@ import it.softfood.handler.IArticoloMenuFacade;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 /**
  * @author Maria Rosaria Paone
@@ -159,6 +160,19 @@ public class POSArticoloMenuFacade {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
+	}
+	
+	public HashSet<IngredientePietanza> inserisciIngredientiPietanze(User role, HashSet<IngredientePietanza> ingredientiPietanza) {
+
+		try {
+			ingredientiPietanza = articolo.inserisciIngredientiPietanze(role, ingredientiPietanza);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return ingredientiPietanza;
 
 	}
 
