@@ -119,7 +119,7 @@ public class Start {
 //        UserFacade ut = UserFacade.getInstance();
 //
 //        LoginHandler facade = LoginHandler.getInstance();
-        User user1 = iuser.login("cuoco", "1234");
+//        User user1 = iuser.login("cuoco", "1234");
 
     
         //Maria
@@ -135,7 +135,7 @@ public class Start {
 //		System.out.println("Bevande "+ bevande.size());
 //		Ordinazione o=ord.selezionaOrdinazionePerId(user1, new Long(0));
 //		ord.rimuoviOrdinazione(user1, o.getId(), true);
-		MenuSession ms = MenuSession.getInstance();
+/*		MenuSession ms = MenuSession.getInstance();
 		Menu menu = ms.selezionaMenuPerId("Menu 1");
 		
 		ListinoSession ls = ListinoSession.getInstance();
@@ -145,7 +145,7 @@ public class Start {
 		listino.setMenu(menu);
 		listino.setPrezzo(9.9);
 		
-		ls.inserisciListino(listino);
+		ls.inserisciListino(listino);*/
 		
 /*		PietanzaSession ps = PietanzaSession.getInstance();
 		Pietanza p = new Pietanza();
@@ -171,7 +171,7 @@ public class Start {
 		
 		//bs.rimuoviBevanda(80L);
 */		
-		IngredienteSession is = IngredienteSession.getInstance();
+/*		IngredienteSession is = IngredienteSession.getInstance();
 		Ingrediente i = new Ingrediente();
 		i.setDescrizione("test_descrizione");
 		//i.setIngredienteMagazzinos(ingredienteMagazzinos);
@@ -183,7 +183,7 @@ public class Start {
 		i.setVariante(false);
 		//i.setVariantes(variantes);
 		//is.inserisciIngrediente(i);
-		is.rimuoviIngrediente(48L);
+		is.rimuoviIngrediente(48L);*/
 	}
 	
 
