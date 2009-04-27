@@ -88,6 +88,7 @@ public class ArticoloMenuFacade  {
 	        			ip.add(ingredientePietanza);
 	        		}
         	} catch (Exception e) {
+        		e.printStackTrace();
         		System.out.println("ArticoloMenuFacade#inserisciIngredientiPietanze");
         		return null;
         	}
@@ -289,6 +290,22 @@ public class ArticoloMenuFacade  {
     public ArrayList<Bevanda> selezionaBevande(User role) {
         ArrayList<Bevanda> bevande = bevandaSession.selezionaBevande();
         return bevande;
+    }
+    
+    public boolean updateIndredientiPietanza(User role, HashSet<IngredientePietanza> ingredientiPietanza) {
+        if (ingredientiPietanza != null) {
+        	try {
+        		for (IngredientePietanza ingredientePietanza : ingredientiPietanza)
+        			ingredientePietanzaSession.update(ingredientePietanza);
+        		
+        		return true;
+        	} catch (Exception e) {
+        		System.err.println("ArticoloMenuFacade#updateIndredientiPietanza");
+        		return false;
+        	}
+        }
+        	
+        return false;
     }
     
     public boolean updateBevanda(User role, Bevanda bevanda) {

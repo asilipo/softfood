@@ -20,6 +20,8 @@ public interface IArticoloMenuFacade extends Remote {
 
 	public HashSet<IngredientePietanza> inserisciIngredientiPietanze(User role, HashSet<IngredientePietanza> ingredientiPietanza) throws RemoteException;
 	    
+	public boolean updateIndredientiPietanza(User role, HashSet<IngredientePietanza> ingredientiPietanza) throws RemoteException;
+		
 	public boolean updatePietanza(User role, Pietanza pietanza) throws RemoteException;
 	 
 	public boolean updateBevanda(User role, Bevanda bevanda) throws RemoteException;
