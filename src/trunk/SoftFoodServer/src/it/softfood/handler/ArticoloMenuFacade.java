@@ -21,6 +21,7 @@ import it.softfood.session.PietanzaSession;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 
 /**
  * @author Maria Rosaria Paone
@@ -44,12 +45,9 @@ public class ArticoloMenuFacade  {
     
     private IngredienteSession ingredienteSession = IngredienteSession.getInstance();
     
-    private IngredientePietanzaSession ingredientePietanzaSessionBeanRemote = IngredientePietanzaSession.getInstance();
+    private IngredientePietanzaSession ingredientePietanzaSession = IngredientePietanzaSession.getInstance();
     
-    private IngredienteMagazzinoSession ingredienteMagazzinoSessionBeanRemote = IngredienteMagazzinoSession.getInstance();
-   
-    private BevandaMagazzinoSession bevandaMagazzinoSessionBeanRemote = BevandaMagazzinoSession.getInstance();
-
+    private IngredienteMagazzinoSession ingredienteMagazzinoSession = IngredienteMagazzinoSession.getInstance();
     
     public synchronized static ArticoloMenuFacade getInstance() {
 		if (singleton == null) {
@@ -80,6 +78,21 @@ public class ArticoloMenuFacade  {
         return null;
     }
     
+    public boolean inserisciIngredientiPietanze(User role, HashSet<IngredientePietanza> ingredientiPietanza) {
+        if (ingredientiPietanza != null) {
+        	try {
+	        	for (IngredientePietanza ingredientePietanza : ingredientiPietanza)
+	        		if (ingredientePietanza != null)
+	        			ingredientePietanzaSession.inserisciIngredientePietanza(ingredientePietanza);
+        	} catch (Exception e) {
+        		System.out.println("ArticoloMenuFacade#inserisciIngredientiPietanze");
+        		return false;
+        	}
+        }
+
+        return true;
+    }
+    
     public BevandaMagazzino inserisciBevandaMagazzino(User role, Long id, Integer quantita) {
         if (id != null) {
         	BevandaMagazzino bevandaMagazzino = new BevandaMagazzino();
@@ -106,7 +119,7 @@ public class ArticoloMenuFacade  {
         	else
         		ingredienteMagazzino.setQuantita(0);
         	
-            return ingredienteMagazzinoSessionBeanRemote.inserisciIngredienteMagazzino(ingredienteMagazzino);
+            return ingredienteMagazzinoSession.inserisciIngredienteMagazzino(ingredienteMagazzino);
         }
 
         return null;
@@ -130,7 +143,7 @@ public class ArticoloMenuFacade  {
     
     public IngredientePietanza inserisciIngredientePietanza(User role, IngredientePietanza ingrediente){
     	if(ingrediente!=null){
-    		ingrediente=ingredientePietanzaSessionBeanRemote.inserisciIngredientePietanza(ingrediente);
+    		ingrediente=ingredientePietanzaSession.inserisciIngredientePietanza(ingrediente);
     		return ingrediente;
     	}
     	return null;
@@ -202,7 +215,7 @@ public class ArticoloMenuFacade  {
     public Integer selezionaDisponibilitaBevanda(User role,Long id) {
         if (id != null) {
             Bevanda bevanda = bevandaSession.selezionaBevandaPerId(id);
-            ArrayList<BevandaMagazzino> bevandeMagazzino = (ArrayList<BevandaMagazzino>) bevandaMagazzinoSessionBeanRemote.selezionaBevandeMagazzino();
+            ArrayList<BevandaMagazzino> bevandeMagazzino = (ArrayList<BevandaMagazzino>) bevandaMagazzinoSession.selezionaBevandeMagazzino();
 
             for (BevandaMagazzino bevandaMagazzino : bevandeMagazzino) {
                 if (bevandaMagazzino.getArticolo().getId().equals(id)) {
@@ -227,8 +240,8 @@ public class ArticoloMenuFacade  {
     }
 
     public Integer verificaIngredientiPietanza(User role,Pietanza pietanza) {
-        ArrayList<IngredientePietanza> ingredientiPietanze = (ArrayList<IngredientePietanza>) ingredientePietanzaSessionBeanRemote.selezionaIngredientiPietanze();
-        ArrayList<IngredienteMagazzino> ingredientiMagazzino = (ArrayList<IngredienteMagazzino>) ingredienteMagazzinoSessionBeanRemote.selezionaIngredientiMagazzino();
+        ArrayList<IngredientePietanza> ingredientiPietanze = (ArrayList<IngredientePietanza>) ingredientePietanzaSession.selezionaIngredientiPietanze();
+        ArrayList<IngredienteMagazzino> ingredientiMagazzino = (ArrayList<IngredienteMagazzino>) ingredienteMagazzinoSession.selezionaIngredientiMagazzino();
         Date data = new Date(System.currentTimeMillis());
 
         int contatore = 0;
@@ -307,7 +320,7 @@ public class ArticoloMenuFacade  {
     
     public boolean updateIngredienteMagazzino(User role, IngredienteMagazzino ingredienteMagazzino) {
         if (ingredienteMagazzino != null) {
-        	ingredienteMagazzinoSessionBeanRemote.update(ingredienteMagazzino);
+        	ingredienteMagazzinoSession.update(ingredienteMagazzino);
         		
         	return true;
         }
@@ -317,7 +330,7 @@ public class ArticoloMenuFacade  {
     
     public boolean updateIngredientePietanza(User role, IngredientePietanza ingredientePietanza) {
         if (ingredientePietanza != null) {
-        	ingredientePietanzaSessionBeanRemote.update(ingredientePietanza);
+        	ingredientePietanzaSession.update(ingredientePietanza);
         		
         	return true;
         }
@@ -336,7 +349,7 @@ public class ArticoloMenuFacade  {
     }
     
     public ArrayList<Bevanda> selezionaBevandeDisponibili(User role) {
-        ArrayList<BevandaMagazzino> bevandeMagazzino = (ArrayList<BevandaMagazzino>) bevandaMagazzinoSessionBeanRemote.selezionaBevandeMagazzinoPerQuantita(1);
+        ArrayList<BevandaMagazzino> bevandeMagazzino = (ArrayList<BevandaMagazzino>) bevandaMagazzinoSession.selezionaBevandeMagazzinoPerQuantita(1);
 
         if (bevandeMagazzino != null && bevandeMagazzino.size() > 0) {
             ArrayList<Bevanda> bevande = new ArrayList<Bevanda>();
@@ -392,7 +405,7 @@ public class ArticoloMenuFacade  {
     public ArrayList<Ingrediente> selezionaIngredientiPietanza(User role,Long id) {
         if (id != null) {
             ArrayList<Ingrediente> ingredienti = new ArrayList<Ingrediente>();
-            ArrayList<IngredientePietanza> ingredientiPietanze = (ArrayList<IngredientePietanza>) ingredientePietanzaSessionBeanRemote.selezionaIngredientiPietanze();
+            ArrayList<IngredientePietanza> ingredientiPietanze = (ArrayList<IngredientePietanza>) ingredientePietanzaSession.selezionaIngredientiPietanze();
 
             if (ingredientiPietanze != null) {
                 for (IngredientePietanza ingredientePietanza : ingredientiPietanze) {
