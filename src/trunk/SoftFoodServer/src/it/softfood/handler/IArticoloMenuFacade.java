@@ -18,7 +18,7 @@ import java.util.HashSet;
 
 public interface IArticoloMenuFacade extends Remote {
 
-	public boolean inserisciIngredientiPietanze(User role, HashSet<IngredientePietanza> ingredientiPietanza) throws RemoteException;
+	public HashSet<IngredientePietanza> inserisciIngredientiPietanze(User role, HashSet<IngredientePietanza> ingredientiPietanza) throws RemoteException;
 	    
 	public boolean updatePietanza(User role, Pietanza pietanza) throws RemoteException;
 	 
