@@ -20,7 +20,7 @@
         <property name="evaso" type="boolean">
             <column name="evaso" not-null="true" />
         </property>
-        <set name="variantes" lazy="false" inverse="true">
+        <set name="variantes" cascade="none" lazy="false" inverse="true">
             <key>
                 <column name="linea_ordinazione" not-null="true" />
             </key>

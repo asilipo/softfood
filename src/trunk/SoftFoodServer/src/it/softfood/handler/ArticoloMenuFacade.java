@@ -375,31 +375,43 @@ public class ArticoloMenuFacade  {
     }
 
     public boolean rimuoviPietanzaMenu(User role,Long id) {
-        if (id != null) {
-            return pietanzaSession.rimuoviPietanza(id);
-        }
-
-        return false;
+    	try {
+	        if (id != null) {
+	            return pietanzaSession.rimuoviPietanza(id);
+	        }
+	
+	        return false;
+    	} catch (Exception e) {
+    		return false;
+    	}
     }
     
     public boolean rimuoviIngrediente(User role,Long id) {
-        if (id != null) {
-            return ingredienteSession.rimuoviIngrediente(id);
-        }
-
-        return false;
+    	try {
+	        if (id != null) {
+	            return ingredienteSession.rimuoviIngrediente(id);
+	        }
+	        return false;
+    	} catch (Exception e) {
+    		return false;
+    	}
     }
     
     public boolean rimuoviBevandaMenu(User role, Long id) {
-        if (id != null) {
-        	Bevanda bevanda = bevandaSession.selezionaBevandaPerId(id);
-        	try {
-        		bevandaMagazzinoSession.rimuoviBevandaMagazzino(((BevandaMagazzino)bevanda.getBevandaMagazzinos().toArray()[0]).getId());
-        	} catch (Exception e){}
-        	return bevandaSession.rimuoviBevanda(id);
-        }
+    	try {
+	        if (id != null) {
+	        	Bevanda bevanda = bevandaSession.selezionaBevandaPerId(id);
+/*	        	try {
+	        		bevandaMagazzinoSession.rimuoviBevandaMagazzino(((BevandaMagazzino)bevanda.getBevandaMagazzinos().toArray()[0]).getId());
+	        	} catch (Exception e){}*/
+	        	return bevandaSession.rimuoviBevanda(id);
+	        }
 
-        return false;
+	        return false;
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    		return false;
+    	}
     }
 
     public ArrayList<Ingrediente> selezionaIngredientiPietanza(User role,Long id) {
