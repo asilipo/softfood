@@ -11,7 +11,7 @@
         <many-to-one lazy="false" name="ordinazione" class="it.softfood.entity.Ordinazione" fetch="select">
             <column name="ordinazione" not-null="true" />
         </many-to-one>
-        <many-to-one lazy="false"  name="articolo" class="it.softfood.entity.Articolo" fetch="select">
+        <many-to-one lazy="false" cascade="none" name="articolo" class="it.softfood.entity.Articolo" fetch="select">
             <column name="articolo" not-null="true" />
         </many-to-one>
         <property name="quantita" type="int">
