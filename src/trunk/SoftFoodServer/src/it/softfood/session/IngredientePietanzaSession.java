@@ -36,6 +36,7 @@ public class IngredientePietanzaSession {
 						
 			return ingredientePietanza; 
 		} catch (Exception e) {
+			e.printStackTrace();
 			System.err.println("IngredientePietanzaSession#inserisciIngredientePietanza");
 			return null;
 		}
