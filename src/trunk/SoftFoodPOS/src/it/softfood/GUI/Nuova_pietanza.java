@@ -272,7 +272,10 @@ public class Nuova_pietanza extends javax.swing.JPanel {
 			pietanza = (Pietanza) articolo
 					.inserisciPietanzaMenu(role, pietanza);
 
-		HashSet<IngredientePietanza> set = new HashSet<IngredientePietanza>();
+		HashSet<IngredientePietanza> set = null;
+		
+		
+		set=new HashSet<IngredientePietanza>();
 		IngredientePietanza in=null;
 		
 		
@@ -294,7 +297,7 @@ public class Nuova_pietanza extends javax.swing.JPanel {
 //		articolo.updatePietanza(role, pietanza);
 
 		frame.getActualPanel().setVisible(false);
-		Quantita quantita = new Quantita(frame, pietanza, set.toArray());
+		Quantita quantita = new Quantita(frame, pietanza, set.toArray(),tipo);
 		frame.setActualPanel(quantita);
 		frame.setComponent(quantita);
 	}
