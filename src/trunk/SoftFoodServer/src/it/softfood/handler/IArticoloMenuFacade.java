@@ -14,9 +14,12 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 
 public interface IArticoloMenuFacade extends Remote{
 
+	public boolean inserisciIngredientiPietanze(User role, HashSet<IngredientePietanza> ingredientiPietanza) throws RemoteException;
+	
 	public boolean updatePietanza(User role, Pietanza pietanza) throws RemoteException;
 	 
 	public boolean updateBevanda(User role, Bevanda bevanda) throws RemoteException;
