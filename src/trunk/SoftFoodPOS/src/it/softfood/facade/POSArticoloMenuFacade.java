@@ -1,6 +1,5 @@
 package it.softfood.facade;
 
-import it.softfood.entity.Articolo;
 import it.softfood.entity.Bevanda;
 import it.softfood.entity.BevandaMagazzino;
 import it.softfood.entity.Ingrediente;
@@ -8,7 +7,6 @@ import it.softfood.entity.IngredienteMagazzino;
 import it.softfood.entity.IngredientePietanza;
 import it.softfood.entity.Pietanza;
 import it.softfood.entity.User;
-import it.softfood.handler.ArticoloMenuFacade;
 import it.softfood.handler.IArticoloMenuFacade;
 
 import java.rmi.RemoteException;
@@ -32,7 +30,6 @@ public class POSArticoloMenuFacade {
 		try {
 			ingr = articolo.selezionaIngredientiPietanza(role, id);
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return ingr;
@@ -44,7 +41,6 @@ public class POSArticoloMenuFacade {
 		try {
 			ingr = articolo.selezionaIngredientePerNome(role, nome);
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return ingr;
@@ -55,7 +51,6 @@ public class POSArticoloMenuFacade {
 		try {
 			pietanze = articolo.selezionaPietanze(role);
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return pietanze;
@@ -66,7 +61,6 @@ public class POSArticoloMenuFacade {
 		try {
 			bevande = articolo.selezionaBevande(role);
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
 		return bevande;
@@ -77,7 +71,6 @@ public class POSArticoloMenuFacade {
 		try {
 			ingrediente = articolo.selezionaIngredienti(role);
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return ingrediente;
@@ -91,12 +84,12 @@ public class POSArticoloMenuFacade {
 		} 
 	}
 	
-	public void rimuoviIngrediente(User role, Long id) {
+	public boolean rimuoviIngrediente(User role, Long id) {
 		try {
-			articolo.rimuoviIngrediente(role, id);
+			return articolo.rimuoviIngrediente(role, id);
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return false;
 		}
 	}
 
@@ -104,7 +97,6 @@ public class POSArticoloMenuFacade {
 		try {
 			return articolo.rimuoviPietanzaMenu(role, id);
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return false;
 		}
@@ -114,7 +106,6 @@ public class POSArticoloMenuFacade {
 		try {
 			articolo.updateBevanda(role, bevanda);
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
