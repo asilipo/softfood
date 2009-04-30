@@ -11,7 +11,12 @@ import it.softfood.enumeration.TipoPietanza;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
-import java.util.Date;
+
+/**
+ * @author Maria Rosaria Paone
+ * @author Marco Grasso
+ * @author Francesco Pacilio
+ */
 
 public interface IOrdinazioneFacade  extends Remote{
 
