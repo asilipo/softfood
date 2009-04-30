@@ -12,10 +12,10 @@
                 <column name="pietanza" />
             </key-property>
         </composite-id>
-        <many-to-one cascade="none" name="articolo" lazy="false" class="it.softfood.entity.Articolo" update="false" insert="false" fetch="select">
+        <many-to-one name="articolo" lazy="false" class="it.softfood.entity.Articolo" update="false" insert="false" fetch="select">
             <column name="pietanza" not-null="true" />
         </many-to-one>
-        <many-to-one cascade="none" name="ingrediente" lazy="false" class="it.softfood.entity.Ingrediente" update="false" insert="false" fetch="select">
+        <many-to-one name="ingrediente" lazy="false" class="it.softfood.entity.Ingrediente" update="false" insert="false" fetch="select">
             <column name="ingrediente" not-null="true" />
         </many-to-one>
         <property name="quantita" type="int">
