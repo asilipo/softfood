@@ -54,6 +54,7 @@ public class Ordini extends javax.swing.JPanel implements ActionListener {
 		int delay = 10000; // milliseconds
 		
 		timer=new Timer(delay, this);
+		frame.setTimer(timer);
 		timer.start();
 
 	}
