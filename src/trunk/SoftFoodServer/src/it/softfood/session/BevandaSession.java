@@ -2,6 +2,7 @@ package it.softfood.session;
 
 import it.softfood.entity.Articolo;
 import it.softfood.entity.Bevanda;
+import it.softfood.exception.ViolazioneVincoliRimozioneBevandaException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -116,7 +117,7 @@ public class BevandaSession {
 		}
 	}
 
-	public boolean rimuoviBevanda(Long id) {
+	public boolean rimuoviBevanda(Long id) throws ViolazioneVincoliRimozioneBevandaException {
 		try {
 	  		Articolo articolo = (Articolo) session.get(Articolo.class, id);
 	  		if (articolo == null) {
@@ -135,10 +136,9 @@ public class BevandaSession {
 			session.delete(articolo);
 			return true;
 		} catch (Exception e) {
-			e.printStackTrace();
-			System.err.println("PietanzaSession#rimuoviPietanza");
-			return false;
-		}
+			//e.printStackTrace();
+			throw new ViolazioneVincoliRimozioneBevandaException(e.getMessage());
+		} 
 	}
 
 	public void flush() {
