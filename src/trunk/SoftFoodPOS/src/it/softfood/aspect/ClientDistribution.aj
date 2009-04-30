@@ -1,5 +1,6 @@
 package it.softfood.aspect;
 
+import it.softfood.exception.ViolazioneVincoliRimozioneBevandaException;
 import it.softfood.handler.IArticoloMenuFacade;
 import it.softfood.handler.IOrdinazioneFacade;
 import it.softfood.handler.IRistoranteFacade;
@@ -44,46 +45,56 @@ public aspect ClientDistribution {
 
 	Object around(): distributeRistoranteFacadeCalls()  {
 		Object obj = null;
+
 		obj = ExecuteMetod.invoke(ristorantefacade, thisJoinPoint.getSignature()
 				.getName(), thisJoinPoint.getArgs());
+
 		return obj;
 	}
-	
+
 	pointcut distributeTavoloFacadeCalls(): execution(* it.softfood.facade.POSTavoloFacade.*(..)) && !execution(it.softfood.facade.POSTavoloFacade.new(..));
 
 	Object around(): distributeTavoloFacadeCalls()  {
 		Object obj = null;
+
 		obj = ExecuteMetod.invoke(tavolofacade, thisJoinPoint.getSignature()
 				.getName(), thisJoinPoint.getArgs());
+
 		return obj;
 	}
-	
+
 	pointcut distributeOrdinazioneFacadeCalls(): execution(* it.softfood.facade.POSOrdinazioneFacade.*(..)) && !execution(it.softfood.facade.POSOrdinazioneFacade.new(..));
 
 	Object around(): distributeOrdinazioneFacadeCalls()  {
 		Object obj = null;
+
 		obj = ExecuteMetod.invoke(ordinazionefacade, thisJoinPoint.getSignature()
 				.getName(), thisJoinPoint.getArgs());
+
 		Object[] params = thisJoinPoint.getArgs();
 		return obj;
 	}
-	
+
 	pointcut distributeArticoloFacadeCalls(): execution(* it.softfood.facade.POSArticoloMenuFacade.*(..)) && !execution(it.softfood.facade.POSArticoloMenuFacade.new(..));
 
 	Object around(): distributeArticoloFacadeCalls()  {
 		Object obj = null;
+
 		obj = ExecuteMetod.invoke(articolofacade, thisJoinPoint.getSignature()
 				.getName(), thisJoinPoint.getArgs());
+
 		Object[] params = thisJoinPoint.getArgs();
 		return obj;
 	}
-	
+
 	pointcut distributeUserFacadeCalls(): execution(* it.softfood.facade.POSUserFacade.*(..)) && !execution(it.softfood.facade.POSUserFacade.new(..));
 
 	Object around(): distributeUserFacadeCalls()  {
 		Object obj = null;
+
 		obj = ExecuteMetod.invoke(userfacade, thisJoinPoint.getSignature()
 				.getName(), thisJoinPoint.getArgs());
+
 		Object[] params = thisJoinPoint.getArgs();
 		return obj;
 	}

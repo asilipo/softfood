@@ -1,8 +1,13 @@
 package it.softfood.aspect;
 
-
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+
+/**
+ * @author Maria Rosaria Paone
+ * @author Marco Grasso
+ * @author Francesco Pacilio
+ */
 
 public class ExecuteMetod {
 
