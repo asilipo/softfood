@@ -419,7 +419,7 @@ public class ArticoloMenuFacade  {
     	}
     }
     
-    public boolean rimuoviBevandaMenu(User role, Long id) throws ViolazioneVincoliRimozioneBevandaException {
+    public boolean rimuoviBevandaMenu(User role, Long id) {
     	try {
 	        if (id != null) {
 	        	Bevanda bevanda = bevandaSession.selezionaBevandaPerId(id);
@@ -433,10 +433,7 @@ public class ArticoloMenuFacade  {
 	        }
 
 	        return false;
-    	} catch (ViolazioneVincoliRimozioneBevandaException vvrbe) {
-    		throw new ViolazioneVincoliRimozioneBevandaException(vvrbe.getMessage());
     	} catch (Exception e) {
-    		e.printStackTrace();
     		return false;
     	} 
     }

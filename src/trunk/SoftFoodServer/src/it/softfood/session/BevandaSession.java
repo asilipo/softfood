@@ -136,8 +136,7 @@ public class BevandaSession {
 			session.delete(articolo);
 			return true;
 		} catch (Exception e) {
-			//e.printStackTrace();
-			throw new ViolazioneVincoliRimozioneBevandaException(e.getMessage());
+			throw new ViolazioneVincoliRimozioneBevandaException("Violazione vincoli - rimozione bevanda");
 		} 
 	}
 
