@@ -94,7 +94,7 @@ public class Visualizza extends javax.swing.JPanel {
 
 		org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application
 				.getInstance(it.softfood.GUI.Main.class).getContext()
-					.getResourceMap(Visualizza.class);
+				.getResourceMap(Visualizza.class);
 		jList1.setFont(resourceMap.getFont("jList1.font"));
 		jList1.setName("jList1");
 		jList1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -108,10 +108,10 @@ public class Visualizza extends javax.swing.JPanel {
 
 		add(jPanel1, java.awt.BorderLayout.CENTER);
 
-		jPanel2.setName("jPanel2"); 
+		jPanel2.setName("jPanel2");
 		jPanel2.setLayout(new java.awt.GridLayout(1, 3, 5, 5));
 
-		jButton1.setText(resourceMap.getString("jButton1.text")); 
+		jButton1.setText(resourceMap.getString("jButton1.text"));
 		jButton1.setName("jButton1");
 		jButton1.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -155,18 +155,35 @@ public class Visualizza extends javax.swing.JPanel {
 		Long id = Long.valueOf(obj.substring(obj.lastIndexOf("-") + 2));
 		System.out.println(id.toString());
 
-		try {
-			if (tipo.equalsIgnoreCase("Pietanza")) {
-				if(!articolofacade.rimuoviBevandaMenu(role, id)) {
-					JOptionPane.showMessageDialog(frame.getComponent(), "Cancellazione non eseguita - pietanza presente in ordinazioni!", "Violazione vincoli", JOptionPane.ERROR_MESSAGE);
+		int n = JOptionPane.showConfirmDialog(frame.getComponent(),
+				"Sei sicuro di voler cancellare l'articolo selezionato?",
+				"Rimozione", JOptionPane.YES_NO_OPTION);
+
+		if (n == JOptionPane.YES_OPTION) {
+			try {
+				if (tipo.equalsIgnoreCase("Pietanza")) {
+					if (!articolofacade.rimuoviPietanzaMenu(role, id)) {
+						JOptionPane
+								.showMessageDialog(
+										frame.getComponent(),
+										"Cancellazione non eseguita - pietanza presente in ordinazioni!",
+										"Violazione vincoli",
+										JOptionPane.ERROR_MESSAGE);
+					}
+				} else if (tipo.equalsIgnoreCase("Bevanda")) {
+					if (!articolofacade.rimuoviBevandaMenu(role, id))
+						JOptionPane
+								.showMessageDialog(
+										frame.getComponent(),
+										"Cancellazione non eseguita - bevanda presente in ordinazioni!",
+										"Violazione vincoli",
+										JOptionPane.ERROR_MESSAGE);
+				} else {
+					articolofacade.rimuoviIngrediente(role, id);
 				}
-			} else if (tipo.equalsIgnoreCase("Bevanda")) {
-				if (!articolofacade.rimuoviBevandaMenu(role, id))
-					JOptionPane.showMessageDialog(frame.getComponent(), "Cancellazione non eseguita - bevanda presente in ordinazioni!", "Violazione vincoli", JOptionPane.ERROR_MESSAGE);
-			} else {
-				articolofacade.rimuoviIngrediente(role, id);
+			} catch (Exception e) {
 			}
-		} catch (Exception e) {}
+		}
 
 		frame.getActualPanel().setVisible(false);
 		Gestione gestione = new Gestione(frame);
