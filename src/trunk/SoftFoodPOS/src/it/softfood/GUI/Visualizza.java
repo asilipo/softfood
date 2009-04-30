@@ -179,7 +179,13 @@ public class Visualizza extends javax.swing.JPanel {
 										"Violazione vincoli",
 										JOptionPane.ERROR_MESSAGE);
 				} else {
-					articolofacade.rimuoviIngrediente(role, id);
+					if(!articolofacade.rimuoviIngrediente(role, id))
+						JOptionPane
+						.showMessageDialog(
+								frame.getComponent(),
+								"Cancellazione non eseguita - ingrediente presente in pietanze!",
+								"Violazione vincoli",
+								JOptionPane.ERROR_MESSAGE);
 				}
 			} catch (Exception e) {
 			}
