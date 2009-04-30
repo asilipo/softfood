@@ -11,9 +11,12 @@ import it.softfood.entity.Bevanda;
 import it.softfood.entity.Ingrediente;
 import it.softfood.entity.Pietanza;
 import it.softfood.entity.User;
+import it.softfood.exception.ViolazioneVincoliRimozioneBevandaException;
 
 import java.util.ArrayList;
 import java.util.Vector;
+
+import javax.swing.JOptionPane;
 
 /**
  * 
@@ -151,7 +154,7 @@ public class Visualizza extends javax.swing.JPanel {
 	}
 
 	private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton2ActionPerformed
-	// TODO add your handling code here:
+		// TODO add your handling code here:
 
 		String obj = (String) jList1.getSelectedValue();
 		System.out.println(obj);
@@ -159,13 +162,17 @@ public class Visualizza extends javax.swing.JPanel {
 		System.out.println(id.toString());
 
 		try {
-			if(tipo.equalsIgnoreCase("Pietanza"))
+			if (tipo.equalsIgnoreCase("Pietanza"))
 				articolofacade.rimuoviBevandaMenu(role, id);
-			else if(tipo.equalsIgnoreCase("Bevanda"))
+			else if (tipo.equalsIgnoreCase("Bevanda"))
 				articolofacade.rimuoviBevandaMenu(role, id);
 			else
 				articolofacade.rimuoviIngrediente(role, id);
+		} catch (ViolazioneVincoliRimozioneBevandaException vincoli) {
+			JOptionPane.showMessageDialog(frame.getComponent(), "ERRORE NELLA CANCELLAZIONE DELLA BEVANDA!","Violazione Vincoli",JOptionPane.ERROR_MESSAGE);
 		} catch (Exception e) {
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(frame.getComponent(), "ERRORE NELLA CANCELLAZIONE DELL'ARTICOLO!","Violazione Vincoli",JOptionPane.ERROR_MESSAGE);
 		}
 
 		frame.getActualPanel().setVisible(false);
@@ -175,12 +182,13 @@ public class Visualizza extends javax.swing.JPanel {
 	}// GEN-LAST:event_jButton2ActionPerformed
 
 	private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton1ActionPerformed
-	// TODO add your handling code here:
+		// TODO add your handling code here:
 
 		frame.getActualPanel().setVisible(false);
 
 		if (tipo.equalsIgnoreCase("Pietanza")) {
-			Nuova_pietanza pietanza = new Nuova_pietanza(frame, new Pietanza(), "NUOVO");
+			Nuova_pietanza pietanza = new Nuova_pietanza(frame, new Pietanza(),
+					"NUOVO");
 			frame.setActualPanel(pietanza);
 			frame.setComponent(pietanza);
 		} else if (tipo.equalsIgnoreCase("Bevanda")) {
@@ -197,7 +205,7 @@ public class Visualizza extends javax.swing.JPanel {
 	}// GEN-LAST:event_jButton1ActionPerformed
 
 	private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton3ActionPerformed
-	// TODO add your handling code here:
+		// TODO add your handling code here:
 
 		String obj = (String) jList1.getSelectedValue();
 		System.out.println(obj);
@@ -207,8 +215,8 @@ public class Visualizza extends javax.swing.JPanel {
 		frame.getActualPanel().setVisible(false);
 
 		if (tipo.equalsIgnoreCase("Pietanza")) {
-			Nuova_pietanza pietanza = new Nuova_pietanza(frame, pietanze.get(jList1
-					.getSelectedIndex()), "MODIFICA");
+			Nuova_pietanza pietanza = new Nuova_pietanza(frame, pietanze
+					.get(jList1.getSelectedIndex()), "MODIFICA");
 			frame.setActualPanel(pietanza);
 			frame.setComponent(pietanza);
 		} else if (tipo.equalsIgnoreCase("Bevanda")) {

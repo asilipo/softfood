@@ -8,6 +8,7 @@ import it.softfood.entity.IngredienteMagazzino;
 import it.softfood.entity.IngredientePietanza;
 import it.softfood.entity.Pietanza;
 import it.softfood.entity.User;
+import it.softfood.exception.ViolazioneVincoliRimozioneBevandaException;
 import it.softfood.handler.ArticoloMenuFacade;
 import it.softfood.handler.IArticoloMenuFacade;
 
@@ -84,12 +85,16 @@ public class POSArticoloMenuFacade {
 		return ingrediente;
 	}
 
-	public void rimuoviBevandaMenu(User role, Long id) {
+	public void rimuoviBevandaMenu(User role, Long id) throws ViolazioneVincoliRimozioneBevandaException {
 		try {
 			articolo.rimuoviBevandaMenu(role, id);
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (ViolazioneVincoliRimozioneBevandaException e) {
+			// TODO Auto-generated catch block
+			throw new ViolazioneVincoliRimozioneBevandaException(e.getMessage());
+			
 		}
 	}
 	
