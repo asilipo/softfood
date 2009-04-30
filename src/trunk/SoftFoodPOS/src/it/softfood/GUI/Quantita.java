@@ -14,6 +14,8 @@ import it.softfood.facade.POSArticoloMenuFacade;
 import java.util.ArrayList;
 import java.util.HashSet;
 
+import javax.swing.JOptionPane;
+
 /**
  * 
  * @author marcograsso
@@ -141,6 +143,7 @@ public class Quantita extends javax.swing.JPanel {
 			
 			
 		}catch(Exception e){
+			JOptionPane.showMessageDialog(frame.getComponent(), "ERRORE NELL'INSERIMENTO DELLE QUANTITA'!","Errore Quantita'",JOptionPane.ERROR_MESSAGE);
 			frame.getActualPanel().setVisible(false);
 			Quantita quant = new Quantita(frame, pietanza, ingredienti,tipo);
 			frame.setActualPanel(quant);

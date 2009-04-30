@@ -101,12 +101,13 @@ public class POSArticoloMenuFacade {
 		}
 	}
 
-	public void rimuoviPietanzaMenu(User role, Long id) {
+	public boolean rimuoviPietanzaMenu(User role, Long id) {
 		try {
-			articolo.rimuoviPietanzaMenu(role, id);
+			return articolo.rimuoviPietanzaMenu(role, id);
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return false;
 		}
 	}
 
