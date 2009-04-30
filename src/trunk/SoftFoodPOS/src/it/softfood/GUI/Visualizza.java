@@ -157,10 +157,12 @@ public class Visualizza extends javax.swing.JPanel {
 
 		try {
 			if (tipo.equalsIgnoreCase("Pietanza")) {
-				articolofacade.rimuoviBevandaMenu(role, id);
+				if(!articolofacade.rimuoviBevandaMenu(role, id)) {
+					JOptionPane.showMessageDialog(frame.getComponent(), "Cancellazione non eseguita - pietanza presente in ordinazioni!", "Violazione vincoli", JOptionPane.ERROR_MESSAGE);
+				}
 			} else if (tipo.equalsIgnoreCase("Bevanda")) {
 				if (!articolofacade.rimuoviBevandaMenu(role, id))
-					JOptionPane.showMessageDialog(frame.getComponent(), "Cancellazione non eseguita - bevanda presente in ordinazioni!", "Violazione Vincoli", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(frame.getComponent(), "Cancellazione non eseguita - bevanda presente in ordinazioni!", "Violazione vincoli", JOptionPane.ERROR_MESSAGE);
 			} else {
 				articolofacade.rimuoviIngrediente(role, id);
 			}
