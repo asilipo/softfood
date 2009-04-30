@@ -9,7 +9,6 @@ import it.softfood.entity.IngredientePietanza;
 import it.softfood.entity.Pietanza;
 import it.softfood.entity.User;
 import it.softfood.enumeration.TipoPietanza;
-import it.softfood.exception.ViolazioneVincoliRimozioneBevandaException;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;

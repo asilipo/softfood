@@ -9,7 +9,6 @@ import it.softfood.entity.IngredientePietanza;
 import it.softfood.entity.Pietanza;
 import it.softfood.entity.User;
 import it.softfood.enumeration.TipoPietanza;
-import it.softfood.exception.ViolazioneVincoliRimozioneBevandaException;
 import it.softfood.session.ArticoloSession;
 import it.softfood.session.BevandaMagazzinoSession;
 import it.softfood.session.BevandaSession;
@@ -399,7 +398,14 @@ public class ArticoloMenuFacade  {
     public boolean rimuoviPietanzaMenu(User role,Long id) {
     	try {
 	        if (id != null) {
-	            return pietanzaSession.rimuoviPietanza(id);
+	        	Pietanza pietanza = pietanzaSession.selezionaPietanzaPerId(id);
+	        	Set<IngredientePietanza> ingredientiPietanza = pietanza.getIngredientePietanzas();
+	            if (ingredientiPietanza != null && ingredientiPietanza.size() > 0) {
+	            	for (IngredientePietanza ingredientePietanza : ingredientiPietanza){
+	            		ingredientePietanzaSession.rimuoviIngredientePietanza(ingredientePietanza.getId());
+	            	}
+	            }
+	        	return pietanzaSession.rimuoviPietanza(id);
 	        }
 	
 	        return false;
