@@ -326,6 +326,7 @@ public class Pannello_ordinazioni extends javax.swing.JPanel {
 private void OKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OKActionPerformed
     this.setVisible(false);
     frame.setComponent(new Menu(role,frame, tavolo));
+    
 }//GEN-LAST:event_OKActionPerformed
 
 private void AnnullaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AnnullaActionPerformed
