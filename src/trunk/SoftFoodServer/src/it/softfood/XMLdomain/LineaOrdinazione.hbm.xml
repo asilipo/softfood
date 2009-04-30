@@ -11,7 +11,7 @@
         <many-to-one lazy="false" name="ordinazione" class="it.softfood.entity.Ordinazione" fetch="select">
             <column name="ordinazione" not-null="true" />
         </many-to-one>
-        <many-to-one lazy="false" cascade="none" name="articolo" class="it.softfood.entity.Articolo" fetch="select">
+        <many-to-one lazy="false" name="articolo" class="it.softfood.entity.Articolo" fetch="select">
             <column name="articolo" not-null="true" />
         </many-to-one>
         <property name="quantita" type="int">
@@ -20,7 +20,7 @@
         <property name="evaso" type="boolean">
             <column name="evaso" not-null="true" />
         </property>
-        <set name="variantes" cascade="none" lazy="false" inverse="true">
+        <set name="variantes" lazy="false" inverse="true">
             <key>
                 <column name="linea_ordinazione" not-null="true" />
             </key>

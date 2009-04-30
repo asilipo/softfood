@@ -26,20 +26,20 @@
         <property name="tipoPietanza" type="java.lang.Integer">
             <column name="tipo_pietanza" />
         </property>
-        <set name="ingredientePietanzas" cascade="delete" lazy="false" inverse="true">
-            <key on-delete="cascade"> 
-                <column name="pietanza" not-null="true" />
+        <set name="ingredientePietanzas" lazy="false" inverse="true">
+            <key> 
+                <column name="pietanza" not-null="true"/>
             </key>
             <one-to-many class="it.softfood.entity.IngredientePietanza" />
         </set>
-        <set name="bevandaMagazzinos" cascade="delete" lazy="false" inverse="true">
-            <key on-delete="cascade">
-                <column name="bevanda" />
+        <set name="bevandaMagazzinos" lazy="false" inverse="true">
+            <key>
+                <column name="bevanda" not-null="true"/>
             </key>
             <one-to-many class="it.softfood.entity.BevandaMagazzino" />
         </set>
-        <set name="lineaOrdinaziones" cascade="none" lazy="false" inverse="true">
-            <key on-delete="noaction">
+        <set name="lineaOrdinaziones" lazy="false" inverse="true">
+            <key>
                 <column name="articolo" not-null="true" />
             </key>
             <one-to-many class="it.softfood.entity.LineaOrdinazione" />
