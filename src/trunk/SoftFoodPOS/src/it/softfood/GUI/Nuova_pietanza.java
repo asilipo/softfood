@@ -244,6 +244,7 @@ public class Nuova_pietanza extends javax.swing.JPanel {
 			data = ing;
 			jList2.setListData(data);
 		} catch (Exception e) {
+			
 			data=new String[0];
 			jList2.setListData(data);
 		}

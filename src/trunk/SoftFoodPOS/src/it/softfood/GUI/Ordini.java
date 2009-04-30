@@ -6,7 +6,11 @@
 
 package it.softfood.GUI;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
+
+import javax.swing.Timer;
 
 import it.softfood.entity.LineaOrdinazione;
 import it.softfood.entity.User;
@@ -16,7 +20,7 @@ import it.softfood.facade.POSOrdinazioneFacade;
  * 
  * @author marcograsso
  */
-public class Ordini extends javax.swing.JPanel {
+public class Ordini extends javax.swing.JPanel implements ActionListener {
 
 	/**
 	 * 
@@ -25,6 +29,7 @@ public class Ordini extends javax.swing.JPanel {
 	private User u;
 	private POSOrdinazioneFacade ordinazioniFacade;
 	private ArrayList<LineaOrdinazione> ordini;
+	private Timer timer;
 
 	private MainView frame;
 
@@ -37,7 +42,7 @@ public class Ordini extends javax.swing.JPanel {
 		ordinazioniFacade = new POSOrdinazioneFacade();
 
 		ordini = ordinazioniFacade.selezionaOrdinazioniGiornaliere(u);
-		
+
 		String[] strings = new String[ordini.size()];
 		int i = 0;
 		for (LineaOrdinazione lin : ordini) {
@@ -45,6 +50,11 @@ public class Ordini extends javax.swing.JPanel {
 		}
 
 		jList1.setListData(strings);
+
+		int delay = 10000; // milliseconds
+		
+		timer=new Timer(delay, this);
+		timer.start();
 
 	}
 
@@ -98,10 +108,10 @@ public class Ordini extends javax.swing.JPanel {
 	}// </editor-fold>//GEN-END:initComponents
 
 	private void jList1MouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jList1MouseClicked
-	// TODO add your handling code here:
+		// TODO add your handling code here:
 		String obj = (String) jList1.getSelectedValue();
 		System.out.println(obj);
-		Long id = Long.valueOf(obj.substring(obj.lastIndexOf("-")+2));
+		Long id = Long.valueOf(obj.substring(obj.lastIndexOf("-") + 2));
 		System.out.println(id.toString());
 		if (id < 0) {
 			frame.getActualPanel().setVisible(false);
@@ -110,7 +120,7 @@ public class Ordini extends javax.swing.JPanel {
 			frame.setComponent(ord);
 		} else {
 			frame.getActualPanel().setVisible(false);
-			Ingredienti ingr = new Ingredienti(frame,id);
+			Ingredienti ingr = new Ingredienti(frame, id);
 			frame.setActualPanel(ingr);
 			frame.setComponent(ingr);
 		}
@@ -120,5 +130,16 @@ public class Ordini extends javax.swing.JPanel {
 	private javax.swing.JList jList1;
 	private javax.swing.JScrollPane jScrollPane1;
 	// End of variables declaration//GEN-END:variables
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		frame.getActualPanel().setVisible(false);
+		Ordini ordini = new Ordini(frame);
+		frame.setActualPanel(ordini);
+		frame.setComponent(ordini);
+		timer.stop();
+		
+	}
 
 }

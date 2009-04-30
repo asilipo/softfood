@@ -80,6 +80,7 @@ private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     Ordini ordini=new Ordini(frame);
     frame.setActualPanel(ordini);
     frame.setComponent(ordini);
+    
 }//GEN-LAST:event_jButton2ActionPerformed
 
 
