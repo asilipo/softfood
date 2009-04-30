@@ -9,6 +9,7 @@ import it.softfood.entity.IngredientePietanza;
 import it.softfood.entity.Pietanza;
 import it.softfood.entity.User;
 import it.softfood.enumeration.TipoPietanza;
+import it.softfood.exception.ViolazioneVincoliRimozioneBevandaException;
 import it.softfood.session.ArticoloSession;
 import it.softfood.session.BevandaMagazzinoSession;
 import it.softfood.session.BevandaSession;
@@ -22,6 +23,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @author Maria Rosaria Paone
@@ -417,17 +419,26 @@ public class ArticoloMenuFacade  {
     	}
     }
     
-    public boolean rimuoviBevandaMenu(User role, Long id) {
+    public boolean rimuoviBevandaMenu(User role, Long id) throws ViolazioneVincoliRimozioneBevandaException {
     	try {
 	        if (id != null) {
+	        	Bevanda bevanda = bevandaSession.selezionaBevandaPerId(id);
+	        	Set<BevandaMagazzino> bevandeMagazzino = bevanda.getBevandaMagazzinos();
+	        	if (bevandeMagazzino != null && bevandeMagazzino.size() > 0) {
+		        	BevandaMagazzino bevandaMagazzino = bevandaMagazzinoSession.selezionaBevandaMagazzinoPerId(((BevandaMagazzino)bevandeMagazzino.toArray()[0]).getId());
+		        	if (bevandaMagazzino != null)
+		        		bevandaMagazzinoSession.rimuoviBevandaMagazzino(bevandaMagazzino.getId());
+	        	}
 	        	return bevandaSession.rimuoviBevanda(id);
 	        }
 
 	        return false;
+    	} catch (ViolazioneVincoliRimozioneBevandaException vvrbe) {
+    		throw new ViolazioneVincoliRimozioneBevandaException(vvrbe.getMessage());
     	} catch (Exception e) {
     		e.printStackTrace();
     		return false;
-    	}
+    	} 
     }
 
     public ArrayList<Ingrediente> selezionaIngredientiPietanza(User role,Long id) {

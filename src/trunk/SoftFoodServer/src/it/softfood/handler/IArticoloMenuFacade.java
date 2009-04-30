@@ -9,6 +9,7 @@ import it.softfood.entity.IngredientePietanza;
 import it.softfood.entity.Pietanza;
 import it.softfood.entity.User;
 import it.softfood.enumeration.TipoPietanza;
+import it.softfood.exception.ViolazioneVincoliRimozioneBevandaException;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
@@ -68,7 +69,7 @@ public interface IArticoloMenuFacade extends Remote {
 
 	public ArrayList<Bevanda> selezionaBevandeDisponibili(User role) throws RemoteException;
 
-	public boolean rimuoviBevandaMenu(User role, Long id) throws RemoteException;
+	public boolean rimuoviBevandaMenu(User role, Long id) throws ViolazioneVincoliRimozioneBevandaException, RemoteException;
 
 	public boolean rimuoviPietanzaMenu(User role, Long id) throws RemoteException;
 	
