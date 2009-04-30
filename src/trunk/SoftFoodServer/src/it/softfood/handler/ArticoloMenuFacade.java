@@ -417,7 +417,14 @@ public class ArticoloMenuFacade  {
     public boolean rimuoviIngrediente(User role,Long id) {
     	try {
 	        if (id != null) {
-	            return ingredienteSession.rimuoviIngrediente(id);
+	        	Ingrediente ingrediente = ingredienteSession.selezionaIngredientePerId(id);
+	        	Set<IngredienteMagazzino> ingredientiMagazzino = ingrediente.getIngredienteMagazzinos();
+	            if (ingredientiMagazzino != null && ingredientiMagazzino.size() > 0) {
+	            	for (IngredienteMagazzino ingredienteMagazzino : ingredientiMagazzino) 
+	            		ingredienteMagazzinoSession.rimuoviIngredienteMagazzino(ingredienteMagazzino.getId());
+	            }
+	            	
+	        	return ingredienteSession.rimuoviIngrediente(id);
 	        }
 	        return false;
     	} catch (Exception e) {
