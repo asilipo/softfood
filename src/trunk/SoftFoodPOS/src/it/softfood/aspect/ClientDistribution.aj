@@ -1,6 +1,5 @@
 package it.softfood.aspect;
 
-import it.softfood.exception.ViolazioneVincoliRimozioneBevandaException;
 import it.softfood.handler.IArticoloMenuFacade;
 import it.softfood.handler.IOrdinazioneFacade;
 import it.softfood.handler.IRistoranteFacade;

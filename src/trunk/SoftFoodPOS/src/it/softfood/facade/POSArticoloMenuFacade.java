@@ -8,7 +8,6 @@ import it.softfood.entity.IngredienteMagazzino;
 import it.softfood.entity.IngredientePietanza;
 import it.softfood.entity.Pietanza;
 import it.softfood.entity.User;
-import it.softfood.exception.ViolazioneVincoliRimozioneBevandaException;
 import it.softfood.handler.ArticoloMenuFacade;
 import it.softfood.handler.IArticoloMenuFacade;
 
@@ -84,7 +83,7 @@ public class POSArticoloMenuFacade {
 		return ingrediente;
 	}
 
-	public boolean rimuoviBevandaMenu(User role, Long id) throws ViolazioneVincoliRimozioneBevandaException {
+	public boolean rimuoviBevandaMenu(User role, Long id) {
 		try {
 			return articolo.rimuoviBevandaMenu(role, id);
 		} catch (Exception e) {
