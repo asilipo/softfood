@@ -1,5 +1,7 @@
 package it.softfood.GUI;
 
+import javax.swing.JOptionPane;
+
 import it.softfood.entity.User;
 import it.softfood.facade.PDAUserFacade;
 
@@ -19,10 +21,10 @@ public class Login extends javax.swing.JPanel {
 
 	public PDAUserFacade userFacade;
 
-	private FrameView frame;
+	private MainView frame;
 
 	/** Creates new form Login */
-	public Login(FrameView frame) {
+	public Login(MainView frame) {
 		userFacade = new PDAUserFacade();
 		this.frame = frame;
 		initComponents();
@@ -269,10 +271,13 @@ public class Login extends javax.swing.JPanel {
 			u = userFacade.login("cameriere", text.getText());
 			if (u == null)
 				throw new Exception();
+			frame.setUser(u);
+			frame.enableLogout();
 			this.setVisible(false);
 			Ordine ordine = new Ordine(u, frame);
 			frame.setComponent(ordine);
 		} catch (Exception e) {
+			JOptionPane.showMessageDialog(frame.getComponent(), "PASSWORD ERRATA PER UTENTE CAMERIERE!","Errore Login",JOptionPane.ERROR_MESSAGE);
 			this.setVisible(false);
 			Login t = new Login(frame);
 			frame.setComponent(t);
