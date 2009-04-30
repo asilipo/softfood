@@ -28,8 +28,7 @@ public class POSArticoloMenuFacade {
 
 	// private ArticoloMenuFacade articolo=ArticoloMenuFacade.getInstance();
 
-	public ArrayList<Ingrediente> selezionaIngredientiPietanza(User role,
-			Long id) {
+	public ArrayList<Ingrediente> selezionaIngredientiPietanza(User role, Long id) {
 		ArrayList<Ingrediente> ingr = null;
 		try {
 			ingr = articolo.selezionaIngredientiPietanza(role, id);
@@ -70,7 +69,7 @@ public class POSArticoloMenuFacade {
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		} 
 		return bevande;
 	}
 
@@ -85,17 +84,12 @@ public class POSArticoloMenuFacade {
 		return ingrediente;
 	}
 
-	public void rimuoviBevandaMenu(User role, Long id) throws ViolazioneVincoliRimozioneBevandaException {
+	public boolean rimuoviBevandaMenu(User role, Long id) throws ViolazioneVincoliRimozioneBevandaException {
 		try {
-			articolo.rimuoviBevandaMenu(role, id);
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ViolazioneVincoliRimozioneBevandaException e) {
-			// TODO Auto-generated catch block
-			throw new ViolazioneVincoliRimozioneBevandaException(e.getMessage());
-			
-		}
+			return articolo.rimuoviBevandaMenu(role, id);
+		} catch (Exception e) {
+			return false;
+		} 
 	}
 	
 	public void rimuoviIngrediente(User role, Long id) {

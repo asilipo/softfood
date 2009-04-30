@@ -162,18 +162,15 @@ public class Visualizza extends javax.swing.JPanel {
 		System.out.println(id.toString());
 
 		try {
-			if (tipo.equalsIgnoreCase("Pietanza"))
+			if (tipo.equalsIgnoreCase("Pietanza")) {
 				articolofacade.rimuoviBevandaMenu(role, id);
-			else if (tipo.equalsIgnoreCase("Bevanda"))
-				articolofacade.rimuoviBevandaMenu(role, id);
-			else
+			} else if (tipo.equalsIgnoreCase("Bevanda")) {
+				if (!articolofacade.rimuoviBevandaMenu(role, id))
+					JOptionPane.showMessageDialog(frame.getComponent(), "Cancellazione non eseguita - bevanda presente in ordinazioni!", "Violazione Vincoli", JOptionPane.ERROR_MESSAGE);
+			} else {
 				articolofacade.rimuoviIngrediente(role, id);
-		} catch (ViolazioneVincoliRimozioneBevandaException vincoli) {
-			JOptionPane.showMessageDialog(frame.getComponent(), "ERRORE NELLA CANCELLAZIONE DELLA BEVANDA!","Violazione Vincoli",JOptionPane.ERROR_MESSAGE);
-		} catch (Exception e) {
-			e.printStackTrace();
-			JOptionPane.showMessageDialog(frame.getComponent(), "ERRORE NELLA CANCELLAZIONE DELL'ARTICOLO!","Violazione Vincoli",JOptionPane.ERROR_MESSAGE);
-		}
+			}
+		} catch (Exception e) {}
 
 		frame.getActualPanel().setVisible(false);
 		Gestione gestione = new Gestione(frame);
