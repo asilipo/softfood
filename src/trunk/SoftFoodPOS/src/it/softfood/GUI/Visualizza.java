@@ -155,7 +155,7 @@ public class Visualizza extends javax.swing.JPanel {
 
 		String obj = (String) jList1.getSelectedValue();
 		System.out.println(obj);
-		Long id = Long.valueOf(obj.substring(obj.indexOf("-") + 2));
+		Long id = Long.valueOf(obj.substring(obj.lastIndexOf("-") + 2));
 		System.out.println(id.toString());
 
 		try {
