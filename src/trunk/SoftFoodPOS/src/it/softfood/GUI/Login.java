@@ -5,6 +5,8 @@
  */
 package it.softfood.GUI;
 
+import javax.swing.JOptionPane;
+
 import it.softfood.entity.User;
 import it.softfood.facade.POSUserFacade;
 
@@ -284,6 +286,7 @@ private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
 	    frame.enableLogout();
 	    frame.enableStart();
 	} catch (Exception e) {
+		JOptionPane.showMessageDialog(frame.getComponent(), "PASSWORD ERRATA PER UTENTE CUOCO!","Errore Login",JOptionPane.ERROR_MESSAGE);
 		this.setVisible(false);
 		Login t = new Login(frame);
 		frame.setActualPanel(t);
