@@ -29,11 +29,13 @@ public class MainView extends FrameView {
     private JPanel actual=null;
     private POSUserFacade userFacade;
     private User u;
+    private Timer timer;
 
     public MainView(SingleFrameApplication app) {
         super(app);
         userFacade=new POSUserFacade();
         u=null;
+        timer=null;
         initComponents();
         
         
@@ -144,6 +146,8 @@ public class MainView extends FrameView {
 
 private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
 // TODO add your handling code here:
+	if(timer!=null)
+		timer.stop();
     this.getActualPanel().setVisible(false);
     Start start=new Start(this);
     this.setActualPanel(start);
@@ -157,6 +161,8 @@ private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 	}catch(Exception e){
 		
 	}
+	if(timer!=null)
+		timer.stop();
     this.getActualPanel().setVisible(false);
     Login login=new Login(this);
     this.setActualPanel(login);
@@ -202,6 +208,14 @@ private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     
     public User getUser(){
     	return u;
+    }
+    
+    public Timer getTimer(){
+    	return timer;
+    }
+    
+    public void setTimer(Timer timer){
+    	this.timer=timer;
     }
 
     private JDialog aboutBox;
