@@ -7,14 +7,9 @@ import it.softfood.entity.Tavolo;
 import it.softfood.entity.User;
 import it.softfood.facade.PDAOrdinazioneFacade;
 import it.softfood.facade.PDATavoloFacade;
-import it.softfood.handler.TavoloFacade;
 
 import java.util.ArrayList;
 import java.util.Enumeration;
-import java.util.Hashtable;
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
 import javax.swing.DefaultListModel;
 import org.jdesktop.application.FrameView;
 
@@ -23,6 +18,7 @@ import org.jdesktop.application.FrameView;
  * @author Marco Grasso
  * @author Francesco Pacilio
  */
+
 public class Tavoli extends javax.swing.JPanel {
 
 	private PDATavoloFacade tavoloFacade;
@@ -35,9 +31,7 @@ public class Tavoli extends javax.swing.JPanel {
     private void initFacade() {
         try {
             tavoloFacade=new PDATavoloFacade();
-            ordinazioneFacade=new PDAOrdinazioneFacade();
-            
-        
+            ordinazioneFacade=new PDAOrdinazioneFacade();    
         } catch (NullPointerException ex) {
             System.err.println("Errore null pointer");
         }
@@ -224,7 +218,6 @@ public class Tavoli extends javax.swing.JPanel {
         }
 
         this.setVisible(false);
-        System.out.println("ORDINE RECUPERATO O CREATO " + ordine.getId());
 
         frame.setComponent(new Menu(role, frame, ordine.getId()));
     }
