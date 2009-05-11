@@ -275,7 +275,6 @@ public class ArticoloMenuFacade  {
                         if (disponibilita < disponibilitaMinima)
                             disponibilitaMinima = disponibilita;
                         disponibilita = 0;
-                        System.out.println("disponibilita minima " + disponibilitaMinima);
                         
                     }
                 }
