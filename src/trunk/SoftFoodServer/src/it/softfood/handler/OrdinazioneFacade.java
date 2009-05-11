@@ -191,7 +191,6 @@ public class OrdinazioneFacade {
 	}
 
     public Ordinazione selezionaOrdinazioneGiornalieraPerTavolo(User role,String riferimentoTavolo, Boolean terminato) {
-		System.out.println("riferimentoTavolo " +riferimentoTavolo);
     	if (riferimentoTavolo != null && terminato != null){
 			ArrayList<Ordinazione> list=((ArrayList<Ordinazione>)ordinazioneSession.selezionaOrdinazioniGionalierePerTavolo(tavoloSession.selezionaTavoloPerRiferimento(riferimentoTavolo, true), terminato));
 			
