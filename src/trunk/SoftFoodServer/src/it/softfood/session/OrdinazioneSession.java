@@ -5,16 +5,11 @@ import it.softfood.entity.Tavolo;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import javax.print.attribute.standard.DateTimeAtCompleted;
-
-import org.apache.tools.ant.util.DateUtils;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.type.DateType;
 
 /**
  * @author Maria Rosaria Paone
@@ -69,6 +64,7 @@ public class OrdinazioneSession {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Ordinazione> selezionaOrdinazioni() {    
 		try {
 			Query q = session.createQuery("from it.softfood.entity.Ordinazione o");
@@ -81,6 +77,7 @@ public class OrdinazioneSession {
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<Ordinazione> selezionaOrdinazioniGiornaliere() {
 		try {
 		    Date date = new Date(System.currentTimeMillis()); 
@@ -95,18 +92,17 @@ public class OrdinazioneSession {
 			for (Ordinazione ordinazione : list) {
 				if (ordinazione.getData().after(date)) {
 					list1.add(ordinazione);
-					System.out.println(ordinazione.getData());
 				}
 			}
 			
 			return list1;
 		} catch (Exception e) {
-			e.printStackTrace();
 			System.err.println("OrdinazioneSession#selezionaOrdinazioniGiornaliere");
 			return null;
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Ordinazione> selezionaOrdinazioniGionalierePerTavolo(Tavolo tavolo, Boolean terminato) {
 		try {
 		    Date date = new Date(System.currentTimeMillis()); 
