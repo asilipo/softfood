@@ -267,7 +267,7 @@ public class ArticoloMenuFacade  {
                         if (ingredienteMagazzino.getQuantita() >= ingredientePietanza.getQuantita() && ingrediente.getScadenza().after(data)) {
                             try {
                                 disponibilita = ingredienteMagazzino.getQuantita() / ingredientePietanza.getQuantita();
-                            } catch (NumberFormatException nfe) {
+                            } catch (Exception nfe) {
                                 disponibilita = 0;
                             }
                         }
