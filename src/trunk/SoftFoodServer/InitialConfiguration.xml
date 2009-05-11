@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <configurations>
-<fileLog>Logging.log</fileLog>
-<authorization_file>HMS_Jaas.config</authorization_file>
-<config_authorization_file>authorization.policy</config_authorization_file>
+	<fileLog>Logging.log</fileLog>
+	<authorization_file>HMS_Jaas.config</authorization_file>
+	<config_authorization_file>authorization.policy</config_authorization_file>
 </configurations>   
