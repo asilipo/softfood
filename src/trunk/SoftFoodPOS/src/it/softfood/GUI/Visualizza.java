@@ -1,8 +1,3 @@
-/*
- * Visualizza.java
- *
- * Created on 19 aprile 2009, 19.11
- */
 package it.softfood.GUI;
 
 import it.softfood.facade.POSArticoloMenuFacade;
@@ -12,7 +7,6 @@ import it.softfood.entity.Ingrediente;
 import it.softfood.entity.Pietanza;
 import it.softfood.entity.User;
 import java.util.ArrayList;
-import java.util.Vector;
 
 import javax.swing.JOptionPane;
 
@@ -24,8 +18,11 @@ import javax.swing.JOptionPane;
 
 public class Visualizza extends javax.swing.JPanel {
 
+	private static final long serialVersionUID = 1L;
+	
 	private MainView frame;
 	private String tipo;
+	@SuppressWarnings("unused")
 	private POSOrdinazioneFacade ordinazionefacade;
 	private POSArticoloMenuFacade articolofacade;
 	private User role;
@@ -33,7 +30,6 @@ public class Visualizza extends javax.swing.JPanel {
 	private ArrayList<Bevanda> bevande;
 	private ArrayList<Ingrediente> ingredienti;
 
-	/** Creates new form Visualizza */
 	public Visualizza(MainView frame, String tipo) {
 		this.frame = frame;
 		this.tipo = tipo;
@@ -41,7 +37,6 @@ public class Visualizza extends javax.swing.JPanel {
 		ordinazionefacade = new POSOrdinazioneFacade();
 		articolofacade = new POSArticoloMenuFacade();
 		role = frame.getUser();
-		Vector<String> element = new Vector<String>();
 		String data[] = null;
 
 		int i = 0;
@@ -151,9 +146,7 @@ public class Visualizza extends javax.swing.JPanel {
 
 	private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {
 		String obj = (String) jList1.getSelectedValue();
-		System.out.println(obj);
 		Long id = Long.valueOf(obj.substring(obj.lastIndexOf("-") + 2));
-		System.out.println(id.toString());
 
 		int n = JOptionPane.showConfirmDialog(frame.getComponent(),
 				"Sei sicuro di voler cancellare l'articolo selezionato?",
@@ -197,9 +190,7 @@ public class Visualizza extends javax.swing.JPanel {
 		frame.setComponent(gestione);
 	}
 
-	private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton1ActionPerformed
-		// TODO add your handling code here:
-
+	private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
 		frame.getActualPanel().setVisible(false);
 
 		if (tipo.equalsIgnoreCase("Pietanza")) {
@@ -218,15 +209,11 @@ public class Visualizza extends javax.swing.JPanel {
 			frame.setActualPanel(ingrediente);
 			frame.setComponent(ingrediente);
 		}
-	}// GEN-LAST:event_jButton1ActionPerformed
+	}
 
-	private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton3ActionPerformed
-		// TODO add your handling code here:
-
+	private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {
 		String obj = (String) jList1.getSelectedValue();
-		System.out.println(obj);
-		Long id = Long.valueOf(obj.substring(obj.lastIndexOf("-") + 2));
-		System.out.println(id.toString());
+		Long.valueOf(obj.substring(obj.lastIndexOf("-") + 2));
 
 		frame.getActualPanel().setVisible(false);
 
@@ -246,9 +233,8 @@ public class Visualizza extends javax.swing.JPanel {
 			frame.setActualPanel(ingrediente);
 			frame.setComponent(ingrediente);
 		}
-	}// GEN-LAST:event_jButton3ActionPerformed
+	}
 
-	// Variables declaration - do not modify//GEN-BEGIN:variables
 	private javax.swing.JButton jButton1;
 	private javax.swing.JButton jButton2;
 	private javax.swing.JButton jButton3;
@@ -256,5 +242,5 @@ public class Visualizza extends javax.swing.JPanel {
 	private javax.swing.JPanel jPanel1;
 	private javax.swing.JPanel jPanel2;
 	private javax.swing.JScrollPane jScrollPane1;
-	// End of variables declaration//GEN-END:variables
+
 }
