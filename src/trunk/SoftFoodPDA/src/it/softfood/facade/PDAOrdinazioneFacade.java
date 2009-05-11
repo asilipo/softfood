@@ -10,6 +10,12 @@ import it.softfood.handler.OrdinazioneFacade;
 
 import java.util.ArrayList;
 
+/**
+ * @author Maria Rosaria Paone
+ * @author Marco Grasso
+ * @author Francesco Pacilio
+ */
+
 public class PDAOrdinazioneFacade {
 
 	public Ordinazione inserisciOrdinazione(User role, Ordinazione ordine) {
@@ -26,6 +32,7 @@ public class PDAOrdinazioneFacade {
 	public Ordinazione selezionaOrdinazioneGiornalieraPerTavolo(User role, String riferimentoTavolo, Boolean terminato) {
 		OrdinazioneFacade ordineFacade=OrdinazioneFacade.getInstance();
 		Ordinazione ord = null;
+		System.out.println("riferimentoTavolo " + riferimentoTavolo);
 		try {
 			ord = ordineFacade.selezionaOrdinazioneGiornalieraPerTavolo(role, riferimentoTavolo, terminato);
 		} catch (Exception e) {
