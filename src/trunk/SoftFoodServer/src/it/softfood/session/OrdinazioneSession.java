@@ -123,13 +123,10 @@ public class OrdinazioneSession {
 			for (Ordinazione ordinazione : list) {
 				if (ordinazione.getData().after(date)) {
 					list1.add(ordinazione);
-					System.out.println(ordinazione.getData());
 				}
 			}
-			
 			return list1;
 		} catch (Exception e) {
-			e.printStackTrace();
 			System.err.println("OrdinazioneSession#selezionaOrdinazioniGionalierePerTavolo");
 			return null;
 		}
