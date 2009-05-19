@@ -9,7 +9,8 @@ import org.hibernate.Session;
  */
 
 public aspect Persistence {
-
+	private Session session = null;
+	
 	declare parents: it.softfood.session.* implements SessionHolder;
 
 	public Persistence() {
@@ -20,8 +21,6 @@ public aspect Persistence {
 		}
 	}
 
-	private Session session = null;
-
 	public Session getSession() {
 		session = HibernateUtil.openSession();
 		return session;
@@ -31,14 +30,10 @@ public aspect Persistence {
 
 	before() :  operation() {		
 		session = HibernateUtil.openSession();
-		
-		
 	}
 
 	after() : operation()  {
-//		System.out.println("Dopo - Persistenza - CLOSING SESSION");
 		HibernateUtil.closeSession();
-//		System.out.println("Dopo - Persistenza - CLOSED SESSION");
 	}
 
 }

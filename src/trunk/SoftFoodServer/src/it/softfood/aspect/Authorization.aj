@@ -38,6 +38,7 @@ public aspect Authorization{
 	!execution(* it.softfood.handler.*.getInstance()) &&
 	args(user,..);
 
+	@SuppressWarnings("unchecked")
 	before(User user) : authOperations(user) {
 
 		LoginHandler login = LoginHandler.getInstance();
@@ -53,6 +54,7 @@ public aspect Authorization{
 		return new OperationPermission(joinPointStaticPart.getSignature().getName());
 	}
 
+	@SuppressWarnings("unchecked")
 	Object around(final User user): authOperations(user) && !cflowbelow(authOperations(User)) {     
 		try {
 			LoginHandler login=LoginHandler.getInstance();

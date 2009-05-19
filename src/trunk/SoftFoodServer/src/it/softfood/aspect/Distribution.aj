@@ -36,6 +36,7 @@ public aspect Distribution {
 			}
 			
 			ITavoloFacade tt = (ITavoloFacade) java.rmi.server.UnicastRemoteObject.exportObject(t, 0);
+			@SuppressWarnings("unused")
 			Registry registry = LocateRegistry.getRegistry("localhost", 1099);
 			Naming.rebind("TavoloFacade", tt);
 		} catch (Exception e) {
@@ -57,6 +58,7 @@ public aspect Distribution {
 			IOrdinazioneFacade tt = (IOrdinazioneFacade) java.rmi.server.UnicastRemoteObject.exportObject(t, 0);
 			System.out.println("Object exported");
 			
+			@SuppressWarnings("unused")
 			Registry registry = LocateRegistry.getRegistry("localhost", 1099);
 			Naming.rebind("OrdineFacade", tt);
 		} catch (Exception e) {
@@ -78,6 +80,7 @@ public aspect Distribution {
 			IRistoranteFacade tt = (IRistoranteFacade) java.rmi.server.UnicastRemoteObject.exportObject(t, 0);
 			System.out.println("Object exported");
 			
+			@SuppressWarnings("unused")
 			Registry registry = LocateRegistry.getRegistry("localhost", 1099);
 			Naming.rebind("RistoranteFacade", tt);
 		} catch (Exception e) {
@@ -98,6 +101,7 @@ public aspect Distribution {
 			
 			IArticoloMenuFacade tt = (IArticoloMenuFacade) java.rmi.server.UnicastRemoteObject.exportObject(t, 0);
 
+			@SuppressWarnings("unused")
 			Registry registry = LocateRegistry.getRegistry("localhost", 1099);
 			Naming.rebind("ArticoloFacade", tt);
 		} catch (Exception e) {
@@ -118,6 +122,7 @@ public aspect Distribution {
 			
 			IUserFacade tt = (IUserFacade) java.rmi.server.UnicastRemoteObject.exportObject(t, 0);
 
+			@SuppressWarnings("unused")
 			Registry registry = LocateRegistry.getRegistry("localhost", 1099);
 			Naming.rebind("UserFacade", tt);
 		} catch (Exception e) {
