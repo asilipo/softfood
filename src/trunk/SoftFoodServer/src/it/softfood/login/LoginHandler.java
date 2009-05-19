@@ -1,6 +1,7 @@
 package it.softfood.login;
 
 import it.softfood.entity.User;
+import it.softfood.util.XmlReader;
 
 import java.util.Enumeration;
 import java.util.Hashtable;
@@ -10,21 +11,23 @@ import java.util.Set;
 import javax.security.auth.Subject;
 import javax.security.auth.login.LoginContext;
 import javax.security.auth.login.LoginException;
-import javax.security.auth.callback.CallbackHandler;
 
-import it.softfood.util.XmlReader;
+/**
+ * @author Maria Rosaria Paone
+ * @author Marco Grasso
+ * @author Francesco Pacilio
+ */
 
 public class LoginHandler {
 
 	private static LoginHandler singleton;
 	private R_CallbackHandler mcall = null;
+	@SuppressWarnings("unchecked")
 	private Hashtable subjectTable = null;
 	Subject sub;
 	private String xmlparameter = "authorization_file";
 
-	/**
-	 * Allocates a LoginHandler object as a Singleton object
-	 */
+	@SuppressWarnings("unchecked")
 	private LoginHandler() {
 		XmlReader xml = new XmlReader();
 		String file = xml.leggi(xmlparameter);
@@ -33,9 +36,6 @@ public class LoginHandler {
 		mcall = new R_CallbackHandler();
 	}
 
-	/**
-	 * Returns LoginHandler instance if just exists or a new instance
-	 */
 	public synchronized static LoginHandler getInstance() {
 		if (singleton == null) {
 			singleton = new LoginHandler();
@@ -43,13 +43,7 @@ public class LoginHandler {
 		return singleton;
 	}
 
-	/**
-	 * Return an HMS_User object as result of the control for an HMS user
-	 * credentials
-	 * 
-	 * @param user
-	 * @param password
-	 */
+	@SuppressWarnings("unchecked")
 	public User login(String user, String password) {
 		try {
 			this.ceeckJustLogged(user);
@@ -67,33 +61,22 @@ public class LoginHandler {
 		}
 	}
 
-	/**
-	 * Returns true if and only if the logout to the system from an HMS user is
-	 * well accomplished.
-	 * 
-	 * @param user
-	 */
-
 	public boolean logout(User user) {
 		try {
-			User u=check(user);
-			System.out.println(subjectTable);
+			User u = check(user);
 			LoginContext lc = (LoginContext) subjectTable.remove(u);
-			System.out.println(lc);
 			lc.logout();
 
 			return true;
 		} catch (Exception e) {
-			System.err.println("Error in logout operation");
-			// e.printStackTrace();
+			System.err.println("LoginHandler#logout");
 			return false;
 		}
-
 	}
 
+	@SuppressWarnings("unchecked")
 	private User check(User user) {
-		// TODO Auto-generated method stub
-		String user_name=user.getUserName();
+		String user_name = user.getUserName();
 		String pass=user.getPassword();
 		Enumeration e = subjectTable.keys();
 		User u;
@@ -105,27 +88,23 @@ public class LoginHandler {
 		return null;
 	}
 
-	/**
-	 * Returns an HMS_User object registrated in to the HMS system or null if it
-	 * does not exist
-	 * 
-	 * @param user
-	 * @param _authenticatedSubject
-	 */
+	@SuppressWarnings("unchecked")
 	private User getPrincipal(String user, Subject _authenticatedSubject) {
 		Set s = _authenticatedSubject.getPrincipals();
 		Iterator it = s.iterator();
+		
 		while (it.hasNext()) {
 			User principal = (User) it.next();
 			if (principal.getUserName().equals(user)) {
 				return (principal);
 			}
 		}
+		
 		return (null);
 	}
 
+	@SuppressWarnings("unchecked")
 	private void ceeckJustLogged(String user) throws LoginException {
-		// TODO Auto-generated method stub
 		Enumeration e = subjectTable.keys();
 		User u;
 		while (e.hasMoreElements()) {
@@ -137,11 +116,14 @@ public class LoginHandler {
 
 	}
 
+	@SuppressWarnings("unchecked")
 	public Hashtable getSubjectTable() {
 		return subjectTable;
 	}
 
+	@SuppressWarnings("unchecked")
 	public void setSubjectTable(Hashtable subjectTable) {
 		this.subjectTable = subjectTable;
 	}
+	
 }
