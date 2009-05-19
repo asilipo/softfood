@@ -19,7 +19,7 @@ import org.aspectj.lang.Signature;
 public aspect Logging {      
 	     
 	private Logger _logger = Logger.getLogger("trace");	
-	private final String xmlparameter="fileLog";
+	private final String xmlparameter = "fileLog";
 	 
 	public Logging() {
 		XmlReader xml= new XmlReader();
@@ -37,8 +37,6 @@ public aspect Logging {
 	    
 	}
 
-	
-	
 	pointcut traceLogin(): 	execution(* itsoftfood.session.*.*(..));
 
 	before(): traceLogin() {
@@ -60,4 +58,5 @@ public aspect Logging {
 		    		                           ". Date+"+new Date().toString());
 		}
 	}
+	
 }
