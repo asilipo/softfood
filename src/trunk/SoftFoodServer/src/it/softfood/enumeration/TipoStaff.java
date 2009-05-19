@@ -15,5 +15,4 @@ public enum TipoStaff {
 		return super.toString();
 	}
 	
-	
 }

@@ -15,5 +15,4 @@ public enum TipoPietanza {
 		return super.toString();
 	}
 
-
 }

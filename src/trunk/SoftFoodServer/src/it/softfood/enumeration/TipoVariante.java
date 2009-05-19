@@ -15,5 +15,4 @@ public enum TipoVariante {
 		return super.toString();
 	}
 	
-	
 }
