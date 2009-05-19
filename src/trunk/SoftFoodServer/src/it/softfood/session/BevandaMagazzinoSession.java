@@ -24,6 +24,7 @@ public class BevandaMagazzinoSession {
 		return(bevandaMagazzino);
 	}
 	
+	@SuppressWarnings("unchecked")
 	private Long getNewId() {
 		try {
 			Query q = session.createQuery("select max(id) from it.softfood.entity.BevandaMagazzino");
@@ -63,6 +64,7 @@ public class BevandaMagazzinoSession {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<BevandaMagazzino> selezionaBevandeMagazzino() {
 		try {
 			Query q = session.createQuery("from it.softfood.entity.BevandaMagazzino b");
@@ -75,6 +77,7 @@ public class BevandaMagazzinoSession {
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<BevandaMagazzino> selezionaBevandeMagazzinoPerQuantita(Integer quantita) {
 		try {
 			Query q = session.createQuery("from it.softfood.entity.BevandaMagazzino b where b.quantita >= ?");

@@ -63,6 +63,7 @@ public class LineaOrdinazioneSession {
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<LineaOrdinazione> selezionaLineeOrdinazionePerOrdinazione(Ordinazione ordinazione) {
 		try {
 			Query q = session.createQuery("from it.softfood.entity.LineaOrdinazione l where l.ordinazione = ?");
@@ -76,6 +77,7 @@ public class LineaOrdinazioneSession {
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<LineaOrdinazione> selezionaLineeOrdinazioneEvasePerOrdinazione(Ordinazione ordinazione, Boolean evase) {
 		try {
 			Query q = session.createQuery("from it.softfood.entity.LineaOrdinazione l where l.ordinazione = ? and l.evaso = ?");

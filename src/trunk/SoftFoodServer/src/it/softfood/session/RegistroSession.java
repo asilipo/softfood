@@ -25,6 +25,7 @@ public class RegistroSession {
 		return registroSession;
 	}
 
+	@SuppressWarnings("unchecked")
 	private Long getNewId() {
 		try {
 			Query q = session.createQuery("select max(id) from it.softfood.entity.Registro");

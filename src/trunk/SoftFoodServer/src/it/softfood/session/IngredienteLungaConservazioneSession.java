@@ -24,6 +24,7 @@ public class IngredienteLungaConservazioneSession {
 		return ingredienteLungaConservazioneSession;
 	}
 
+	@SuppressWarnings("unchecked")
 	private Long getNewId() {
 		try {
 			Query q = session.createQuery("select max(id) from it.softfood.entity.Ingrediente");
@@ -62,6 +63,7 @@ public class IngredienteLungaConservazioneSession {
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<Ingrediente> selezionaIngredientiLungaConservazione() {
 		try {
 			Query q = session.createQuery("from it.softfood.entity.Ingrediente t");

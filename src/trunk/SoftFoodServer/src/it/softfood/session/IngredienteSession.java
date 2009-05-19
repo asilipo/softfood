@@ -24,6 +24,7 @@ public class IngredienteSession {
 		return ingredienteSession;
 	}
 
+	@SuppressWarnings("unchecked")
 	private Long getNewId() {
 		try {
 			Query q = session.createQuery("select max(id) from it.softfood.entity.Ingrediente");
@@ -63,6 +64,7 @@ public class IngredienteSession {
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<Ingrediente> selezionaIngredientePerNome(String nome) {
 		try {
 			Query q = session.createQuery("from it.softfood.entity.Ingrediente i where i.nome = ?");
@@ -76,6 +78,7 @@ public class IngredienteSession {
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<Ingrediente> selezionaIngredienti() {
 		try {
 			Query q = session.createQuery("from it.softfood.entity.Ingrediente i");
@@ -88,6 +91,7 @@ public class IngredienteSession {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Ingrediente> selezionaIngredientePerVariante() {
 		try {
 			Query q = session.createQuery("from it.softfood.entity.Ingrediente i");

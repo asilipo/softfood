@@ -53,7 +53,8 @@ public class IngredientePietanzaSession {
 		}
 	}
 
-    public List<IngredientePietanza> selezionaIngredientiPietanze() {
+    @SuppressWarnings("unchecked")
+	public List<IngredientePietanza> selezionaIngredientiPietanze() {
     	try {
 			Query q = session.createQuery("from it.softfood.entity.IngredientePietanza i");
 			List<IngredientePietanza> list = (List<IngredientePietanza>) q.list();

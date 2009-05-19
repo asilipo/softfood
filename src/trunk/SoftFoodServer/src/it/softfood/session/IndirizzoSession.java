@@ -24,6 +24,7 @@ public class IndirizzoSession {
 		return indirizzoSession;
 	}
 
+	@SuppressWarnings("unchecked")
 	private Long getNewId() {
 		try {
 			Query q = session.createQuery("select max(id) from it.softfood.entity.Indirizzo");

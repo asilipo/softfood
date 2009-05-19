@@ -1,9 +1,8 @@
 package it.softfood.session;
 
-import java.util.List;
-
 import it.softfood.entity.Listino;
-import it.softfood.entity.Menu;
+
+import java.util.List;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -25,6 +24,7 @@ public class ListinoSession {
 		return listinoSession;
 	}
 
+	@SuppressWarnings("unchecked")
 	private Long getNewId() {
 		try {
 			Query q = session.createQuery("select max(id) from it.softfood.entity.Listino");

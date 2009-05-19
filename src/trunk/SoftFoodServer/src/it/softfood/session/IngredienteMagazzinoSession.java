@@ -24,6 +24,7 @@ public class IngredienteMagazzinoSession {
 		return ingredienteMagazzinoSession;
 	}
 
+	@SuppressWarnings("unchecked")
 	private Long getNewId() {
 		try {
 			Query q = session.createQuery("select max(id) from it.softfood.entity.IngredienteMagazzino");
@@ -61,6 +62,7 @@ public class IngredienteMagazzinoSession {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<IngredienteMagazzino> selezionaIngredientiMagazzino() {
 		try {
 			Query q = session.createQuery("from it.softfood.entity.IngredienteMagazzino i");
@@ -73,6 +75,7 @@ public class IngredienteMagazzinoSession {
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<IngredienteMagazzino> selezionaIngredientiLungaConservazionePerQuantita(Integer quantita) {
 		try {
 			Query q = session.createQuery("from it.softfood.entity.IngredienteMagazzino i where i.quantita = ?");

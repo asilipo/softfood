@@ -24,6 +24,7 @@ public class TavoloSession {
 		return tavoloSession;
 	}
 
+	@SuppressWarnings("unchecked")
 	private Long getNewId() {
 		try {
 			Query q = session.createQuery("select max(id) from it.softfood.entity.Tavolo");
@@ -55,6 +56,11 @@ public class TavoloSession {
 	public Tavolo selezionaTavoloPerId(Long id) {
 		try {
 			Tavolo tavolo = (Tavolo) session.get(Tavolo.class, id);
+			if (tavolo == null) {
+				Query q = session.createQuery("from it.softfood.entity.Tavolo t where t.id = ?");
+				q.setLong(0, id);		
+				tavolo = (Tavolo) q.uniqueResult();
+			}
 			
 			return tavolo;
 		} catch (Exception e) {
@@ -77,6 +83,7 @@ public class TavoloSession {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Tavolo> selezionaTavoliPerNumeroPosti(Integer numeroPosti) {
 		try {
 			Query q = session.createQuery("from it.softfood.entity.Tavolo t where t.numeroPosti = ? AND t.attivo = ?");
@@ -91,6 +98,7 @@ public class TavoloSession {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Tavolo> selezionaTavoliLiberi() {
 		try {
 			Query q = session.createQuery("from it.softfood.entity.Tavolo t where t.occupato = ? AND t.attivo = ? order by t.riferimento");
@@ -105,6 +113,7 @@ public class TavoloSession {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Tavolo> selezionaTavoliOccupati() {
 		try {
 			Query q = session.createQuery("from it.softfood.entity.Tavolo t where t.occupato = ? AND t.attivo = ? order by t.riferimento");
@@ -119,6 +128,7 @@ public class TavoloSession {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Tavolo> selezionaTavoliNonAttivi() {
 		try {
 			Query q = session.createQuery("from it.softfood.entity.Tavolo t where t.attivo = ?");

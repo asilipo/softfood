@@ -26,6 +26,7 @@ public class BevandaSession {
 		return bevandaSession;
 	}
 
+	@SuppressWarnings("unchecked")
 	private Long getNewId() {
 		try {
 			Query q = session.createQuery("select max(id) from it.softfood.entity.Articolo");
@@ -86,6 +87,7 @@ public class BevandaSession {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	public ArrayList<Bevanda> selezionaBevande() {
 		try {
 			Query q = session.createQuery("from it.softfood.entity.Articolo o where tipoArticolo = 'Bevanda'");
