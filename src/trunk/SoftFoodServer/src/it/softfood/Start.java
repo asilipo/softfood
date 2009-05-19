@@ -91,7 +91,12 @@ public class Start {
 		IRistoranteFacade rist=RistoranteFacade.getInstance();
 		IArticoloMenuFacade art=(IArticoloMenuFacade) ArticoloMenuFacade.getInstance();
 		IUserFacade iuser = (IUserFacade) UserFacade.getInstance();
+		
+		//User u = iuser.login("cameriere", "1234");
+		//System.out.println("nome " + u.getName());
+		//System.out.println("pwd " + u.getPassword());
 //		
+		
 //		Pietanza p = new Pietanza();
 //		p.setId(51L);
 //		p.setNome("Patatine");
