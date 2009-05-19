@@ -15,18 +15,18 @@ public interface IUserFacade extends Remote {
 
 	public User selezionaUtentePerUserPassword(String username, String password) throws RemoteException;
 
-	public User inserisciUtente(User role, User u) throws RemoteException;
+	public User inserisciUtente(User user) throws RemoteException;
 
-	public User selezionaUserName(User role, User u) throws RemoteException;
+	public User selezionaUserName(User user) throws RemoteException;
 
-	public User selezionaPassword(User role, User u) throws RemoteException;
+	public User selezionaPassword(User user) throws RemoteException;
 
-	public boolean modificaRuolo(User role, User u, String ruolo) throws RemoteException;
+	public boolean modificaRuolo(User user, String ruolo) throws RemoteException;
 
-	public boolean eliminaUtente(User role, User r) throws RemoteException;
+	public boolean eliminaUtente(User user) throws RemoteException;
 	
 	public User login(String username, String password) throws RemoteException;
 	
-	public void logout(User u)throws RemoteException;
+	public void logout(User user)throws RemoteException;
 
 }

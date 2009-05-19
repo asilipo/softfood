@@ -8,51 +8,30 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Maria Rosaria Paone
+ * @author Marco Grasso
+ * @author Francesco Pacilio
+ */
+
 public interface ITavoloFacade extends Remote{
 
-	/* (non-Javadoc)
-	 * @see it.softfood.handler.ITavoloFacade#inserisciTavolo(it.softfood.entity.Tavolo)
-	 */
-	public abstract Tavolo inserisciTavolo(User role,Tavolo tavolo)throws RemoteException;
+	public Tavolo inserisciTavolo(User user, Tavolo tavolo) throws RemoteException;
 
-	/* (non-Javadoc)
-	 * @see it.softfood.handler.ITavoloFacade#liberaTavolo(it.softfood.entity.Tavolo)
-	 */
-	public abstract boolean liberaTavolo(User role,Tavolo tavolo)throws RemoteException;
+	public abstract boolean liberaTavolo(User user, Tavolo tavolo) throws RemoteException;
 
-	/* (non-Javadoc)
-	 * @see it.softfood.handler.ITavoloFacade#occupaTavolo(it.softfood.entity.Tavolo)
-	 */
-	public abstract boolean occupaTavolo(User role,Tavolo tavolo)throws RemoteException;
+	public abstract boolean occupaTavolo(User user, Tavolo tavolo) throws RemoteException;
 
-	/* (non-Javadoc)
-	 * @see it.softfood.handler.ITavoloFacade#selezionaTavolo(java.lang.Long)
-	 */
-	public abstract Tavolo selezionaTavolo(User role,Long id)throws RemoteException;
+	public abstract Tavolo selezionaTavolo(User user, Long id) throws RemoteException;
 
-	/* (non-Javadoc)
-	 * @see it.softfood.handler.ITavoloFacade#selezionaTavoliLiberi()
-	 */
-	public abstract List<Tavolo> selezionaTavoliLiberi(User role)throws RemoteException;
+	public abstract List<Tavolo> selezionaTavoliLiberi(User user) throws RemoteException;
 
-	/* (non-Javadoc)
-	 * @see it.softfood.handler.ITavoloFacade#selezionaTavoliOccupati()
-	 */
-	public abstract List<Tavolo> selezionaTavoliOccupati(User role)throws RemoteException;
+	public abstract List<Tavolo> selezionaTavoliOccupati(User user) throws RemoteException;
 
-	/* (non-Javadoc)
-	 * @see it.softfood.handler.ITavoloFacade#selezionaTavoliNonAttivi()
-	 */
-	public abstract List<Tavolo> selezionaTavoliNonAttivi(User role)throws RemoteException;
+	public abstract List<Tavolo> selezionaTavoliNonAttivi(User user) throws RemoteException;
 
-	/* (non-Javadoc)
-	 * @see it.softfood.handler.ITavoloFacade#rimuoviTavolo(java.lang.Long)
-	 */
-	public abstract boolean rimuoviTavolo(User role,Long id)throws RemoteException;
+	public abstract boolean rimuoviTavolo(User user, Long id) throws RemoteException;
 
-	/* (non-Javadoc)
-	 * @see it.softfood.handler.ITavoloFacade#occupaTavoli(java.util.List)
-	 */
-	public abstract Long occupaTavoli(User role,ArrayList<String> riferimenti)throws RemoteException;
+	public abstract Long occupaTavoli(User user, ArrayList<String> riferimenti) throws RemoteException;
 
 }

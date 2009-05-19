@@ -58,8 +58,8 @@ public class OrdinazioneFacade {
 		return singleton;
 	}
 	
-	public Ordinazione inserisciOrdinazione(User role,Ordinazione ordinazione) {
-		if (ordinazione != null) {
+	public Ordinazione inserisciOrdinazione(User user, Ordinazione ordinazione) {
+		if (user != null && ordinazione != null) {
             Tavolo tavolo = tavoloSession.selezionaTavoloPerId(ordinazione.getTavolo().getId());
 
             if (tavolo == null || tavolo.getNumeroPosti() < ordinazione.getCoperti()) {
@@ -99,28 +99,33 @@ public class OrdinazioneFacade {
 		return null;
 	}
 
-    private Integer verificaIngredientiPietanza(User role, Pietanza pietanza) {
-        ArrayList<IngredientePietanza> ingredientiPietanze = (ArrayList<IngredientePietanza>) ingredientePietanzaSession.selezionaIngredientiPietanze();
-        ArrayList<IngredienteMagazzino> ingredientiMagazzino = (ArrayList<IngredienteMagazzino>) ingredienteMagazzinoSession.selezionaIngredientiMagazzino();
-        Date data = new Date(System.currentTimeMillis());
-
-        int disponibilita = 0;
-        for (IngredientePietanza ingredientePietanza : ingredientiPietanze) {
-
-            if (ingredientePietanza.getId().getPietanza().equals(pietanza.getId())) {
-                Ingrediente ingrediente = ingredienteSession.selezionaIngredientePerId(ingredientePietanza.getId().getIngrediente());
-                for (IngredienteMagazzino ingredienteMagazzino : ingredientiMagazzino)
-                    if (ingredienteMagazzino.getIngrediente().getId().equals(ingrediente.getId()) && ingredienteMagazzino.getQuantita() >=
-                            (ingredientePietanza.getQuantita() + (ingredientePietanza.getQuantita() * disponibilita)) && ingrediente.getScadenza().after(data))
-                            disponibilita++;
-            }
-        }
-
-        return disponibilita;
+    @SuppressWarnings("unused")
+	private Integer verificaIngredientiPietanza(User user, Pietanza pietanza) {
+    	if (user != null && pietanza != null) {
+	        ArrayList<IngredientePietanza> ingredientiPietanze = (ArrayList<IngredientePietanza>) ingredientePietanzaSession.selezionaIngredientiPietanze();
+	        ArrayList<IngredienteMagazzino> ingredientiMagazzino = (ArrayList<IngredienteMagazzino>) ingredienteMagazzinoSession.selezionaIngredientiMagazzino();
+	        Date data = new Date(System.currentTimeMillis());
+	
+	        int disponibilita = 0;
+	        for (IngredientePietanza ingredientePietanza : ingredientiPietanze) {
+	
+	            if (ingredientePietanza.getId().getPietanza().equals(pietanza.getId())) {
+	                Ingrediente ingrediente = ingredienteSession.selezionaIngredientePerId(ingredientePietanza.getId().getIngrediente());
+	                for (IngredienteMagazzino ingredienteMagazzino : ingredientiMagazzino)
+	                    if (ingredienteMagazzino.getIngrediente().getId().equals(ingrediente.getId()) && ingredienteMagazzino.getQuantita() >=
+	                            (ingredientePietanza.getQuantita() + (ingredientePietanza.getQuantita() * disponibilita)) && ingrediente.getScadenza().after(data))
+	                            disponibilita++;
+	            }
+	        }
+	
+	        return disponibilita;
+    	}
+    	
+    	return 0;
     }
 
-    public Ordinazione modificaOrdinazione(User role,Ordinazione nuovaOrdinazione, Ordinazione vecchiaOrdinazione) {
-		if (nuovaOrdinazione != null && vecchiaOrdinazione != null) {
+    public Ordinazione modificaOrdinazione(User user, Ordinazione nuovaOrdinazione, Ordinazione vecchiaOrdinazione) {
+		if (user != null && nuovaOrdinazione != null && vecchiaOrdinazione != null) {
 			Ordinazione ordinazione = ordinazioneSession.selezionaOrdinazionePerId(vecchiaOrdinazione.getId());
             ordinazione.setData(nuovaOrdinazione.getData());
             ordinazione.setSconto(nuovaOrdinazione.getSconto());
@@ -134,73 +139,94 @@ public class OrdinazioneFacade {
 		return null;
 	}
 
-	public Ordinazione selezionaOrdinazionePerId(User role,Long id) {
-		if (id != null) {
+	public Ordinazione selezionaOrdinazionePerId(User user, Long id) {
+		if (user != null && id != null) {
 			Ordinazione ord=ordinazioneSession.selezionaOrdinazionePerId(id);
 			return ord;
 		}
 		return null;
 	}
 	
-	public ArrayList<Ordinazione> selezionaOrdinazioni(User role) {
-		return (ArrayList<Ordinazione>) ordinazioneSession.selezionaOrdinazioni();
+	public ArrayList<Ordinazione> selezionaOrdinazioni(User user) {
+		if (user != null)
+			return (ArrayList<Ordinazione>) ordinazioneSession.selezionaOrdinazioni();
+		
+		return null;
 	}
 	
-	public ArrayList<LineaOrdinazione> selezionaOrdinazioniGiornaliere(User role) {
-		
-		System.out.println("ENTRO");
-		Date data=new Date(System.currentTimeMillis());
-		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
-		String a=sdf.format(data);
-		System.out.println("INIZIALIZZO");
-		try {
-			data=sdf.parse(a);
-		} catch (ParseException e1) {
-			System.err.println("ERRORE 1");
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		System.out.println("PARSO");
-		ArrayList<Ordinazione> ord = null;
-		ArrayList<LineaOrdinazione> non_evasi = new ArrayList<LineaOrdinazione>();
-		Set<LineaOrdinazione> linea=new HashSet<LineaOrdinazione>();
-		
-		try {
-			ord = (ArrayList<Ordinazione>) ordinazioneSession.selezionaOrdinazioniGiornaliere();
-			System.out.println("ORDINI PRESENTI "+ord.size());
-			for(Ordinazione o : ord){
-				linea=o.getLineaOrdinaziones();
-				for(LineaOrdinazione lin : linea)
-					if(!lin.getEvaso())
-						non_evasi.add((LineaOrdinazione)lin);
+	public ArrayList<LineaOrdinazione> selezionaOrdinazioniGiornaliere(User user) {
+		if (user != null) {
+			Date data = new Date(System.currentTimeMillis());
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			String a = sdf.format(data);
+	
+			try {
+				data = sdf.parse(a);
+			} catch (ParseException e1) {
+				System.err.println("OrdinazioneFacade#selezionaOrdinazioniGiornaliere");
+				e1.printStackTrace();
 			}
 			
-		} catch (Exception e) {
-			System.err.println("ERRORE 2");
-			e.printStackTrace();
+			ArrayList<Ordinazione> ord = null;
+			ArrayList<LineaOrdinazione> non_evasi = new ArrayList<LineaOrdinazione>();
+			Set<LineaOrdinazione> linea=new HashSet<LineaOrdinazione>();
+			
+			try {
+				ord = (ArrayList<Ordinazione>) ordinazioneSession.selezionaOrdinazioniGiornaliere();
+				System.out.println("ORDINI PRESENTI " + ord.size());
+				for(Ordinazione o : ord){
+					linea=o.getLineaOrdinaziones();
+					for(LineaOrdinazione lin : linea)
+						if(!lin.getEvaso())
+							non_evasi.add((LineaOrdinazione)lin);
+				}
+				
+			} catch (Exception e) {
+				System.err.println("ERRORE 2");
+				e.printStackTrace();
+			}
+			
+			return non_evasi;
 		}
 		
-		return non_evasi;
+		return null;
 	}
 	
-	public ArrayList<Ordinazione> selezionaOrdinazioniGiornalierePerTavolo(User role, Tavolo tavolo, Boolean terminato) {
-		if (tavolo != null && terminato != null) 
+	public ArrayList<Ordinazione> selezionaOrdinazioniGiornalierePerTavolo(User user, Tavolo tavolo, Boolean terminato) {
+		if (user != null && tavolo != null && terminato != null) 
 			return (ArrayList<Ordinazione>) ordinazioneSession.selezionaOrdinazioniGionalierePerTavolo(tavolo, terminato);
 		
 		return null;
 	}
 
-    public Ordinazione selezionaOrdinazioneGiornalieraPerTavolo(User role,String riferimentoTavolo, Boolean terminato) {
-    	if (riferimentoTavolo != null && terminato != null){
-			ArrayList<Ordinazione> list=((ArrayList<Ordinazione>)ordinazioneSession.selezionaOrdinazioniGionalierePerTavolo(tavoloSession.selezionaTavoloPerRiferimento(riferimentoTavolo, true), terminato));
-			
-			return list.get(0);
+    public Ordinazione selezionaOrdinazioneGiornalieraPerTavolo(User user, String riferimentoTavolo, Boolean terminato) {
+    	if (user != null && riferimentoTavolo != null && terminato != null){
+    		Tavolo tavolo = tavoloSession.selezionaTavoloPerRiferimento(riferimentoTavolo, true);
+    		ArrayList<Ordinazione> list = ((ArrayList<Ordinazione>) ordinazioneSession.selezionaOrdinazioniGionalierePerTavolo(tavolo, terminato));
+			if (list != null && list.size() > 0) {
+				Ordinazione ordinazione = list.get(0);
+				return ordinazione;
+			}
 		}
+    	
+		return null;
+	}
+    
+    public Ordinazione selezionaOrdinazionePerTavolo(User user, String riferimentoTavolo, Boolean terminato) {
+    	if (user != null && riferimentoTavolo != null && terminato != null){
+    		Tavolo tavolo = tavoloSession.selezionaTavoloPerRiferimento(riferimentoTavolo, true);
+    		ArrayList<Ordinazione> list = ((ArrayList<Ordinazione>)ordinazioneSession.selezionaOrdinazioniPerTavolo(tavolo, terminato));
+			if (list != null && list.size() > 0) {
+				Ordinazione ordinazione = list.get(0);
+				return ordinazione;
+			}
+		}
+    	
 		return null;
 	}
 	
-	public boolean rimuoviOrdinazione(User role,Long id, Boolean ripristinaPietanze) {
-		if (id != null) {
+	public boolean rimuoviOrdinazione(User user, Long id, Boolean ripristinaPietanze) {
+		if (user != null && id != null) {
             Boolean statoEliminazione = false;
             Ordinazione ordinazione = ordinazioneSession.selezionaOrdinazionePerId(id);
             ArrayList<LineaOrdinazione> lineeOrdinazione = (ArrayList<LineaOrdinazione>) lineaOrdinazioneSession.selezionaLineeOrdinazionePerOrdinazione(ordinazione);
@@ -217,10 +243,10 @@ public class OrdinazioneFacade {
                         if (ripristinaPietanze) {
                             Articolo articolo = lineaOrdinazione.getArticolo();
                             if (articolo.getTipoArticolo().equals("Pietanza")) {
-                                if (!this.aggiornaMagazzinoIngredienti(role,lineaOrdinazione, "+"))
+                                if (!this.aggiornaMagazzinoIngredienti(user,lineaOrdinazione, "+"))
                                     throw new Exception();
                             } else {
-                                if (!this.aggiornaMagazzinoBevande(role,lineaOrdinazione, "+"))
+                                if (!this.aggiornaMagazzinoBevande(user,lineaOrdinazione, "+"))
                                     throw new Exception();
                             }
                         }
@@ -255,8 +281,8 @@ public class OrdinazioneFacade {
 		return false;
 	}
 	
-	public LineaOrdinazione inserisciLineaOrdinazione(User role, LineaOrdinazione lineaOrdinazione) {
-		if (lineaOrdinazione != null) {
+	public LineaOrdinazione inserisciLineaOrdinazione(User user, LineaOrdinazione lineaOrdinazione) {
+		if (user != null && lineaOrdinazione != null) {
             try {
             	lineaOrdinazione.setOrdinazione(lineaOrdinazione.getOrdinazione());
             	lineaOrdinazione.setEvaso(false);
@@ -265,10 +291,10 @@ public class OrdinazioneFacade {
                 Articolo articolo = lineaOrdinazione.getArticolo();
                 
                 if (articolo.getTipoArticolo().equals("Pietanza")) {
-                    if (!this.aggiornaMagazzinoIngredienti(role, lineaOrdinazione, "-"))
+                    if (!this.aggiornaMagazzinoIngredienti(user, lineaOrdinazione, "-"))
                         throw new Exception();
                 } else {
-                	if (!this.aggiornaMagazzinoBevande(role, lineaOrdinazione, "-"))
+                	if (!this.aggiornaMagazzinoBevande(user, lineaOrdinazione, "-"))
                         throw  new Exception();
                 }
                 return lineaOrdinazione;
@@ -280,9 +306,9 @@ public class OrdinazioneFacade {
 		return null;
 	}
 	
-	public LineaOrdinazione modificaLineaOrdinazione(User role,LineaOrdinazione nuovaLineaOrdinazione,
+	public LineaOrdinazione modificaLineaOrdinazione(User user, LineaOrdinazione nuovaLineaOrdinazione,
             LineaOrdinazione vecchiaLineaOrdinazione) {
-        if (nuovaLineaOrdinazione != null && vecchiaLineaOrdinazione != null) {
+        if (user != null && nuovaLineaOrdinazione != null && vecchiaLineaOrdinazione != null) {
 			LineaOrdinazione lineaOrdinazione = vecchiaLineaOrdinazione;
             lineaOrdinazione.setArticolo(nuovaLineaOrdinazione.getArticolo());
             lineaOrdinazione.setOrdinazione(nuovaLineaOrdinazione.getOrdinazione());
@@ -294,42 +320,46 @@ public class OrdinazioneFacade {
 		return null;
 	}
 
-    public LineaOrdinazione selezionaLineaOrdinazionePerId(User role,Long id) {
-        if (id != null)
+    public LineaOrdinazione selezionaLineaOrdinazionePerId(User user, Long id) {
+        if (user != null && id != null)
 			return lineaOrdinazioneSession.selezionaLineaOrdinazionePerId(id);
 
         return null;
     }
     
-    public ArrayList<LineaOrdinazione> selezionaLineeOrdinazionePerOrdinazione(User role,Ordinazione ordinazione) {
-        if (ordinazione != null){
+    public ArrayList<LineaOrdinazione> selezionaLineeOrdinazionePerOrdinazione(User user, Ordinazione ordinazione) {
+        if (user != null && ordinazione != null){
         	ArrayList<LineaOrdinazione> linea=(ArrayList<LineaOrdinazione>) lineaOrdinazioneSession.selezionaLineeOrdinazionePerOrdinazione(ordinazione);
 			return linea;
         }
         return null;
     }
 
-    public ArrayList<LineaOrdinazione> selezionaLineeOrdinazionePerOrdinazioneTipoPietanza(User role,Ordinazione ordinazione, TipoPietanza tipoPietanza) {
-        ArrayList<LineaOrdinazione> lineeOrdinazione = new ArrayList<LineaOrdinazione>();
-        if (ordinazione != null) 
-			 lineeOrdinazione = (ArrayList<LineaOrdinazione>) lineaOrdinazioneSession.selezionaLineeOrdinazionePerOrdinazione(ordinazione);
-        
-        ArrayList<LineaOrdinazione> lineeOrdinazioneArticoli = new ArrayList<LineaOrdinazione> ();
-        
-        for (LineaOrdinazione lineaOrdinazione : lineeOrdinazione) {
-            Articolo articolo = lineaOrdinazione.getArticolo();
-            if (articolo.getTipoArticolo().equals("Bevanda") && tipoPietanza.equals(TipoPietanza.BEVANDA))
-                lineeOrdinazioneArticoli.add(lineaOrdinazione);
-            if (articolo.getTipoArticolo().equals("Pietanza"))
-                if (articolo.getTipoPietanza()==(tipoPietanza.ordinal()))
-                    lineeOrdinazioneArticoli.add(lineaOrdinazione);
+    public ArrayList<LineaOrdinazione> selezionaLineeOrdinazionePerOrdinazioneTipoPietanza(User user, Ordinazione ordinazione, TipoPietanza tipoPietanza) {
+        if (user != null) {
+	    	ArrayList<LineaOrdinazione> lineeOrdinazione = new ArrayList<LineaOrdinazione>();
+	        if (ordinazione != null) 
+				 lineeOrdinazione = (ArrayList<LineaOrdinazione>) lineaOrdinazioneSession.selezionaLineeOrdinazionePerOrdinazione(ordinazione);
+	        
+	        ArrayList<LineaOrdinazione> lineeOrdinazioneArticoli = new ArrayList<LineaOrdinazione> ();
+	        
+	        for (LineaOrdinazione lineaOrdinazione : lineeOrdinazione) {
+	            Articolo articolo = lineaOrdinazione.getArticolo();
+	            if (articolo.getTipoArticolo().equals("Bevanda") && tipoPietanza.equals(TipoPietanza.BEVANDA))
+	                lineeOrdinazioneArticoli.add(lineaOrdinazione);
+	            if (articolo.getTipoArticolo().equals("Pietanza"))
+	                if (articolo.getTipoPietanza()==(tipoPietanza.ordinal()))
+	                    lineeOrdinazioneArticoli.add(lineaOrdinazione);
+	        }
+	
+	        return lineeOrdinazioneArticoli;
         }
-
-        return lineeOrdinazioneArticoli;
+        
+        return null;
     }
 
-    public boolean rimuoviLineaOrdinazione(User role,Long id) {
-        if (id != null) {
+    public boolean rimuoviLineaOrdinazione(User user, Long id) {
+        if (user != null && id != null) {
             try {
                 ArrayList<Variante> varianti = (ArrayList<Variante>) varianteSession.selezionaVariantiPerLineaOrdinazione(lineaOrdinazioneSession.selezionaLineaOrdinazionePerId(id));
                 if (varianti != null && varianti.size() > 0) {
@@ -347,17 +377,13 @@ public class OrdinazioneFacade {
 		return false;
     }
 
-    public Variante inserisciVariante(User role, Variante variante) {
-        if (variante != null) {
+    public Variante inserisciVariante(User user, Variante variante) {
+        if (user != null && variante != null) {
             LineaOrdinazione lineaOrdinazione = variante.getLineaOrdinazione();
             Ingrediente ingrediente = variante.getIngrediente();
 
             if (lineaOrdinazione != null && ingrediente != null) {
-                try {
-//                    lineaOrdinazione = em.merge(lineaOrdinazione);
-//                    ingrediente = em.merge(ingrediente);
-//                    em.flush();
-                	
+                try {                	
                     variante.setIngrediente(ingrediente);
                     variante.setLineaOrdinazione(lineaOrdinazione);
                     
@@ -365,7 +391,7 @@ public class OrdinazioneFacade {
                     
                     return variante;
                 } catch (Exception e) {
-                	System.out.println("OrdinazioneFacade#inserisciVariante: " + e);
+                	System.err.println("OrdinazioneFacade#inserisciVariante");
                 }
             }
         }
@@ -373,26 +399,28 @@ public class OrdinazioneFacade {
         return null;
     }
 
-    public ArrayList<Ingrediente> selezionaIngredientiPerVariante (User role) {
-        ArrayList<IngredienteMagazzino> ingredientiMagazzino = (ArrayList<IngredienteMagazzino>) ingredienteMagazzinoSession.selezionaIngredientiMagazzino();
-        ArrayList<Ingrediente> ingredienti = (ArrayList<Ingrediente>) ingredienteSession.selezionaIngredientePerVariante();
-
-        if (ingredientiMagazzino != null && ingredienti != null) {
-            ArrayList<Ingrediente> ingredientiVariante = new ArrayList<Ingrediente>();
-
-            for (Ingrediente ingrediente : ingredienti) 
-                for (IngredienteMagazzino ingredienteMagazzino : ingredientiMagazzino)
-                    if (ingrediente.getId().equals(ingredienteMagazzino.getIngrediente().getId()) && ingredienteMagazzino.getQuantita() > 200)
-                        ingredientiVariante.add(ingredienteMagazzino.getIngrediente());
-
-            return ingredientiVariante;
-        }
+    public ArrayList<Ingrediente> selezionaIngredientiPerVariante (User user) {
+    	if (user != null) {
+	        ArrayList<IngredienteMagazzino> ingredientiMagazzino = (ArrayList<IngredienteMagazzino>) ingredienteMagazzinoSession.selezionaIngredientiMagazzino();
+	        ArrayList<Ingrediente> ingredienti = (ArrayList<Ingrediente>) ingredienteSession.selezionaIngredientePerVariante();
+	
+	        if (ingredientiMagazzino != null && ingredienti != null) {
+	            ArrayList<Ingrediente> ingredientiVariante = new ArrayList<Ingrediente>();
+	
+	            for (Ingrediente ingrediente : ingredienti) 
+	                for (IngredienteMagazzino ingredienteMagazzino : ingredientiMagazzino)
+	                    if (ingrediente.getId().equals(ingredienteMagazzino.getIngrediente().getId()) && ingredienteMagazzino.getQuantita() > 200)
+	                        ingredientiVariante.add(ingredienteMagazzino.getIngrediente());
+	
+	            return ingredientiVariante;
+	        }
+    	}
         
         return null;
     }
 
-    public Variante modificaVariante(User role,Variante nuovaVariante, Variante vecchiaVariante) {
-        if (nuovaVariante != null && vecchiaVariante != null) {
+    public Variante modificaVariante(User user, Variante nuovaVariante, Variante vecchiaVariante) {
+        if (user != null && nuovaVariante != null && vecchiaVariante != null) {
 			Variante variante = vecchiaVariante;
             variante.setIngrediente(vecchiaVariante.getIngrediente());
             variante.setLineaOrdinazione(vecchiaVariante.getLineaOrdinazione());
@@ -404,22 +432,22 @@ public class OrdinazioneFacade {
 		return null;
 	}
 
-    public Variante selezionaVariantePerId(User role,Long id) {
-        if (id != null)
+    public Variante selezionaVariantePerId(User user,Long id) {
+        if (user != null && id != null)
 			return varianteSession.selezionaVariantePerId(id);
 
         return null;
     }
     
-    public void setLineaEvasa(User role,LineaOrdinazione linea) {
-       linea.setEvaso(true);
-       
-       lineaOrdinazioneSession.update(linea);
-       
+    public void setLineaEvasa(User user, LineaOrdinazione linea) {
+    	if (user != null && linea != null) {
+    		linea.setEvaso(true);
+    		lineaOrdinazioneSession.update(linea);
+    	}
     }
 
-    public Ingrediente selezionaIngredientePerNome (User role,String ingrediente) {
-        if (ingrediente != null) {
+    public Ingrediente selezionaIngredientePerNome (User user, String ingrediente) {
+        if (user != null && ingrediente != null) {
             ArrayList<Ingrediente> ingredienti = (ArrayList<Ingrediente>) ingredienteSession.selezionaIngredientePerNome(ingrediente);
 
             if (ingredienti != null)
@@ -429,12 +457,12 @@ public class OrdinazioneFacade {
         return null;
     }
 
-    public ArrayList<Variante> selezionaVariantiPerIngrediente(User role,Ingrediente ingrediente) {
+    public ArrayList<Variante> selezionaVariantiPerIngrediente(User user, Ingrediente ingrediente) {
         return null;
     }
 
-    public ArrayList<Variante> selezionaVariantiPerLineaOrdinazione(User role,LineaOrdinazione lineaOrdinazione) {
-        if (lineaOrdinazione != null) {
+    public ArrayList<Variante> selezionaVariantiPerLineaOrdinazione(User user, LineaOrdinazione lineaOrdinazione) {
+        if (user != null && lineaOrdinazione != null) {
             ArrayList<Variante> varianti =(ArrayList<Variante>) varianteSession.selezionaVariantiPerLineaOrdinazione(lineaOrdinazione);
 
             if (varianti != null && varianti.size() > 0)
@@ -444,64 +472,68 @@ public class OrdinazioneFacade {
         return null;
     }
 
-    public boolean rimuoviVariante(User role,Long id) {
-        if (id != null)
+    public boolean rimuoviVariante(User user, Long id) {
+        if (user != null && id != null)
 			return varianteSession.rimuoviVariante(id);
 
 		return false;
     }
 
-    private boolean aggiornaMagazzinoIngredienti(User role, LineaOrdinazione lineaOrdinazione, String tipoAggiornamento) {
-        try {
-            ArrayList<IngredientePietanza> ingredientiPietanze = (ArrayList<IngredientePietanza>) ingredientePietanzaSession.selezionaIngredientiPietanze();
-            ArrayList<IngredienteMagazzino> ingredientiMagazzino = (ArrayList<IngredienteMagazzino>) ingredienteMagazzinoSession.selezionaIngredientiMagazzino();
-            if (ingredientiPietanze != null && ingredientiMagazzino != null) {
-                for (IngredientePietanza ingredientePietanza : ingredientiPietanze) {
-                    if (ingredientePietanza.getId().getPietanza().equals(lineaOrdinazione.getArticolo().getId())) {
-                            for (IngredienteMagazzino ingredienteMagazzino : ingredientiMagazzino) {
-                                if (ingredienteMagazzino.getIngrediente().getId().
-                                        equals(ingredientePietanza.getId().getIngrediente())) {
-                                	
-                                	int quantita = ingredienteMagazzino.getQuantita();
-                                	if (tipoAggiornamento.equalsIgnoreCase("+"))
-                                        ingredienteMagazzino.setQuantita(quantita + (lineaOrdinazione.getQuantita() * ingredientePietanza.getQuantita()));
-                                    else
-                                         ingredienteMagazzino.setQuantita(quantita - (lineaOrdinazione.getQuantita() * ingredientePietanza.getQuantita()));
-
-                                    ingredienteMagazzinoSession.update(ingredienteMagazzino);
-                                }
-                            }
-                        }
-                }
-                return true;
-            }
-        } catch (Exception e) {
-            return false;
+    private boolean aggiornaMagazzinoIngredienti(User user, LineaOrdinazione lineaOrdinazione, String tipoAggiornamento) {
+        if (user != null) {
+	    	try {
+	            ArrayList<IngredientePietanza> ingredientiPietanze = (ArrayList<IngredientePietanza>) ingredientePietanzaSession.selezionaIngredientiPietanze();
+	            ArrayList<IngredienteMagazzino> ingredientiMagazzino = (ArrayList<IngredienteMagazzino>) ingredienteMagazzinoSession.selezionaIngredientiMagazzino();
+	            if (ingredientiPietanze != null && ingredientiMagazzino != null) {
+	                for (IngredientePietanza ingredientePietanza : ingredientiPietanze) {
+	                    if (ingredientePietanza.getId().getPietanza().equals(lineaOrdinazione.getArticolo().getId())) {
+	                            for (IngredienteMagazzino ingredienteMagazzino : ingredientiMagazzino) {
+	                                if (ingredienteMagazzino.getIngrediente().getId().
+	                                        equals(ingredientePietanza.getId().getIngrediente())) {
+	                                	
+	                                	int quantita = ingredienteMagazzino.getQuantita();
+	                                	if (tipoAggiornamento.equalsIgnoreCase("+"))
+	                                        ingredienteMagazzino.setQuantita(quantita + (lineaOrdinazione.getQuantita() * ingredientePietanza.getQuantita()));
+	                                    else
+	                                         ingredienteMagazzino.setQuantita(quantita - (lineaOrdinazione.getQuantita() * ingredientePietanza.getQuantita()));
+	
+	                                    ingredienteMagazzinoSession.update(ingredienteMagazzino);
+	                                }
+	                            }
+	                        }
+	                }
+	                return true;
+	            }
+	        } catch (Exception e) {
+	            return false;
+	        }
         }
         
         return false;
     }
 
-    private boolean aggiornaMagazzinoBevande(User role,LineaOrdinazione lineaOrdinazione, String tipoAggiornamento) {
-        try {
-            ArrayList<BevandaMagazzino> bevandeMagazzino = (ArrayList<BevandaMagazzino>) bevandaMagazzinoSession.selezionaBevandeMagazzino();
-            if (bevandeMagazzino != null) {
-                for (BevandaMagazzino bevandaMagazzino : bevandeMagazzino) {
-                    if (bevandaMagazzino.getArticolo().getId().equals(lineaOrdinazione.getArticolo().getId())) {
-                    	int quantita = bevandaMagazzino.getQuantita();
-                    	
-                    	if (tipoAggiornamento.equalsIgnoreCase("+")) {
-                            bevandaMagazzino.setQuantita(quantita + (lineaOrdinazione.getQuantita() * (lineaOrdinazione.getArticolo()).getCapacita().intValue()));
-                        } else {
-                        	bevandaMagazzino.setQuantita(quantita - (lineaOrdinazione.getQuantita() * (lineaOrdinazione.getArticolo()).getCapacita().intValue()));
-                        }
-                        bevandaMagazzinoSession.update(bevandaMagazzino);
-                    }
-                }
-                return true;
-            }
-        } catch (Exception e) {
-            return false;
+    private boolean aggiornaMagazzinoBevande(User user, LineaOrdinazione lineaOrdinazione, String tipoAggiornamento) {
+        if (user != null) {
+	    	try {
+	            ArrayList<BevandaMagazzino> bevandeMagazzino = (ArrayList<BevandaMagazzino>) bevandaMagazzinoSession.selezionaBevandeMagazzino();
+	            if (bevandeMagazzino != null) {
+	                for (BevandaMagazzino bevandaMagazzino : bevandeMagazzino) {
+	                    if (bevandaMagazzino.getArticolo().getId().equals(lineaOrdinazione.getArticolo().getId())) {
+	                    	int quantita = bevandaMagazzino.getQuantita();
+	                    	
+	                    	if (tipoAggiornamento.equalsIgnoreCase("+")) {
+	                            bevandaMagazzino.setQuantita(quantita + (lineaOrdinazione.getQuantita() * (lineaOrdinazione.getArticolo()).getCapacita().intValue()));
+	                        } else {
+	                        	bevandaMagazzino.setQuantita(quantita - (lineaOrdinazione.getQuantita() * (lineaOrdinazione.getArticolo()).getCapacita().intValue()));
+	                        }
+	                        bevandaMagazzinoSession.update(bevandaMagazzino);
+	                    }
+	                }
+	                return true;
+	            }
+	        } catch (Exception e) {
+	            return false;
+	        }
         }
 
         return false;

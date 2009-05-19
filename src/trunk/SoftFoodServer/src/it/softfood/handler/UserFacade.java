@@ -13,11 +13,9 @@ import it.softfood.session.UserSession;
 public class UserFacade {
 	
 	private static UserFacade singleton; 
-	
-	private UserSession user = UserSession.getInstance();
+	private UserSession userSession = UserSession.getInstance();
 
-	public UserFacade() {
-	}
+	public UserFacade() {}
 	
 	public synchronized static UserFacade getInstance() {
 		if (singleton == null) {
@@ -28,46 +26,77 @@ public class UserFacade {
 	}
 
 	public User selezionaUtentePerUserPassword(String username, String password) {
-		User u = user.selezionaUtente(username,password);
-		return u;
+		if (username != null && password != null) {
+			User user = userSession.selezionaUtente(username, password);
+			return user;
+		}
+		
+		return null;
 	}
 	
-	public User inserisciUtente(User role, User u){		
-		u=user.inserisciUser(u);
-		return u;		
+	public User inserisciUtente(User user){		
+		if (user != null) {
+			user = userSession.inserisciUser(user);
+			return user;		
+		}
+		
+		return null;
 	}
 	
-	public User selezionaUserName(User role, User u) {		
-		u = user.selezionaUserPerUserName(u.getUserName());
-		return u;
+	public User selezionaUserName(User user) {
+		if (user != null) {
+			user = userSession.selezionaUserPerUserName(user.getUserName());
+			return user;
+		}
+		
+		return null;
 	}
 	
-	public User selezionaPassword(User role, User u) {		
-		u = user.selezionaUserPerPassword(u.getPassword());
-		return u;
+	public User selezionaPassword(User user) {	
+		if (user != null) {
+			user = userSession.selezionaUserPerPassword(user.getPassword());
+			return user;
+		}
+		
+		return null;
 	}
 	
-	public boolean modificaRuolo(User role, User u, String ruolo) {
-		boolean v = user.modificaRuoloUser(u, ruolo);
-		return v;
+	public boolean modificaRuolo(User user, String ruolo) {
+		if (user != null && ruolo != null) {
+			boolean v = userSession.modificaRuoloUser(user, ruolo);
+			return v;
+		}
+		
+		return false;
 	}
 	
-	public boolean eliminaUtente(User role, User r) {
-		return user.rimuoviUser(r.getUserName());
+	public boolean eliminaUtente(User user) {
+		if (user != null)
+			return userSession.rimuoviUser(user.getUserName());
+		
+		return false;
 	}
 	
-	public User selezionaUtente(User role, String username, String password) {
-		return user.selezionaUtente(username,password);
+	public User selezionaUtente(User user, String username, String password) {
+		if (user != null && username != null && password != null)
+			return userSession.selezionaUtente(username, password);
+		
+		return null;
 	}
 	
 	public User login(String username, String password) {
-		LoginHandler l = LoginHandler.getInstance();
-		User u = l.login(username, password);
-		return u;
+		if (username != null && password != null) {
+			LoginHandler l = LoginHandler.getInstance();
+			User user = l.login(username, password);
+			return user;
+		}
+		
+		return null;
 	}
 	
-	public void logout(User u) {
-		LoginHandler.getInstance().logout(u);
+	public void logout(User user) {
+		if (user != null) 
+			LoginHandler.getInstance().logout(user);
 	}
 	
 }

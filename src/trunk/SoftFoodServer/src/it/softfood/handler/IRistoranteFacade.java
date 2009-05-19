@@ -6,19 +6,22 @@ import it.softfood.entity.User;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
+/**
+ * @author Maria Rosaria Paone
+ * @author Marco Grasso
+ * @author Francesco Pacilio
+ */
+
 public interface IRistoranteFacade extends Remote{
 
-	public abstract Ristorante inserisciRistorante(User role,Ristorante ristorante)throws RemoteException;
+	public Ristorante inserisciRistorante(User user, Ristorante ristorante) throws RemoteException;
 
-	public abstract Ristorante modificaRistorante(User role,Ristorante nuovoRistorante,
-			Ristorante vecchioRistorante)throws RemoteException;
+	public Ristorante modificaRistorante(User user, Ristorante nuovoRistorante, Ristorante vecchioRistorante) throws RemoteException;
 
-	public abstract Ristorante selezionaRistorantePerRagioneSociale(User role,
-			String ragioneSociale)throws RemoteException;
+	public Ristorante selezionaRistorantePerRagioneSociale(User user, String ragioneSociale) throws RemoteException;
 
-	public abstract Ristorante selezionaRistorantePerPartitaIva(User role,
-			String partitaIva)throws RemoteException;
+	public Ristorante selezionaRistorantePerPartitaIva(User user, String partitaIva) throws RemoteException;
 
-	public abstract boolean rimuoviRistorante(User role,String ragioneSociale)throws RemoteException;
+	public boolean rimuoviRistorante(User user, String ragioneSociale) throws RemoteException;
 
 }

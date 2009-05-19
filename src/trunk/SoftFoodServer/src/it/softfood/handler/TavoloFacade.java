@@ -33,56 +33,65 @@ public class TavoloFacade implements ITavoloFacade {
 		return singleton;
 	}
 
-	public Tavolo inserisciTavolo(User role,Tavolo tavolo) {
-		if (tavolo != null)
+	public Tavolo inserisciTavolo(User user, Tavolo tavolo) {
+		if (user != null && tavolo != null)
 			return tavoloSession.inserisciTavolo(tavolo);
 		
 		return null;
 	}
 	
-	public boolean liberaTavolo(User role,Tavolo tavolo) {
-		if (tavolo != null)
+	public boolean liberaTavolo(User user, Tavolo tavolo) {
+		if (user != null && tavolo != null)
 			return tavoloSession.modificaStatoTavolo(tavolo, false);
 		
 		return false;
 	}
 	
-	public boolean occupaTavolo(User role,Tavolo tavolo) {
-		if (tavolo != null)
+	public boolean occupaTavolo(User user, Tavolo tavolo) {
+		if (user != null && tavolo != null)
 			return tavoloSession.modificaStatoTavolo(tavolo, true);	
 		
 		return false;
 	}
 	
-	public Tavolo selezionaTavolo(User role,Long id) {
-		if (id != null)
+	public Tavolo selezionaTavolo(User user, Long id) {
+		if (user != null && id != null)
 			return tavoloSession.selezionaTavoloPerId(id);
 		
 		return null;
 	}
 	
-	public List<Tavolo> selezionaTavoliLiberi(User role) {
-		return tavoloSession.selezionaTavoliLiberi();
+	public List<Tavolo> selezionaTavoliLiberi(User user) {
+		if (user != null)
+			return tavoloSession.selezionaTavoliLiberi();
+		
+		return null;
 	}
 
-    public List<Tavolo> selezionaTavoliOccupati(User role) {
-		return tavoloSession.selezionaTavoliOccupati();
+    public List<Tavolo> selezionaTavoliOccupati(User user) {
+    	if (user != null)
+    		return tavoloSession.selezionaTavoliOccupati();
+    	
+    	return null;
 	}
 
-    public List<Tavolo> selezionaTavoliNonAttivi(User role) {
-        return tavoloSession.selezionaTavoliNonAttivi();
+    public List<Tavolo> selezionaTavoliNonAttivi(User user) {
+    	if (user != null)
+    		return tavoloSession.selezionaTavoliNonAttivi();
+    	
+    	return null;
     }
     
-	public boolean rimuoviTavolo(User role,Long id) {
-		if (id != null)
+	public boolean rimuoviTavolo(User user, Long id) {
+		if (user != null && id != null)
 			return tavoloSession.rimuoviTavolo(id);
 		
 		return false;
 	}
     
-    public Long occupaTavoli(User role,ArrayList<String> riferimenti) {
+    public Long occupaTavoli(User user, ArrayList<String> riferimenti) {
         try {
-            if (riferimenti != null) {
+            if (user != null && riferimenti != null) {
                 if (riferimenti.size() == 1) {
                     String riferimento = riferimenti.get(0);
                     if (riferimento != null) {
@@ -134,10 +143,8 @@ public class TavoloFacade implements ITavoloFacade {
                 }
             }
         } catch (SecurityException ex) {
-//            ejbCtx.setRollbackOnly();
             Logger.getLogger(TavoloFacade.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IllegalStateException ex) {
-//            ejbCtx.setRollbackOnly();
             Logger.getLogger(TavoloFacade.class.getName()).log(Level.SEVERE, null, ex);
         }
         

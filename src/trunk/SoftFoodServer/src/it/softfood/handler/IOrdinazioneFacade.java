@@ -20,50 +20,52 @@ import java.util.ArrayList;
 
 public interface IOrdinazioneFacade  extends Remote{
 
-	public Ordinazione inserisciOrdinazione(User role,Ordinazione ordinazione)throws RemoteException;
+	public Ordinazione inserisciOrdinazione(User user, Ordinazione ordinazione) throws RemoteException;
 
-	public Ordinazione modificaOrdinazione(User role,Ordinazione nuovaOrdinazione, Ordinazione vecchiaOrdinazione) throws RemoteException;
+	public Ordinazione modificaOrdinazione(User user, Ordinazione nuovaOrdinazione, Ordinazione vecchiaOrdinazione) throws RemoteException;
 
-	public Ordinazione selezionaOrdinazionePerId(User role,Long id) throws RemoteException;
+	public Ordinazione selezionaOrdinazionePerId(User user, Long id) throws RemoteException;
 
-	public ArrayList<Ordinazione> selezionaOrdinazioni(User role) throws RemoteException;
+	public ArrayList<Ordinazione> selezionaOrdinazioni(User user) throws RemoteException;
 
-	public ArrayList<LineaOrdinazione> selezionaOrdinazioniGiornaliere(User role) throws RemoteException;
+	public ArrayList<LineaOrdinazione> selezionaOrdinazioniGiornaliere(User user) throws RemoteException;
 
-	public ArrayList<Ordinazione> selezionaOrdinazioniGiornalierePerTavolo(User role, Tavolo tavolo, Boolean terminato) throws RemoteException;
+	public ArrayList<Ordinazione> selezionaOrdinazioniGiornalierePerTavolo(User user, Tavolo tavolo, Boolean terminato) throws RemoteException;
 
-	public Ordinazione selezionaOrdinazioneGiornalieraPerTavolo(User role,String riferimentoTavolo, Boolean terminato) throws RemoteException;
+	public Ordinazione selezionaOrdinazioneGiornalieraPerTavolo(User user, String riferimentoTavolo, Boolean terminato) throws RemoteException;
 
-	public boolean rimuoviOrdinazione(User role,Long id, Boolean ripristinaPietanze) throws RemoteException;
+	public Ordinazione selezionaOrdinazionePerTavolo(User user, String riferimentoTavolo, Boolean terminato) throws RemoteException;
+		
+	public boolean rimuoviOrdinazione(User user, Long id, Boolean ripristinaPietanze) throws RemoteException;
 
-	public LineaOrdinazione inserisciLineaOrdinazione(User role,LineaOrdinazione lineaOrdinazione) throws RemoteException;
+	public LineaOrdinazione inserisciLineaOrdinazione(User user, LineaOrdinazione lineaOrdinazione) throws RemoteException;
 
-	public LineaOrdinazione modificaLineaOrdinazione(User role,LineaOrdinazione nuovaLineaOrdinazione, LineaOrdinazione vecchiaLineaOrdinazione) throws RemoteException;
+	public LineaOrdinazione modificaLineaOrdinazione(User user, LineaOrdinazione nuovaLineaOrdinazione, LineaOrdinazione vecchiaLineaOrdinazione) throws RemoteException;
 
-	public LineaOrdinazione selezionaLineaOrdinazionePerId(User role,Long id)throws RemoteException;
+	public LineaOrdinazione selezionaLineaOrdinazionePerId(User user, Long id)throws RemoteException;
 
-	public ArrayList<LineaOrdinazione> selezionaLineeOrdinazionePerOrdinazione(User role,Ordinazione ordinazione) throws RemoteException;
+	public ArrayList<LineaOrdinazione> selezionaLineeOrdinazionePerOrdinazione(User user, Ordinazione ordinazione) throws RemoteException;
 
-	public ArrayList<LineaOrdinazione> selezionaLineeOrdinazionePerOrdinazioneTipoPietanza(User role,Ordinazione ordinazione, TipoPietanza tipoPietanza) throws RemoteException;
+	public ArrayList<LineaOrdinazione> selezionaLineeOrdinazionePerOrdinazioneTipoPietanza(User user, Ordinazione ordinazione, TipoPietanza tipoPietanza) throws RemoteException;
 
-	public boolean rimuoviLineaOrdinazione(User role,Long id) throws RemoteException;
+	public boolean rimuoviLineaOrdinazione(User user, Long id) throws RemoteException;
 
-	public Variante inserisciVariante(User role,Variante variante) throws RemoteException;
+	public Variante inserisciVariante(User user, Variante variante) throws RemoteException;
 
-	public ArrayList<Ingrediente> selezionaIngredientiPerVariante(User role) throws RemoteException;
+	public ArrayList<Ingrediente> selezionaIngredientiPerVariante(User user) throws RemoteException;
 
-	public Variante modificaVariante(User role,Variante nuovaVariante, Variante vecchiaVariante) throws RemoteException;
+	public Variante modificaVariante(User user, Variante nuovaVariante, Variante vecchiaVariante) throws RemoteException;
 
-	public Variante selezionaVariantePerId(User role,Long id) throws RemoteException;
+	public Variante selezionaVariantePerId(User user, Long id) throws RemoteException;
 
-	public Ingrediente selezionaIngredientePerNome(User role,String ingrediente) throws RemoteException;
+	public Ingrediente selezionaIngredientePerNome(User user, String ingrediente) throws RemoteException;
 
-	public ArrayList<Variante> selezionaVariantiPerIngrediente(User role,Ingrediente ingrediente) throws RemoteException;
+	public ArrayList<Variante> selezionaVariantiPerIngrediente(User user, Ingrediente ingrediente) throws RemoteException;
 
-	public ArrayList<Variante> selezionaVariantiPerLineaOrdinazione(User role,LineaOrdinazione lineaOrdinazione) throws RemoteException;
+	public ArrayList<Variante> selezionaVariantiPerLineaOrdinazione(User user, LineaOrdinazione lineaOrdinazione) throws RemoteException;
 
-	public boolean rimuoviVariante(User role,Long id) throws RemoteException;
+	public boolean rimuoviVariante(User user, Long id) throws RemoteException;
 	
-	public void setLineaEvasa(User role,LineaOrdinazione linea) throws RemoteException;
+	public void setLineaEvasa(User user, LineaOrdinazione linea) throws RemoteException;
 
 }
