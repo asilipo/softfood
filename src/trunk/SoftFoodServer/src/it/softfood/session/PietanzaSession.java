@@ -27,6 +27,7 @@ public class PietanzaSession {
 		return pietanzaSession;
 	}
 
+	@SuppressWarnings("unchecked")
 	private Long getNewId() {
 		try {
 			Query q = session.createQuery("select max(id) from it.softfood.entity.Articolo");
@@ -88,7 +89,8 @@ public class PietanzaSession {
 		}
 	}
 
-    public List<Pietanza> selezionaPietanzePerTipo(TipoPietanza tipoPietanza) {
+    @SuppressWarnings("unchecked")
+	public List<Pietanza> selezionaPietanzePerTipo(TipoPietanza tipoPietanza) {
     	try {
 			Query q = session.createQuery("from it.softfood.entity.Articolo o where o.tipoPietanza = ?");
 			q.setInteger(0, tipoPietanza.ordinal());
@@ -119,7 +121,8 @@ public class PietanzaSession {
 		}
 	}
 
-    public ArrayList<Pietanza> selezionaPietanze() {
+    @SuppressWarnings("unchecked")
+	public ArrayList<Pietanza> selezionaPietanze() {
     	try {
 			Query q = session.createQuery("from it.softfood.entity.Articolo o where tipoArticolo = 'Pietanza'");
 			List<Articolo> articoli = (List<Articolo>) q.list();

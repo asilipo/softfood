@@ -24,6 +24,7 @@ public class IngredienteFrescoSession {
 		return ingredienteFrescoSession;
 	}
 	
+	@SuppressWarnings("unchecked")
 	private Long getNewId() {
 		try {
 			Query q = session.createQuery("select max(id) from it.softfood.entity.Ingrediente");
@@ -62,6 +63,7 @@ public class IngredienteFrescoSession {
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<Ingrediente> selezionaIngredientiFreschi() {
 		try {
 			Query q = session.createQuery("from it.softfood.entity.Ingrediente");

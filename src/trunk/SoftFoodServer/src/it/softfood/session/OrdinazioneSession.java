@@ -57,6 +57,12 @@ public class OrdinazioneSession {
 	public Ordinazione selezionaOrdinazionePerId(Long id) {
 		try {
 			Ordinazione ordinazione = (Ordinazione) session.get(Ordinazione.class, id);
+			if (ordinazione == null) {
+				Query q = session.createQuery("from it.softfood.entity.Ordinazione o where o.id = ?");
+				q.setLong(0, id);
+				ordinazione = (Ordinazione) q.uniqueResult();
+			}
+			
 			return ordinazione;
 		} catch (Exception e) {
 			System.err.println("OrdinazioneSession#selezionaOrdinazionePerId");
@@ -109,7 +115,7 @@ public class OrdinazioneSession {
 		    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		    String a = sdf.format(date);
 		    date = sdf.parse(a);
-
+		    
 			Query q = session.createQuery("from it.softfood.entity.Ordinazione o where o.tavolo = ? and o.terminato = ? order by o.data");
 			q.setLong(0, tavolo.getId());
 			q.setBoolean(1, terminato);
@@ -121,7 +127,28 @@ public class OrdinazioneSession {
 					list1.add(ordinazione);
 				}
 			}
+			
 			return list1;
+		} catch (Exception e) {
+			System.err.println("OrdinazioneSession#selezionaOrdinazioniGionalierePerTavolo");
+			return null;
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Ordinazione> selezionaOrdinazioniPerTavolo(Tavolo tavolo, Boolean terminato) {
+		try {
+		    Date date = new Date(System.currentTimeMillis()); 
+		    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		    String a = sdf.format(date);
+		    date = sdf.parse(a);
+		    
+			Query q = session.createQuery("from it.softfood.entity.Ordinazione o where o.tavolo = ? and o.terminato = ? order by o.data");
+			q.setLong(0, tavolo.getId());
+			q.setBoolean(1, terminato);
+			List<Ordinazione> list = (List<Ordinazione>) q.list();
+			
+			return list;
 		} catch (Exception e) {
 			System.err.println("OrdinazioneSession#selezionaOrdinazioniGionalierePerTavolo");
 			return null;

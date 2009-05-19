@@ -64,6 +64,7 @@ public class VarianteSession  {
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<Variante> selezionaVariantiPerIngrediente(Ingrediente ingrediente) {
 		try {
 			Query q = session.createQuery("from it.softfood.entity.Variante v where v.ingrediente = ?");
@@ -77,6 +78,7 @@ public class VarianteSession  {
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<Variante> selezionaVariantiPerLineaOrdinazione(LineaOrdinazione lineaOrdinazione) {
 		try {
 			Query q = session.createQuery("from it.softfood.entity.Variante v where v.lineaOrdinazione = ?");

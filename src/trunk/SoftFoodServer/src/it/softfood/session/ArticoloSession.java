@@ -1,7 +1,6 @@
 package it.softfood.session;
 
 import it.softfood.entity.Articolo;
-import it.softfood.entity.Pietanza;
 
 import java.util.List;
 
@@ -25,6 +24,7 @@ public class ArticoloSession {
 		return articoloSession;
 	}
 
+	@SuppressWarnings({ "unchecked"})
 	private Long getNewId() {
 		try {
 			Query q = session.createQuery("select max(id) from it.softfood.entity.Articolo");
