@@ -66,7 +66,7 @@ public class LineaOrdinazioneSession {
 	@SuppressWarnings("unchecked")
 	public List<LineaOrdinazione> selezionaLineeOrdinazionePerOrdinazione(Ordinazione ordinazione) {
 		try {
-			Query q = session.createQuery("from it.softfood.entity.LineaOrdinazione l where l.ordinazione = ?");
+			Query q = session.createQuery("from it.softfood.entity.LineaOrdinazione l where l.ordinazione = ? order by l.id");
 			q.setLong(0, ordinazione.getId());
 			List<LineaOrdinazione> list = (List<LineaOrdinazione>) q.list();
 			

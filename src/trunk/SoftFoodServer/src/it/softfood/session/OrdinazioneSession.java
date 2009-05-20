@@ -107,6 +107,24 @@ public class OrdinazioneSession {
 			return null;
 		}
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Ordinazione> selezionaOrdinazioniGiornaliereNoData() {
+		try {
+		    Date date = new Date(System.currentTimeMillis()); 
+		    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		    String a = sdf.format(date);
+		    date = sdf.parse(a);
+
+			Query q = session.createQuery("from it.softfood.entity.Ordinazione o where o.terminato = false order by o.data");
+			List<Ordinazione> list = (List<Ordinazione>) q.list();
+			
+			return list;
+		} catch (Exception e) {
+			System.err.println("OrdinazioneSession#selezionaOrdinazioniGiornaliere");
+			return null;
+		}
+	}
 
 	@SuppressWarnings("unchecked")
 	public List<Ordinazione> selezionaOrdinazioniGionalierePerTavolo(Tavolo tavolo, Boolean terminato) {
