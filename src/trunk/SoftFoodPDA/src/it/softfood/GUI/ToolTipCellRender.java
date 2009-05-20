@@ -20,7 +20,8 @@ import javax.swing.table.TableColumn;
 
 public class ToolTipCellRender extends DefaultTableCellRenderer {
 
-    private XTableColumnModel id_antipasto;
+	private static final long serialVersionUID = -2296174585378900927L;
+	private XTableColumnModel id_antipasto;
     private PDAOrdinazioneFacade ordinazioneFacade;
     private User role;
     private TableColumn id;

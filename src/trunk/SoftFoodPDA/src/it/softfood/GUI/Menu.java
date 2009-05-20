@@ -4,7 +4,6 @@ import it.softfood.entity.User;
 
 import org.jdesktop.application.FrameView;
 
-
 /**
  * @author Maria Rosaria Paone
  * @author Marco Grasso
@@ -24,7 +23,6 @@ public class Menu extends javax.swing.JPanel {
     }
 
     private void initComponents() {
-
         jToggleButton1 = new javax.swing.JToggleButton();
         Antipasti = new javax.swing.JButton();
         Primi = new javax.swing.JButton();
@@ -178,7 +176,7 @@ public class Menu extends javax.swing.JPanel {
 	
 	private void BibiteActionPerformed(java.awt.event.ActionEvent evt) {
 	    this.setVisible(false);
-	    Bibite bibite = new Bibite(role,frame,tavolo);
+	    Bibite bibite = new Bibite(role, frame, tavolo);
 	    frame.setComponent(bibite);
 	}
 
