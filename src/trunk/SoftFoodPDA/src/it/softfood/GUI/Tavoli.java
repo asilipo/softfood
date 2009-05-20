@@ -3,6 +3,7 @@ package it.softfood.GUI;
 import it.softfood.entity.Ordinazione;
 import it.softfood.entity.Tavolo;
 import it.softfood.entity.User;
+import it.softfood.exception.TavoloOccupatoException;
 import it.softfood.facade.PDAOrdinazioneFacade;
 import it.softfood.facade.PDATavoloFacade;
 
@@ -212,6 +213,11 @@ public class Tavoli extends javax.swing.JPanel {
 			try {
 				ordine = ordinazioneFacade.inserisciOrdinazione(role, ordine);
 			} catch (NullPointerException e) {
+				this.setVisible(false);
+				Tavoli pannello_tavoli = new Tavoli(role, frame, vuoti);
+				frame.setComponent(pannello_tavoli);
+			} catch (TavoloOccupatoException e) {
+				JOptionPane.showMessageDialog(frame.getComponent(), "Tavolo occupato!", "Attenzione", JOptionPane.ERROR_MESSAGE);
 				this.setVisible(false);
 				Tavoli pannello_tavoli = new Tavoli(role, frame, vuoti);
 				frame.setComponent(pannello_tavoli);
