@@ -3,12 +3,12 @@ package it.softfood.GUI;
 import it.softfood.entity.Ordinazione;
 import it.softfood.entity.Tavolo;
 import it.softfood.entity.User;
-import it.softfood.exception.TavoloOccupatoException;
 import it.softfood.facade.PDAOrdinazioneFacade;
 import it.softfood.facade.PDATavoloFacade;
 
 import java.util.ArrayList;
 import java.util.Enumeration;
+
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
@@ -40,7 +40,7 @@ public class Tavoli extends javax.swing.JPanel {
 		}
 	}
 
-	public Tavoli(User role,FrameView frame, boolean vuoti) {
+	public Tavoli(User role, FrameView frame, boolean vuoti) {
 		this.frame = frame;
 		this.vuoti = vuoti;
 		this.role = role;
@@ -53,7 +53,9 @@ public class Tavoli extends javax.swing.JPanel {
 			tavoli = (ArrayList<Tavolo>) tavoloFacade.selezionaTavoliLiberi(role);
 		} else {
 			SelezionaTavoli.setText(SelezionaTavoli.getText() + " un tavolo:");
-			tavoli = (ArrayList<Tavolo>) tavoloFacade.selezionaTavoliOccupati(role);
+			try {
+				tavoli = (ArrayList<Tavolo>) tavoloFacade.selezionaTavoliOccupati(role);
+			} catch (Exception e) {}
 
 			jComboBox2.setVisible(false);
 			jLabel1.setVisible(false);
@@ -202,44 +204,41 @@ public class Tavoli extends javax.swing.JPanel {
 		}
 		
 		Ordinazione ordine = null;
+		boolean occ = false;
 		if (vuoti) {
-			Long tavoloSelezionato = tavoloFacade.occupaTavoli(role,tav);
-
-			ordine = new Ordinazione();
-			ordine.setTavolo(tavoloFacade.selezionaTavolo(role,tavoloSelezionato));
-			ordine.setCoperti(Integer.parseInt((String) jComboBox2.getSelectedItem()));
-			ordine.setTerminato(false);
-
 			try {
+				Long tavoloSelezionato = tavoloFacade.occupaTavoli(role, tav);
+
+				ordine = new Ordinazione();
+				ordine.setTavolo(tavoloFacade.selezionaTavolo(role, tavoloSelezionato));
+				ordine.setCoperti(Integer.parseInt((String) jComboBox2.getSelectedItem()));
+				ordine.setTerminato(false);
 				ordine = ordinazioneFacade.inserisciOrdinazione(role, ordine);
-			} catch (NullPointerException e) {
-				this.setVisible(false);
-				Tavoli pannello_tavoli = new Tavoli(role, frame, vuoti);
-				frame.setComponent(pannello_tavoli);
-			} catch (TavoloOccupatoException e) {
+			} catch (Exception e) {
+				occ = true;
+				ordine = null;
 				JOptionPane.showMessageDialog(frame.getComponent(), "Tavolo occupato!", "Attenzione", JOptionPane.ERROR_MESSAGE);
 				this.setVisible(false);
-				Tavoli pannello_tavoli = new Tavoli(role, frame, vuoti);
-				frame.setComponent(pannello_tavoli);
-			}
+				frame.setComponent(new Ordine(role, frame));
+			} 
 		} else {
 			ordine = ordinazioneFacade.selezionaOrdinazioneGiornalieraPerTavolo(role, ((String)tav.get(0)), false);
 		}
-
-		
 
 		if (ordine != null) {
 			this.setVisible(false);
 			frame.setComponent(new Menu(role, frame, ordine.getId()));
 		} else {
-			JOptionPane.showMessageDialog(frame.getComponent(), "Ordinazioni del giorno precedente da chiudere!", "Attenzione", JOptionPane.ERROR_MESSAGE);
-			this.setVisible(false);
-			ordine = ordinazioneFacade.selezionaOrdinazionePerTavolo(role, ((String)tav.get(0)), false);
-			if (ordine != null)
-				frame.setComponent(new Menu(role, frame, ordine.getId()));
-			else {
+			if (!occ) {
+				JOptionPane.showMessageDialog(frame.getComponent(), "Ordinazioni del giorno precedente da chiudere!", "Attenzione", JOptionPane.ERROR_MESSAGE);
 				this.setVisible(false);
-				frame.setComponent(new Ordine(role, frame));
+				ordine = ordinazioneFacade.selezionaOrdinazionePerTavolo(role, ((String)tav.get(0)), false);
+				if (ordine != null)
+					frame.setComponent(new Menu(role, frame, ordine.getId()));
+				else {
+					this.setVisible(false);
+					frame.setComponent(new Ordine(role, frame));
+				}
 			}
 		}
 	}
