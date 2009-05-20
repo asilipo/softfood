@@ -7,6 +7,12 @@ import it.softfood.handler.TavoloFacade;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Maria Rosaria Paone
+ * @author Marco Grasso
+ * @author Francesco Pacilio
+ */
+
 public class PDATavoloFacade {
 	
 	public List<Tavolo> selezionaTavoliLiberi(User role){
@@ -22,7 +28,7 @@ public class PDATavoloFacade {
 
 	public List<Tavolo> selezionaTavoliOccupati(User role) {
 		TavoloFacade tavolo = TavoloFacade.getInstance();
-		List<Tavolo> list=tavolo.selezionaTavoliOccupati(role);
+		List<Tavolo> list = tavolo.selezionaTavoliOccupati(role);
 		
 		return list;
 	}
@@ -40,7 +46,7 @@ public class PDATavoloFacade {
 
 	public Tavolo selezionaTavolo(User role,Long tavoloSelezionato) {
 		TavoloFacade tavolo = TavoloFacade.getInstance();
-		Tavolo tav=tavolo.selezionaTavolo(role,tavoloSelezionato);
+		Tavolo tav = tavolo.selezionaTavolo(role,tavoloSelezionato);
 		return tav;
 	}
 
