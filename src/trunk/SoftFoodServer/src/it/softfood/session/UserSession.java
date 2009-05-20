@@ -14,8 +14,6 @@ import org.hibernate.Session;
 public class UserSession {
 	
 	private Session session;
-
-	
 	private static UserSession userSingleton;
 
 	public synchronized static UserSession getInstance(){
@@ -26,14 +24,11 @@ public class UserSession {
 
 	
 	public User inserisciUser(User user) {
-
 		try {
-			System.out.println("Inserisci Utente "+user.getUserName());
 			session.persist(user);	
 			return user;
 		} catch (Exception e) {
 			System.err.println("UserSessionBean#inserisciUser");
-			System.err.println(e);
 			return null;
 		}
 	}
@@ -55,13 +50,10 @@ public class UserSession {
 			Query q = session.createQuery(str);
 			q.setString(0, password);
 			result = (User) q.list().get(0);
-			return result;
 			
+			return result;
 		} catch (Exception e) {
-			System.err
-					.println("UserSessionBean#selezionaUserPerPassword");
-			System.err
-			.println(e);
+			System.err.println("UserSessionBean#selezionaUserPerPassword");
 			return null;
 		}
 	}
@@ -70,7 +62,6 @@ public class UserSession {
 	public boolean modificaRuoloUser(User user, String ruolo) {
 		try {
 			user.setRuolo(ruolo);
-
 			user = (User) session.merge(user);
 
 			return true;
