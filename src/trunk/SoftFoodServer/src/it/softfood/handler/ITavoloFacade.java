@@ -2,6 +2,7 @@ package it.softfood.handler;
 
 import it.softfood.entity.Tavolo;
 import it.softfood.entity.User;
+import it.softfood.exception.TavoloOccupatoException;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
@@ -32,6 +33,6 @@ public interface ITavoloFacade extends Remote{
 
 	public abstract boolean rimuoviTavolo(User user, Long id) throws RemoteException;
 
-	public abstract Long occupaTavoli(User user, ArrayList<String> riferimenti) throws RemoteException;
+	public abstract Long occupaTavoli(User user, ArrayList<String> riferimenti) throws TavoloOccupatoException, RemoteException;
 
 }

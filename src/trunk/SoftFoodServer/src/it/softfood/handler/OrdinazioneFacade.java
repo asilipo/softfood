@@ -61,11 +61,12 @@ public class OrdinazioneFacade {
 	
 	public Ordinazione inserisciOrdinazione(User user, Ordinazione ordinazione) throws TavoloOccupatoException {
 		if (user != null && ordinazione != null) {
-            Tavolo tavolo = tavoloSession.selezionaTavoloPerId(ordinazione.getTavolo().getId());
-            
-            if (tavolo != null && tavolo.isAttivo() && tavolo.isOccupato()) {
-            	throw new TavoloOccupatoException(null);
-            }
+			Tavolo tavolo = null;
+			try {
+				tavolo = tavoloSession.selezionaTavoloPerId(ordinazione.getTavolo().getId());
+			} catch (NullPointerException npe) {
+				throw new TavoloOccupatoException(null);
+			}
             
             if (tavolo == null || tavolo.getNumeroPosti() < ordinazione.getCoperti()) {
                 try {

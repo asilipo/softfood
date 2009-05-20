@@ -7,6 +7,7 @@ import it.softfood.entity.Tavolo;
 import it.softfood.entity.User;
 import it.softfood.entity.Variante;
 import it.softfood.enumeration.TipoPietanza;
+import it.softfood.exception.TavoloOccupatoException;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
@@ -20,7 +21,7 @@ import java.util.ArrayList;
 
 public interface IOrdinazioneFacade  extends Remote{
 
-	public Ordinazione inserisciOrdinazione(User user, Ordinazione ordinazione) throws RemoteException;
+	public Ordinazione inserisciOrdinazione(User user, Ordinazione ordinazione) throws TavoloOccupatoException, RemoteException;
 
 	public Ordinazione modificaOrdinazione(User user, Ordinazione nuovaOrdinazione, Ordinazione vecchiaOrdinazione) throws RemoteException;
 
