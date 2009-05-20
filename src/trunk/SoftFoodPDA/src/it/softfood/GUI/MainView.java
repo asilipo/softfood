@@ -19,8 +19,8 @@ public class MainView extends FrameView {
 
 	public MainView(SingleFrameApplication app) {
 		super(app);
-		userFacade=new PDAUserFacade();
-		u=null;
+		userFacade = new PDAUserFacade();
+		u = null;
 		initComponents();      
 
 		Login ordine = new Login(this);
@@ -34,10 +34,10 @@ public class MainView extends FrameView {
 		jMenuItem1 = new javax.swing.JMenuItem();
 		javax.swing.JMenu fileMenu = new javax.swing.JMenu();
 
-		mainPanel.setMaximumSize(new java.awt.Dimension(225, 450));
-		mainPanel.setMinimumSize(new java.awt.Dimension(225, 450));
+		mainPanel.setMaximumSize(new java.awt.Dimension(350, 490));
+		mainPanel.setMinimumSize(new java.awt.Dimension(350, 490));
 		mainPanel.setName("mainPanel"); // NOI18N
-		mainPanel.setPreferredSize(new java.awt.Dimension(225, 450));
+		mainPanel.setPreferredSize(new java.awt.Dimension(350, 490));
 		mainPanel.setLayout(null);
 
 		javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);

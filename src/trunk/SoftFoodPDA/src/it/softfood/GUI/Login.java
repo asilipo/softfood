@@ -50,7 +50,7 @@ public class Login extends javax.swing.JPanel {
 		jPanel1.setLayout(new java.awt.GridLayout(2, 1));
 
 		jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-		jLabel1.setText("INSERISCI PASSWORD:");
+		jLabel1.setText("Login cameriere - inserire password");
 		jLabel1.setName("jLabel1");
 		jPanel1.add(jLabel1);
 
@@ -255,13 +255,14 @@ public class Login extends javax.swing.JPanel {
 			u = userFacade.login("cameriere", text.getText());
 			if (u == null)
 				throw new Exception();
+			
 			frame.setUser(u);
 			frame.enableLogout();
 			this.setVisible(false);
 			Ordine ordine = new Ordine(u, frame);
 			frame.setComponent(ordine);
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(frame.getComponent(), "PASSWORD ERRATA PER UTENTE CAMERIERE!","Errore Login",JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(frame.getComponent(), "Password errata o l'utente ha già \neffettuato l'accesso!","Errore Login",JOptionPane.ERROR_MESSAGE);
 			this.setVisible(false);
 			Login t = new Login(frame);
 			frame.setComponent(t);
