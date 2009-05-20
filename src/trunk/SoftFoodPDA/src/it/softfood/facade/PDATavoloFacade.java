@@ -27,28 +27,23 @@ public class PDATavoloFacade {
 		return list;
 	}
 
-	public List<Tavolo> selezionaTavoliOccupati(User role) {
+	public List<Tavolo> selezionaTavoliOccupati(User role) throws Exception {
 		TavoloFacade tavolo = TavoloFacade.getInstance();
 		List<Tavolo> list = tavolo.selezionaTavoliOccupati(role);
 		
 		return list;
 	}
 
-	public Long occupaTavoli(User role, ArrayList<String> tav) {
-		Long id = null;
-		try {
-			TavoloFacade tavolo = TavoloFacade.getInstance();
-			id = tavolo.occupaTavoli(role,tav);
-		} catch (Exception e) {
-			System.err.println("PDATavoloFAcade#occupaTavoli");
-		}
+	public Long occupaTavoli(User role, ArrayList<String> tav) throws Exception {
+		TavoloFacade tavolo = TavoloFacade.getInstance();
+		Long id = tavolo.occupaTavoli(role,tav);
 		
 		return id;
 	}
 
-	public Tavolo selezionaTavolo(User role,Long tavoloSelezionato) {
+	public Tavolo selezionaTavolo(User role, Long tavoloSelezionato) {
 		TavoloFacade tavolo = TavoloFacade.getInstance();
-		Tavolo tav = tavolo.selezionaTavolo(role,tavoloSelezionato);
+		Tavolo tav = tavolo.selezionaTavolo(role, tavoloSelezionato);
 		return tav;
 	}
 

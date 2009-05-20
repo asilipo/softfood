@@ -6,7 +6,6 @@ import it.softfood.entity.Ordinazione;
 import it.softfood.entity.User;
 import it.softfood.entity.Variante;
 import it.softfood.enumeration.TipoPietanza;
-import it.softfood.exception.TavoloOccupatoException;
 import it.softfood.handler.OrdinazioneFacade;
 
 import java.util.ArrayList;
@@ -19,10 +18,9 @@ import java.util.ArrayList;
 
 public class PDAOrdinazioneFacade {
 
-	public Ordinazione inserisciOrdinazione(User role, Ordinazione ordine) throws TavoloOccupatoException {
+	public Ordinazione inserisciOrdinazione(User role, Ordinazione ordine) throws Exception {
 		OrdinazioneFacade ordineFacade = OrdinazioneFacade.getInstance();
 		Ordinazione ord = null;
-
 		ord = ordineFacade.inserisciOrdinazione(role, ordine);
 
 		return ord;
