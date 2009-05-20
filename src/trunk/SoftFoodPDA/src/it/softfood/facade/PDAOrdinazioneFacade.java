@@ -24,8 +24,9 @@ public class PDAOrdinazioneFacade {
 		try {
 			ord = ordineFacade.inserisciOrdinazione(role, ordine);
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.err.println("PDATavoloFacade#inserisciOrdinazione");
 		}
+		
 		return ord;
 	}
 
@@ -35,7 +36,7 @@ public class PDAOrdinazioneFacade {
 		try {
 			ordinazione = ordineFacade.selezionaOrdinazioneGiornalieraPerTavolo(user, riferimentoTavolo, terminato);
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.err.println("PDATavoloFacade#selezionaOrdinazioneGiornalieraPerTavolo");
 		}
 		
 		return ordinazione;
@@ -48,7 +49,7 @@ public class PDAOrdinazioneFacade {
 		try {
 			ordinazione = ordineFacade.selezionaOrdinazionePerTavolo(user, riferimentoTavolo, terminato);
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.err.println("PDATavoloFacade#selezionaOrdinazionePerTavolo");
 		}
 		
 		return ordinazione;
@@ -60,7 +61,7 @@ public class PDAOrdinazioneFacade {
 		try {
 			ord = ordineFacade.selezionaOrdinazionePerId(role,tavolo);
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.err.println("PDATavoloFacade#selezionaOrdinazionePerId");
 		}
 		
 		return ord;
@@ -72,7 +73,7 @@ public class PDAOrdinazioneFacade {
 		try {
 			ord = (ArrayList<LineaOrdinazione>) ordineFacade.selezionaLineeOrdinazionePerOrdinazione(role, selezionaOrdinazionePerId);
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.err.println("PDATavoloFacade#selezionaLineeOrdinazionePerOrdinazione");
 		}
 		
 		return ord;
@@ -84,7 +85,7 @@ public class PDAOrdinazioneFacade {
 		try {
 			result = ordineFacade.rimuoviOrdinazione(role,tavolo, b);
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.err.println("PDATavoloFacade#rimuoviOrdinazione");
 		}
 		if(!result)
 			new Exception();
@@ -97,7 +98,7 @@ public class PDAOrdinazioneFacade {
 		try {
 			linee = ordineFacade.selezionaLineeOrdinazionePerOrdinazioneTipoPietanza(role, ordine, tipo_pietanza);
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.err.println("PDATavoloFacade#selezionaLineeOrdinazionePerOrdinazioneTipoPietanza");
 		}
 		
 		return linee;
@@ -110,7 +111,7 @@ public class PDAOrdinazioneFacade {
 		try {
 			result = ordineFacade.rimuoviLineaOrdinazione(role,id);
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.err.println("PDATavoloFacade#rimuoviLineaOrdinazione");
 		}
 		if(!result)
 			new Exception();
@@ -123,7 +124,7 @@ public class PDAOrdinazioneFacade {
 		try {
 			ord = ordineFacade.selezionaLineaOrdinazionePerId(role,id_linea);
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.err.println("PDATavoloFacade#selezionaLineaOrdinazionePerId");
 		}
 		
 		return ord;
@@ -136,8 +137,9 @@ public class PDAOrdinazioneFacade {
 		try {
 			linee = ordineFacade.selezionaVariantiPerLineaOrdinazione(role,lineaOrdinazione);
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.err.println("PDATavoloFacade#selezionaVariantiPerLineaOrdinazione");
 		}
+		
 		return linee;
 	}
 
@@ -148,8 +150,9 @@ public class PDAOrdinazioneFacade {
 		try {
 			ingrediente = ordineFacade.selezionaIngredientiPerVariante(role);
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.err.println("PDATavoloFacade#selezionaIngredientiPerVariante");
 		}
+		
 		return ingrediente;
 	}
 
@@ -159,26 +162,26 @@ public class PDAOrdinazioneFacade {
 		try {
 			lineaOrdinazione = ordineFacade.inserisciLineaOrdinazione(role, linea);
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.err.println("PDATavoloFacade#inserisciLineaOrdinazione");
 		}
 		
 		return lineaOrdinazione;
 	}
 
-	public Ingrediente selezionaIngredientePerNome(User role,String nome) {
+	public Ingrediente selezionaIngredientePerNome(User role, String nome) {
 		OrdinazioneFacade ordineFacade=OrdinazioneFacade.getInstance();
 		Ingrediente ingr = null;
 		try {
 			ingr = ordineFacade.selezionaIngredientePerNome(role,nome);
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.err.println("PDATavoloFacade#selezionaIngredientePerNome");
 		}
 		
 		return ingr;
 	}
 
-	public void inserisciVariante(User role,Variante variante) {
-		OrdinazioneFacade ordineFacade=OrdinazioneFacade.getInstance();
+	public void inserisciVariante(User role, Variante variante) {
+		OrdinazioneFacade ordineFacade = OrdinazioneFacade.getInstance();
 		Variante v = ordineFacade.inserisciVariante(role,variante);
 		if(v == null){
 			new Exception();
