@@ -339,6 +339,7 @@ public class OrdinazioneFacade {
             try {
             	lineaOrdinazione.setOrdinazione(lineaOrdinazione.getOrdinazione());
             	lineaOrdinazione.setEvaso(false);
+            	if (this.v)
                 lineaOrdinazione = lineaOrdinazioneSession.inserisciLineaOrdinazione(lineaOrdinazione);
                 
                 Articolo articolo = lineaOrdinazione.getArticolo();
@@ -359,8 +360,7 @@ public class OrdinazioneFacade {
 		return null;
 	}
 	
-	public LineaOrdinazione modificaLineaOrdinazione(User user, LineaOrdinazione nuovaLineaOrdinazione,
-            LineaOrdinazione vecchiaLineaOrdinazione) {
+	public LineaOrdinazione modificaLineaOrdinazione(User user, LineaOrdinazione nuovaLineaOrdinazione, LineaOrdinazione vecchiaLineaOrdinazione) {
         if (user != null && nuovaLineaOrdinazione != null && vecchiaLineaOrdinazione != null) {
 			LineaOrdinazione lineaOrdinazione = vecchiaLineaOrdinazione;
             lineaOrdinazione.setArticolo(nuovaLineaOrdinazione.getArticolo());
