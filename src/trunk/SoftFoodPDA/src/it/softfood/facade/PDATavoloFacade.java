@@ -21,8 +21,9 @@ public class PDATavoloFacade {
 		try {
 			list = tavolo.selezionaTavoliLiberi(role);
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.err.println("PDATavoloFAcade#selezionaTavoliLiberi");
 		}
+		
 		return list;
 	}
 
@@ -33,14 +34,15 @@ public class PDATavoloFacade {
 		return list;
 	}
 
-	public Long occupaTavoli(User role,ArrayList<String> tav) {
+	public Long occupaTavoli(User role, ArrayList<String> tav) {
 		Long id = null;
 		try {
 			TavoloFacade tavolo = TavoloFacade.getInstance();
 			id = tavolo.occupaTavoli(role,tav);
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.err.println("PDATavoloFAcade#occupaTavoli");
 		}
+		
 		return id;
 	}
 
