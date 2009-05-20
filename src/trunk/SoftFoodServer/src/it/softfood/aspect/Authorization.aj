@@ -22,7 +22,7 @@ import org.aspectj.lang.JoinPoint;
  * @author Francesco Pacilio
  */
 
-public aspect Authorization{
+public aspect Authorization {
 
 	private String xmlparameter="config_authorization_file";
 

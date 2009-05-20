@@ -1,15 +1,15 @@
 package it.softfood.entity;
 
-
-
 import java.security.Principal;
 
+/**
+ * @author Maria Rosaria Paone
+ * @author Marco Grasso
+ * @author Francesco Pacilio
+ */
 
 public class User implements  Principal, java.io.Serializable {
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private String userName;
 	private String password;
@@ -49,12 +49,8 @@ public class User implements  Principal, java.io.Serializable {
 	}
 
 	public String getName() {
-		// TODO Auto-generated method stub
 		return ruolo;
 	}
-
-
-    
 
 }
 

@@ -46,8 +46,7 @@ public class UserSession {
 	public User selezionaUserPerPassword(String password) {
 		try {
 			User result;
-			String str = " from it.softfood.entity.User t where t.password = ? ";
-			Query q = session.createQuery(str);
+			Query q = session.createQuery("from it.softfood.entity.User t where t.password = ? ");
 			q.setString(0, password);
 			result = (User) q.list().get(0);
 			
