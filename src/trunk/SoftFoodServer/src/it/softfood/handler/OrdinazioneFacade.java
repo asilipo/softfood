@@ -12,6 +12,7 @@ import it.softfood.entity.Tavolo;
 import it.softfood.entity.User;
 import it.softfood.entity.Variante;
 import it.softfood.enumeration.TipoPietanza;
+import it.softfood.exception.TavoloOccupatoException;
 import it.softfood.session.BevandaMagazzinoSession;
 import it.softfood.session.IngredienteMagazzinoSession;
 import it.softfood.session.IngredientePietanzaSession;
@@ -58,10 +59,14 @@ public class OrdinazioneFacade {
 		return singleton;
 	}
 	
-	public Ordinazione inserisciOrdinazione(User user, Ordinazione ordinazione) {
+	public Ordinazione inserisciOrdinazione(User user, Ordinazione ordinazione) throws TavoloOccupatoException {
 		if (user != null && ordinazione != null) {
             Tavolo tavolo = tavoloSession.selezionaTavoloPerId(ordinazione.getTavolo().getId());
-
+            
+            if (tavolo != null && tavolo.isAttivo() && tavolo.isOccupato()) {
+            	throw new TavoloOccupatoException(null);
+            }
+            
             if (tavolo == null || tavolo.getNumeroPosti() < ordinazione.getCoperti()) {
                 try {
                     if (tavolo.getRiferimento().contains("+")) {
