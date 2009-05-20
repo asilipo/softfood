@@ -90,6 +90,7 @@ public class UserFacade {
 			String username = userSession.selezionaUserPerPassword(password).getUserName();	
 			LoginHandler l = LoginHandler.getInstance();
 			User user = l.login(username, password);
+			
 			return user;
 		}
 		
