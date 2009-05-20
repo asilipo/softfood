@@ -7,54 +7,55 @@ import it.softfood.handler.IOrdinazioneFacade;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
+/**
+ * @author Maria Rosaria Paone
+ * @author Marco Grasso
+ * @author Francesco Pacilio
+ */
+
 public class POSOrdinazioneFacade {
 	
 	private IOrdinazioneFacade ordinazionefacade;
 
-	public ArrayList<LineaOrdinazione> selezionaOrdinazioniGiornaliere(User role) {
-//		OrdinazioneFacade ordinazionefacade=OrdinazioneFacade.getInstance();
+	public ArrayList<LineaOrdinazione> selezionaOrdinazioniGiornaliereNoData(User role) {
 		ArrayList<LineaOrdinazione> non_evasi=null;;
 		try {
 			non_evasi = ordinazionefacade.selezionaOrdinazioniGiornaliere(role);
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.err.println("POSArticoloMenuFacade#selezionaOrdinazioniGiornaliereNoData");
 		}
+		
 		return non_evasi;
 	}
 
 	public LineaOrdinazione selezionaLineaOrdinazionePerId(User role,Long id){
-//		OrdinazioneFacade ordinazionefacade=OrdinazioneFacade.getInstance();
-		LineaOrdinazione linea=null;
+		LineaOrdinazione linea = null;
 		try {
 			linea = ordinazionefacade.selezionaLineaOrdinazionePerId(role, id);
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.err.println("POSArticoloMenuFacade#selezionaLineaOrdinazionePerId");
 		}
-		System.out.println("LINEA POS "+linea);
+
 		return linea;
 	}
 	
 	public ArrayList<Variante> selezionaVariantiPerLineaOrdinazione(User role,LineaOrdinazione lin){
-//		OrdinazioneFacade ordinazionefacade=OrdinazioneFacade.getInstance();
 		ArrayList<Variante> linea = null;
 		try {
 			linea = ordinazionefacade.selezionaVariantiPerLineaOrdinazione(role, lin);
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.err.println("POSArticoloMenuFacade#selezionaVariantiPerLineaOrdinazione");
 		}
+		
 		return linea;
 	}
 	
 	public void setLineaEvasa(User role, LineaOrdinazione linea){
-//		OrdinazioneFacade ordinazionefacade=OrdinazioneFacade.getInstance();
 		try {
 			ordinazionefacade.setLineaEvasa(role, linea);
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.err.println("POSArticoloMenuFacade#setLineaEvasa");
 		}
 	}
+	
 }
