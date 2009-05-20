@@ -6,6 +6,7 @@ import it.softfood.entity.Ordinazione;
 import it.softfood.entity.User;
 import it.softfood.entity.Variante;
 import it.softfood.enumeration.TipoPietanza;
+import it.softfood.exception.TavoloOccupatoException;
 import it.softfood.handler.OrdinazioneFacade;
 
 import java.util.ArrayList;
@@ -18,15 +19,12 @@ import java.util.ArrayList;
 
 public class PDAOrdinazioneFacade {
 
-	public Ordinazione inserisciOrdinazione(User role, Ordinazione ordine) {
-		OrdinazioneFacade ordineFacade=OrdinazioneFacade.getInstance();
+	public Ordinazione inserisciOrdinazione(User role, Ordinazione ordine) throws TavoloOccupatoException {
+		OrdinazioneFacade ordineFacade = OrdinazioneFacade.getInstance();
 		Ordinazione ord = null;
-		try {
-			ord = ordineFacade.inserisciOrdinazione(role, ordine);
-		} catch (Exception e) {
-			System.err.println("PDATavoloFacade#inserisciOrdinazione");
-		}
-		
+
+		ord = ordineFacade.inserisciOrdinazione(role, ordine);
+
 		return ord;
 	}
 
