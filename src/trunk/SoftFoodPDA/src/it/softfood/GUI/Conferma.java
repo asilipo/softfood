@@ -4,12 +4,8 @@ import it.softfood.entity.LineaOrdinazione;
 import it.softfood.entity.User;
 import it.softfood.facade.PDAOrdinazioneFacade;
 
-import it.softfood.handler.OrdinazioneFacade;
-
 import java.util.ArrayList;
-import java.util.Hashtable;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
+
 import org.jdesktop.application.FrameView;
 
 /**
@@ -21,9 +17,8 @@ import org.jdesktop.application.FrameView;
 public class Conferma extends javax.swing.JPanel {
 
 	private static final long serialVersionUID = 1L;
-	
 	private PDAOrdinazioneFacade ordinazioneFacade;
-    private User role;
+    private User user;
 
     private void initFacade() {
         try {
@@ -33,15 +28,15 @@ public class Conferma extends javax.swing.JPanel {
         }
     }
     
-    public Conferma(User role,FrameView frame,Long tavolo) {
+    public Conferma(User user, FrameView frame, Long tavolo) {
         this.frame = frame;
         this.tavolo = tavolo;
-        this.role = role;
+        this.user = user;
 
         initComponents();
         initFacade();
         
-        ArrayList<LineaOrdinazione> ordini = (ArrayList<LineaOrdinazione>) ordinazioneFacade.selezionaLineeOrdinazionePerOrdinazione(role,ordinazioneFacade.selezionaOrdinazionePerId(role,tavolo));
+        ArrayList<LineaOrdinazione> ordini = (ArrayList<LineaOrdinazione>) ordinazioneFacade.selezionaLineeOrdinazionePerOrdinazione(user, ordinazioneFacade.selezionaOrdinazionePerId(user, tavolo));
         
         String data[] = new String[ordini.size()];
         
@@ -53,7 +48,6 @@ public class Conferma extends javax.swing.JPanel {
     }
 
     private void initComponents() {
-
         jScrollPane1 = new javax.swing.JScrollPane();
         menu = new javax.swing.JList();
         jPanel1 = new javax.swing.JPanel();
@@ -95,11 +89,11 @@ public class Conferma extends javax.swing.JPanel {
         });
         jPanel2.add(Cancella, java.awt.BorderLayout.NORTH);
 
-        jPanel3.setName("jPanel3"); // NOI18N
+        jPanel3.setName("jPanel3"); 
         jPanel3.setLayout(new java.awt.GridLayout(1, 2, 5, 5));
 
-        OK.setText(resourceMap.getString("OK.text")); // NOI18N
-        OK.setName("OK"); // NOI18N
+        OK.setText(resourceMap.getString("OK.text")); 
+        OK.setName("OK");
         OK.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 OKActionPerformed(evt);
@@ -107,8 +101,8 @@ public class Conferma extends javax.swing.JPanel {
         });
         jPanel3.add(OK);
 
-        Annulla.setText(resourceMap.getString("Annulla.text")); // NOI18N
-        Annulla.setName("Annulla"); // NOI18N
+        Annulla.setText(resourceMap.getString("Annulla.text")); 
+        Annulla.setName("Annulla");
         Annulla.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AnnullaActionPerformed(evt);
@@ -126,22 +120,22 @@ public class Conferma extends javax.swing.JPanel {
     private void CancellaActionPerformed(java.awt.event.ActionEvent evt) {
         this.setVisible(false);
 
-        ordinazioneFacade.rimuoviOrdinazione(role,tavolo, true);
-        Ordine ordine = new Ordine(role, frame);
+        ordinazioneFacade.rimuoviOrdinazione(user, tavolo, true);
+        Ordine ordine = new Ordine(user, frame);
         frame.setComponent(ordine);   
     }
 
     private void OKActionPerformed(java.awt.event.ActionEvent evt) {
         this.setVisible(false);
 
-        Ordine ordine = new Ordine(role, frame);
+        Ordine ordine = new Ordine(user, frame);
         frame.setComponent(ordine);
     }
 
     private void AnnullaActionPerformed(java.awt.event.ActionEvent evt) {
         this.setVisible(false);
         
-        frame.setComponent(new Menu(role, frame, tavolo));
+        frame.setComponent(new Menu(user, frame, tavolo));
     }
 
     private javax.swing.JButton Annulla;
