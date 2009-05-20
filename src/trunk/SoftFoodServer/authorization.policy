@@ -1,4 +1,4 @@
-grant Principal it.softfood.entity.User "cameriere"{ 
+grant Principal it.softfood.entity.User "cameriere" { 
     permission it.softfood.aspect.OperationPermission "login";
     permission it.softfood.aspect.OperationPermission "logout";
     permission it.softfood.aspect.OperationPermission "selezionaPietanzeDisponibiliPerTipo";
@@ -38,7 +38,6 @@ grant Principal it.softfood.entity.User "cuoco"{
     permission  it.softfood.aspect.OperationPermission "selezionaIngredientiPietanza";
     
 };  
-
 grant Principal it.softfood.entity.User "amministratore"{
   permission it.softfood.aspect.OperationPermission "login"; 
   permission it.softfood.aspect.OperationPermission "logout";
@@ -48,12 +47,7 @@ grant Principal it.softfood.entity.User "amministratore"{
   permission it.softfood.aspect.OperationPermission "modificaRuolo";
   permission it.softfood.aspect.OperationPermission "eliminaUtente";
   permission it.softfood.aspect.OperationPermission "selezionaUtente";
-
-
-
-
 }; 
-
 grant {
     permission java.net.SocketPermission "*", "listen, resolve, accept, connect";
     permission java.util.PropertyPermission "*", "read, write";
@@ -61,6 +55,5 @@ grant {
     permission java.io.FilePermission "/-", "read,write";
     permission java.net.NetPermission "*";
     permission javax.security.auth.AuthPermission "*";
-      permission java.lang.RuntimePermission "*";
-
+    permission java.lang.RuntimePermission "*";
 };

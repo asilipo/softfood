@@ -44,15 +44,15 @@ public class LoginHandler {
 	}
 
 	@SuppressWarnings("unchecked")
-	public User login(String user, String password) {
+	public User login(String username, String password) {
 		try {
-			this.ceeckJustLogged(user);
+			this.ceeckJustLogged(username);
 			LoginContext loginContex;
-			loginContex = new LoginContext("HMS_Jaas", mcall);
-			mcall.setUserPwd(user, password);
+			loginContex = new LoginContext("Jaas", mcall);
+			mcall.setUserPwd(username, password);
 			loginContex.login();
 			Subject _authenticatedSubject = loginContex.getSubject();
-			User principal = this.getPrincipal(user, _authenticatedSubject);
+			User principal = this.getPrincipal(username, _authenticatedSubject);
 			subjectTable.put(principal, loginContex);
 			return (principal);
 		} catch (Exception e) {

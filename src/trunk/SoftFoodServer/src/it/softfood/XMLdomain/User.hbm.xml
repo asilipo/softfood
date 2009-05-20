@@ -8,7 +8,7 @@
             <column name="username" length="100" />
             <generator class="assigned" />
         </id>
-        <property name="password" type="string">
+        <property name="password" type="string" unique="true">
             <column name="pass" length="100" not-null="true" />
         </property>
         <property name="ruolo" type="string">
