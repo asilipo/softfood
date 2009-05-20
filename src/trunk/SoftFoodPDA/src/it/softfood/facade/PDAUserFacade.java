@@ -11,9 +11,9 @@ import it.softfood.handler.UserFacade;
 
 public class PDAUserFacade {
 	
-	public User login(String user,String password){
+	public User login(String ruolo, String password) {
 		UserFacade role = UserFacade.getInstance();
-		User u = role.login(user, password);
+		User u = role.login(ruolo, password);
 
 		return u;
 	}
