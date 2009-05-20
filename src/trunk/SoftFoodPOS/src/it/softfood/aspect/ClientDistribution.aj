@@ -70,7 +70,9 @@ public aspect ClientDistribution {
 		obj = ExecuteMetod.invoke(ordinazionefacade, thisJoinPoint.getSignature()
 				.getName(), thisJoinPoint.getArgs());
 
+		@SuppressWarnings("unused")
 		Object[] params = thisJoinPoint.getArgs();
+		
 		return obj;
 	}
 
@@ -82,7 +84,9 @@ public aspect ClientDistribution {
 		obj = ExecuteMetod.invoke(articolofacade, thisJoinPoint.getSignature()
 				.getName(), thisJoinPoint.getArgs());
 
+		@SuppressWarnings("unused")
 		Object[] params = thisJoinPoint.getArgs();
+		
 		return obj;
 	}
 
@@ -94,7 +98,9 @@ public aspect ClientDistribution {
 		obj = ExecuteMetod.invoke(userfacade, thisJoinPoint.getSignature()
 				.getName(), thisJoinPoint.getArgs());
 
+		@SuppressWarnings("unused")
 		Object[] params = thisJoinPoint.getArgs();
+		
 		return obj;
 	}
 
