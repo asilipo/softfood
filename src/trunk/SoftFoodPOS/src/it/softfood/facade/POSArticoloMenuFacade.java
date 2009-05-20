@@ -23,15 +23,14 @@ public class POSArticoloMenuFacade {
 
 	private IArticoloMenuFacade articolo;
 
-	// private ArticoloMenuFacade articolo=ArticoloMenuFacade.getInstance();
-
 	public ArrayList<Ingrediente> selezionaIngredientiPietanza(User role, Long id) {
 		ArrayList<Ingrediente> ingr = null;
 		try {
 			ingr = articolo.selezionaIngredientiPietanza(role, id);
 		} catch (RemoteException e) {
-			e.printStackTrace();
+			System.err.println("POSArticoloMenuFacade#selezionaIngredientiPietanza");
 		}
+		
 		return ingr;
 	}
 	
@@ -41,8 +40,9 @@ public class POSArticoloMenuFacade {
 		try {
 			ingr = articolo.selezionaIngredientePerNome(role, nome);
 		} catch (RemoteException e) {
-			e.printStackTrace();
+			System.err.println("POSArticoloMenuFacade#selezionaIngredientePerNome");
 		}
+		
 		return ingr;
 	}
 
@@ -51,8 +51,9 @@ public class POSArticoloMenuFacade {
 		try {
 			pietanze = articolo.selezionaPietanze(role);
 		} catch (RemoteException e) {
-			e.printStackTrace();
+			System.err.println("POSArticoloMenuFacade#selezionaPietanze");
 		}
+		
 		return pietanze;
 	}
 
@@ -61,8 +62,9 @@ public class POSArticoloMenuFacade {
 		try {
 			bevande = articolo.selezionaBevande(role);
 		} catch (RemoteException e) {
-			e.printStackTrace();
+			System.err.println("POSArticoloMenuFacade#selezionaBevande");
 		} 
+		
 		return bevande;
 	}
 
@@ -71,8 +73,9 @@ public class POSArticoloMenuFacade {
 		try {
 			ingrediente = articolo.selezionaIngredienti(role);
 		} catch (RemoteException e) {
-			e.printStackTrace();
+			System.err.println("POSArticoloMenuFacade#selezionaIngredienti");
 		}
+		
 		return ingrediente;
 	}
 
@@ -80,6 +83,7 @@ public class POSArticoloMenuFacade {
 		try {
 			return articolo.rimuoviBevandaMenu(role, id);
 		} catch (Exception e) {
+			System.err.println("POSArticoloMenuFacade#rimuoviBevandaMenu");
 			return false;
 		} 
 	}
@@ -88,7 +92,7 @@ public class POSArticoloMenuFacade {
 		try {
 			return articolo.rimuoviIngrediente(role, id);
 		} catch (RemoteException e) {
-			e.printStackTrace();
+			System.err.println("POSArticoloMenuFacade#rimuoviIngrediente");
 			return false;
 		}
 	}
@@ -97,7 +101,7 @@ public class POSArticoloMenuFacade {
 		try {
 			return articolo.rimuoviPietanzaMenu(role, id);
 		} catch (RemoteException e) {
-			e.printStackTrace();
+			System.err.println("POSArticoloMenuFacade#rimuoviPietanzaMenu");
 			return false;
 		}
 	}
@@ -106,17 +110,15 @@ public class POSArticoloMenuFacade {
 		try {
 			articolo.updateBevanda(role, bevanda);
 		} catch (RemoteException e) {
-			e.printStackTrace();
+			System.err.println("POSArticoloMenuFacade#updateBevanda");
 		}
-
 	}
 	
 	public void updateIngrediente(User role, Ingrediente ingrediente) {
 		try {
 			articolo.updateIngrediente(role, ingrediente);
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.err.println("POSArticoloMenuFacade#updateIngrediente");
 		}
 
 	}
@@ -125,131 +127,104 @@ public class POSArticoloMenuFacade {
 		try {
 			articolo.updateBevandaMagazzino(role, bevanda);
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.err.println("POSArticoloMenuFacade#updateBevandaMagazzino");
 		}
-
 	}
 	
 	public void updateIndredientiPietanza(User role, HashSet<IngredientePietanza> ingredientiPietanza) {
 		try {
 			articolo.updateIndredientiPietanza(role, ingredientiPietanza);
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.err.println("POSArticoloMenuFacade#updateIndredientiPietanza");
 		}
 
 	}
 
-	public void updateIngredienteMagazzino(User role,
-			IngredienteMagazzino ingredienteMagazzino) {
+	public void updateIngredienteMagazzino(User role, IngredienteMagazzino ingredienteMagazzino) {
 		try {
 			articolo.updateIngredienteMagazzino(role, ingredienteMagazzino);
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.err.println("POSArticoloMenuFacade#updateIngredienteMagazzino");
 		}
-
 	}
 	
-	public void updatePietanza(User role,
-			Pietanza pietanza) {
+	public void updatePietanza(User role, Pietanza pietanza) {
 		try {
 			articolo.updatePietanza(role, pietanza);
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.err.println("POSArticoloMenuFacade#updatePietanza");
 		}
-
 	}
 	
 	public HashSet<IngredientePietanza> inserisciIngredientiPietanze(User role, HashSet<IngredientePietanza> ingredientiPietanza) {
-
 		try {
 			ingredientiPietanza = articolo.inserisciIngredientiPietanze(role, ingredientiPietanza);
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.err.println("POSArticoloMenuFacade#inserisciIngredientiPietanze");
 		}
 
 		return ingredientiPietanza;
-
 	}
 
 	public Bevanda inserisciBevandaMenu(User role, Bevanda art) {
-
 		try {
 			art = articolo.inserisciBevandaMenu(role, art);
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.err.println("POSArticoloMenuFacade#inserisciBevandaMenu");
 		}
 
 		return art;
-
 	}
 	
 	public IngredientePietanza inserisciIngredientePietanza(User role, IngredientePietanza ingrediente) {
-
 		try {
 			ingrediente = articolo.inserisciIngredientePietanza(role, ingrediente);
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.err.println("POSArticoloMenuFacade#inserisciIngredientePietanza");
 		}
 
 		return ingrediente;
-
 	}
 	
 	public Pietanza inserisciPietanzaMenu(User role, Pietanza art) {
-
 		try {
 			art = articolo.inserisciPietanzaMenu(role, art);
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.err.println("POSArticoloMenuFacade#inserisciPietanzaMenu");
 		}
 
 		return art;
-
 	}
 
 	public Ingrediente inserisciIngrediente(User role, Ingrediente ingrediente) {
-
 		try {
 			ingrediente = articolo.inserisciIngrediente(role, ingrediente);
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.err.println("POSArticoloMenuFacade#inserisciIngrediente");
 		}
 
 		return ingrediente;
-
 	}
 
-	public BevandaMagazzino inserisciBevandaMagazzino(User role, Long id,
-			Integer quantita) {
+	public BevandaMagazzino inserisciBevandaMagazzino(User role, Long id, Integer quantita) {
 		BevandaMagazzino bevanda = null;
 		try {
 			bevanda = articolo.inserisciBevandaMagazzino(role, id, quantita);
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.err.println("POSArticoloMenuFacade#inserisciBevandaMagazzino");
 		}
+		
 		return bevanda;
 	}
 
-	public IngredienteMagazzino inserisciIngredienteMagazzino(User role,
-			Long id, Integer quantita) {
+	public IngredienteMagazzino inserisciIngredienteMagazzino(User role, Long id, Integer quantita) {
 		IngredienteMagazzino ingrediente = null;
 		try {
-			ingrediente = articolo.inserisciIngredienteMagazzino(role, id,
-					quantita);
+			ingrediente = articolo.inserisciIngredienteMagazzino(role, id, quantita);
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.err.println("POSArticoloMenuFacade#inserisciIngredienteMagazzino");
 		}
+		
 		return ingrediente;
 	}
 
