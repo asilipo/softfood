@@ -29,20 +29,33 @@ public class PDAOrdinazioneFacade {
 		return ord;
 	}
 
-	public Ordinazione selezionaOrdinazioneGiornalieraPerTavolo(User role, String riferimentoTavolo, Boolean terminato) {
-		OrdinazioneFacade ordineFacade=OrdinazioneFacade.getInstance();
-		Ordinazione ord = null;
-		System.out.println("riferimentoTavolo " + riferimentoTavolo);
+	public Ordinazione selezionaOrdinazioneGiornalieraPerTavolo(User user, String riferimentoTavolo, Boolean terminato) {
+		OrdinazioneFacade ordineFacade = OrdinazioneFacade.getInstance();
+		Ordinazione ordinazione = null;		
 		try {
-			ord = ordineFacade.selezionaOrdinazioneGiornalieraPerTavolo(role, riferimentoTavolo, terminato);
+			ordinazione = ordineFacade.selezionaOrdinazioneGiornalieraPerTavolo(user, riferimentoTavolo, terminato);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return ord;
+		
+		return ordinazione;
+	}
+	
+	public Ordinazione selezionaOrdinazionePerTavolo(User user, String riferimentoTavolo, Boolean terminato) {
+		OrdinazioneFacade ordineFacade = OrdinazioneFacade.getInstance();
+		Ordinazione ordinazione = null;
+		
+		try {
+			ordinazione = ordineFacade.selezionaOrdinazionePerTavolo(user, riferimentoTavolo, terminato);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return ordinazione;
 	}
 
 	public Ordinazione selezionaOrdinazionePerId(User role,Long tavolo) {
-		OrdinazioneFacade ordineFacade=OrdinazioneFacade.getInstance();
+		OrdinazioneFacade ordineFacade = OrdinazioneFacade.getInstance();
 		Ordinazione ord = null;
 		try {
 			ord = ordineFacade.selezionaOrdinazionePerId(role,tavolo);
@@ -57,7 +70,7 @@ public class PDAOrdinazioneFacade {
 		OrdinazioneFacade ordineFacade=OrdinazioneFacade.getInstance();
 		ArrayList<LineaOrdinazione> ord = null;
 		try {
-			ord = (ArrayList<LineaOrdinazione>) ordineFacade.selezionaLineeOrdinazionePerOrdinazione(role,selezionaOrdinazionePerId);
+			ord = (ArrayList<LineaOrdinazione>) ordineFacade.selezionaLineeOrdinazionePerOrdinazione(role, selezionaOrdinazionePerId);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -82,10 +95,11 @@ public class PDAOrdinazioneFacade {
 		ArrayList<LineaOrdinazione> linee = null;
 	    
 		try {
-			linee = ordineFacade.selezionaLineeOrdinazionePerOrdinazioneTipoPietanza(role,ordine, tipo_pietanza);
+			linee = ordineFacade.selezionaLineeOrdinazionePerOrdinazioneTipoPietanza(role, ordine, tipo_pietanza);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
 		return linee;
 	}
 
@@ -168,8 +182,7 @@ public class PDAOrdinazioneFacade {
 		Variante v = ordineFacade.inserisciVariante(role,variante);
 		if(v == null){
 			new Exception();
-		}
-		
+		}	
 	}
 
 }
