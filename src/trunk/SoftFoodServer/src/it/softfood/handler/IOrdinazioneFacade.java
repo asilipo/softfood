@@ -30,6 +30,8 @@ public interface IOrdinazioneFacade  extends Remote{
 
 	public ArrayList<LineaOrdinazione> selezionaOrdinazioniGiornaliere(User user) throws RemoteException;
 
+	public ArrayList<LineaOrdinazione> selezionaOrdinazioniGiornaliereNoData(User user) throws RemoteException;
+		
 	public ArrayList<Ordinazione> selezionaOrdinazioniGiornalierePerTavolo(User user, Tavolo tavolo, Boolean terminato) throws RemoteException;
 
 	public Ordinazione selezionaOrdinazioneGiornalieraPerTavolo(User user, String riferimentoTavolo, Boolean terminato) throws RemoteException;

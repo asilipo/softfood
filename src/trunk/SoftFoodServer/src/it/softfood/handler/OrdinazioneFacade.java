@@ -192,6 +192,53 @@ public class OrdinazioneFacade {
 		return null;
 	}
 	
+	public ArrayList<LineaOrdinazione> selezionaOrdinazioniGiornaliereNoData(User user) {
+		if (user != null) {
+			Date data = new Date(System.currentTimeMillis());
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			String a = sdf.format(data);
+	
+			try {
+				data = sdf.parse(a);
+			} catch (ParseException e1) {
+				System.err.println("OrdinazioneFacade#selezionaOrdinazioniGiornaliere");
+				e1.printStackTrace();
+			}
+			
+			ArrayList<Ordinazione> ord = null;
+			ArrayList<LineaOrdinazione> non_evasi = new ArrayList<LineaOrdinazione>();
+			Set<LineaOrdinazione> linea = new HashSet<LineaOrdinazione>();
+			
+			try {
+				ord = (ArrayList<Ordinazione>) ordinazioneSession.selezionaOrdinazioniGiornaliereNoData();
+				for(Ordinazione o : ord){
+					linea = o.getLineaOrdinaziones();
+					for(LineaOrdinazione l : linea)
+						if(!l.getEvaso() && l.getArticolo().getTipoPietanza() != 5)
+							non_evasi.add((LineaOrdinazione)l);
+				}
+			} catch (Exception e) {
+				System.err.println("OrdinazioneFacade#selezionaOrdinazioniGiornaliereNoData");
+			}
+			
+			if (non_evasi != null ) {
+				for (int i = 0; i < non_evasi.size()-1; i++) {
+			        for (int j = i + 1; j < non_evasi.size(); j++) {
+			            if (non_evasi.get(i).getId() > non_evasi.get(j).getId()) {
+			                LineaOrdinazione temp = non_evasi.get(i);
+			                non_evasi.set(i, non_evasi.get(j));
+			                non_evasi.set(j, temp);
+			            }
+			        }
+			    }
+			}
+
+			return non_evasi;
+		}
+		
+		return null;
+	}
+	
 	public ArrayList<Ordinazione> selezionaOrdinazioniGiornalierePerTavolo(User user, Tavolo tavolo, Boolean terminato) {
 		if (user != null && tavolo != null && terminato != null) 
 			return (ArrayList<Ordinazione>) ordinazioneSession.selezionaOrdinazioniGionalierePerTavolo(tavolo, terminato);
@@ -328,7 +375,7 @@ public class OrdinazioneFacade {
     }
     
     public ArrayList<LineaOrdinazione> selezionaLineeOrdinazionePerOrdinazione(User user, Ordinazione ordinazione) {
-        if (user != null && ordinazione != null){
+    	if (user != null && ordinazione != null){
         	ArrayList<LineaOrdinazione> linea=(ArrayList<LineaOrdinazione>) lineaOrdinazioneSession.selezionaLineeOrdinazionePerOrdinazione(ordinazione);
 			return linea;
         }
