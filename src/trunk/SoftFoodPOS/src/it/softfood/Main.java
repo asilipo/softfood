@@ -1,10 +1,5 @@
 package it.softfood;
 
-import java.util.ArrayList;
-
-import it.softfood.entity.Bevanda;
-import it.softfood.entity.LineaOrdinazione;
-import it.softfood.entity.User;
 import it.softfood.facade.POSArticoloMenuFacade;
 import it.softfood.facade.POSOrdinazioneFacade;
 import it.softfood.facade.POSUserFacade;
