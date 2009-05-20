@@ -6,11 +6,11 @@ package it.softfood.exception;
  * @author Francesco Pacilio
  */
 
-public class TavoloOccupatoException extends Exception {
+public class AggiornamentoIngredientiMagazzinoException extends Exception {
 
 	private static final long serialVersionUID = 1L;
 
-	public TavoloOccupatoException(String messaggio) {
+	public AggiornamentoIngredientiMagazzinoException(String messaggio) {
 		super(messaggio);
 	}
 	
