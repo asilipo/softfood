@@ -2,6 +2,7 @@ package it.softfood.handler;
 
 import it.softfood.entity.Tavolo;
 import it.softfood.entity.User;
+import it.softfood.exception.TavoloOccupatoException;
 import it.softfood.session.RistoranteSession;
 import it.softfood.session.TavoloSession;
 
@@ -89,66 +90,68 @@ public class TavoloFacade implements ITavoloFacade {
 		return false;
 	}
     
-    public Long occupaTavoli(User user, ArrayList<String> riferimenti) {
-        try {
-            if (user != null && riferimenti != null) {
-                if (riferimenti.size() == 1) {
-                    String riferimento = riferimenti.get(0);
-                    if (riferimento != null) {
-                        Tavolo tavolo = tavoloSession.selezionaTavoloPerRiferimento(riferimento, true);
-                        if (!tavolo.isOccupato()) {
-                            tavolo.setOccupato(true);
-                            tavoloSession.update(tavolo);
-                            return tavolo.getId();
-                        } else {
-                        	tavolo.setOccupato(false);
-                            return null;
-                        }
-                    } else {
-                        throw new IllegalStateException();
-                    }
-                } else if (riferimenti.size() > 1) {
-                    String riferimentoTavoli = null;
-                    Integer numeroPosti = 0;
-                    for (String riferimento : riferimenti) {
-                        if (riferimento != null) {
-                            Tavolo tavolo = tavoloSession.selezionaTavoloPerRiferimento(riferimento, true);
-                            if (!tavolo.isOccupato()) {
-                                tavolo.setAttivo(false);
-                                tavoloSession.update(tavolo);
-                                if (riferimentoTavoli == null)
-                                    riferimentoTavoli = tavolo.getRiferimento();
-                                else
-                                    riferimentoTavoli = riferimentoTavoli + "+" + tavolo.getRiferimento();
-                                numeroPosti = numeroPosti + tavolo.getNumeroPosti();
-                            }
-                            else {
-                            	tavolo.setAttivo(true);
-                            	tavoloSession.update(tavolo);
-                                return null;
-                            } 
-                        } else {
-                            throw new IllegalStateException();
-                        }
-                    }
-
-                    Tavolo nuovoTavolo = new Tavolo();
-                    nuovoTavolo.setAttivo(true);
-                    nuovoTavolo.setNumeroPosti(numeroPosti);
-                    nuovoTavolo.setOccupato(true);
-                    nuovoTavolo.setRiferimento(riferimentoTavoli);
-                    nuovoTavolo.setRistorante(ristoranteSession.selezionaRistorantePerRagioneSociale("La taverna"));
-                    nuovoTavolo=(tavoloSession.inserisciTavolo(nuovoTavolo));
-                    return nuovoTavolo.getId();
-                }
-            }
-        } catch (SecurityException ex) {
-            Logger.getLogger(TavoloFacade.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IllegalStateException ex) {
-            Logger.getLogger(TavoloFacade.class.getName()).log(Level.SEVERE, null, ex);
+    public Long occupaTavoli(User user, ArrayList<String> riferimenti) throws TavoloOccupatoException {
+        if (user != null) {
+	    	try {
+	            if (riferimenti != null) {
+	                if (riferimenti.size() == 1) {
+	                    String riferimento = riferimenti.get(0);
+	                    if (riferimento != null) {
+	                        Tavolo tavolo = tavoloSession.selezionaTavoloPerRiferimento(riferimento, true);
+	                        if (!tavolo.isOccupato()) {
+	                            tavolo.setOccupato(true);
+	                            tavoloSession.update(tavolo);
+	                            return tavolo.getId();
+	                        } else {
+	                        	tavolo.setOccupato(false);
+	                            throw new TavoloOccupatoException(null);
+	                        }
+	                    } else {
+	                        throw new IllegalStateException();
+	                    }
+	                } else if (riferimenti.size() > 1) {
+	                    String riferimentoTavoli = null;
+	                    Integer numeroPosti = 0;
+	                    for (String riferimento : riferimenti) {
+	                        if (riferimento != null) {
+	                            Tavolo tavolo = tavoloSession.selezionaTavoloPerRiferimento(riferimento, true);
+	                            if (!tavolo.isOccupato()) {
+	                                tavolo.setAttivo(false);
+	                                tavoloSession.update(tavolo);
+	                                if (riferimentoTavoli == null)
+	                                    riferimentoTavoli = tavolo.getRiferimento();
+	                                else
+	                                    riferimentoTavoli = riferimentoTavoli + "+" + tavolo.getRiferimento();
+	                                numeroPosti = numeroPosti + tavolo.getNumeroPosti();
+	                            }
+	                            else {
+	                            	tavolo.setAttivo(true);
+	                            	tavoloSession.update(tavolo);
+	                            	throw new TavoloOccupatoException(null);
+	                            } 
+	                        } else {
+	                            throw new IllegalStateException();
+	                        }
+	                    }
+	
+	                    Tavolo nuovoTavolo = new Tavolo();
+	                    nuovoTavolo.setAttivo(true);
+	                    nuovoTavolo.setNumeroPosti(numeroPosti);
+	                    nuovoTavolo.setOccupato(true);
+	                    nuovoTavolo.setRiferimento(riferimentoTavoli);
+	                    nuovoTavolo.setRistorante(ristoranteSession.selezionaRistorantePerRagioneSociale("La taverna"));
+	                    nuovoTavolo=(tavoloSession.inserisciTavolo(nuovoTavolo));
+	                    return nuovoTavolo.getId();
+	                }
+	            }
+	        } catch (SecurityException ex) {
+	            Logger.getLogger(TavoloFacade.class.getName()).log(Level.SEVERE, null, ex);
+	        } catch (IllegalStateException ex) {
+	            Logger.getLogger(TavoloFacade.class.getName()).log(Level.SEVERE, null, ex);
+	        }
         }
         
-        return null;
+        throw new TavoloOccupatoException(null);
     }
 
 }
