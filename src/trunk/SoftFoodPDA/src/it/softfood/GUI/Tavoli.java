@@ -62,23 +62,22 @@ public class Tavoli extends javax.swing.JPanel {
 		}
 
 		int i = 0;
-		int size = tavoli.size();
+
 		model = new DefaultListModel();
 
-		if (size == 0) {
+		if (tavoli == null || tavoli.size() == 0) {
 			add.setEnabled(false);
 			jComboBox1.setEnabled(false);
 			jComboBox2.setEnabled(false);
 			model.addElement("Nessun tavolo disponibile per l'operazione! ");
+		} else {
+			listaTavoli = new String[tavoli.size()];
+			for (Tavolo tavolo : tavoli) {
+				listaTavoli[i] = tavolo.getRiferimento();
+				jComboBox1.addItem(tavolo.getRiferimento());
+				i++;
+			}
 		}
-
-		listaTavoli = new String[size];
-		for (Tavolo tavolo : tavoli) {
-			listaTavoli[i] = tavolo.getRiferimento();
-			jComboBox1.addItem(tavolo.getRiferimento());
-			i++;
-		}
-
 		jList1.setModel(model);
 	}
 
@@ -222,7 +221,7 @@ public class Tavoli extends javax.swing.JPanel {
 				frame.setComponent(new Ordine(role, frame));
 			} 
 		} else {
-			ordine = ordinazioneFacade.selezionaOrdinazioneGiornalieraPerTavolo(role, ((String)tav.get(0)), false);
+			ordine = ordinazioneFacade.selezionaOrdinazionePerTavolo(role, ((String)tav.get(0)), false);
 		}
 
 		if (ordine != null) {

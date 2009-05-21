@@ -6,6 +6,10 @@ import it.softfood.entity.Ordinazione;
 import it.softfood.entity.User;
 import it.softfood.entity.Variante;
 import it.softfood.enumeration.TipoPietanza;
+import it.softfood.exception.AggiornamentoIngredientiMagazzinoException;
+import it.softfood.exception.DisponibilitaBevandaException;
+import it.softfood.exception.DisponibilitaPietanzaException;
+import it.softfood.exception.UserException;
 import it.softfood.handler.OrdinazioneFacade;
 
 import java.util.ArrayList;
@@ -127,11 +131,11 @@ public class PDAOrdinazioneFacade {
 	}
 
 	public ArrayList<Variante> selezionaVariantiPerLineaOrdinazione(User role, LineaOrdinazione lineaOrdinazione) {
-		OrdinazioneFacade ordineFacade=OrdinazioneFacade.getInstance();
-		ArrayList<Variante> linee=null;
+		OrdinazioneFacade ordineFacade = OrdinazioneFacade.getInstance();
+		ArrayList<Variante> linee = null;
 	
 		try {
-			linee = ordineFacade.selezionaVariantiPerLineaOrdinazione(role,lineaOrdinazione);
+			linee = ordineFacade.selezionaVariantiPerLineaOrdinazione(role, lineaOrdinazione);
 		} catch (Exception e) {
 			System.err.println("PDATavoloFacade#selezionaVariantiPerLineaOrdinazione");
 		}
@@ -152,14 +156,10 @@ public class PDAOrdinazioneFacade {
 		return ingrediente;
 	}
 
-	public LineaOrdinazione inserisciLineaOrdinazione(User role, LineaOrdinazione linea) {
+	public LineaOrdinazione inserisciLineaOrdinazione(User role, LineaOrdinazione linea) throws DisponibilitaBevandaException, DisponibilitaPietanzaException, AggiornamentoIngredientiMagazzinoException, UserException {
 		OrdinazioneFacade ordineFacade=OrdinazioneFacade.getInstance();
 		LineaOrdinazione lineaOrdinazione = null;
-		try {
-			lineaOrdinazione = ordineFacade.inserisciLineaOrdinazione(role, linea);
-		} catch (Exception e) {
-			System.err.println("PDATavoloFacade#inserisciLineaOrdinazione");
-		}
+		lineaOrdinazione = ordineFacade.inserisciLineaOrdinazione(role, linea);
 		
 		return lineaOrdinazione;
 	}
