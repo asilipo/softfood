@@ -110,7 +110,6 @@ public class Pannello_ordinazioni extends javax.swing.JPanel {
 
 		i = 0;
 		j = 0;
-		System.out.println("1qqqqqqqqqqqqqqqqqq c 'è ");
 		for (LineaOrdinazione linea : linee) {
 			tabella_ordini.setValueAt(linea.getId(), i, j++);
 			tabella_ordini.setValueAt(linea.getArticolo().getNome(), i, j++);
