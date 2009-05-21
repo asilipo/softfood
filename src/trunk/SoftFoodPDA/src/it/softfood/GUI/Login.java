@@ -13,7 +13,7 @@ import it.softfood.facade.PDAUserFacade;
 
 public class Login extends javax.swing.JPanel {
 
-	private static final long serialVersionUID = 2672136801023778083L;
+	private static final long serialVersionUID = 1L;
 	public PDAUserFacade userFacade;
 	private MainView frame;
 

@@ -31,7 +31,7 @@ public class ToolTipCellRender extends DefaultTableCellRenderer {
         this.id = id;
         this.id_antipasto = id_antipasto;
         this.ordinazioneFacade = ordinazioneFacade;
-        this.role=role;
+        this.role = role;
     }
 
     public void setValue(String aValue) {
@@ -52,31 +52,32 @@ public class ToolTipCellRender extends DefaultTableCellRenderer {
         id_antipasto.setColumnVisible(id, true);
 
         Long id_linea = (Long) table.getValueAt(row, 0);
-
-        LineaOrdinazione lineaOrdinazione = ordinazioneFacade.selezionaLineaOrdinazionePerId(role,id_linea);
+        LineaOrdinazione lineaOrdinazione = ordinazioneFacade.selezionaLineaOrdinazionePerId(role, id_linea);
         
-        ArrayList<Variante> varianti = (ArrayList<Variante>) ordinazioneFacade.selezionaVariantiPerLineaOrdinazione(role,lineaOrdinazione);
-
-        String tool = "";
-        if (varianti != null) {
-            for (Variante var : varianti){
-            	String variation=null;
-            	if(var.getTipoVariazione()==0)
-            		variation="+";
-            	else
-            		variation="-";
-                tool = tool + variation + " " + var.getIngrediente().getNome() + " ";
-            }
-            this.setBackground(Color.LIGHT_GRAY);
-            this.setForeground(Color.BLACK);
-            this.setToolTipText(tool);
-            tool = "";
-        } else {
-            setBackground(Color.WHITE);
-            this.setForeground(Color.BLACK);
-        }
-
-        id_antipasto.setColumnVisible(id, false);
+        if (lineaOrdinazione != null) {
+	        ArrayList<Variante> varianti = (ArrayList<Variante>) ordinazioneFacade.selezionaVariantiPerLineaOrdinazione(role, lineaOrdinazione);
+	
+	        String tool = "";
+	        if (varianti != null) {
+	            for (Variante var : varianti){
+	            	String variation = null;
+	            	if(var.getTipoVariazione() == 0)
+	            		variation = "+";
+	            	else
+	            		variation = "-";
+	                tool = tool + variation + " " + var.getIngrediente().getNome() + " ";
+	            }
+	            this.setBackground(Color.LIGHT_GRAY);
+	            this.setForeground(Color.BLACK);
+	            this.setToolTipText(tool);
+	            tool = "";
+	        } else {
+	            setBackground(Color.WHITE);
+	            this.setForeground(Color.BLACK);
+	        }
+	
+	        id_antipasto.setColumnVisible(id, false);
+    	}   
 
         return cell;
     }

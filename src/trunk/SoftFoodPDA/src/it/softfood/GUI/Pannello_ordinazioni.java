@@ -65,7 +65,7 @@ public class Pannello_ordinazioni extends javax.swing.JPanel {
 			tipo_pietanza = TipoPietanza.DOLCE;
 		}
 
-		ArrayList<Pietanza> pietanze = (ArrayList<Pietanza>) articolo.selezionaPietanzeDisponibiliPerTipo(role,tipo_pietanza);
+		ArrayList<Pietanza> pietanze = (ArrayList<Pietanza>) articolo.selezionaPietanzeDisponibiliPerTipo(role, tipo_pietanza);
 
 		tabella_pietanza.setModel(new javax.swing.table.DefaultTableModel(new String[]{"ID", "Pietanza"}, pietanze.size()){
 			private static final long serialVersionUID = 1L;
@@ -110,6 +110,7 @@ public class Pannello_ordinazioni extends javax.swing.JPanel {
 
 		i = 0;
 		j = 0;
+		System.out.println("1qqqqqqqqqqqqqqqqqq c 'è ");
 		for (LineaOrdinazione linea : linee) {
 			tabella_ordini.setValueAt(linea.getId(), i, j++);
 			tabella_ordini.setValueAt(linea.getArticolo().getNome(), i, j++);

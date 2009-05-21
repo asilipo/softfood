@@ -5,6 +5,10 @@ import it.softfood.entity.LineaOrdinazione;
 import it.softfood.entity.User;
 import it.softfood.entity.Variante;
 import it.softfood.enumeration.TipoVariante;
+import it.softfood.exception.AggiornamentoIngredientiMagazzinoException;
+import it.softfood.exception.DisponibilitaBevandaException;
+import it.softfood.exception.DisponibilitaPietanzaException;
+import it.softfood.exception.UserException;
 import it.softfood.facade.PDAArticoloMenuFacade;
 import it.softfood.facade.PDAOrdinazioneFacade;
 
@@ -13,6 +17,7 @@ import java.util.Enumeration;
 import java.util.Hashtable;
 
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 
 import org.jdesktop.application.FrameView;
 
@@ -154,7 +159,7 @@ public class Pietanza extends javax.swing.JPanel {
         if (!tipo.equalsIgnoreCase("bibite")) {
             cancella.setText(resourceMap.getString("cancella.text")); 
             cancella.setEnabled(false);
-            cancella.setName("cancella"); // NOI18N
+            cancella.setName("cancella");
         }
         cancella.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -211,7 +216,7 @@ public class Pietanza extends javax.swing.JPanel {
             jScrollPane2.setName("jScrollPane2"); 
             jScrollPane2.setPreferredSize(new java.awt.Dimension(260, 100));
 
-            jList1.setName("jList1"); // NOI18N
+            jList1.setName("jList1");
             jList1.addMouseListener(new java.awt.event.MouseAdapter() {
                 public void mouseClicked(java.awt.event.MouseEvent evt) {
                     jList1MouseClicked(evt);
@@ -259,39 +264,67 @@ public class Pietanza extends javax.swing.JPanel {
 
 	@SuppressWarnings("unchecked")
 	private void OKActionPerformed(java.awt.event.ActionEvent evt) {
-	    this.setVisible(false);
-	    LineaOrdinazione linea = new LineaOrdinazione();
-	    linea.setOrdinazione(ordinazioneFacade.selezionaOrdinazionePerId(role,tavolo));
-	    linea.setArticolo(articolo.selezionaArticoloMenuPerId(role,id));
-	    linea.setQuantita((Integer) jComboBox1.getSelectedItem());
-	    linea = ordinazioneFacade.inserisciLineaOrdinazione(role, linea);
+	    this.setVisible(false); 
+	    try {
+		    LineaOrdinazione linea = new LineaOrdinazione();
+		    linea.setOrdinazione(ordinazioneFacade.selezionaOrdinazionePerId(role,tavolo));
+		    linea.setArticolo(articolo.selezionaArticoloMenuPerId(role,id));   
+	    	linea.setQuantita((Integer) jComboBox1.getSelectedItem());
+		    linea = ordinazioneFacade.inserisciLineaOrdinazione(role, linea);
+	
+		    Variante variante = new Variante();
+		
+		    if (!jListModel.isEmpty()) {
+		        Enumeration enumeration = jListModel.elements();
+		        while (enumeration.hasMoreElements()) {
+		            String var = (String) enumeration.nextElement();
+		            variante.setLineaOrdinazione(linea);
+		            if (var.substring(0, 1).equalsIgnoreCase("+")) {
+		                variante.setTipoVariazione(TipoVariante.AGGIUNTA.ordinal());
+		            } else {
+		                variante.setTipoVariazione(TipoVariante.RIMOZIONE.ordinal());
+		            }
+		
+		            variante.setIngrediente(ordinazioneFacade.selezionaIngredientePerNome(role,var.substring(2)));
+		
+		            ordinazioneFacade.inserisciVariante(role,variante);
+		            variante = new Variante();
+		        }
+		    }
 
-	    Variante variante = new Variante();
-	
-	    if (!jListModel.isEmpty()) {
-	        Enumeration enumeration = jListModel.elements();
-	        while (enumeration.hasMoreElements()) {
-	            String var = (String) enumeration.nextElement();
-	            variante.setLineaOrdinazione(linea);
-	            if (var.substring(0, 1).equalsIgnoreCase("+")) {
-	                variante.setTipoVariazione(TipoVariante.AGGIUNTA.ordinal());
-	            } else {
-	                variante.setTipoVariazione(TipoVariante.RIMOZIONE.ordinal());
-	            }
-	
-	            variante.setIngrediente(ordinazioneFacade.selezionaIngredientePerNome(role,var.substring(2)));
-	
-	            ordinazioneFacade.inserisciVariante(role,variante);
-	            variante = new Variante();
-	        }
-	    }
-	
-	    if (tipo.equalsIgnoreCase("bibite")) {
-	        Bibite pannello = new Bibite(role,frame, tavolo);
+		    if (linea != null) {
+			    if (tipo.equalsIgnoreCase("bibite")) {
+			    	this.setVisible(false);
+			        Bibite pannello = new Bibite(role, frame, tavolo);
+			        frame.setComponent(pannello);
+			    } else {
+			    	this.setVisible(false);
+			        Pannello_ordinazioni pannello = new Pannello_ordinazioni(role, frame, tavolo, tipo);
+			        frame.setComponent(pannello);
+			    }
+		    } else {
+		    	if (tipo.equalsIgnoreCase("bibite")) 
+		    		throw new DisponibilitaBevandaException(null);
+		    	else 
+		    		throw new DisponibilitaPietanzaException(null);
+		    }
+		    	
+	    } catch (UserException ue) {
+	    	JOptionPane.showMessageDialog(frame.getComponent(), "L'utente non ha le credenziali per eseguire l'operazione!", "Errore sicurezza", JOptionPane.ERROR_MESSAGE);
+	    } catch (DisponibilitaBevandaException e) {
+	        Bibite pannello = new Bibite(role, frame, tavolo);
 	        frame.setComponent(pannello);
-	    } else {
-	        Pannello_ordinazioni pannello = new Pannello_ordinazioni(role,frame, tavolo, tipo);
+	      	JOptionPane.showMessageDialog(frame.getComponent(), "La bevanda non è più disponibile!", "Errore disponibilità bevanda", JOptionPane.ERROR_MESSAGE);
+		} catch (DisponibilitaPietanzaException e) {
+	        Pannello_ordinazioni pannello = new Pannello_ordinazioni(role, frame, tavolo, tipo);
 	        frame.setComponent(pannello);
+		  	JOptionPane.showMessageDialog(frame.getComponent(), "La pietanza non è più disponibile!", "Errore disponibilità pietanza", JOptionPane.ERROR_MESSAGE);
+		} catch (AggiornamentoIngredientiMagazzinoException e) {
+		  	JOptionPane.showMessageDialog(frame.getComponent(), "Scorte magazzino insufficienti!", "Errore aggiornamento magazzino", JOptionPane.ERROR_MESSAGE);
+		} catch (NullPointerException npe) {
+	        Pannello_ordinazioni pannello = new Pannello_ordinazioni(role, frame, tavolo, tipo);
+	        frame.setComponent(pannello);
+	    	JOptionPane.showMessageDialog(frame.getComponent(), "L'articolo non è più disponibile!", "Errore sicurezza", JOptionPane.ERROR_MESSAGE);
 	    }
 	}
 
