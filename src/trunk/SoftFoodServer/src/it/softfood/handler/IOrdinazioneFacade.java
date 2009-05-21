@@ -7,7 +7,11 @@ import it.softfood.entity.Tavolo;
 import it.softfood.entity.User;
 import it.softfood.entity.Variante;
 import it.softfood.enumeration.TipoPietanza;
+import it.softfood.exception.AggiornamentoIngredientiMagazzinoException;
+import it.softfood.exception.DisponibilitaBevandaException;
+import it.softfood.exception.DisponibilitaPietanzaException;
 import it.softfood.exception.TavoloOccupatoException;
+import it.softfood.exception.UserException;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
@@ -41,7 +45,7 @@ public interface IOrdinazioneFacade  extends Remote{
 		
 	public boolean rimuoviOrdinazione(User user, Long id, Boolean ripristinaPietanze) throws RemoteException;
 
-	public LineaOrdinazione inserisciLineaOrdinazione(User user, LineaOrdinazione lineaOrdinazione) throws RemoteException;
+	public LineaOrdinazione inserisciLineaOrdinazione(User user, LineaOrdinazione lineaOrdinazione) throws DisponibilitaBevandaException, DisponibilitaPietanzaException, AggiornamentoIngredientiMagazzinoException, UserException, RemoteException;
 
 	public LineaOrdinazione modificaLineaOrdinazione(User user, LineaOrdinazione nuovaLineaOrdinazione, LineaOrdinazione vecchiaLineaOrdinazione) throws RemoteException;
 

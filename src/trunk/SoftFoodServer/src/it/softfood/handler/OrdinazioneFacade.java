@@ -1,6 +1,7 @@
 package it.softfood.handler;
 
 import it.softfood.entity.Articolo;
+import it.softfood.entity.Bevanda;
 import it.softfood.entity.BevandaMagazzino;
 import it.softfood.entity.Ingrediente;
 import it.softfood.entity.IngredienteMagazzino;
@@ -12,13 +13,19 @@ import it.softfood.entity.Tavolo;
 import it.softfood.entity.User;
 import it.softfood.entity.Variante;
 import it.softfood.enumeration.TipoPietanza;
+import it.softfood.exception.AggiornamentoIngredientiMagazzinoException;
+import it.softfood.exception.DisponibilitaBevandaException;
+import it.softfood.exception.DisponibilitaPietanzaException;
 import it.softfood.exception.TavoloOccupatoException;
+import it.softfood.exception.UserException;
 import it.softfood.session.BevandaMagazzinoSession;
+import it.softfood.session.BevandaSession;
 import it.softfood.session.IngredienteMagazzinoSession;
 import it.softfood.session.IngredientePietanzaSession;
 import it.softfood.session.IngredienteSession;
 import it.softfood.session.LineaOrdinazioneSession;
 import it.softfood.session.OrdinazioneSession;
+import it.softfood.session.PietanzaSession;
 import it.softfood.session.TavoloSession;
 import it.softfood.session.VarianteSession;
 
@@ -40,15 +47,16 @@ import java.util.StringTokenizer;
 public class OrdinazioneFacade {
 
 	private static OrdinazioneFacade singleton;
-	private TavoloSession tavoloSession=TavoloSession.getInstance();
-	private OrdinazioneSession ordinazioneSession=OrdinazioneSession.getInstance();
-	private LineaOrdinazioneSession lineaOrdinazioneSession=LineaOrdinazioneSession.getInstance();
-	private IngredientePietanzaSession ingredientePietanzaSession=IngredientePietanzaSession.getInstance();
-	private IngredienteMagazzinoSession ingredienteMagazzinoSession=IngredienteMagazzinoSession.getInstance();
-	private IngredienteSession ingredienteSession=IngredienteSession.getInstance();
-	private VarianteSession varianteSession=VarianteSession.getInstance();
-	private BevandaMagazzinoSession bevandaMagazzinoSession=BevandaMagazzinoSession.getInstance();
-	
+	private TavoloSession tavoloSession = TavoloSession.getInstance();
+	private OrdinazioneSession ordinazioneSession = OrdinazioneSession.getInstance();
+	private LineaOrdinazioneSession lineaOrdinazioneSession = LineaOrdinazioneSession.getInstance();
+	private IngredientePietanzaSession ingredientePietanzaSession = IngredientePietanzaSession.getInstance();
+	private IngredienteMagazzinoSession ingredienteMagazzinoSession = IngredienteMagazzinoSession.getInstance();
+	private IngredienteSession ingredienteSession = IngredienteSession.getInstance();
+	private VarianteSession varianteSession = VarianteSession.getInstance();
+	private BevandaMagazzinoSession bevandaMagazzinoSession = BevandaMagazzinoSession.getInstance();
+	private PietanzaSession pietanzaSession = PietanzaSession.getInstance();
+	private BevandaSession bevandaSession = BevandaSession.getInstance();
 	
 	public OrdinazioneFacade(){}
 	
@@ -333,13 +341,49 @@ public class OrdinazioneFacade {
 
 		return false;
 	}
-	
-	public LineaOrdinazione inserisciLineaOrdinazione(User user, LineaOrdinazione lineaOrdinazione) {
+
+	public LineaOrdinazione inserisciLineaOrdinazione(User user, LineaOrdinazione lineaOrdinazione) throws DisponibilitaBevandaException, DisponibilitaPietanzaException, AggiornamentoIngredientiMagazzinoException, UserException {
+		if (user != null && lineaOrdinazione != null) {
+			lineaOrdinazione.setOrdinazione(lineaOrdinazione.getOrdinazione());
+			lineaOrdinazione.setEvaso(false);
+			Articolo articolo = lineaOrdinazione.getArticolo();
+
+			if (articolo != null) {
+				if (articolo.getTipoArticolo().equals("Bevanda")) {
+					if (this.selezionaDisponibilitaBevanda(user, articolo.getId()) > 0)
+						lineaOrdinazione = lineaOrdinazioneSession.inserisciLineaOrdinazione(lineaOrdinazione);
+					else
+						throw new DisponibilitaBevandaException(null);
+				}
+
+				if (articolo.getTipoArticolo().equals("Pietanza")) {
+					if (this.selezionaDisponibilitaPietanza(user, articolo.getId()) > 0) 
+						lineaOrdinazione = lineaOrdinazioneSession.inserisciLineaOrdinazione(lineaOrdinazione);
+					else 
+						throw new DisponibilitaPietanzaException(null);
+				}
+
+				if (articolo.getTipoArticolo().equals("Pietanza")) {
+					if (!this.aggiornaMagazzinoIngredienti(user, lineaOrdinazione, "-"))
+						throw new AggiornamentoIngredientiMagazzinoException(null);
+				} else {
+					if (!this.aggiornaMagazzinoBevande(user, lineaOrdinazione, "-"))
+						throw new AggiornamentoIngredientiMagazzinoException(null);
+				}
+				return lineaOrdinazione;
+			}
+
+			return null;
+		}
+
+		throw new UserException(null);
+	}
+	 
+	/*public LineaOrdinazione inserisciLineaOrdinazione(User user, LineaOrdinazione lineaOrdinazione) {
 		if (user != null && lineaOrdinazione != null) {
             try {
             	lineaOrdinazione.setOrdinazione(lineaOrdinazione.getOrdinazione());
             	lineaOrdinazione.setEvaso(false);
-            	if (this.v)
                 lineaOrdinazione = lineaOrdinazioneSession.inserisciLineaOrdinazione(lineaOrdinazione);
                 
                 Articolo articolo = lineaOrdinazione.getArticolo();
@@ -352,13 +396,14 @@ public class OrdinazioneFacade {
                         throw  new Exception();
                 }
                 return lineaOrdinazione;
+            	
             } catch (Exception e) {
-            	System.out.println("OrdinazioneFacade#inserisciLineaOrdinazione " + e);
+            	System.err.println("OrdinazioneFacade#inserisciLineaOrdinazione " + e);
             }
 		}
 		
 		return null;
-	}
+	}*/
 	
 	public LineaOrdinazione modificaLineaOrdinazione(User user, LineaOrdinazione nuovaLineaOrdinazione, LineaOrdinazione vecchiaLineaOrdinazione) {
         if (user != null && nuovaLineaOrdinazione != null && vecchiaLineaOrdinazione != null) {
@@ -590,6 +635,75 @@ public class OrdinazioneFacade {
         }
 
         return false;
+    }
+    
+    public Integer selezionaDisponibilitaPietanza(User user, Long id) {
+        if (user != null && id != null) {
+            Pietanza pietanza = pietanzaSession.selezionaPietanzaPerId(id);
+            return this.verificaDisponibilitaIngredientiPietanza(user, pietanza);
+        }
+
+        return null;
+    }
+
+    private Integer selezionaDisponibilitaBevanda(User user, Long id) {
+        if (user != null && id != null) {
+            Bevanda bevanda = bevandaSession.selezionaBevandaPerId(id);
+            ArrayList<BevandaMagazzino> bevandeMagazzino = (ArrayList<BevandaMagazzino>) bevandaMagazzinoSession.selezionaBevandeMagazzino();
+
+            for (BevandaMagazzino bevandaMagazzino : bevandeMagazzino) {
+                if (bevandaMagazzino.getArticolo().getId().equals(id)) {
+                    return (bevandaMagazzino.getQuantita()) / (bevanda.getCapacita()).intValue();
+                }
+            }
+        }
+
+        return 0;
+    }
+    
+    private Integer verificaDisponibilitaIngredientiPietanza(User user, Pietanza pietanza) {
+    	if (user != null && pietanza != null) {
+	        ArrayList<IngredientePietanza> ingredientiPietanze = (ArrayList<IngredientePietanza>) ingredientePietanzaSession.selezionaIngredientiPietanze();
+	        ArrayList<IngredienteMagazzino> ingredientiMagazzino = (ArrayList<IngredienteMagazzino>) ingredienteMagazzinoSession.selezionaIngredientiMagazzino();
+	        Date data = new Date(System.currentTimeMillis());
+	
+	        int contatore = 0;
+	        int disponibilita = 0;
+	        int disponibilitaMinima = 1000;
+	        int numeroIngredienti = 0;
+	
+			for (IngredientePietanza ingredientePietanza : ingredientiPietanze) {
+	        	if (ingredientePietanza.getId().getPietanza().equals(pietanza.getId())) {
+	            	numeroIngredienti++;
+	                Ingrediente ingrediente = ingredienteSession.selezionaIngredientePerId(ingredientePietanza.getId().getIngrediente());
+	                
+	                for (IngredienteMagazzino ingredienteMagazzino : ingredientiMagazzino) {
+	                	
+	                	if (ingredienteMagazzino.getIngrediente().getId().equals(ingrediente.getId())) {
+	                        contatore++;
+	                        
+	                        if (ingredienteMagazzino.getQuantita() >= ingredientePietanza.getQuantita() && ingrediente.getScadenza().after(data)) {
+	                            try {
+	                                disponibilita = ingredienteMagazzino.getQuantita() / ingredientePietanza.getQuantita();
+	                            } catch (Exception nfe) {
+	                                disponibilita = 0;
+	                            }
+	                        }
+	
+	                        if (disponibilita < disponibilitaMinima)
+	                            disponibilitaMinima = disponibilita;
+	                        disponibilita = 0;
+	                        
+	                    }
+	                }
+	            }
+	        }
+			
+	        if (contatore == numeroIngredienti && contatore > 0)
+	            return disponibilitaMinima;
+    	}
+    	
+        return 0;
     }
     
 }
