@@ -56,8 +56,15 @@ public class TavoloFacade implements ITavoloFacade {
 	}
 	
 	public Tavolo selezionaTavolo(User user, Long id) {
-		if (user != null && id != null)
-			return tavoloSession.selezionaTavoloPerId(id);
+		if (user != null && id != null) {
+			try {
+				Long.parseLong(id.toString());
+				
+				return tavoloSession.selezionaTavoloPerId(id);
+			} catch (NumberFormatException nfe) {
+				return null;
+			}
+		}
 		
 		return null;
 	}
@@ -84,8 +91,14 @@ public class TavoloFacade implements ITavoloFacade {
     }
     
 	public boolean rimuoviTavolo(User user, Long id) {
-		if (user != null && id != null)
-			return tavoloSession.rimuoviTavolo(id);
+		if (user != null && id != null) { 
+			try {
+				Long.parseLong(id.toString());
+				return tavoloSession.rimuoviTavolo(id);
+			} catch (NumberFormatException nfe) {
+				return false;
+			}
+		}
 		
 		return false;
 	}
