@@ -52,7 +52,7 @@ public interface IArticoloMenuFacade extends Remote {
     
 	public Articolo selezionaArticoloMenuPerId(User user, Long id) throws RemoteException;
 
-	public Ingrediente selezionaIngredientePerNome(User user,String nome) throws RemoteException;
+	public Ingrediente selezionaIngredientePerNome(User user, String nome) throws RemoteException;
 	
 	public ArrayList<Pietanza> selezionaPietanzePerTipo(User user, TipoPietanza tipoPietanza) throws RemoteException;
 
