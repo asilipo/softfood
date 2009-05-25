@@ -91,7 +91,7 @@ public class PDAOrdinazioneFacade {
 			new Exception();
 	}
 
-	public ArrayList<LineaOrdinazione> selezionaLineeOrdinazionePerOrdinazioneTipoPietanza(User role,Ordinazione ordine, TipoPietanza tipo_pietanza) {
+	public ArrayList<LineaOrdinazione> selezionaLineeOrdinazionePerOrdinazioneTipoPietanza(User role, Ordinazione ordine, TipoPietanza tipo_pietanza) {
 		OrdinazioneFacade ordineFacade = OrdinazioneFacade.getInstance();
 		ArrayList<LineaOrdinazione> linee = null;
 	    
@@ -104,8 +104,8 @@ public class PDAOrdinazioneFacade {
 		return linee;
 	}
 
-	public void rimuoviLineaOrdinazione(User role,Long id) {
-		OrdinazioneFacade ordineFacade=OrdinazioneFacade.getInstance();
+	public void rimuoviLineaOrdinazione(User role, Long id) {
+		OrdinazioneFacade ordineFacade = OrdinazioneFacade.getInstance();
 		boolean result=false;
 	
 		try {

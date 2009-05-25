@@ -97,7 +97,7 @@ public class Pannello_ordinazioni extends javax.swing.JPanel {
 
 		Ordinazione ordine = ordinazioneFacade.selezionaOrdinazionePerId(role,tavolo);
 
-		ArrayList<LineaOrdinazione> linee = (ArrayList<LineaOrdinazione>) ordinazioneFacade.selezionaLineeOrdinazionePerOrdinazioneTipoPietanza(role,ordine, tipo_pietanza);
+		ArrayList<LineaOrdinazione> linee = (ArrayList<LineaOrdinazione>) ordinazioneFacade.selezionaLineeOrdinazionePerOrdinazioneTipoPietanza(role, ordine, tipo_pietanza);
 
 		tabella_ordini.setModel(new javax.swing.table.DefaultTableModel(new Object [linee.size()][3],new String[]{"ID", "Pietanza","Quantita'"}){
 			private static final long serialVersionUID = 1L;
