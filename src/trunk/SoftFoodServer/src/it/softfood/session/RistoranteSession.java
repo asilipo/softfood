@@ -1,5 +1,8 @@
 package it.softfood.session;
 
+import java.util.List;
+
+import it.softfood.entity.Articolo;
 import it.softfood.entity.Ristorante;
 
 import org.hibernate.Query;
@@ -21,14 +24,15 @@ public class RistoranteSession {
 			ristorante = new RistoranteSession();
 		return(ristorante);
 	}
-	
+		
 	public Ristorante inserisciRistorante(Ristorante ristorante) {
 		try {
 			session.persist(ristorante);
-			ristorante = (Ristorante) session.get(Ristorante.class, ristorante);
+			ristorante = (Ristorante) session.get(Ristorante.class, ristorante.getRagioneSociale());
 			
 			return ristorante;
 		} catch (Exception e) {
+			e.printStackTrace();
 			System.err.println("RistoranteSession#inserisciRistorante");
 			return null;
 		}
