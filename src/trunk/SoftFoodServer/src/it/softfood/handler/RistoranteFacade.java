@@ -44,21 +44,28 @@ public class RistoranteFacade  {
 	}
 
 	public Ristorante selezionaRistorantePerRagioneSociale(User user, String ragioneSociale) {
-		if (user != null && ragioneSociale != null)
+		if (user != null && ragioneSociale != null && ragioneSociale != "")
 			return ristoranteSession.selezionaRistorantePerRagioneSociale(ragioneSociale);
 		
 		return null;
 	}
 	
 	public Ristorante selezionaRistorantePerPartitaIva(User user, String partitaIva) {
-		if (user != null && partitaIva != null)
-			return ristoranteSession.selezionaRistorantePerPartitaIva(partitaIva);
+		if (user != null && partitaIva != null && partitaIva.length() == 11) {
+			try {
+				i = Integer.parseInt(partitaIva);
+				return ristoranteSession.selezionaRistorantePerPartitaIva(partitaIva);
+			}
+			catch(NumberFormatException nfe) {
+				return null;
+			}
+		}
 		
 		return null;
 	}
 
 	public boolean rimuoviRistorante(User user, String ragioneSociale) {
-		if (user != null && ragioneSociale != null)
+		if (user != null && ragioneSociale != null && ragioneSociale != "")
 			return ristoranteSession.rimuoviRistorante(ragioneSociale);
 		
 		return false;
