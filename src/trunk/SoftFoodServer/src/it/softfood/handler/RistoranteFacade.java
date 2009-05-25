@@ -53,7 +53,7 @@ public class RistoranteFacade  {
 	public Ristorante selezionaRistorantePerPartitaIva(User user, String partitaIva) {
 		if (user != null && partitaIva != null && partitaIva.length() == 11) {
 			try {
-				i = Integer.parseInt(partitaIva);
+				Integer.parseInt(partitaIva);
 				return ristoranteSession.selezionaRistorantePerPartitaIva(partitaIva);
 			}
 			catch(NumberFormatException nfe) {
