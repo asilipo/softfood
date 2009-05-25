@@ -20,10 +20,10 @@ public class ExecuteMetod {
 
 			return m.invoke(target, params);
 		} catch (IllegalAccessException e) {
-			e.printStackTrace();
 			return null;
 		} catch (InvocationTargetException e) {
-			e.printStackTrace();
+			return null;
+		} catch (IllegalArgumentException e) {
 			return null;
 		}
 	}

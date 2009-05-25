@@ -263,15 +263,21 @@ public class Login extends javax.swing.JPanel {
 		User u = null;
 		try {
 			u = userFacade.login("cuoco", jTextField1.getText());
-			if (u == null)
-				throw new Exception();
-			frame.setUser(u);
-			this.setVisible(false);
-			Start start=new Start(frame);
-			frame.setActualPanel(start);
-			frame.setComponent(start);
-			frame.enableLogout();
-			frame.enableStart();
+			if (u != null) {
+				frame.setUser(u);
+				this.setVisible(false);
+				Start start=new Start(frame);
+				frame.setActualPanel(start);
+				frame.setComponent(start);
+				frame.enableLogout();
+				frame.enableStart();
+			} else {
+				JOptionPane.showMessageDialog(frame.getComponent(), "PASSWORD ERRATA PER UTENTE CUOCO!","Errore Login",JOptionPane.ERROR_MESSAGE);
+				this.setVisible(false);
+				Login t = new Login(frame);
+				frame.setActualPanel(t);
+				frame.setComponent(t);
+			}
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(frame.getComponent(), "PASSWORD ERRATA PER UTENTE CUOCO!","Errore Login",JOptionPane.ERROR_MESSAGE);
 			this.setVisible(false);
