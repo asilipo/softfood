@@ -9,7 +9,7 @@ import java.lang.reflect.Method;
  * @author Francesco Pacilio
  */
 
-public class ExecuteMetod {
+public class ExecuteMethod {
 
 	public synchronized static Object invoke(Object target, String methodName, Object[] params) {
 		try {	 
