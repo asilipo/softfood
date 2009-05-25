@@ -44,7 +44,7 @@ public aspect ClientDistribution {
 
 	Object around(): distributeRistoranteFacadeCalls()  {
 		Object obj = null;
-		obj = ExecuteMetod.invoke(ristorantefacade, thisJoinPoint.getSignature()
+		obj = ExecuteMethod.invoke(ristorantefacade, thisJoinPoint.getSignature()
 				.getName(), thisJoinPoint.getArgs());
 		return obj;
 	}
@@ -53,7 +53,7 @@ public aspect ClientDistribution {
 
 	Object around(): distributeTavoloFacadeCalls()  {
 		Object obj = null;
-		obj = ExecuteMetod.invoke(tavolofacade, thisJoinPoint.getSignature()
+		obj = ExecuteMethod.invoke(tavolofacade, thisJoinPoint.getSignature()
 				.getName(), thisJoinPoint.getArgs());
 		return obj;
 	}
@@ -62,7 +62,7 @@ public aspect ClientDistribution {
 
 	Object around(): distributeOrdinazioneFacadeCalls()  {
 		Object obj = null;
-		obj = ExecuteMetod.invoke(ordinazionefacade, thisJoinPoint.getSignature()
+		obj = ExecuteMethod.invoke(ordinazionefacade, thisJoinPoint.getSignature()
 				.getName(), thisJoinPoint.getArgs());
 
 		return obj;
@@ -72,7 +72,7 @@ public aspect ClientDistribution {
 
 	Object around(): distributeArticoloFacadeCalls()  {
 		Object obj = null;
-		obj = ExecuteMetod.invoke(articolofacade, thisJoinPoint.getSignature()
+		obj = ExecuteMethod.invoke(articolofacade, thisJoinPoint.getSignature()
 				.getName(), thisJoinPoint.getArgs());
 		@SuppressWarnings("unused")
 		Object[] params = thisJoinPoint.getArgs();
@@ -83,7 +83,7 @@ public aspect ClientDistribution {
 
 	Object around(): distributeUserFacadeCalls()  {
 		Object obj = null;
-		obj = ExecuteMetod.invoke(userfacade, thisJoinPoint.getSignature()
+		obj = ExecuteMethod.invoke(userfacade, thisJoinPoint.getSignature()
 				.getName(), thisJoinPoint.getArgs());
 		@SuppressWarnings("unused")
 		Object[] params = thisJoinPoint.getArgs();
