@@ -59,7 +59,7 @@ public class Ingredienti extends javax.swing.JPanel {
 			var_size=0;
 		}
 
-		String data[] = new String[ingr_size+var_size+6];
+		String data[] = new String[ingr_size+var_size+10];
 
 		int i = 0;
 		data[i++] = "-----------------------------------------";
@@ -76,6 +76,12 @@ public class Ingredienti extends javax.swing.JPanel {
 		for(int is = 0; is < var_size; is++)
 			data[i++]=TipoVariante.values()[var.get(is).getTipoVariazione()]+" - "+var.get(is).getIngrediente().getNome();
 
+		data[i++] = "-----------------------------------------";
+		data[i++] = "-                QUANTITA               -";
+		data[i++] = "-----------------------------------------";
+		
+		data[i++] = ""+linea.getQuantita();
+		
 		jList1.setListData(data);
 	}
 
