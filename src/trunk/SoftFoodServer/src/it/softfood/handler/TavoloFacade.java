@@ -109,7 +109,7 @@ public class TavoloFacade implements ITavoloFacade {
 	            if (riferimenti != null) {
 	                if (riferimenti.size() == 1) {
 	                    String riferimento = riferimenti.get(0);
-	                    if (riferimento != null) {
+	                    if (riferimento != null && riferimento != "") {
 	                        Tavolo tavolo = tavoloSession.selezionaTavoloPerRiferimento(riferimento, true);
 	                        if (!tavolo.isOccupato()) {
 	                            tavolo.setOccupato(true);
