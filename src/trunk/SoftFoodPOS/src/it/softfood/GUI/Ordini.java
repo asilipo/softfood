@@ -38,7 +38,7 @@ public class Ordini extends javax.swing.JPanel implements ActionListener {
 		String[] strings = new String[ordini.size()];
 		int i = 0;
 		for (LineaOrdinazione lin : ordini) {
-			strings[i++] = lin.getArticolo().getNome() + " - " + lin.getQuantita();
+			strings[i++] = lin.getArticolo().getNome() + " - " + lin.getId();
 		}
 
 		jList1.setListData(strings);
@@ -91,19 +91,29 @@ public class Ordini extends javax.swing.JPanel implements ActionListener {
 	}
 
 	private void jList1MouseClicked(java.awt.event.MouseEvent evt) {
-		String obj = (String) jList1.getSelectedValue();
-		Long id = Long.valueOf(obj.substring(obj.lastIndexOf("-") + 2));
-		if (id < 0) {
+		String obj = null;
+		timer.stop();
+		try{
+			obj = (String) jList1.getSelectedValue();
+			Long id = Long.valueOf(obj.substring(obj.lastIndexOf("-") + 2));
+			if (id < 0) {
+				frame.getActualPanel().setVisible(false);
+				Ordini ord = new Ordini(frame);
+				frame.setActualPanel(ord);
+				frame.setComponent(ord);
+			} else {
+				frame.getActualPanel().setVisible(false);
+				Ingredienti ingr = new Ingredienti(frame, id);
+				frame.setActualPanel(ingr);
+				frame.setComponent(ingr);
+			}
+		}catch(Exception e){
 			frame.getActualPanel().setVisible(false);
 			Ordini ord = new Ordini(frame);
 			frame.setActualPanel(ord);
 			frame.setComponent(ord);
-		} else {
-			frame.getActualPanel().setVisible(false);
-			Ingredienti ingr = new Ingredienti(frame, id);
-			frame.setActualPanel(ingr);
-			frame.setComponent(ingr);
 		}
+		
 	}
 
 	@Override
