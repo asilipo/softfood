@@ -25,7 +25,7 @@ grant Principal it.softfood.entity.User "cameriere" {
     permission it.softfood.aspect.OperationPermission "occupaTavoli";
     permission it.softfood.aspect.OperationPermission "selezionaTavolo";
 }; 
-grant Principal it.softfood.entity.User "cassiere"{
+grant Principal it.softfood.entity.User "cassiere" {
     permission  it.softfood.aspect.OperationPermission "login"; 
     permission  it.softfood.aspect.OperationPermission "logout";
 };  
