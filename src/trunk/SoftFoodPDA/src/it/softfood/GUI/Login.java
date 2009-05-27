@@ -1,9 +1,10 @@
 package it.softfood.GUI;
 
-import javax.swing.JOptionPane;
-
 import it.softfood.entity.User;
+import it.softfood.enumeration.Ruolo;
 import it.softfood.facade.PDAUserFacade;
+
+import javax.swing.JOptionPane;
 
 /**
  * @author Maria Rosaria Paone
@@ -252,7 +253,7 @@ public class Login extends javax.swing.JPanel {
 	private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {
 		User u = null;
 		try {
-			u = userFacade.login("cameriere", text.getText());
+			u = userFacade.login(Ruolo.CAMERIERE, text.getText());
 			if (u == null)
 				throw new Exception();
 			
