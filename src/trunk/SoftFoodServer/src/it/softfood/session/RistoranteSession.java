@@ -1,8 +1,5 @@
 package it.softfood.session;
 
-import java.util.List;
-
-import it.softfood.entity.Articolo;
 import it.softfood.entity.Ristorante;
 
 import org.hibernate.Query;

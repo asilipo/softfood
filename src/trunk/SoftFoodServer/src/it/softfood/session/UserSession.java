@@ -1,6 +1,7 @@
 package it.softfood.session;
 
 import it.softfood.entity.User;
+import it.softfood.enumeration.Ruolo;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -58,7 +59,7 @@ public class UserSession {
 	}
 
 
-	public boolean modificaRuoloUser(User user, String ruolo) {
+	public boolean modificaRuoloUser(User user, Ruolo ruolo) {
 		try {
 			user.setRuolo(ruolo);
 			user = (User) session.merge(user);
