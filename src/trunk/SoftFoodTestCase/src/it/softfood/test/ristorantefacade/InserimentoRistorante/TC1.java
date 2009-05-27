@@ -46,7 +46,7 @@ public class TC1 {
 			System.err.println("Exception to obtain the reference to the remote object: " + e);
 		}
 		
-		user = userFacade.login("amministratore", "123456"); 
+		user = userFacade.login("test", "test"); 
 	}
 
 	@After
@@ -57,7 +57,7 @@ public class TC1 {
 
 	@Test
 	public void testInserisciRistorante() throws RemoteException {
-		User user1 = new User("amministratore","1234",Ruolo.AMMINISTRATORE);
+		User user1 = new User("amministratore","123456",Ruolo.AMMINISTRATORE);
 
 		Indirizzo indirizzo = new Indirizzo(100L, "82100", "Benevento", "24 a","Bn","via Roma",null,null,null);
 		Ristorante expected = new Ristorante("Ristorante test",indirizzo,"01234567890");

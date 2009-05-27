@@ -3,12 +3,16 @@ package it.softfood.test.ristorantefacade.InserimentoRistorante;
 import static org.junit.Assert.*;
 
 import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 
 import it.softfood.entity.Indirizzo;
 import it.softfood.entity.User;
 import it.softfood.handler.IRistoranteFacade;
+import it.softfood.handler.IUserFacade;
 import it.softfood.handler.RistoranteFacade;
 import it.softfood.entity.Ristorante;
+import it.softfood.enumeration.Ruolo;
 
 import org.junit.After;
 import org.junit.Before;
@@ -23,56 +27,42 @@ import org.junit.Test;
 public class TC5 {
 
 	private IRistoranteFacade ristoranteFacade;
-	private Ristorante ristorante;
+	private IUserFacade userFacade;
+	private Ristorante actual;
 	private User user;
 	
 	@Before
 	public void setUp() throws Exception {
-		 ristoranteFacade = RistoranteFacade.getInstance();
-		 
-		 Indirizzo indirizzo = new Indirizzo();
-		 indirizzo.setCap("83100");
-		 indirizzo.setCitta("Avellino");
-		 indirizzo.setCivico("10");
-		 indirizzo.setId(1000000L);
-		 indirizzo.setProvincia("AV");
-		 indirizzo.setVia("via Roma");
-		 
-		 ristorante = new Ristorante();
-		 ristorante.setIndirizzo(indirizzo);
-		 ristorante.setPartitaIva("01234567891");
-		 ristorante.setRagioneSociale("Test");
-		 
-		 user = new User("test", "test", "test");		 
+		System.setProperty("java.security.policy", "polis.policy");
+		if (System.getSecurityManager() == null) {
+			System.setSecurityManager(new SecurityManager());
+		}
+		try {
+			Registry registry = LocateRegistry.getRegistry("localhost");
+			ristoranteFacade = (IRistoranteFacade) registry.lookup("RistoranteFacade");
+			userFacade = (IUserFacade) registry.lookup("UserFacade");
+		} catch (Exception e) {
+			System.err.println("Exception to obtain the reference to the remote object: " + e);
+		}
+		
+		user = userFacade.login("test", "test"); 
 	}
 
 	@After
 	public void tearDown() throws Exception {
+		ristoranteFacade.rimuoviRistorante(user, actual.getRagioneSociale());
+		userFacade.logout(user);
 	}
 
 	@Test
 	public void testInserisciRistorante() throws RemoteException {
-		ristoranteFacade.inserisciRistorante(user, ristorante);
-	}
+		User user1 = new User("amministratore","",Ruolo.AMMINISTRATORE);
 
-	@Test
-	public void testModificaRistorante() {
-		fail("Not yet implemented");
-	}
+		Indirizzo indirizzo = new Indirizzo(100L, "82100", "Benevento", "24 a","Bn","via Roma",null,null,null);
+		Ristorante expected = new Ristorante("Ristorante test",indirizzo,"01234567890");
+		actual = ristoranteFacade.inserisciRistorante(user, expected);
+		
+		assertNull(actual);
 
-	@Test
-	public void testSelezionaRistorantePerRagioneSociale() {
-		fail("Not yet implemented");
 	}
-
-	@Test
-	public void testSelezionaRistorantePerPartitaIva() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testRimuoviRistorante() {
-		fail("Not yet implemented");
-	}
-
 }
