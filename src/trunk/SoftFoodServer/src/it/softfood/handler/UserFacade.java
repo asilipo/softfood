@@ -85,7 +85,7 @@ public class UserFacade {
 		return null;
 	}
 	
-	public User login(String ruolo, String password) {
+	public User login(Ruolo ruolo, String password) {
 		if (ruolo != null && password != null) {
 			UserSession userSession = UserSession.getInstance();
 			User u = userSession.selezionaUserPerPassword(password);
