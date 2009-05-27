@@ -2,6 +2,7 @@ package it.softfood.handler;
 
 import it.softfood.entity.Ristorante;
 import it.softfood.entity.User;
+import it.softfood.session.IndirizzoSession;
 import it.softfood.session.RistoranteSession;
 
 /**
@@ -14,6 +15,7 @@ public class RistoranteFacade  {
 
 	private static RistoranteFacade singleton;
 	private RistoranteSession ristoranteSession = RistoranteSession.getInstance();
+	private IndirizzoSession indirizzoSession = IndirizzoSession.getInstance();
 	
 	public RistoranteFacade() {}
 	
@@ -21,12 +23,24 @@ public class RistoranteFacade  {
 		if (singleton == null) {
 			singleton = new RistoranteFacade();
 		}
+		
 		return singleton;
 	}
 
 	public Ristorante inserisciRistorante(User user, Ristorante ristorante) {
-		if (user != null && ristorante != null)
+		if (user != null && ristorante != null) {
+			try {
+				Integer.parseInt(ristorante.getPartitaIva());
+				Integer.parseInt(ristorante.getIndirizzo().getCap());
+			} catch (NumberFormatException nfe) {
+				return null;
+			}
+			
+			if (ristorante.getIndirizzo() != null)
+				indirizzoSession.inserisciIndirizzo(ristorante.getIndirizzo());
+						
 			return ristoranteSession.inserisciRistorante(ristorante);
+		}
 		
 		return null;
 	}
