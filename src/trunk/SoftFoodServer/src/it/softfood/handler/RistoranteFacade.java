@@ -36,10 +36,12 @@ public class RistoranteFacade  {
 				return null;
 			}
 			
+			ristorante = ristoranteSession.inserisciRistorante(ristorante);
+			
 			if (ristorante.getIndirizzo() != null)
 				indirizzoSession.inserisciIndirizzo(ristorante.getIndirizzo());
 						
-			return ristoranteSession.inserisciRistorante(ristorante);
+			return ristorante;
 		}
 		
 		return null;
