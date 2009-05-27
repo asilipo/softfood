@@ -1,6 +1,7 @@
 package it.softfood.facade;
 
 import it.softfood.entity.User;
+import it.softfood.enumeration.Ruolo;
 import it.softfood.handler.UserFacade;
 
 /**
@@ -11,7 +12,7 @@ import it.softfood.handler.UserFacade;
 
 public class PDAUserFacade {
 	
-	public User login(String ruolo, String password) {
+	public User login(Ruolo ruolo, String password) {
 		UserFacade role = UserFacade.getInstance();
 		User u = role.login(ruolo, password);
 
