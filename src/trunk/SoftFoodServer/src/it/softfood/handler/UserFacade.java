@@ -1,6 +1,7 @@
 package it.softfood.handler;
 
 import it.softfood.entity.User;
+import it.softfood.enumeration.Ruolo;
 import it.softfood.login.LoginHandler;
 import it.softfood.session.UserSession;
 
@@ -61,7 +62,7 @@ public class UserFacade {
 		return null;
 	}
 	
-	public boolean modificaRuolo(User user, String ruolo) {
+	public boolean modificaRuolo(User user, Ruolo ruolo) {
 		if (user != null && ruolo != null) {
 			boolean v = userSession.modificaRuoloUser(user, ruolo);
 			return v;
