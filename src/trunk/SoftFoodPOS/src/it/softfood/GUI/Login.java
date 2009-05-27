@@ -1,6 +1,7 @@
 package it.softfood.GUI;
 
 import it.softfood.entity.User;
+import it.softfood.enumeration.Ruolo;
 import it.softfood.facade.POSUserFacade;
 
 import javax.swing.JOptionPane;
@@ -262,7 +263,7 @@ public class Login extends javax.swing.JPanel {
 	private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {
 		User u = null;
 		try {
-			u = userFacade.login("cuoco", jTextField1.getText());
+			u = userFacade.login(Ruolo.CUOCO, jTextField1.getText());
 			if (u != null) {
 				frame.setUser(u);
 				this.setVisible(false);
