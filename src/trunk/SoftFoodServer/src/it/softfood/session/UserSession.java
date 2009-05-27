@@ -47,7 +47,8 @@ public class UserSession {
 	public User selezionaUserPerPassword(String password) {
 		try {
 			User result;
-			Query q = session.createQuery("from it.softfood.entity.User t where t.password = ? ");
+			System.out.println("ssddd " + password);
+			Query q = session.createQuery("from it.softfood.entity.User t where t.password = ?");
 			q.setString(0, password);
 			result = (User) q.list().get(0);
 			
@@ -61,7 +62,7 @@ public class UserSession {
 
 	public boolean modificaRuoloUser(User user, Ruolo ruolo) {
 		try {
-			user.setRuolo(ruolo);
+			user.setRuolo(ruolo.toString());
 			user = (User) session.merge(user);
 
 			return true;

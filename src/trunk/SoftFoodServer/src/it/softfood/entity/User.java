@@ -1,7 +1,5 @@
 package it.softfood.entity;
 
-import it.softfood.enumeration.Ruolo;
-
 import java.security.Principal;
 
 /**
@@ -15,12 +13,12 @@ public class User implements  Principal, java.io.Serializable {
 	private static final long serialVersionUID = 1L;
 	private String userName;
 	private String password;
-	private Ruolo ruolo;
+	private String ruolo;
 
 	public User() {
 	}
 
-	public User(String userName, String password, Ruolo ruolo) {
+	public User(String userName, String password, String ruolo) {
 		this.userName = userName;
 		this.password = password;
 		this.ruolo = ruolo;
@@ -42,11 +40,11 @@ public class User implements  Principal, java.io.Serializable {
 		this.password = password;
 	}
 
-	public Ruolo getRuolo() {
+	public String getRuolo() {
 		return this.ruolo;
 	}
 
-	public void setRuolo(Ruolo ruolo) {
+	public void setRuolo(String ruolo) {
 		this.ruolo = ruolo;
 	}
 
