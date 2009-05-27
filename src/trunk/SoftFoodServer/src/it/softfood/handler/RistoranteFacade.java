@@ -29,11 +29,13 @@ public class RistoranteFacade  {
 
 	public Ristorante inserisciRistorante(User user, Ristorante ristorante) {
 		if (user != null && ristorante != null) {
-			try {
-				Integer.parseInt(ristorante.getPartitaIva());
-				Integer.parseInt(ristorante.getIndirizzo().getCap());
-			} catch (NumberFormatException nfe) {
-				return null;
+			if (ristorante.getIndirizzo() != null) {
+				try {
+					Integer.parseInt(ristorante.getPartitaIva());
+					Integer.parseInt(ristorante.getIndirizzo().getCap());
+				} catch (NumberFormatException nfe) {
+					return null;
+				}
 			}
 			
 			ristorante = ristoranteSession.inserisciRistorante(ristorante);
