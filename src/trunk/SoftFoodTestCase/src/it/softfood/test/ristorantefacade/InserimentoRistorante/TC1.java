@@ -1,4 +1,4 @@
-package it.softfood.test.ristorantefacade;
+package it.softfood.test.ristorantefacade.InserimentoRistorante;
 
 import static org.junit.Assert.*;
 
@@ -20,7 +20,7 @@ import org.junit.Test;
  * @author Francesco Pacilio
  */
 
-public class RistoranteFacadeTestCase {
+public class TC1 {
 
 	private IRistoranteFacade ristoranteFacade;
 	private Ristorante ristorante;
