@@ -64,7 +64,7 @@ public class UserFacade {
 	
 	public boolean modificaRuolo(User user, Ruolo ruolo) {
 		if (user != null && ruolo != null) {
-			boolean v = userSession.modificaRuoloUser(user, ruolo);
+			boolean v = userSession.modificaRuoloUser(user, ruolo.toString());
 			return v;
 		}
 		

@@ -1,5 +1,6 @@
 package it.softfood.handler;
 
+import it.softfood.entity.Indirizzo;
 import it.softfood.entity.Ristorante;
 import it.softfood.entity.User;
 import it.softfood.session.IndirizzoSession;
@@ -28,22 +29,38 @@ public class RistoranteFacade  {
 	}
 
 	public Ristorante inserisciRistorante(User user, Ristorante ristorante) {
-		if (user != null && ristorante != null) {
-			if (ristorante.getIndirizzo() != null) {
+		if (user != null && ristorante != null && ristorante.getRagioneSociale() != null &&
+				!ristorante.getRagioneSociale().equals("") && ristorante.getPartitaIva() != null &&
+					!ristorante.getPartitaIva().equals("")) {
+			Indirizzo indirizzo = ristorante.getIndirizzo();
+			if (indirizzo != null) {
 				try {
-					Integer.parseInt(ristorante.getPartitaIva());
-					Integer.parseInt(ristorante.getIndirizzo().getCap());
+					if (indirizzo.getVia() != null && !indirizzo.getVia().equals("") &&
+							indirizzo.getCitta() != null && !indirizzo.getCitta().equals("") &&
+								indirizzo.getCap() != null && !indirizzo.getCap().equals("") &&
+									indirizzo.getCivico() != null && !indirizzo.getCivico().equals("") &&
+										indirizzo.getProvincia() != null && !indirizzo.getProvincia().equals("")) {
+						Integer.parseInt(ristorante.getPartitaIva());
+						if (ristorante.getPartitaIva().length() != 11)
+							return null;
+						
+						Integer.parseInt(ristorante.getIndirizzo().getCap());
+						if (ristorante.getIndirizzo().getCap().length() != 5)
+							return null;
+						
+						indirizzo = indirizzoSession.inserisciIndirizzo(ristorante.getIndirizzo());
+					} else {
+						indirizzo = null;
+					}
 				} catch (NumberFormatException nfe) {
 					return null;
 				}
 			}
-			
-			ristorante = ristoranteSession.inserisciRistorante(ristorante);
-			
-			if (ristorante.getIndirizzo() != null)
-				indirizzoSession.inserisciIndirizzo(ristorante.getIndirizzo());
-						
-			return ristorante;
+
+			if (indirizzo != null) {
+				ristorante = ristoranteSession.inserisciRistorante(ristorante);
+				return ristorante;
+			}
 		}
 		
 		return null;
@@ -83,8 +100,15 @@ public class RistoranteFacade  {
 	}
 
 	public boolean rimuoviRistorante(User user, String ragioneSociale) {
-		if (user != null && ragioneSociale != null && ragioneSociale != "")
-			return ristoranteSession.rimuoviRistorante(ragioneSociale);
+		if (user != null && ragioneSociale != null && ragioneSociale != "") {
+			Ristorante ristorante = ristoranteSession.selezionaRistorantePerRagioneSociale(ragioneSociale);
+			
+			boolean state = ristoranteSession.rimuoviRistorante(ragioneSociale);			
+			if (state && ristorante != null && ristorante.getIndirizzo() != null) 
+				indirizzoSession.rimuoviIndirizzo(ristorante.getIndirizzo().getId());
+			
+			return state;
+		}
 		
 		return false;
 	}
