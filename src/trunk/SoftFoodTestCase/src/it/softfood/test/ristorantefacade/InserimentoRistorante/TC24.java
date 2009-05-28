@@ -1,6 +1,5 @@
 package it.softfood.test.ristorantefacade.InserimentoRistorante;
 
-import it.softfood.entity.Indirizzo;
 import it.softfood.entity.Ristorante;
 import it.softfood.entity.User;
 import it.softfood.enumeration.Ruolo;
@@ -50,26 +49,14 @@ public class TC24 extends TestCase {
 
 	@After
 	public void tearDown() throws Exception {
-		ristoranteFacade.rimuoviRistorante(user, ristorante.getRagioneSociale());
 		userFacade.logout(user);
 	}
 
 	@Test
-	public void testInserisciRistorante() throws RemoteException {
-		 Indirizzo indirizzo = new Indirizzo();
-		 indirizzo.setCap("83100");
-		 indirizzo.setCitta("Avellino");
-		 indirizzo.setCivico("10");
-		 indirizzo.setProvincia("AV");
-		 indirizzo.setVia("via Roma");
-		 indirizzo.setId(1000000L);
+	public void testInserisciRistorante() throws RemoteException { 
+		 ristorante = null;
 		 
-		 ristorante = new Ristorante();
-		 ristorante.setIndirizzo(indirizzo);
-		 ristorante.setPartitaIva("01234567891");
-		 ristorante.setRagioneSociale("Test");
-		 
-		 User user = null;	
+		 User user = new User("amministratore", "123456", Ruolo.AMMINISTRATORE.toString());	
 		 Ristorante ristoranteAttuale = ristoranteFacade.inserisciRistorante(user, ristorante);
 		 
 		 Assert.assertNull(ristoranteAttuale);

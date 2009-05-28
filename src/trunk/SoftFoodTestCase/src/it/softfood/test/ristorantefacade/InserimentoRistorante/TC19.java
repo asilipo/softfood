@@ -12,6 +12,7 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
 import junit.framework.Assert;
+import junit.framework.TestCase;
 
 import org.junit.After;
 import org.junit.Before;
@@ -23,7 +24,7 @@ import org.junit.Test;
  * @author Francesco Pacilio
  */
 
-public class TC19 {
+public class TC19 extends TestCase {
 
 	private IRistoranteFacade ristoranteFacade;
 	private IUserFacade userFacade;
@@ -49,14 +50,13 @@ public class TC19 {
 
 	@After
 	public void tearDown() throws Exception {
-		ristoranteFacade.rimuoviRistorante(user, ristorante.getRagioneSociale());
 		userFacade.logout(user);
 	}
 
 	@Test
 	public void testInserisciRistorante() throws RemoteException {
 		 Indirizzo indirizzo = new Indirizzo();
-		 indirizzo.setCap("83100");
+		 indirizzo.setCap("a");
 		 indirizzo.setCitta("Avellino");
 		 indirizzo.setCivico("10");
 		 indirizzo.setProvincia("AV");
@@ -68,7 +68,7 @@ public class TC19 {
 		 ristorante.setPartitaIva("01234567891");
 		 ristorante.setRagioneSociale("Test");
 		 
-		 user = new User("test", "test", "test");	
+		 User user = new User("amministratore", "123456", Ruolo.AMMINISTRATORE.toString());	
 		 Ristorante ristoranteAttuale = ristoranteFacade.inserisciRistorante(user, ristorante);
 		 
 		 Assert.assertNull(ristoranteAttuale);
