@@ -70,8 +70,8 @@ public class TC5 extends TestCase {
 	@Test
 	public void testSelezionaTavolo() throws RemoteException {
 		User user = new User("cameriere 1", "", Ruolo.CAMERIERE.toString());
-		Tavolo tavoloOttenuto = tavoloFacade.selezionaTavolo(user, 1000000L);
-		Assert.assertNull(tavoloOttenuto);
+		Tavolo tavoloAttuale = tavoloFacade.selezionaTavolo(user, 1000000L);
+		Assert.assertNull(tavoloAttuale);
 	}
 
 }
