@@ -40,13 +40,17 @@ public class IndirizzoSession {
     
 	public Indirizzo inserisciIndirizzo(Indirizzo indirizzo) {
 		try {
-			Long id = this.getNewId();
-			indirizzo.setId(id);
+			if (indirizzo.getId() == null) {
+				Long id = this.getNewId();
+				indirizzo.setId(id);
+			}
+
 			session.persist(indirizzo);
-			indirizzo = (Indirizzo) session.get(Indirizzo.class, indirizzo);
+			indirizzo = (Indirizzo) session.get(Indirizzo.class, indirizzo.getId());
 			
 			return indirizzo; 
 		} catch (Exception e) {
+			e.printStackTrace();
 			System.err.println("IndirizzoSession#inserisciIndirizzo");
 			return null;
 		}

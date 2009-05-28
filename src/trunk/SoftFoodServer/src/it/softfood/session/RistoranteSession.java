@@ -29,7 +29,6 @@ public class RistoranteSession {
 			
 			return ristorante;
 		} catch (Exception e) {
-			e.printStackTrace();
 			System.err.println("RistoranteSession#inserisciRistorante");
 			return null;
 		}
@@ -37,10 +36,13 @@ public class RistoranteSession {
 
 	public Ristorante selezionaRistorantePerRagioneSociale(String ragioneSociale) {
 		try {			
-			Query q = session.createQuery("from it.softfood.entity.Ristorante r where r.ragioneSociale =  ?");
-			q.setString(0, ragioneSociale);
-			Ristorante ristorante = (Ristorante) q.uniqueResult();
-			
+			Ristorante ristorante = (Ristorante) session.get(Ristorante.class, ragioneSociale);
+			if (ristorante == null) {
+				Query q = session.createQuery("from it.softfood.entity.Ristorante r where r.ragioneSociale = ?");
+				q.setString(0, ragioneSociale);
+				ristorante = (Ristorante) q.uniqueResult();
+			}
+
 		    return ristorante; 
 		} catch (Exception e) {
 			System.err.println("RistoranteSession#selezionaRistorantePerRagioneSociale");
