@@ -10,6 +10,7 @@ public class TestSuiteInserimentoRistorante {
 		TestSuite suite = new TestSuite("Test inserimento ristorante");
 
 		suite.addTestSuite(it.softfood.test.ristorantefacade.InserimentoRistorante.TC1.class);
+		suite.addTestSuite(it.softfood.test.ristorantefacade.InserimentoRistorante.TC11.class);
 		suite.addTestSuite(it.softfood.test.ristorantefacade.InserimentoRistorante.TC24.class);
 		suite.addTestSuite(it.softfood.test.ristorantefacade.InserimentoRistorante.TC25.class);
 
