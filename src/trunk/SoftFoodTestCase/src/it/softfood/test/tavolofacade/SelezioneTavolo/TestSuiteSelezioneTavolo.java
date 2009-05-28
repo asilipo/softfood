@@ -7,20 +7,19 @@ public class TestSuiteSelezioneTavolo {
 
 	public static Test suite() {
 		
-		TestSuite suite = new TestSuite("Test selezione tavolo");
-
-		suite.addTestSuite(it.softfood.test.tavolofacade.SelezioneTavolo.TC1.class);
-		suite.addTestSuite(it.softfood.test.tavolofacade.SelezioneTavolo.TC2.class);
-		suite.addTestSuite(it.softfood.test.tavolofacade.SelezioneTavolo.TC3.class);
-		suite.addTestSuite(it.softfood.test.tavolofacade.SelezioneTavolo.TC4.class);
-		suite.addTestSuite(it.softfood.test.tavolofacade.SelezioneTavolo.TC5.class);
-		suite.addTestSuite(it.softfood.test.tavolofacade.SelezioneTavolo.TC6.class);
-		suite.addTestSuite(it.softfood.test.tavolofacade.SelezioneTavolo.TC7.class);
-		suite.addTestSuite(it.softfood.test.tavolofacade.SelezioneTavolo.TC8.class);
-		suite.addTestSuite(it.softfood.test.tavolofacade.SelezioneTavolo.TC9.class);
-
-		System.out.println("Selezione tavolo: TEST COMPLETO");
-
+		TestSuite suite = new TestSuite(
+				"Test for it.softfood.test.tavolofacade.SelezioneTavolo");
+		//$JUnit-BEGIN$
+		suite.addTestSuite(TC1.class);
+		suite.addTestSuite(TC2.class);
+		suite.addTestSuite(TC3.class);
+		suite.addTestSuite(TC4.class);
+		suite.addTestSuite(TC5.class);
+		suite.addTestSuite(TC6.class);
+		suite.addTestSuite(TC7.class);
+		suite.addTestSuite(TC8.class);
+		suite.addTestSuite(TC9.class);
+		//$JUnit-END$
 		return suite;
 	}
 

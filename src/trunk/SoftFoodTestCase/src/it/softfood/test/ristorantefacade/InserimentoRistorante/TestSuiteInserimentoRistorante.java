@@ -7,35 +7,34 @@ public class TestSuiteInserimentoRistorante {
 
 	public static Test suite() {
 		
-		TestSuite suite = new TestSuite("Test inserimento ristorante");
-
-		suite.addTestSuite(it.softfood.test.ristorantefacade.InserimentoRistorante.TC1.class);
-		suite.addTestSuite(it.softfood.test.ristorantefacade.InserimentoRistorante.TC2.class);
-		suite.addTestSuite(it.softfood.test.ristorantefacade.InserimentoRistorante.TC3.class);
-		suite.addTestSuite(it.softfood.test.ristorantefacade.InserimentoRistorante.TC4.class);
-		suite.addTestSuite(it.softfood.test.ristorantefacade.InserimentoRistorante.TC5.class);
-		suite.addTestSuite(it.softfood.test.ristorantefacade.InserimentoRistorante.TC6.class);
-		suite.addTestSuite(it.softfood.test.ristorantefacade.InserimentoRistorante.TC7.class);
-		suite.addTestSuite(it.softfood.test.ristorantefacade.InserimentoRistorante.TC8.class);
-		suite.addTestSuite(it.softfood.test.ristorantefacade.InserimentoRistorante.TC9.class);
-		suite.addTestSuite(it.softfood.test.ristorantefacade.InserimentoRistorante.TC10.class);
-		suite.addTestSuite(it.softfood.test.ristorantefacade.InserimentoRistorante.TC11.class);
-		suite.addTestSuite(it.softfood.test.ristorantefacade.InserimentoRistorante.TC12.class);
-		suite.addTestSuite(it.softfood.test.ristorantefacade.InserimentoRistorante.TC13.class);
-		suite.addTestSuite(it.softfood.test.ristorantefacade.InserimentoRistorante.TC14.class);
-		suite.addTestSuite(it.softfood.test.ristorantefacade.InserimentoRistorante.TC15.class);
-		suite.addTestSuite(it.softfood.test.ristorantefacade.InserimentoRistorante.TC16.class);
-		suite.addTestSuite(it.softfood.test.ristorantefacade.InserimentoRistorante.TC17.class);
-		suite.addTestSuite(it.softfood.test.ristorantefacade.InserimentoRistorante.TC18.class);
-		suite.addTestSuite(it.softfood.test.ristorantefacade.InserimentoRistorante.TC19.class);
-		suite.addTestSuite(it.softfood.test.ristorantefacade.InserimentoRistorante.TC20.class);
-		suite.addTestSuite(it.softfood.test.ristorantefacade.InserimentoRistorante.TC21.class);
-		suite.addTestSuite(it.softfood.test.ristorantefacade.InserimentoRistorante.TC22.class);		
-		suite.addTestSuite(it.softfood.test.ristorantefacade.InserimentoRistorante.TC23.class);
-		suite.addTestSuite(it.softfood.test.ristorantefacade.InserimentoRistorante.TC24.class);
-
-		System.out.println("Inserimento ristorante: TEST COMPLETO");
-
+		TestSuite suite = new TestSuite(
+			"Test for it.softfood.test.tavolofacade.InserimentoRistorante");
+		//$JUnit-BEGIN$
+		suite.addTestSuite(TC1.class);
+		suite.addTestSuite(TC2.class);
+		suite.addTestSuite(TC3.class);
+		suite.addTestSuite(TC4.class);
+		suite.addTestSuite(TC5.class);
+		suite.addTestSuite(TC6.class);
+		suite.addTestSuite(TC7.class);
+		suite.addTestSuite(TC8.class);
+		suite.addTestSuite(TC9.class);
+		suite.addTestSuite(TC10.class);
+		suite.addTestSuite(TC11.class);
+		suite.addTestSuite(TC12.class);
+		suite.addTestSuite(TC13.class);
+		suite.addTestSuite(TC14.class);
+		suite.addTestSuite(TC15.class);
+		suite.addTestSuite(TC16.class);
+		suite.addTestSuite(TC17.class);
+		suite.addTestSuite(TC18.class);
+		suite.addTestSuite(TC19.class);
+		suite.addTestSuite(TC20.class);
+		suite.addTestSuite(TC21.class);
+		suite.addTestSuite(TC22.class);		
+		suite.addTestSuite(TC23.class);
+		suite.addTestSuite(TC24.class);
+		//$JUnit-END$
 		return suite;
 	}
 
