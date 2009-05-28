@@ -79,9 +79,9 @@ public class RistoranteFacade  {
 	}
 
 	public Ristorante selezionaRistorantePerRagioneSociale(User user, String ragioneSociale) {
-		if (user != null && ragioneSociale != null && ragioneSociale != "")
+		if (user != null && ragioneSociale != null && !ragioneSociale.equals("")) 
 			return ristoranteSession.selezionaRistorantePerRagioneSociale(ragioneSociale);
-		
+					
 		return null;
 	}
 	

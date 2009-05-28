@@ -109,8 +109,75 @@ public class Ristorante implements java.io.Serializable {
 	}
         
 	@Override
-	public boolean equals(Object arg0) {
-		return super.equals(arg0);
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((fornitores == null) ? 0 : fornitores.hashCode());
+		result = prime * result
+				+ ((indirizzo == null) ? 0 : indirizzo.hashCode());
+		result = prime * result + ((menus == null) ? 0 : menus.hashCode());
+		result = prime * result
+				+ ((partitaIva == null) ? 0 : partitaIva.hashCode());
+		result = prime * result
+				+ ((ragioneSociale == null) ? 0 : ragioneSociale.hashCode());
+		result = prime * result
+				+ ((registros == null) ? 0 : registros.hashCode());
+		result = prime * result + ((staffs == null) ? 0 : staffs.hashCode());
+		result = prime * result + ((tavolos == null) ? 0 : tavolos.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Ristorante other = (Ristorante) obj;
+		if (fornitores == null) {
+			if (other.fornitores != null)
+				return false;
+		} else if (!fornitores.equals(other.fornitores))
+			return false;
+		/*if (indirizzo == null) {
+			if (other.indirizzo != null)
+				return false;
+		} else if (!indirizzo.equals(other.indirizzo))
+			return false;*/
+		if (menus == null) {
+			if (other.menus != null)
+				return false;
+		} else if (!menus.equals(other.menus))
+			return false;
+		if (partitaIva == null) {
+			if (other.partitaIva != null)
+				return false;
+		} else if (!partitaIva.equals(other.partitaIva))
+			return false;
+		if (ragioneSociale == null) {
+			if (other.ragioneSociale != null)
+				return false;
+		} else if (!ragioneSociale.equals(other.ragioneSociale))
+			return false;
+		if (registros == null) {
+			if (other.registros != null)
+				return false;
+		} else if (!registros.equals(other.registros))
+			return false;
+		if (staffs == null) {
+			if (other.staffs != null)
+				return false;
+		} else if (!staffs.equals(other.staffs))
+			return false;
+		if (tavolos == null) {
+			if (other.tavolos != null)
+				return false;
+		} else if (!tavolos.equals(other.tavolos))
+			return false;
+		return true;
 	}
 
 }

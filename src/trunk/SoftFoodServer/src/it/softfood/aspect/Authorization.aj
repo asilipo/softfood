@@ -24,9 +24,10 @@ import org.aspectj.lang.JoinPoint;
 
 public aspect Authorization {
 
-	private String xmlparameter="config_authorization_file";
+	private String xmlparameter = "InitialConfiguration.xml";
 
-	public Authorization()throws Exception{
+	public Authorization() throws Exception {
+		System.out.println("Authorization ");
 		XmlReader xml = new XmlReader();
 		String file = xml.leggi(xmlparameter);
 		System.setProperty("java.security.policy", file);
@@ -40,34 +41,38 @@ public aspect Authorization {
 
 	@SuppressWarnings("unchecked")
 	before(User user) : authOperations(user) {
-
+		System.out.println("before " + user);
+		System.out.println("before " +user.getUserName());
 		LoginHandler login = LoginHandler.getInstance();
 		Hashtable hT = login.getSubjectTable();
 		if(hT.containsKey(user)) {
 			return;    
 		} else {
+			System.out.println("AuthorizationException");
 			throw new AuthorizationException(new Exception("User Not Logged " + user.getUserName()));
 		}	
 	}
 
-	public Permission getPermission(JoinPoint.StaticPart joinPointStaticPart){
+	public Permission getPermission(JoinPoint.StaticPart joinPointStaticPart) {
+		System.out.println("getPermission " );
 		return new OperationPermission(joinPointStaticPart.getSignature().getName());
 	}
 
 	@SuppressWarnings("unchecked")
 	Object around(final User user): authOperations(user) && !cflowbelow(authOperations(User)) {     
 		try {
-			LoginHandler login=LoginHandler.getInstance();
+			LoginHandler login = LoginHandler.getInstance();
 			Hashtable hT = login.getSubjectTable();
-			LoginContext lc= (LoginContext)hT.get(user);
+			LoginContext lc = (LoginContext) hT.get(user);
 			Subject _authenticatedSubject=lc.getSubject();
 			_authenticatedSubject.getPrincipals().iterator().next();
 			return Subject.doAsPrivileged(_authenticatedSubject,
 					new PrivilegedExceptionAction() {public Object run() throws Exception {return proceed(user); } },
 					null); 
 		} 
-		catch (PrivilegedActionException ex) {                  
-			throw new AuthorizationException(ex.getException());   
+		catch (PrivilegedActionException ex) {
+			System.out.println("AuthorizationException");
+			throw new AuthorizationException(ex.getException());
 		}
 	}
 
