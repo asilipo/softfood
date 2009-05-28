@@ -41,10 +41,13 @@ public class TavoloSession {
 	
 	public Tavolo inserisciTavolo(Tavolo tavolo) {
 		try {
-			Long id = this.getNewId();
-			tavolo.setId(id);
+			Long id = 0L;
+			if (tavolo.getId() == null) {
+				id = this.getNewId();
+				tavolo.setId(id);
+			}
 			session.persist(tavolo);
-			tavolo = this.selezionaTavoloPerId(id);
+			tavolo = this.selezionaTavoloPerId(tavolo.getId());
 			
 			return tavolo;
 		} catch (Exception e) {
