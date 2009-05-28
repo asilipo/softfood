@@ -10,6 +10,14 @@ public class TestSuiteInserimentoRistorante {
 		TestSuite suite = new TestSuite("Test inserimento ristorante");
 
 		suite.addTestSuite(it.softfood.test.ristorantefacade.InserimentoRistorante.TC1.class);
+		suite.addTestSuite(it.softfood.test.ristorantefacade.InserimentoRistorante.TC2.class);
+		suite.addTestSuite(it.softfood.test.ristorantefacade.InserimentoRistorante.TC3.class);
+		suite.addTestSuite(it.softfood.test.ristorantefacade.InserimentoRistorante.TC4.class);
+		suite.addTestSuite(it.softfood.test.ristorantefacade.InserimentoRistorante.TC5.class);
+		suite.addTestSuite(it.softfood.test.ristorantefacade.InserimentoRistorante.TC6.class);
+		suite.addTestSuite(it.softfood.test.ristorantefacade.InserimentoRistorante.TC7.class);
+		suite.addTestSuite(it.softfood.test.ristorantefacade.InserimentoRistorante.TC8.class);
+		suite.addTestSuite(it.softfood.test.ristorantefacade.InserimentoRistorante.TC9.class);
 		suite.addTestSuite(it.softfood.test.ristorantefacade.InserimentoRistorante.TC10.class);
 		suite.addTestSuite(it.softfood.test.ristorantefacade.InserimentoRistorante.TC11.class);
 		suite.addTestSuite(it.softfood.test.ristorantefacade.InserimentoRistorante.TC12.class);
