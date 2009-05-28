@@ -12,6 +12,7 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
 import junit.framework.Assert;
+import junit.framework.TestCase;
 
 import org.junit.After;
 import org.junit.Before;
@@ -23,7 +24,7 @@ import org.junit.Test;
  * @author Francesco Pacilio
  */
 
-public class TC9 {
+public class TC9 extends TestCase {
 
 	private IRistoranteFacade ristoranteFacade;
 	private IUserFacade userFacade;
@@ -49,7 +50,6 @@ public class TC9 {
 
 	@After
 	public void tearDown() throws Exception {
-		ristoranteFacade.rimuoviRistorante(user, ristorante.getRagioneSociale());
 		userFacade.logout(user);
 	}
 
@@ -68,7 +68,7 @@ public class TC9 {
 		 ristorante.setPartitaIva("01234567891");
 		 ristorante.setRagioneSociale("Test");
 		 
-		 user = new User("test", "test", "test");	
+		 User user = new User("amministratore", "123456", Ruolo.CASSIERE.toString());	
 		 Ristorante ristoranteAttuale = ristoranteFacade.inserisciRistorante(user, ristorante);
 		 
 		 Assert.assertNull(ristoranteAttuale);
