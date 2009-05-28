@@ -23,7 +23,7 @@ import org.junit.Test;
  * @author Francesco Pacilio
  */
 
-public class TC14 {
+public class TC25 {
 
 	private IRistoranteFacade ristoranteFacade;
 	private IUserFacade userFacade;
@@ -68,7 +68,7 @@ public class TC14 {
 		 ristorante.setPartitaIva("01234567891");
 		 ristorante.setRagioneSociale("Test");
 		 
-		 user = new User("test", "test", "test");	
+		 User user = new User("amministratore", "123456", Ruolo.AMMINISTRATORE.toString());	
 		 Ristorante ristoranteAttuale = ristoranteFacade.inserisciRistorante(user, ristorante);
 		 
 		 Assert.assertTrue(ristoranteAttuale.equals(ristorante));
