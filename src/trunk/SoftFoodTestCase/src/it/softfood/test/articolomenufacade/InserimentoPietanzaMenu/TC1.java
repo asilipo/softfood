@@ -2,6 +2,7 @@ package it.softfood.test.articolomenufacade.InserimentoPietanzaMenu;
 
 import it.softfood.entity.Pietanza;
 import it.softfood.entity.User;
+import it.softfood.enumeration.Ruolo;
 import it.softfood.enumeration.TipoPietanza;
 import it.softfood.handler.IArticoloMenuFacade;
 import it.softfood.handler.IUserFacade;
@@ -40,7 +41,7 @@ public class TC1 {
 			System.err.println("Exception to obtain the reference to the remote object: " + e);
 		}
 		
-		user = userFacade.login("test", "test");
+		user = userFacade.login(Ruolo.TESTER, "test");
 	}
 
 	@After
