@@ -1,19 +1,17 @@
 package it.softfood.test.ristorantefacade.InserimentoRistorante;
 
-import static org.junit.Assert.*;
+import it.softfood.entity.Indirizzo;
+import it.softfood.entity.Ristorante;
+import it.softfood.entity.User;
+import it.softfood.enumeration.Ruolo;
+import it.softfood.handler.IRistoranteFacade;
+import it.softfood.handler.IUserFacade;
 
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
-import it.softfood.entity.Indirizzo;
-import it.softfood.entity.User;
-import it.softfood.handler.IArticoloMenuFacade;
-import it.softfood.handler.IRistoranteFacade;
-import it.softfood.handler.IUserFacade;
-import it.softfood.handler.RistoranteFacade;
-import it.softfood.entity.Ristorante;
-import it.softfood.enumeration.Ruolo;
+import junit.framework.Assert;
 
 import org.junit.After;
 import org.junit.Before;
@@ -29,7 +27,7 @@ public class TC1 {
 
 	private IRistoranteFacade ristoranteFacade;
 	private IUserFacade userFacade;
-	private Ristorante actual;
+	private Ristorante ristorante;
 	private User user;
 	
 	@Before
@@ -46,24 +44,34 @@ public class TC1 {
 			System.err.println("Exception to obtain the reference to the remote object: " + e);
 		}
 		
-		user = userFacade.login("test", "test"); 
+		user = userFacade.login(Ruolo.TESTER, "test");
 	}
 
 	@After
 	public void tearDown() throws Exception {
-		ristoranteFacade.rimuoviRistorante(user, actual.getRagioneSociale());
+		ristoranteFacade.rimuoviRistorante(user, ristorante.getRagioneSociale());
 		userFacade.logout(user);
 	}
 
 	@Test
 	public void testInserisciRistorante() throws RemoteException {
-		User user1 = new User("amministratore","123456",Ruolo.AMMINISTRATORE);
-
-		Indirizzo indirizzo = new Indirizzo(100L, "82100", "Benevento", "24 a","Bn","via Roma",null,null,null);
-		Ristorante expected = new Ristorante("Ristorante test",indirizzo,"01234567890");
-		actual = ristoranteFacade.inserisciRistorante(user, expected);
-		
-		assertEquals(expected, actual);
-
+		 Indirizzo indirizzo = new Indirizzo();
+		 indirizzo.setCap("83100");
+		 indirizzo.setCitta("Avellino");
+		 indirizzo.setCivico("10");
+		 indirizzo.setProvincia("AV");
+		 indirizzo.setVia("via Roma");
+		 indirizzo.setId(1000000L);
+		 
+		 ristorante = new Ristorante();
+		 ristorante.setIndirizzo(indirizzo);
+		 ristorante.setPartitaIva("01234567891");
+		 ristorante.setRagioneSociale("Test");
+		 
+		 User user = new User("amministratore", "123456", Ruolo.AMMINISTRATORE.toString());	
+		 Ristorante ristoranteAttuale = ristoranteFacade.inserisciRistorante(user, ristorante);
+		 
+		 Assert.assertTrue(ristoranteAttuale.equals(ristorante));
 	}
+
 }
