@@ -1,6 +1,5 @@
 package it.softfood.test.ristorantefacade.InserimentoRistorante;
 
-import it.softfood.entity.Indirizzo;
 import it.softfood.entity.Ristorante;
 import it.softfood.entity.User;
 import it.softfood.enumeration.Ruolo;
@@ -12,6 +11,7 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
 import junit.framework.Assert;
+import junit.framework.TestCase;
 
 import org.junit.After;
 import org.junit.Before;
@@ -23,7 +23,7 @@ import org.junit.Test;
  * @author Francesco Pacilio
  */
 
-public class TC25 {
+public class TC25 extends TestCase {
 
 	private IRistoranteFacade ristoranteFacade;
 	private IUserFacade userFacade;
@@ -49,29 +49,17 @@ public class TC25 {
 
 	@After
 	public void tearDown() throws Exception {
-		ristoranteFacade.rimuoviRistorante(user, ristorante.getRagioneSociale());
 		userFacade.logout(user);
 	}
 
 	@Test
-	public void testInserisciRistorante() throws RemoteException {
-		 Indirizzo indirizzo = new Indirizzo();
-		 indirizzo.setCap("83100");
-		 indirizzo.setCitta("Avellino");
-		 indirizzo.setCivico("10");
-		 indirizzo.setProvincia("AV");
-		 indirizzo.setVia("via Roma");
-		 indirizzo.setId(1000000L);
-		 
-		 ristorante = new Ristorante();
-		 ristorante.setIndirizzo(indirizzo);
-		 ristorante.setPartitaIva("01234567891");
-		 ristorante.setRagioneSociale("Test");
+	public void testInserisciRistorante() throws RemoteException {		 
+		 ristorante = null;
 		 
 		 User user = new User("amministratore", "123456", Ruolo.AMMINISTRATORE.toString());	
 		 Ristorante ristoranteAttuale = ristoranteFacade.inserisciRistorante(user, ristorante);
 		 
-		 Assert.assertTrue(ristoranteAttuale.equals(ristorante));
+		 Assert.assertNull(ristoranteAttuale);
 	}
 
 }
