@@ -32,7 +32,7 @@
             </key>
             <one-to-many class="it.softfood.entity.Staff" />
         </set>
-        <set name="tavolos" lazy="false" inverse="true">
+        <set name="tavolos" lazy="true" inverse="true">
             <key>
                 <column name="ristorante" not-null="true" />
             </key>
