@@ -67,7 +67,7 @@ public class TC1 extends TestCase {
 		 ristorante = new Ristorante();
 		 ristorante.setIndirizzo(indirizzo);
 		 ristorante.setPartitaIva("01234567891");
-		 ristorante.setRagioneSociale("Test");
+		 ristorante.setRagioneSociale("Ristorante test");
 		 
 		 User user = new User("amministratore", "123456", Ruolo.AMMINISTRATORE.toString());	
 		 Ristorante ristoranteAttuale = ristoranteFacade.inserisciRistorante(user, ristorante);

@@ -12,6 +12,7 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
 import junit.framework.Assert;
+import junit.framework.TestCase;
 
 import org.junit.After;
 import org.junit.Before;
@@ -23,7 +24,7 @@ import org.junit.Test;
  * @author Francesco Pacilio
  */
 
-public class TC23 {
+public class TC23 extends TestCase {
 
 	private IRistoranteFacade ristoranteFacade;
 	private IUserFacade userFacade;
@@ -68,7 +69,7 @@ public class TC23 {
 		 ristorante.setPartitaIva("01234567891");
 		 ristorante.setRagioneSociale("Test");
 		 
-		 user = new User("test", "test", "test");	
+		 User user = null;	
 		 Ristorante ristoranteAttuale = ristoranteFacade.inserisciRistorante(user, ristorante);
 		 
 		 Assert.assertNull(ristoranteAttuale);
