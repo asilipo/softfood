@@ -49,7 +49,7 @@ public class TC1 extends TestCase {
 			System.err.println("Exception to obtain the reference to the remote object: " + e);
 		}
 		
-		user = userFacade.login(Ruolo.TESTER, "test");
+		user = userFacade.login(Ruolo.TESTER, "test", "test");
 		
 		Ristorante ristorante = ristoranteFacade.selezionaRistorantePerRagioneSociale(user, "La taverna");
 		
@@ -61,13 +61,13 @@ public class TC1 extends TestCase {
 		tavolo1.setRistorante(ristorante);
 		tavolo1 = tavoloFacade.inserisciTavolo(user, tavolo1);
 		
-		tavolo1 = new Tavolo();
-		tavolo1.setAttivo(true);
-		tavolo1.setId(1000001L);
-		tavolo1.setOccupato(false);
-		tavolo1.setRiferimento("Tavolo2 test");
-		tavolo1.setRistorante(ristorante);
-		tavolo1 = tavoloFacade.inserisciTavolo(user, tavolo2);
+		tavolo2 = new Tavolo();
+		tavolo2.setAttivo(true);
+		tavolo2.setId(1000001L);
+		tavolo2.setOccupato(false);
+		tavolo2.setRiferimento("Tavolo2 test");
+		tavolo2.setRistorante(ristorante);
+		tavolo2 = tavoloFacade.inserisciTavolo(user, tavolo2);
 	}
 
 	@After
@@ -79,9 +79,22 @@ public class TC1 extends TestCase {
 
 	@Test
 	public void testSelezionaTavoliLiberi() throws RemoteException {
-		User user = new User("cameriere 1", "1234", Ruolo.CAMERIERE.toString());	
+		User user = new User("cameriere 1", "1234", Ruolo.CAMERIERE.toString());
+		userFacade.login(Ruolo.CAMERIERE, "1234", "cameriere 1");
 		ArrayList<Tavolo> tavoliAttuali = (ArrayList<Tavolo>) tavoloFacade.selezionaTavoliLiberi(user);
-		Assert.assertTrue(tavoliAttuali.contains(tavolo1) && tavoliAttuali.contains(tavolo2));
+		boolean a = false;
+		boolean b = false;
+		for (Tavolo t : tavoliAttuali) {
+			if (t.equals(tavolo1))
+				a = true;
+			if (t.equals(tavolo2))
+				b = true;
+		}
+		
+		if(a && b)
+			Assert.assertTrue(a && b);
+
+		userFacade.logout(user);
 	}
 
 }

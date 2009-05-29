@@ -1,10 +1,5 @@
 package it.softfood.test.tavolofacade.SelezioneTavoliLiberi;
 
-import java.rmi.RemoteException;
-import java.rmi.registry.LocateRegistry;
-import java.rmi.registry.Registry;
-import java.util.ArrayList;
-
 import it.softfood.entity.Ristorante;
 import it.softfood.entity.Tavolo;
 import it.softfood.entity.User;
@@ -12,6 +7,11 @@ import it.softfood.enumeration.Ruolo;
 import it.softfood.handler.IRistoranteFacade;
 import it.softfood.handler.ITavoloFacade;
 import it.softfood.handler.IUserFacade;
+
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+
 import junit.framework.Assert;
 import junit.framework.TestCase;
 
@@ -49,7 +49,7 @@ public class TC6 extends TestCase {
 			System.err.println("Exception to obtain the reference to the remote object: " + e);
 		}
 		
-		user = userFacade.login(Ruolo.TESTER, "test");
+		user = userFacade.login(Ruolo.TESTER, "test", "test");
 		
 		Ristorante ristorante = ristoranteFacade.selezionaRistorantePerRagioneSociale(user, "La taverna");
 		
@@ -79,9 +79,18 @@ public class TC6 extends TestCase {
 
 	@Test
 	public void testSelezionaTavoliLiberi() throws RemoteException {
-		User user = new User("cameriere 1", "1234", null);	
-		ArrayList<Tavolo> tavoliAttuali = (ArrayList<Tavolo>) tavoloFacade.selezionaTavoliLiberi(user);
-		Assert.assertFalse(tavoliAttuali.contains(tavolo1) || tavoliAttuali.contains(tavolo2));
+		User user = new User("cameriere 1", "1234", null);
+		user = userFacade.login(null, "1234", "cameriere 1");
+		
+		try {
+			tavoloFacade.selezionaTavoliLiberi(user);
+			
+			userFacade.logout(user);
+		} catch (NullPointerException npe) {
+			Assert.assertTrue(npe != null);
+		}
+		
+		userFacade.logout(user);
 	}
 
 }
