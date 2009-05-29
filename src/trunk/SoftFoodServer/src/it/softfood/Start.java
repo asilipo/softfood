@@ -11,6 +11,7 @@ import it.softfood.entity.Pietanza;
 import it.softfood.entity.Ristorante;
 import it.softfood.entity.Tavolo;
 import it.softfood.entity.User;
+import it.softfood.enumeration.Ruolo;
 import it.softfood.enumeration.TipoPietanza;
 import it.softfood.handler.ArticoloMenuFacade;
 import it.softfood.handler.IArticoloMenuFacade;
@@ -92,10 +93,16 @@ public class Start {
 		IArticoloMenuFacade art=(IArticoloMenuFacade) ArticoloMenuFacade.getInstance();
 		IUserFacade iuser = (IUserFacade) UserFacade.getInstance();
 		
-		//User u = iuser.login("cameriere", "1234");
-		//System.out.println("nome " + u.getName());
-		//System.out.println("pwd " + u.getPassword());
+//		User u = iuser.login(Ruolo.CUOCO, "12345");
+//		System.out.println("nome " + u.getName());
+//		System.out.println("pwd " + u.getPassword());
 //		
+//		Ristorante ristorante = rist.selezionaRistorantePerRagioneSociale(u, "La taverna");
+//		
+//		tav.selezionaTavoliOccupati(u);
+//		
+//		iuser.logout(u);
+		
 		
 //		Pietanza p = new Pietanza();
 //		p.setId(51L);

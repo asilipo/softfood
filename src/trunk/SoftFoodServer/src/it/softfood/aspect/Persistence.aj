@@ -26,7 +26,7 @@ public aspect Persistence {
 		return session;
 	}
 
-	pointcut operation(): execution(* it.softfood.handler.*.*(..)) && !cflowbelow(execution(* it.softfood.handler.*.*(..))) && !execution(* it.softfood.handler.*.*Session(..));
+	pointcut operation(): execution(* it.softfood.handler.*.*(..)) && !cflowbelow(execution(* it.softfood.handler.*.*(..))) && !execution(* it.softfood.handler.*.*Session(..)) && !execution(* it.softfood.handler.*.login(..)) && !execution(* it.softfood.handler.*.logout(..));
 
 	before() :  operation() {		
 		session = HibernateUtil.openSession();
