@@ -48,6 +48,9 @@ public class RistoranteFacade  {
 						if (ristorante.getIndirizzo().getCap().length() != 5)
 							return null;
 						
+						if (ristorante.getIndirizzo().getProvincia().length() != 2)
+							return null;
+						
 						indirizzo = indirizzoSession.inserisciIndirizzo(ristorante.getIndirizzo());
 					} else {
 						indirizzo = null;
