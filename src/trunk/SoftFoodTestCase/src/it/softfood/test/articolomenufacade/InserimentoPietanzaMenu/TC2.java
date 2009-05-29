@@ -40,7 +40,7 @@ public class TC2 {
 			System.err.println("Exception to obtain the reference to the remote object: " + e);
 		}
 		
-		user = userFacade.login(null, "test");
+		user = userFacade.login(null, "test", "test");
 	}
 
 	@After
