@@ -11,6 +11,8 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
+import junit.framework.Assert;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -49,7 +51,7 @@ public class TC1 {
 	}
 
 	@Test
-	public void testInserisciPietanzaMenu() {
+	public void testInserisciPietanzaMenu() throws RemoteException {
 		Pietanza pietanza = new Pietanza();
 		pietanza.setId(1000000L);
 		pietanza.setNome("pietanza_test");
@@ -57,13 +59,10 @@ public class TC1 {
 		pietanza.setTipoPietanza(TipoPietanza.ANTIPASTI.ordinal());
 		pietanza.setTipoArticolo("Pietanza");
 		
-		try {
-			articoloMenuFacade.inserisciPietanzaMenu(user, pietanza);
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
+		
+		User user = userFacade.login(Ruolo.AMMINISTRATORE, "123456", "amministratore");
+		Pietanza pietanzaAttuale = articoloMenuFacade.inserisciPietanzaMenu(user, pietanza);
+		Assert.assertTrue(pietanza.equals(pietanzaAttuale));
 	}
 	
 }
