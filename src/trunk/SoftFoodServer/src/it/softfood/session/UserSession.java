@@ -50,7 +50,10 @@ public class UserSession {
 			System.out.println("ssddd " + password);
 			Query q = session.createQuery("from it.softfood.entity.User t where t.password = ?");
 			q.setString(0, password);
+			System.out.println(q.list());
 			result = (User) q.list().get(0);
+			System.out.println(result);
+			
 			
 			return result;
 		} catch (Exception e) {

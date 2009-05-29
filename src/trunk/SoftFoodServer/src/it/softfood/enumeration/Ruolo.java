@@ -8,7 +8,7 @@ package it.softfood.enumeration;
 
 public enum Ruolo {
 
-	CAMERIERE, CUOCO, CASSIERE, AMMINISTRATORE, TESTER;
+	CAMERIERE, CUOCO, CASSIERE, AMMINISTRATORE, TEST;
 
 	@Override
 	public String toString() {
