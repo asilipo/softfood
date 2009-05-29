@@ -19,7 +19,7 @@ public interface ITavoloFacade extends Remote{
 
 	public Tavolo inserisciTavolo(User user, Tavolo tavolo) throws RemoteException;
 
-	public boolean liberaTavolo(User user, Tavolo tavolo) throws RemoteException;
+	public boolean liberaTavolo(User user, Long id) throws RemoteException;
 
 	public boolean occupaTavolo(User user, Tavolo tavolo) throws RemoteException;
 

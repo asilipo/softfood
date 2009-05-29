@@ -41,7 +41,7 @@ public class TavoloFacade implements ITavoloFacade {
 		return null;
 	}
 	
-	public boolean liberaTavolo(User user, Tavolo tavolo) {
+	public boolean liberaTavolo(User user, Long id) {
 		if (user != null && tavolo != null)
 			return tavoloSession.modificaStatoTavolo(tavolo, false);
 		
