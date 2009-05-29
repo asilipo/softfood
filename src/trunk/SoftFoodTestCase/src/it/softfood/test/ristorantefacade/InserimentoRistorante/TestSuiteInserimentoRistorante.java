@@ -36,6 +36,9 @@ public class TestSuiteInserimentoRistorante {
 		suite.addTestSuite(TC24.class);
 		suite.addTestSuite(TC25.class);
 		suite.addTestSuite(TC26.class);
+		suite.addTestSuite(TC27.class);
+		suite.addTestSuite(TC28.class);
+		suite.addTestSuite(TC29.class);
 		//$JUnit-END$
 		return suite;
 	}
