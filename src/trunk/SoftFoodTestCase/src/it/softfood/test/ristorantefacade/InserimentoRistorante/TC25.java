@@ -24,7 +24,7 @@ import org.junit.Test;
  * @author Francesco Pacilio
  */
 
-public class TC21 extends TestCase {
+public class TC25 extends TestCase {
 
 	private IRistoranteFacade ristoranteFacade;
 	private IUserFacade userFacade;
@@ -56,10 +56,10 @@ public class TC21 extends TestCase {
 	@Test
 	public void testInserisciRistorante() throws RemoteException {
 		 Indirizzo indirizzo = new Indirizzo();
-		 indirizzo.setCap("831002");
+		 indirizzo.setCap("83100");
 		 indirizzo.setCitta("Avellino");
 		 indirizzo.setCivico("10");
-		 indirizzo.setProvincia("AV");
+		 indirizzo.setProvincia("A");
 		 indirizzo.setVia("via Roma");
 		 indirizzo.setId(1000000L);
 		 
