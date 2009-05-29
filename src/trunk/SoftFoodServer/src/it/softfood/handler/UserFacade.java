@@ -85,12 +85,13 @@ public class UserFacade {
 		return null;
 	}
 	
-	public User login(Ruolo ruolo, String password) {
-		if (ruolo != null && password != null) {
-			UserSession userSession = UserSession.getInstance();
-			User u = userSession.selezionaUserPerPassword(password);
+	public User login(Ruolo ruolo, String password, String username) {
+		if (ruolo != null && password != null && !password.equals(" ") 
+				&& username != null && !username.equals(" ")) {
+			//UserSession userSession = UserSession.getInstance();
+			//User u = userSession.selezionaUserPerPassword(password);
 			
-			String username = u.getUserName();	
+			//String userName = u.getUserName();	
 			LoginHandler l = LoginHandler.getInstance();
 			User user = l.login(username, password);
 			
