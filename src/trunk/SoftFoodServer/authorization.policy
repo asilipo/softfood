@@ -1,4 +1,4 @@
-grant Principal it.softfood.entity.User "cameriere" { 
+grant Principal it.softfood.entity.User "CAMERIERE" { 
     permission it.softfood.aspect.OperationPermission "login";
     permission it.softfood.aspect.OperationPermission "logout";
     permission it.softfood.aspect.OperationPermission "selezionaPietanzeDisponibiliPerTipo";
@@ -25,11 +25,11 @@ grant Principal it.softfood.entity.User "cameriere" {
     permission it.softfood.aspect.OperationPermission "occupaTavoli";
     permission it.softfood.aspect.OperationPermission "selezionaTavolo";
 }; 
-grant Principal it.softfood.entity.User "cassiere" {
+grant Principal it.softfood.entity.User "CASSIERE" {
     permission  it.softfood.aspect.OperationPermission "login"; 
     permission  it.softfood.aspect.OperationPermission "logout";
 };  
-grant Principal it.softfood.entity.User "cuoco"{
+grant Principal it.softfood.entity.User "CUOCO"{
     permission  it.softfood.aspect.OperationPermission "login"; 
     permission  it.softfood.aspect.OperationPermission "logout";
     permission  it.softfood.aspect.OperationPermission "selezionaOrdinazioniGiornaliere";
@@ -38,7 +38,7 @@ grant Principal it.softfood.entity.User "cuoco"{
     permission  it.softfood.aspect.OperationPermission "selezionaIngredientiPietanza";
     
 };  
-grant Principal it.softfood.entity.User "amministratore"{
+grant Principal it.softfood.entity.User "AMMINISTRATORE"{
   permission it.softfood.aspect.OperationPermission "login"; 
   permission it.softfood.aspect.OperationPermission "logout";
   permission it.softfood.aspect.OperationPermission "inserisciUtente";
@@ -47,6 +47,9 @@ grant Principal it.softfood.entity.User "amministratore"{
   permission it.softfood.aspect.OperationPermission "modificaRuolo";
   permission it.softfood.aspect.OperationPermission "eliminaUtente";
   permission it.softfood.aspect.OperationPermission "selezionaUtente";
+}; 
+grant Principal it.softfood.entity.User "TEST"{
+  	permission java.security.AllPermission;
 }; 
 grant {
     permission java.net.SocketPermission "*", "listen, resolve, accept, connect";
