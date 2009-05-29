@@ -42,9 +42,10 @@ public class TavoloFacade implements ITavoloFacade {
 	}
 	
 	public boolean liberaTavolo(User user, Long id) {
-		if (user != null && tavolo != null)
+		if (user != null && id != null) {
+			Tavolo tavolo = tavoloSession.selezionaTavoloPerId(id);
 			return tavoloSession.modificaStatoTavolo(tavolo, false);
-		
+		}
 		return false;
 	}
 	
