@@ -51,9 +51,10 @@ public class ArticoloMenuFacade  {
 	}
     
     public Pietanza inserisciPietanzaMenu(User user, Pietanza pietanza) {
-        if (user != null && pietanza != null)
+        if (user != null && pietanza != null) {
+        	pietanza.setTipoArticolo("Pietanza");
     		return pietanzaSession.inserisciPietanza(pietanza);
-
+        }
         return null;
     }
     
