@@ -48,7 +48,7 @@ public class TavoloSession {
 			}
 			session.persist(tavolo);
 			tavolo = this.selezionaTavoloPerId(tavolo.getId());
-			
+			session.flush();
 			return tavolo;
 		} catch (Exception e) {
 			System.err.println("TavoloSession#inserisciTavolo");
