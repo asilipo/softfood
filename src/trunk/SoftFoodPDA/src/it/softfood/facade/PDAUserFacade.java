@@ -13,10 +13,11 @@ import it.softfood.handler.UserFacade;
 public class PDAUserFacade {
 	
 	public User login(Ruolo ruolo, String password) {
+		System.out.println("ciao1" );
 		UserFacade role = UserFacade.getInstance();
+		System.out.println("ciao2");
 		System.out.println(role);
-		String username = role.selezionaUserPerPassword(password).getUserName();
-		User u = role.login(username,ruolo, password);
+		User u = role.login(ruolo, password);
 		return u;
 	}
 	

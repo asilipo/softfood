@@ -24,11 +24,10 @@ public class Start {
 		}
 		// TODO Auto-generated method stub
 		Registry registry = LocateRegistry.getRegistry("localhost");
-		IUserFacade userfacade= (IUserFacade) registry.lookup("UserFacade");
+		IUserFacade userfacade = (IUserFacade) registry.lookup("UserFacade");
 		UserFacade role = UserFacade.getInstance();
-		User u = role.login(role.selezionaUserPerPassword("1234").getUserName(),Ruolo.CAMERIERE, "1234");
-		System.out.println(u);
-
+		//User u = role.login(role.selezionaUserPerPassword("1234").getUserName(),Ruolo.CAMERIERE, "1234");
+		//System.out.println(u);
 	}
 
 }

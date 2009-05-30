@@ -253,7 +253,9 @@ public class Login extends javax.swing.JPanel {
 	private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {
 		User u = null;
 		try {
+			System.out.println("ciao");
 			u = userFacade.login(Ruolo.CAMERIERE, text.getText());
+			System.out.println(u);
 			if (u == null)
 				throw new Exception();
 			
