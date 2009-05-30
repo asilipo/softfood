@@ -1,6 +1,7 @@
 package it.softfood.login;
 
 import it.softfood.entity.User;
+import it.softfood.handler.UserFacade;
 import it.softfood.util.XmlReader;
 
 import java.util.Enumeration;
@@ -53,7 +54,7 @@ public class LoginHandler {
 			loginContex.login();
 			Subject _authenticatedSubject = loginContex.getSubject();
 			User principal = this.getPrincipal(username, _authenticatedSubject);
-			subjectTable.put(principal, loginContex);
+			subjectTable.put(principal.getUserName(), loginContex);
 			return (principal);
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
@@ -64,7 +65,7 @@ public class LoginHandler {
 	public boolean logout(User user) {
 		try {
 			User u = check(user);
-			LoginContext lc = (LoginContext) subjectTable.remove(u);
+			LoginContext lc = (LoginContext) subjectTable.remove(u.getUserName());
 			lc.logout();
 
 			return true;
@@ -76,14 +77,15 @@ public class LoginHandler {
 
 	@SuppressWarnings("unchecked")
 	private User check(User user) {
+		UserFacade ufacade = UserFacade.getInstance();
 		String user_name = user.getUserName();
 		String pass=user.getPassword();
 		Enumeration e = subjectTable.keys();
-		User u;
+		String u;
 		while (e.hasMoreElements()) {
-			u = (User) e.nextElement();
-			if (u.getUserName().equals(user_name) && u.getPassword().equals(pass))
-				return u;
+			u = (String) e.nextElement();
+			if (u.equals(user_name))
+				return ufacade.selezionaUserName(new User(u,pass,user.getRuolo()));
 		}
 		return null;
 	}
@@ -106,10 +108,10 @@ public class LoginHandler {
 	@SuppressWarnings("unchecked")
 	private void ceeckJustLogged(String user) throws LoginException {
 		Enumeration e = subjectTable.keys();
-		User u;
+		String u;
 		while (e.hasMoreElements()) {
-			u = (User) e.nextElement();
-			if (u.getUserName().equals(user))
+			u = (String) e.nextElement();
+			if (u.equals(user))
 				throw new LoginException("User just Present");
 		}
 		return;
