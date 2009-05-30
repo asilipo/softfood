@@ -12,6 +12,7 @@ grant Principal it.softfood.entity.User "CAMERIERE" {
     permission it.softfood.aspect.OperationPermission "selezionaOrdinazioneGiornalieraPerTavolo";
     permission it.softfood.aspect.OperationPermission "selezionaOrdinazionePerId";
     permission it.softfood.aspect.OperationPermission "selezionaLineeOrdinazionePerOrdinazione";
+    permission it.softfood.aspect.OperationPermission "selezionaLineeOrdinazionePerOrdinazioneTipoPietanza";
     permission it.softfood.aspect.OperationPermission "rimuoviOrdinazione";
     permission it.softfood.aspect.OperationPermission "selezionaLineeOrdinazionePerOrdinazione";
     permission it.softfood.aspect.OperationPermission "rimuoviLineaOrdinazione";
