@@ -28,10 +28,10 @@ public interface IUserFacade extends Remote {
 
 	public boolean eliminaUtente(User user) throws RemoteException;
 	
-	public User login1(Ruolo ruolo, String password, String username) throws RemoteException;
-	
-	public User login(Ruolo ruolo, String password) throws RemoteException;
+	public User login(String username, Ruolo ruolo, String password) throws RemoteException;
 	
 	public void logout(User user)throws RemoteException;
+	
+	public User selezionaUserPerPassword(String password)throws RemoteException;
 
 }

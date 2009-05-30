@@ -12,122 +12,121 @@ import it.softfood.session.UserSession;
  */
 
 public class UserFacade {
-	
-	private static UserFacade singleton; 
+
+	private static UserFacade singleton;
 	private UserSession userSession = UserSession.getInstance();
 
-	public UserFacade() {}
-	
+	public UserFacade() {
+	}
+
 	public synchronized static UserFacade getInstance() {
 		if (singleton == null) {
 			singleton = new UserFacade();
 		}
-		
+
 		return singleton;
 	}
 
 	public User selezionaUtente(String username, String password, Ruolo ruolo) {
 		if (username != null && password != null) {
-			User user = userSession.selezionaUtente1(username, password, ruolo.toString());
+			User user = userSession.selezionaUtente1(username, password, ruolo
+					.toString());
 			return user;
 		}
-		
+
 		return null;
 	}
-	
+
 	public User selezionaUtentePerUserPassword(String username, String password) {
 		if (username != null && password != null) {
 			User user = userSession.selezionaUtente(username, password);
 			return user;
 		}
-		
+
 		return null;
 	}
-	
-	public User inserisciUtente(User user){		
+
+	public User inserisciUtente(User user) {
 		if (user != null) {
 			user = userSession.inserisciUser(user);
-			return user;		
+			return user;
 		}
-		
+
 		return null;
 	}
-	
+
 	public User selezionaUserName(User user) {
 		if (user != null) {
 			user = userSession.selezionaUserPerUserName(user.getUserName());
 			return user;
 		}
-		
+
 		return null;
 	}
-	
-	public User selezionaPassword(User user) {	
+
+	public User selezionaPassword(User user) {
 		if (user != null) {
 			user = userSession.selezionaUserPerPassword(user.getPassword());
 			return user;
 		}
-		
+
 		return null;
 	}
-	
+
 	public boolean modificaRuolo(User user, Ruolo ruolo) {
 		if (user != null && ruolo != null) {
 			boolean v = userSession.modificaRuoloUser(user, ruolo);
 			return v;
 		}
-		
+
 		return false;
 	}
-	
+
 	public boolean eliminaUtente(User user) {
 		if (user != null)
 			return userSession.rimuoviUser(user.getUserName());
-		
+
 		return false;
 	}
-	
+
 	public User selezionaUtente(User user, String username, String password) {
 		if (user != null && username != null && password != null)
 			return userSession.selezionaUtente(username, password);
-		
+
 		return null;
 	}
-	
-	public User login1(Ruolo ruolo, String password, String username) {
-		if (ruolo != null && password != null && !password.equals(" ") 
-				&& username != null && !username.equals(" ")) {
-			//UserSession userSession = UserSession.getInstance();
-			//User u = userSession.selezionaUserPerPassword(password);
-			
-			//String userName = u.getUserName();	
-			LoginHandler l = LoginHandler.getInstance();
-			User user = l.login(username, password);
-			
-			return user;
+
+	public User selezionaUserPerPassword(String password) {
+		if (password != null)
+			return userSession.selezionaUserPerPassword(password);
+
+		return null;
+
+	}
+
+	public User login(String username, Ruolo ruolo, String password) {
+		try {
+			if (ruolo != null && password != null && !password.equals(" ")) {
+				UserSession userSession = UserSession.getInstance();
+				User u = userSession.selezionaUtente1(username, password, ruolo
+						.toString());
+
+				String userName = u.getUserName();
+				LoginHandler l = LoginHandler.getInstance();
+				User user = l.login(userName, password);
+
+				return user;
+			}
+		} catch (Exception e) {
+			return null;
 		}
-		
+
 		return null;
 	}
-	
-	public User login(Ruolo ruolo, String password) {
-		if (ruolo != null && password != null && !password.equals(" ")) {
-			UserSession userSession = UserSession.getInstance();
-			User u = userSession.selezionaUserPerPassword(password);
-			
-			String userName = u.getUserName();	
-			LoginHandler l = LoginHandler.getInstance();
-			User user = l.login(userName, password);
-			
-			return user;
-		}
-		
-		return null;
-	}
-	
+
 	public void logout(User user) {
-		if (user != null) 
+		if (user != null)
 			LoginHandler.getInstance().logout(user);
 	}
-	
+
 }
