@@ -110,6 +110,7 @@ public class UserFacade {
 	public void logout(User user) {
 		if (user != null)
 			LoginHandler.getInstance().logout(user);
+		return;
 	}
 
 }
