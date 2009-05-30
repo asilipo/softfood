@@ -93,7 +93,7 @@ public class Start {
 		IArticoloMenuFacade art=(IArticoloMenuFacade) ArticoloMenuFacade.getInstance();
 		IUserFacade iuser = (IUserFacade) UserFacade.getInstance();
 		
-//		User u = iuser.login(Ruolo.CUOCO, "12345");
+//		User u = iuser.login("TEST",Ruolo.TEST, "test");
 //		System.out.println("nome " + u.getName());
 //		System.out.println("pwd " + u.getPassword());
 //		
@@ -102,8 +102,8 @@ public class Start {
 //		tav.selezionaTavoliOccupati(u);
 //		
 //		iuser.logout(u);
-		
-		
+//		
+//		System.out.println("OPERAZIONE COMPLETATA");
 //		Pietanza p = new Pietanza();
 //		p.setId(51L);
 //		p.setNome("Patatine");
