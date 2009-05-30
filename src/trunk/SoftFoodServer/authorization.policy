@@ -25,6 +25,7 @@ grant Principal it.softfood.entity.User "CAMERIERE" {
     permission it.softfood.aspect.OperationPermission "selezionaTavoliOccupati";
     permission it.softfood.aspect.OperationPermission "occupaTavoli";
     permission it.softfood.aspect.OperationPermission "selezionaTavolo";
+    permission it.softfood.aspect.OperationPermission "selezionaUserName";
 }; 
 grant Principal it.softfood.entity.User "CASSIERE" {
     permission  it.softfood.aspect.OperationPermission "login"; 
