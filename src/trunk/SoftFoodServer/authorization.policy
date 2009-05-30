@@ -97,6 +97,8 @@ grant Principal it.softfood.entity.User "CUOCO"{
     permission  it.softfood.aspect.OperationPermission "selezionaOrdinazioni";
     permission  it.softfood.aspect.OperationPermission "selezionaOrdinazioniGiornaliere";
     permission  it.softfood.aspect.OperationPermission "selezionaOrdinazioneGiornaliereNoData";
+    permission  it.softfood.aspect.OperationPermission "selezionaOrdinazioniGiornaliereNoData";
+    permission  it.softfood.aspect.OperationPermission "selezionaOrdinazioniGiornaliere";
     permission  it.softfood.aspect.OperationPermission "modificaLineaOrdinazione";
     permission  it.softfood.aspect.OperationPermission "modificaOrdinazione";
     permission  it.softfood.aspect.OperationPermission "selezionaLineaOrdinazionePerId";
