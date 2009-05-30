@@ -26,32 +26,32 @@ public class PDAArticoloMenuFacade {
 	}
 
 	public ArrayList<Ingrediente> selezionaIngredientiPietanza(User role,Long id) {
-		ArticoloMenuFacade articolo=ArticoloMenuFacade.getInstance();
+		ArticoloMenuFacade articolo = ArticoloMenuFacade.getInstance();
 		ArrayList<Ingrediente> ingredienti= (ArrayList<Ingrediente>) articolo.selezionaIngredientiPietanza(role,id);
 		return ingredienti;
 	}
 
 	public int selezionaDisponibilitaBevanda(User role,Long id) {
-		ArticoloMenuFacade articolo=ArticoloMenuFacade.getInstance();
+		ArticoloMenuFacade articolo = ArticoloMenuFacade.getInstance();
 		int disponibilita=articolo.selezionaDisponibilitaBevanda(role,id);
 		return disponibilita;
 	}
 
 	public int selezionaDisponibilitaPietanza(User role,Long id) {
-		ArticoloMenuFacade articolo=ArticoloMenuFacade.getInstance();
-		int disponibilita=articolo.selezionaDisponibilitaPietanza(role,id);
+		ArticoloMenuFacade articolo = ArticoloMenuFacade.getInstance();
+		int disponibilita = articolo.selezionaDisponibilitaPietanza(role,id);
 		return disponibilita;
 	}
 
 	public Articolo selezionaArticoloMenuPerId(User role,Long id) {
-		ArticoloMenuFacade articolo=ArticoloMenuFacade.getInstance();
-		Articolo art=articolo.selezionaArticoloMenuPerId(role,id);
+		ArticoloMenuFacade articolo = ArticoloMenuFacade.getInstance();
+		Articolo art = articolo.selezionaArticoloMenuPerId(role,id);
 		return art;
 	}
 
 	public ArrayList<Bevanda> selezionaBevandeDisponibili(User role) {
-		ArticoloMenuFacade articolo=ArticoloMenuFacade.getInstance();
-		ArrayList<Bevanda> bevande= (ArrayList<Bevanda>) articolo.selezionaBevandeDisponibili(role);
+		ArticoloMenuFacade articolo = ArticoloMenuFacade.getInstance();
+		ArrayList<Bevanda> bevande = (ArrayList<Bevanda>) articolo.selezionaBevandeDisponibili(role);
 		return bevande;
 	}
 

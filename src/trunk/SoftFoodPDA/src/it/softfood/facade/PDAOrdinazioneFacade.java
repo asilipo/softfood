@@ -80,7 +80,7 @@ public class PDAOrdinazioneFacade {
 	}
 
 	public void rimuoviOrdinazione(User role, Long tavolo, Boolean b) {
-		OrdinazioneFacade ordineFacade=OrdinazioneFacade.getInstance();
+		OrdinazioneFacade ordineFacade = OrdinazioneFacade.getInstance();
 		boolean result = false;
 		try {
 			result = ordineFacade.rimuoviOrdinazione(role,tavolo, b);
@@ -115,7 +115,6 @@ public class PDAOrdinazioneFacade {
 		}
 		if(!result)
 			new Exception();
-		
 	}
 
 	public LineaOrdinazione selezionaLineaOrdinazionePerId(User role,Long id_linea) {
@@ -157,7 +156,7 @@ public class PDAOrdinazioneFacade {
 	}
 
 	public LineaOrdinazione inserisciLineaOrdinazione(User role, LineaOrdinazione linea) throws DisponibilitaBevandaException, DisponibilitaPietanzaException, AggiornamentoIngredientiMagazzinoException, UserException {
-		OrdinazioneFacade ordineFacade=OrdinazioneFacade.getInstance();
+		OrdinazioneFacade ordineFacade = OrdinazioneFacade.getInstance();
 		LineaOrdinazione lineaOrdinazione = null;
 		lineaOrdinazione = ordineFacade.inserisciLineaOrdinazione(role, linea);
 		
@@ -165,7 +164,7 @@ public class PDAOrdinazioneFacade {
 	}
 
 	public Ingrediente selezionaIngredientePerNome(User role, String nome) {
-		OrdinazioneFacade ordineFacade=OrdinazioneFacade.getInstance();
+		OrdinazioneFacade ordineFacade = OrdinazioneFacade.getInstance();
 		Ingrediente ingr = null;
 		try {
 			ingr = ordineFacade.selezionaIngredientePerNome(role,nome);
