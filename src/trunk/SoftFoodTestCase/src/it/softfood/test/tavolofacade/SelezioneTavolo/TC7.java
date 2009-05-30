@@ -51,7 +51,7 @@ public class TC7 extends TestCase {
 		
 		//user = userFacade.login(Ruolo.TESTER, "test");
 		
-		user = userFacade.login("TEST",Ruolo.TEST, "test");
+		user = userFacade.login(Ruolo.TEST, "test");
 		
 		Ristorante ristorante = ristoranteFacade.selezionaRistorantePerRagioneSociale(user, "La taverna");
 		
@@ -74,7 +74,7 @@ public class TC7 extends TestCase {
 	public void testSelezionaTavolo() throws RemoteException {
 		//User user1 = new User("cameriere 1", "1234", Ruolo.CUOCO.toString());
 		
-		User user1 = userFacade.login("cameriere 1",Ruolo.CUOCO, "1234");
+		User user1 = userFacade.login(Ruolo.CUOCO, "1234");
 		
 		Tavolo tavoloAttuale=null;
 		try{
