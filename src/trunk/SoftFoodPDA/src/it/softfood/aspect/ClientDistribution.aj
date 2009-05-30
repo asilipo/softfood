@@ -2,7 +2,7 @@ package it.softfood.aspect;
 
 import it.softfood.handler.IArticoloMenuFacade;
 import it.softfood.handler.IOrdinazioneFacade;
-import it.softfood.handler.IRistoranteFacade;
+//import it.softfood.handler.IRistoranteFacade;
 import it.softfood.handler.ITavoloFacade;
 import it.softfood.handler.IUserFacade;
 
@@ -18,7 +18,7 @@ import java.rmi.registry.Registry;
 public aspect ClientDistribution {
 
 	private ITavoloFacade tavolofacade;
-	private IRistoranteFacade ristorantefacade;
+//	private IRistoranteFacade ristorantefacade;
 	private IOrdinazioneFacade ordinazionefacade;
 	private IArticoloMenuFacade articolofacade;
 	private IUserFacade userfacade;
@@ -31,7 +31,7 @@ public aspect ClientDistribution {
 		try {
 			Registry registry = LocateRegistry.getRegistry("localhost");
 			tavolofacade = (ITavoloFacade) registry.lookup("TavoloFacade");
-			ristorantefacade = (IRistoranteFacade) registry.lookup("RistoranteFacade");
+//			ristorantefacade = (IRistoranteFacade) registry.lookup("RistoranteFacade");
 			ordinazionefacade = (IOrdinazioneFacade) registry.lookup("OrdineFacade");
 			articolofacade = (IArticoloMenuFacade) registry.lookup("ArticoloFacade");
 			userfacade= (IUserFacade) registry.lookup("UserFacade");
@@ -40,14 +40,14 @@ public aspect ClientDistribution {
 		}
 	}
 
-	pointcut distributeRistoranteFacadeCalls(): execution(* it.softfood.facade.PDARistoranteFacade.*(..)) && !execution(it.softfood.facade.PDARistoranteFacade.new(..));
-
-	Object around(): distributeRistoranteFacadeCalls()  {
-		Object obj = null;
-		obj = ExecuteMethod.invoke(ristorantefacade, thisJoinPoint.getSignature()
-				.getName(), thisJoinPoint.getArgs());
-		return obj;
-	}
+//	pointcut distributeRistoranteFacadeCalls(): execution(* it.softfood.facade.PDARistoranteFacade.*(..)) && !execution(it.softfood.facade.PDARistoranteFacade.new(..));
+//
+//	Object around(): distributeRistoranteFacadeCalls()  {
+//		Object obj = null;
+//		obj = ExecuteMethod.invoke(ristorantefacade, thisJoinPoint.getSignature()
+//				.getName(), thisJoinPoint.getArgs());
+//		return obj;
+//	}
 	
 	pointcut distributeTavoloFacadeCalls(): execution(* it.softfood.facade.PDATavoloFacade.*(..)) && !execution(it.softfood.facade.PDATavoloFacade.new(..));
 
@@ -68,7 +68,7 @@ public aspect ClientDistribution {
 		return obj;
 	}
 	
-	pointcut distributeArticoloFacadeCalls(): execution(* it.softfood.facade.PDAArticoloMenuFacade.*(..)) && !execution(it.softfood.facade.PDAArticoloMenu.new(..));
+	pointcut distributeArticoloFacadeCalls(): execution(* it.softfood.facade.PDAArticoloMenuFacade.*(..)) && !execution(it.softfood.facade.PDAArticoloMenuFacade.new(..));
 
 	Object around(): distributeArticoloFacadeCalls()  {
 		Object obj = null;
