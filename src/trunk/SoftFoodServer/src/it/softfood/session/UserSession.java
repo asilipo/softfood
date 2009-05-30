@@ -116,4 +116,15 @@ public class UserSession {
 		return result;
 	}
 	
+	public User selezionaUtente1(String username, String password, String ruolo) {
+		User result;
+		String str = " from it.softfood.entity.User t where t.userName = ? AND t.password = ? AND t.ruolo = ?";
+		Query q = session.createQuery(str);
+		q.setString(0, username);
+		q.setString(1, password);
+		q.setString(2, ruolo);
+		result = (User) q.uniqueResult();
+		return result;
+	}
+	
 }
