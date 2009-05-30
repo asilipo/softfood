@@ -23,8 +23,6 @@ import org.aspectj.lang.JoinPoint;
 
 public aspect Authorization {
 
-//	private String xmlparameter = "InitialConfiguration.xml";
-
 	public Authorization() throws Exception {
 		System.out.println("Authorization ");
 		//XmlReader xml = new XmlReader();
@@ -40,20 +38,16 @@ public aspect Authorization {
 
 	@SuppressWarnings("unchecked")
 	before(User user) : authOperations(user) {
-		System.out.println("before " + user);
-		//System.out.println("before " +user.getUserName());
 		LoginHandler login = LoginHandler.getInstance();
 		Hashtable hT = login.getSubjectTable();
 		if(hT.containsKey(user.getUserName())) {
 			return;    
 		} else {
-			System.out.println("AuthorizationException");
 			throw new AuthorizationException(new Exception("User Not Logged " + user.getUserName()));
 		}	
 	}
 
 	public Permission getPermission(JoinPoint.StaticPart joinPointStaticPart) {
-		System.out.println("getPermission " );
 		return new OperationPermission(joinPointStaticPart.getSignature().getName());
 	}
 
@@ -70,7 +64,6 @@ public aspect Authorization {
 					null); 
 		} 
 		catch (PrivilegedActionException ex) {
-			System.out.println("AuthorizationException");
 			throw new AuthorizationException(ex.getException());
 		}
 	}
