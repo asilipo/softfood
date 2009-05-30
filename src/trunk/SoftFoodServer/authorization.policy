@@ -71,7 +71,7 @@ grant Principal it.softfood.entity.User "CUOCO"{
     permission  it.softfood.aspect.OperationPermission "inserisciPietanzaMenu";
     permission  it.softfood.aspect.OperationPermission "inserisciIngrediente"; 
     permission  it.softfood.aspect.OperationPermission "inserisciBevandaMagazzino";
-    permission  it.softfood.aspect.OperationPermission "inserisciIngredienteMagazzino"
+    permission  it.softfood.aspect.OperationPermission "inserisciIngredienteMagazzino";
     permission  it.softfood.aspect.OperationPermission "inserisciPietanza";
     permission  it.softfood.aspect.OperationPermission "inserisciBevanda";
     permission  it.softfood.aspect.OperationPermission "inserisciIngrediente";
