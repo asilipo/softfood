@@ -29,7 +29,6 @@ public class Bibite extends javax.swing.JPanel {
 
 	private void initFacade() {
 		try {
-
 			articolo = new PDAArticoloMenuFacade();
 			ordinazioneFacade = new PDAOrdinazioneFacade();
 		} catch (Exception e) {
@@ -211,23 +210,23 @@ public class Bibite extends javax.swing.JPanel {
 		pannello_bibite.add(jPanel1, java.awt.BorderLayout.SOUTH);
 
 		jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-		jLabel2.setText(resourceMap.getString("jLabel2.text")); // NOI18N
-		jLabel2.setName("jLabel2"); // NOI18N
+		jLabel2.setText(resourceMap.getString("jLabel2.text")); 
+		jLabel2.setName("jLabel2"); 
 		pannello_bibite.add(jLabel2, java.awt.BorderLayout.PAGE_START);
 
 		add(pannello_bibite, java.awt.BorderLayout.NORTH);
 
-		pannello_ordini.setName("pannello_ordini"); // NOI18N
+		pannello_ordini.setName("pannello_ordini");
 		pannello_ordini.setLayout(new java.awt.BorderLayout(5, 5));
 
 		jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-		jLabel1.setText(resourceMap.getString("label_ordini.text")); // NOI18N
+		jLabel1.setText(resourceMap.getString("label_ordini.text")); 
 		jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 		jLabel1.setName("label_ordini"); // NOI18N
 		jLabel1.setPreferredSize(new java.awt.Dimension(225, 13));
 		pannello_ordini.add(jLabel1, java.awt.BorderLayout.PAGE_START);
 
-		jScrollPane2.setName("jScrollPane2"); // NOI18N
+		jScrollPane2.setName("jScrollPane2"); 
 		jScrollPane2.setPreferredSize(new java.awt.Dimension(100, 200));
 
 		tabella_ordini.setModel(new javax.swing.table.DefaultTableModel(
@@ -266,11 +265,11 @@ public class Bibite extends javax.swing.JPanel {
 		});
 		jScrollPane2.setViewportView(tabella_ordini);
 		tabella_ordini.getColumnModel().getColumn(0).setResizable(false);
-		tabella_ordini.getColumnModel().getColumn(0).setHeaderValue(resourceMap.getString("tabella_ordini.columnModel.title0")); // NOI18N
+		tabella_ordini.getColumnModel().getColumn(0).setHeaderValue(resourceMap.getString("tabella_ordini.columnModel.title0")); 
 		tabella_ordini.getColumnModel().getColumn(1).setResizable(false);
-		tabella_ordini.getColumnModel().getColumn(1).setHeaderValue(resourceMap.getString("tabella_ordini.columnModel.title1")); // NOI18N
+		tabella_ordini.getColumnModel().getColumn(1).setHeaderValue(resourceMap.getString("tabella_ordini.columnModel.title1")); 
 		tabella_ordini.getColumnModel().getColumn(2).setResizable(false);
-		tabella_ordini.getColumnModel().getColumn(2).setHeaderValue(resourceMap.getString("tabella_ordini.columnModel.title2")); // NOI18N
+		tabella_ordini.getColumnModel().getColumn(2).setHeaderValue(resourceMap.getString("tabella_ordini.columnModel.title2")); 
 
 		pannello_ordini.add(jScrollPane2, java.awt.BorderLayout.CENTER);
 

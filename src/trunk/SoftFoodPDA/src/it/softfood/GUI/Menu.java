@@ -35,19 +35,19 @@ public class Menu extends javax.swing.JPanel {
         Ok = new javax.swing.JButton();
 
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(it.softfood.GUI.Main.class).getContext().getResourceMap(Menu.class);
-        jToggleButton1.setText(resourceMap.getString("jToggleButton1.text")); // NOI18N
-        jToggleButton1.setName("jToggleButton1"); // NOI18N
+        jToggleButton1.setText(resourceMap.getString("jToggleButton1.text")); 
+        jToggleButton1.setName("jToggleButton1"); 
 
         setMaximumSize(new java.awt.Dimension(225, 450));
         setMinimumSize(new java.awt.Dimension(225, 450));
-        setName("Form"); // NOI18N
+        setName("Form"); 
         setPreferredSize(new java.awt.Dimension(225, 450));
         setLayout(new java.awt.GridLayout(4, 2, 5, 5));
 
-        Antipasti.setIcon(resourceMap.getIcon("Antipasti.icon")); // NOI18N
-        Antipasti.setText(resourceMap.getString("Antipasti.text")); // NOI18N
+        Antipasti.setIcon(resourceMap.getIcon("Antipasti.icon")); 
+        Antipasti.setText(resourceMap.getString("Antipasti.text"));
         Antipasti.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        Antipasti.setName("Antipasti"); // NOI18N
+        Antipasti.setName("Antipasti");
         Antipasti.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         Antipasti.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -56,10 +56,10 @@ public class Menu extends javax.swing.JPanel {
         });
         add(Antipasti);
 
-        Primi.setIcon(resourceMap.getIcon("Primi.icon")); // NOI18N
-        Primi.setText(resourceMap.getString("Primi.text")); // NOI18N
+        Primi.setIcon(resourceMap.getIcon("Primi.icon")); 
+        Primi.setText(resourceMap.getString("Primi.text")); 
         Primi.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        Primi.setName("Primi"); // NOI18N
+        Primi.setName("Primi");
         Primi.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         Primi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -140,37 +140,37 @@ public class Menu extends javax.swing.JPanel {
 
     private void OkActionPerformed(java.awt.event.ActionEvent evt) {
         this.setVisible(false);
-        Conferma conferma = new Conferma(role,frame,tavolo);
+        Conferma conferma = new Conferma(role, frame, tavolo);
         frame.setComponent(conferma);
     }
 
 	private void AntipastiActionPerformed(java.awt.event.ActionEvent evt) {
 	    this.setVisible(false);
-	    Pannello_ordinazioni antipasto = new Pannello_ordinazioni(role,frame, tavolo, "antipasti");
+	    Pannello_ordinazioni antipasto = new Pannello_ordinazioni(role, frame, tavolo, "antipasti");
 	    frame.setComponent(antipasto);
 	}
 
 	private void PrimiActionPerformed(java.awt.event.ActionEvent evt) {
 	    this.setVisible(false);
-	    Pannello_ordinazioni primi = new Pannello_ordinazioni(role,frame,tavolo,"primi");
+	    Pannello_ordinazioni primi = new Pannello_ordinazioni(role, frame, tavolo, "primi");
 	    frame.setComponent(primi);
 	}
 	
 	private void SecondiActionPerformed(java.awt.event.ActionEvent evt) {
 	    this.setVisible(false);
-	    Pannello_ordinazioni secondi = new Pannello_ordinazioni(role,frame,tavolo,"secondi");
+	    Pannello_ordinazioni secondi = new Pannello_ordinazioni(role, frame, tavolo, "secondi");
 	    frame.setComponent(secondi);
 	}
 
 	private void ContorniActionPerformed(java.awt.event.ActionEvent evt) {
 	    this.setVisible(false);
-	    Pannello_ordinazioni contorni = new Pannello_ordinazioni(role,frame,tavolo,"contorni");
+	    Pannello_ordinazioni contorni = new Pannello_ordinazioni(role, frame, tavolo, "contorni");
 	    frame.setComponent(contorni);
 	}
 	
 	private void DolciActionPerformed(java.awt.event.ActionEvent evt) {
 	    this.setVisible(false);
-	    Pannello_ordinazioni dolci = new Pannello_ordinazioni(role,frame,tavolo,"dolci");
+	    Pannello_ordinazioni dolci = new Pannello_ordinazioni(role, frame, tavolo, "dolci");
 	    frame.setComponent(dolci);
 	}
 	

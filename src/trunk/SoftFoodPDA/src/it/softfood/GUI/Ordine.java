@@ -13,7 +13,6 @@ import org.jdesktop.application.FrameView;
 public class Ordine extends javax.swing.JPanel {
 	
 	private static final long serialVersionUID = 1L;
-	
 	private User role;
 	
     public Ordine(User role, FrameView frame) {

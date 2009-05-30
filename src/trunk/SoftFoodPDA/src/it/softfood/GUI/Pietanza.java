@@ -54,7 +54,7 @@ public class Pietanza extends javax.swing.JPanel {
         initComponents();
         initFacade(null);
 
-        ArrayList<Ingrediente> ingredienti = (ArrayList<Ingrediente>) articolo.selezionaIngredientiPietanza(role,id);
+        ArrayList<Ingrediente> ingredienti = (ArrayList<Ingrediente>) articolo.selezionaIngredientiPietanza(role, id);
 
         String ingr[] = new String[ingredienti.size()];
         int i = 0;
@@ -65,7 +65,7 @@ public class Pietanza extends javax.swing.JPanel {
 
         int disp;
         if (tipo.equalsIgnoreCase("bibite")) {
-            disp = articolo.selezionaDisponibilitaBevanda(role,id);
+            disp = articolo.selezionaDisponibilitaBevanda(role, id);
             jPanel1.setVisible(false);
             cancella.setVisible(false);
         } else {
@@ -267,8 +267,8 @@ public class Pietanza extends javax.swing.JPanel {
 	    this.setVisible(false); 
 	    try {
 		    LineaOrdinazione linea = new LineaOrdinazione();
-		    linea.setOrdinazione(ordinazioneFacade.selezionaOrdinazionePerId(role,tavolo));
-		    linea.setArticolo(articolo.selezionaArticoloMenuPerId(role,id));   
+		    linea.setOrdinazione(ordinazioneFacade.selezionaOrdinazionePerId(role, tavolo));
+		    linea.setArticolo(articolo.selezionaArticoloMenuPerId(role, id));   
 	    	linea.setQuantita((Integer) jComboBox1.getSelectedItem());
 		    linea = ordinazioneFacade.inserisciLineaOrdinazione(role, linea);
 	
@@ -285,7 +285,7 @@ public class Pietanza extends javax.swing.JPanel {
 		                variante.setTipoVariazione(TipoVariante.RIMOZIONE.ordinal());
 		            }
 		
-		            variante.setIngrediente(ordinazioneFacade.selezionaIngredientePerNome(role,var.substring(2)));
+		            variante.setIngrediente(ordinazioneFacade.selezionaIngredientePerNome(role, var.substring(2)));
 		
 		            ordinazioneFacade.inserisciVariante(role,variante);
 		            variante = new Variante();
