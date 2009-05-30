@@ -4,10 +4,13 @@ grant Principal it.softfood.entity.User "CAMERIERE" {
     permission it.softfood.aspect.OperationPermission "selezionaUserPerPassword";
     permission it.softfood.aspect.OperationPermission "selezionaPietanzeDisponibiliPerTipo";
     permission it.softfood.aspect.OperationPermission "selezionaIngredientiPietanza";
+    permission it.softfood.aspect.OperationPermission "selezionaIngredientiPietanze";
+    permission it.softfood.aspect.OperationPermission "selezionaIngredientiMagazzino";
     permission it.softfood.aspect.OperationPermission "selezionaDisponibilitaBevanda";
     permission it.softfood.aspect.OperationPermission "selezionaDisponibilitaPietanza";
     permission it.softfood.aspect.OperationPermission "selezionaArticoloMenuPerId";
     permission it.softfood.aspect.OperationPermission "selezionaBevandeDisponibili";
+    permission it.softfood.aspect.OperationPermission "selezionaBevandeMagazzino";
     permission it.softfood.aspect.OperationPermission "inserisciOrdinazione";
     permission it.softfood.aspect.OperationPermission "selezionaOrdinazioneGiornalieraPerTavolo";
     permission it.softfood.aspect.OperationPermission "selezionaOrdinazionePerId";
@@ -32,6 +35,8 @@ grant Principal it.softfood.entity.User "CAMERIERE" {
     permission it.softfood.aspect.OperationPermission "selezionaUserName";
     permission it.softfood.aspect.OperationPermission "selezionaOrdinazionePerTavolo";
     permission it.softfood.aspect.OperationPermission "verificaIngredientiPietanza";
+    permission it.softfood.aspect.OperationPermission "aggiornaMagazzinoIngredienti"
+    permission it.softfood.aspect.OperationPermission "aggiornaMagazzinoBevande"
 }; 
 grant Principal it.softfood.entity.User "CASSIERE" {
     permission  it.softfood.aspect.OperationPermission "login"; 
