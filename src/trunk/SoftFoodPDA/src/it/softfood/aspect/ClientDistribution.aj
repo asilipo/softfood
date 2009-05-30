@@ -29,7 +29,7 @@ public aspect ClientDistribution {
 			System.setSecurityManager(new SecurityManager());
 		}
 		try {
-			Registry registry = LocateRegistry.getRegistry("localhost");
+			Registry registry = LocateRegistry.getRegistry("localhost" , 1099);
 			tavolofacade = (ITavoloFacade) registry.lookup("TavoloFacade");
 //			ristorantefacade = (IRistoranteFacade) registry.lookup("RistoranteFacade");
 			ordinazionefacade = (IOrdinazioneFacade) registry.lookup("OrdineFacade");

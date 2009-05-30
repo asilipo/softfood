@@ -291,3 +291,4 @@ public class Login extends javax.swing.JPanel {
 	private javax.swing.JPasswordField text;
 
 }
+
