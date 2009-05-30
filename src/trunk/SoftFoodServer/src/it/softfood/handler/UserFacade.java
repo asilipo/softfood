@@ -26,6 +26,15 @@ public class UserFacade {
 		return singleton;
 	}
 
+	public User selezionaUtente(String username, String password, Ruolo ruolo) {
+		if (username != null && password != null) {
+			User user = userSession.selezionaUtente1(username, password, ruolo.toString());
+			return user;
+		}
+		
+		return null;
+	}
+	
 	public User selezionaUtentePerUserPassword(String username, String password) {
 		if (username != null && password != null) {
 			User user = userSession.selezionaUtente(username, password);

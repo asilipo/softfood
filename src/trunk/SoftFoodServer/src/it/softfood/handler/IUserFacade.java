@@ -16,6 +16,8 @@ public interface IUserFacade extends Remote {
 
 	public User selezionaUtentePerUserPassword(String username, String password) throws RemoteException;
 
+	public User selezionaUtente(String username, String password, Ruolo ruolo) throws RemoteException;
+	
 	public User inserisciUtente(User user) throws RemoteException;
 
 	public User selezionaUserName(User user) throws RemoteException;
