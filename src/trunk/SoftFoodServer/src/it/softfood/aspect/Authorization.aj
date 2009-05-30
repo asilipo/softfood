@@ -1,6 +1,7 @@
 package it.softfood.aspect;
 
 import it.softfood.entity.User;
+import it.softfood.enumeration.Ruolo;
 import it.softfood.login.AuthorizationException;
 import it.softfood.login.LoginHandler;
 import java.security.AccessController;
@@ -32,7 +33,7 @@ public aspect Authorization {
 	}
 
 	pointcut authOperations(User user): execution(* it.softfood.handler.*.*(User,..)) &&
-	!execution(* it.softfood.handler.*.login(String,String))&&
+	!execution(* it.softfood.handler.*.login(Ruolo,String))&&
 	!execution(* it.softfood.handler.*.logout(User)) &&
 	!execution(* it.softfood.handler.*.getInstance()) &&
 	args(user,..);
@@ -40,10 +41,10 @@ public aspect Authorization {
 	@SuppressWarnings("unchecked")
 	before(User user) : authOperations(user) {
 		System.out.println("before " + user);
-		System.out.println("before " +user.getUserName());
+		//System.out.println("before " +user.getUserName());
 		LoginHandler login = LoginHandler.getInstance();
 		Hashtable hT = login.getSubjectTable();
-		if(hT.containsKey(user)) {
+		if(hT.containsKey(user.getUserName())) {
 			return;    
 		} else {
 			System.out.println("AuthorizationException");
@@ -61,7 +62,7 @@ public aspect Authorization {
 		try {
 			LoginHandler login = LoginHandler.getInstance();
 			Hashtable hT = login.getSubjectTable();
-			LoginContext lc = (LoginContext) hT.get(user);
+			LoginContext lc = (LoginContext) hT.get(user.getUserName());
 			Subject _authenticatedSubject=lc.getSubject();
 			_authenticatedSubject.getPrincipals().iterator().next();
 			return Subject.doAsPrivileged(_authenticatedSubject,
