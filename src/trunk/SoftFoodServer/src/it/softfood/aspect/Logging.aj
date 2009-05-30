@@ -37,7 +37,7 @@ public aspect Logging {
 	    
 	}
 
-	pointcut traceLogin(): 	execution(* itsoftfood.session.*.*(..));
+	pointcut traceLogin(): 	execution(* it.softfood.session.*.*(..));
 
 	before(): traceLogin() {
 		if (_logger.isEnabledFor(Level.INFO)) {
