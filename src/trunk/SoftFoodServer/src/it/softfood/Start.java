@@ -89,7 +89,7 @@ public class Start {
 		
 		ITavoloFacade tav=TavoloFacade.getInstance();
 		IOrdinazioneFacade ord=(IOrdinazioneFacade) OrdinazioneFacade.getInstance();
-		IRistoranteFacade rist=RistoranteFacade.getInstance();
+		IRistoranteFacade rist=(IRistoranteFacade) RistoranteFacade.getInstance();
 		IArticoloMenuFacade art=(IArticoloMenuFacade) ArticoloMenuFacade.getInstance();
 		IUserFacade iuser = (IUserFacade) UserFacade.getInstance();
 		

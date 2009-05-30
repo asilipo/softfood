@@ -48,7 +48,6 @@ public class User implements  Principal, java.io.Serializable {
 		this.ruolo = ruolo;
 	}
 
-	@Override
 	public String getName() {
 		return ruolo.toString();
 	}
