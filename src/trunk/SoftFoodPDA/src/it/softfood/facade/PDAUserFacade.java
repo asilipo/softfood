@@ -15,7 +15,8 @@ public class PDAUserFacade {
 	public User login(Ruolo ruolo, String password) {
 		UserFacade role = UserFacade.getInstance();
 		System.out.println(role);
-		User u = role.login(role.selezionaUserPerPassword(password).getUserName(),ruolo, password);
+		String username = role.selezionaUserPerPassword(password).getUserName();
+		User u = role.login(username,ruolo, password);
 		return u;
 	}
 	

@@ -263,7 +263,7 @@ public class Login extends javax.swing.JPanel {
 			Ordine ordine = new Ordine(u, frame);
 			frame.setComponent(ordine);
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(frame.getComponent(), "Password errata o l'utente ha già \neffettuato l'accesso!","Errore Login",JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(frame.getComponent(), "Password errata o l'utente ha gia' \neffettuato l'accesso!","Errore Login",JOptionPane.ERROR_MESSAGE);
 			this.setVisible(false);
 			Login t = new Login(frame);
 			frame.setComponent(t);
