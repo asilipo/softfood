@@ -37,11 +37,14 @@ grant Principal it.softfood.entity.User "CAMERIERE" {
     permission it.softfood.aspect.OperationPermission "verificaIngredientiPietanza";
     permission it.softfood.aspect.OperationPermission "aggiornaMagazzinoIngredienti";
     permission it.softfood.aspect.OperationPermission "aggiornaMagazzinoBevande";
+    permission it.softfood.aspect.OperationPermission "verificaDisponibilitaIngredientiPietanza";
 }; 
+
 grant Principal it.softfood.entity.User "CASSIERE" {
     permission  it.softfood.aspect.OperationPermission "login"; 
     permission  it.softfood.aspect.OperationPermission "logout";
-};  
+};
+  
 grant Principal it.softfood.entity.User "CUOCO"{
     permission  it.softfood.aspect.OperationPermission "login"; 
     permission  it.softfood.aspect.OperationPermission "logout";
@@ -49,8 +52,50 @@ grant Principal it.softfood.entity.User "CUOCO"{
     permission  it.softfood.aspect.OperationPermission "selezionaLineaOrdinazionePerId";
     permission  it.softfood.aspect.OperationPermission "selezionaVariantiPerLineaOrdinazione";
     permission  it.softfood.aspect.OperationPermission "selezionaIngredientiPietanza";
-    
-};  
+    permission  it.softfood.aspect.OperationPermission "selezionaIngredientePerNome";
+    permission  it.softfood.aspect.OperationPermission "selezionaPietanze";
+    permission  it.softfood.aspect.OperationPermission "selezionaBevande";
+    permission  it.softfood.aspect.OperationPermission "selezionaIngredienti";
+    permission  it.softfood.aspect.OperationPermission "rimuoviBevandaMenu";
+    permission  it.softfood.aspect.OperationPermission "rimuoviIngrediente";
+    permission  it.softfood.aspect.OperationPermission "rimuoviPietanzaMenu";
+    permission  it.softfood.aspect.OperationPermission "updateBevanda";
+    permission  it.softfood.aspect.OperationPermission "updateIngrediente";
+    permission  it.softfood.aspect.OperationPermission "updateBevandaMagazzino";
+    permission  it.softfood.aspect.OperationPermission "updateIndredientiPietanza";
+    permission  it.softfood.aspect.OperationPermission "updateIngredienteMagazzino";
+    permission  it.softfood.aspect.OperationPermission "updatePietanza";
+    permission  it.softfood.aspect.OperationPermission "inserisciIngredientiPietanze";
+    permission  it.softfood.aspect.OperationPermission "inserisciBevandaMenu";
+    permission  it.softfood.aspect.OperationPermission "inserisciIngredientePietanza";
+    permission  it.softfood.aspect.OperationPermission "inserisciPietanzaMenu";
+    permission  it.softfood.aspect.OperationPermission "inserisciIngrediente"; 
+    permission  it.softfood.aspect.OperationPermission "inserisciBevandaMagazzino";
+    permission  it.softfood.aspect.OperationPermission "inserisciIngredienteMagazzino"
+    permission  it.softfood.aspect.OperationPermission "inserisciPietanza";
+    permission  it.softfood.aspect.OperationPermission "inserisciBevanda";
+    permission  it.softfood.aspect.OperationPermission "inserisciIngrediente";
+    permission  it.softfood.aspect.OperationPermission "selezionaArticoloPerId";
+    permission  it.softfood.aspect.OperationPermission "selezionaMagazzinoPerId";
+    permission  it.softfood.aspect.OperationPermission "selezionaIngredientePerId";
+    permission  it.softfood.aspect.OperationPermission "inserisciIngredientePietanza";
+    permission  it.softfood.aspect.OperationPermission "selezionePietanzePerTipo";
+    permission  it.softfood.aspect.OperationPermission "verificaIngredientiPietanza";
+    permission  it.softfood.aspect.OperationPermission "selezionaPietanzaPerId";
+    permission  it.softfood.aspect.OperationPermission "selezionaBevandaPerId";
+    permission  it.softfood.aspect.OperationPermission "selezionaBevandeMagazzino";
+    permission  it.softfood.aspect.OperationPermission "selezionaIngredientiPietanze";
+    permission  it.softfood.aspect.OperationPermission "selezionaIngredientiMagazzino";
+    permission  it.softfood.aspect.OperationPermission "selezionaBevandaMagazzinoPerQuantita";
+    permission  it.softfood.aspect.OperationPermission "rimuoviIngredientePietanza";
+    permission  it.softfood.aspect.OperationPermission "rimuoviPietanza";
+    permission  it.softfood.aspect.OperationPermission "rimuoviIngredienteMagazzino";
+    permission  it.softfood.aspect.OperationPermission "selezionaBevandeMagazzinoPerId";
+    permission  it.softfood.aspect.OperationPermission "rimuoviBevandaMagazzino";
+    permission  it.softfood.aspect.OperationPermission "rimuoviBevanda";
+};
+
+  
 grant Principal it.softfood.entity.User "AMMINISTRATORE"{
   permission it.softfood.aspect.OperationPermission "login"; 
   permission it.softfood.aspect.OperationPermission "logout";
