@@ -7,6 +7,7 @@ import it.softfood.enumeration.Ruolo;
 import it.softfood.handler.IRistoranteFacade;
 import it.softfood.handler.ITavoloFacade;
 import it.softfood.handler.IUserFacade;
+import it.softfood.login.AuthorizationException;
 
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -48,7 +49,9 @@ public class TC7 extends TestCase {
 			System.err.println("Exception to obtain the reference to the remote object: " + e);
 		}
 		
-		user = userFacade.login(Ruolo.TESTER, "test", "test");
+		//user = userFacade.login(Ruolo.TESTER, "test");
+		
+		user = userFacade.login("TEST",Ruolo.TEST, "test");
 		
 		Ristorante ristorante = ristoranteFacade.selezionaRistorantePerRagioneSociale(user, "La taverna");
 		
@@ -69,11 +72,21 @@ public class TC7 extends TestCase {
 
 	@Test
 	public void testSelezionaTavolo() throws RemoteException {
-		User user = new User("cameriere 1", "1234", Ruolo.CUOCO.toString());
-		user = userFacade.login(Ruolo.CUOCO, "1234", "cameriere 1");
-		Tavolo tavoloAttuale = tavoloFacade.selezionaTavolo(user, 1000000L);
+		//User user1 = new User("cameriere 1", "1234", Ruolo.CUOCO.toString());
+		
+		User user1 = userFacade.login("cameriere 1",Ruolo.CUOCO, "1234");
+		
+		Tavolo tavoloAttuale=null;
+		try{
+//			
+			tavoloAttuale= tavoloFacade.selezionaTavolo(user1, 1000000L);
+		}catch(Exception e){
+			tavoloAttuale = null;
+		}
+		if(user1 != null)
+			userFacade.logout(user1);
+		
 		Assert.assertNull(tavoloAttuale);
-		userFacade.logout(user);
 	}
 
 }
