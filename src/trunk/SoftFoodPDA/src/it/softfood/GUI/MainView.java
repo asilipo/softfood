@@ -36,7 +36,7 @@ public class MainView extends FrameView {
 
 		mainPanel.setMaximumSize(new java.awt.Dimension(350, 490));
 		mainPanel.setMinimumSize(new java.awt.Dimension(350, 490));
-		mainPanel.setName("mainPanel"); // NOI18N
+		mainPanel.setName("mainPanel"); 
 		mainPanel.setPreferredSize(new java.awt.Dimension(350, 490));
 		mainPanel.setLayout(null);
 
@@ -82,7 +82,7 @@ public class MainView extends FrameView {
 			e.printStackTrace();
 		}
 		this.getComponent().setVisible(false);
-		Login login=new Login(this);
+		Login login = new Login(this);
 		this.disableLogout();
 		setComponent(login);
 	}
@@ -96,7 +96,7 @@ public class MainView extends FrameView {
 	}
 
 	public void setUser(User u){
-		this.u=u;
+		this.u = u;
 	}
 
 	public User getUser(){

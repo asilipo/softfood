@@ -33,8 +33,8 @@ public class Tavoli extends javax.swing.JPanel {
 
 	private void initFacade() {
 		try {
-			tavoloFacade=new PDATavoloFacade();
-			ordinazioneFacade=new PDAOrdinazioneFacade();    
+			tavoloFacade = new PDATavoloFacade();
+			ordinazioneFacade = new PDAOrdinazioneFacade();    
 		} catch (NullPointerException ex) {
 			System.err.println("Errore null pointer");
 		}
@@ -250,7 +250,6 @@ public class Tavoli extends javax.swing.JPanel {
 
 	private void addActionPerformed(java.awt.event.ActionEvent evt) {
 		Ok.setEnabled(true);
-
 		int dim = 20;
 		String[] posti = new String[dim];
 		String riferimento = (String) jComboBox1.getSelectedItem();

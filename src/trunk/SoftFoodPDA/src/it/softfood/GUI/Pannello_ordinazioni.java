@@ -230,13 +230,13 @@ public class Pannello_ordinazioni extends javax.swing.JPanel {
 		pannello_ordini.setLayout(new java.awt.BorderLayout(5, 5));
 
 		jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-		jLabel1.setText(resourceMap.getString("label_ordini.text")); // NOI18N
+		jLabel1.setText(resourceMap.getString("label_ordini.text")); 
 		jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-		jLabel1.setName("label_ordini"); // NOI18N
+		jLabel1.setName("label_ordini"); 
 		jLabel1.setPreferredSize(new java.awt.Dimension(225, 13));
 		pannello_ordini.add(jLabel1, java.awt.BorderLayout.PAGE_START);
 
-		jScrollPane2.setName("jScrollPane2"); // NOI18N
+		jScrollPane2.setName("jScrollPane2"); 
 		jScrollPane2.setPreferredSize(new java.awt.Dimension(100, 200));
 
 		tabella_ordini.setModel(new javax.swing.table.DefaultTableModel(
@@ -330,7 +330,7 @@ public class Pannello_ordinazioni extends javax.swing.JPanel {
 		long id_long = ((Long) tabella_pietanza.getValueAt(tabella_pietanza.getSelectedRow(), 0)).longValue();
 		id_antipasto.setColumnVisible(id, false);
 		this.setVisible(false);
-		it.softfood.GUI.Pietanza pietanza = new it.softfood.GUI.Pietanza(role,frame, tavolo, id_long, tipo);
+		it.softfood.GUI.Pietanza pietanza = new it.softfood.GUI.Pietanza(role, frame, tavolo, id_long, tipo);
 		frame.setComponent(pietanza);
 	}
 
@@ -346,10 +346,10 @@ public class Pannello_ordinazioni extends javax.swing.JPanel {
 		linea_ordine.setColumnVisible(id_ordini, true);
 		Long id = (Long) tabella_ordini.getValueAt(tabella_ordini.getSelectedRow(),0);
 
-		ordinazioneFacade.rimuoviLineaOrdinazione(role,id);
+		ordinazioneFacade.rimuoviLineaOrdinazione(role, id);
 		linea_ordine.setColumnVisible(id_ordini, false);
 		this.setVisible(false);
-		Pannello_ordinazioni pannello=new Pannello_ordinazioni(role,frame, tavolo, tipo);
+		Pannello_ordinazioni pannello = new Pannello_ordinazioni(role,frame, tavolo, tipo);
 		frame.setComponent(pannello);
 	}
 
