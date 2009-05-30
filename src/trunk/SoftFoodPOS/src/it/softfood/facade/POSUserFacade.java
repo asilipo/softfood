@@ -14,7 +14,7 @@ public class POSUserFacade {
 	
 	public User login(Ruolo ruolo, String password) {
 		UserFacade role = UserFacade.getInstance();
-		User u = role.login(role.selezionaUserPerPassword(password).getUserName(),ruolo, password);
+		User u = role.login(ruolo, password);
 		return u;
 	}
 	
