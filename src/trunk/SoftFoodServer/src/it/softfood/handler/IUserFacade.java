@@ -30,6 +30,8 @@ public interface IUserFacade extends Remote {
 	
 	public User login(Ruolo ruolo, String password) throws RemoteException;
 	
-	public void logout(User user)throws RemoteException;
+	public User loginUser(User user) throws RemoteException;
+	
+	public void logout(User user) throws RemoteException;
 
 }

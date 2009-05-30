@@ -21,10 +21,8 @@ public class UserFacade {
 
 	public synchronized static UserFacade getInstance() {
 		if (singleton == null) {
-			System.out.println("sss");
 			singleton = new UserFacade();
 		}
-		System.out.println("sssqq");
 		return singleton;
 	}
 
@@ -106,10 +104,29 @@ public class UserFacade {
 
 		return null;
 	}
+	
+	public User loginUser(User user) {
+		try {
+			if (user != null && user.getName() != null && user.getPassword() != null 
+					&& user.getRuolo() != null && !user.getPassword().equals(" ") &&
+						!user.getName().equals(" ")) {				
+				LoginHandler l = LoginHandler.getInstance();
+				user = l.login(user.getName(), user.getPassword());
+
+				return user;
+			}
+		} catch (Exception e) {
+			return null;
+		}
+
+		return null;
+	}
 
 	public void logout(User user) {
-		if (user != null)
-			LoginHandler.getInstance().logout(user);
+		if (user != null) {
+			LoginHandler l = LoginHandler.getInstance();
+			l.logout(user);
+		}
 		return;
 	}
 
