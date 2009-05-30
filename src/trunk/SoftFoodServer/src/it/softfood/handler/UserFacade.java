@@ -21,16 +21,16 @@ public class UserFacade {
 
 	public synchronized static UserFacade getInstance() {
 		if (singleton == null) {
+			System.out.println("sss");
 			singleton = new UserFacade();
 		}
-
+		System.out.println("sssqq");
 		return singleton;
 	}
 
 	public User selezionaUtente(String username, String password, Ruolo ruolo) {
 		if (username != null && password != null) {
-			User user = userSession.selezionaUtente1(username, password, ruolo
-					.toString());
+			User user = userSession.selezionaUtente1(username, password, ruolo.toString());
 			return user;
 		}
 
@@ -89,28 +89,14 @@ public class UserFacade {
 		return false;
 	}
 
-	public User selezionaUserPerPassword(String password) {
-		if (password != null)
-			return userSession.selezionaUserPerPassword(password);
-
-		return null;
-
-	}
-
-	public User login(String username, Ruolo ruolo, String password) {
+	public User login(Ruolo ruolo, String password) {
 		try {
-			System.out.println(username);
-			System.out.println(ruolo);
-			System.out.println(password);
-			if (ruolo != null && password != null && !password.equals(" ") &&
-					username != null && !username.equals("")) {
-				UserSession userSession = UserSession.getInstance();
-				User u = userSession.selezionaUtente1(username, password, ruolo
-						.toString());
-
-				String userName = u.getUserName();
+			if (ruolo != null && password != null && !password.equals(" ")) {
+				User user = userSession.selezionaUserPerPassword(password);
+				String userName = user.getUserName();
+				
 				LoginHandler l = LoginHandler.getInstance();
-				User user = l.login(userName, password);
+				user = l.login(userName, password);
 
 				return user;
 			}
