@@ -1,7 +1,6 @@
 package it.softfood.login;
 
 import it.softfood.entity.User;
-import it.softfood.handler.UserFacade;
 import it.softfood.util.XmlReader;
 
 import java.util.Enumeration;
@@ -77,15 +76,13 @@ public class LoginHandler {
 
 	@SuppressWarnings("unchecked")
 	private User check(User user) {
-		UserFacade ufacade = UserFacade.getInstance();
 		String user_name = user.getUserName();
-		String pass=user.getPassword();
 		Enumeration e = subjectTable.keys();
 		String u;
 		while (e.hasMoreElements()) {
 			u = (String) e.nextElement();
 			if (u.equals(user_name))
-				return ufacade.selezionaUserName(new User(u,pass,user.getRuolo()));
+				return user;
 		}
 		return null;
 	}
