@@ -7,6 +7,10 @@ import java.rmi.registry.Registry;
 
 import it.softfood.entity.User;
 import it.softfood.enumeration.Ruolo;
+import it.softfood.facade.PDAArticoloMenuFacade;
+import it.softfood.facade.PDAOrdinazioneFacade;
+import it.softfood.facade.PDATavoloFacade;
+import it.softfood.facade.PDAUserFacade;
 import it.softfood.handler.IUserFacade;
 import it.softfood.handler.UserFacade;
 
@@ -18,16 +22,25 @@ public class Start {
 	 * @throws NotBoundException 
 	 */
 	public static void main(String[] args) throws RemoteException, NotBoundException {
-		System.setProperty("java.security.policy", "polis.policy");
-		if (System.getSecurityManager() == null) {
-			System.setSecurityManager(new SecurityManager());
-		}
-		// TODO Auto-generated method stub
-		Registry registry = LocateRegistry.getRegistry("localhost");
-		IUserFacade userfacade = (IUserFacade) registry.lookup("UserFacade");
-		UserFacade role = UserFacade.getInstance();
-		//User u = role.login(role.selezionaUserPerPassword("1234").getUserName(),Ruolo.CAMERIERE, "1234");
-		//System.out.println(u);
+		PDATavoloFacade pda = new PDATavoloFacade();
+        PDAOrdinazioneFacade pdaOrd=new PDAOrdinazioneFacade();
+        PDAArticoloMenuFacade articolo = new PDAArticoloMenuFacade();
+        PDAUserFacade user=new PDAUserFacade();
+//      Tavolo tav=pda.selezionaTavolo(new Long(0));
+//      Ordinazione ordine = pdaOrd.selezionaOrdinazioneGiornalieraPerTavolo(tav.getRiferimento(), new Boolean("false"));
+//
+//      System.out.println("TERMINATO OK! "+ordine.getId());
+
+//      ArrayList<Pietanza> array= articolo.selezionaPietanzeDisponibiliPerTipo(TipoPietanza.DOLCE);
+
+//      System.out.println(array.size());
+
+        User u=user.login(Ruolo.CAMERIERE, "1234");
+
+        pda.selezionaTavoliLiberi(u);
+        System.out.println();
+
+        user.logout(u);
 	}
 
 }
