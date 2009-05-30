@@ -3,8 +3,6 @@ package it.softfood.aspect;
 import it.softfood.entity.User;
 import it.softfood.login.AuthorizationException;
 import it.softfood.login.LoginHandler;
-import it.softfood.util.XmlReader;
-
 import java.security.AccessController;
 import java.security.Permission;
 import java.security.PrivilegedActionException;
@@ -24,7 +22,7 @@ import org.aspectj.lang.JoinPoint;
 
 public aspect Authorization {
 
-	private String xmlparameter = "InitialConfiguration.xml";
+//	private String xmlparameter = "InitialConfiguration.xml";
 
 	public Authorization() throws Exception {
 		System.out.println("Authorization ");
