@@ -1,37 +1,23 @@
 package it.softfood.test.articolofacade.selezionaingredientepernome;
 
 import it.softfood.entity.Ingrediente;
-import it.softfood.entity.Ristorante;
-import it.softfood.entity.Tavolo;
 import it.softfood.entity.User;
 import it.softfood.enumeration.Ruolo;
 import it.softfood.handler.IArticoloMenuFacade;
-import it.softfood.handler.IRistoranteFacade;
-import it.softfood.handler.ITavoloFacade;
 import it.softfood.handler.IUserFacade;
-import it.softfood.login.AuthorizationException;
 
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.Date;
 
-
 import junit.framework.Assert;
-import junit.framework.TestCase;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-/**
- * @author Maria Rosaria Paone
- * @author Marco Grasso
- * @author Francesco Pacilio
- */
-
-public class TC1 extends TestCase {
-	
+public class TC10 {
 	private IArticoloMenuFacade articoloFacade;
 	private IUserFacade userFacade;
 	private User user;
@@ -75,20 +61,18 @@ public class TC1 extends TestCase {
 
 	@Test
 	public void testSelezionaIngredientePerNome() throws RemoteException {
-		
 		User user1 = userFacade.login(Ruolo.CAMERIERE, "1234");
 		user1.setUserName("cameriere 1");
 		
 		Ingrediente ingredienteAttuale=null;
 		try{			
-			ingredienteAttuale= articoloFacade.selezionaIngredientePerNome(user1, "Ingrediente di Test");
+			ingredienteAttuale= articoloFacade.selezionaIngredientePerNome(user1,null);
 		}catch(Exception e){
 			ingredienteAttuale = null;
 		}
 		if(user1 != null)
 			userFacade.logout(user1);
 		//dovrebbe essere non nullo
-		Assert.assertNotNull(ingredienteAttuale);
+		Assert.assertNull(ingredienteAttuale);
 	}
-
 }
