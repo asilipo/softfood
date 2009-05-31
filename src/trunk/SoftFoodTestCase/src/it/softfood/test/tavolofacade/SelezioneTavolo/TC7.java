@@ -51,7 +51,7 @@ public class TC7 extends TestCase {
 		
 		//user = userFacade.login(Ruolo.TESTER, "test");
 		
-		user = userFacade.login(Ruolo.TEST, "test");
+		user = userFacade.login(Ruolo.TEST, "test");//da togliere
 		
 		Ristorante ristorante = ristoranteFacade.selezionaRistorantePerRagioneSociale(user, "La taverna");
 		
@@ -67,7 +67,7 @@ public class TC7 extends TestCase {
 	@After
 	public void tearDown() throws Exception {
 		tavoloFacade.rimuoviTavolo(user, 1000000L);
-		userFacade.logout(user);
+		userFacade.logout(user); //da togliere
 	}
 
 	@Test
