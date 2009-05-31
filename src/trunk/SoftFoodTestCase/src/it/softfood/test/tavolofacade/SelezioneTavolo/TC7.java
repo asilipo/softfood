@@ -12,6 +12,7 @@ import it.softfood.login.AuthorizationException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.security.AccessControlException;
 
 import junit.framework.Assert;
 import junit.framework.TestCase;
@@ -74,16 +75,16 @@ public class TC7 extends TestCase {
 	public void testSelezionaTavolo() throws RemoteException {
 		//User user1 = new User("cameriere 1", "1234", Ruolo.CUOCO.toString());
 		
-		User user1 = userFacade.login(Ruolo.CUOCO, "1234");
+		User user1 = userFacade.login(Ruolo.CUOCO, "12345");
 		
 		Tavolo tavoloAttuale=null;
 		try{
 //			
 			tavoloAttuale= tavoloFacade.selezionaTavolo(user1, 1000000L);
-		}catch(Exception e){
+		}catch(AccessControlException e){
 			tavoloAttuale = null;
 		}
-		if(user1 != null)
+//		if(user1 != null)
 			userFacade.logout(user1);
 		
 		Assert.assertNull(tavoloAttuale);
