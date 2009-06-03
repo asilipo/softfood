@@ -9,6 +9,7 @@ import it.softfood.handler.IUserFacade;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.security.AccessControlException;
 import java.util.Date;
 
 import junit.framework.Assert;
@@ -46,7 +47,7 @@ public class TC9 {
 		ingrediente.setId(10000L);
 		ingrediente.setNome("Ingrediente di Test");
 		ingrediente.setTipoIngrediente("IngredienteLungaConservazione");
-		ingrediente.setScadenza(new Date("2009-09-26"));
+		ingrediente.setScadenza(new Date(109,1,21));
 		ingrediente.setUnitaMisura("g");
 		ingrediente.setVariante(true);
 
@@ -62,12 +63,12 @@ public class TC9 {
 	@Test
 	public void testSelezionaIngredientePerNome() throws RemoteException {
 		User user1 = userFacade.login(Ruolo.CASSIERE, "1234");
-		user1.setUserName("cameriere 1");
+		//user1.setUserName("cameriere 1");
 		
-		Ingrediente ingredienteAttuale=null;
+		Ingrediente ingredienteAttuale = null;
 		try{			
 			ingredienteAttuale= articoloFacade.selezionaIngredientePerNome(user1, "Ingrediente di Test");
-		}catch(Exception e){
+		}catch(AccessControlException e){
 			ingredienteAttuale = null;
 		}
 		if(user1 != null)

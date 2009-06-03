@@ -46,7 +46,7 @@ public class TC4 {
 		ingrediente.setId(10000L);
 		ingrediente.setNome("Ingrediente di Test");
 		ingrediente.setTipoIngrediente("IngredienteLungaConservazione");
-		ingrediente.setScadenza(new Date("2009-09-26"));
+		ingrediente.setScadenza(new Date(109,1,21));
 		ingrediente.setUnitaMisura("g");
 		ingrediente.setVariante(true);
 
@@ -62,7 +62,7 @@ public class TC4 {
 	@Test
 	public void testSelezionaIngredientePerNome() throws RemoteException {
 		User user1 = userFacade.login(Ruolo.CAMERIERE, null);
-		user1.setUserName("cameriere 1");
+		//user1.setUserName("cameriere 1");
 		
 		Ingrediente ingredienteAttuale=null;
 		try{			

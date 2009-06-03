@@ -14,6 +14,7 @@ import it.softfood.login.AuthorizationException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.security.AccessControlException;
 import java.util.Date;
 
 
@@ -48,7 +49,7 @@ public class TC1 extends TestCase {
 			articoloFacade = (IArticoloMenuFacade) registry.lookup("ArticoloFacade"); //CONTROLLARE
 			//ristoranteFacade = (IRistoranteFacade) registry.lookup("RistoranteFacade");
 			userFacade = (IUserFacade) registry.lookup("UserFacade");
-		} catch (Exception e) {
+		} catch (AccessControlException e) {
 			System.err.println("Exception to obtain the reference to the remote object: " + e);
 		}
 		
@@ -60,7 +61,7 @@ public class TC1 extends TestCase {
 		ingrediente.setId(10000L);
 		ingrediente.setNome("Ingrediente di Test");
 		ingrediente.setTipoIngrediente("IngredienteLungaConservazione");
-		ingrediente.setScadenza(new Date("2009-09-26"));
+		ingrediente.setScadenza(new Date(109,1,21));
 		ingrediente.setUnitaMisura("g");
 		ingrediente.setVariante(true);
 
@@ -77,7 +78,7 @@ public class TC1 extends TestCase {
 	public void testSelezionaIngredientePerNome() throws RemoteException {
 		
 		User user1 = userFacade.login(Ruolo.CAMERIERE, "1234");
-		user1.setUserName("cameriere 1");
+		//user1.setUserName("cameriere 1");
 		
 		Ingrediente ingredienteAttuale=null;
 		try{			
