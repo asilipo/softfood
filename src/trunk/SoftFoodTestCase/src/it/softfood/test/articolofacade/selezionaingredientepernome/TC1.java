@@ -88,7 +88,6 @@ public class TC1 extends TestCase {
 		}
 		if(user1 != null)
 			userFacade.logout(user1);
-		//dovrebbe essere non nullo
 		Assert.assertNotNull(ingredienteAttuale);
 	}
 

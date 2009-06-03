@@ -62,18 +62,18 @@ public class TC3 {
 
 	@Test
 	public void testSelezionaIngredientePerNome() throws RemoteException {
-		User user1 = userFacade.login(Ruolo.CAMERIERE, "1234");
-		user1.setUserName("");
+		User user1 = userFacade.login(Ruolo.CASSIERE, "12345");
 		
 		Ingrediente ingredienteAttuale=null;
 		try{			
-			ingredienteAttuale= articoloFacade.selezionaIngredientePerNome(user1, "Ingrediente di Test");
-		}catch(Exception e){
+			ingredienteAttuale= articoloFacade.selezionaIngredientePerNome(user1,"Ingrediente di Test");
+			System.out.println(ingredienteAttuale);
+		}catch(AccessControlException e){
+			System.out.println(e);
 			ingredienteAttuale = null;
 		}
 		if(user1 != null)
 			userFacade.logout(user1);
-		//dovrebbe essere non nullo
 		Assert.assertNull(ingredienteAttuale);
 	}
 
