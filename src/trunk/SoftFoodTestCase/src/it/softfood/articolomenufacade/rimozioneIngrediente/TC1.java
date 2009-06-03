@@ -56,7 +56,7 @@ public class TC1 {
 
 	@After
 	public void tearDown() throws Exception {
-		articoloFacade.rimuoviIngrediente(user, 1000000L);
+		articoloFacade.rimuoviIngrediente(user, ingrediente.getId());
 		userFacade.logout(user); //da togliere
 	}
 
