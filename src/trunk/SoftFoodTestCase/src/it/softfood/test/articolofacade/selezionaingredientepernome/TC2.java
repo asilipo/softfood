@@ -19,7 +19,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class TC2 {
-
 	private IArticoloMenuFacade articoloFacade;
 	private IUserFacade userFacade;
 	private User user;
@@ -63,18 +62,16 @@ public class TC2 {
 
 	@Test
 	public void testSelezionaIngredientePerNome() throws RemoteException {
-		User user1 = userFacade.login(Ruolo.CAMERIERE, "1234");
-		user1.setUserName(null);
+		User user1 = userFacade.login(Ruolo.AMMINISTRATORE, "123456");
 		
 		Ingrediente ingredienteAttuale=null;
 		try{			
-			ingredienteAttuale= articoloFacade.selezionaIngredientePerNome(user1, "Ingrediente di Test");
-		}catch(Exception e){
+			ingredienteAttuale= articoloFacade.selezionaIngredientePerNome(user1,"Ingrediente di Test");
+		}catch(AccessControlException e){
 			ingredienteAttuale = null;
 		}
 		if(user1 != null)
 			userFacade.logout(user1);
-		//dovrebbe essere non nullo
 		Assert.assertNull(ingredienteAttuale);
 	}
 }
