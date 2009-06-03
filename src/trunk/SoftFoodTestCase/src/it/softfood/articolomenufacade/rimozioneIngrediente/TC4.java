@@ -56,20 +56,20 @@ public class TC4 {
 
 	@After
 	public void tearDown() throws Exception {
-		articoloFacade.rimuoviIngrediente(user, 1000000L);
+		articoloFacade.rimuoviIngrediente(user, ingrediente.getId());
 		userFacade.logout(user); //da togliere
 	}
 
 	@Test
 	public void testRimozioneIngrediente() throws RemoteException {
 		
-		User user1 = userFacade.login(Ruolo.CUOCO, null);
-	//	user1.setUserName("cuoco");
+		User user1 = userFacade.login(Ruolo.CASSIERE, "12345");
+
 		
 		boolean ingredienteAttuale = false;
 		try{	
 			ingredienteAttuale = articoloFacade.rimuoviIngrediente(user1, ingrediente.getId());
-		}catch(Exception e){
+		}catch(AccessControlException e){
 			ingredienteAttuale = false;
 		}
 	
