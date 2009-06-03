@@ -46,7 +46,7 @@ public class TC1 {
 		ingrediente.setId(1000000L);
 		ingrediente.setNome("Ingrediente di Test");
 		ingrediente.setTipoIngrediente("IngredienteLungaConservazione");
-		ingrediente.setScadenza(new Date("2009-09-26"));
+		ingrediente.setScadenza(new Date(109,1,21));
 		ingrediente.setUnitaMisura("g");
 		ingrediente.setVariante(true);
 
@@ -64,12 +64,11 @@ public class TC1 {
 	public void testSelezionaIngredientePerNome() throws RemoteException {
 		
 		User user1 = userFacade.login(Ruolo.CAMERIERE, "1234");
-		user1.setUserName("cameriere 1");
-		long id = 1000000L;
+		
 		
 		ArrayList<Ingrediente> ingredienti = null;
 		try{			
-			ingredienti = articoloFacade.selezionaIngredientiPietanza(user1, id);
+			ingredienti = articoloFacade.selezionaIngredientiPietanza(user1, ingrediente.getId());
 		}catch(Exception e){
 			ingredienti = null;
 		}
