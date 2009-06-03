@@ -60,6 +60,7 @@ public class TC2 {
 		try{			
 			listaIngrediente = articoloFacade.selezionaIngredienti(user1);
 		}catch(Exception e){
+			
 			listaIngrediente = null;
 		}
 		System.out.println(listaIngrediente);
