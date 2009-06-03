@@ -41,12 +41,22 @@ public class TC1 {
 		
 		user = userFacade.login(Ruolo.TEST, "test");//da togliere
 		
-		//Ristorante ristorante = ristoranteFacade.selezionaRistorantePerRagioneSociale(user, "La taverna");
+		ingrediente = new Ingrediente();
+		ingrediente.setDescrizione("Ingrediente di test");
+		ingrediente.setId(1000000L);
+		ingrediente.setNome("Ingrediente di Test");
+		ingrediente.setTipoIngrediente("IngredienteLungaConservazione");
+		ingrediente.setScadenza(new Date("2009-09-26"));
+		ingrediente.setUnitaMisura("g");
+		ingrediente.setVariante(true);
+
+		ingrediente = articoloFacade.inserisciIngrediente(user, ingrediente);
 	
 	}
 
 	@After
 	public void tearDown() throws Exception {
+		articoloFacade.rimuoviIngrediente(user, (long) 1000000L);
 		userFacade.logout(user); //da togliere
 	}
 
