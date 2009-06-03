@@ -52,7 +52,7 @@ public class TC4 {
 	@Test
 	public void testSelezionaIngredientePerNome() throws RemoteException {
 		
-		User user1 = userFacade.login(Ruolo.CASSIERE, "4321");
+		User user1 = userFacade.login(Ruolo.CASSIERE, "12345");
 		//user1.setUserName("cameriere 1");
 		
 		
@@ -66,7 +66,7 @@ public class TC4 {
 		if(user1 != null)
 			userFacade.logout(user1);
 		//dovrebbe essere non nullo
-		Assert.assertNotNull(listaIngrediente);
+		Assert.assertNull(listaIngrediente);
 	}
 
 }

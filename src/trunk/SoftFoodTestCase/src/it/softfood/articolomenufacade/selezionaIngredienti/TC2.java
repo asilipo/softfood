@@ -52,7 +52,7 @@ public class TC2 {
 	@Test
 	public void testSelezionaIngredientePerNome() throws RemoteException {
 		
-		User user1 = userFacade.login(Ruolo.CAMERIERE, "4321");
+		User user1 = userFacade.login(Ruolo.CAMERIERE, "1234");
 		//user1.setUserName("cameriere 1");
 		
 		
