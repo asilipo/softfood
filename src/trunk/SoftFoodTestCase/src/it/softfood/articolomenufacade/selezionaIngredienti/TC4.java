@@ -18,7 +18,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-public class TC2 {
+public class TC4 {
 	private IArticoloMenuFacade articoloFacade;
 	private IUserFacade userFacade;
 	private User user;
@@ -52,7 +52,7 @@ public class TC2 {
 	@Test
 	public void testSelezionaIngredientePerNome() throws RemoteException {
 		
-		User user1 = userFacade.login(Ruolo.CAMERIERE, "4321");
+		User user1 = userFacade.login(Ruolo.CASSIERE, "4321");
 		//user1.setUserName("cameriere 1");
 		
 		
@@ -66,7 +66,7 @@ public class TC2 {
 		if(user1 != null)
 			userFacade.logout(user1);
 		//dovrebbe essere non nullo
-		Assert.assertNull(listaIngrediente);
+		Assert.assertNotNull(listaIngrediente);
 	}
 
 }
