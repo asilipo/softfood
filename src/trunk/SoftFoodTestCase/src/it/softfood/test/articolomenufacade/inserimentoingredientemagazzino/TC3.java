@@ -1,4 +1,4 @@
-package it.softfood.articolomenufacade.inserimentoIngredienteMagazzino;
+package it.softfood.test.articolomenufacade.inserimentoingredientemagazzino;
 
 import it.softfood.entity.Ingrediente;
 import it.softfood.entity.IngredienteMagazzino;

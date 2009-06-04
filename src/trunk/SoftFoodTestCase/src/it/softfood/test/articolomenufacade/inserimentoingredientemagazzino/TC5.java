@@ -1,4 +1,4 @@
-package it.softfood.articolomenufacade.inserimentoIngredienteMagazzino;
+package it.softfood.test.articolomenufacade.inserimentoingredientemagazzino;
 
 import it.softfood.entity.Ingrediente;
 import it.softfood.entity.IngredienteMagazzino;
@@ -13,12 +13,20 @@ import java.rmi.registry.Registry;
 import java.security.AccessControlException;
 
 import junit.framework.Assert;
+import junit.framework.TestCase;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-public class TC5 {
+/**
+ * @author Maria Rosaria Paone
+ * @author Marco Grasso
+ * @author Francesco Pacilio
+ */
+
+public class TC5 extends TestCase {
+	
 	private IArticoloMenuFacade articoloFacade;
 	private IUserFacade userFacade;
 	private User user;
