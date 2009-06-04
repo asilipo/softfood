@@ -14,12 +14,20 @@ import java.security.AccessControlException;
 import java.util.ArrayList;
 
 import junit.framework.Assert;
+import junit.framework.TestCase;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-public class TC3 {
+/**
+ * @author Maria Rosaria Paone
+ * @author Marco Grasso
+ * @author Francesco Pacilio
+ */
+
+public class TC3 extends TestCase {
+	
 	private IOrdinazioneFacade ordinazioneFacade;
 	private IUserFacade userFacade;
 	private User user;
