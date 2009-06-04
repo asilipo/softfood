@@ -49,7 +49,7 @@ public class TC2 extends TestCase {
 			System.err.println("Exception to obtain the reference to the remote object: " + e);
 		}
 		
-		user = userFacade.login(Ruolo.TESTER, "test", "test");
+		user = userFacade.login(Ruolo.TEST, "test");
 		
 		Ristorante ristorante = ristoranteFacade.selezionaRistorantePerRagioneSociale(user, "La taverna");
 		
@@ -80,7 +80,7 @@ public class TC2 extends TestCase {
 	@Test
 	public void testSelezionaTavoliLiberi() throws RemoteException {
 		User user = new User(null, "1234", Ruolo.CAMERIERE.toString());	
-		user = userFacade.login(Ruolo.CAMERIERE, "1234", null);
+		user = userFacade.login(Ruolo.CAMERIERE, "1234");
 		try {
 			tavoloFacade.selezionaTavoliLiberi(user);
 			
