@@ -28,7 +28,7 @@ import org.junit.Test;
  * @author Francesco Pacilio
  */
 
-public class TC4 extends TestCase {
+public class TC23 extends TestCase {
 	
 	private IOrdinazioneFacade ordinazioneFacade;
 	private IUserFacade userFacade;
@@ -80,7 +80,7 @@ public class TC4 extends TestCase {
 	@Test
 	public void testSelezioneOrdinazionePerTavolo() throws RemoteException {
 		
-		User user1 = userFacade.login(Ruolo.CASSIERE, "12345");
+		User user1 = userFacade.login(Ruolo.CAMERIERE, "1234");
 	//	user1.setUserName("cuoco");
 		
 		Ordinazione ordinazioneAttuale = null;
@@ -95,6 +95,6 @@ public class TC4 extends TestCase {
 		if(user1 != null)
 			userFacade.logout(user1);
 		
-		Assert.assertNull(ordinazioneAttuale);
+		Assert.assertNotNull(ordinazioneAttuale);
 	}
 }

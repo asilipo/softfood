@@ -1,4 +1,4 @@
-package it.softfood.ordinazioneFacade.selezioneOrdinazionePerTavolo;
+package it.softfood.test.ordinazionefacade.selezioneordinazionepertavolo;
 
 import it.softfood.entity.Ordinazione;
 import it.softfood.entity.Tavolo;
@@ -16,12 +16,20 @@ import java.util.Date;
 import java.util.List;
 
 import junit.framework.Assert;
+import junit.framework.TestCase;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-public class TC5 {
+/**
+ * @author Maria Rosaria Paone
+ * @author Marco Grasso
+ * @author Francesco Pacilio
+ */
+
+public class TC5 extends TestCase {
+	
 	private IOrdinazioneFacade ordinazioneFacade;
 	private IUserFacade userFacade;
 	private User user;
