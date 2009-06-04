@@ -1,6 +1,6 @@
-package it.sodtfood.test.ristorantefacade.rimozioneristorante;
+package it.softfood.test.ristorantefacade.rimozioneristorante;
 
-import static org.junit.Assert.*;
+import junit.framework.TestCase;
 
 import org.junit.After;
 import org.junit.Before;
@@ -12,7 +12,7 @@ import org.junit.Test;
  * @author Francesco Pacilio
  */
 
-public class TC4 {
+public class TC4 extends TestCase {
 
 	@Before
 	public void setUp() throws Exception {
