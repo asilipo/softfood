@@ -25,7 +25,7 @@ import org.junit.Test;
  * @author Francesco Pacilio
  */
 
-public class TC1 extends TestCase {
+public class TC3 extends TestCase {
 	
 	private IArticoloMenuFacade articoloFacade;
 	private IUserFacade userFacade;
