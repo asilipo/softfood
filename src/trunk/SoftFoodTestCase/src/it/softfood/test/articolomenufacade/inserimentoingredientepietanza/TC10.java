@@ -12,7 +12,7 @@ import org.junit.Test;
  * @author Francesco Pacilio
  */
 
-public class TC1 extends TestCase {
+public class TC10 extends TestCase {
 
 	@Before
 	public void setUp() throws Exception {
