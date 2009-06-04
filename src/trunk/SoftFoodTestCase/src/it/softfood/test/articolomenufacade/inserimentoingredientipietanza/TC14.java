@@ -1,4 +1,4 @@
-package it.softfood.test.articolomenufacade.inserimentoingredientepietanza;
+package it.softfood.test.articolomenufacade.inserimentoingredientipietanza;
 
 import junit.framework.TestCase;
 
@@ -12,7 +12,7 @@ import org.junit.Test;
  * @author Francesco Pacilio
  */
 
-public class TC4 extends TestCase {
+public class TC14 extends TestCase {
 
 	@Before
 	public void setUp() throws Exception {
@@ -23,7 +23,7 @@ public class TC4 extends TestCase {
 	}
 
 	@Test
-	public void testInserisciIngredientePietanza() {
+	public void testInserisciIngredientiPietanze() {
 		fail("Not yet implemented");
 	}
 

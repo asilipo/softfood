@@ -23,7 +23,7 @@ public class TC3 extends TestCase {
 	}
 
 	@Test
-	public void testInserisciIngredientiPietanze() {
+	public void testInserisciIngredientePietanza() {
 		fail("Not yet implemented");
 	}
 

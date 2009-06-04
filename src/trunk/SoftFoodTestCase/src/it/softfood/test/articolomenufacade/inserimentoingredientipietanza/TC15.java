@@ -1,4 +1,4 @@
-package it.softfood.test.articolomenufacade.inserimentoingredientepietanza;
+package it.softfood.test.articolomenufacade.inserimentoingredientipietanza;
 
 import junit.framework.TestCase;
 
