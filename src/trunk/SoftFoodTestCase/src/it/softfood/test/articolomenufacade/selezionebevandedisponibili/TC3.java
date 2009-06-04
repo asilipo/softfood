@@ -1,12 +1,18 @@
 package it.softfood.test.articolomenufacade.selezionebevandedisponibili;
 
-import static org.junit.Assert.*;
+import junit.framework.TestCase;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-public class TC3 {
+/**
+ * @author Maria Rosaria Paone
+ * @author Marco Grasso
+ * @author Francesco Pacilio
+ */
+
+public class TC3 extends TestCase {
 
 	@Before
 	public void setUp() throws Exception {
