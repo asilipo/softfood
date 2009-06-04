@@ -43,7 +43,7 @@ public class TC1 {
 			System.err.println("Exception to obtain the reference to the remote object: " + e);
 		}
 		
-		user = userFacade.login(Ruolo.TESTER, "test", "test");
+		user = userFacade.login(Ruolo.TEST, "test");
 	}
 
 	@After
@@ -60,7 +60,7 @@ public class TC1 {
 		pietanza.setTipoArticolo("Pietanza");
 		
 		
-		User user = userFacade.login(Ruolo.AMMINISTRATORE, "123456", "amministratore");
+		User user = userFacade.login(Ruolo.AMMINISTRATORE, "123456");
 		Pietanza pietanzaAttuale = articoloMenuFacade.inserisciPietanzaMenu(user, pietanza);
 		Assert.assertTrue(pietanza.equals(pietanzaAttuale));
 	}
