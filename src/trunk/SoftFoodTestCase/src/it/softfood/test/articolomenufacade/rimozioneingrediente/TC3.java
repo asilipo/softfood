@@ -1,4 +1,4 @@
-package it.softfood.articolomenufacade.rimozioneIngrediente;
+package it.softfood.test.articolomenufacade.rimozioneingrediente;
 
 import it.softfood.entity.Ingrediente;
 import it.softfood.entity.User;
@@ -13,12 +13,14 @@ import java.security.AccessControlException;
 import java.util.Date;
 
 import junit.framework.Assert;
+import junit.framework.TestCase;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-public class TC3 {
+public class TC3 extends TestCase {
+	
 	private IArticoloMenuFacade articoloFacade;
 	private IUserFacade userFacade;
 	private User user;
