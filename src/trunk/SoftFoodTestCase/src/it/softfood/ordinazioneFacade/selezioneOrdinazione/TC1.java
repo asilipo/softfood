@@ -29,6 +29,7 @@ public class TC1 {
 	private User user;
 	private ITavoloFacade tavoloFacade;
 	private long id;
+	private Ordinazione ordinazione;
 
 	@Before
 	public void setUp() throws Exception {
@@ -47,7 +48,7 @@ public class TC1 {
 		}
 		
 		user = userFacade.login(Ruolo.TEST, "test");
-		Ordinazione ordinazione = new Ordinazione();
+		ordinazione = new Ordinazione();
 		ordinazione.setData(new Date(109,1,21));
 		ordinazione.setId( (long)1000000 );
 		ordinazione.setCoperti(4);
@@ -58,11 +59,14 @@ public class TC1 {
 		ordinazione.setId(id);
 		ordinazione.setTerminato(false);
 		
+		ordinazioneFacade.inserisciOrdinazione(user, ordinazione);
+		
 		}
 
 	@After
 	public void tearDown() throws Exception {
 		//tavoloFacade.rimuoviTavolo(user, id);
+		ordinazioneFacade.rimuoviOrdinazione(user, ordinazione.getId(), false);
 		userFacade.logout(user); //da togliere
 	}
 
