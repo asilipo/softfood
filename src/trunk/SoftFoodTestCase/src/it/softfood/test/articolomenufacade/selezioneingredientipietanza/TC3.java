@@ -46,34 +46,35 @@ public class TC3 {
 		ingrediente.setId(1000000L);
 		ingrediente.setNome("Ingrediente di Test");
 		ingrediente.setTipoIngrediente("IngredienteLungaConservazione");
-		ingrediente.setScadenza(new Date("2009-09-26"));
+		ingrediente.setScadenza(new Date(109,8,26));
 		ingrediente.setUnitaMisura("g");
 		ingrediente.setVariante(true);
 
 		ingrediente = articoloFacade.inserisciIngrediente(user, ingrediente);
+	
 	}
 
 	@After
 	public void tearDown() throws Exception {
-		articoloFacade.rimuoviIngrediente(user, (long) 1000000L);
+		articoloFacade.rimuoviIngrediente(user, ingrediente.getId());
 		userFacade.logout(user); //da togliere
 	}
 
 	@Test
-	public void testSelezionaIngredientePerNome() throws RemoteException {
+	public void testSelezionaIngredientePietanza() throws RemoteException {
 		
-		User user1 = userFacade.login(Ruolo.CAMERIERE, "1234");
-		user1.setUserName(" ");
-		long id = 1000000L;
+		User user1 = userFacade.login(Ruolo.AMMINISTRATORE, "123456");
+		
+	
 		
 		ArrayList<Ingrediente> ingredienti = null;
 		try{			
-			ingredienti = articoloFacade.selezionaIngredientiPietanza(user1, id);
+			ingredienti = articoloFacade.selezionaIngredientiPietanza(user1, ingrediente.getId());
 		}catch(Exception e){
 			ingredienti = null;
 		}
-		if(user1 != null)
-			userFacade.logout(user1);
+		
+		userFacade.logout(user1);
 		//dovrebbe essere non nullo
 		Assert.assertNull(ingredienti);
 	}

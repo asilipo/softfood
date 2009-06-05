@@ -61,10 +61,10 @@ public class TC1 {
 	}
 
 	@Test
-	public void testSelezionaIngredientePerNome() throws RemoteException {
+	public void testSelezionaIngredientePietanza() throws RemoteException {
 		
-		User user1 = userFacade.login(Ruolo.CAMERIERE, "1234");
-		user1.setUserName("cameriere 1");
+		User user1 = userFacade.login(Ruolo.CUOCO, "12345");
+		
 	
 		
 		ArrayList<Ingrediente> ingredienti = null;
@@ -73,8 +73,8 @@ public class TC1 {
 		}catch(Exception e){
 			ingredienti = null;
 		}
-		if(user1 != null)
-			userFacade.logout(user1);
+		
+		userFacade.logout(user1);
 		//dovrebbe essere non nullo
 		Assert.assertNotNull(ingredienti);
 	}
