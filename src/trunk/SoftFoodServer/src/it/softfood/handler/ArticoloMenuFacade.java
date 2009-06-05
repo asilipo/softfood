@@ -96,7 +96,7 @@ public class ArticoloMenuFacade  {
     }
     
     public BevandaMagazzino inserisciBevandaMagazzino(User user, Long id, Integer quantita) {
-        if (user != null && id != null) {
+        if (user != null && id != null && quantita!=null && quantita>=0) {
         	BevandaMagazzino bevandaMagazzino = new BevandaMagazzino();
         	bevandaMagazzino.setArticolo(articoloSession.selezionaArticoloPerId(id));
         	bevandaMagazzino.setMagazzino(magazzinoSession.selezionaMagazzinoPerId(0L));
@@ -342,7 +342,7 @@ public class ArticoloMenuFacade  {
     }
     
     public boolean updatePietanza(User user, Pietanza pietanza) {
-        if (user != null && pietanza != null) {
+        if (user != null && pietanza != null && pietanza.getNome()!=null && pietanza.getTipoPietanza()!=null && !pietanza.getNome().equals("")) {
     		pietanzaSession.update(pietanza);
         	return true;
         }
