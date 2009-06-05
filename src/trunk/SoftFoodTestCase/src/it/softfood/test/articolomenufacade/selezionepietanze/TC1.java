@@ -62,7 +62,7 @@ public class TC1 extends TestCase {
 		User user_test = userFacade.login(Ruolo.CAMERIERE, "1234");
 		
 		
-		ArrayList<Pietanza> pietanza;
+		ArrayList<Pietanza> pietanza=null;
 		
 		try{	
 			pietanza = articoloFacade.selezionaPietanze(user_test);
