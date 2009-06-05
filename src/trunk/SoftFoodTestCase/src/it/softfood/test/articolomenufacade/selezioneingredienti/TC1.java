@@ -58,9 +58,9 @@ public class TC1 extends TestCase {
 	}
 
 	@Test
-	public void testSelezionaIngredientePerNome() throws RemoteException {
+	public void testSelezionaIngredienti() throws RemoteException {
 		
-		User user1 = userFacade.login(Ruolo.CUOCO, "4321");
+		User user1 = userFacade.login(Ruolo.CUOCO, "12345");
 		//user1.setUserName("cameriere 1");
 		
 		
