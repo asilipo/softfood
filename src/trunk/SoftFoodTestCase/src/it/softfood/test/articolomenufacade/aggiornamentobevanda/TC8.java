@@ -75,10 +75,10 @@ public class TC8 extends TestCase {
 		}
 		
 		Bevanda bevanda_test=bevanda;
-		bevanda.setCapacita(null);
-		bevanda.setNome("BEVANDA TEST");
-		bevanda.setTipoArticolo("BEVANDA");
-		bevanda.setTipoPietanza(TipoPietanza.BEVANDA.ordinal());
+		bevanda_test.setCapacita(null);
+		bevanda_test.setNome("BEVANDA TEST");
+		bevanda_test.setTipoArticolo("BEVANDA");
+		bevanda_test.setTipoPietanza(TipoPietanza.BEVANDA.ordinal());
 		boolean test_return = false;
 		try {
 			test_return=articoloFacade.updateBevanda(user_test, bevanda_test);
