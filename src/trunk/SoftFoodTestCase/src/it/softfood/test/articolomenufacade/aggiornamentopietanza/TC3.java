@@ -63,7 +63,7 @@ public class TC3 extends TestCase {
 	}
 
 	@Test
-	public void testUpdateBevanda() {
+	public void testUpdatePietanza() {
 		User user_test=null;
 		try {
 			user_test=userFacade.login(Ruolo.CASSIERE, "1234567");

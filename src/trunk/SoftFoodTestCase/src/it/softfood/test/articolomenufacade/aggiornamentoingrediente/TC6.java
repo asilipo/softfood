@@ -64,7 +64,7 @@ public class TC6 extends TestCase {
 	}
 
 	@Test
-	public void testUpdateBevanda() {
+	public void testUpdateIngrediente() {
 		User user_test=null;
 		try {
 			user_test=userFacade.login(Ruolo.CUOCO, "12345");
