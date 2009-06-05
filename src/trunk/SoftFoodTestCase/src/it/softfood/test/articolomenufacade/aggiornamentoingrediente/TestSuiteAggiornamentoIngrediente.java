@@ -21,7 +21,6 @@ public class TestSuiteAggiornamentoIngrediente {
 		suite.addTestSuite(TC1.class);
 		suite.addTestSuite(TC3.class);
 		suite.addTestSuite(TC7.class);
-		suite.addTestSuite(TC9.class);
 		suite.addTestSuite(TC4.class);
 		suite.addTestSuite(TC2.class);
 		//$JUnit-END$
