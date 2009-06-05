@@ -7,7 +7,6 @@ import it.softfood.handler.IUserFacade;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
-import java.security.AccessControlException;
 
 import junit.framework.TestCase;
 
@@ -21,7 +20,7 @@ import org.junit.Test;
  * @author Francesco Pacilio
  */
 
-public class TC3 extends TestCase {
+public class TC6 extends TestCase {
 
 	private IUserFacade userFacade;
 	private User user;
@@ -51,6 +50,7 @@ public class TC3 extends TestCase {
 
 	@After
 	public void tearDown() throws Exception {
+		userInserito.setRuolo(Ruolo.CAMERIERE.toString());
 		userFacade.eliminaUtente(user, userInserito);
 		userFacade.logout(user);
 	}
@@ -58,23 +58,16 @@ public class TC3 extends TestCase {
 	@Test
 	public void testSelezionaUserName() {
 		User userAttuale = null;
-		User user1 = null;
 		try {
-			user1 = userFacade.login(Ruolo.CASSIERE, "1234");
-			userAttuale = userFacade.selezionaUserName(user1, userInserito);
+			userInserito.setRuolo(null);
+			userAttuale = userFacade.selezionaUserName(user, userInserito);
 		} catch (RemoteException e) {
 			e.printStackTrace();
-		} catch (NullPointerException npe) {
+		} catch (Exception e) {
 			userAttuale = null;
-		} catch (AccessControlException ace) {
-			try {
-				userFacade.logout(user1);
-			} catch (RemoteException e) {
-				e.printStackTrace();
-			}
 		}
 		
 		assertNull(userAttuale);
 	}
-
+	
 }
