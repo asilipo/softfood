@@ -60,7 +60,7 @@ public class TC4 extends TestCase {
 	public void testInserimentoBevandaMenu() {
 		User user_test = null;
 		try {
-			user_test = userFacade.login(Ruolo.CASSIERE , "12345");
+			user_test = userFacade.login(Ruolo.CASSIERE , "1234567");
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			user_test = null;
