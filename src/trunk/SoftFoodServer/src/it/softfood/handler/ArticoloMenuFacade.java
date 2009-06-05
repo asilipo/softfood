@@ -66,7 +66,7 @@ public class ArticoloMenuFacade  {
     }
     
     public Ingrediente inserisciIngrediente(User user, Ingrediente ingrediente) {
-        if (user != null && ingrediente != null) {
+        if (user != null && ingrediente != null && ingrediente.getNome()!=null && ingrediente.getScadenza()!=null && !ingrediente.getNome().equals("")) {
             return ingredienteSession.inserisciIngrediente(ingrediente);
         }
 
@@ -333,7 +333,7 @@ public class ArticoloMenuFacade  {
     }
     
     public boolean updateBevanda(User user, Bevanda bevanda) {
-        if (user != null && bevanda != null) {
+        if (user != null && bevanda != null && bevanda.getNome()!=null && bevanda.getCapacita()!=null && bevanda.getTipoArticolo()!=null && !bevanda.getNome().equals("") && !bevanda.getTipoArticolo().equals("") && bevanda.getCapacita()>=0) {
     		bevandaSession.update(bevanda);
         	return true;
         }
