@@ -129,7 +129,7 @@ public class Softfood_LoginModule implements LoginModule {
 		return true;
 	}
 
-	private User controlCredential(String username,String password){
+	private User controlCredential(String username, String password){
 		IUserFacade emp=UserFacade.getInstance();
 		User employee = null;
 		try {

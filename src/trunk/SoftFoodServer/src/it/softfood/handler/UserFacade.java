@@ -54,9 +54,12 @@ public class UserFacade {
 		return null;
 	}
 
-	public User selezionaUserName(User user) {
-		if (user != null) {
-			user = userSession.selezionaUserPerUserName(user.getUserName());
+	public User selezionaUserName(User user, User userUsername) {
+		if (user != null && userUsername != null && userUsername.getUserName() != null &&
+				!userUsername.getUserName().equals("") && userUsername.getRuolo() != null &&
+				!userUsername.getRuolo().equals("") && userUsername.getPassword() != null &&
+				!userUsername.getPassword().equals("")) {
+			user = userSession.selezionaUserPerUserName(userUsername.getUserName());
 			return user;
 		}
 
