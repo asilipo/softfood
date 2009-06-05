@@ -20,7 +20,7 @@ public interface IUserFacade extends Remote {
 	
 	public User inserisciUtente(User user, User nuovoUser) throws RemoteException;
 
-	public User selezionaUserName(User user) throws RemoteException;
+	public User selezionaUserName(User user, User userUsername) throws RemoteException;
 
 	public User selezionaPassword(User user) throws RemoteException;
 

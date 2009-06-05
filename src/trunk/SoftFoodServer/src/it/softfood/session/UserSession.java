@@ -36,7 +36,7 @@ public class UserSession {
 
 	public User selezionaUserPerUserName(String user) {
 		try {
-			User u=(User) session.get(User.class, user);
+			User u = (User) session.get(User.class, user);
 			return u;
 		} catch (Exception e) {
 			System.err.println("UserSessionBean#selezionaUserPerUserName");
