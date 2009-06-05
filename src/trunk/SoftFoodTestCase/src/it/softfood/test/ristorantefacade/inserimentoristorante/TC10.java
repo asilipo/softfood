@@ -1,4 +1,4 @@
-package it.softfood.test.ristorantefacade.InserimentoRistorante;
+package it.softfood.test.ristorantefacade.inserimentoristorante;
 
 import it.softfood.entity.Indirizzo;
 import it.softfood.entity.Ristorante;
@@ -45,7 +45,7 @@ public class TC10 extends TestCase {
 			System.err.println("Exception to obtain the reference to the remote object: " + e);
 		}
 		
-		user = userFacade.login(Ruolo.TESTER, "test", "test");
+		user = userFacade.login(Ruolo.TEST, "test");
 	}
 
 	@After
