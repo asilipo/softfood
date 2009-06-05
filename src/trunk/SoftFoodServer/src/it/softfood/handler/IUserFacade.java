@@ -18,7 +18,7 @@ public interface IUserFacade extends Remote {
 
 	public User selezionaUtente(String username, String password, Ruolo ruolo) throws RemoteException;
 	
-	public User inserisciUtente(User user) throws RemoteException;
+	public User inserisciUtente(User user, User nuovoUser) throws RemoteException;
 
 	public User selezionaUserName(User user) throws RemoteException;
 
@@ -26,7 +26,7 @@ public interface IUserFacade extends Remote {
 
 	public boolean modificaRuolo(User user, Ruolo ruolo) throws RemoteException;
 
-	public boolean eliminaUtente(User user) throws RemoteException;
+	public boolean eliminaUtente(User user, User userDaEliminare) throws RemoteException;
 	
 	public User login(Ruolo ruolo, String password) throws RemoteException;
 	
