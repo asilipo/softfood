@@ -1,4 +1,4 @@
-package it.softfood.test.ristorantefacade.InserimentoRistorante;
+package it.softfood.test.ristorantefacade.inserimentoristorante;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
