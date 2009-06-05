@@ -32,7 +32,7 @@ public class TC2 extends TestCase {
 	private IUserFacade userFacade;
 	private IArticoloMenuFacade articoloFacade;
 	private User user;
-	private IngredientePietanza ingredientePietanza;
+	private IngredientePietanza ingredientePietanza=null;
 	private Ingrediente ingrediente = new Ingrediente();
 	private Pietanza pietanza = new Pietanza();
 	
@@ -53,24 +53,18 @@ public class TC2 extends TestCase {
 		
 		user = userFacade.login(Ruolo.TEST, "test");
 		
-		ingredientePietanza = new IngredientePietanza();
-		ingredientePietanza.setQuantita(5);
-		
 		ingrediente.setNome("Test Ingrediente");		
 		ingrediente.setScadenza(new Date(109,4,31));
 		ingrediente.setVariante(true);		
 		
-		articoloFacade.inserisciIngrediente(user, ingrediente);
+		ingrediente=articoloFacade.inserisciIngrediente(user, ingrediente);
 		
 		pietanza.setNome("Pietanza Test");
 		pietanza.setTipoPietanza(TipoPietanza.PRIMO_PIATTO.ordinal());
 	
-		articoloFacade.inserisciPietanzaMenu(user, pietanza);
+		pietanza=articoloFacade.inserisciPietanzaMenu(user, pietanza);
 		
-		ingredientePietanza.setIngrediente(ingrediente);
-		ingredientePietanza.setArticolo(pietanza);
 		
-		articoloFacade.inserisciIngredientePietanza(user, ingredientePietanza);
 	
 	}
 
@@ -96,8 +90,10 @@ public class TC2 extends TestCase {
 		
 		
 		
-		ingredientePietanza = null;
-		
+		ingredientePietanza = new IngredientePietanza();
+		ingredientePietanza.setQuantita(5);
+		ingredientePietanza.setIngrediente(ingrediente);
+		ingredientePietanza.setArticolo(pietanza);
 		
 		
 		try {
