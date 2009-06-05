@@ -65,7 +65,7 @@ public class TC4 extends TestCase {
 	@Test
 	public void testRimozioneIngrediente() throws RemoteException {
 		
-		User user1 = userFacade.login(Ruolo.CASSIERE, "12345");
+		User user1 = userFacade.login(Ruolo.CASSIERE, "1234567");
 
 		
 		boolean ingredienteAttuale = false;
