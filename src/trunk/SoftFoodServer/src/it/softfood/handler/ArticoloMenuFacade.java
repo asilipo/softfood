@@ -51,7 +51,8 @@ public class ArticoloMenuFacade  {
 	}
     
     public Pietanza inserisciPietanzaMenu(User user, Pietanza pietanza) {
-        if (user != null && pietanza != null) {
+        if (user != null && pietanza != null && pietanza.getNome()!=null && pietanza.getTipoPietanza()!=null && !pietanza.getNome().equals("")) {
+        	
         	pietanza.setTipoArticolo("Pietanza");
     		return pietanzaSession.inserisciPietanza(pietanza);
         }
@@ -144,7 +145,7 @@ public class ArticoloMenuFacade  {
     }
     
     public IngredientePietanza inserisciIngredientePietanza(User user, IngredientePietanza ingrediente){
-    	if(user != null && ingrediente!=null){
+    	if(user != null && ingrediente!=null && ingrediente.getArticolo()!=null && ingrediente.getIngrediente()!=null && ingrediente.getQuantita()>=0){
     		ingrediente=ingredientePietanzaSession.inserisciIngredientePietanza(ingrediente);
     		return ingrediente;
     	}
