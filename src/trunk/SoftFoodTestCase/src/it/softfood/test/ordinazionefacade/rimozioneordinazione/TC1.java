@@ -1,4 +1,4 @@
-package it.softfood.ordinazioneFacade.rimozioneOrdinazione;
+package it.softfood.test.ordinazionefacade.rimozioneordinazione;
 
 import it.softfood.entity.LineaOrdinazione;
 import it.softfood.entity.Ordinazione;
@@ -13,17 +13,18 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.security.AccessControlException;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import junit.framework.Assert;
+import junit.framework.TestCase;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-public class TC1 {
+public class TC1 extends TestCase {
+	
 	private IOrdinazioneFacade ordinazioneFacade;
 	private IUserFacade userFacade;
 	private User user;
