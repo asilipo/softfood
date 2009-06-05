@@ -1,7 +1,6 @@
 package it.softfood.test.ristorantefacade.InserimentoRistorante;
 
 import it.softfood.entity.Indirizzo;
-import it.softfood.entity.Pietanza;
 import it.softfood.entity.Ristorante;
 import it.softfood.entity.User;
 import it.softfood.enumeration.Ruolo;
@@ -25,7 +24,7 @@ import org.junit.Test;
  * @author Francesco Pacilio
  */
 
-public class TC1 extends TestCase {
+public class TC13 extends TestCase {
 
 	private IRistoranteFacade ristoranteFacade;
 	private IUserFacade userFacade;
@@ -46,21 +45,33 @@ public class TC1 extends TestCase {
 			System.err.println("Exception to obtain the reference to the remote object: " + e);
 		}
 		
-		user = userFacade.login(Ruolo.TEST, "test", "test");
+		user = userFacade.login(Ruolo.TESTER, "test", "test");
 	}
 
 	@After
 	public void tearDown() throws Exception {
-		ristoranteFacade.rimuoviRistorante(user, ristorante.getRagioneSociale());
 		userFacade.logout(user);
 	}
 
 	@Test
 	public void testInserisciRistorante() throws RemoteException {
-
-		User user = userFacade.login(Ruolo.AMMINISTRATORE, "123456", "amministratore");
-		Pietanza pietanzaAttuale = articoloMenuFacade.inserisciPietanzaMenu(user, pietanza);
-		Assert.assertTrue(pietanza.equals(pietanzaAttuale));
+		 Indirizzo indirizzo = new Indirizzo();
+		 indirizzo.setCap("83100");
+		 indirizzo.setCitta("Avellino");
+		 indirizzo.setCivico("10");
+		 indirizzo.setProvincia("AV");
+		 indirizzo.setVia("via Roma");
+		 indirizzo.setId(1000000L);
+		 
+		 ristorante = new Ristorante();
+		 ristorante.setIndirizzo(indirizzo);
+		 ristorante.setPartitaIva("a");
+		 ristorante.setRagioneSociale("Ristorante test");
+		 		 
+		 User user = new User("amministratore", "123456", Ruolo.AMMINISTRATORE.toString());	
+		 Ristorante ristoranteAttuale = ristoranteFacade.inserisciRistorante(user, ristorante);
+		 
+		 Assert.assertNull(ristoranteAttuale);
 	}
 
 }
