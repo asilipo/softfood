@@ -44,7 +44,11 @@ public class BevandaSession {
 
 	public Bevanda inserisciBevanda(Bevanda bevanda) {
 		try {
-			Long id = this.getNewId();
+			Long id=0L;
+			if(bevanda.getId()==null)
+				id = this.getNewId();
+			else
+				id = bevanda.getId();
 			Articolo articolo = new Articolo();
 			articolo.setDescrizione(bevanda.getDescrizione());
 			articolo.setId(id);

@@ -41,8 +41,12 @@ public class IngredienteSession {
 	
 	public Ingrediente inserisciIngrediente(Ingrediente ingrediente) {
 		try {
-			Long id = this.getNewId();
-			ingrediente.setId(id);
+			if(ingrediente.getId()==null){
+				Long id = this.getNewId();
+				ingrediente.setId(id);
+			}
+			if(ingrediente.getTipoIngrediente()==null)
+				ingrediente.setTipoIngrediente("IngredienteLungaConservazione");
 			session.persist(ingrediente);
 			ingrediente = (Ingrediente) session.get(Ingrediente.class, ingrediente.getId());
 			
