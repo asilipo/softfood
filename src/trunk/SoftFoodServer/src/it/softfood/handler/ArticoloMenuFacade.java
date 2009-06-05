@@ -59,7 +59,7 @@ public class ArticoloMenuFacade  {
     }
     
     public Bevanda inserisciBevandaMenu(User user, Bevanda bevanda) {
-        if (user != null && bevanda != null)
+        if (user != null && bevanda != null && bevanda.getNome()!=null && bevanda.getCapacita()!=null && bevanda.getTipoArticolo()!=null && !bevanda.getNome().equals("") && !bevanda.getTipoArticolo().equals("") && bevanda.getCapacita()>=0)
     		return bevandaSession.inserisciBevanda(bevanda);
 
         return null;
