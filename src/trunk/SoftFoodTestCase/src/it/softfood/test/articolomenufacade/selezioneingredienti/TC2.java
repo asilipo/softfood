@@ -58,9 +58,9 @@ public class TC2 extends TestCase {
 	}
 
 	@Test
-	public void testSelezionaIngredientePerNome() throws RemoteException {
+	public void testSelezionaIngredienti() throws RemoteException {
 		
-		User user1 = userFacade.login(Ruolo.CUOCO, "4321");
+		User user1 = userFacade.login(Ruolo.CAMERIERE, "1234");
 		//user1.setUserName("cameriere 1");
 		
 		
@@ -74,6 +74,6 @@ public class TC2 extends TestCase {
 		if(user1 != null)
 			userFacade.logout(user1);
 		//dovrebbe essere non nullo
-		Assert.assertNotNull(listaIngrediente);
+		Assert.assertNull(listaIngrediente);
 	}
 }
