@@ -17,8 +17,11 @@ public class TestSuiteSelezioneUtentePerUsernamePassword {
 		//$JUnit-BEGIN$
 		suite.addTestSuite(TC1.class);
 		suite.addTestSuite(TC2.class);
-		suite.addTestSuite(TC4.class);
+		suite.addTestSuite(TC1.class);
 		suite.addTestSuite(TC3.class);
+		suite.addTestSuite(TC2.class);
+		suite.addTestSuite(TC3.class);
+		suite.addTestSuite(TC4.class);
 		suite.addTestSuite(TC5.class);
 		//$JUnit-END$
 		return suite;
