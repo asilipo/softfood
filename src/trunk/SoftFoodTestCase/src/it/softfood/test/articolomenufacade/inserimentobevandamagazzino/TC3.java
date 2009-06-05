@@ -39,38 +39,36 @@ public class TC3 extends TestCase {
 		}
 		try {
 			Registry registry = LocateRegistry.getRegistry("localhost");
-			articoloFacade = (IArticoloMenuFacade) registry.lookup("ArticoloFacade"); //CONTROLLARE
-			//ristoranteFacade = (IRistoranteFacade) registry.lookup("RistoranteFacade");
+			articoloFacade = (IArticoloMenuFacade) registry.lookup("ArticoloFacade");
 			userFacade = (IUserFacade) registry.lookup("UserFacade");
 		} catch (Exception e) {
 			System.err.println("Exception to obtain the reference to the remote object: " + e);
 		}
 		
-		user = userFacade.login(Ruolo.TEST, "test");//da togliere	
-	}
+		user = userFacade.login(Ruolo.TEST, "test");
+		
+		}
 
 	@After
 	public void tearDown() throws Exception {
-		userFacade.logout(user); //da togliere
+		
+		userFacade.logout(user);
 	}
 
 	@Test
 	public void testInserimentoBevandaMagazzino() throws RemoteException {
 		
-		User user1 = userFacade.login(Ruolo.CAMERIERE, "1234");
-	//	user1.setUserName("cuoco");
+		User user_test = userFacade.login(Ruolo.CAMERIERE, "1234");
 		
-		BevandaMagazzino ingredienteAttuale = null;
+		bevanda = null;
 		try{	
-			ingredienteAttuale = articoloFacade.inserisciBevandaMagazzino(user1, (long)1000000, 1000000);
-			
+			bevanda = articoloFacade.inserisciBevandaMagazzino(user_test, 1000000L, 100);
 		}catch(AccessControlException e){
-			ingredienteAttuale = null;
+			bevanda = null;
 		}
-	
-		if(user1 != null)
-			userFacade.logout(user1);
 		
-		Assert.assertNull(ingredienteAttuale);
+		userFacade.logout(user_test);
+		
+		Assert.assertNull(bevanda);
 	}
 }

@@ -38,8 +38,7 @@ public class TC5 {
 		}
 		try {
 			Registry registry = LocateRegistry.getRegistry("localhost");
-			articoloFacade = (IArticoloMenuFacade) registry.lookup("ArticoloFacade"); //CONTROLLARE
-			//ristoranteFacade = (IRistoranteFacade) registry.lookup("RistoranteFacade");
+			articoloFacade = (IArticoloMenuFacade) registry.lookup("ArticoloFacade");
 			userFacade = (IUserFacade) registry.lookup("UserFacade");
 		} catch (Exception e) {
 			System.err.println("Exception to obtain the reference to the remote object: " + e);
@@ -51,27 +50,25 @@ public class TC5 {
 
 	@After
 	public void tearDown() throws Exception {
-		userFacade.logout(user); 
+		
+		userFacade.logout(user);
 	}
 
 	@Test
 	public void testInserimentoBevandaMagazzino() throws RemoteException {
 		
-		User user1 = userFacade.login(Ruolo.CUOCO, "4321");
-	//	user1.setUserName("cuoco");
+		User user_test = userFacade.login(Ruolo.CUOCO, "12345");
 		
-		BevandaMagazzino ingredienteAttuale = null;
+		bevanda = null;
 		try{	
-			ingredienteAttuale = articoloFacade.inserisciBevandaMagazzino(user1, null, 1000000);
-			
+			bevanda = articoloFacade.inserisciBevandaMagazzino(user_test, null, 100);
 		}catch(AccessControlException e){
-			ingredienteAttuale = null;
+			bevanda = null;
 		}
-	
-		if(user1 != null)
-			userFacade.logout(user1);
 		
-		Assert.assertNull(ingredienteAttuale);
+		userFacade.logout(user_test);
+		
+		Assert.assertNull(bevanda);
 	}
 	
 }
