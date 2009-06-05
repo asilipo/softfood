@@ -30,7 +30,6 @@ public class TC1 extends TestCase {
 	private User user;
 	private Bevanda bevanda;
 	
-
 	@Before
 	public void setUp() throws Exception {
 		System.setProperty("java.security.policy", "polis.policy");
