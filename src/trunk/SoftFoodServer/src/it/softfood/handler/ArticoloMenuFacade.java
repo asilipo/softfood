@@ -351,7 +351,7 @@ public class ArticoloMenuFacade  {
     }
     
     public boolean updateIngrediente(User user, Ingrediente ingrediente) {
-        if (user != null && ingrediente != null) {
+        if (user != null && ingrediente != null && ingrediente.getNome()!=null && ingrediente.getScadenza()!=null && !ingrediente.getNome().equals("")) {
     		ingredienteSession.update(ingrediente);
         	return true;
         }
