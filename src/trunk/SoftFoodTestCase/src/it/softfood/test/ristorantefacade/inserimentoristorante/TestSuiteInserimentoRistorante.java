@@ -3,6 +3,12 @@ package it.softfood.test.ristorantefacade.inserimentoristorante;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
+/**
+ * @author Maria Rosaria Paone
+ * @author Marco Grasso
+ * @author Francesco Pacilio
+ */
+
 public class TestSuiteInserimentoRistorante {
 
 	public static Test suite() {

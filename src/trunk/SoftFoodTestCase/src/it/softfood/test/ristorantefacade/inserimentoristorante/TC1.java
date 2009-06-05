@@ -1,7 +1,5 @@
 package it.softfood.test.ristorantefacade.inserimentoristorante;
 
-import it.softfood.entity.Indirizzo;
-import it.softfood.entity.Pietanza;
 import it.softfood.entity.Ristorante;
 import it.softfood.entity.User;
 import it.softfood.enumeration.Ruolo;
@@ -12,7 +10,6 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
-import junit.framework.Assert;
 import junit.framework.TestCase;
 
 import org.junit.After;
