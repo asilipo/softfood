@@ -11,6 +11,7 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.security.AccessControlException;
+import java.util.Date;
 
 import junit.framework.Assert;
 import junit.framework.TestCase;
@@ -40,38 +41,46 @@ public class TC6 extends TestCase {
 		}
 		try {
 			Registry registry = LocateRegistry.getRegistry("localhost");
-			articoloFacade = (IArticoloMenuFacade) registry.lookup("ArticoloFacade"); //CONTROLLARE
-			//ristoranteFacade = (IRistoranteFacade) registry.lookup("RistoranteFacade");
+			articoloFacade = (IArticoloMenuFacade) registry.lookup("ArticoloFacade"); 
 			userFacade = (IUserFacade) registry.lookup("UserFacade");
 		} catch (Exception e) {
 			System.err.println("Exception to obtain the reference to the remote object: " + e);
 		}
 		
-		user = userFacade.login(Ruolo.TEST, "test");//da togliere
+		user = userFacade.login(Ruolo.TEST, "test");
+		
+		ingrediente=new Ingrediente();
+		ingrediente.setId(1000000L);
+		ingrediente.setNome("INGREDIENTE TEST");
+		ingrediente.setScadenza(new Date(109,4,31));
+		ingrediente.setVariante(true);
+		
+		ingrediente=articoloFacade.inserisciIngrediente(user, ingrediente);
 		
 		}
 
 	@After
 	public void tearDown() throws Exception {
-		userFacade.logout(user); //da togliere
+		articoloFacade.rimuoviIngrediente(user, ingrediente.getId());
+		userFacade.logout(user); 
 	}
 
 	@Test
 	public void testInserimentoIngredienteMagazzino() throws RemoteException {
 		
-		User user1 = userFacade.login(Ruolo.CUOCO, "4321");
-	//	user1.setUserName("cuoco");
+		User user_test = userFacade.login(Ruolo.CUOCO, "12345");
+
 		
 		IngredienteMagazzino ingredienteAttuale = null;
 		try{	
-			ingredienteAttuale = articoloFacade.inserisciIngredienteMagazzino(user1, (long) 1000000L, null);
+			ingredienteAttuale = articoloFacade.inserisciIngredienteMagazzino(user_test, 1000000L, null);
 		}catch(AccessControlException e){
+			System.out.println(e);
 			ingredienteAttuale = null;
 		}
 	
-		if(user1 != null)
-			userFacade.logout(user1);
+			userFacade.logout(user_test);
 		
-		Assert.assertNull(ingredienteAttuale);
+		Assert.assertNotNull(ingredienteAttuale);
 	}
 }
