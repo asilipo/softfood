@@ -35,7 +35,7 @@ public class TC3 {
 			articoloFacade = (IArticoloMenuFacade) registry.lookup("ArticoloFacade"); //CONTROLLARE
 			//ristoranteFacade = (IRistoranteFacade) registry.lookup("RistoranteFacade");
 			userFacade = (IUserFacade) registry.lookup("UserFacade");
-		} catch (Exception e) {
+		} catch (AccessControlException e) {
 			System.err.println("Exception to obtain the reference to the remote object: " + e);
 		}
 		
@@ -56,18 +56,19 @@ public class TC3 {
 
 	@After
 	public void tearDown() throws Exception {
-		articoloFacade.rimuoviIngrediente(user, 1000000L);
+		articoloFacade.rimuoviIngrediente(user, ingrediente.getId());
 		userFacade.logout(user); //da togliere
 	}
 
 	@Test
 	public void testSelezionaIngredientePerNome() throws RemoteException {
-		User user1 = userFacade.login(Ruolo.CAMERIERE, "1234");
-		user1.setUserName("");
+		
+		User user1 = userFacade.login(Ruolo.CASSIERE, "1234567");
+		//user1.setUserName("cameriere 1");
 		
 		Ingrediente ingredienteAttuale=null;
 		try{			
-			ingredienteAttuale= articoloFacade.selezionaIngredientePerNome(user1, "Ingrediente di Test");
+			ingredienteAttuale= articoloFacade.selezionaIngredientePerNome(user1, ingrediente.getNome());
 		}catch(Exception e){
 			ingredienteAttuale = null;
 		}
