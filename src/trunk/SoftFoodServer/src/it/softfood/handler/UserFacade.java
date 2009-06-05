@@ -36,7 +36,7 @@ public class UserFacade {
 	}
 
 	public User selezionaUtentePerUserPassword(String username, String password) {
-		if (username != null && password != null) {
+		if (username != null && password != null && !username.equals("") && !password.equals("")) {
 			User user = userSession.selezionaUtente(username, password);
 			return user;
 		}
@@ -44,9 +44,10 @@ public class UserFacade {
 		return null;
 	}
 
-	public User inserisciUtente(User user) {
-		if (user != null) {
-			user = userSession.inserisciUser(user);
+	public User inserisciUtente(User user, User nuovoUser) {
+		if (user != null && nuovoUser != null && !nuovoUser.getUserName().equals("") &&
+				!nuovoUser.getPassword().equals("")) {
+			user = userSession.inserisciUser(nuovoUser);
 			return user;
 		}
 
@@ -80,9 +81,9 @@ public class UserFacade {
 		return false;
 	}
 
-	public boolean eliminaUtente(User user) {
-		if (user != null)
-			return userSession.rimuoviUser(user.getUserName());
+	public boolean eliminaUtente(User user, User userDaEliminare) {
+		if (user != null && userDaEliminare != null)
+			return userSession.rimuoviUser(userDaEliminare.getUserName());
 
 		return false;
 	}
