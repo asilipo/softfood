@@ -1,10 +1,8 @@
 package it.softfood.test.articolomenufacade.aggiornamentoingrediente;
 
-import it.softfood.entity.Bevanda;
 import it.softfood.entity.Ingrediente;
 import it.softfood.entity.User;
 import it.softfood.enumeration.Ruolo;
-import it.softfood.enumeration.TipoPietanza;
 import it.softfood.handler.IArticoloMenuFacade;
 import it.softfood.handler.IUserFacade;
 
@@ -34,6 +32,7 @@ public class TC1 extends TestCase {
 	private Ingrediente ingrediente;
 	
 
+	@SuppressWarnings("deprecation")
 	@Before
 	public void setUp() throws Exception {
 		System.setProperty("java.security.policy", "polis.policy");
@@ -65,13 +64,13 @@ public class TC1 extends TestCase {
 		
 	}
 
+	@SuppressWarnings("deprecation")
 	@Test
 	public void testUpdateIngrediente() {
 		User user_test=null;
 		try {
 			user_test=userFacade.login(Ruolo.CUOCO, "12345");
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			user_test=null;
 		}
 		
@@ -85,14 +84,12 @@ public class TC1 extends TestCase {
 		} catch (AccessControlException e) {
 			test_return = false;
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 		try {
 			userFacade.logout(user_test);
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

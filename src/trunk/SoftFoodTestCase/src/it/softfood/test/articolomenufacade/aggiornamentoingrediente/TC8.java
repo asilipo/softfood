@@ -32,6 +32,7 @@ public class TC8 extends TestCase {
 	private Ingrediente ingrediente;
 	
 
+	@SuppressWarnings("deprecation")
 	@Before
 	public void setUp() throws Exception {
 		System.setProperty("java.security.policy", "polis.policy");
@@ -69,7 +70,6 @@ public class TC8 extends TestCase {
 		try {
 			user_test=userFacade.login(Ruolo.CUOCO, "12345");
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			user_test=null;
 		}
 		
@@ -81,14 +81,12 @@ public class TC8 extends TestCase {
 		} catch (AccessControlException e) {
 			test_return = false;
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 		try {
 			userFacade.logout(user_test);
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
