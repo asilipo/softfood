@@ -47,23 +47,21 @@ public class TC1 extends TestCase {
 		}
 		
 		user=userFacade.login(Ruolo.TEST, "test");
-		
 	}
 
 	@After
 	public void tearDown() throws Exception {
 		articoloFacade.rimuoviIngrediente(user, ingrediente.getId());
 		userFacade.logout(user);
-		
 	}
 
+	@SuppressWarnings("deprecation")
 	@Test
 	public void testInserimentoIngrediente() {
 		User user_test=null;
 		try {
 			user_test=userFacade.login(Ruolo.CUOCO, "12345");
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			user_test=null;
 		}
 		
@@ -77,14 +75,12 @@ public class TC1 extends TestCase {
 		} catch (AccessControlException e) {
 			ingrediente=null;
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 		try {
 			userFacade.logout(user_test);
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
