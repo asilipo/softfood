@@ -10,7 +10,6 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.security.AccessControlException;
-import java.util.Date;
 
 import junit.framework.TestCase;
 
@@ -53,7 +52,6 @@ public class TC7 extends TestCase {
 	@After
 	public void tearDown() throws Exception {
 		userFacade.logout(user);
-		
 	}
 
 	@Test
@@ -62,7 +60,6 @@ public class TC7 extends TestCase {
 		try {
 			user_test=userFacade.login(Ruolo.CUOCO, "12345");
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			user_test=null;
 		}
 		
@@ -76,14 +73,12 @@ public class TC7 extends TestCase {
 		} catch (AccessControlException e) {
 			ingrediente=null;
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 		try {
 			userFacade.logout(user_test);
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

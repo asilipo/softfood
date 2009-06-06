@@ -53,16 +53,15 @@ public class TC5 extends TestCase {
 	@After
 	public void tearDown() throws Exception {
 		userFacade.logout(user);
-		
 	}
 
+	@SuppressWarnings("deprecation")
 	@Test
 	public void testInserimentoIngrediente() {
 		User user_test=null;
 		try {
 			user_test=userFacade.login(Ruolo.CUOCO, "12345");
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			user_test=null;
 		}
 		
@@ -76,14 +75,12 @@ public class TC5 extends TestCase {
 		} catch (AccessControlException e) {
 			ingrediente=null;
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 		try {
 			userFacade.logout(user_test);
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

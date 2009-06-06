@@ -56,13 +56,13 @@ public class TC2 extends TestCase {
 		
 	}
 
+	@SuppressWarnings("deprecation")
 	@Test
 	public void testInserimentoIngrediente() {
 		User user_test=null;
 		try {
 			user_test=userFacade.login(Ruolo.AMMINISTRATORE, "123456");
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			user_test=null;
 		}
 		
@@ -76,14 +76,12 @@ public class TC2 extends TestCase {
 		} catch (AccessControlException e) {
 			ingrediente=null;
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 		try {
 			userFacade.logout(user_test);
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
