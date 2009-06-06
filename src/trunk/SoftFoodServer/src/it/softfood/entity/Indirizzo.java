@@ -57,6 +57,8 @@ public class Indirizzo implements java.io.Serializable {
 	}
 
 	public void setCap(String cap) {
+		if(cap.length()<4)
+			cap = null;
 		this.cap = cap;
 	}
 	
@@ -65,6 +67,8 @@ public class Indirizzo implements java.io.Serializable {
 	}
 
 	public void setCitta(String citta) {
+		if(citta.length()<5)
+			citta = null;
 		this.citta = citta;
 	}
 	
@@ -73,6 +77,8 @@ public class Indirizzo implements java.io.Serializable {
 	}
 
 	public void setCivico(String civico) {
+		if(civico.length()<3)
+			civico = null;
 		this.civico = civico;
 	}
 	
@@ -81,6 +87,8 @@ public class Indirizzo implements java.io.Serializable {
 	}
 
 	public void setProvincia(String provincia) {
+		if(provincia.length()<5)
+			provincia = null;
 		this.provincia = provincia;
 	}
 	
@@ -89,6 +97,8 @@ public class Indirizzo implements java.io.Serializable {
 	}
 
 	public void setVia(String via) {
+		if(via.length()<4)
+			via = null;
 		this.via = via;
 	}
 	
