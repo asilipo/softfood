@@ -40,8 +40,11 @@ public class LineaOrdinazioneSession {
 	
 	public LineaOrdinazione inserisciLineaOrdinazione(LineaOrdinazione lineaOrdinazione) {
 		try {
-			Long id = this.getNewId();
-			lineaOrdinazione.setId(id);
+			Long id = lineaOrdinazione.getId();
+			if(id ==null){
+				id = this.getNewId();
+				lineaOrdinazione.setId(id);
+			}
 			session.persist(lineaOrdinazione);
 			lineaOrdinazione = (LineaOrdinazione) this.selezionaLineaOrdinazionePerId(lineaOrdinazione.getId());
 			
