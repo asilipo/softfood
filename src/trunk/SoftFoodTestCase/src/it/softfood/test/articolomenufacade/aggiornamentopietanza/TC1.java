@@ -1,6 +1,5 @@
 package it.softfood.test.articolomenufacade.aggiornamentopietanza;
 
-import it.softfood.entity.Ingrediente;
 import it.softfood.entity.Pietanza;
 import it.softfood.entity.User;
 import it.softfood.enumeration.Ruolo;
@@ -12,7 +11,6 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.security.AccessControlException;
-import java.util.Date;
 
 import junit.framework.TestCase;
 
