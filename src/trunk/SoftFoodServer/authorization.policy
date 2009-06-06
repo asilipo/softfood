@@ -2,6 +2,7 @@ grant Principal it.softfood.entity.User "CAMERIERE" {
     permission it.softfood.aspect.OperationPermission "login";
     permission it.softfood.aspect.OperationPermission "logout";
     permission it.softfood.aspect.OperationPermission "selezionaPietanze";
+    permission it.softfood.aspect.OperationPermission "selezionaPietanzePerTipo";
     permission it.softfood.aspect.OperationPermission "selezionaBevande";
     permission it.softfood.aspect.OperationPermission "selezionaUserPerPassword";
     permission it.softfood.aspect.OperationPermission "selezionaPietanzeDisponibili";
