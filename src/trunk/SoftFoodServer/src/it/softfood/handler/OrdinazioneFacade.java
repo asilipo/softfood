@@ -68,7 +68,7 @@ public class OrdinazioneFacade {
 	}
 	
 	public Ordinazione inserisciOrdinazione(User user, Ordinazione ordinazione) throws TavoloOccupatoException {
-		if (user != null && ordinazione != null) {
+		if (ordinazione.getTavolo()!=null && user != null && ordinazione != null && ordinazione.getCoperti()>0 && ordinazione.getData()!=null) {
 			Tavolo tavolo = null;
 			try {
 				tavolo = tavoloSession.selezionaTavoloPerId(ordinazione.getTavolo().getId());
