@@ -66,9 +66,9 @@ public class UserFacade {
 		return null;
 	}
 
-	public User selezionaPassword(User user) {
-		if (user != null) {
-			user = userSession.selezionaUserPerPassword(user.getPassword());
+	public User selezionaPassword(User user, String username) {
+		if (user != null && username != null) {
+			user = userSession.selezionaPassword(username);
 			return user;
 		}
 

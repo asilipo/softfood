@@ -58,6 +58,19 @@ public class UserSession {
 		}
 	}
 
+	public User selezionaPassword(String username) {
+		try {
+			User result;
+			Query q = session.createQuery("from it.softfood.entity.User t where t.userName = ?");
+			q.setString(0, username);
+			result = (User) q.list().get(0);
+
+			return result;
+		} catch (Exception e) {
+			System.err.println("UserSessionBean#selezionaUserPerPassword");
+			return null;
+		}
+	}
 
 	public boolean modificaRuoloUser(User user, Ruolo ruolo) {
 		try {
