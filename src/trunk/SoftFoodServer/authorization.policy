@@ -119,6 +119,8 @@ grant Principal it.softfood.entity.User "AMMINISTRATORE"{
   permission it.softfood.aspect.OperationPermission "modificaRuolo";
   permission it.softfood.aspect.OperationPermission "eliminaUtente";
   permission it.softfood.aspect.OperationPermission "selezionaUtente";
+  permission it.softfood.aspect.OperationPermission "inserisciOrdinazione";
+
 }; 
 grant Principal it.softfood.entity.User "TEST"{
   	permission java.security.AllPermission;
