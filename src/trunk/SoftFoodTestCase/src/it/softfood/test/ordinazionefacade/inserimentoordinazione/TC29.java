@@ -32,7 +32,7 @@ import org.junit.Test;
  * @author Francesco Pacilio
  */
 
-public class TC31 extends TestCase {
+public class TC29 extends TestCase {
 
 
 	private IOrdinazioneFacade ordinazioneFacade;
