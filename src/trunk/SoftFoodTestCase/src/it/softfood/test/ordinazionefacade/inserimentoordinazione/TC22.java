@@ -79,7 +79,7 @@ public class TC22 extends TestCase {
 		Indirizzo indirizzo = new Indirizzo();
 		indirizzo.setVia("via Roma");
 		indirizzo.setCivico("24 A");
-		indirizzo.setCap(" ");
+		indirizzo.setCap("831002");
 		indirizzo.setProvincia("AV");
 		indirizzo.setCitta("Avellino");
 		ristorante.setIndirizzo(indirizzo);

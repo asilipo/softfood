@@ -83,10 +83,11 @@ public class TC31 extends TestCase {
 		indirizzo.setCap("83100");
 		indirizzo.setProvincia("AV");
 		indirizzo.setCitta("Avellino");
-		ristorante.setIndirizzo(indirizzo);
+		
+		ristorante.setIndirizzo(null);
 		
 		
-		ristorante = ristoranteFacade.inserisciRistorante(user, null); 
+		ristorante = ristoranteFacade.inserisciRistorante(user, ristorante); 
 		//ristorante = ristoranteFacade.selezionaRistorantePerRagioneSociale(user, "La taverna");
 		tavolo.setRistorante(ristorante);
 		

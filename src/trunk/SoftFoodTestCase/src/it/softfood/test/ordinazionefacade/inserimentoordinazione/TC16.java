@@ -74,10 +74,10 @@ public class TC16 extends TestCase {
 		
 		
 		ristorante.setRagioneSociale("Ristorante Test");
-		ristorante.setPartitaIva("a");
+		ristorante.setPartitaIva("01234567890");
 		
 		Indirizzo indirizzo = new Indirizzo();
-		indirizzo.setVia("via Roma");
+		indirizzo.setVia("");
 		indirizzo.setCivico("24 A");
 		indirizzo.setCap("83100");
 		indirizzo.setProvincia("AV");

@@ -74,18 +74,19 @@ public class TC26 extends TestCase {
 		
 		
 		ristorante.setRagioneSociale("Ristorante Test");
-		ristorante.setPartitaIva("01234567890");
+		ristorante.setPartitaIva("01234567891");
 		
 		Indirizzo indirizzo = new Indirizzo();
 		indirizzo.setVia("via Roma");
 		indirizzo.setCivico("24 A");
 		indirizzo.setCap("83100");
-		indirizzo.setProvincia("A");
+		indirizzo.setProvincia("AV");
 		indirizzo.setCitta("Avellino");
 		ristorante.setIndirizzo(indirizzo);
 		
 		
 		ristorante = ristoranteFacade.inserisciRistorante(user, ristorante); 
+		//ristorante = ristoranteFacade.selezionaRistorantePerRagioneSociale(user, "La taverna");
 		tavolo.setRistorante(ristorante);
 		
 		tavolo = tavoloFacade.inserisciTavolo(user, tavolo);
@@ -110,10 +111,7 @@ public class TC26 extends TestCase {
 
 	@After
 	public void tearDown() throws Exception {
-		//ordinazioneFacade.rimuoviOrdinazione(user, ordinazione.getId(), false);		
-		//tavoloFacade.rimuoviTavolo(user, tavolo.getId());		
-		//boolean verifica = ristoranteFacade.rimuoviRistorante(user, ristorante.getRagioneSociale());		
-		articoloFacade.rimuoviPietanzaMenu(user, pietanza.getId());
+		articoloFacade.rimuoviBevandaMenu(user, pietanza.getId());
 		userFacade.logout(user);		
 	}
 
@@ -128,7 +126,7 @@ public class TC26 extends TestCase {
 		}		
 		
 		try {
-			ordinazione = ordinazioneFacade.inserisciOrdinazione(user_test, ordinazione);
+			ordinazione = ordinazioneFacade.inserisciOrdinazione(user_test, null);
 			
 		} catch (Exception e) {
 			System.out.println(e);
@@ -144,6 +142,5 @@ public class TC26 extends TestCase {
 		}
 		assertNull(ordinazione);
 	}
-
 
 }

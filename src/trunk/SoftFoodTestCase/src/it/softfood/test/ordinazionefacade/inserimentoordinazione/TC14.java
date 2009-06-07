@@ -74,7 +74,7 @@ public class TC14 extends TestCase {
 		
 		
 		ristorante.setRagioneSociale("Ristorante Test");
-		ristorante.setPartitaIva(null);
+		ristorante.setPartitaIva("012345678");
 		
 		Indirizzo indirizzo = new Indirizzo();
 		indirizzo.setVia("via Roma");
@@ -144,4 +144,5 @@ public class TC14 extends TestCase {
 		}
 		assertNull(ordinazione);
 	}
+
 }
