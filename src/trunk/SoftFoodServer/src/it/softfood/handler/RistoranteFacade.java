@@ -30,7 +30,7 @@ public class RistoranteFacade  {
 
 	public Ristorante inserisciRistorante(User user, Ristorante ristorante) 
 	{
-		if (ristorante.getIndirizzo()!=null &&  user != null && ristorante != null && ristorante.getRagioneSociale() != null &&
+		if (ristorante != null &&  user != null && ristorante.getIndirizzo()!=null  &&  ristorante.getRagioneSociale() != null &&
 				!ristorante.getRagioneSociale().equals("") && ristorante.getPartitaIva() != null &&
 					!ristorante.getPartitaIva().equals("")) {
 			Indirizzo indirizzo = ristorante.getIndirizzo();
