@@ -73,8 +73,8 @@ public class TC13 extends TestCase {
 		tavolo.setRiferimento("Tavolo Test");
 		
 		
-		ristorante.setRagioneSociale("");
-		ristorante.setPartitaIva("01234567891");
+		ristorante.setRagioneSociale("Ristorante Test");
+		ristorante.setPartitaIva("a");
 		
 		Indirizzo indirizzo = new Indirizzo();
 		indirizzo.setVia("via Roma");

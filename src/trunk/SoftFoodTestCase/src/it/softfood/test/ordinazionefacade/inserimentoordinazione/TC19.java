@@ -77,9 +77,9 @@ public class TC19 extends TestCase {
 		ristorante.setPartitaIva("01234567890");
 		
 		Indirizzo indirizzo = new Indirizzo();
-		indirizzo.setVia("");
+		indirizzo.setVia("via Roma");
 		indirizzo.setCivico("24 A");
-		indirizzo.setCap("83100");
+		indirizzo.setCap("a");
 		indirizzo.setProvincia("AV");
 		indirizzo.setCitta("Avellino");
 		ristorante.setIndirizzo(indirizzo);
@@ -144,5 +144,4 @@ public class TC19 extends TestCase {
 		}
 		assertNull(ordinazione);
 	}
-
 }

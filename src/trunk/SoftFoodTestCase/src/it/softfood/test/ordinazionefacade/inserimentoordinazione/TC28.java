@@ -34,6 +34,7 @@ import org.junit.Test;
 
 public class TC28 extends TestCase {
 
+
 	private IOrdinazioneFacade ordinazioneFacade;
 	private LineaOrdinazione lineaOrdinazione;
 	private IArticoloMenuFacade articoloFacade;
@@ -85,7 +86,7 @@ public class TC28 extends TestCase {
 		ristorante.setIndirizzo(indirizzo);
 		
 		
-		ristorante = ristoranteFacade.inserisciRistorante(user, ristorante); 
+		ristorante = ristoranteFacade.inserisciRistorante(user, null); 
 		//ristorante = ristoranteFacade.selezionaRistorantePerRagioneSociale(user, "La taverna");
 		tavolo.setRistorante(ristorante);
 		
@@ -126,7 +127,7 @@ public class TC28 extends TestCase {
 		}		
 		
 		try {
-			ordinazione = ordinazioneFacade.inserisciOrdinazione(user_test, null);
+			ordinazione = ordinazioneFacade.inserisciOrdinazione(user_test, ordinazione);
 			
 		} catch (Exception e) {
 			System.out.println(e);

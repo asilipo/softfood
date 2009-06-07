@@ -78,8 +78,8 @@ public class TC20 extends TestCase {
 		
 		Indirizzo indirizzo = new Indirizzo();
 		indirizzo.setVia("via Roma");
-		indirizzo.setCivico(" ");
-		indirizzo.setCap("83100");
+		indirizzo.setCivico("24 A");
+		indirizzo.setCap(" ");
 		indirizzo.setProvincia("AV");
 		indirizzo.setCitta("Avellino");
 		ristorante.setIndirizzo(indirizzo);

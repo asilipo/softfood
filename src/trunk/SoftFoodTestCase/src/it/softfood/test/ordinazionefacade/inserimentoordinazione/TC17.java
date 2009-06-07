@@ -74,11 +74,11 @@ public class TC17 extends TestCase {
 		
 		
 		ristorante.setRagioneSociale("Ristorante Test");
-		ristorante.setPartitaIva("012345678");
+		ristorante.setPartitaIva("01234567890");
 		
 		Indirizzo indirizzo = new Indirizzo();
 		indirizzo.setVia("via Roma");
-		indirizzo.setCivico("24 A");
+		indirizzo.setCivico(" ");
 		indirizzo.setCap("83100");
 		indirizzo.setProvincia("AV");
 		indirizzo.setCitta("Avellino");

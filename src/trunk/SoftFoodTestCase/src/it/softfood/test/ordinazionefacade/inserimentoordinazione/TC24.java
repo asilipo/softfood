@@ -79,8 +79,8 @@ public class TC24 extends TestCase {
 		Indirizzo indirizzo = new Indirizzo();
 		indirizzo.setVia("via Roma");
 		indirizzo.setCivico("24 A");
-		indirizzo.setCap("831002");
-		indirizzo.setProvincia("AV");
+		indirizzo.setCap("83100");
+		indirizzo.setProvincia("A");
 		indirizzo.setCitta("Avellino");
 		ristorante.setIndirizzo(indirizzo);
 		
@@ -144,5 +144,6 @@ public class TC24 extends TestCase {
 		}
 		assertNull(ordinazione);
 	}
+
 
 }

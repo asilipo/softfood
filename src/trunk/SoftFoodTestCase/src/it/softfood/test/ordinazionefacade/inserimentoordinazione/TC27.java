@@ -66,29 +66,26 @@ public class TC27 extends TestCase {
 		
 		user = userFacade.login(Ruolo.TEST, "test");
 		
-		tavolo = new Tavolo();
-		tavolo.setNumeroPosti(4);
-		tavolo.setAttivo(true);
-		tavolo.setOccupato(true);
-		tavolo.setRiferimento("Tavolo Test");
+		tavolo = null;
+		
 		
 		
 		ristorante.setRagioneSociale("Ristorante Test");
-		ristorante.setPartitaIva("01234567890");
+		ristorante.setPartitaIva("01234567891");
 		
 		Indirizzo indirizzo = new Indirizzo();
 		indirizzo.setVia("via Roma");
 		indirizzo.setCivico("24 A");
 		indirizzo.setCap("83100");
-		indirizzo.setProvincia("AVE");
+		indirizzo.setProvincia("AV");
 		indirizzo.setCitta("Avellino");
 		ristorante.setIndirizzo(indirizzo);
 		
 		
 		ristorante = ristoranteFacade.inserisciRistorante(user, ristorante); 
-		tavolo.setRistorante(ristorante);
+		//tavolo.setRistorante(ristorante);
 		
-		tavolo = tavoloFacade.inserisciTavolo(user, tavolo);
+		tavolo = tavoloFacade.inserisciTavolo(user, null);
 		
 		pietanza = new Pietanza();
 		pietanza=new Pietanza();
@@ -144,6 +141,5 @@ public class TC27 extends TestCase {
 		}
 		assertNull(ordinazione);
 	}
-
 
 }

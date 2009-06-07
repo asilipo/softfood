@@ -32,7 +32,8 @@ import org.junit.Test;
  * @author Francesco Pacilio
  */
 
-public class TC18 extends TestCase {
+public class TC9 extends TestCase {
+
 	private IOrdinazioneFacade ordinazioneFacade;
 	private LineaOrdinazione lineaOrdinazione;
 	private IArticoloMenuFacade articoloFacade;
@@ -72,8 +73,8 @@ public class TC18 extends TestCase {
 		tavolo.setRiferimento("Tavolo Test");
 		
 		
-		ristorante.setRagioneSociale("Ristorante Test");
-		ristorante.setPartitaIva("0123456789012");
+		ristorante.setRagioneSociale(null);
+		ristorante.setPartitaIva("01234567891");
 		
 		Indirizzo indirizzo = new Indirizzo();
 		indirizzo.setVia("via Roma");
@@ -90,10 +91,10 @@ public class TC18 extends TestCase {
 		tavolo = tavoloFacade.inserisciTavolo(user, tavolo);
 		
 		pietanza = new Pietanza();
-		pietanza = new Pietanza();
+		pietanza=new Pietanza();
 		pietanza.setNome("BEVANDA TEST");
 		pietanza.setTipoPietanza(TipoPietanza.PRIMO_PIATTO.ordinal());
-		pietanza = articoloFacade.inserisciPietanzaMenu(user, pietanza);
+		pietanza=articoloFacade.inserisciPietanzaMenu(user, pietanza);
 		
 		System.out.println("INSERITA PIetanza "+pietanza.getId());
 		
@@ -143,5 +144,4 @@ public class TC18 extends TestCase {
 		}
 		assertNull(ordinazione);
 	}
-
 }

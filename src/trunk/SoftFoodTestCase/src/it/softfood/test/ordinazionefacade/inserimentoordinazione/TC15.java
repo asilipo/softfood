@@ -33,7 +33,6 @@ import org.junit.Test;
  */
 
 public class TC15 extends TestCase {
-
 	private IOrdinazioneFacade ordinazioneFacade;
 	private LineaOrdinazione lineaOrdinazione;
 	private IArticoloMenuFacade articoloFacade;
@@ -74,7 +73,7 @@ public class TC15 extends TestCase {
 		
 		
 		ristorante.setRagioneSociale("Ristorante Test");
-		ristorante.setPartitaIva("");
+		ristorante.setPartitaIva("0123456789012");
 		
 		Indirizzo indirizzo = new Indirizzo();
 		indirizzo.setVia("via Roma");
@@ -91,10 +90,10 @@ public class TC15 extends TestCase {
 		tavolo = tavoloFacade.inserisciTavolo(user, tavolo);
 		
 		pietanza = new Pietanza();
-		pietanza=new Pietanza();
+		pietanza = new Pietanza();
 		pietanza.setNome("BEVANDA TEST");
 		pietanza.setTipoPietanza(TipoPietanza.PRIMO_PIATTO.ordinal());
-		pietanza=articoloFacade.inserisciPietanzaMenu(user, pietanza);
+		pietanza = articoloFacade.inserisciPietanzaMenu(user, pietanza);
 		
 		System.out.println("INSERITA PIetanza "+pietanza.getId());
 		
@@ -144,4 +143,5 @@ public class TC15 extends TestCase {
 		}
 		assertNull(ordinazione);
 	}
+
 }

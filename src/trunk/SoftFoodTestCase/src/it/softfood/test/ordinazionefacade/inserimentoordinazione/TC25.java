@@ -80,7 +80,7 @@ public class TC25 extends TestCase {
 		indirizzo.setVia("via Roma");
 		indirizzo.setCivico("24 A");
 		indirizzo.setCap("83100");
-		indirizzo.setProvincia(" ");
+		indirizzo.setProvincia("AVE");
 		indirizzo.setCitta("Avellino");
 		ristorante.setIndirizzo(indirizzo);
 		
@@ -144,5 +144,6 @@ public class TC25 extends TestCase {
 		}
 		assertNull(ordinazione);
 	}
+
 
 }
