@@ -53,7 +53,7 @@ public class Ristorante implements java.io.Serializable {
 	}
 
 	public Indirizzo getIndirizzo() {
-		if(indirizzo.getCap()!=null && indirizzo.getCitta()!= null && indirizzo.getCivico()!=null && indirizzo.getProvincia()!=null && indirizzo.getVia()!=null )
+		if(indirizzo!= null && indirizzo.getCap()!=null && indirizzo.getCitta()!= null && indirizzo.getCivico()!=null && indirizzo.getProvincia()!=null && indirizzo.getVia()!=null )
 			return this.indirizzo;
 		else return null;
 	}
