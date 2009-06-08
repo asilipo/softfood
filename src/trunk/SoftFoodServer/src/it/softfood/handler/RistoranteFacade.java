@@ -36,12 +36,7 @@ public class RistoranteFacade  {
 			Indirizzo indirizzo = ristorante.getIndirizzo();
 			if (indirizzo != null) {
 				try {
-					String via = indirizzo.getVia();
-					via = indirizzo.getCitta();
-					via = indirizzo.getCap();
-					via = indirizzo.getProvincia();
-					via = indirizzo.getCivico();
-					
+										
 					if (indirizzo.getVia() != null && !indirizzo.getVia().equals("") &&
 							indirizzo.getCitta() != null && !indirizzo.getCitta().equals("") &&
 								indirizzo.getCap() != null && !indirizzo.getCap().equals("") &&
