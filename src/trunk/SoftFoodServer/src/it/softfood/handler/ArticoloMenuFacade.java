@@ -229,7 +229,7 @@ public class ArticoloMenuFacade  {
             return this.verificaIngredientiPietanza(user, pietanza);
         }
 
-        return null;
+        return 0;
     }
 
     public Integer selezionaDisponibilitaBevanda(User user, Long id) {
