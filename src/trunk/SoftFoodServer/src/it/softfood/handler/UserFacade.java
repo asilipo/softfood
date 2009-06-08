@@ -45,8 +45,9 @@ public class UserFacade {
 	}
 
 	public User inserisciUtente(User user, User nuovoUser) {
-		if (user != null && nuovoUser != null && !nuovoUser.getUserName().equals("") &&
-				!nuovoUser.getPassword().equals("")) {
+		if (user != null && nuovoUser != null && nuovoUser.getUserName() != null &&
+				!nuovoUser.getUserName().equals("") && nuovoUser.getPassword() != null &&
+					!nuovoUser.getPassword().equals("") && nuovoUser.getRuolo() != null) {
 			user = userSession.inserisciUser(nuovoUser);
 			return user;
 		}
@@ -75,9 +76,9 @@ public class UserFacade {
 		return null;
 	}
 
-	public boolean modificaRuolo(User user, Ruolo ruolo) {
-		if (user != null && ruolo != null) {
-			boolean v = userSession.modificaRuoloUser(user, ruolo);
+	public boolean modificaRuolo(User user, User userDaModificare, Ruolo ruolo) {
+		if (user != null && userDaModificare != null && ruolo != null) {
+			boolean v = userSession.modificaRuoloUser(userDaModificare, ruolo);
 			return v;
 		}
 
