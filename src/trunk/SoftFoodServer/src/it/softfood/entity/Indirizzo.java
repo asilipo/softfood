@@ -77,7 +77,7 @@ public class Indirizzo implements java.io.Serializable {
 	}
 
 	public void setCivico(String civico) {
-		if(civico.length()<3)
+		if(civico.length()<1)
 			civico = null;
 		this.civico = civico;
 	}
