@@ -15,13 +15,8 @@ public class TestSuiteLogout {
 		TestSuite suite = new TestSuite(
 				"Test for it.softfood.test.userfacade.logout");
 		//$JUnit-BEGIN$
-		suite.addTestSuite(TC3.class);
 		suite.addTestSuite(TC1.class);
-		suite.addTestSuite(TC4.class);
 		suite.addTestSuite(TC2.class);
-		suite.addTestSuite(TC6.class);
-		suite.addTestSuite(TC7.class);
-		suite.addTestSuite(TC5.class);
 		//$JUnit-END$
 		return suite;
 	}
