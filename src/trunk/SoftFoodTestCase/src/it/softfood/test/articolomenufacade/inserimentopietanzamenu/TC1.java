@@ -1,6 +1,5 @@
 package it.softfood.test.articolomenufacade.inserimentopietanzamenu;
 
-import it.softfood.entity.BevandaMagazzino;
 import it.softfood.entity.Pietanza;
 import it.softfood.entity.User;
 import it.softfood.enumeration.Ruolo;
