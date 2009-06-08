@@ -98,8 +98,7 @@ public class TC3 extends TestCase {
 		pietanza.setTipoPietanza(TipoPietanza.PRIMO_PIATTO.ordinal());
 		pietanza=articoloFacade.inserisciPietanzaMenu(user, pietanza);
 		
-		System.out.println("INSERITA PIetanza "+pietanza.getId());
-		
+	
 		ordinazione = new Ordinazione();
 		ordinazione.setCoperti(4);
 		ordinazione.setTerminato(true);
@@ -112,11 +111,9 @@ public class TC3 extends TestCase {
 
 	@After
 	public void tearDown() throws Exception {
-		//ordinazioneFacade.rimuoviOrdinazione(user, ordinazione.getId(), false);		
 		tavoloFacade.rimuoviTavolo(user, tavolo.getId());		
 		boolean verifica = ristoranteFacade.rimuoviRistorante(user, ristorante.getRagioneSociale());		
 		verifica = articoloFacade.rimuoviPietanzaMenu(user, pietanza.getId());
-		System.out.println(verifica+" "+pietanza.getId());
 		userFacade.logout(user);		
 	}
 
