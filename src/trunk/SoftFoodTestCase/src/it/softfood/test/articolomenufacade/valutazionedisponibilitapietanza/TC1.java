@@ -1,6 +1,8 @@
 package it.softfood.test.articolomenufacade.valutazionedisponibilitapietanza;
 
 import it.softfood.entity.Bevanda;
+import it.softfood.entity.Ingrediente;
+import it.softfood.entity.IngredientePietanza;
 import it.softfood.entity.Pietanza;
 import it.softfood.entity.User;
 import it.softfood.enumeration.Ruolo;
@@ -12,6 +14,7 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.security.AccessControlException;
+import java.util.Date;
 
 import junit.framework.TestCase;
 
@@ -31,6 +34,9 @@ public class TC1 extends TestCase {
 	private IArticoloMenuFacade articoloFacade;
 	private User user;
 	private Pietanza pietanza;
+	private Ingrediente ingrediente;
+	private IngredientePietanza ingrediente_pietanza;
+	
 	
 	@Before
 	public void setUp() throws Exception {
@@ -54,21 +60,41 @@ public class TC1 extends TestCase {
 		
 		pietanza=articoloFacade.inserisciPietanzaMenu(user, pietanza);
 		
+		ingrediente=new Ingrediente();
+		ingrediente.setNome("Ingrediente test");
+		ingrediente.setScadenza(new Date(109,10,30));
+		
+		ingrediente=articoloFacade.inserisciIngrediente(user, ingrediente);
+		
+		ingrediente_pietanza=new IngredientePietanza();
+		ingrediente_pietanza.setArticolo(pietanza);
+		ingrediente_pietanza.setIngrediente(ingrediente);
+		ingrediente_pietanza.setQuantita(5);
+		
+		ingrediente_pietanza=articoloFacade.inserisciIngredientePietanza(user, ingrediente_pietanza);
+		
+		articoloFacade.inserisciIngredienteMagazzino(user, ingrediente.getId(), 10);
+		
+		
+		
+	
+		
 		
 	}
 
 	@After
 	public void tearDown() throws Exception {
+		articoloFacade.rimuoviIngrediente(user, ingrediente.getId());
 		articoloFacade.rimuoviPietanzaMenu(user, pietanza.getId());
 		userFacade.logout(user);
 		
 	}
 
 	@Test
-	public void testValutazioneDisponibilitaBevanda() {
+	public void testValutazioneDisponibilitaPietanza() {
 		User user_test=null;
 		try {
-			user_test=userFacade.login(Ruolo.CUOCO, "12345");
+			user_test=userFacade.login(Ruolo.CAMERIERE, "1234");
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			user_test=null;
@@ -79,14 +105,14 @@ public class TC1 extends TestCase {
 		
 		int test_return = 0;
 		try {
-			//test_return=articoloFacade.selezionaDisponibilitaBevanda(user_test, bevanda.getId());
+			test_return=articoloFacade.selezionaDisponibilitaPietanza(user_test, pietanza.getId());
 		} catch (AccessControlException e) {
 			System.out.println(e);
 			test_return = 0;
-		} /*catch (RemoteException e) {
+		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}*/
+		}
 		
 		try {
 			userFacade.logout(user_test);
