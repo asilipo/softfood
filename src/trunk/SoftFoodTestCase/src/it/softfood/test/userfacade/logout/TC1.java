@@ -38,7 +38,7 @@ public class TC1 extends TestCase {
 			System.err.println("Exception to obtain the reference to the remote object: " + e);
 		}
 		
-		user = userFacade.login(Ruolo.CAMERIERE, "123456");
+		user = userFacade.login(Ruolo.CAMERIERE, "1234");
 	}
 
 	@After
