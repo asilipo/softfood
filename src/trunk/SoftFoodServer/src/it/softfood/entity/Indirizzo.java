@@ -87,7 +87,7 @@ public class Indirizzo implements java.io.Serializable {
 	}
 
 	public void setProvincia(String provincia) {
-		if(provincia.length()<5)
+		if(provincia.length()<2)
 			provincia = null;
 		this.provincia = provincia;
 	}
