@@ -86,7 +86,6 @@ public class TC4 extends TestCase {
 		
 		
 		ristorante = ristoranteFacade.inserisciRistorante(user, ristorante); 
-		//ristorante = ristoranteFacade.selezionaRistorantePerRagioneSociale(user, "La taverna");
 		tavolo.setRistorante(ristorante);
 		
 		tavolo = tavoloFacade.inserisciTavolo(user, tavolo);
@@ -96,17 +95,7 @@ public class TC4 extends TestCase {
 		pietanza.setNome("BEVANDA TEST");
 		pietanza.setTipoPietanza(TipoPietanza.PRIMO_PIATTO.ordinal());
 		pietanza=articoloFacade.inserisciPietanzaMenu(user, pietanza);
-		
-		System.out.println("INSERITA PIetanza "+pietanza.getId());
-		
-		ordinazione = new Ordinazione();
-		ordinazione.setCoperti(-4); //Non c'e il controllo che se è negativo ritorna nullo
-		ordinazione.setTerminato(true);
-		ordinazione.setTavolo(tavolo);	
-		ordinazione.setData(new Date(109,5,30));
-		
-		
-		
+			
 	}
 
 	@After
@@ -115,7 +104,6 @@ public class TC4 extends TestCase {
 		tavoloFacade.rimuoviTavolo(user, tavolo.getId());		
 		boolean verifica = ristoranteFacade.rimuoviRistorante(user, ristorante.getRagioneSociale());		
 		verifica = articoloFacade.rimuoviPietanzaMenu(user, pietanza.getId());
-		System.out.println(verifica+" "+pietanza.getId());
 		userFacade.logout(user);		
 	}
 
@@ -130,9 +118,13 @@ public class TC4 extends TestCase {
 		}		
 		
 		try {
+			ordinazione = new Ordinazione();
+			ordinazione.setCoperti(-4); 
+			ordinazione.setTerminato(true);
+			ordinazione.setTavolo(tavolo);	
+			ordinazione.setData(new Date(109,5,30));
 			
 			ordinazione = ordinazioneFacade.inserisciOrdinazione(user_test, ordinazione);
-			System.out.println(tavolo.getNumeroPosti());
 		} catch (Exception e) {
 			System.out.println(e);
 			ordinazione = null;

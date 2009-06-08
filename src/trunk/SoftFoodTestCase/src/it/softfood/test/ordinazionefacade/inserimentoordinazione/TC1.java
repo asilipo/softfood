@@ -47,7 +47,7 @@ public class TC1 extends TestCase {
 	private Ordinazione ordinazione;
 	private Tavolo tavolo;
 	private ITavoloFacade tavoloFacade;
-	private Ristorante ristorante = new Ristorante();
+	private Ristorante ristorante;
 	
 
 	@Before
@@ -72,10 +72,10 @@ public class TC1 extends TestCase {
 		tavolo = new Tavolo();
 		tavolo.setNumeroPosti(4);
 		tavolo.setAttivo(true);
-		tavolo.setOccupato(true);
+		tavolo.setOccupato(false);
 		tavolo.setRiferimento("Tavolo Test");
 		
-		
+		ristorante = new Ristorante();
 		ristorante.setRagioneSociale("Ristorante Test");
 		ristorante.setPartitaIva("01234567891");
 		
@@ -83,13 +83,11 @@ public class TC1 extends TestCase {
 		indirizzo.setVia("via Roma");
 		indirizzo.setCivico("24 A");
 		indirizzo.setCap("83100");
-		indirizzo.setProvincia("AV");
+		indirizzo.setProvincia("Av");
 		indirizzo.setCitta("Avellino");
 		ristorante.setIndirizzo(indirizzo);
 		
-		
-		ristorante = ristoranteFacade.inserisciRistorante(user, ristorante); 
-		//ristorante = ristoranteFacade.selezionaRistorantePerRagioneSociale(user, "La taverna");
+		ristorante = ristoranteFacade.inserisciRistorante(user, ristorante);
 		tavolo.setRistorante(ristorante);
 		
 		tavolo = tavoloFacade.inserisciTavolo(user, tavolo);
@@ -100,7 +98,6 @@ public class TC1 extends TestCase {
 		pietanza.setTipoPietanza(TipoPietanza.PRIMO_PIATTO.ordinal());
 		pietanza=articoloFacade.inserisciPietanzaMenu(user, pietanza);
 		
-		System.out.println("INSERITA PIetanza "+pietanza.getId());
 		
 		ordinazione = new Ordinazione();
 		ordinazione.setCoperti(4);
@@ -116,9 +113,8 @@ public class TC1 extends TestCase {
 	public void tearDown() throws Exception {
 		ordinazioneFacade.rimuoviOrdinazione(user, ordinazione.getId(), false);		
 		tavoloFacade.rimuoviTavolo(user, tavolo.getId());		
+		articoloFacade.rimuoviPietanzaMenu(user, pietanza.getId());
 		boolean verifica = ristoranteFacade.rimuoviRistorante(user, ristorante.getRagioneSociale());		
-		verifica = articoloFacade.rimuoviPietanzaMenu(user, pietanza.getId());
-		System.out.println(verifica+" "+pietanza.getId());
 		userFacade.logout(user);		
 	}
 
@@ -142,6 +138,7 @@ public class TC1 extends TestCase {
 		
 		try {
 			userFacade.logout(user_test);
+
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			System.out.println(e);

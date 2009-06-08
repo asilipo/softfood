@@ -42,10 +42,9 @@ public class TC5 extends TestCase {
 	private User user;
 	private Pietanza pietanza;
 	private Ordinazione ordinazione;
-	private Tavolo tavolo;
 	private ITavoloFacade tavoloFacade;
 	private Ristorante ristorante = new Ristorante();
-	
+	private Tavolo tavolo;
 
 	@Before
 	public void setUp() throws Exception {
@@ -65,16 +64,16 @@ public class TC5 extends TestCase {
 		}
 		
 		user = userFacade.login(Ruolo.TEST, "test");
-		
+
 		tavolo = new Tavolo();
 		tavolo.setNumeroPosti(4);
 		tavolo.setAttivo(true);
 		tavolo.setOccupato(true);
 		tavolo.setRiferimento("Tavolo Test");
 		
-		
 		ristorante.setRagioneSociale("Ristorante Test");
 		ristorante.setPartitaIva("01234567891");
+		
 		
 		Indirizzo indirizzo = new Indirizzo();
 		indirizzo.setVia("via Roma");
@@ -86,10 +85,8 @@ public class TC5 extends TestCase {
 		
 		
 		ristorante = ristoranteFacade.inserisciRistorante(user, ristorante); 
-		//ristorante = ristoranteFacade.selezionaRistorantePerRagioneSociale(user, "La taverna");
+			
 		tavolo.setRistorante(ristorante);
-		
-		tavolo = tavoloFacade.inserisciTavolo(user, tavolo);
 		
 		pietanza = new Pietanza();
 		pietanza=new Pietanza();
@@ -97,13 +94,8 @@ public class TC5 extends TestCase {
 		pietanza.setTipoPietanza(TipoPietanza.PRIMO_PIATTO.ordinal());
 		pietanza=articoloFacade.inserisciPietanzaMenu(user, pietanza);
 		
-		System.out.println("INSERITA PIetanza "+pietanza.getId());
 		
-		ordinazione = new Ordinazione();
-		ordinazione.setCoperti(4); //Non c'e il controllo che se è negativo ritorna nullo
-		ordinazione.setTerminato(true);
-		ordinazione.setTavolo(tavolo);	
-		ordinazione.setData(null);
+		
 		
 		
 		
@@ -111,11 +103,9 @@ public class TC5 extends TestCase {
 
 	@After
 	public void tearDown() throws Exception {
-		//ordinazioneFacade.rimuoviOrdinazione(user, ordinazione.getId(), false);		
-		tavoloFacade.rimuoviTavolo(user, tavolo.getId());		
-		boolean verifica = ristoranteFacade.rimuoviRistorante(user, ristorante.getRagioneSociale());		
-		verifica = articoloFacade.rimuoviPietanzaMenu(user, pietanza.getId());
-		System.out.println(verifica+" "+pietanza.getId());
+		tavoloFacade.rimuoviTavolo(user, tavolo.getId());
+		ristoranteFacade.rimuoviRistorante(user, ristorante.getRagioneSociale());		
+		articoloFacade.rimuoviPietanzaMenu(user, pietanza.getId());
 		userFacade.logout(user);		
 	}
 
@@ -130,9 +120,9 @@ public class TC5 extends TestCase {
 		}		
 		
 		try {
+			ordinazione = new Ordinazione();
 			
-			ordinazione = ordinazioneFacade.inserisciOrdinazione(user_test, ordinazione);
-			System.out.println(tavolo.getNumeroPosti());
+			ordinazione = ordinazioneFacade.inserisciOrdinazione(user_test, null);
 		} catch (Exception e) {
 			System.out.println(e);
 			ordinazione = null;
