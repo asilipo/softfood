@@ -43,7 +43,7 @@ public class TC1 extends TestCase {
 		
 		userInserito = new User();
 		userInserito.setPassword("10000");
-		userInserito.setRuolo(Ruolo.CAMERIERE.toString());
+		userInserito.setRuolo(Ruolo.CUOCO.toString());
 		userInserito.setUserName("Cameriere Test");
 		userFacade.inserisciUtente(user, userInserito);
 	}
@@ -58,9 +58,9 @@ public class TC1 extends TestCase {
 	public void testModificaRuolo() {
 		Boolean valoreAttuale = false;
 		try {
-			valoreAttuale = userFacade.modificaRuolo(user, Ruolo.CAMERIERE);
+			valoreAttuale = userFacade.modificaRuolo(user, userInserito, Ruolo.CAMERIERE);
 		} catch (RemoteException e) {
-			e.printStackTrace();
+			valoreAttuale = false;
 		}
 		
 		assertTrue(valoreAttuale);

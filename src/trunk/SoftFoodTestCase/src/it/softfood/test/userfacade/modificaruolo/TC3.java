@@ -44,7 +44,7 @@ public class TC3 extends TestCase {
 		
 		userInserito = new User();
 		userInserito.setPassword("10000");
-		userInserito.setRuolo(Ruolo.CAMERIERE.toString());
+		userInserito.setRuolo(Ruolo.CUOCO.toString());
 		userInserito.setUserName("Cameriere Test");
 		userFacade.inserisciUtente(user, userInserito);
 	}
@@ -61,14 +61,14 @@ public class TC3 extends TestCase {
 		User user1 = null;
 		try {
 			user1 = userFacade.login(Ruolo.CAMERIERE, "1234");
-			valoreAttuale = userFacade.modificaRuolo(user1, Ruolo.CAMERIERE);
+			valoreAttuale = userFacade.modificaRuolo(user, user1, Ruolo.CAMERIERE);
 		} catch (RemoteException e) {
-			e.printStackTrace();
+			valoreAttuale = false;
 		} catch (AccessControlException ace) {
 			try {
 				userFacade.logout(user1);
 			} catch (RemoteException e) {
-				e.printStackTrace();
+				valoreAttuale = false;
 			}
 		}
 		
