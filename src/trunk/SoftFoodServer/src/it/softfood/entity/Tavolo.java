@@ -16,7 +16,7 @@ public class Tavolo implements java.io.Serializable {
 	private Long id;
 	private Ristorante ristorante;
 	private boolean attivo;
-	private int numeroPosti;
+	private Integer numeroPosti;
 	private boolean occupato;
 	private String riferimento;
 	private Set<Ordinazione> ordinaziones = new HashSet<Ordinazione>(0);
@@ -70,11 +70,11 @@ public class Tavolo implements java.io.Serializable {
 		this.attivo = attivo;
 	}
 
-	public int getNumeroPosti() {
+	public Integer getNumeroPosti() {
 		return this.numeroPosti;
 	}
 
-	public void setNumeroPosti(int numeroPosti) {
+	public void setNumeroPosti(Integer numeroPosti) {
 		this.numeroPosti = numeroPosti;
 	}
 
