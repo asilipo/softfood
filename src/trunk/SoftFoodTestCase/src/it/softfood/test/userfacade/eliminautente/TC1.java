@@ -59,7 +59,7 @@ public class TC1 extends TestCase {
 		try {
 			stato = userFacade.eliminaUtente(user, userInserito);
 		} catch (RemoteException e) {
-			stato = false;
+			e.printStackTrace();
 		}
 		
 		assertTrue(stato);
