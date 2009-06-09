@@ -42,13 +42,12 @@ grant Principal it.softfood.entity.User "CAMERIERE" {
     permission it.softfood.aspect.OperationPermission "aggiornaMagazzinoIngredienti";
     permission it.softfood.aspect.OperationPermission "aggiornaMagazzinoBevande";
     permission it.softfood.aspect.OperationPermission "verificaDisponibilitaIngredientiPietanza";
+    permission it.softfood.aspect.OperationPermission "selezionaTavoliNonAttivi";
 }; 
-
 grant Principal it.softfood.entity.User "CASSIERE" {
     permission  it.softfood.aspect.OperationPermission "login"; 
     permission  it.softfood.aspect.OperationPermission "logout";
 };
-  
 grant Principal it.softfood.entity.User "CUOCO"{
 	permission  it.softfood.aspect.OperationPermission "selezionaDisponibilitaBevanda";
     permission  it.softfood.aspect.OperationPermission "login"; 
@@ -108,8 +107,6 @@ grant Principal it.softfood.entity.User "CUOCO"{
     permission  it.softfood.aspect.OperationPermission "modificaOrdinazione";
     permission  it.softfood.aspect.OperationPermission "setLineaEvasa";
 };
-
-  
 grant Principal it.softfood.entity.User "AMMINISTRATORE"{
   permission it.softfood.aspect.OperationPermission "login"; 
   permission it.softfood.aspect.OperationPermission "logout";
@@ -119,8 +116,11 @@ grant Principal it.softfood.entity.User "AMMINISTRATORE"{
   permission it.softfood.aspect.OperationPermission "modificaRuolo";
   permission it.softfood.aspect.OperationPermission "eliminaUtente";
   permission it.softfood.aspect.OperationPermission "selezionaUtente";
-  permission it.softfood.aspect.OperationPermission "inserisciOrdinazione";
-
+  permission it.softfood.aspect.OperationPermission "inserisciTavolo";
+  permission it.softfood.aspect.OperationPermission "selezionaRistorantePerPartitaIva";
+  permission it.softfood.aspect.OperationPermission "selezionaRistorantePerRagioneSociale";
+  permission it.softfood.aspect.OperationPermission "rimuoviTavolo";
+  permission it.softfood.aspect.OperationPermission "selezionaTavolo";
 }; 
 grant Principal it.softfood.entity.User "TEST"{
   	permission java.security.AllPermission;
