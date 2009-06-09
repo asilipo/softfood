@@ -83,8 +83,18 @@ public class TC3 extends TestCase {
 			e.printStackTrace();
 		} catch (AccessControlException ace) {
 			tavoliAttuali = null;
+			try {
+				userFacade.logout(user1);
+			} catch (RemoteException e) {
+				e.printStackTrace();
+			}
 		} catch (NullPointerException npe) {
 			tavoliAttuali = null;
+			try {
+				userFacade.logout(user1);
+			} catch (RemoteException e) {
+				e.printStackTrace();
+			}
 		}
 		
 		assertNull(tavoliAttuali);
