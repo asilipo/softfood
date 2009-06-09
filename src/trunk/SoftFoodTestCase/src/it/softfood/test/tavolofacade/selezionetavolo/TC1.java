@@ -45,6 +45,7 @@ public class TC1 extends TestCase {
 			ristoranteFacade = (IRistoranteFacade) registry.lookup("RistoranteFacade");
 		} catch (Exception e) {
 			System.err.println("Exception to obtain the reference to the remote object: " + e);
+			fail("Exception");
 		}
 		
 		user = userFacade.login(Ruolo.AMMINISTRATORE, "123456");
@@ -77,7 +78,7 @@ public class TC1 extends TestCase {
 			tavoloAttuale = tavoloFacade.selezionaTavolo(user1, 1000000L);
 			userFacade.logout(user1);
 		} catch (RemoteException e) {
-				e.printStackTrace();
+			fail("RemoteException");
 		}
 		
 		assertTrue(tavoloAttuale.equals(tavoloInserito));
