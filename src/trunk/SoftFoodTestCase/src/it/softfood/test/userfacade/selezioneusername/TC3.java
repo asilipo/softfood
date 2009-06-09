@@ -38,6 +38,7 @@ public class TC3 extends TestCase {
 			userFacade = (IUserFacade) registry.lookup("UserFacade");
 		} catch (Exception e) {
 			System.err.println("Exception to obtain the reference to the remote object: " + e);
+			fail("Exception");
 		}
 		
 		user = userFacade.login(Ruolo.AMMINISTRATORE, "123456");
@@ -63,7 +64,7 @@ public class TC3 extends TestCase {
 			user1 = userFacade.login(Ruolo.CASSIERE, "1234");
 			userAttuale = userFacade.selezionaUserName(user1, userInserito);
 		} catch (RemoteException e) {
-			e.printStackTrace();
+			fail("RemoteException");
 		} catch (NullPointerException npe) {
 			userAttuale = null;
 		} catch (AccessControlException ace) {
