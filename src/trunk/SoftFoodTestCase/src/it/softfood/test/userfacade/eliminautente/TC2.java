@@ -64,16 +64,13 @@ public class TC2 extends TestCase {
 			stato = userFacade.eliminaUtente(user1, userInserito);
 			userFacade.logout(user1);
 		} catch (RemoteException e) {
-			stato = false;
-			try {
-				userFacade.logout(user1);
-			} catch (RemoteException e1) {
-			}
+			e.printStackTrace();
 		} catch (AccessControlException ace) {
 			stato = false;
 			try {
 				userFacade.logout(user1);
 			} catch (RemoteException e) {
+				e.printStackTrace();
 			}
 		}
 		
