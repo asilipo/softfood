@@ -60,7 +60,7 @@ public class TC5 extends TestCase {
 		try {
 			userAttuale = userFacade.selezionaUtentePerUserPassword("Cameriere Test", " ");
 		} catch (RemoteException e) {
-			e.printStackTrace();
+			fail("RemoteException");
 		} catch (NullPointerException npe) {
 			userAttuale = null;
 		}
