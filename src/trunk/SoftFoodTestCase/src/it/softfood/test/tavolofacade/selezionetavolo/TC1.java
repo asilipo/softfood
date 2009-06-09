@@ -77,7 +77,7 @@ public class TC1 extends TestCase {
 			tavoloAttuale = tavoloFacade.selezionaTavolo(user1, 1000000L);
 			userFacade.logout(user1);
 		} catch (RemoteException e) {
-			e.printStackTrace();
+			assertFalse(true);
 		}
 		
 		assertTrue(tavoloAttuale.equals(tavoloInserito));
