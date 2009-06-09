@@ -63,12 +63,13 @@ public class TC3 extends TestCase {
 			user1 = userFacade.login(Ruolo.CAMERIERE, "1234");
 			valoreAttuale = userFacade.modificaRuolo(user, user1, Ruolo.CAMERIERE);
 		} catch (RemoteException e) {
-			valoreAttuale = false;
+			fail("RemoteException");
 		} catch (AccessControlException ace) {
 			try {
+				valoreAttuale = false;
 				userFacade.logout(user1);
 			} catch (RemoteException e) {
-				valoreAttuale = false;
+				fail("RemoteException");
 			}
 		}
 		
