@@ -7,6 +7,7 @@ import it.softfood.handler.IUserFacade;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.security.AccessControlException;
 
 import junit.framework.TestCase;
 
@@ -37,6 +38,7 @@ public class TC5 extends TestCase {
 			userFacade = (IUserFacade) registry.lookup("UserFacade");
 		} catch (Exception e) {
 			System.err.println("Exception to obtain the reference to the remote object: " + e);
+			fail("Exception");
 		}
 		
 		user = userFacade.login(Ruolo.AMMINISTRATORE, "123456");
@@ -60,10 +62,13 @@ public class TC5 extends TestCase {
 		try {
 			valoreAttuale = userFacade.modificaRuolo(null, userInserito, Ruolo.CAMERIERE);
 		} catch (RemoteException e) {
-			valoreAttuale = false;
+			fail("RemoteException");
 		} catch (NullPointerException npe) {
 			valoreAttuale = false;
+		} catch (AccessControlException ace) {
+			valoreAttuale = false;
 		}
+		
 		
 		assertFalse(valoreAttuale);
 	}

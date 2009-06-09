@@ -37,6 +37,7 @@ public class TC1 extends TestCase {
 			userFacade = (IUserFacade) registry.lookup("UserFacade");
 		} catch (Exception e) {
 			System.err.println("Exception to obtain the reference to the remote object: " + e);
+			fail("Exception");
 		}
 		
 		user = userFacade.login(Ruolo.AMMINISTRATORE, "123456");
@@ -60,7 +61,7 @@ public class TC1 extends TestCase {
 		try {
 			valoreAttuale = userFacade.modificaRuolo(user, userInserito, Ruolo.CAMERIERE);
 		} catch (RemoteException e) {
-			valoreAttuale = false;
+			fail("RemoteException");
 		}
 		
 		assertTrue(valoreAttuale);
