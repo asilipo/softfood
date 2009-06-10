@@ -10,6 +10,8 @@ import java.util.Set;
 
 import it.softfood.entity.Articolo;
 import it.softfood.entity.Indirizzo;
+import it.softfood.entity.Ingrediente;
+import it.softfood.entity.IngredientePietanza;
 import it.softfood.entity.LineaOrdinazione;
 import it.softfood.entity.Ordinazione;
 import it.softfood.entity.Pietanza;
@@ -53,7 +55,8 @@ public class TC1 extends TestCase {
 	private ITavoloFacade tavoloFacade;
 	private Ristorante ristorante;
 	private LineaOrdinazione lineaordinazione;
-	
+	private Ingrediente ingrediente;
+	private IngredientePietanza ingrediente_pietanza;
 
 	@Before
 	public void setUp() throws Exception {
@@ -77,18 +80,61 @@ public class TC1 extends TestCase {
 		tavolo = new Tavolo();
 		tavolo.setNumeroPosti(4);
 		tavolo.setAttivo(true);
-		tavolo.setOccupato(false);
+		tavolo.setOccupato(true);
 		tavolo.setRiferimento("Tavolo Test");
 		
 		
+//		ristorante.setRagioneSociale("Ristorante Test");
+//		ristorante.setPartitaIva("01234567891");
+//		
+//		Indirizzo indirizzo = new Indirizzo();
+//		indirizzo.setVia("via Roma");
+//		indirizzo.setCivico("24 A");
+//		indirizzo.setCap("83100");
+//		indirizzo.setProvincia("AV");
+//		indirizzo.setCitta("Avellino");
+//		ristorante.setIndirizzo(indirizzo);
+//		
+//		
+//		ristorante = ristoranteFacade.inserisciRistorante(user, ristorante); 
+		ristorante = ristoranteFacade.selezionaRistorantePerRagioneSociale(user, "La taverna");
+		tavolo.setRistorante(ristorante);
 		
+		System.out.println("RISTORANTE "+ristorante.getRagioneSociale());
+		
+		tavolo = tavoloFacade.inserisciTavolo(user, tavolo);
+		
+		System.out.println("INSERITA TAVOLO "+tavolo.getId());
 		
 		pietanza = new Pietanza();
+		pietanza=new Pietanza();
 		pietanza.setNome("BEVANDA TEST");
 		pietanza.setTipoPietanza(TipoPietanza.PRIMO_PIATTO.ordinal());
-		pietanza = articoloFacade.inserisciPietanzaMenu(user, pietanza);
+		pietanza=articoloFacade.inserisciPietanzaMenu(user, pietanza);
 		
-		System.out.println("PIET "+pietanza);
+		ingrediente = new Ingrediente();
+		ingrediente.setNome("INGREDIENTE TEST");
+		ingrediente.setScadenza(new Date(109,5,30));
+		ingrediente=articoloFacade.inserisciIngrediente(user, ingrediente);
+		
+		articoloFacade.inserisciIngredienteMagazzino(user, ingrediente.getId(), 100);
+		
+		ingrediente_pietanza = new IngredientePietanza();
+		ingrediente_pietanza.setArticolo(pietanza);
+		ingrediente_pietanza.setIngrediente(ingrediente);
+		ingrediente_pietanza.setQuantita(1);
+		ingrediente_pietanza=articoloFacade.inserisciIngredientePietanza(user, ingrediente_pietanza);
+		
+		System.out.println("INSERITA PIetanza "+pietanza.getId());
+		
+		ordinazione = new Ordinazione();
+		ordinazione.setCoperti(4);
+		ordinazione.setTerminato(true);
+		ordinazione.setTavolo(tavolo);	
+		//ordinazione.setData(new Date(109,5,30));
+		
+		ordinazione = ordinazioneFacade.inserisciOrdinazione(user, ordinazione);
+		System.out.println("ORDI "+ordinazione);
 		
 		
 	
@@ -96,9 +142,12 @@ public class TC1 extends TestCase {
 
 	@After
 	public void tearDown() throws Exception {
-		articoloFacade.rimuoviPietanzaMenu(user, pietanza.getId());
-		tavoloFacade.rimuoviTavolo(user, tavolo.getId());		
+		
 		ordinazioneFacade.rimuoviOrdinazione(user, ordinazione.getId(), false);
+		tavoloFacade.rimuoviTavolo(user, tavolo.getId());		
+		articoloFacade.rimuoviPietanzaMenu(user, pietanza.getId());
+		articoloFacade.rimuoviIngrediente(user, ingrediente.getId());
+//		ristoranteFacade.rimuoviRistorante(user, ristorante.getRagioneSociale());
 		userFacade.logout(user);		
 	}
 
@@ -106,7 +155,7 @@ public class TC1 extends TestCase {
 	public void testInserimentoLineaOrdinazione() throws Exception {
 		User user_test = null;
 		try {
-			user_test = userFacade.login(Ruolo.AMMINISTRATORE, "123456");
+			user_test = userFacade.login(Ruolo.CAMERIERE, "1234");
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			user_test = null;
@@ -114,26 +163,14 @@ public class TC1 extends TestCase {
 		
 		try {
 			
-			tavolo = tavoloFacade.inserisciTavolo(user, tavolo);
-			System.out.println("TAV "+tavolo);
-			
-			ordinazione = new Ordinazione();
-			ordinazione.setCoperti(4);
-			ordinazione.setTerminato(true);
-			ordinazione.setTavolo(tavolo);	
-			ordinazione.setData(new Date(109,5,30));
-			
-			ordinazione = ordinazioneFacade.inserisciOrdinazione(user, ordinazione);
-			System.out.println("ORDI "+ordinazione);
-			
 			
 			lineaordinazione = new LineaOrdinazione();
 			lineaordinazione.setArticolo(pietanza);
 			lineaordinazione.setEvaso(false);
-			lineaordinazione.setQuantita(12);
+			lineaordinazione.setQuantita(1);
 			lineaordinazione.setOrdinazione(ordinazione);
 			
-			lineaordinazione = ordinazioneFacade.inserisciLineaOrdinazione(user_test, lineaOrdinazione);
+			lineaordinazione = ordinazioneFacade.inserisciLineaOrdinazione(user_test, lineaordinazione);
 			
 		} catch (Exception e) {
 			System.out.println(e);
