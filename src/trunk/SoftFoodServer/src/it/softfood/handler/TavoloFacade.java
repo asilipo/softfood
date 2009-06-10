@@ -36,7 +36,7 @@ public class TavoloFacade implements ITavoloFacade {
 
 	public Tavolo inserisciTavolo(User user, Tavolo tavolo) {
 		if (user != null && tavolo != null && tavolo.getRiferimento() != null && !tavolo.getRiferimento().equals("") &&
-				tavolo.getNumeroPosti() != null && tavolo.getNumeroPosti() >= 0)
+				tavolo.getNumeroPosti() != null && tavolo.getNumeroPosti() >= 0 && tavolo.getRistorante() != null)
 			return tavoloSession.inserisciTavolo(tavolo);
 		
 		return null;

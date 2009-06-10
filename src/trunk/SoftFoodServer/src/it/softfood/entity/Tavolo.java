@@ -108,14 +108,11 @@ public class Tavolo implements java.io.Serializable {
 		int result = 1;
 		result = prime * result + (attivo ? 1231 : 1237);
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + numeroPosti;
+		result = prime * result
+				+ ((numeroPosti == null) ? 0 : numeroPosti.hashCode());
 		result = prime * result + (occupato ? 1231 : 1237);
 		result = prime * result
-				+ ((ordinaziones == null) ? 0 : ordinaziones.hashCode());
-		result = prime * result
 				+ ((riferimento == null) ? 0 : riferimento.hashCode());
-		result = prime * result
-				+ ((ristorante == null) ? 0 : ristorante.hashCode());
 		return result;
 	}
 
@@ -135,14 +132,12 @@ public class Tavolo implements java.io.Serializable {
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
-		if (numeroPosti != other.numeroPosti)
+		if (numeroPosti == null) {
+			if (other.numeroPosti != null)
+				return false;
+		} else if (!numeroPosti.equals(other.numeroPosti))
 			return false;
 		if (occupato != other.occupato)
-			return false;
-		if (ordinaziones == null) {
-			if (other.ordinaziones != null)
-				return false;
-		} else if (!ordinaziones.equals(other.ordinaziones))
 			return false;
 		if (riferimento == null) {
 			if (other.riferimento != null)
