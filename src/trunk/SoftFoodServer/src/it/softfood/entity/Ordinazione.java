@@ -16,7 +16,7 @@ public class Ordinazione implements java.io.Serializable {
 	
 	private Long id;
 	private Tavolo tavolo;
-	private int coperti;
+	private Integer coperti;
 	private Date data;
 	private Double sconto;
 	private boolean terminato;
@@ -65,11 +65,11 @@ public class Ordinazione implements java.io.Serializable {
 		this.tavolo = tavolo;
 	}
 
-	public int getCoperti() {
+	public Integer getCoperti() {
 		return this.coperti;
 	}
 
-	public void setCoperti(int coperti) {
+	public void setCoperti(Integer coperti) {
 		this.coperti = coperti;
 	}
 
