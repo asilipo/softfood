@@ -79,7 +79,7 @@ public class TC3 extends TestCase {
 	@Test
 	public void testSelezioneOrdinazione() throws RemoteException {
 		
-		User user1 = userFacade.login(Ruolo.CASSIERE, "12345");
+		User user1 = userFacade.login(Ruolo.CASSIERE, "1234567");
 
 		
 		Ordinazione ordinazioneAttuale = null;
