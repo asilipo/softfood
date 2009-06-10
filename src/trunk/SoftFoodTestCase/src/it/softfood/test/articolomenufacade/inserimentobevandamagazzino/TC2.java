@@ -43,32 +43,42 @@ public class TC2 extends TestCase {
 			userFacade = (IUserFacade) registry.lookup("UserFacade");
 		} catch (Exception e) {
 			System.err.println("Exception to obtain the reference to the remote object: " + e);
+			fail("Exception");
 		}
 		
-		user = userFacade.login(Ruolo.TEST, "test");
-		
-		}
+		user = userFacade.login(Ruolo.TEST, "test");	
+	}
 
 	@After
 	public void tearDown() throws Exception {
-		
 		userFacade.logout(user);
 	}
 
 	@Test
-	public void testInserimentoBevandaMagazzino() throws RemoteException {
+	public void testInserimentoBevandaMagazzino() {
+		User user_test = null;
 		
-		User user_test = userFacade.login(Ruolo.AMMINISTRATORE, "123456");
-		
-		bevanda = null;
-		try{	
+		try {
+			user_test = userFacade.login(Ruolo.AMMINISTRATORE, "123456");
+		} catch (RemoteException e1) {
+			fail("RemoteException");
+		}
+
+		try {	
 			bevanda = articoloFacade.inserisciBevandaMagazzino(user_test, 1000000L, 100);
-		}catch(AccessControlException e){
+		} catch(AccessControlException e){
 			bevanda = null;
+		} catch (RemoteException e) {
+			fail("RemoteException");
 		}
 		
-		userFacade.logout(user_test);
+		try {
+			userFacade.logout(user_test);
+		} catch (RemoteException e) {
+			fail("RemoteException");
+		}
 		
 		Assert.assertNull(bevanda);
 	}
+	
 }
