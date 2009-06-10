@@ -113,7 +113,7 @@ public class TC1 extends TestCase {
 	}
 
 	@Test
-	public void testInserisciOrdinazione() throws Exception {
+	public void testRimozioneOrdinazione() throws Exception {
 		User user_test = null;
 		try {
 			user_test = userFacade.login(Ruolo.CAMERIERE, "1234");

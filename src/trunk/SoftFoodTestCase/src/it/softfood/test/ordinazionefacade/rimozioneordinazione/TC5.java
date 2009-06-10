@@ -1,11 +1,17 @@
 package it.softfood.test.ordinazionefacade.rimozioneordinazione;
 
+import it.softfood.entity.Indirizzo;
 import it.softfood.entity.LineaOrdinazione;
 import it.softfood.entity.Ordinazione;
+import it.softfood.entity.Pietanza;
+import it.softfood.entity.Ristorante;
 import it.softfood.entity.Tavolo;
 import it.softfood.entity.User;
 import it.softfood.enumeration.Ruolo;
+import it.softfood.enumeration.TipoPietanza;
+import it.softfood.handler.IArticoloMenuFacade;
 import it.softfood.handler.IOrdinazioneFacade;
+import it.softfood.handler.IRistoranteFacade;
 import it.softfood.handler.ITavoloFacade;
 import it.softfood.handler.IUserFacade;
 
@@ -32,14 +38,18 @@ import org.junit.Test;
 public class TC5 extends TestCase {
 	
 	private IOrdinazioneFacade ordinazioneFacade;
+	private LineaOrdinazione lineaOrdinazione;
+	private IArticoloMenuFacade articoloFacade;
+	private IRistoranteFacade ristoranteFacade;
 	private IUserFacade userFacade;
 	private User user;
-	private ITavoloFacade tavoloFacade;
-	private long id;
+	private Pietanza pietanza;
 	private Ordinazione ordinazione;
-	private List<Tavolo> tavolo;
-	private LineaOrdinazione lineaOrdinazione;
+	private Tavolo tavolo;
+	private ITavoloFacade tavoloFacade;
+	private Ristorante ristorante;
 	
+
 	@Before
 	public void setUp() throws Exception {
 		System.setProperty("java.security.policy", "polis.policy");
@@ -48,60 +58,89 @@ public class TC5 extends TestCase {
 		}
 		try {
 			Registry registry = LocateRegistry.getRegistry("localhost");
-			ordinazioneFacade = (IOrdinazioneFacade) registry.lookup("OrdineFacade"); //CONTROLLARE
-			//ristoranteFacade = (IRistoranteFacade) registry.lookup("RistoranteFacade");
-			tavoloFacade = (ITavoloFacade) registry.lookup("TavoloFacade");
+			articoloFacade = (IArticoloMenuFacade) registry.lookup("ArticoloFacade");
+			ordinazioneFacade =(IOrdinazioneFacade) registry.lookup("OrdineFacade");	
+			tavoloFacade =(ITavoloFacade) registry.lookup("TavoloFacade");
 			userFacade = (IUserFacade) registry.lookup("UserFacade");
+			ristoranteFacade = (IRistoranteFacade)registry.lookup("RistoranteFacade");
 		} catch (Exception e) {
 			System.err.println("Exception to obtain the reference to the remote object: " + e);
 		}
 		
 		user = userFacade.login(Ruolo.TEST, "test");
 		
-		LineaOrdinazione linea = ordinazioneFacade.selezionaLineaOrdinazionePerId(user, 10L);
-			
+		tavolo = new Tavolo();
+		tavolo.setNumeroPosti(4);
+		tavolo.setAttivo(true);
+		tavolo.setOccupato(false);
+		tavolo.setRiferimento("Tavolo Test");
+		
+		ristorante = new Ristorante();
+		ristorante.setRagioneSociale("Ristorante Test");
+		ristorante.setPartitaIva("01234567891");
+		
+		Indirizzo indirizzo = new Indirizzo();
+		indirizzo.setVia("via Roma");
+		indirizzo.setCivico("24 A");
+		indirizzo.setCap("83100");
+		indirizzo.setProvincia("Av");
+		indirizzo.setCitta("Avellino");
+		ristorante.setIndirizzo(indirizzo);
+		
+		ristorante = ristoranteFacade.inserisciRistorante(user, ristorante);
+		tavolo.setRistorante(ristorante);
+		
+		tavolo = tavoloFacade.inserisciTavolo(user, tavolo);
+		
+		pietanza = new Pietanza();
+		pietanza=new Pietanza();
+		pietanza.setNome("BEVANDA TEST");
+		pietanza.setTipoPietanza(TipoPietanza.PRIMO_PIATTO.ordinal());
+		pietanza=articoloFacade.inserisciPietanzaMenu(user, pietanza);
+		
 		ordinazione = new Ordinazione();
-		ordinazione.setData(new Date(109,1,21));
-		ordinazione.setId( (long)1000000 );
 		ordinazione.setCoperti(4);
-		tavolo = tavoloFacade.selezionaTavoliLiberi(user);
+		ordinazione.setTerminato(true);
+		ordinazione.setTavolo(tavolo);	
+		ordinazione.setData(new Date(109,5,30));
 		
-		id = tavolo.get(0).getId();
-		ordinazione.setTavolo(tavolo.get(0));
-		ordinazione.setId(100000L);
-		ordinazione.setTerminato(false);
-	
+		ordinazione = ordinazioneFacade.inserisciOrdinazione(user, ordinazione);
 		
 		
-		ordinazioneFacade.inserisciOrdinazione(user, ordinazione);
-		
-		
-		
-		}
+	}
 
 	@After
 	public void tearDown() throws Exception {
 		ordinazioneFacade.rimuoviOrdinazione(user, ordinazione.getId(), false);
-		userFacade.logout(user); //da togliere
+		articoloFacade.rimuoviPietanzaMenu(user, pietanza.getId());
+		tavoloFacade.rimuoviTavolo(user, tavolo.getId());			
+		ristoranteFacade.rimuoviRistorante(user, ristorante.getRagioneSociale());		
+		userFacade.logout(user);		
 	}
 
 	@Test
-	public void testRimozioneOrdinazione() throws RemoteException {
+	public void testRimozioneOrdinazione() throws Exception {
+		User user_test = null;
+		try {
+			user_test = userFacade.login(Ruolo.CASSIERE, "1234567");
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			user_test = null;
+		}		
+		boolean verifica = false;
+		try {
+			verifica = ordinazioneFacade.rimuoviOrdinazione(user_test, null, false);
 		
-		User user1 = userFacade.login(Ruolo.CAMERIERE, "1234");
-	//	user1.setUserName("cuoco");
-		
-		boolean ordinazioneAttuale = false;
-		try{	
-			ordinazioneAttuale = ordinazioneFacade.rimuoviOrdinazione(user1, null, false);
-			
-		}catch(AccessControlException e){
-			ordinazioneAttuale = false;
+		} catch (Exception e) {
+			verifica = false;
 		}
-	
-		if(user1 != null)
-			userFacade.logout(user1);
 		
-		Assert.assertFalse(ordinazioneAttuale);
-	}
+		try {
+			userFacade.logout(user_test);
+
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+		assertFalse(verifica);
+	}	
 }
