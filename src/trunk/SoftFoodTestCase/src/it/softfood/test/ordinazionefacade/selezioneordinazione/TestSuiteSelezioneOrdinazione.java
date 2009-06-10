@@ -9,10 +9,10 @@ public class TestSuiteSelezioneOrdinazione {
 		TestSuite suite = new TestSuite(
 				"Test for it.softfood.test.ordinazionefacade.selezioneordinazione");
 		//$JUnit-BEGIN$
-		suite.addTestSuite(TC2.class);
 		suite.addTestSuite(TC1.class);
-		suite.addTestSuite(TC4.class);
+		suite.addTestSuite(TC2.class);
 		suite.addTestSuite(TC3.class);
+		suite.addTestSuite(TC4.class);
 		//$JUnit-END$
 		return suite;
 	}
