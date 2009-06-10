@@ -1,18 +1,14 @@
 package it.softfood.test.articolomenufacade.selezioneingredientipietanza;
 
 import it.softfood.entity.Ingrediente;
-import it.softfood.entity.IngredientePietanza;
-import it.softfood.entity.Pietanza;
 import it.softfood.entity.User;
 import it.softfood.enumeration.Ruolo;
-import it.softfood.enumeration.TipoPietanza;
 import it.softfood.handler.IArticoloMenuFacade;
 import it.softfood.handler.IUserFacade;
 
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
-import java.security.AccessControlException;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -68,7 +64,7 @@ public class TC2  extends TestCase{
 	@Test
 	public void testSelezionaIngredientePietanza() throws RemoteException {
 		
-		User user1 = userFacade.login(Ruolo.CAMERIERE, "1234");
+		User user1 = userFacade.login(Ruolo.AMMINISTRATORE, "123456");
 		
 	
 		
@@ -81,6 +77,6 @@ public class TC2  extends TestCase{
 		
 		userFacade.logout(user1);
 		//dovrebbe essere non nullo
-		Assert.assertNotNull(ingredienti);
+		Assert.assertNull(ingredienti);
 	}
 }
