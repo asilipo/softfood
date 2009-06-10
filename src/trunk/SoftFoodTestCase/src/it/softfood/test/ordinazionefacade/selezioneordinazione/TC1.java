@@ -119,7 +119,7 @@ public class TC1 extends TestCase {
 	}
 
 	@Test
-	public void testRimozioneOrdinazione() throws Exception {
+	public void testSelezioneOrdinazione() throws Exception {
 		User user_test = null;
 		try {
 			user_test = userFacade.login(Ruolo.CAMERIERE, "1234");
@@ -127,12 +127,11 @@ public class TC1 extends TestCase {
 			// TODO Auto-generated catch block
 			user_test = null;
 		}		
-		boolean verifica = false;
 		try {
 			ordinazione = ordinazioneFacade.selezionaOrdinazionePerId(user_test, ordinazione.getId());
 		} catch (Exception e) {
 			System.out.println(e);
-			verifica = false;
+			ordinazione = null;
 		} 
 		
 		try {
