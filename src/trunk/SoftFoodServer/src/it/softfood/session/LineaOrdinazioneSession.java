@@ -50,7 +50,6 @@ public class LineaOrdinazioneSession {
 			
 			return lineaOrdinazione;
 		} catch (Exception e) {
-			System.err.println("LineaOrdinazioneSession#inserisciLineaOrdinazione");
 			return null;
 		}
 	}
