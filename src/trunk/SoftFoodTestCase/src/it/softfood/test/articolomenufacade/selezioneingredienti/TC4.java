@@ -1,5 +1,6 @@
 package it.softfood.test.articolomenufacade.selezioneingredienti;
 
+
 import it.softfood.entity.Ingrediente;
 import it.softfood.entity.User;
 import it.softfood.enumeration.Ruolo;
@@ -60,9 +61,7 @@ public class TC4 extends TestCase {
 	@Test
 	public void testSelezionaIngredienti() throws RemoteException {
 		
-		User user1 = userFacade.login(Ruolo.CASSIERE, "1234567");
-		//user1.setUserName("cameriere 1");
-		
+		User user1 = userFacade.login(Ruolo.CAMERIERE, "1234");
 		
 		ArrayList<Ingrediente> listaIngrediente = null;
 		try{			
