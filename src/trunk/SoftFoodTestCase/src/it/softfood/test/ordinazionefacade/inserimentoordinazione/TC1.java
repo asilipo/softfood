@@ -114,7 +114,7 @@ public class TC1 extends TestCase {
 		ordinazioneFacade.rimuoviOrdinazione(user, ordinazione.getId(), false);		
 		tavoloFacade.rimuoviTavolo(user, tavolo.getId());		
 		articoloFacade.rimuoviPietanzaMenu(user, pietanza.getId());
-		boolean verifica = ristoranteFacade.rimuoviRistorante(user, ristorante.getRagioneSociale());		
+		ristoranteFacade.rimuoviRistorante(user, ristorante.getRagioneSociale());		
 		userFacade.logout(user);		
 	}
 
