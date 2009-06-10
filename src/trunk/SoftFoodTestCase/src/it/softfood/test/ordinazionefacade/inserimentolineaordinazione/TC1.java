@@ -81,8 +81,6 @@ public class TC1 extends TestCase {
 		
 		tavolo = tavoloFacade.inserisciTavolo(user, tavolo);
 		
-		System.out.println("INSERITA TAVOLO "+tavolo.getId());
-		
 		pietanza = new Pietanza();
 		pietanza.setNome("Antipasto all'italiana");
 		pietanza.setTipoPietanza(TipoPietanza.ANTIPASTI.ordinal());
