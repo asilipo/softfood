@@ -75,7 +75,7 @@ public class TC3 extends TestCase {
 	}
 
 	@Test
-	public void testSelezionaRistorantePerRagioneSociale() {
+	public void testSelezionaRistorantePerPartitaIva() {
 		User user1 = null;
 		try {
 			user1 = userFacade.login(Ruolo.CAMERIERE, "1234") ;
