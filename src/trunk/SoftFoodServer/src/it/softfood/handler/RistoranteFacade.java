@@ -28,10 +28,9 @@ public class RistoranteFacade  {
 		return singleton;
 	}
 
-	public Ristorante inserisciRistorante(User user, Ristorante ristorante) 
-	{
+	public Ristorante inserisciRistorante(User user, Ristorante ristorante) {
 		if (ristorante != null &&  user != null && ristorante.getIndirizzo()!=null  &&  ristorante.getRagioneSociale() != null &&
-				!ristorante.getRagioneSociale().equals("") && ristorante.getPartitaIva() != null &&
+				!ristorante.getRagioneSociale().equals(" ") && ristorante.getPartitaIva() != null &&
 					!ristorante.getPartitaIva().equals("")) {
 			Indirizzo indirizzo = ristorante.getIndirizzo();
 			if (indirizzo != null) {
