@@ -31,7 +31,6 @@ public class TC1 extends TestCase {
 	private User user;
 	private Bevanda bevanda;
 	
-
 	@Before
 	public void setUp() throws Exception {
 		System.setProperty("java.security.policy", "polis.policy");
@@ -44,18 +43,16 @@ public class TC1 extends TestCase {
 			userFacade = (IUserFacade) registry.lookup("UserFacade");
 		} catch (Exception e) {
 			System.err.println("Exception to obtain the reference to the remote object: " + e);
+			fail ("Exception");
 		}
 		
-		user=userFacade.login(Ruolo.TEST, "test");
-		
-		
+		user = userFacade.login(Ruolo.TEST, "test");
 	}
 
 	@After
 	public void tearDown() throws Exception {
 		articoloFacade.rimuoviBevandaMenu(user, bevanda.getId());
 		userFacade.logout(user);
-		
 	}
 
 	@Test
@@ -64,9 +61,7 @@ public class TC1 extends TestCase {
 		try {
 			user_test = userFacade.login(Ruolo.CUOCO, "12345");
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			System.out.println(e);
-			user_test=null;
+			user_test = null;
 		}
 		
 		bevanda = new Bevanda();
@@ -82,19 +77,16 @@ public class TC1 extends TestCase {
 			System.out.println(e);
 			bevanda = null;
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			fail ("RemoteException");
 		}
 		
 		try {
 			userFacade.logout(user_test);
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			fail ("RemoteException");
 		}
 		
 		assertNotNull(bevanda);
 	}
-
 
 }

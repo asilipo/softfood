@@ -24,11 +24,11 @@ import org.junit.Test;
  */
 
 public class TC10 extends TestCase {
+	
 	private IUserFacade userFacade;
 	private IArticoloMenuFacade articoloFacade;
 	private User user;
 	private Bevanda bevanda;
-	
 
 	@Before
 	public void setUp() throws Exception {
@@ -42,11 +42,10 @@ public class TC10 extends TestCase {
 			userFacade = (IUserFacade) registry.lookup("UserFacade");
 		} catch (Exception e) {
 			System.err.println("Exception to obtain the reference to the remote object: " + e);
+			fail ("Exception");
 		}
 		
 		user = userFacade.login(Ruolo.TEST, "test");
-		
-		
 	}
 
 	@After
@@ -58,29 +57,23 @@ public class TC10 extends TestCase {
 	public void testInserimentoBevandaMenu() {
 		User user_test = null;
 		try {
-			user_test = userFacade.login(Ruolo.CUOCO, "4321");
+			user_test = userFacade.login(Ruolo.CUOCO, "12345");
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			user_test = null;
-		}
-		
-		bevanda = null;
-		
+			fail ("RemoteException");
+		}	
 		
 		try {
-			bevanda = articoloFacade.inserisciBevandaMenu(user_test, bevanda);
+			bevanda = articoloFacade.inserisciBevandaMenu(user_test, null);
 		} catch (AccessControlException e) {
 			bevanda = null;
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			fail ("RemoteException");
 		}
 		
 		try {
 			userFacade.logout(user_test);
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			fail ("RemoteException");
 		}
 		
 		assertNull(bevanda);
