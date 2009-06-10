@@ -33,6 +33,7 @@ public class TC2 extends TestCase {
 	private User user;
 	private Ingrediente ingrediente;
 
+	@SuppressWarnings("deprecation")
 	@Before
 	public void setUp() throws Exception {
 		System.setProperty("java.security.policy", "polis.policy");
@@ -45,19 +46,19 @@ public class TC2 extends TestCase {
 			userFacade = (IUserFacade) registry.lookup("UserFacade");
 		} catch (Exception e) {
 			System.err.println("Exception to obtain the reference to the remote object: " + e);
+			fail("Exception");
 		}
 		
 		user = userFacade.login(Ruolo.TEST, "test");
 		
-		ingrediente=new Ingrediente();
+		ingrediente = new Ingrediente();
 		ingrediente.setId(1000000L);
 		ingrediente.setNome("INGREDIENTE TEST");
 		ingrediente.setScadenza(new Date(109,4,31));
 		ingrediente.setVariante(true);
 		
-		ingrediente=articoloFacade.inserisciIngrediente(user, ingrediente);
-		
-		}
+		ingrediente = articoloFacade.inserisciIngrediente(user, ingrediente);
+	}
 
 	@After
 	public void tearDown() throws Exception {
@@ -66,21 +67,30 @@ public class TC2 extends TestCase {
 	}
 
 	@Test
-	public void testInserimentoIngredienteMagazzino() throws RemoteException {
-		
-		User user_test = userFacade.login(Ruolo.AMMINISTRATORE, "123456");
+	public void testInserimentoIngredienteMagazzino() {
+		User user_test = null;
+		try {
+			user_test = userFacade.login(Ruolo.AMMINISTRATORE, "123456");
+		} catch (RemoteException e1) {
+			fail("RemoteException");
+		}
 
-		
 		IngredienteMagazzino ingredienteAttuale = null;
-		try{	
+		try {	
 			ingredienteAttuale = articoloFacade.inserisciIngredienteMagazzino(user_test, 1000000L, 100);
-		}catch(AccessControlException e){
-			System.out.println(e);
+		} catch(AccessControlException e){
 			ingredienteAttuale = null;
+		} catch (RemoteException e) {
+			fail("RemoteException");
 		}
 	
+		try {
 			userFacade.logout(user_test);
+		} catch (RemoteException e) {
+			fail("RemoteException");
+		}
 		
 		Assert.assertNull(ingredienteAttuale);
 	}
+	
 }

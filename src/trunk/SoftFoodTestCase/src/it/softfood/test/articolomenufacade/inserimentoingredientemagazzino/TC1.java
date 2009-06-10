@@ -27,6 +27,7 @@ public class TC1 extends TestCase {
 	private User user;
 	private Ingrediente ingrediente;
 
+	@SuppressWarnings("deprecation")
 	@Before
 	public void setUp() throws Exception {
 		System.setProperty("java.security.policy", "polis.policy");
@@ -49,9 +50,8 @@ public class TC1 extends TestCase {
 		ingrediente.setScadenza(new Date(109,4,31));
 		ingrediente.setVariante(true);
 		
-		ingrediente=articoloFacade.inserisciIngrediente(user, ingrediente);
-		
-		}
+		ingrediente = articoloFacade.inserisciIngrediente(user, ingrediente);
+	}
 
 	@After
 	public void tearDown() throws Exception {
@@ -60,21 +60,30 @@ public class TC1 extends TestCase {
 	}
 
 	@Test
-	public void testInserimentoIngredienteMagazzino() throws RemoteException {
-		
-		User user_test = userFacade.login(Ruolo.CUOCO, "12345");
+	public void testInserimentoIngredienteMagazzino() {
+		User user_test = null;
+		try {
+			user_test = userFacade.login(Ruolo.CUOCO, "12345");
+		} catch (RemoteException e1) {
+			fail("RemoteException");
+		}
 
-		
 		IngredienteMagazzino ingredienteAttuale = null;
-		try{	
+		try {	
 			ingredienteAttuale = articoloFacade.inserisciIngredienteMagazzino(user_test, 1000000L, 100);
-		}catch(AccessControlException e){
-			System.out.println(e);
+		} catch(AccessControlException e){
 			ingredienteAttuale = null;
+		} catch (RemoteException e) {
+			fail("RemoteException");
 		}
 	
+		try {
 			userFacade.logout(user_test);
+		} catch (RemoteException e) {
+			fail("RemoteException");
+		}
 		
 		Assert.assertNotNull(ingredienteAttuale);
 	}
+	
 }
