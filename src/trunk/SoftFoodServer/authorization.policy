@@ -47,9 +47,11 @@ grant Principal it.softfood.entity.User "CAMERIERE" {
 grant Principal it.softfood.entity.User "CASSIERE" {
     permission  it.softfood.aspect.OperationPermission "login"; 
     permission  it.softfood.aspect.OperationPermission "logout";
+   
 };
   
 grant Principal it.softfood.entity.User "CUOCO"{
+ permission  it.softfood.aspect.OperationPermission "selezionaOrdinazioniGiornalierePerTavolo";
 	permission  it.softfood.aspect.OperationPermission "selezionaDisponibilitaBevanda";
     permission  it.softfood.aspect.OperationPermission "login"; 
     permission  it.softfood.aspect.OperationPermission "logout";
