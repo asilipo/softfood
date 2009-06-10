@@ -1,6 +1,8 @@
 package it.softfood.test.ristorantefacade.inserimentoristorante;
 
+import it.softfood.entity.Indirizzo;
 import it.softfood.entity.Ristorante;
+import it.softfood.entity.Tavolo;
 import it.softfood.entity.User;
 import it.softfood.enumeration.Ruolo;
 import it.softfood.handler.IRistoranteFacade;
@@ -24,10 +26,11 @@ import org.junit.Test;
 
 public class TC1 extends TestCase {
 
-	private IRistoranteFacade ristoranteFacade;
 	private IUserFacade userFacade;
-	private Ristorante ristorante;
+	private IRistoranteFacade ristoranteFacade;
 	private User user;
+	private Tavolo tavoloInserito;
+	private Ristorante ristorante;
 	
 	@Before
 	public void setUp() throws Exception {
@@ -37,13 +40,15 @@ public class TC1 extends TestCase {
 		}
 		try {
 			Registry registry = LocateRegistry.getRegistry("localhost");
-			ristoranteFacade = (IRistoranteFacade) registry.lookup("RistoranteFacade");
 			userFacade = (IUserFacade) registry.lookup("UserFacade");
+			ristoranteFacade = (IRistoranteFacade) registry.lookup("RistoranteFacade");
 		} catch (Exception e) {
 			System.err.println("Exception to obtain the reference to the remote object: " + e);
+			fail("Exception");
 		}
 		
 		user = userFacade.login(Ruolo.TEST, "test");
+		
 	}
 
 	@After
@@ -53,11 +58,34 @@ public class TC1 extends TestCase {
 	}
 
 	@Test
-	public void testInserisciRistorante() throws RemoteException {
+	public void testRimuoviRistorante() {
+		User user1 = null;
+		try {
+			user1 = userFacade.login(Ruolo.AMMINISTRATORE, "123456") ;
 
-		User user = userFacade.login(Ruolo.AMMINISTRATORE, "123456");
-	//	Pietanza pietanzaAttuale = articoloMenuFacade.inserisciPietanzaMenu(user, pietanza);
-	//	Assert.assertTrue(pietanza.equals(pietanzaAttuale));
+			Indirizzo indirizzo = new Indirizzo();
+			indirizzo.setCap("83100");
+			indirizzo.setCitta("Avellino");
+			indirizzo.setCivico("23 A");
+			indirizzo.setId(1000000L);
+			indirizzo.setProvincia("AV");
+			indirizzo.setVia("via Roma");
+			
+			ristorante = new Ristorante();
+			ristorante.setIndirizzo(indirizzo);
+			ristorante.setPartitaIva("01234567890");
+			ristorante.setRagioneSociale("Ristorante Test");
+			ristorante = ristoranteFacade.inserisciRistorante(user, ristorante);
+			
+			
+			userFacade.logout(user1);
+		} catch (RemoteException e) {
+			fail ("RemoteException");
+		}
+		
+		assertNotNull(ristorante);
 	}
+
+
 
 }
