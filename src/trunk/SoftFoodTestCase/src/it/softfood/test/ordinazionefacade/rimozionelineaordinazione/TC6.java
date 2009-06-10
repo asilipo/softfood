@@ -1,5 +1,6 @@
 package it.softfood.test.ordinazionefacade.rimozionelineaordinazione;
 
+import static org.junit.Assert.*;
 import it.softfood.entity.Indirizzo;
 import it.softfood.entity.LineaOrdinazione;
 import it.softfood.entity.Ordinazione;
@@ -20,20 +21,11 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.Date;
 
-import junit.framework.TestCase;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-/**
- * @author Maria Rosaria Paone
- * @author Marco Grasso
- * @author Francesco Pacilio
- */
-
-public class TC4 extends TestCase {
-
+public class TC6 {
 	private IOrdinazioneFacade ordinazioneFacade;
 	private LineaOrdinazione lineaOrdinazione;
 	private IArticoloMenuFacade articoloFacade;
@@ -119,14 +111,14 @@ public class TC4 extends TestCase {
 	public void testInserisciOrdinazione() throws Exception {
 		User user_test = null;
 		try {
-			user_test = userFacade.login(Ruolo.CASSIERE, "1234567");
+			user_test = userFacade.login(Ruolo.CUOCO, "12345");
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			user_test = null;
 		}		
 		boolean verifica = false;
 		try {
-			verifica = ordinazioneFacade.rimuoviOrdinazione(user_test, ordinazione.getId(), false);
+			verifica = ordinazioneFacade.rimuoviOrdinazione(user_test, ordinazione.getId(),  null);
 			
 		} catch (Exception e) {
 			
@@ -144,5 +136,4 @@ public class TC4 extends TestCase {
 		}
 		assertFalse(verifica);
 	}
-
 }
