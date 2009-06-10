@@ -1,14 +1,18 @@
 package it.softfood.test.articolomenufacade.selezioneingredientipietanza;
 
 import it.softfood.entity.Ingrediente;
+import it.softfood.entity.IngredientePietanza;
+import it.softfood.entity.Pietanza;
 import it.softfood.entity.User;
 import it.softfood.enumeration.Ruolo;
+import it.softfood.enumeration.TipoPietanza;
 import it.softfood.handler.IArticoloMenuFacade;
 import it.softfood.handler.IUserFacade;
 
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.security.AccessControlException;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -64,13 +68,13 @@ public class TC4  extends TestCase{
 	@Test
 	public void testSelezionaIngredientePietanza() throws RemoteException {
 		
-		User user1 = userFacade.login(Ruolo.CASSIERE, "1234567");
+		User user1 = userFacade.login(Ruolo.CAMERIERE, "1234");
 		
 	
 		
 		ArrayList<Ingrediente> ingredienti = null;
 		try{			
-			ingredienti = articoloFacade.selezionaIngredientiPietanza(user1, ingrediente.getId());
+			ingredienti = articoloFacade.selezionaIngredientiPietanza(user1, null);
 		}catch(Exception e){
 			ingredienti = null;
 		}
@@ -79,5 +83,4 @@ public class TC4  extends TestCase{
 		//dovrebbe essere non nullo
 		Assert.assertNull(ingredienti);
 	}
-
 }
