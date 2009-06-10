@@ -51,7 +51,7 @@ public class ArticoloMenuFacade  {
 	}
     
     public Pietanza inserisciPietanzaMenu(User user, Pietanza pietanza) {
-        if (user != null && pietanza != null && pietanza.getNome()!=null && pietanza.getTipoPietanza()!=null && !pietanza.getNome().equals("")) {
+        if (user != null && pietanza != null && pietanza.getNome() != null && !pietanza.getNome().equals("") && pietanza.getTipoPietanza()!=null && !pietanza.getNome().equals("")) {
         	
         	pietanza.setTipoArticolo("Pietanza");
     		return pietanzaSession.inserisciPietanza(pietanza);
