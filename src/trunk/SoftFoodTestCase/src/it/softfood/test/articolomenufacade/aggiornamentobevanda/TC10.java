@@ -25,12 +25,12 @@ import org.junit.Test;
  */
 
 public class TC10 extends TestCase {
+	
 	private IUserFacade userFacade;
 	private IArticoloMenuFacade articoloFacade;
 	private User user;
 	private Bevanda bevanda;
 	
-
 	@Before
 	public void setUp() throws Exception {
 		System.setProperty("java.security.policy", "polis.policy");
@@ -43,24 +43,24 @@ public class TC10 extends TestCase {
 			userFacade = (IUserFacade) registry.lookup("UserFacade");
 		} catch (Exception e) {
 			System.err.println("Exception to obtain the reference to the remote object: " + e);
+			fail ("Exception");
 		}
 		
-		user=userFacade.login(Ruolo.TEST, "test");
+		user = userFacade.login(Ruolo.TEST, "test");
 
-		bevanda=new Bevanda();
+		bevanda = new Bevanda();
 		bevanda.setCapacita(1000F);
 		bevanda.setNome("BEVNDA TEST");
 		bevanda.setTipoArticolo("BEVANDA");
 		bevanda.setTipoPietanza(TipoPietanza.BEVANDA.ordinal());
 		
-		bevanda=articoloFacade.inserisciBevandaMenu(user, bevanda);
+		bevanda = articoloFacade.inserisciBevandaMenu(user, bevanda);
 	}
 
 	@After
 	public void tearDown() throws Exception {
 		articoloFacade.rimuoviBevandaMenu(user, bevanda.getId());
-		userFacade.logout(user);
-		
+		userFacade.logout(user);		
 	}
 
 	@Test
@@ -69,11 +69,10 @@ public class TC10 extends TestCase {
 		try {
 			user_test=userFacade.login(Ruolo.CUOCO, "12345");
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			user_test=null;
+			fail ("RemoteException");
 		}
 		
-		Bevanda bevanda_test=null;
+		Bevanda bevanda_test = null;
 		
 		boolean test_return = false;
 		try {
@@ -81,17 +80,16 @@ public class TC10 extends TestCase {
 		} catch (AccessControlException e) {
 			test_return = false;
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			fail ("RemoteException");
 		}
 		
 		try {
 			userFacade.logout(user_test);
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			fail ("RemoteException");
 		}
 		
 		assertFalse(test_return);
 	}
+	
 }
