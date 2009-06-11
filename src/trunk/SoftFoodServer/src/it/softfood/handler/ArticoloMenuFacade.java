@@ -439,6 +439,14 @@ public class ArticoloMenuFacade  {
     	return false;
     }
     
+    public boolean rimuoviIngredienteMagazzino(User user, Long id) {
+    	if (user != null) {
+    		return ingredienteMagazzinoSession.rimuoviIngredienteMagazzino(id);
+    	}
+    	
+    	return false;
+    }
+    
     public boolean rimuoviIngrediente(User user, Long id) {
     	if (user != null) {
 	    	try {

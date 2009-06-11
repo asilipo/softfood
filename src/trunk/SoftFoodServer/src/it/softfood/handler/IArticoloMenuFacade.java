@@ -76,6 +76,8 @@ public interface IArticoloMenuFacade extends Remote {
 
 	public boolean rimuoviBevandaMenu(User user, Long id) throws RemoteException;
 
+	public boolean rimuoviIngredienteMagazzino(User user, Long id) throws RemoteException;
+	 
 	public boolean rimuoviPietanzaMenu(User user, Long id) throws RemoteException;
 	
 	public boolean rimuoviIngrediente(User user,Long id) throws RemoteException;
