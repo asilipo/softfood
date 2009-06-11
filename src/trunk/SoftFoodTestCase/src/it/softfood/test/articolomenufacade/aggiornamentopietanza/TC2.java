@@ -44,52 +44,49 @@ public class TC2 extends TestCase {
 			userFacade = (IUserFacade) registry.lookup("UserFacade");
 		} catch (Exception e) {
 			System.err.println("Exception to obtain the reference to the remote object: " + e);
+			fail ("Exception");
 		}
 		
-		user=userFacade.login(Ruolo.TEST, "test");
+		user = userFacade.login(Ruolo.TEST, "test");
 		
-		pietanza=new Pietanza();
+		pietanza = new Pietanza();
 		pietanza.setNome("PIETANZA TEST");
 		pietanza.setTipoPietanza(TipoPietanza.PRIMO_PIATTO.ordinal());
 		
-		pietanza=articoloFacade.inserisciPietanzaMenu(user, pietanza);
+		pietanza = articoloFacade.inserisciPietanzaMenu(user, pietanza);
 	}
 
 	@After
 	public void tearDown() throws Exception {
 		articoloFacade.rimuoviPietanzaMenu(user, pietanza.getId());
 		userFacade.logout(user);
-		
 	}
 
 	@Test
 	public void testUpdatePietanza() {
-		User user_test=null;
+		User user_test = null;
 		try {
-			user_test=userFacade.login(Ruolo.AMMINISTRATORE, "123456");
+			user_test = userFacade.login(Ruolo.AMMINISTRATORE, "123456");
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			user_test=null;
+			fail ("RemoteException");
 		}
 		
-		Pietanza pietanza_test=pietanza;
+		Pietanza pietanza_test = pietanza;
 		pietanza_test.setNome("PIETANZA TEST");
 		pietanza_test.setTipoPietanza(TipoPietanza.PRIMO_PIATTO.ordinal());
 		boolean test_return = false;
 		try {
-			test_return=articoloFacade.updatePietanza(user_test, pietanza_test);
+			test_return = articoloFacade.updatePietanza(user_test, pietanza_test);
 		} catch (AccessControlException e) {
 			test_return = false;
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			fail ("RemoteException");
 		}
 		
 		try {
 			userFacade.logout(user_test);
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			fail ("RemoteException");
 		}
 		
 		assertFalse(test_return);
