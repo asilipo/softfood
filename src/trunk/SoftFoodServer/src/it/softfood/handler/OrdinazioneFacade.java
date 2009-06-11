@@ -578,18 +578,21 @@ public class OrdinazioneFacade {
     }
 
     private boolean aggiornaMagazzinoIngredienti(User user, LineaOrdinazione lineaOrdinazione, String tipoAggiornamento) {
-        if (user != null) {
+    	if (user != null) {
 	    	try {
+	        	System.out.println("quantità 111");
 	            ArrayList<IngredientePietanza> ingredientiPietanze = (ArrayList<IngredientePietanza>) ingredientePietanzaSession.selezionaIngredientiPietanze();
 	            ArrayList<IngredienteMagazzino> ingredientiMagazzino = (ArrayList<IngredienteMagazzino>) ingredienteMagazzinoSession.selezionaIngredientiMagazzino();
 	            if (ingredientiPietanze != null && ingredientiMagazzino != null) {
+	            	System.out.println("quantità 223");
 	                for (IngredientePietanza ingredientePietanza : ingredientiPietanze) {
 	                    if (ingredientePietanza.getId().getPietanza().equals(lineaOrdinazione.getArticolo().getId())) {
 	                            for (IngredienteMagazzino ingredienteMagazzino : ingredientiMagazzino) {
-	                                if (ingredienteMagazzino.getIngrediente().getId().
-	                                        equals(ingredientePietanza.getId().getIngrediente())) {
+	                            	System.out.println("quantità 33333333");
+	                            	if (ingredienteMagazzino.getIngrediente().getId().equals(ingredientePietanza.getId().getIngrediente())) {
 	                                	
 	                                	int quantita = ingredienteMagazzino.getQuantita();
+	                                	System.out.println("quantità " + quantita);
 	                                	if (tipoAggiornamento.equalsIgnoreCase("+"))
 	                                        ingredienteMagazzino.setQuantita(quantita + (lineaOrdinazione.getQuantita() * ingredientePietanza.getQuantita()));
 	                                    else
@@ -611,14 +614,14 @@ public class OrdinazioneFacade {
     }
 
     private boolean aggiornaMagazzinoBevande(User user, LineaOrdinazione lineaOrdinazione, String tipoAggiornamento) {
-        if (user != null) {
+    	if (user != null) {
 	    	try {
 	            ArrayList<BevandaMagazzino> bevandeMagazzino = (ArrayList<BevandaMagazzino>) bevandaMagazzinoSession.selezionaBevandeMagazzino();
 	            if (bevandeMagazzino != null) {
 	                for (BevandaMagazzino bevandaMagazzino : bevandeMagazzino) {
 	                    if (bevandaMagazzino.getArticolo().getId().equals(lineaOrdinazione.getArticolo().getId())) {
 	                    	int quantita = bevandaMagazzino.getQuantita();
-	                    	
+	                                   	
 	                    	if (tipoAggiornamento.equalsIgnoreCase("+")) {
 	                            bevandaMagazzino.setQuantita(quantita + (lineaOrdinazione.getQuantita() * (lineaOrdinazione.getArticolo()).getCapacita().intValue()));
 	                        } else {
