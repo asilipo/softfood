@@ -30,7 +30,6 @@ public class TC9 extends TestCase {
 	private IArticoloMenuFacade articoloFacade;
 	private User user;
 	private Bevanda bevanda;
-	
 
 	@Before
 	public void setUp() throws Exception {
@@ -44,34 +43,33 @@ public class TC9 extends TestCase {
 			userFacade = (IUserFacade) registry.lookup("UserFacade");
 		} catch (Exception e) {
 			System.err.println("Exception to obtain the reference to the remote object: " + e);
+			fail("Exception");
 		}
 		
-		user=userFacade.login(Ruolo.TEST, "test");
+		user = userFacade.login(Ruolo.TEST, "test");
 
-		bevanda=new Bevanda();
+		bevanda = new Bevanda();
 		bevanda.setCapacita(1000F);
 		bevanda.setNome("BEVNDA TEST");
 		bevanda.setTipoArticolo("BEVANDA");
 		bevanda.setTipoPietanza(TipoPietanza.BEVANDA.ordinal());
 		
-		bevanda=articoloFacade.inserisciBevandaMenu(user, bevanda);
+		bevanda = articoloFacade.inserisciBevandaMenu(user, bevanda);
 	}
 
 	@After
 	public void tearDown() throws Exception {
 		articoloFacade.rimuoviBevandaMenu(user, bevanda.getId());
 		userFacade.logout(user);
-		
 	}
 
 	@Test
 	public void testUpdateBevanda() {
-		User user_test=null;
+		User user_test = null;
 		try {
-			user_test=userFacade.login(Ruolo.CUOCO, "12345");
+			user_test = userFacade.login(Ruolo.CUOCO, "12345");
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			user_test=null;
+			fail ("RemoteException");
 		}
 		
 		Bevanda bevanda_test=bevanda;
@@ -80,22 +78,22 @@ public class TC9 extends TestCase {
 		bevanda_test.setTipoArticolo("BEVANDA");
 		bevanda_test.setTipoPietanza(TipoPietanza.BEVANDA.ordinal());
 		boolean test_return = false;
+		
 		try {
-			test_return=articoloFacade.updateBevanda(user_test, bevanda_test);
+			test_return = articoloFacade.updateBevanda(user_test, bevanda_test);
 		} catch (AccessControlException e) {
 			test_return = false;
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			fail ("RemoteException");
 		}
 		
 		try {
 			userFacade.logout(user_test);
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			fail ("RemoteException");
 		}
 		
 		assertFalse(test_return);
 	}
+	
 }
