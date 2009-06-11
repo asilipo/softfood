@@ -31,7 +31,6 @@ public class TC1 extends TestCase {
 	private User user;
 	private Ingrediente ingrediente;
 	
-
 	@SuppressWarnings("deprecation")
 	@Before
 	public void setUp() throws Exception {
@@ -45,52 +44,52 @@ public class TC1 extends TestCase {
 			userFacade = (IUserFacade) registry.lookup("UserFacade");
 		} catch (Exception e) {
 			System.err.println("Exception to obtain the reference to the remote object: " + e);
+			fail ("Exception");
 		}
 		
-		user=userFacade.login(Ruolo.TEST, "test");
+		user = userFacade.login(Ruolo.TEST, "test");
 		
-		ingrediente=new Ingrediente();
+		ingrediente = new Ingrediente();
 		ingrediente.setNome("INGREDIENTE TEST");
 		ingrediente.setScadenza(new Date(109,4,31));
 		ingrediente.setVariante(true);
 		
-		ingrediente=articoloFacade.inserisciIngrediente(user, ingrediente);
+		ingrediente = articoloFacade.inserisciIngrediente(user, ingrediente);
 	}
 
 	@After
 	public void tearDown() throws Exception {
 		articoloFacade.rimuoviIngrediente(user, ingrediente.getId());
-		userFacade.logout(user);
-		
+		userFacade.logout(user);	
 	}
 
 	@SuppressWarnings("deprecation")
 	@Test
 	public void testUpdateIngrediente() {
-		User user_test=null;
+		User user_test = null;
 		try {
-			user_test=userFacade.login(Ruolo.CUOCO, "12345");
+			user_test = userFacade.login(Ruolo.CUOCO, "12345");
 		} catch (RemoteException e) {
-			user_test=null;
+			fail ("RemoteException");
 		}
 		
-		Ingrediente ingrediente_test=ingrediente;
+		Ingrediente ingrediente_test = ingrediente;
 		ingrediente_test.setNome("INGREDIENTE TEST");
 		ingrediente_test.setScadenza(new Date(109,4,31));
 		ingrediente_test.setVariante(true);
 		boolean test_return = false;
 		try {
-			test_return=articoloFacade.updateIngrediente(user_test, ingrediente_test);
+			test_return = articoloFacade.updateIngrediente(user_test, ingrediente_test);
 		} catch (AccessControlException e) {
 			test_return = false;
 		} catch (RemoteException e) {
-			e.printStackTrace();
+			fail ("RemoteException");
 		}
 		
 		try {
 			userFacade.logout(user_test);
 		} catch (RemoteException e) {
-			e.printStackTrace();
+			fail ("RemoteException");
 		}
 		
 		assertTrue(test_return);
