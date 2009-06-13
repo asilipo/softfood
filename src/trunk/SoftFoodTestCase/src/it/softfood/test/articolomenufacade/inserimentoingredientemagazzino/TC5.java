@@ -79,7 +79,6 @@ public class TC5 extends TestCase {
 		try{	
 			ingredienteAttuale = articoloFacade.inserisciIngredienteMagazzino(user_test, null, 100);
 		}catch(AccessControlException e){
-			System.out.println(e);
 			ingredienteAttuale = null;
 		} catch (RemoteException e) {
 			fail("RemoteException");

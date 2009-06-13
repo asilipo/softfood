@@ -51,7 +51,7 @@ public class TC6 extends TestCase {
 		
 		user = userFacade.login(Ruolo.TEST, "test");
 		
-		ingrediente=new Ingrediente();
+		ingrediente = new Ingrediente();
 		ingrediente.setId(1000000L);
 		ingrediente.setNome("INGREDIENTE TEST");
 		ingrediente.setScadenza(new Date(109,4,31));

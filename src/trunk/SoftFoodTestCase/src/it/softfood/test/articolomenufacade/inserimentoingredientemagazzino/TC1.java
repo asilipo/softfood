@@ -40,11 +40,12 @@ public class TC1 extends TestCase {
 			userFacade = (IUserFacade) registry.lookup("UserFacade");
 		} catch (Exception e) {
 			System.err.println("Exception to obtain the reference to the remote object: " + e);
+			fail ("Exception");
 		}
 		
 		user = userFacade.login(Ruolo.TEST, "test");
 		
-		ingrediente=new Ingrediente();
+		ingrediente = new Ingrediente();
 		ingrediente.setId(1000000L);
 		ingrediente.setNome("INGREDIENTE TEST");
 		ingrediente.setScadenza(new Date(109,4,31));
