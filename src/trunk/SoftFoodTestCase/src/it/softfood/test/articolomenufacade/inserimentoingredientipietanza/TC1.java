@@ -37,7 +37,7 @@ public class TC1 extends TestCase {
 	private Ingrediente ingrediente = new Ingrediente();
 	private Pietanza pietanza = new Pietanza();
 	
-
+	@SuppressWarnings("deprecation")
 	@Before
 	public void setUp() throws Exception {
 		System.setProperty("java.security.policy", "polis.policy");
@@ -50,6 +50,7 @@ public class TC1 extends TestCase {
 			userFacade = (IUserFacade) registry.lookup("UserFacade");
 		} catch (Exception e) {
 			System.err.println("Exception to obtain the reference to the remote object: " + e);
+			fail ("Exception");
 		}
 		
 		user = userFacade.login(Ruolo.TEST, "test");
@@ -58,24 +59,19 @@ public class TC1 extends TestCase {
 		ingrediente.setScadenza(new Date(109,4,31));
 		ingrediente.setVariante(true);		
 		
-		ingrediente=articoloFacade.inserisciIngrediente(user, ingrediente);
+		ingrediente = articoloFacade.inserisciIngrediente(user, ingrediente);
 		
 		pietanza.setNome("Pietanza Test");
 		pietanza.setTipoPietanza(TipoPietanza.PRIMO_PIATTO.ordinal());
 	
-		pietanza=articoloFacade.inserisciPietanzaMenu(user, pietanza);
-		
-		
-	
+		pietanza = articoloFacade.inserisciPietanzaMenu(user, pietanza);
 	}
 
 	@After
 	public void tearDown() throws Exception {
 		articoloFacade.rimuoviIngrediente(user, ingrediente.getId());
 		articoloFacade.rimuoviPietanzaMenu(user, pietanza.getId());
-		
 		userFacade.logout(user);
-		
 	}
 
 	@Test
@@ -84,11 +80,8 @@ public class TC1 extends TestCase {
 		try {
 			user_test = userFacade.login(Ruolo.CUOCO, "12345");
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			System.out.println(e);
-			user_test=null;
+			fail ("RemoteException");
 		}
-		
 		
 		HashSet<IngredientePietanza> ingredienti=new HashSet<IngredientePietanza>();
 		ingredientePietanza = new IngredientePietanza();
@@ -100,18 +93,15 @@ public class TC1 extends TestCase {
 		try {
 			ingredienti = articoloFacade.inserisciIngredientiPietanze(user_test, ingredienti);
 		} catch (AccessControlException e) {
-			System.out.println(e);
 			ingredienti = null;
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			fail ("RemoteException");
 		}
 		
 		try {
 			userFacade.logout(user_test);
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			fail ("RemoteException");
 		}
 		
 		assertNotNull(ingredienti);
