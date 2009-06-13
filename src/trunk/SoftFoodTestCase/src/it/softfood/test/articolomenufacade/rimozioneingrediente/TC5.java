@@ -32,7 +32,7 @@ public class TC5 extends TestCase {
 	private User user;
 	private Ingrediente ingrediente;
 
-	@SuppressWarnings("deprecation")
+	@SuppressWarnings({ "deprecation"})
 	@Before
 	public void setUp() throws Exception {
 		System.setProperty("java.security.policy", "polis.policy");
