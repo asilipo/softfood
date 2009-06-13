@@ -19,6 +19,12 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * @author Maria Rosaria Paone
+ * @author Marco Grasso
+ * @author Francesco Pacilio
+ */
+
 public class TC5 extends TestCase {
 	
 	private IArticoloMenuFacade articoloFacade;
@@ -26,6 +32,7 @@ public class TC5 extends TestCase {
 	private User user;
 	private Ingrediente ingrediente;
 
+	@SuppressWarnings("deprecation")
 	@Before
 	public void setUp() throws Exception {
 		System.setProperty("java.security.policy", "polis.policy");
@@ -35,15 +42,14 @@ public class TC5 extends TestCase {
 		try {
 			Registry registry = LocateRegistry.getRegistry("localhost");
 			articoloFacade = (IArticoloMenuFacade) registry.lookup("ArticoloFacade"); //CONTROLLARE
-			//ristoranteFacade = (IRistoranteFacade) registry.lookup("RistoranteFacade");
 			userFacade = (IUserFacade) registry.lookup("UserFacade");
 		} catch (Exception e) {
 			System.err.println("Exception to obtain the reference to the remote object: " + e);
+			fail ("Exception");
 		}
 		
-		user = userFacade.login(Ruolo.TEST, "test");//da togliere
+		user = userFacade.login(Ruolo.TEST, "test");
 		
-		//Ristorante ristorante = ristoranteFacade.selezionaRistorantePerRagioneSociale(user, "La taverna");
 		ingrediente = new Ingrediente();
 		ingrediente.setDescrizione("Ingrediente di test");
 		ingrediente.setId((long)1000000L);
@@ -59,25 +65,36 @@ public class TC5 extends TestCase {
 	@After
 	public void tearDown() throws Exception {
 		articoloFacade.rimuoviIngrediente(user, ingrediente.getId());
-		userFacade.logout(user); //da togliere
+		userFacade.logout(user); 
 	}
 
 	@Test
-	public void testRimozioneIngrediente() throws RemoteException {
-		
-		User user1 = userFacade.login(Ruolo.CUOCO, "12345");
+	public void testRimozioneIngrediente() {
+		User user1 = null;
+		try {
+			user1 = userFacade.login(Ruolo.CUOCO, "12345");
+		} catch (RemoteException e1) {
+			fail ("RemoteException");
+		}
 		
 		boolean ingredienteAttuale = false;
-		try{	
+		try {	
 			ingredienteAttuale = articoloFacade.rimuoviIngrediente(user1, null);
-		}catch(AccessControlException e){
-			System.out.println(e);
+		} catch(AccessControlException e) {
 			ingredienteAttuale = false;
+		} catch (RemoteException e) {
+			fail ("RemoteException");
 		}
 	
-		if(user1 != null)
-			userFacade.logout(user1);
+		if(user1 != null) {
+			try {
+				userFacade.logout(user1);
+			} catch (RemoteException e) {
+				fail ("RemoteException");
+			}
+		}
 		
 		Assert.assertFalse(ingredienteAttuale);
 	}
+	
 }
