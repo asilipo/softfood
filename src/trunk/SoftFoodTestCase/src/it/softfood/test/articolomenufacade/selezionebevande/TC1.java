@@ -3,7 +3,6 @@ package it.softfood.test.articolomenufacade.selezionebevande;
 import it.softfood.entity.Bevanda;
 import it.softfood.entity.User;
 import it.softfood.enumeration.Ruolo;
-import it.softfood.enumeration.TipoPietanza;
 import it.softfood.handler.IArticoloMenuFacade;
 import it.softfood.handler.IUserFacade;
 
@@ -30,8 +29,6 @@ public class TC1 extends TestCase {
 	private IUserFacade userFacade;
 	private IArticoloMenuFacade articoloFacade;
 	private User user;
-	private Bevanda bevanda;
-	
 
 	@Before
 	public void setUp() throws Exception {
@@ -45,11 +42,10 @@ public class TC1 extends TestCase {
 			userFacade = (IUserFacade) registry.lookup("UserFacade");
 		} catch (Exception e) {
 			System.err.println("Exception to obtain the reference to the remote object: " + e);
+			fail ("Exception");
 		}
 		
-		user=userFacade.login(Ruolo.TEST, "test");
-		
-		
+		user = userFacade.login(Ruolo.TEST, "test");
 	}
 
 	@After
@@ -63,30 +59,23 @@ public class TC1 extends TestCase {
 		try {
 			user_test = userFacade.login(Ruolo.CAMERIERE, "1234");
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			System.out.println(e);
-			user_test=null;
+			fail ("RemoteException");
 		}
-		
-		
-		
+
 		ArrayList<Bevanda> bevanda = null;
 		
 		try {
 			bevanda = articoloFacade.selezionaBevande(user_test);
 		} catch (AccessControlException e) {
-			System.out.println(e);
 			bevanda = null;
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			fail ("RemoteException");
 		}
 		
 		try {
 			userFacade.logout(user_test);
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			fail ("RemoteException");
 		}
 		
 		assertNotNull(bevanda);

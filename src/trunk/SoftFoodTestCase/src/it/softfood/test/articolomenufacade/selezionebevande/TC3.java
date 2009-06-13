@@ -29,8 +29,6 @@ public class TC3 extends TestCase {
 	private IUserFacade userFacade;
 	private IArticoloMenuFacade articoloFacade;
 	private User user;
-	private Bevanda bevanda;
-	
 
 	@Before
 	public void setUp() throws Exception {
@@ -44,11 +42,10 @@ public class TC3 extends TestCase {
 			userFacade = (IUserFacade) registry.lookup("UserFacade");
 		} catch (Exception e) {
 			System.err.println("Exception to obtain the reference to the remote object: " + e);
+			fail ("Exception");
 		}
 		
-		user=userFacade.login(Ruolo.TEST, "test");
-		
-		
+		user = userFacade.login(Ruolo.TEST, "test");
 	}
 
 	@After
@@ -62,12 +59,9 @@ public class TC3 extends TestCase {
 		try {
 			user_test = userFacade.login(Ruolo.CASSIERE, "1234567");
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			System.out.println(e);
-			user_test=null;
+			fail ("RemoteException");
+			user_test = null;
 		}
-		
-		
 		
 		ArrayList<Bevanda> bevanda = null;
 		
@@ -76,15 +70,13 @@ public class TC3 extends TestCase {
 		} catch (AccessControlException e) {
 			bevanda = null;
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			fail ("RemoteException");
 		}
 		
 		try {
 			userFacade.logout(user_test);
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			fail ("RemoteException");
 		}
 		
 		assertNull(bevanda);
