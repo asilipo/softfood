@@ -25,11 +25,11 @@ import org.junit.Test;
  */
 
 public class TC4 extends TestCase {
+	
 	private IUserFacade userFacade;
 	private IArticoloMenuFacade articoloFacade;
 	private User user;
 	private Bevanda bevanda;
-	
 
 	@Before
 	public void setUp() throws Exception {
@@ -43,16 +43,16 @@ public class TC4 extends TestCase {
 			userFacade = (IUserFacade) registry.lookup("UserFacade");
 		} catch (Exception e) {
 			System.err.println("Exception to obtain the reference to the remote object: " + e);
+			fail ("Exception");
 		}
 		
-		user=userFacade.login(Ruolo.TEST, "test");
+		user = userFacade.login(Ruolo.TEST, "test");
 		
-		bevanda=new Bevanda();
+		bevanda = new Bevanda();
 		bevanda.setCapacita(1000F);
 		bevanda.setNome("BEVNDA TEST");
 		bevanda.setTipoArticolo("BEVANDA");
 	
-		
 		bevanda.setTipoPietanza(TipoPietanza.BEVANDA.ordinal());
 		
 		bevanda=articoloFacade.inserisciBevandaMenu(user, bevanda);
@@ -62,7 +62,6 @@ public class TC4 extends TestCase {
 	public void tearDown() throws Exception {
 		articoloFacade.rimuoviBevandaMenu(user, bevanda.getId());
 		userFacade.logout(user);
-		
 	}
 
 	@Test
@@ -71,10 +70,8 @@ public class TC4 extends TestCase {
 		try {
 			user_test = userFacade.login(Ruolo.CUOCO, "12345");
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			user_test = null;
+			fail ("RemoteException");
 		}
-		
 		
 		boolean test_return = false;
 		try {
@@ -82,14 +79,13 @@ public class TC4 extends TestCase {
 		} catch (AccessControlException e) {
 			test_return = false;
 		} catch (RemoteException e) {
-			e.printStackTrace();
+			fail ("RemoteException");
 		}
 		
 		try {
 			userFacade.logout(user_test);
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			fail ("RemoteException");
 		}
 		
 		assertFalse(test_return);
