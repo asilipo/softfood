@@ -44,11 +44,11 @@ public class TC6 extends TestCase {
 			userFacade = (IUserFacade) registry.lookup("UserFacade");
 		} catch (Exception e) {
 			System.err.println("Exception to obtain the reference to the remote object: " + e);
+			fail ("Exception");
 		}
 		
 		user = userFacade.login(Ruolo.TEST, "test");
-		
-		}
+	}
 
 	@After
 	public void tearDown() throws Exception {
@@ -56,22 +56,31 @@ public class TC6 extends TestCase {
 	}
 
 	@Test
-	public void testInserimentoPietanzaMenu() throws RemoteException {
-		
-		User user_test = userFacade.login(Ruolo.CUOCO, "12345");
+	public void testInserimentoPietanzaMenu() {	
+		User user_test = null;
+		try {
+			user_test = userFacade.login(Ruolo.CUOCO, "12345");
+		} catch (RemoteException e1) {
+			fail ("RemoteException");
+		}
 		
 		pietanza = new Pietanza();
 		pietanza.setNome(null);
 		pietanza.setTipoPietanza(TipoPietanza.PRIMO_PIATTO.ordinal());
-		
-		
-		try{	
+			
+		try {	
 			pietanza = articoloFacade.inserisciPietanzaMenu(user_test, pietanza);
-		}catch(AccessControlException e){
+		} catch(AccessControlException e) {
 			pietanza = null;
+		} catch (RemoteException e) {
+			fail ("RemoteException");
 		}
 		
-		userFacade.logout(user_test);
+		try {
+			userFacade.logout(user_test);
+		} catch (RemoteException e) {
+			fail ("RemoteException");
+		}
 		
 		Assert.assertNull(pietanza);
 	}
