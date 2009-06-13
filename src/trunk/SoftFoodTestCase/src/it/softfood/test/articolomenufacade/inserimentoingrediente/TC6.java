@@ -31,7 +31,6 @@ public class TC6 extends TestCase {
 	private User user;
 	private Ingrediente ingrediente;
 	
-
 	@Before
 	public void setUp() throws Exception {
 		System.setProperty("java.security.policy", "polis.policy");
@@ -44,9 +43,10 @@ public class TC6 extends TestCase {
 			userFacade = (IUserFacade) registry.lookup("UserFacade");
 		} catch (Exception e) {
 			System.err.println("Exception to obtain the reference to the remote object: " + e);
+			fail ("Exception");
 		}
 		
-		user=userFacade.login(Ruolo.TEST, "test");
+		user = userFacade.login(Ruolo.TEST, "test");
 	}
 
 	@After
@@ -59,28 +59,28 @@ public class TC6 extends TestCase {
 	public void testInserimentoIngrediente() {
 		User user_test=null;
 		try {
-			user_test=userFacade.login(Ruolo.CUOCO, "12345");
+			user_test = userFacade.login(Ruolo.CUOCO, "12345");
 		} catch (RemoteException e) {
-			user_test=null;
+			fail ("RemoteException");
 		}
 		
-		ingrediente=new Ingrediente();
+		ingrediente = new Ingrediente();
 		ingrediente.setNome("");
 		ingrediente.setScadenza(new Date(109,4,31));
 		ingrediente.setVariante(true);
 		
 		try {
-			ingrediente=articoloFacade.inserisciIngrediente(user_test, ingrediente);
+			ingrediente = articoloFacade.inserisciIngrediente(user_test, ingrediente);
 		} catch (AccessControlException e) {
-			ingrediente=null;
+			ingrediente = null;
 		} catch (RemoteException e) {
-			e.printStackTrace();
+			fail ("RemoteException");
 		}
 		
 		try {
 			userFacade.logout(user_test);
 		} catch (RemoteException e) {
-			e.printStackTrace();
+			fail ("RemoteException");
 		}
 		
 		assertNull(ingrediente);

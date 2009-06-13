@@ -30,7 +30,6 @@ public class TC3 extends TestCase {
 	private IArticoloMenuFacade articoloFacade;
 	private User user;
 	private Ingrediente ingrediente;
-	
 
 	@Before
 	public void setUp() throws Exception {
@@ -44,45 +43,44 @@ public class TC3 extends TestCase {
 			userFacade = (IUserFacade) registry.lookup("UserFacade");
 		} catch (Exception e) {
 			System.err.println("Exception to obtain the reference to the remote object: " + e);
+			fail ("Exception");
 		}
 		
-		user=userFacade.login(Ruolo.TEST, "test");
-		
+		user = userFacade.login(Ruolo.TEST, "test");
 	}
 
 	@After
 	public void tearDown() throws Exception {
 		userFacade.logout(user);
-		
 	}
 
 	@SuppressWarnings("deprecation")
 	@Test
 	public void testInserimentoIngrediente() {
-		User user_test=null;
+		User user_test = null;
 		try {
-			user_test=userFacade.login(Ruolo.CAMERIERE, "1234");
+			user_test = userFacade.login(Ruolo.CAMERIERE, "1234");
 		} catch (RemoteException e) {
-			user_test=null;
+			fail ("RemoteException");
 		}
 		
-		ingrediente=new Ingrediente();
+		ingrediente = new Ingrediente();
 		ingrediente.setNome("INGREDIENTE TEST");
 		ingrediente.setScadenza(new Date(109,4,31));
 		ingrediente.setVariante(true);
 		
 		try {
-			ingrediente=articoloFacade.inserisciIngrediente(user_test, ingrediente);
+			ingrediente = articoloFacade.inserisciIngrediente(user_test, ingrediente);
 		} catch (AccessControlException e) {
-			ingrediente=null;
+			ingrediente = null;
 		} catch (RemoteException e) {
-			e.printStackTrace();
+			fail ("RemoteException");
 		}
 		
 		try {
 			userFacade.logout(user_test);
 		} catch (RemoteException e) {
-			e.printStackTrace();
+			fail ("RemoteException");
 		}
 		
 		assertNull(ingrediente);
