@@ -19,12 +19,20 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-public class TC3  extends TestCase{
+/**
+ * @author Maria Rosaria Paone
+ * @author Marco Grasso
+ * @author Francesco Pacilio
+ */
+
+public class TC3  extends TestCase { 
+	
 	private IArticoloMenuFacade articoloFacade;
 	private IUserFacade userFacade;
 	private User user;
 	private Ingrediente ingrediente;
 
+	@SuppressWarnings("deprecation")
 	@Before
 	public void setUp() throws Exception {
 		System.setProperty("java.security.policy", "polis.policy");
@@ -34,15 +42,14 @@ public class TC3  extends TestCase{
 		try {
 			Registry registry = LocateRegistry.getRegistry("localhost");
 			articoloFacade = (IArticoloMenuFacade) registry.lookup("ArticoloFacade"); //CONTROLLARE
-			//ristoranteFacade = (IRistoranteFacade) registry.lookup("RistoranteFacade");
 			userFacade = (IUserFacade) registry.lookup("UserFacade");
 		} catch (AccessControlException e) {
 			System.err.println("Exception to obtain the reference to the remote object: " + e);
+			fail ("Exception");
 		}
 		
-		user = userFacade.login(Ruolo.TEST, "test");//da togliere
+		user = userFacade.login(Ruolo.TEST, "test");
 		
-		//Ristorante ristorante = ristoranteFacade.selezionaRistorantePerRagioneSociale(user, "La taverna");
 		ingrediente = new Ingrediente();
 		ingrediente.setDescrizione("Ingrediente di test");
 		ingrediente.setId(10000L);
@@ -58,24 +65,35 @@ public class TC3  extends TestCase{
 	@After
 	public void tearDown() throws Exception {
 		articoloFacade.rimuoviIngrediente(user, ingrediente.getId());
-		userFacade.logout(user); //da togliere
+		userFacade.logout(user);
 	}
 
 	@Test
-	public void testSelezionaIngredientePerNome() throws RemoteException {
-		
-		User user1 = userFacade.login(Ruolo.CASSIERE, "1234567");
-		//user1.setUserName("cameriere 1");
-		
-		Ingrediente ingredienteAttuale=null;
-		try{			
-			ingredienteAttuale= articoloFacade.selezionaIngredientePerNome(user1, ingrediente.getNome());
-		}catch(Exception e){
-			ingredienteAttuale = null;
+	public void testSelezionaIngredientePerNome() {
+		User user1 = null;
+		try {
+			user1 = userFacade.login(Ruolo.CASSIERE, "1234567");
+		} catch (RemoteException e1) {
+			fail ("RemoteException");
 		}
-		if(user1 != null)
-			userFacade.logout(user1);
-		//dovrebbe essere non nullo
+		
+		Ingrediente ingredienteAttuale = null;
+		try {			
+			ingredienteAttuale = articoloFacade.selezionaIngredientePerNome(user1, ingrediente.getNome());
+		} catch(AccessControlException ace) {
+			ingredienteAttuale = null;
+		} catch (RemoteException e) {
+			fail ("RemoteException");
+		}
+		
+		if(user1 != null) {
+			try {
+				userFacade.logout(user1);
+			} catch (RemoteException e) {
+				fail ("RemoteException");
+			}
+		}
+		
 		Assert.assertNull(ingredienteAttuale);
 	}
 
