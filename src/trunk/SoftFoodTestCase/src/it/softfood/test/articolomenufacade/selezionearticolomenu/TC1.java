@@ -70,7 +70,7 @@ public class TC1 extends TestCase {
 		pietanza.setNome("PIETANZA TEST");
 		pietanza.setTipoPietanza(TipoPietanza.PRIMO_PIATTO.ordinal());
 		
-		@SuppressWarnings("unused")
+		@SuppressWarnings({ "unused"})
 		Articolo articolo = null;
 		try {	
 			articolo = articoloFacade.selezionaArticoloMenuPerId(user_test, pietanza.getId());
