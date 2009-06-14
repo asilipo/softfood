@@ -22,7 +22,6 @@ grant Principal it.softfood.entity.User "CAMERIERE" {
     permission it.softfood.aspect.OperationPermission "selezionaLineeOrdinazionePerOrdinazioneTipoPietanza";
     permission it.softfood.aspect.OperationPermission "rimuoviOrdinazione";
     permission it.softfood.aspect.OperationPermission "rimuoviLineaOrdinazione";
-    permission it.softfood.aspect.OperationPermission "selezionaLineaOrdinazionePerId";
     permission it.softfood.aspect.OperationPermission "selezionaVariantiPerLineaOrdinazione";
     permission it.softfood.aspect.OperationPermission "selezionaIngredientiPerVariante";
     permission it.softfood.aspect.OperationPermission "inserisciLineaOrdinazione";
