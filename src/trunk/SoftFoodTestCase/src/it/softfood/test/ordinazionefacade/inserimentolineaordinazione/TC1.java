@@ -1,6 +1,7 @@
 package it.softfood.test.ordinazionefacade.inserimentolineaordinazione;
 
 import it.softfood.entity.Ingrediente;
+import it.softfood.entity.IngredienteMagazzino;
 import it.softfood.entity.IngredientePietanza;
 import it.softfood.entity.LineaOrdinazione;
 import it.softfood.entity.Ordinazione;
@@ -10,6 +11,10 @@ import it.softfood.entity.Tavolo;
 import it.softfood.entity.User;
 import it.softfood.enumeration.Ruolo;
 import it.softfood.enumeration.TipoPietanza;
+import it.softfood.exception.AggiornamentoIngredientiMagazzinoException;
+import it.softfood.exception.DisponibilitaBevandaException;
+import it.softfood.exception.DisponibilitaPietanzaException;
+import it.softfood.exception.UserException;
 import it.softfood.handler.IArticoloMenuFacade;
 import it.softfood.handler.IOrdinazioneFacade;
 import it.softfood.handler.IRistoranteFacade;
@@ -48,6 +53,7 @@ public class TC1 extends TestCase {
 	private LineaOrdinazione lineaordinazione;
 	private Ingrediente ingrediente;
 	private IngredientePietanza ingrediente_pietanza;
+	private IngredienteMagazzino ingredienteMagazzino;
 
 	@SuppressWarnings("deprecation")
 	@Before
@@ -91,13 +97,13 @@ public class TC1 extends TestCase {
 		ingrediente.setScadenza(new Date(109,5,30));
 		ingrediente = articoloFacade.inserisciIngrediente(user, ingrediente);
 		
-		articoloFacade.inserisciIngredienteMagazzino(user, ingrediente.getId(), 100);
+		ingredienteMagazzino = articoloFacade.inserisciIngredienteMagazzino(user, ingrediente.getId(), 10000);
 		
 		ingrediente_pietanza = new IngredientePietanza();
 		ingrediente_pietanza.setArticolo(pietanza);
 		ingrediente_pietanza.setIngrediente(ingrediente);
 		ingrediente_pietanza.setQuantita(1);
-		ingrediente_pietanza=articoloFacade.inserisciIngredientePietanza(user, ingrediente_pietanza);
+		ingrediente_pietanza = articoloFacade.inserisciIngredientePietanza(user, ingrediente_pietanza);
 				
 		ordinazione = new Ordinazione();
 		ordinazione.setCoperti(4);
@@ -114,14 +120,15 @@ public class TC1 extends TestCase {
 		tavoloFacade.rimuoviTavolo(user, tavolo.getId());		
 		articoloFacade.rimuoviPietanzaMenu(user, pietanza.getId());
 		articoloFacade.rimuoviIngrediente(user, ingrediente.getId());
+		articoloFacade.rimuoviIngredienteMagazzino(user, ingredienteMagazzino.getId());
 		userFacade.logout(user);		
 	}
 
 	@Test
 	public void testInserimentoLineaOrdinazione() {
-		User user_test = null;
+		User user = null;
 		try {
-			user_test = userFacade.login(Ruolo.CAMERIERE, "1234");
+			user = userFacade.login(Ruolo.CAMERIERE, "1234");
 		} catch (RemoteException e) {
 			fail ("RemoteException");
 		}		
@@ -133,13 +140,38 @@ public class TC1 extends TestCase {
 			lineaordinazione.setQuantita(1);
 			lineaordinazione.setOrdinazione(ordinazione);
 			
-			lineaordinazione = ordinazioneFacade.inserisciLineaOrdinazione(user_test, lineaordinazione);
-		} catch (Exception e) {
-			lineaordinazione = null;
-		} 
+			lineaordinazione = ordinazioneFacade.inserisciLineaOrdinazione(this.user, lineaordinazione);
+		} catch (NullPointerException npe) {
+			
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (DisponibilitaBevandaException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (DisponibilitaPietanzaException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (AggiornamentoIngredientiMagazzinoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (UserException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
+		/*catch (Exception e) {
+			try {
+				userFacade.logout(user);
+			} catch (RemoteException e1) {
+				fail ("RemoteException");
+			}
+		}*/
 		
 		try {
-			userFacade.logout(user_test);
+			userFacade.logout(user);
 		} catch (RemoteException e) {
 			fail ("RemoteException");
 		}
