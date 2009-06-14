@@ -31,7 +31,6 @@ public class TC4 extends TestCase {
 	private IArticoloMenuFacade articoloFacade;
 	private IUserFacade userFacade;
 	private User user;
-	private Ingrediente ingrediente;
 
 	@Before
 	public void setUp() throws Exception {
@@ -42,37 +41,47 @@ public class TC4 extends TestCase {
 		try {
 			Registry registry = LocateRegistry.getRegistry("localhost");
 			articoloFacade = (IArticoloMenuFacade) registry.lookup("ArticoloFacade"); //CONTROLLARE
-			//ristoranteFacade = (IRistoranteFacade) registry.lookup("RistoranteFacade");
 			userFacade = (IUserFacade) registry.lookup("UserFacade");
 		} catch (AccessControlException e) {
 			System.err.println("Exception to obtain the reference to the remote object: " + e);
+			fail ("Exception");
 		}
 		
-		user = userFacade.login(Ruolo.TEST, "test");//da togliere
-		
-		}
+		user = userFacade.login(Ruolo.TEST, "test");
+	}
 
 	@After
 	public void tearDown() throws Exception {
-	
-		userFacade.logout(user); //da togliere
+		userFacade.logout(user);
 	}
 
 	@Test
-	public void testSelezionaIngredienti() throws RemoteException {
-		
-		User user1 = userFacade.login(Ruolo.CAMERIERE, "1234");
+	public void testSelezionaIngredienti() {
+		User user1 = null;
+		try {
+			user1 = userFacade.login(Ruolo.CAMERIERE, "1234");
+		} catch (RemoteException e) {
+			fail ("RemoteException");
+		}
 		
 		ArrayList<Ingrediente> listaIngrediente = null;
-		try{			
+		try {			
 			listaIngrediente = articoloFacade.selezionaIngredienti(user1);
-		}catch(Exception e){
+		} catch(AccessControlException ace){
 			listaIngrediente = null;
+		} catch (RemoteException e) {
+			fail ("RemoteException");
 		}
-		System.out.println(listaIngrediente);
-		if(user1 != null)
-			userFacade.logout(user1);
-		//dovrebbe essere non nullo
+		
+		if(user1 != null) {
+			try {
+				userFacade.logout(user1);
+			} catch (RemoteException e) {
+				fail ("RemoteException");
+			}
+		}
+		
 		Assert.assertNull(listaIngrediente);
 	}
+	
 }
