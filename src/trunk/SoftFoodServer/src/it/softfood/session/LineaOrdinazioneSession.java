@@ -49,6 +49,14 @@ public class LineaOrdinazioneSession {
 			lineaOrdinazione = (LineaOrdinazione) this.selezionaLineaOrdinazionePerId(lineaOrdinazione.getId());
 			
 			return lineaOrdinazione;
+		} catch (NullPointerException e) {
+			Long id = this.getNewId();
+			lineaOrdinazione.setId(id);
+		
+			session.persist(lineaOrdinazione);
+			lineaOrdinazione = (LineaOrdinazione) this.selezionaLineaOrdinazionePerId(lineaOrdinazione.getId());
+		
+			return lineaOrdinazione;
 		} catch (Exception e) {
 			return null;
 		}
