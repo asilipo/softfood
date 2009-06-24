@@ -127,7 +127,6 @@ public class Pannello_ordinazioni extends javax.swing.JPanel {
 
 		ToolTipCellRender tool = new ToolTipCellRender(role, ordinazioneFacade, id_ordini, linea_ordine);
 		tabella_ordini.setDefaultRenderer(tabella_ordini.getColumnClass(0), tool);
-
 	}
 
 	@SuppressWarnings("unchecked")
@@ -263,7 +262,7 @@ public class Pannello_ordinazioni extends javax.swing.JPanel {
 				return canEdit [columnIndex];
 			}
 		});
-		tabella_ordini.setName("tabella_ordini"); // NOI18N
+		tabella_ordini.setName("tabella_ordini");
 		tabella_ordini.addMouseListener(new java.awt.event.MouseAdapter() {
 			public void mouseClicked(java.awt.event.MouseEvent evt) {
 				tabella_ordiniMouseClicked(evt);

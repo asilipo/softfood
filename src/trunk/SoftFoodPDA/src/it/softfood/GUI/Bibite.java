@@ -34,7 +34,6 @@ public class Bibite extends javax.swing.JPanel {
 		} catch (Exception e) {
 			System.err.println("Errore binding: ArticoloMenuFacade - OrdinazioneFacade");
 		}
-
 	}
 
 	@SuppressWarnings("serial")
@@ -57,7 +56,6 @@ public class Bibite extends javax.swing.JPanel {
 
 		if (bibite != null) {
 			tabella_bibite.setModel(new javax.swing.table.DefaultTableModel(new String[]{"ID", "Bevanda"}, bibite.size()) {
-
 				@Override
 				public boolean isCellEditable(int row, int column) {
 					return false;
@@ -65,7 +63,6 @@ public class Bibite extends javax.swing.JPanel {
 			});
 		}else{
 			tabella_bibite.setModel(new javax.swing.table.DefaultTableModel(new String[]{"ID", "Bevanda"}, 0) {
-
 				@Override
 				public boolean isCellEditable(int row, int column) {
 					return false;

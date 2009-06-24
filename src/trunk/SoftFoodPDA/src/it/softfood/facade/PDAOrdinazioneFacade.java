@@ -45,7 +45,6 @@ public class PDAOrdinazioneFacade {
 	public Ordinazione selezionaOrdinazionePerTavolo(User user, String riferimentoTavolo, Boolean terminato) {
 		OrdinazioneFacade ordineFacade = OrdinazioneFacade.getInstance();
 		Ordinazione ordinazione = null;
-		
 		try {
 			ordinazione = ordineFacade.selezionaOrdinazionePerTavolo(user, riferimentoTavolo, terminato);
 		} catch (Exception e) {
