@@ -55,6 +55,8 @@ public class Nuovo_ingrediente extends javax.swing.JPanel {
 				jComboBox2.setSelectedIndex(4);
 			if(!ingrediente.isVariante())
 				jComboBox3.setSelectedIndex(1);
+			else 
+				jComboBox3.setSelectedIndex(0);
 			try{
 				jTextField3.setText(new Integer(((IngredienteMagazzino)ingrediente.getIngredienteMagazzinos().toArray()[0]).getQuantita()).toString());
 			}catch(Exception e){
@@ -209,15 +211,19 @@ public class Nuovo_ingrediente extends javax.swing.JPanel {
 	@SuppressWarnings("deprecation")
 	private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         	
 		if(tipo.equalsIgnoreCase("NUOVO"))
-			ingrediente=new Ingrediente();
+			ingrediente = new Ingrediente();
 		ingrediente.setNome(jTextField1.getText());
 		ingrediente.setDescrizione(jTextField2.getText());
-		int d=giorno.getSelectedIndex()+1;
-		int m=mese.getSelectedIndex();
-		int y=anno.getSelectedIndex()+109;
-		Date date=new Date(y,m,d);
+		if (jComboBox3.getSelectedIndex() == 0) 
+			ingrediente.setVariante(true);
+		else
+			ingrediente.setVariante(false);
+		int d = giorno.getSelectedIndex()+1;
+		int m = mese.getSelectedIndex();
+		int y = anno.getSelectedIndex()+109;
+		Date date = new Date(y,m,d);
 		ingrediente.setScadenza(date);
-		if(jComboBox1.getSelectedIndex()==0)
+		if(jComboBox1.getSelectedIndex() == 0)
 			ingrediente.setTipoIngrediente("IngredienteLungaConservazione");
 		else
 			ingrediente.setTipoIngrediente("IngredienteFresco");
