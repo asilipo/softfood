@@ -319,12 +319,40 @@ public class ArticoloMenuFacade  {
     	return null;
     }
     
-    public boolean updateIndredientiPietanza(User user, Long idPietanza, HashSet<IngredientePietanza> ingredientiPietanza) {
+/*    public boolean updateIndredientiPietanza(User user, Long idPietanza, HashSet<IngredientePietanza> ingredientiPietanza) {
         if (user != null && ingredientiPietanza != null && ingredientiPietanza.size() > 0) {
         	
         	try {
         		for (IngredientePietanza ingredientePietanza : ingredientiPietanza)
         			ingredientePietanzaSession.update(ingredientePietanza);
+        		
+        		return true;
+        	} catch (Exception e) {
+        		e.printStackTrace();
+        		System.err.println("ArticoloMenuFacade#updateIndredientiPietanza");
+        		return false;
+        	}
+        }
+        	
+        return false;
+    }*/
+    
+    public boolean updateIndredientiPietanza(User user, Long idPietanza, HashSet<IngredientePietanza> ingredientiPietanza) {
+        if (user != null && ingredientiPietanza != null && ingredientiPietanza.size() > 0) {
+        	ArrayList<Ingrediente> ingredienti = new ArrayList<Ingrediente>();
+            ArrayList<IngredientePietanza> ingredientiPietanze = (ArrayList<IngredientePietanza>) ingredientePietanzaSession.selezionaIngredientiPietanze();
+
+            if (ingredientiPietanze != null) {
+                for (IngredientePietanza ingredientePietanza : ingredientiPietanze) {
+                    if (ingredientePietanza.getId().getPietanza().equals(idPietanza)) {
+                        ingredientePietanzaSession.rimuoviIngredientePietanza(ingredientePietanza.getId());
+                    }
+                }
+            }
+
+        	try {
+        		for (IngredientePietanza ingredientePietanza : ingredientiPietanza)
+        			ingredientePietanzaSession.inserisciIngredientePietanza(ingredientePietanza);
         		
         		return true;
         	} catch (Exception e) {
