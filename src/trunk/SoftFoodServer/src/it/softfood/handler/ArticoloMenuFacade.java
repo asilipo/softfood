@@ -319,14 +319,16 @@ public class ArticoloMenuFacade  {
     	return null;
     }
     
-    public boolean updateIndredientiPietanza(User user, HashSet<IngredientePietanza> ingredientiPietanza) {
-        if (user != null && ingredientiPietanza != null) {
+    public boolean updateIndredientiPietanza(User user, Long idPietanza, HashSet<IngredientePietanza> ingredientiPietanza) {
+        if (user != null && ingredientiPietanza != null && ingredientiPietanza.size() > 0) {
+        	
         	try {
         		for (IngredientePietanza ingredientePietanza : ingredientiPietanza)
         			ingredientePietanzaSession.update(ingredientePietanza);
         		
         		return true;
         	} catch (Exception e) {
+        		e.printStackTrace();
         		System.err.println("ArticoloMenuFacade#updateIndredientiPietanza");
         		return false;
         	}
