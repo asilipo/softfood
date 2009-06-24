@@ -104,16 +104,18 @@ public class Quantita extends javax.swing.JPanel {
 		int quantita[]=new int[ingredienti.length];
 		HashSet<IngredientePietanza> set=new HashSet<IngredientePietanza> ();
 		try {
+			Long id = null;
 			for(int i = 0; i < quantita.length; i++){
 				quantita[i]=Integer.parseInt(jTextArea1[i].getText());
 				((IngredientePietanza)ingredienti[i]).setQuantita(quantita[i]);
 				set.add((IngredientePietanza) ingredienti[i]);
+				id = ((IngredientePietanza)ingredienti[i]).getArticolo().getId();
 			}
-			
+
 			if(tipo.equalsIgnoreCase("NUOVO"))
 				set = articolo.inserisciIngredientiPietanze(user, set);
 			else
-				articolo.updateIndredientiPietanza(user, set);
+				articolo.updateIndredientiPietanza(user, id, set);
 			
 			pietanza.setIngredientePietanzas(set);
 			

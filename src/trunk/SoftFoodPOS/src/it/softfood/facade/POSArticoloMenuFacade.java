@@ -131,9 +131,9 @@ public class POSArticoloMenuFacade {
 		}
 	}
 	
-	public void updateIndredientiPietanza(User role, HashSet<IngredientePietanza> ingredientiPietanza) {
+	public void updateIndredientiPietanza(User role, Long idPietanza, HashSet<IngredientePietanza> ingredientiPietanza) {
 		try {
-			articolo.updateIndredientiPietanza(role, ingredientiPietanza);
+			articolo.updateIndredientiPietanza(role, idPietanza, ingredientiPietanza);
 		} catch (RemoteException e) {
 			System.err.println("POSArticoloMenuFacade#updateIndredientiPietanza");
 		}
