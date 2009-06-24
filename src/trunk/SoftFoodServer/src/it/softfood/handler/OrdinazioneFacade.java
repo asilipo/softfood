@@ -358,7 +358,6 @@ public class OrdinazioneFacade {
 
 				if (articolo.getTipoArticolo().equals("Pietanza")) {
 					if (this.selezionaDisponibilitaPietanza(user, articolo.getId()) > 0) {
-						System.out.println("qui");
 						lineaOrdinazione = lineaOrdinazioneSession.inserisciLineaOrdinazione(lineaOrdinazione);
 					} else 
 						throw new DisponibilitaPietanzaException(null);
