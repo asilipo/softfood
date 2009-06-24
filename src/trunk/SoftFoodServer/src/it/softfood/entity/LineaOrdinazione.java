@@ -51,7 +51,7 @@ public class LineaOrdinazione implements java.io.Serializable {
 		this.id = id;
 	}
 
-	public long getId() {
+	public Long getId() {
 		return this.id;
 	}
 	
