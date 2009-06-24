@@ -28,6 +28,7 @@ import org.junit.Test;
  */
 
 public class TC3 extends TestCase {
+	
 	private IUserFacade userFacade;
 	private IArticoloMenuFacade articoloFacade;
 	private User user;
@@ -35,7 +36,7 @@ public class TC3 extends TestCase {
 	private Ingrediente ingrediente;
 	private IngredientePietanza ingrediente_pietanza;
 	
-	
+	@SuppressWarnings("deprecation")
 	@Before
 	public void setUp() throws Exception {
 		System.setProperty("java.security.policy", "polis.policy");
@@ -48,75 +49,62 @@ public class TC3 extends TestCase {
 			userFacade = (IUserFacade) registry.lookup("UserFacade");
 		} catch (Exception e) {
 			System.err.println("Exception to obtain the reference to the remote object: " + e);
+			fail ("Exception");
 		}
 		
-		user=userFacade.login(Ruolo.TEST, "test");
+		user = userFacade.login(Ruolo.TEST, "test");
 		
-		pietanza=new Pietanza();
+		pietanza = new Pietanza();
 		pietanza.setNome("BEVANDA TEST");
 		pietanza.setTipoPietanza(TipoPietanza.PRIMO_PIATTO.ordinal());
 		
-		pietanza=articoloFacade.inserisciPietanzaMenu(user, pietanza);
+		pietanza = articoloFacade.inserisciPietanzaMenu(user, pietanza);
 		
-		ingrediente=new Ingrediente();
+		ingrediente = new Ingrediente();
 		ingrediente.setNome("Ingrediente test");
 		ingrediente.setScadenza(new Date(109,10,30));
 		
-		ingrediente=articoloFacade.inserisciIngrediente(user, ingrediente);
+		ingrediente = articoloFacade.inserisciIngrediente(user, ingrediente);
 		
-		ingrediente_pietanza=new IngredientePietanza();
+		ingrediente_pietanza = new IngredientePietanza();
 		ingrediente_pietanza.setArticolo(pietanza);
 		ingrediente_pietanza.setIngrediente(ingrediente);
 		ingrediente_pietanza.setQuantita(5);
 		
-		ingrediente_pietanza=articoloFacade.inserisciIngredientePietanza(user, ingrediente_pietanza);
+		ingrediente_pietanza = articoloFacade.inserisciIngredientePietanza(user, ingrediente_pietanza);
 		
-		articoloFacade.inserisciIngredienteMagazzino(user, ingrediente.getId(), 10);
-		
-		
-		
-	
-		
-		
+		articoloFacade.inserisciIngredienteMagazzino(user, ingrediente.getId(), 10);		
 	}
 
 	@After
 	public void tearDown() throws Exception {
 		articoloFacade.rimuoviIngrediente(user, ingrediente.getId());
 		articoloFacade.rimuoviPietanzaMenu(user, pietanza.getId());
-		userFacade.logout(user);
-		
+		userFacade.logout(user);	
 	}
 
 	@Test
 	public void testValutazioneDisponibilitaPietanza() {
-		User user_test=null;
+		User user_test = null;
 		try {
-			user_test=userFacade.login(Ruolo.AMMINISTRATORE, "123456");
+			user_test = userFacade.login(Ruolo.AMMINISTRATORE, "123456");
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			user_test=null;
+			fail ("RemoteException");
 		}
-		
-		
-		
 		
 		int test_return = 0;
 		try {
-			test_return=articoloFacade.selezionaDisponibilitaPietanza(user_test, pietanza.getId());
+			test_return = articoloFacade.selezionaDisponibilitaPietanza(user_test, pietanza.getId());
 		} catch (AccessControlException e) {
-			System.out.println(e);
 			test_return = 0;
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			fail ("RemoteException");
 		}
 		
 		try {
 			userFacade.logout(user_test);
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			fail ("RemoteException");
 		}
 		
 		assertFalse(test_return>0);
