@@ -139,7 +139,7 @@ public class TC6 extends TestCase {
 		ArrayList<LineaOrdinazione> linee=null;
 		
 		try {
-			linee=ordinazioneFacade.selezionaLineeOrdinazionePerOrdinazioneTipoPietanza(user_test, ordinazione, TipoPietanza.BEVANDA);
+			linee=ordinazioneFacade.selezionaLineeOrdinazionePerOrdinazioneTipoPietanza(user_test, ordinazione, null);
 		} catch (Exception e) {
 			fail(e.toString());
 		} 
