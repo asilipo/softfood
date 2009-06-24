@@ -43,17 +43,18 @@ public class TC2 extends TestCase {
 			userFacade = (IUserFacade) registry.lookup("UserFacade");
 		} catch (Exception e) {
 			System.err.println("Exception to obtain the reference to the remote object: " + e);
+			fail ("Exception");
 		}
 		
-		user=userFacade.login(Ruolo.TEST, "test");
+		user = userFacade.login(Ruolo.TEST, "test");
 		
-		bevanda=new Bevanda();
+		bevanda = new Bevanda();
 		bevanda.setCapacita(1000F);
 		bevanda.setNome("BEVANDA TEST");
 		bevanda.setTipoArticolo("Bevanda");
 		bevanda.setTipoPietanza(TipoPietanza.BEVANDA.ordinal());
 		
-		bevanda=articoloFacade.inserisciBevandaMenu(user, bevanda);
+		bevanda = articoloFacade.inserisciBevandaMenu(user, bevanda);
 		
 		articoloFacade.inserisciBevandaMagazzino(user, bevanda.getId(), 10000);
 	}
@@ -62,38 +63,30 @@ public class TC2 extends TestCase {
 	public void tearDown() throws Exception {
 		articoloFacade.rimuoviBevandaMenu(user, bevanda.getId());
 		userFacade.logout(user);
-		
 	}
 
 	@Test
 	public void testValutazioneDisponibilitaBevanda() {
-		User user_test=null;
+		User user_test = null;
 		try {
-			user_test=userFacade.login(Ruolo.AMMINISTRATORE, "123456");
+			user_test = userFacade.login(Ruolo.AMMINISTRATORE, "123456");
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			user_test=null;
-		}
-		
-		
-		
+			fail ("RemoteException");
+		}	
 		
 		int test_return = 0;
 		try {
-			test_return=articoloFacade.selezionaDisponibilitaBevanda(user_test, bevanda.getId());
+			test_return = articoloFacade.selezionaDisponibilitaBevanda(user_test, bevanda.getId());
 		} catch (AccessControlException e) {
-			System.out.println(e);
 			test_return = 0;
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			fail ("RemoteException");
 		}
 		
 		try {
 			userFacade.logout(user_test);
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			fail ("RemoteException");
 		}
 		
 		assertFalse(test_return>0);
