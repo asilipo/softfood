@@ -6,6 +6,7 @@ import it.softfood.entity.User;
 import it.softfood.facade.PDAOrdinazioneFacade;
 import it.softfood.facade.PDATavoloFacade;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Enumeration;
 
@@ -212,6 +213,7 @@ public class Tavoli extends javax.swing.JPanel {
 				ordine.setTavolo(tavoloFacade.selezionaTavolo(role, tavoloSelezionato));
 				ordine.setCoperti(Integer.parseInt((String) jComboBox2.getSelectedItem()));
 				ordine.setTerminato(false);
+				ordine.setData(new Timestamp(System.currentTimeMillis()));
 				ordine = ordinazioneFacade.inserisciOrdinazione(role, ordine);
 			} catch (Exception e) {
 				occ = true;
