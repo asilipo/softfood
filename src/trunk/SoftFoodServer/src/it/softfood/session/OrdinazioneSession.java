@@ -162,6 +162,7 @@ public class OrdinazioneSession {
 		    date = sdf.parse(a);
 		    
 			Query q = session.createQuery("from it.softfood.entity.Ordinazione o where o.tavolo = ? and o.terminato = ? order by o.data");
+			
 			q.setLong(0, tavolo.getId());
 			q.setBoolean(1, terminato);
 			List<Ordinazione> list = (List<Ordinazione>) q.list();
