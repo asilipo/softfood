@@ -99,7 +99,7 @@ public class OrdinazioneFacade {
             }
 
             try {    		    
-                ordinazione.setData(new Timestamp(System.currentTimeMillis()));
+            	ordinazione.setData(new Timestamp(System.currentTimeMillis()));
                 ordinazione.setSconto(0d);
                 ordinazione.setTotale(0d);
                 ordinazione.setTerminato(false);
@@ -155,7 +155,7 @@ public class OrdinazioneFacade {
 
 	public Ordinazione selezionaOrdinazionePerId(User user, Long id) {
 		if (user != null && id != null) {
-			Ordinazione ord=ordinazioneSession.selezionaOrdinazionePerId(id);
+			Ordinazione ord = ordinazioneSession.selezionaOrdinazionePerId(id);
 			return ord;
 		}
 		return null;
@@ -274,7 +274,7 @@ public class OrdinazioneFacade {
 	}
     
     public Ordinazione selezionaOrdinazionePerTavolo(User user, String riferimentoTavolo, Boolean terminato) {
-    	if (user != null && riferimentoTavolo != null && terminato != null){
+    	if (user != null && riferimentoTavolo != null && terminato != null) {
     		Tavolo tavolo = tavoloSession.selezionaTavoloPerRiferimento(riferimentoTavolo, true);
     		ArrayList<Ordinazione> list = ((ArrayList<Ordinazione>)ordinazioneSession.selezionaOrdinazioniPerTavolo(tavolo, terminato));
 			if (list != null && list.size() > 0) {
@@ -357,9 +357,10 @@ public class OrdinazioneFacade {
 				}
 
 				if (articolo.getTipoArticolo().equals("Pietanza")) {
-					if (this.selezionaDisponibilitaPietanza(user, articolo.getId()) > 0) 
+					if (this.selezionaDisponibilitaPietanza(user, articolo.getId()) > 0) {
+						System.out.println("qui");
 						lineaOrdinazione = lineaOrdinazioneSession.inserisciLineaOrdinazione(lineaOrdinazione);
-					else 
+					} else 
 						throw new DisponibilitaPietanzaException(null);
 				}
 
@@ -580,19 +581,15 @@ public class OrdinazioneFacade {
     private boolean aggiornaMagazzinoIngredienti(User user, LineaOrdinazione lineaOrdinazione, String tipoAggiornamento) {
     	if (user != null) {
 	    	try {
-	        	System.out.println("quantità 111");
 	            ArrayList<IngredientePietanza> ingredientiPietanze = (ArrayList<IngredientePietanza>) ingredientePietanzaSession.selezionaIngredientiPietanze();
 	            ArrayList<IngredienteMagazzino> ingredientiMagazzino = (ArrayList<IngredienteMagazzino>) ingredienteMagazzinoSession.selezionaIngredientiMagazzino();
 	            if (ingredientiPietanze != null && ingredientiMagazzino != null) {
-	            	System.out.println("quantità 223");
 	                for (IngredientePietanza ingredientePietanza : ingredientiPietanze) {
 	                    if (ingredientePietanza.getId().getPietanza().equals(lineaOrdinazione.getArticolo().getId())) {
 	                            for (IngredienteMagazzino ingredienteMagazzino : ingredientiMagazzino) {
-	                            	System.out.println("quantità 33333333");
 	                            	if (ingredienteMagazzino.getIngrediente().getId().equals(ingredientePietanza.getId().getIngrediente())) {
 	                                	
 	                                	int quantita = ingredienteMagazzino.getQuantita();
-	                                	System.out.println("quantità " + quantita);
 	                                	if (tipoAggiornamento.equalsIgnoreCase("+"))
 	                                        ingredienteMagazzino.setQuantita(quantita + (lineaOrdinazione.getQuantita() * ingredientePietanza.getQuantita()));
 	                                    else

@@ -138,7 +138,9 @@ public class ArticoloMenuFacade  {
     
     public Ingrediente selezionaIngredientePerNome(User user, String nome) {
         if (user != null && nome != null) {
-            return (Ingrediente) ingredienteSession.selezionaIngredientePerNome(nome).get(0);
+        	ArrayList<Ingrediente> ingredienti = (ArrayList<Ingrediente>) ingredienteSession.selezionaIngredientePerNome(nome);
+            if (ingredienti != null && ingredienti.size() > 0)
+            	return (Ingrediente) ingredienti.get(0);
         }
 
         return null;
