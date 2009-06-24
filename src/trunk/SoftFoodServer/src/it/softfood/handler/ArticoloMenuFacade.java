@@ -339,7 +339,6 @@ public class ArticoloMenuFacade  {
     
     public boolean updateIndredientiPietanza(User user, Long idPietanza, HashSet<IngredientePietanza> ingredientiPietanza) {
         if (user != null && ingredientiPietanza != null && ingredientiPietanza.size() > 0) {
-        	ArrayList<Ingrediente> ingredienti = new ArrayList<Ingrediente>();
             ArrayList<IngredientePietanza> ingredientiPietanze = (ArrayList<IngredientePietanza>) ingredientePietanzaSession.selezionaIngredientiPietanze();
 
             if (ingredientiPietanze != null) {
