@@ -2,7 +2,6 @@ package it.softfood.test.ristorantefacade.inserimentoristorante;
 
 import it.softfood.entity.Indirizzo;
 import it.softfood.entity.Ristorante;
-import it.softfood.entity.Tavolo;
 import it.softfood.entity.User;
 import it.softfood.enumeration.Ruolo;
 import it.softfood.handler.IRistoranteFacade;
@@ -13,7 +12,6 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.security.AccessControlException;
 
-import junit.framework.Assert;
 import junit.framework.TestCase;
 
 import org.junit.After;
@@ -31,7 +29,6 @@ public class TC7 extends TestCase {
 	private IUserFacade userFacade;
 	private IRistoranteFacade ristoranteFacade;
 	private User user;
-	private Tavolo tavoloInserito;
 	private Ristorante ristorante;
 	
 	@Before
@@ -50,12 +47,10 @@ public class TC7 extends TestCase {
 		}
 		
 		user = userFacade.login(Ruolo.TEST, "test");
-		
 	}
 
 	@After
 	public void tearDown() throws Exception {
-		
 		userFacade.logout(user);
 	}
 
@@ -84,7 +79,7 @@ public class TC7 extends TestCase {
 		} catch (RemoteException e) {
 			fail ("RemoteException");
 		}catch (AccessControlException ace) {
-			ristorante=null;
+			ristorante = null;
 			try {
 				userFacade.logout(user1);
 			} catch (RemoteException e) {
@@ -94,4 +89,5 @@ public class TC7 extends TestCase {
 		
 		assertNull(ristorante);
 	}
+	
 }
