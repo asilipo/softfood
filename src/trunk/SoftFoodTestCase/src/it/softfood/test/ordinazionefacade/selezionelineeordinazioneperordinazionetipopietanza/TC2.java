@@ -19,6 +19,7 @@ import it.softfood.handler.IUserFacade;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.security.AccessControlException;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -141,6 +142,8 @@ public class TC2 extends TestCase {
 		
 		try {
 			linee=ordinazioneFacade.selezionaLineeOrdinazionePerOrdinazioneTipoPietanza(user_test, ordinazione, TipoPietanza.ANTIPASTI);
+		} catch (AccessControlException e) {
+			linee=null;
 		} catch (Exception e) {
 			fail(e.toString());
 		} 
