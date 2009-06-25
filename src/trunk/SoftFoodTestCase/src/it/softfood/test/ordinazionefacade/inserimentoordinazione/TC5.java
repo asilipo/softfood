@@ -1,7 +1,6 @@
 package it.softfood.test.ordinazionefacade.inserimentoordinazione;
 
 import it.softfood.entity.Indirizzo;
-import it.softfood.entity.LineaOrdinazione;
 import it.softfood.entity.Ordinazione;
 import it.softfood.entity.Pietanza;
 import it.softfood.entity.Ristorante;
@@ -18,7 +17,6 @@ import it.softfood.handler.IUserFacade;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
-import java.util.Date;
 
 import junit.framework.TestCase;
 
@@ -35,7 +33,6 @@ import org.junit.Test;
 public class TC5 extends TestCase {
 
 	private IOrdinazioneFacade ordinazioneFacade;
-	private LineaOrdinazione lineaOrdinazione;
 	private IArticoloMenuFacade articoloFacade;
 	private IRistoranteFacade ristoranteFacade;
 	private IUserFacade userFacade;
@@ -83,22 +80,15 @@ public class TC5 extends TestCase {
 		indirizzo.setCitta("Avellino");
 		ristorante.setIndirizzo(indirizzo);
 		
-		
 		ristorante = ristoranteFacade.inserisciRistorante(user, ristorante); 
 			
 		tavolo.setRistorante(ristorante);
 		
 		pietanza = new Pietanza();
-		pietanza=new Pietanza();
+		pietanza = new Pietanza();
 		pietanza.setNome("BEVANDA TEST");
 		pietanza.setTipoPietanza(TipoPietanza.PRIMO_PIATTO.ordinal());
-		pietanza=articoloFacade.inserisciPietanzaMenu(user, pietanza);
-		
-		
-		
-		
-		
-		
+		pietanza = articoloFacade.inserisciPietanzaMenu(user, pietanza);
 	}
 
 	@After
@@ -115,8 +105,7 @@ public class TC5 extends TestCase {
 		try {
 			user_test = userFacade.login(Ruolo.AMMINISTRATORE, "123456");
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			user_test = null;
+			fail ("RemoteException");
 		}		
 		
 		try {
@@ -124,17 +113,16 @@ public class TC5 extends TestCase {
 			
 			ordinazione = ordinazioneFacade.inserisciOrdinazione(user_test, null);
 		} catch (Exception e) {
-			System.out.println(e);
 			ordinazione = null;
 		} 
 		
 		try {
 			userFacade.logout(user_test);
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			System.out.println(e);
-			e.printStackTrace();
+			fail ("RemoteException");
 		}
+		
 		assertNull(ordinazione);
 	}
+	
 }
