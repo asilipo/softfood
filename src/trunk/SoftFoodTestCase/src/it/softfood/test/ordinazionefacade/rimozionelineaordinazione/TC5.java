@@ -1,6 +1,5 @@
 package it.softfood.test.ordinazionefacade.rimozionelineaordinazione;
 
-import it.softfood.entity.Indirizzo;
 import it.softfood.entity.Ingrediente;
 import it.softfood.entity.IngredientePietanza;
 import it.softfood.entity.LineaOrdinazione;
@@ -138,12 +137,11 @@ public class TC5 extends TestCase {
 			fail ("RemoteException");
 		}		
 		
-		boolean result=false;
-		
+		boolean result = false;
 		try {
-			result=ordinazioneFacade.rimuoviLineaOrdinazione(user_test, null);
+			result = ordinazioneFacade.rimuoviLineaOrdinazione(user_test, null);
 		} catch (AccessControlException e) {
-			result=false;
+			result = false;
 		} catch (Exception e) {
 			fail(e.toString());
 		} 
