@@ -1,8 +1,10 @@
 package it.softfood.test.articolomenufacade.inserimentobevandamagazzino;
 
+import it.softfood.entity.Bevanda;
 import it.softfood.entity.BevandaMagazzino;
 import it.softfood.entity.User;
 import it.softfood.enumeration.Ruolo;
+import it.softfood.enumeration.TipoPietanza;
 import it.softfood.handler.IArticoloMenuFacade;
 import it.softfood.handler.IUserFacade;
 
@@ -29,7 +31,8 @@ public class TC3 extends TestCase {
 	private IArticoloMenuFacade articoloFacade;
 	private IUserFacade userFacade;
 	private User user;
-	private BevandaMagazzino bevanda;
+	private BevandaMagazzino bevandaMagazzino;
+	private Bevanda bevanda;
 
 	@Before
 	public void setUp() throws Exception {
@@ -47,10 +50,20 @@ public class TC3 extends TestCase {
 		}
 		
 		user = userFacade.login(Ruolo.TEST, "test");
+		
+		bevanda = new Bevanda();
+		bevanda.setCapacita(1000F);
+		bevanda.setNome("BEVNDA TEST");
+		bevanda.setTipoArticolo("BEVANDA");
+		bevanda.setTipoPietanza(TipoPietanza.BEVANDA.ordinal());
+		
+		bevanda = articoloFacade.inserisciBevandaMenu(user, bevanda);
 	}
 
 	@After
 	public void tearDown() throws Exception {
+		articoloFacade.rimuoviBevandaMenu(user, bevanda.getId());
+		articoloFacade.rimuoviBevandaMagazzino(user, 1000000L);
 		userFacade.logout(user);
 	}
 
@@ -64,9 +77,9 @@ public class TC3 extends TestCase {
 		}
 
 		try {	
-			bevanda = articoloFacade.inserisciBevandaMagazzino(user_test, 1000000L, 100);
+			bevandaMagazzino = articoloFacade.inserisciBevandaMagazzino(user_test, bevanda, 1000000L, 100);
 		} catch(AccessControlException e){
-			bevanda = null;
+			bevandaMagazzino = null;
 		} catch (RemoteException e) {
 			fail("RemoteException");
 		}
@@ -77,7 +90,7 @@ public class TC3 extends TestCase {
 			fail("RemoteException");
 		}
 		
-		Assert.assertNull(bevanda);
+		Assert.assertNull(bevandaMagazzino);
 	}
 	
 }
