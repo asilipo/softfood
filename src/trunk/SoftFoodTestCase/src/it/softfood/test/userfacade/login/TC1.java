@@ -42,6 +42,7 @@ public class TC1 extends TestCase {
 
 	@After
 	public void tearDown() throws Exception {
+		userFacade.logout(user);
 	}
 
 	@Test
