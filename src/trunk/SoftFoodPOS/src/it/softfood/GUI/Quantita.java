@@ -103,10 +103,11 @@ public class Quantita extends javax.swing.JPanel {
 	private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
 		int quantita[]=new int[ingredienti.length];
 		HashSet<IngredientePietanza> set=new HashSet<IngredientePietanza> ();
+		Visualizza visualizza = null;
 		try {
 			Long id = null;
 			for(int i = 0; i < quantita.length; i++){
-				quantita[i]=Integer.parseInt(jTextArea1[i].getText());
+				quantita[i] = Integer.parseInt(jTextArea1[i].getText());
 				((IngredientePietanza)ingredienti[i]).setQuantita(quantita[i]);
 				set.add((IngredientePietanza) ingredienti[i]);
 				id = ((IngredientePietanza)ingredienti[i]).getArticolo().getId();
@@ -122,15 +123,27 @@ public class Quantita extends javax.swing.JPanel {
 			articolo.updatePietanza(user, pietanza);
 			
 			frame.getActualPanel().setVisible(false);
-			Visualizza visualizza = new Visualizza(frame, "Pietanza");
+			visualizza = new Visualizza(frame, "Pietanza");
 			frame.setActualPanel(visualizza);
 			frame.setComponent(visualizza);
-		} catch(Exception e){
+		} catch (NullPointerException npe) { 
+			JOptionPane.showMessageDialog(frame.getComponent(), "ERRORE NELL'INSERIMENTO DELLA PIETANZA'!","Errore Quantita'",JOptionPane.ERROR_MESSAGE);
+			frame.getActualPanel().setVisible(false);
+			Nuova_pietanza nuova = new Nuova_pietanza(frame, pietanza, tipo);
+			frame.setActualPanel(nuova);
+			frame.setComponent(nuova);
+		} catch (NumberFormatException nfe) { 
 			JOptionPane.showMessageDialog(frame.getComponent(), "ERRORE NELL'INSERIMENTO DELLE QUANTITA'!","Errore Quantita'",JOptionPane.ERROR_MESSAGE);
 			frame.getActualPanel().setVisible(false);
 			Quantita quant = new Quantita(frame, pietanza, ingredienti,tipo);
 			frame.setActualPanel(quant);
 			frame.setComponent(quant);
+		} catch(Exception e){
+			JOptionPane.showMessageDialog(frame.getComponent(), "ERRORE NELL'INSERIMENTO DELLE QUANTITA'!","Errore Quantita'",JOptionPane.ERROR_MESSAGE);
+			frame.getActualPanel().setVisible(false);
+			Nuova_pietanza nuova = new Nuova_pietanza(frame, pietanza, tipo);
+			frame.setActualPanel(nuova);
+			frame.setComponent(nuova);
 		}		
 	}
 
