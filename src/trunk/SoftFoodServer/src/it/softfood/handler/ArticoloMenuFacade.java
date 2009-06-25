@@ -96,16 +96,17 @@ public class ArticoloMenuFacade  {
     	return null;
     }
     
-    public BevandaMagazzino inserisciBevandaMagazzino(User user, Bevanda bevanda, Long id, Integer quantita) {
+    public BevandaMagazzino inserisciBevandaMagazzino(User user, Long bevandaID, Long id, Integer quantita) {
         if (user != null && id != null && quantita != null && quantita >= 0) {
         	BevandaMagazzino bevandaMagazzino = new BevandaMagazzino();
-        	bevandaMagazzino.setArticolo(articoloSession.selezionaArticoloPerId(id));
+        	bevandaMagazzino.setArticolo(articoloSession.selezionaArticoloPerId(bevandaID));
         	bevandaMagazzino.setMagazzino(magazzinoSession.selezionaMagazzinoPerId(0L));
-        	bevandaMagazzino.setArticolo(bevanda);
+
         	if (quantita != null)
         		bevandaMagazzino.setQuantita(quantita);
         	else
         		bevandaMagazzino.setQuantita(0);
+        	
         	
             return bevandaMagazzinoSession.inserisciBevandaMagazzino(bevandaMagazzino);
         }
