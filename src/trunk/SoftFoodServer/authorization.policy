@@ -43,6 +43,7 @@ grant Principal it.softfood.entity.User "CAMERIERE" {
     permission it.softfood.aspect.OperationPermission "verificaDisponibilitaIngredientiPietanza";
     permission it.softfood.aspect.OperationPermission "liberaTavolo";
     permission it.softfood.aspect.OperationPermission "selezionaTavoliNonAttivi";
+    permission it.softfood.aspect.OperationPermission "rimuoviBevandaMagazzino";
 }; 
 
 grant Principal it.softfood.entity.User "CASSIERE" {
