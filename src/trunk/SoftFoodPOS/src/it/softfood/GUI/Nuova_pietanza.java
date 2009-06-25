@@ -243,13 +243,13 @@ public class Nuova_pietanza extends javax.swing.JPanel {
 
 		if (tipo.equalsIgnoreCase("NUOVO"))
 			pietanza = (Pietanza) articolo.inserisciPietanzaMenu(role, pietanza);
-
-		HashSet<IngredientePietanza> set = null;
+		else 
+			articolo.updatePietanza(role, pietanza);
 		
+		HashSet<IngredientePietanza> set = null;
 		
 		set = new HashSet<IngredientePietanza>();
 		IngredientePietanza in = null;
-		
 		
 		for(int i = 0; i < data.length; i++){
 			in = new IngredientePietanza();
