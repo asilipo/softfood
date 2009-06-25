@@ -19,11 +19,8 @@ import it.softfood.handler.IUserFacade;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
-import java.security.AccessControlException;
 import java.util.Date;
-import java.util.List;
 
-import junit.framework.Assert;
 import junit.framework.TestCase;
 
 import org.junit.After;
@@ -118,7 +115,6 @@ public class TC1 extends TestCase {
 		lineaordinazione.setOrdinazione(ordinazione);
 		
 		lineaordinazione = ordinazioneFacade.inserisciLineaOrdinazione(user, lineaordinazione);
-	
 	}
 
 	@After
@@ -138,13 +134,11 @@ public class TC1 extends TestCase {
 		} catch (RemoteException e) {
 			fail ("RemoteException");
 		}		
-		
 
-		
 		try {
-			lineaordinazione=ordinazioneFacade.selezionaLineaOrdinazionePerId(user_test, lineaordinazione.getId());
+			lineaordinazione = ordinazioneFacade.selezionaLineaOrdinazionePerId(user_test, lineaordinazione.getId());
 		} catch (Exception e) {
-			fail(e.toString());
+			fail ("Exception");
 		} 
 		
 		try {
@@ -155,4 +149,5 @@ public class TC1 extends TestCase {
 		
 		assertNotNull(lineaordinazione);
 	}
+	
 }

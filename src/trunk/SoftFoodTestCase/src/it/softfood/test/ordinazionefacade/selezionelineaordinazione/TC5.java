@@ -21,9 +21,7 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.security.AccessControlException;
 import java.util.Date;
-import java.util.List;
 
-import junit.framework.Assert;
 import junit.framework.TestCase;
 
 import org.junit.After;
@@ -118,7 +116,6 @@ public class TC5 extends TestCase {
 		lineaordinazione.setOrdinazione(ordinazione);
 		
 		lineaordinazione = ordinazioneFacade.inserisciLineaOrdinazione(user, lineaordinazione);
-	
 	}
 
 	@After
@@ -138,15 +135,13 @@ public class TC5 extends TestCase {
 		} catch (RemoteException e) {
 			fail ("RemoteException");
 		}		
-		
 
-		
 		try {
-			lineaordinazione=ordinazioneFacade.selezionaLineaOrdinazionePerId(user_test, null);
+			lineaordinazione = ordinazioneFacade.selezionaLineaOrdinazionePerId(user_test, null);
 		} catch (AccessControlException e) {
-			lineaordinazione=null;
+			lineaordinazione = null;
 		} catch (Exception e) {
-			fail(e.toString());
+			fail ("Exception");
 		} 
 		
 		try {
@@ -157,4 +152,5 @@ public class TC5 extends TestCase {
 		
 		assertNull(lineaordinazione);
 	}
+	
 }
