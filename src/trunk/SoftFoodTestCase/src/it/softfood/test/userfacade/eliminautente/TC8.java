@@ -21,7 +21,7 @@ import org.junit.Test;
  * @author Francesco Pacilio
  */
 
-public class TC3 extends TestCase {
+public class TC8 extends TestCase {
 
 	private IUserFacade userFacade;
 	private User user;
@@ -52,6 +52,7 @@ public class TC3 extends TestCase {
 
 	@After
 	public void tearDown() throws Exception {
+		userInserito.setPassword("10000");
 		userFacade.eliminaUtente(user, userInserito);
 		userFacade.logout(user);
 	}
@@ -61,6 +62,7 @@ public class TC3 extends TestCase {
 		Boolean stato = false;
 		User user1 = null;
 		try {
+			userInserito.setPassword(null);
 			user1 = userFacade.login(Ruolo.CASSIERE, "1234567");
 			stato = userFacade.eliminaUtente(user1, userInserito);
 			userFacade.logout(user1);
