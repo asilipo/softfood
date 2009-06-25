@@ -67,6 +67,8 @@ public class TC1 extends TestCase {
 			bevanda = articoloFacade.selezionaBevandeDisponibili(user_test);
 		} catch (AccessControlException e) {
 			bevanda = null;
+		} catch (NullPointerException e) {
+			bevanda = null;
 		} catch (RemoteException e) {
 			fail ("RemoteException");
 		}
