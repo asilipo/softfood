@@ -62,16 +62,23 @@ public class TC2 extends TestCase {
 		User user1 = null;
 		try {
 			user1 = userFacade.login(Ruolo.CUOCO, "1234567");
-			valoreAttuale = userFacade.modificaRuolo(user, user1, Ruolo.CAMERIERE);
+			valoreAttuale = userFacade.modificaRuolo(user1, userInserito, Ruolo.CAMERIERE);
 		} catch (RemoteException e) {
 			fail("RemoteException");
+		} catch (NullPointerException npe) {
+			valoreAttuale = false;
+			try {
+				userFacade.logout(user1);
+			} catch (RemoteException e) {
+				fail("RemoteException");
+			}
 		} catch (AccessControlException ace) {
 			try {
 				userFacade.logout(user1);
 			} catch (RemoteException e) {
 				fail("RemoteException");
 			}
-		}
+		} 
 		
 		assertFalse(valoreAttuale);
 	}
