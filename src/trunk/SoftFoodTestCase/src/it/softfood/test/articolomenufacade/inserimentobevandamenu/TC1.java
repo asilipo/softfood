@@ -70,7 +70,6 @@ public class TC1 extends TestCase {
 		bevanda.setTipoArticolo("BEVANDA");
 		bevanda.setTipoPietanza(TipoPietanza.BEVANDA.ordinal());
 		
-		
 		try {
 			bevanda = articoloFacade.inserisciBevandaMenu(user_test, bevanda);
 		} catch (AccessControlException e) {
