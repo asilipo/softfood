@@ -96,11 +96,12 @@ public class ArticoloMenuFacade  {
     	return null;
     }
     
-    public BevandaMagazzino inserisciBevandaMagazzino(User user, Long id, Integer quantita) {
-        if (user != null && id != null && quantita!=null && quantita>=0) {
+    public BevandaMagazzino inserisciBevandaMagazzino(User user, Bevanda bevanda, Long id, Integer quantita) {
+        if (user != null && id != null && quantita != null && quantita >= 0) {
         	BevandaMagazzino bevandaMagazzino = new BevandaMagazzino();
         	bevandaMagazzino.setArticolo(articoloSession.selezionaArticoloPerId(id));
         	bevandaMagazzino.setMagazzino(magazzinoSession.selezionaMagazzinoPerId(0L));
+        	bevandaMagazzino.setArticolo(bevanda);
         	if (quantita != null)
         		bevandaMagazzino.setQuantita(quantita);
         	else
@@ -473,6 +474,14 @@ public class ArticoloMenuFacade  {
     public boolean rimuoviIngredienteMagazzino(User user, Long id) {
     	if (user != null) {
     		return ingredienteMagazzinoSession.rimuoviIngredienteMagazzino(id);
+    	}
+    	
+    	return false;
+    }
+    
+    public boolean rimuoviBevandaMagazzino(User user, Long idBevanda) {
+    	if (user != null) {
+    		return bevandaMagazzinoSession.rimuoviBevandaMagazzino(idBevanda);
     	}
     	
     	return false;

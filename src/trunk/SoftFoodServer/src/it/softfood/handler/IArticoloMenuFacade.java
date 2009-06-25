@@ -38,7 +38,7 @@ public interface IArticoloMenuFacade extends Remote {
 
 	public boolean updateIngredienteMagazzino(User user, IngredienteMagazzino ingredienteMagazzino) throws RemoteException;
 	
-	public BevandaMagazzino inserisciBevandaMagazzino(User user, Long id, Integer quantita) throws RemoteException;
+	public BevandaMagazzino inserisciBevandaMagazzino(User user, Bevanda bevanda, Long id, Integer quantita) throws RemoteException;
 	
 	public IngredienteMagazzino inserisciIngredienteMagazzino(User user, Long id, Integer quantita) throws RemoteException;
 	
@@ -82,6 +82,8 @@ public interface IArticoloMenuFacade extends Remote {
 	
 	public boolean rimuoviIngrediente(User user,Long id) throws RemoteException;
 
+	public boolean rimuoviBevandaMagazzino(User user, Long id) throws RemoteException;
+	
 	public ArrayList<Ingrediente> selezionaIngredientiPietanza(User user, Long id) throws RemoteException;
 
 	public ArrayList<Ingrediente> selezionaIngredienti(User user) throws RemoteException;

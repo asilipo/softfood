@@ -63,6 +63,19 @@ public class BevandaMagazzinoSession {
 			return null;
 		}
 	}
+	
+	public BevandaMagazzino selezionaBevandaMagazzinoPerIdBevanda(Long id) {
+		try {			
+			Query q = session.createQuery("from it.softfood.entity.BevandaMagazzino b where b.articolo = ? "); 
+			q.setLong(0, id);
+			BevandaMagazzino bevandaMagazzino = (BevandaMagazzino) q.uniqueResult();
+			
+		    return bevandaMagazzino;
+		} catch (Exception e) {
+			System.err.println("BevandaMagazzinoSession#selezionaBevandaMagazzinoPerIdBevanda");
+			return null;
+		}
+	}
 
 	@SuppressWarnings("unchecked")
 	public List<BevandaMagazzino> selezionaBevandeMagazzino() {
@@ -94,6 +107,7 @@ public class BevandaMagazzinoSession {
     public boolean rimuoviBevandaMagazzino(Long id) {
     	try {
     		BevandaMagazzino bevandaMagazzino = this.selezionaBevandaMagazzinoPerId(id);
+
 			if (bevandaMagazzino != null) {
 				session.delete(bevandaMagazzino);
 				return true;
