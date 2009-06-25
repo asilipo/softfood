@@ -9,7 +9,6 @@ public class TestSuiteSelezionaLineaOrdinazionePerId {
 		TestSuite suite = new TestSuite(
 				"Test for it.softfood.test.ordinazionefacade.selezionelineaordinazione");
 		//$JUnit-BEGIN$
-		suite.addTestSuite(TC5.class);
 		suite.addTestSuite(TC4.class);
 		suite.addTestSuite(TC3.class);
 		suite.addTestSuite(TC2.class);

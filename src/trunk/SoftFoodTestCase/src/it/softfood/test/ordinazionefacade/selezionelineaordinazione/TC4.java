@@ -116,7 +116,6 @@ public class TC4 extends TestCase {
 		lineaordinazione.setOrdinazione(ordinazione);
 		
 		lineaordinazione = ordinazioneFacade.inserisciLineaOrdinazione(user, lineaordinazione);
-	
 	}
 
 	@After
@@ -132,13 +131,13 @@ public class TC4 extends TestCase {
 	public void testRimozioneLineaOrdinazione() {
 		User user_test = null;
 		try {
-			user_test = userFacade.login(Ruolo.CASSIERE, "1234567");
+			user_test = userFacade.login(Ruolo.CUOCO, "12345");
 		} catch (RemoteException e) {
 			fail ("RemoteException");
 		}		
 
 		try {
-			lineaordinazione = ordinazioneFacade.selezionaLineaOrdinazionePerId(user_test, lineaordinazione.getId());
+			lineaordinazione = ordinazioneFacade.selezionaLineaOrdinazionePerId(user_test, null);
 		} catch (AccessControlException e) {
 			lineaordinazione = null;
 		} catch (Exception e) {
