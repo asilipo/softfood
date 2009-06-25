@@ -434,7 +434,7 @@ public class OrdinazioneFacade {
     }
 
     public ArrayList<LineaOrdinazione> selezionaLineeOrdinazionePerOrdinazioneTipoPietanza(User user, Ordinazione ordinazione, TipoPietanza tipoPietanza) {
-        if (user != null) {
+        if (user != null && ordinazione!=null && tipoPietanza!=null) {
 	    	ArrayList<LineaOrdinazione> lineeOrdinazione = new ArrayList<LineaOrdinazione>();
 	        if (ordinazione != null) 
 				 lineeOrdinazione = (ArrayList<LineaOrdinazione>) lineaOrdinazioneSession.selezionaLineeOrdinazionePerOrdinazione(ordinazione);
