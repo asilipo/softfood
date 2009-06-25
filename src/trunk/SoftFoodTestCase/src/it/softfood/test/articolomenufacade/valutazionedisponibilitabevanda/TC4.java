@@ -55,7 +55,7 @@ public class TC4 extends TestCase {
 		
 		bevanda = articoloFacade.inserisciBevandaMenu(user, bevanda);
 		
-		articoloFacade.inserisciBevandaMagazzino(user, bevanda.getId(), 10000);
+		articoloFacade.inserisciBevandaMagazzino(user, bevanda.getId(), null, 10000);
 	}
 
 	@After
