@@ -8,6 +8,8 @@ import it.softfood.facade.POSArticoloMenuFacade;
 import java.util.Date;
 import java.util.HashSet;
 
+import javax.swing.JOptionPane;
+
 /**
  * @author Maria Rosaria Paone
  * @author Marco Grasso
@@ -231,32 +233,44 @@ public class Nuovo_ingrediente extends javax.swing.JPanel {
 		ingrediente.setUnitaMisura((String) jComboBox2.getSelectedItem());
 
 		if(tipo.equalsIgnoreCase("NUOVO"))
-			ingrediente=(Ingrediente) articolofacade.inserisciIngrediente(role, ingrediente);
+			ingrediente = (Ingrediente) articolofacade.inserisciIngrediente(role, ingrediente);
 
 		HashSet<IngredienteMagazzino> set=new HashSet<IngredienteMagazzino>();
 
+		boolean state = true;
 		IngredienteMagazzino ingredienteMagazzino=null;
 		try{
 			ingredienteMagazzino = (IngredienteMagazzino) ingrediente.getIngredienteMagazzinos().toArray()[0];
 			ingredienteMagazzino.setQuantita(new Integer(jTextField3.getText()));
 			articolofacade.updateIngredienteMagazzino(role, ingredienteMagazzino);
-		}catch(Exception e){
-			ingredienteMagazzino=articolofacade.inserisciIngredienteMagazzino(role, ingrediente.getId(), new Integer(jTextField3.getText()));
+		} catch(Exception e) {
+			state = false;
+			try {
+				ingredienteMagazzino = articolofacade.inserisciIngredienteMagazzino(role, ingrediente.getId(), new Integer(jTextField3.getText()));
+			} catch (Exception npe) {
+				JOptionPane.showMessageDialog(frame.getComponent(), "Inserire i dati in modo corretto!","Errore Quantita'",JOptionPane.ERROR_MESSAGE);
+				frame.getActualPanel().setVisible(false);
+				Visualizza visualizza = new Visualizza(frame, "Ingrediente");
+				frame.setActualPanel(visualizza);
+				frame.setComponent(visualizza);
+			}
 		}
-		set.add(ingredienteMagazzino);
-		ingrediente.setIngredienteMagazzinos(set);
-
-		articolofacade.updateIngrediente(role, ingrediente);
-
-		frame.getActualPanel().setVisible(false);
-		Visualizza visualizza=new Visualizza(frame,"Ingrediente");
-		frame.setActualPanel(visualizza);
-		frame.setComponent(visualizza);
+		if (state) {
+			set.add(ingredienteMagazzino);
+			ingrediente.setIngredienteMagazzinos(set);
+	
+			articolofacade.updateIngrediente(role, ingrediente);
+	
+			frame.getActualPanel().setVisible(false);
+			Visualizza visualizza = new Visualizza(frame,"Ingrediente");
+			frame.setActualPanel(visualizza);
+			frame.setComponent(visualizza);
+		}
 	}                                        
 
 	private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
 		frame.getActualPanel().setVisible(false);
-		Visualizza visualizza=new Visualizza(frame,"Ingrediente");
+		Visualizza visualizza = new Visualizza(frame,"Ingrediente");
 		frame.setActualPanel(visualizza);
 		frame.setComponent(visualizza);
 	}                                        
