@@ -1,6 +1,5 @@
 package it.softfood.test.ordinazionefacade.rimozionelineaordinazione;
 
-import it.softfood.entity.Indirizzo;
 import it.softfood.entity.Ingrediente;
 import it.softfood.entity.IngredientePietanza;
 import it.softfood.entity.LineaOrdinazione;
@@ -116,7 +115,6 @@ public class TC1 extends TestCase {
 		lineaordinazione.setOrdinazione(ordinazione);
 		
 		lineaordinazione = ordinazioneFacade.inserisciLineaOrdinazione(user, lineaordinazione);
-	
 	}
 
 	@After
@@ -137,12 +135,11 @@ public class TC1 extends TestCase {
 			fail ("RemoteException");
 		}		
 		
-		boolean result=false;
-		
+		boolean result = false;
 		try {
-			result=ordinazioneFacade.rimuoviLineaOrdinazione(user_test, lineaordinazione.getId());
+			result = ordinazioneFacade.rimuoviLineaOrdinazione(user_test, lineaordinazione.getId());
 		} catch (Exception e) {
-			result=false;
+			result = false;
 		} 
 		
 		try {
@@ -153,6 +150,5 @@ public class TC1 extends TestCase {
 		
 		assertTrue(result);
 	}
-
 
 }
