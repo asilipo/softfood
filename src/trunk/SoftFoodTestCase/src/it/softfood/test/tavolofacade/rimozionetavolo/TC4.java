@@ -8,8 +8,10 @@ import it.softfood.handler.IRistoranteFacade;
 import it.softfood.handler.ITavoloFacade;
 import it.softfood.handler.IUserFacade;
 
+import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.security.AccessControlException;
 
 import junit.framework.TestCase;
 
@@ -63,12 +65,35 @@ public class TC4 extends TestCase {
 
 	@After
 	public void tearDown() throws Exception {
+		tavoloFacade.rimuoviTavolo(user, 1000000L);
 		userFacade.logout(user);
 	}
-
+	
 	@Test
 	public void testRimuoviTavolo() {
-		fail("Not yet implemented");
+		User user1 = null;
+		Boolean stato = false;
+		try {
+			user1 = userFacade.login(Ruolo.CASSIERE, "123456");
+			stato = tavoloFacade.rimuoviTavolo(user1, 1000000L);
+			userFacade.logout(user1);
+		} catch (RemoteException e) {
+			fail("RemoteException");
+		} catch (AccessControlException ace) {
+			try {
+				userFacade.logout(user1);
+			} catch (RemoteException e) {
+				fail("RemoteException");
+			}
+		} catch (NullPointerException npe) {
+			try {
+				userFacade.logout(user1);
+			} catch (RemoteException e) {
+				fail("RemoteException");
+			}
+		}
+		
+		assertFalse(stato);
 	}
 
 }
