@@ -144,17 +144,17 @@ public class Nuova_bevanda extends javax.swing.JPanel {
 		bevanda.setDescrizione(jTextArea1.getText());
 
 		if(tipo.equalsIgnoreCase("NUOVO"))
-			bevanda=(Bevanda) articolofacade.inserisciBevandaMenu(role, bevanda);
+			bevanda = (Bevanda) articolofacade.inserisciBevandaMenu(role, bevanda);
 
-		HashSet<BevandaMagazzino> set=new HashSet<BevandaMagazzino>();
+		HashSet<BevandaMagazzino> set = new HashSet<BevandaMagazzino>();
 
-		BevandaMagazzino bevandaMagazzino=null;
+		BevandaMagazzino bevandaMagazzino = null;
 		try{
 			bevandaMagazzino = (BevandaMagazzino) bevanda.getBevandaMagazzinos().toArray()[0];
 			bevandaMagazzino.setQuantita(new Integer(jTextField3.getText()));
 			articolofacade.updateBevandaMagazzino(role, bevandaMagazzino);
-		}catch(Exception e){
-			bevandaMagazzino=articolofacade.inserisciBevandaMagazzino(role, bevanda.getId(), new Integer(jTextField3.getText()));
+		} catch(Exception e) {
+			bevandaMagazzino = articolofacade.inserisciBevandaMagazzino(role, bevanda.getId(), new Long(1), new Integer(jTextField3.getText()));
 		}
 		set.add(bevandaMagazzino);
 		bevanda.setBevandaMagazzinos(set);

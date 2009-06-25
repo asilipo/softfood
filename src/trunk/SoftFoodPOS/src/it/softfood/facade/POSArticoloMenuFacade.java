@@ -206,15 +206,17 @@ public class POSArticoloMenuFacade {
 		return ingrediente;
 	}
 
-	public BevandaMagazzino inserisciBevandaMagazzino(User role, Long id, Integer quantita) {
-		BevandaMagazzino bevanda = null;
+	public BevandaMagazzino inserisciBevandaMagazzino(User role, Long bevandaId, Long id, Integer quantita) {
+    	System.out.println("bevanda id s" + bevandaId);
+    	System.out.println("bevanda magazzino id s" + id);
+		BevandaMagazzino bevandaMagazzino = null;
 		try {
-			bevanda = articolo.inserisciBevandaMagazzino(role, id, quantita);
+			bevandaMagazzino = articolo.inserisciBevandaMagazzino(role, bevandaId, id, quantita);
 		} catch (RemoteException e) {
 			System.err.println("POSArticoloMenuFacade#inserisciBevandaMagazzino");
 		}
 		
-		return bevanda;
+		return bevandaMagazzino;
 	}
 
 	public IngredienteMagazzino inserisciIngredienteMagazzino(User role, Long id, Integer quantita) {
