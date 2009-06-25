@@ -70,21 +70,14 @@ public class TC18 extends TestCase {
 			
 			ristorante = new Ristorante();
 			ristorante.setIndirizzo(indirizzo);
-			ristorante.setPartitaIva("01234567890");
-			ristorante.setRagioneSociale("");
+			ristorante.setPartitaIva(null);
+			ristorante.setRagioneSociale("Ristorante Test");
 			ristorante = ristoranteFacade.inserisciRistorante(user1, ristorante);
 			
 			userFacade.logout(user1);
 		} catch (RemoteException e) {
 			fail ("RemoteException");
-		} catch (NullPointerException npe) {
-			ristorante = null;
-			try {
-				userFacade.logout(user1);
-			} catch (RemoteException e) {
-				fail ("RemoteException");
-			}
-		} catch (AccessControlException ace) {
+		}catch (AccessControlException ace) {
 			ristorante = null;
 			try {
 				userFacade.logout(user1);
