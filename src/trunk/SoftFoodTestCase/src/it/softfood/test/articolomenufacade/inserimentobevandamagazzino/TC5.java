@@ -77,7 +77,7 @@ public class TC5 extends TestCase {
 		}
 		
 		try {	
-			bevandaMagazzino = articoloFacade.inserisciBevandaMagazzino(user_test, bevanda, null, 100);
+			bevandaMagazzino = articoloFacade.inserisciBevandaMagazzino(user_test, bevanda.getId(), null, 100);
 		} catch(AccessControlException e){
 			bevandaMagazzino = null;
 		} catch (RemoteException e) {
