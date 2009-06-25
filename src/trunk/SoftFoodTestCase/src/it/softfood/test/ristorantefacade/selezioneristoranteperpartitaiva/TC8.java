@@ -1,9 +1,7 @@
 package it.softfood.test.ristorantefacade.selezioneristoranteperpartitaiva;
 
-import static org.junit.Assert.*;
 import it.softfood.entity.Indirizzo;
 import it.softfood.entity.Ristorante;
-import it.softfood.entity.Tavolo;
 import it.softfood.entity.User;
 import it.softfood.enumeration.Ruolo;
 import it.softfood.handler.IRistoranteFacade;
@@ -27,10 +25,10 @@ import org.junit.Test;
  */
 
 public class TC8 extends TestCase {
+	
 	private IUserFacade userFacade;
 	private IRistoranteFacade ristoranteFacade;
 	private User user;
-	private Tavolo tavoloInserito;
 	private Ristorante ristorante;
 	
 	@Before
@@ -64,7 +62,6 @@ public class TC8 extends TestCase {
 		ristorante.setRagioneSociale("Ristorante Test");
 		
 		ristorante = ristoranteFacade.inserisciRistorante(user, ristorante);
-	
 	}
 
 	@After
@@ -78,7 +75,7 @@ public class TC8 extends TestCase {
 		User user1 = null;
 		try {
 			user1 = userFacade.login(Ruolo.AMMINISTRATORE, "123456") ;
-			ristorante=ristoranteFacade.selezionaRistorantePerRagioneSociale(user1, "0123456789012");
+			ristorante = ristoranteFacade.selezionaRistorantePerRagioneSociale(user1, "0123456789012");
 			userFacade.logout(user1);
 		} catch (RemoteException e) {
 			fail ("RemoteException");
