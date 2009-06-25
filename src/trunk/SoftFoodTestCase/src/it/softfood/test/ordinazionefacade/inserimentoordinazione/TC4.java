@@ -1,7 +1,6 @@
 package it.softfood.test.ordinazionefacade.inserimentoordinazione;
 
 import it.softfood.entity.Indirizzo;
-import it.softfood.entity.LineaOrdinazione;
 import it.softfood.entity.Ordinazione;
 import it.softfood.entity.Pietanza;
 import it.softfood.entity.Ristorante;
@@ -35,7 +34,6 @@ import org.junit.Test;
 public class TC4 extends TestCase {
 
 	private IOrdinazioneFacade ordinazioneFacade;
-	private LineaOrdinazione lineaOrdinazione;
 	private IArticoloMenuFacade articoloFacade;
 	private IRistoranteFacade ristoranteFacade;
 	private IUserFacade userFacade;
@@ -62,6 +60,7 @@ public class TC4 extends TestCase {
 			ristoranteFacade = (IRistoranteFacade)registry.lookup("RistoranteFacade");
 		} catch (Exception e) {
 			System.err.println("Exception to obtain the reference to the remote object: " + e);
+			fail ("Exception");
 		}
 		
 		user = userFacade.login(Ruolo.TEST, "test");
@@ -71,7 +70,6 @@ public class TC4 extends TestCase {
 		tavolo.setAttivo(true);
 		tavolo.setOccupato(true);
 		tavolo.setRiferimento("Tavolo Test");
-		
 		
 		ristorante.setRagioneSociale("Ristorante Test");
 		ristorante.setPartitaIva("01234567891");
@@ -84,37 +82,34 @@ public class TC4 extends TestCase {
 		indirizzo.setCitta("Avellino");
 		ristorante.setIndirizzo(indirizzo);
 		
-		
 		ristorante = ristoranteFacade.inserisciRistorante(user, ristorante); 
 		tavolo.setRistorante(ristorante);
 		
 		tavolo = tavoloFacade.inserisciTavolo(user, tavolo);
 		
 		pietanza = new Pietanza();
-		pietanza=new Pietanza();
+		pietanza = new Pietanza();
 		pietanza.setNome("BEVANDA TEST");
 		pietanza.setTipoPietanza(TipoPietanza.PRIMO_PIATTO.ordinal());
-		pietanza=articoloFacade.inserisciPietanzaMenu(user, pietanza);
-			
+		pietanza = articoloFacade.inserisciPietanzaMenu(user, pietanza);
 	}
 
 	@After
 	public void tearDown() throws Exception {
-	//	ordinazioneFacade.rimuoviOrdinazione(user, ordinazione.getId(), false);		
 		tavoloFacade.rimuoviTavolo(user, tavolo.getId());		
-		boolean verifica = ristoranteFacade.rimuoviRistorante(user, ristorante.getRagioneSociale());		
-		verifica = articoloFacade.rimuoviPietanzaMenu(user, pietanza.getId());
+		ristoranteFacade.rimuoviRistorante(user, ristorante.getRagioneSociale());		
+		articoloFacade.rimuoviPietanzaMenu(user, pietanza.getId());
 		userFacade.logout(user);		
 	}
 
+	@SuppressWarnings("deprecation")
 	@Test
 	public void testInserisciOrdinazione() throws Exception {
 		User user_test = null;
 		try {
 			user_test = userFacade.login(Ruolo.AMMINISTRATORE, "123456");
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			user_test = null;
+			fail ("RemoteException");
 		}		
 		
 		try {
@@ -126,17 +121,15 @@ public class TC4 extends TestCase {
 			
 			ordinazione = ordinazioneFacade.inserisciOrdinazione(user_test, ordinazione);
 		} catch (Exception e) {
-			System.out.println(e);
 			ordinazione = null;
 		} 
 		
 		try {
 			userFacade.logout(user_test);
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			System.out.println(e);
-			e.printStackTrace();
+			fail ("RemoteException");
 		}
+		
 		assertNull(ordinazione);
 	}
 
