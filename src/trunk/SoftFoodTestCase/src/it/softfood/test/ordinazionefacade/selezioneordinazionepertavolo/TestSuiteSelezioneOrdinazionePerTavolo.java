@@ -2,8 +2,6 @@ package it.softfood.test.ordinazionefacade.selezioneordinazionepertavolo;
 
 import it.softfood.test.ordinazionefacade.selezioneordinazione.TC1;
 import it.softfood.test.ordinazionefacade.selezioneordinazione.TC2;
-import it.softfood.test.ordinazionefacade.selezioneordinazionepertavolo.*;
-
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
@@ -19,8 +17,8 @@ public class TestSuiteSelezioneOrdinazionePerTavolo {
 		suite.addTestSuite(TC5.class);
 		suite.addTestSuite(TC6.class);
 		suite.addTestSuite(TC7.class);
-		
 		//$JUnit-END$
 		return suite;
 	}
+	
 }
