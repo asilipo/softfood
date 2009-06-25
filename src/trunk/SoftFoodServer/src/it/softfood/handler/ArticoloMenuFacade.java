@@ -67,7 +67,7 @@ public class ArticoloMenuFacade  {
     }
     
     public Ingrediente inserisciIngrediente(User user, Ingrediente ingrediente) {
-        if (user != null && ingrediente != null && ingrediente.getNome()!=null && ingrediente.getScadenza()!=null && !ingrediente.getNome().equals("")) {
+        if (user != null && ingrediente != null && ingrediente.getNome() != null && ingrediente.getScadenza() != null && !ingrediente.getNome().equals("")) {
             return ingredienteSession.inserisciIngrediente(ingrediente);
         }
 
