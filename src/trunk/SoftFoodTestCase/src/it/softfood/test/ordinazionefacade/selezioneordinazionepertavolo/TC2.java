@@ -1,7 +1,6 @@
 package it.softfood.test.ordinazionefacade.selezioneordinazionepertavolo;
 
 import it.softfood.entity.Indirizzo;
-import it.softfood.entity.LineaOrdinazione;
 import it.softfood.entity.Ordinazione;
 import it.softfood.entity.Pietanza;
 import it.softfood.entity.Ristorante;
@@ -18,11 +17,8 @@ import it.softfood.handler.IUserFacade;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
-import java.security.AccessControlException;
 import java.util.Date;
-import java.util.List;
 
-import junit.framework.Assert;
 import junit.framework.TestCase;
 
 import org.junit.After;
@@ -31,9 +27,7 @@ import org.junit.Test;
 
 public class TC2 extends TestCase {
 	
-
 	private IOrdinazioneFacade ordinazioneFacade;
-	private LineaOrdinazione lineaOrdinazione;
 	private IArticoloMenuFacade articoloFacade;
 	private IRistoranteFacade ristoranteFacade;
 	private IUserFacade userFacade;
@@ -44,7 +38,7 @@ public class TC2 extends TestCase {
 	private ITavoloFacade tavoloFacade;
 	private Ristorante ristorante;
 	
-
+	@SuppressWarnings("deprecation")
 	@Before
 	public void setUp() throws Exception {
 		System.setProperty("java.security.policy", "polis.policy");
@@ -60,6 +54,7 @@ public class TC2 extends TestCase {
 			ristoranteFacade = (IRistoranteFacade)registry.lookup("RistoranteFacade");
 		} catch (Exception e) {
 			System.err.println("Exception to obtain the reference to the remote object: " + e);
+			fail ("Exception");
 		}
 		
 		user = userFacade.login(Ruolo.TEST, "test");
@@ -100,8 +95,6 @@ public class TC2 extends TestCase {
 		ordinazione.setData(new Date(109,5,30));
 		
 		ordinazione = ordinazioneFacade.inserisciOrdinazione(user, ordinazione);
-		
-		
 	}
 
 	@After
@@ -119,14 +112,13 @@ public class TC2 extends TestCase {
 		try {
 			user_test = userFacade.login(Ruolo.AMMINISTRATORE, "123456");
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			user_test = null;
+			fail ("RemoteException");
 		}
+		
 		Ordinazione ordinazione2 = null;
 		try {
 			ordinazione2 = ordinazioneFacade.selezionaOrdinazionePerTavolo(user_test, tavolo.getRiferimento(), false);
 		} catch (Exception e) {
-			System.out.println(e);
 			ordinazione2 = null;
 		} 
 		
@@ -134,10 +126,10 @@ public class TC2 extends TestCase {
 			userFacade.logout(user_test);
 
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			System.out.println(e);
-			e.printStackTrace();
+			fail ("RemoteException");
 		}
+		
 		assertNull(ordinazione2);
 	}
+	
 }
