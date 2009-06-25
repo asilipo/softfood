@@ -145,7 +145,7 @@ public class OrdinazioneSession {
 					list1.add(ordinazione);
 				}
 			}
-			
+
 			return list1;
 		} catch (Exception e) {
 			System.err.println("OrdinazioneSession#selezionaOrdinazioniGionalierePerTavolo");
