@@ -162,7 +162,7 @@ public class TavoloFacade implements ITavoloFacade {
 	        } catch (SecurityException ex) {
 	            Logger.getLogger(TavoloFacade.class.getName()).log(Level.SEVERE, null, ex);
 	        } catch (IllegalStateException ex) {
-	            Logger.getLogger(TavoloFacade.class.getName()).log(Level.SEVERE, null, ex);
+	            return null;
 	        }
         }
         
