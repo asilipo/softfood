@@ -2,7 +2,6 @@ package it.softfood.test.ristorantefacade.rimozioneristorante;
 
 import it.softfood.entity.Indirizzo;
 import it.softfood.entity.Ristorante;
-import it.softfood.entity.Tavolo;
 import it.softfood.entity.User;
 import it.softfood.enumeration.Ruolo;
 import it.softfood.handler.IRistoranteFacade;
@@ -26,10 +25,10 @@ import org.junit.Test;
  */
 
 public class TC5 extends TestCase {
+	
 	private IUserFacade userFacade;
 	private IRistoranteFacade ristoranteFacade;
 	private User user;
-	private Tavolo tavoloInserito;
 	private Ristorante ristorante;
 	
 	@Before
@@ -63,7 +62,6 @@ public class TC5 extends TestCase {
 		ristorante.setRagioneSociale("Ristorante Test");
 		
 		ristorante = ristoranteFacade.inserisciRistorante(user, ristorante);
-	
 	}
 
 	@After
@@ -75,10 +73,10 @@ public class TC5 extends TestCase {
 	@Test
 	public void testRimuoviRistorante() {
 		User user1 = null;
-		boolean result=false;
+		boolean result = false;
 		try {
 			user1 = userFacade.login(Ruolo.AMMINISTRATORE, "123456") ;
-			result=ristoranteFacade.rimuoviRistorante(user1, null);
+			result = ristoranteFacade.rimuoviRistorante(user1, null);
 			userFacade.logout(user1);
 		} catch (RemoteException e) {
 			fail ("RemoteException");
