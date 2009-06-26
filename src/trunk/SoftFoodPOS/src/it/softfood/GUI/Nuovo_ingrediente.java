@@ -255,9 +255,9 @@ public class Nuovo_ingrediente extends javax.swing.JPanel {
 					frame.setActualPanel(visualizza);
 					frame.setComponent(visualizza);
 				} catch (Exception npe) {
-					JOptionPane.showMessageDialog(frame.getComponent(), "Inserire i dati in modo corretto!","Errore Quantita'",JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(frame.getComponent(), "Quantita' non inserita correttamente e settata di default!","Errore Quantita'",JOptionPane.ERROR_MESSAGE);
 					frame.getActualPanel().setVisible(false);
-					Visualizza visualizza = new Visualizza(frame, "Ingrediente");
+					Visualizza visualizza = new Visualizza(frame,"Ingrediente");
 					frame.setActualPanel(visualizza);
 					frame.setComponent(visualizza);
 				}
@@ -276,9 +276,9 @@ public class Nuovo_ingrediente extends javax.swing.JPanel {
 		} catch (NullPointerException npe) {
 			JOptionPane.showMessageDialog(frame.getComponent(), "Inserire i dati in modo corretto!","Errore Quantita'",JOptionPane.ERROR_MESSAGE);
 			frame.getActualPanel().setVisible(false);
-			Visualizza visualizza = new Visualizza(frame, "Ingrediente");
-			frame.setActualPanel(visualizza);
-			frame.setComponent(visualizza);
+			Nuovo_ingrediente ingr = new Nuovo_ingrediente(frame, new Ingrediente(), "NUOVO");
+			frame.setActualPanel(ingr);
+			frame.setComponent(ingr);
 		}
 	}                                        
 
