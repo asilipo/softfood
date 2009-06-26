@@ -160,8 +160,7 @@ public class BevandaSession {
 	public void update(Bevanda bevanda) {
 		if (bevanda != null) {
 			Articolo articolo = (Articolo) session.get(Articolo.class, bevanda.getId());
-			if(articolo == null) {
-				articolo = new Articolo();
+			if(articolo != null) {
 				articolo.setDescrizione(bevanda.getDescrizione());
 				articolo.setId(bevanda.getId());
 				articolo.setLineaOrdinaziones(bevanda.getLineaOrdinaziones());
@@ -169,9 +168,10 @@ public class BevandaSession {
 				articolo.setNome(bevanda.getNome());
 				articolo.setTipoArticolo(bevanda.getTipoArticolo());
 				articolo.setTipoPietanza(bevanda.getTipoPietanza());
+				articolo.setCapacita(bevanda.getCapacita());
 				articolo.setBevandaMagazzinos(bevanda.getBevandaMagazzinos());
+				session.update(articolo);
 			}
-			session.update(articolo);
 		}
 	}
 	
