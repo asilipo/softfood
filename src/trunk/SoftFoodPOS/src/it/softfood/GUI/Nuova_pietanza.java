@@ -251,20 +251,23 @@ public class Nuova_pietanza extends javax.swing.JPanel {
 		HashSet<IngredientePietanza> set = null;
 		
 		set = new HashSet<IngredientePietanza>();
-		ArrayList<IngredientePietanza> ingredienti=null;
+		HashSet<IngredientePietanza> ingredienti=null;
 		IngredientePietanza in = null;
 		
 		for(int i = 0; i < data.length; i++){
 			in = new IngredientePietanza();
 			in.setArticolo(pietanza);
 			in.setIngrediente(articolo.selezionaIngredientePerNome(role, data[i]));
-			ingredienti=(ArrayList<IngredientePietanza>) pietanza.getIngredientePietanzas();
-			for(IngredientePietanza ingrpiet : ingredienti){
-				if(ingrpiet.getIngrediente().getNome().equalsIgnoreCase(in.getIngrediente().getNome())){
-					in.setQuantita(ingrpiet.getQuantita());
+			if(tipo.equals("MODIFICA")){
+				ingredienti=(HashSet<IngredientePietanza>) pietanza.getIngredientePietanzas();
+				for(IngredientePietanza ingrpiet : ingredienti){
+					if(ingrpiet.getIngrediente().getNome().equalsIgnoreCase(in.getIngrediente().getNome())){
+						in.setQuantita(ingrpiet.getQuantita());
+					}
 				}
+			}else{
+				in.setQuantita(0);
 			}
-			//in.setQuantita(0);
 			in.setId(new IngredientePietanzaPK(articolo.selezionaIngredientePerNome(role, data[i]).getId(),pietanza.getId()));
 			set.add(in);
 		}
