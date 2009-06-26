@@ -2,6 +2,8 @@ package it.softfood.GUI;
 
 import java.util.HashSet;
 
+import javax.swing.JOptionPane;
+
 import it.softfood.entity.Bevanda;
 import it.softfood.entity.BevandaMagazzino;
 import it.softfood.entity.User;
@@ -134,37 +136,63 @@ public class Nuova_bevanda extends javax.swing.JPanel {
 		add(jPanel2, java.awt.BorderLayout.SOUTH);
 	}                      
 
-	private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+	private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {    
+		Boolean bm = false;
 		if(tipo.equalsIgnoreCase("NUOVO"))
-			bevanda=new Bevanda();
-		bevanda.setTipoArticolo("Bevanda");
-		bevanda.setTipoPietanza(TipoPietanza.BEVANDA.ordinal());
-		bevanda.setNome(jTextField1.getText());
-		bevanda.setCapacita(new Float(jTextField2.getText()));
-		bevanda.setDescrizione(jTextArea1.getText());
-
-		if(tipo.equalsIgnoreCase("NUOVO"))
-			bevanda = (Bevanda) articolofacade.inserisciBevandaMenu(role, bevanda);
-
-		HashSet<BevandaMagazzino> set = new HashSet<BevandaMagazzino>();
-
-		BevandaMagazzino bevandaMagazzino = null;
-		try{
-			bevandaMagazzino = (BevandaMagazzino) bevanda.getBevandaMagazzinos().toArray()[0];
-			bevandaMagazzino.setQuantita(new Integer(jTextField3.getText()));
-			articolofacade.updateBevandaMagazzino(role, bevandaMagazzino);
-		} catch(Exception e) {
-			bevandaMagazzino = articolofacade.inserisciBevandaMagazzino(role, bevanda.getId(), new Long(1), new Integer(jTextField3.getText()));
-		}
-		set.add(bevandaMagazzino);
-		bevanda.setBevandaMagazzinos(set);
-
-		articolofacade.updateBevanda(role, bevanda);
-
-		frame.getActualPanel().setVisible(false);
-		Visualizza visualizza=new Visualizza(frame,"Bevanda");
-		frame.setActualPanel(visualizza);
-		frame.setComponent(visualizza);
+			bevanda = new Bevanda();
+		try {
+			bevanda.setId(null);
+			bevanda.setTipoArticolo("Bevanda");
+			bevanda.setTipoPietanza(TipoPietanza.BEVANDA.ordinal());
+			if (jTextField1.getText() == null)
+				throw new NullPointerException();
+			bevanda.setNome(jTextField1.getText());
+			bevanda.setCapacita(new Float(jTextField2.getText()));
+			bevanda.setDescrizione(jTextArea1.getText());
+	
+			if(tipo.equalsIgnoreCase("NUOVO"))
+				bevanda = (Bevanda) articolofacade.inserisciBevandaMenu(role, bevanda);
+	
+			HashSet<BevandaMagazzino> set = new HashSet<BevandaMagazzino>();
+	
+			BevandaMagazzino bevandaMagazzino = null;
+			try{
+				bevandaMagazzino = (BevandaMagazzino) bevanda.getBevandaMagazzinos().toArray()[0];
+				System.out.println(jTextField3.getText());
+				bevandaMagazzino.setQuantita(new Integer(jTextField3.getText()));
+				articolofacade.updateBevandaMagazzino(role, bevandaMagazzino);
+			} catch(Exception e) {
+				bm = true;
+				bevandaMagazzino = articolofacade.inserisciBevandaMagazzino(role, bevanda.getId(), new Long(1), new Integer(jTextField3.getText()));
+			}
+			set.add(bevandaMagazzino);
+			bevanda.setBevandaMagazzinos(set);
+	
+			articolofacade.updateBevanda(role, bevanda);
+	
+			frame.getActualPanel().setVisible(false);
+			Visualizza visualizza=new Visualizza(frame,"Bevanda");
+			frame.setActualPanel(visualizza);
+			frame.setComponent(visualizza);
+		}catch(NullPointerException npe){
+			JOptionPane.showMessageDialog(frame.getComponent(), "E'necessario inserire il nome!","Errore Dati Immessi", JOptionPane.ERROR_MESSAGE);
+			frame.getActualPanel().setVisible(false);
+			Nuova_bevanda nuova = new Nuova_bevanda(frame, bevanda, tipo);
+			frame.setActualPanel(nuova);
+			frame.setComponent(nuova);	
+		} catch (NumberFormatException nfe) {
+			if (bm) 
+				JOptionPane.showMessageDialog(frame.getComponent(), "Quantità non corretta!","Errore Quantità", JOptionPane.ERROR_MESSAGE);
+			else
+				JOptionPane.showMessageDialog(frame.getComponent(), "Capacità non corretta!","Errore Capacità", JOptionPane.ERROR_MESSAGE);
+			
+			if (bevanda.getId() != null)
+				articolofacade.rimuoviBevandaMenu(role, bevanda.getId());
+			frame.getActualPanel().setVisible(false);
+			Nuova_bevanda nuova = new Nuova_bevanda(frame, bevanda, tipo);
+			frame.setActualPanel(nuova);
+			frame.setComponent(nuova);
+		} 
 	}                                        
 
 	private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
