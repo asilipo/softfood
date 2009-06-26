@@ -8,7 +8,6 @@ import it.softfood.entity.User;
 import it.softfood.enumeration.TipoPietanza;
 import it.softfood.facade.POSArticoloMenuFacade;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -236,6 +235,7 @@ public class Nuova_pietanza extends javax.swing.JPanel {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
 		try {
 			if (tipo.equalsIgnoreCase("NUOVO"))
