@@ -361,6 +361,13 @@ public class ArticoloMenuFacade  {
         		System.err.println("ArticoloMenuFacade#updateIndredientiPietanza");
         		return false;
         	}
+        }else{
+        	if(ingredientiPietanza==null || ingredientiPietanza.size()==0){
+        		Set<IngredientePietanza> ingredienti=null;
+        		ingredienti=pietanzaSession.selezionaPietanzaPerId(idPietanza).getIngredientePietanzas();
+        		for(IngredientePietanza ingrpiet:ingredienti)
+        			ingredientePietanzaSession.rimuoviIngredientePietanza(ingrpiet.getId());
+        	}
         }
         	
         return false;
