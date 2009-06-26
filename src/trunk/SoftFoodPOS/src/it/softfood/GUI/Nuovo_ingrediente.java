@@ -211,62 +211,72 @@ public class Nuovo_ingrediente extends javax.swing.JPanel {
 	}
 
 	@SuppressWarnings("deprecation")
-	private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         	
-		if(tipo.equalsIgnoreCase("NUOVO"))
-			ingrediente = new Ingrediente();
-		ingrediente.setNome(jTextField1.getText());
-		ingrediente.setDescrizione(jTextField2.getText());
-		if (jComboBox3.getSelectedIndex() == 0) 
-			ingrediente.setVariante(true);
-		else
-			ingrediente.setVariante(false);
-		int d = giorno.getSelectedIndex()+1;
-		int m = mese.getSelectedIndex();
-		int y = anno.getSelectedIndex()+109;
-		Date date = new Date(y,m,d);
-		ingrediente.setScadenza(date);
-		if(jComboBox1.getSelectedIndex() == 0)
-			ingrediente.setTipoIngrediente("IngredienteLungaConservazione");
-		else
-			ingrediente.setTipoIngrediente("IngredienteFresco");
-
-		ingrediente.setUnitaMisura((String) jComboBox2.getSelectedItem());
-
-		if(tipo.equalsIgnoreCase("NUOVO"))
-			ingrediente = (Ingrediente) articolofacade.inserisciIngrediente(role, ingrediente);
-
-		HashSet<IngredienteMagazzino> set=new HashSet<IngredienteMagazzino>();
-
-		boolean state = true;
-		IngredienteMagazzino ingredienteMagazzino=null;
-		try{
-			ingredienteMagazzino = (IngredienteMagazzino) ingrediente.getIngredienteMagazzinos().toArray()[0];
-			ingredienteMagazzino.setQuantita(new Integer(jTextField3.getText()));
-			articolofacade.updateIngredienteMagazzino(role, ingredienteMagazzino);
-		} catch(Exception e) {
-			state = false;
-			try {
-				ingredienteMagazzino = articolofacade.inserisciIngredienteMagazzino(role, ingrediente.getId(), new Integer(jTextField3.getText()));
+	private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {  
+		try {
+			if(tipo.equalsIgnoreCase("NUOVO"))
+				ingrediente = new Ingrediente();
+			if (jTextField1.getText() == null || jTextField1.getText().equals("")) 
+				throw new NullPointerException();
+			ingrediente.setNome(jTextField1.getText());
+			ingrediente.setDescrizione(jTextField2.getText());
+			if (jComboBox3.getSelectedIndex() == 0) 
+				ingrediente.setVariante(true);
+			else
+				ingrediente.setVariante(false);
+			int d = giorno.getSelectedIndex()+1;
+			int m = mese.getSelectedIndex();
+			int y = anno.getSelectedIndex()+109;
+			Date date = new Date(y,m,d);
+			ingrediente.setScadenza(date);
+			if(jComboBox1.getSelectedIndex() == 0)
+				ingrediente.setTipoIngrediente("IngredienteLungaConservazione");
+			else
+				ingrediente.setTipoIngrediente("IngredienteFresco");
+	
+			ingrediente.setUnitaMisura((String) jComboBox2.getSelectedItem());
+	
+			if(tipo.equalsIgnoreCase("NUOVO"))
+				ingrediente = (Ingrediente) articolofacade.inserisciIngrediente(role, ingrediente);
+	
+			HashSet<IngredienteMagazzino> set=new HashSet<IngredienteMagazzino>();
+	
+			boolean state = true;
+			IngredienteMagazzino ingredienteMagazzino = null;
+			try{
+				ingredienteMagazzino = (IngredienteMagazzino) ingrediente.getIngredienteMagazzinos().toArray()[0];
+				ingredienteMagazzino.setQuantita(new Integer(jTextField3.getText()));
+				articolofacade.updateIngredienteMagazzino(role, ingredienteMagazzino);
+			} catch(Exception e) {
+				state = false;
+				try {
+					ingredienteMagazzino = articolofacade.inserisciIngredienteMagazzino(role, ingrediente.getId(), new Integer(jTextField3.getText()));
+					frame.getActualPanel().setVisible(false);
+					Visualizza visualizza = new Visualizza(frame,"Ingrediente");
+					frame.setActualPanel(visualizza);
+					frame.setComponent(visualizza);
+				} catch (Exception npe) {
+					JOptionPane.showMessageDialog(frame.getComponent(), "Inserire i dati in modo corretto!","Errore Quantita'",JOptionPane.ERROR_MESSAGE);
+					frame.getActualPanel().setVisible(false);
+					Visualizza visualizza = new Visualizza(frame, "Ingrediente");
+					frame.setActualPanel(visualizza);
+					frame.setComponent(visualizza);
+				}
+			}
+			if (state) {
+				set.add(ingredienteMagazzino);
+				ingrediente.setIngredienteMagazzinos(set);
+		
+				articolofacade.updateIngrediente(role, ingrediente);
+		
 				frame.getActualPanel().setVisible(false);
 				Visualizza visualizza = new Visualizza(frame,"Ingrediente");
 				frame.setActualPanel(visualizza);
 				frame.setComponent(visualizza);
-			} catch (Exception npe) {
-				JOptionPane.showMessageDialog(frame.getComponent(), "Inserire i dati in modo corretto!","Errore Quantita'",JOptionPane.ERROR_MESSAGE);
-				frame.getActualPanel().setVisible(false);
-				Visualizza visualizza = new Visualizza(frame, "Ingrediente");
-				frame.setActualPanel(visualizza);
-				frame.setComponent(visualizza);
 			}
-		}
-		if (state) {
-			set.add(ingredienteMagazzino);
-			ingrediente.setIngredienteMagazzinos(set);
-	
-			articolofacade.updateIngrediente(role, ingrediente);
-	
+		} catch (NullPointerException npe) {
+			JOptionPane.showMessageDialog(frame.getComponent(), "Inserire i dati in modo corretto!","Errore Quantita'",JOptionPane.ERROR_MESSAGE);
 			frame.getActualPanel().setVisible(false);
-			Visualizza visualizza = new Visualizza(frame,"Ingrediente");
+			Visualizza visualizza = new Visualizza(frame, "Ingrediente");
 			frame.setActualPanel(visualizza);
 			frame.setComponent(visualizza);
 		}
