@@ -144,7 +144,7 @@ public class Nuova_bevanda extends javax.swing.JPanel {
 			bevanda.setId(null);
 			bevanda.setTipoArticolo("Bevanda");
 			bevanda.setTipoPietanza(TipoPietanza.BEVANDA.ordinal());
-			if (jTextField1.getText() == null)
+			if (jTextField1.getText() == null || jTextField1.getText().equals(""))
 				throw new NullPointerException();
 			bevanda.setNome(jTextField1.getText());
 			bevanda.setCapacita(new Float(jTextField2.getText()));

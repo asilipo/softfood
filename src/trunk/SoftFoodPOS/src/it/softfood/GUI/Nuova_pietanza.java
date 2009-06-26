@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.swing.JOptionPane;
+
 /**
  * @author Maria Rosaria Paone
  * @author Marco Grasso
@@ -227,55 +229,78 @@ public class Nuova_pietanza extends javax.swing.JPanel {
 	}
 
 	private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
-		if (tipo.equalsIgnoreCase("NUOVO"))
-			pietanza = new Pietanza();
-		pietanza.setTipoArticolo("Pietanza");
-		String type = (String) jComboBox1.getSelectedItem();
-		if (type.equalsIgnoreCase("Antipasto"))
-			pietanza.setTipoPietanza(TipoPietanza.ANTIPASTI.ordinal());
-		else if (type.equalsIgnoreCase("Primo"))
-			pietanza.setTipoPietanza(TipoPietanza.PRIMO_PIATTO.ordinal());
-		else if (type.equalsIgnoreCase("Secondo"))
-			pietanza.setTipoPietanza(TipoPietanza.SECONDO_PIATTO.ordinal());
-		else if (type.equalsIgnoreCase("Contorno"))
-			pietanza.setTipoPietanza(TipoPietanza.CONTORNO.ordinal());
-		else
-			pietanza.setTipoPietanza(TipoPietanza.DOLCE.ordinal());
-		pietanza.setNome(jTextField1.getText());
-		pietanza.setDescrizione(jTextField2.getText());
-
-		if (tipo.equalsIgnoreCase("NUOVO"))
-			pietanza = (Pietanza) articolo.inserisciPietanzaMenu(role, pietanza);
-		else 
-			articolo.updatePietanza(role, pietanza);
-		
-		HashSet<IngredientePietanza> set = null;
-		
-		set = new HashSet<IngredientePietanza>();
-		Set<IngredientePietanza> ingredienti=null;
-		IngredientePietanza in = null;
-		
-		for(int i = 0; i < data.length; i++){
-			in = new IngredientePietanza();
-			in.setArticolo(pietanza);
-			in.setIngrediente(articolo.selezionaIngredientePerNome(role, data[i]));
-			in.setQuantita(0);
-			if(tipo.equals("MODIFICA")){
-				ingredienti= pietanza.getIngredientePietanzas();
-				for(IngredientePietanza ingrpiet : ingredienti){
-					if(ingrpiet.getIngrediente().getNome().equalsIgnoreCase(in.getIngrediente().getNome())){
-						in.setQuantita(ingrpiet.getQuantita());
+		try {
+			if (tipo.equalsIgnoreCase("NUOVO"))
+				pietanza = new Pietanza();
+			pietanza.setTipoArticolo("Pietanza");
+			String type = (String) jComboBox1.getSelectedItem();
+			if (type.equalsIgnoreCase("Antipasto"))
+				pietanza.setTipoPietanza(TipoPietanza.ANTIPASTI.ordinal());
+			else if (type.equalsIgnoreCase("Primo"))
+				pietanza.setTipoPietanza(TipoPietanza.PRIMO_PIATTO.ordinal());
+			else if (type.equalsIgnoreCase("Secondo"))
+				pietanza.setTipoPietanza(TipoPietanza.SECONDO_PIATTO.ordinal());
+			else if (type.equalsIgnoreCase("Contorno"))
+				pietanza.setTipoPietanza(TipoPietanza.CONTORNO.ordinal());
+			else
+				pietanza.setTipoPietanza(TipoPietanza.DOLCE.ordinal());
+			
+			if (jTextField1.getText() == null || jTextField1.getText().equals(""))
+				throw new NullPointerException();
+			
+			pietanza.setNome(jTextField1.getText());
+			pietanza.setDescrizione(jTextField2.getText());
+	
+			if (tipo.equalsIgnoreCase("NUOVO"))
+				pietanza = (Pietanza) articolo.inserisciPietanzaMenu(role, pietanza);
+			else 
+				articolo.updatePietanza(role, pietanza);
+			
+			HashSet<IngredientePietanza> set = null;
+			
+			set = new HashSet<IngredientePietanza>();
+			Set<IngredientePietanza> ingredienti = null;
+			IngredientePietanza in = null;
+			
+			for(int i = 0; i < data.length; i++){
+				in = new IngredientePietanza();
+				in.setArticolo(pietanza);
+	
+				in.setIngrediente(articolo.selezionaIngredientePerNome(role, data[i]));
+				if(tipo.equals("MODIFICA")){
+					ingredienti = pietanza.getIngredientePietanzas();
+					for(IngredientePietanza ingrpiet : ingredienti){
+						if(ingrpiet.getIngrediente().getNome().equalsIgnoreCase(in.getIngrediente().getNome())){
+							in.setQuantita(ingrpiet.getQuantita());
+						}
 					}
+				} else {
+					in.setQuantita(0);
 				}
+				in.setId(new IngredientePietanzaPK(articolo.selezionaIngredientePerNome(role, data[i]).getId(),pietanza.getId()));
+				set.add(in);
 			}
-			in.setId(new IngredientePietanzaPK(articolo.selezionaIngredientePerNome(role, data[i]).getId(),pietanza.getId()));
-			set.add(in);
+			
+			frame.getActualPanel().setVisible(false);
+			if (data.length > 0) {
+				Quantita quantita = new Quantita(frame, pietanza, set.toArray(),tipo);
+				frame.setActualPanel(quantita);
+				frame.setComponent(quantita);
+			} else {
+				articolo.updateIndredientiPietanza(role, pietanza.getId(), null);
+				articolo.updatePietanza(role, pietanza);
+				Visualizza visualizza = new Visualizza(frame, "Pietanza");
+				frame.setActualPanel(visualizza);
+				frame.setComponent(visualizza);
+			}
+		} catch (NullPointerException npe) {
+			JOptionPane.showMessageDialog(frame.getComponent(), "Dati inseriti in modo non corretto!","Errore Dati Immessi", JOptionPane.ERROR_MESSAGE);
+
+			frame.getActualPanel().setVisible(false);
+			Nuova_pietanza nuova = new Nuova_pietanza(frame, pietanza, tipo);
+			frame.setActualPanel(nuova);
+			frame.setComponent(nuova);
 		}
-		
-		frame.getActualPanel().setVisible(false);
-		Quantita quantita = new Quantita(frame, pietanza, set.toArray(),tipo);
-		frame.setActualPanel(quantita);
-		frame.setComponent(quantita);
 	}
 
 	private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {
