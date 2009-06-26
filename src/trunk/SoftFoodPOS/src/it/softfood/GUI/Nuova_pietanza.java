@@ -287,7 +287,7 @@ public class Nuova_pietanza extends javax.swing.JPanel {
 				frame.setActualPanel(quantita);
 				frame.setComponent(quantita);
 			} else {
-				articolo.updateIndredientiPietanza(role, pietanza.getId(), null);
+				articolo.updateIndredientiPietanza(role, pietanza.getId(), new HashSet());
 				articolo.updatePietanza(role, pietanza);
 				Visualizza visualizza = new Visualizza(frame, "Pietanza");
 				frame.setActualPanel(visualizza);
