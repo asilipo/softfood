@@ -350,16 +350,15 @@ public class OrdinazioneFacade {
 
 			if (articolo != null) {
 				if (articolo.getTipoArticolo().equals("Bevanda")) {
-					if (this.selezionaDisponibilitaBevanda(user, articolo.getId()) > lineaOrdinazione.getQuantita())
+					if (this.selezionaDisponibilitaBevanda(user, articolo.getId()) >= lineaOrdinazione.getQuantita())
 						lineaOrdinazione = lineaOrdinazioneSession.inserisciLineaOrdinazione(lineaOrdinazione);
 					else {
-						System.out.println("ssssssss");
 						throw new DisponibilitaBevandaException(null);
 					}
 				}
 
 				if (articolo.getTipoArticolo().equals("Pietanza")) {
-					if (this.selezionaDisponibilitaPietanza(user, articolo.getId()) > lineaOrdinazione.getQuantita()) {
+					if (this.selezionaDisponibilitaPietanza(user, articolo.getId()) >= lineaOrdinazione.getQuantita()) {
 						lineaOrdinazione = lineaOrdinazioneSession.inserisciLineaOrdinazione(lineaOrdinazione);
 					} else 
 						throw new DisponibilitaPietanzaException(null);
@@ -380,32 +379,6 @@ public class OrdinazioneFacade {
 
 		throw new UserException(null);
 	}
-	 
-	/*public LineaOrdinazione inserisciLineaOrdinazione(User user, LineaOrdinazione lineaOrdinazione) {
-		if (user != null && lineaOrdinazione != null) {
-            try {
-            	lineaOrdinazione.setOrdinazione(lineaOrdinazione.getOrdinazione());
-            	lineaOrdinazione.setEvaso(false);
-                lineaOrdinazione = lineaOrdinazioneSession.inserisciLineaOrdinazione(lineaOrdinazione);
-                
-                Articolo articolo = lineaOrdinazione.getArticolo();
-                
-                if (articolo.getTipoArticolo().equals("Pietanza")) {
-                    if (!this.aggiornaMagazzinoIngredienti(user, lineaOrdinazione, "-"))
-                        throw new Exception();
-                } else {
-                	if (!this.aggiornaMagazzinoBevande(user, lineaOrdinazione, "-"))
-                        throw  new Exception();
-                }
-                return lineaOrdinazione;
-            	
-            } catch (Exception e) {
-            	System.err.println("OrdinazioneFacade#inserisciLineaOrdinazione " + e);
-            }
-		}
-		
-		return null;
-	}*/
 	
 	public LineaOrdinazione modificaLineaOrdinazione(User user, LineaOrdinazione nuovaLineaOrdinazione, LineaOrdinazione vecchiaLineaOrdinazione) {
         if (user != null && nuovaLineaOrdinazione != null && vecchiaLineaOrdinazione != null) {
