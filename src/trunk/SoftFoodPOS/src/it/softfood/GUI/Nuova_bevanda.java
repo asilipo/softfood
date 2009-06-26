@@ -40,8 +40,12 @@ public class Nuova_bevanda extends javax.swing.JPanel {
 			jTextField1.setText(bevanda.getNome());
 			jTextArea1.setText(bevanda.getDescrizione());
 			jTextField2.setText(bevanda.getCapacita().toString());
-			try{
-				jTextField3.setText(new Integer(((BevandaMagazzino)bevanda.getBevandaMagazzinos().toArray()[0]).getQuantita()).toString());
+			try {
+				Integer q = new Integer(((BevandaMagazzino)bevanda.getBevandaMagazzinos().toArray()[0]).getQuantita());
+				if (q > 0) 
+					jTextField3.setText(q.toString());
+				else
+					jTextField3.setText(q.toString());
 			}catch(Exception e){
 				jTextField3.setText("0");
 			}
