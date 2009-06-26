@@ -17,8 +17,6 @@ import java.rmi.registry.Registry;
 
 public aspect ClientDistribution {
 
-//	private ITavoloFacade tavolofacade;
-//	private IRistoranteFacade ristorantefacade;
 	private IOrdinazioneFacade ordinazionefacade;
 	private IArticoloMenuFacade articolofacade;
 	private IUserFacade userfacade;
@@ -30,8 +28,6 @@ public aspect ClientDistribution {
 		}
 		try {
 			Registry registry = LocateRegistry.getRegistry("localhost");
-//			tavolofacade = (ITavoloFacade) registry.lookup("TavoloFacade");
-//			ristorantefacade = (IRistoranteFacade) registry.lookup("RistoranteFacade");
 			ordinazionefacade = (IOrdinazioneFacade) registry.lookup("OrdineFacade");
 			articolofacade = (IArticoloMenuFacade) registry.lookup("ArticoloFacade");
 			userfacade= (IUserFacade) registry.lookup("UserFacade");
@@ -39,28 +35,6 @@ public aspect ClientDistribution {
 			System.err.println("Exception to obtain the reference to the remote object: " + e);
 		}
 	}
-
-//	pointcut distributeRistoranteFacadeCalls(): execution(* it.softfood.facade.POSRistoranteFacade.*(..)) && !execution(it.softfood.facade.POSRistoranteFacade.new(..));
-//
-//	Object around(): distributeRistoranteFacadeCalls()  {
-//		Object obj = null;
-//
-//		obj = ExecuteMetod.invoke(ristorantefacade, thisJoinPoint.getSignature()
-//				.getName(), thisJoinPoint.getArgs());
-//
-//		return obj;
-//	}
-
-//	pointcut distributeTavoloFacadeCalls(): execution(* it.softfood.facade.POSTavoloFacade.*(..)) && !execution(it.softfood.facade.POSTavoloFacade.new(..));
-//
-//	Object around(): distributeTavoloFacadeCalls()  {
-//		Object obj = null;
-//
-//		obj = ExecuteMetod.invoke(tavolofacade, thisJoinPoint.getSignature()
-//				.getName(), thisJoinPoint.getArgs());
-//
-//		return obj;
-//	}
 
 	pointcut distributeOrdinazioneFacadeCalls(): execution(* it.softfood.facade.POSOrdinazioneFacade.*(..)) && !execution(it.softfood.facade.POSOrdinazioneFacade.new(..));
 
