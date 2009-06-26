@@ -101,27 +101,29 @@ public class Quantita extends javax.swing.JPanel {
 	}
 
 	private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
-		int quantita[]=new int[ingredienti.length];
-		HashSet<IngredientePietanza> set=new HashSet<IngredientePietanza> ();
-		Visualizza visualizza = null;
-		try {
-			Long id = null;
-			for(int i = 0; i < quantita.length; i++){
-				quantita[i] = Integer.parseInt(jTextArea1[i].getText());
-				((IngredientePietanza)ingredienti[i]).setQuantita(quantita[i]);
-				set.add((IngredientePietanza) ingredienti[i]);
-				id = ((IngredientePietanza)ingredienti[i]).getArticolo().getId();
-			}
+		
+			int quantita[]=new int[ingredienti.length];
+			HashSet<IngredientePietanza> set=new HashSet<IngredientePietanza> ();
+			Visualizza visualizza = null;
+			try {
+				if(ingredienti.length!=0){
+					Long id = null;
+					for(int i = 0; i < quantita.length; i++){
+						quantita[i] = Integer.parseInt(jTextArea1[i].getText());
+						((IngredientePietanza)ingredienti[i]).setQuantita(quantita[i]);
+						set.add((IngredientePietanza) ingredienti[i]);
+						id = ((IngredientePietanza)ingredienti[i]).getArticolo().getId();
+					}
 
-			if(tipo.equalsIgnoreCase("NUOVO"))
-				set = articolo.inserisciIngredientiPietanze(user, set);
-			else
-				articolo.updateIndredientiPietanza(user, id, set);
-			
-			pietanza.setIngredientePietanzas(set);
-			
-			articolo.updatePietanza(user, pietanza);
-			
+					if(tipo.equalsIgnoreCase("NUOVO"))
+						set = articolo.inserisciIngredientiPietanze(user, set);
+					else
+						articolo.updateIndredientiPietanza(user, id, set);
+
+					pietanza.setIngredientePietanzas(set);
+
+					articolo.updatePietanza(user, pietanza);
+				}
 			frame.getActualPanel().setVisible(false);
 			visualizza = new Visualizza(frame, "Pietanza");
 			frame.setActualPanel(visualizza);
