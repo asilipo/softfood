@@ -197,6 +197,11 @@ public class Nuova_pietanza extends javax.swing.JPanel {
 		String index = "";
 		try {
 			index = (String) jList1.getSelectedValue();
+			if(index.equals(""))
+				throw new NullPointerException();
+			for(int j=0;j<data.length;j++)
+				if(data[j].equalsIgnoreCase(index))
+					throw new Exception("");
 			String ing[] = new String[data.length + 1];
 			int i = 0;
 			for (; i < data.length; i++)
@@ -204,8 +209,11 @@ public class Nuova_pietanza extends javax.swing.JPanel {
 			ing[i] = index;
 			data = ing;
 			jList2.setListData(data);
-		} catch (Exception e) {
-			e.printStackTrace();
+		}catch (NullPointerException e) {
+			JOptionPane.showMessageDialog(frame.getComponent(), "Selezionare almeno un ingrediente dalla lista!","Errore Dati Immessi", JOptionPane.ERROR_MESSAGE);
+		} 
+		catch (Exception e) {
+			JOptionPane.showMessageDialog(frame.getComponent(), "Ingrediente gia' selezionato!","Errore Dati Immessi", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 
