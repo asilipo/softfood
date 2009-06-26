@@ -350,14 +350,16 @@ public class OrdinazioneFacade {
 
 			if (articolo != null) {
 				if (articolo.getTipoArticolo().equals("Bevanda")) {
-					if (this.selezionaDisponibilitaBevanda(user, articolo.getId()) > 0)
+					if (this.selezionaDisponibilitaBevanda(user, articolo.getId()) > lineaOrdinazione.getQuantita())
 						lineaOrdinazione = lineaOrdinazioneSession.inserisciLineaOrdinazione(lineaOrdinazione);
-					else
+					else {
+						System.out.println("ssssssss");
 						throw new DisponibilitaBevandaException(null);
+					}
 				}
 
 				if (articolo.getTipoArticolo().equals("Pietanza")) {
-					if (this.selezionaDisponibilitaPietanza(user, articolo.getId()) > 0) {
+					if (this.selezionaDisponibilitaPietanza(user, articolo.getId()) > lineaOrdinazione.getQuantita()) {
 						lineaOrdinazione = lineaOrdinazioneSession.inserisciLineaOrdinazione(lineaOrdinazione);
 					} else 
 						throw new DisponibilitaPietanzaException(null);
