@@ -247,6 +247,10 @@ public class Nuovo_ingrediente extends javax.swing.JPanel {
 			state = false;
 			try {
 				ingredienteMagazzino = articolofacade.inserisciIngredienteMagazzino(role, ingrediente.getId(), new Integer(jTextField3.getText()));
+				frame.getActualPanel().setVisible(false);
+				Visualizza visualizza = new Visualizza(frame,"Ingrediente");
+				frame.setActualPanel(visualizza);
+				frame.setComponent(visualizza);
 			} catch (Exception npe) {
 				JOptionPane.showMessageDialog(frame.getComponent(), "Inserire i dati in modo corretto!","Errore Quantita'",JOptionPane.ERROR_MESSAGE);
 				frame.getActualPanel().setVisible(false);
