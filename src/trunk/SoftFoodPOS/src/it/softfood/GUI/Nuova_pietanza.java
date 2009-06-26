@@ -8,6 +8,7 @@ import it.softfood.entity.User;
 import it.softfood.enumeration.TipoPietanza;
 import it.softfood.facade.POSArticoloMenuFacade;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 
 /**
@@ -53,6 +54,7 @@ public class Nuova_pietanza extends javax.swing.JPanel {
 			jTextField2.setText(pietanza.getDescrizione());
 			jList1.setListData(ingredientis);
 			jList2.setListData(data);
+			jComboBox1.setSelectedIndex(pietanza.getTipo().ordinal());
 		} else {
 			jList1.setListData(ingredientis);
 		}
@@ -249,13 +251,20 @@ public class Nuova_pietanza extends javax.swing.JPanel {
 		HashSet<IngredientePietanza> set = null;
 		
 		set = new HashSet<IngredientePietanza>();
+		ArrayList<IngredientePietanza> ingredienti=null;
 		IngredientePietanza in = null;
 		
 		for(int i = 0; i < data.length; i++){
 			in = new IngredientePietanza();
 			in.setArticolo(pietanza);
 			in.setIngrediente(articolo.selezionaIngredientePerNome(role, data[i]));
-			in.setQuantita(0);
+			ingredienti=(ArrayList<IngredientePietanza>) pietanza.getIngredientePietanzas();
+			for(IngredientePietanza ingrpiet : ingredienti){
+				if(ingrpiet.getIngrediente().getNome().equalsIgnoreCase(in.getIngrediente().getNome())){
+					in.setQuantita(ingrpiet.getQuantita());
+				}
+			}
+			//in.setQuantita(0);
 			in.setId(new IngredientePietanzaPK(articolo.selezionaIngredientePerNome(role, data[i]).getId(),pietanza.getId()));
 			set.add(in);
 		}
