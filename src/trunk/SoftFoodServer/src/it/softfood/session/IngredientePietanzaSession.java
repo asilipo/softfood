@@ -5,6 +5,7 @@ import it.softfood.entity.IngredientePietanzaPK;
 
 import java.util.List;
 
+import org.hibernate.NonUniqueObjectException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
@@ -35,7 +36,9 @@ public class IngredientePietanzaSession {
 			ingredientePietanza = (IngredientePietanza) session.get(IngredientePietanza.class, ingredientePietanza.getId());
 						
 			return ingredientePietanza; 
-		} catch (Exception e) {
+		}catch(NonUniqueObjectException ex){
+			return null;
+		}catch (Exception e) {
 			e.printStackTrace();
 			System.err.println("IngredientePietanzaSession#inserisciIngredientePietanza");
 			return null;
