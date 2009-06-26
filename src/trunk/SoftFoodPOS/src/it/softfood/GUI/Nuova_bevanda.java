@@ -156,9 +156,8 @@ public class Nuova_bevanda extends javax.swing.JPanel {
 			HashSet<BevandaMagazzino> set = new HashSet<BevandaMagazzino>();
 	
 			BevandaMagazzino bevandaMagazzino = null;
-			try{
+			try { 
 				bevandaMagazzino = (BevandaMagazzino) bevanda.getBevandaMagazzinos().toArray()[0];
-				System.out.println(jTextField3.getText());
 				bevandaMagazzino.setQuantita(new Integer(jTextField3.getText()));
 				articolofacade.updateBevandaMagazzino(role, bevandaMagazzino);
 			} catch(Exception e) {
