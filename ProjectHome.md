@@ -1,0 +1,1 @@
+Applicaziona gestione ristorante.
